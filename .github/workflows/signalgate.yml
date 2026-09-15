@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: "18 0 * * *"
   workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "결과만 확인하고 커밋하지 않음 (테스트용)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -18,17 +23,32 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Fetch Upbit data
+      - name: Fetch Upbit data (게이트)
         id: fetch
         continue-on-error: true
         run: python fetch.py
 
-      - name: Commit status.json
+      - name: Fetch funding rates (캐리)
+        id: funding
+        continue-on-error: true
+        run: python funding.py
+
+      - name: Show results
         if: always()
+        run: |
+          echo "=== status.json ==="
+          python -c "import json;print(json.dumps(json.load(open('status.json',encoding='utf-8'))['summary'],ensure_ascii=False,indent=2))" || echo "없음"
+          echo "=== funding.json ==="
+          python -c "import json;d=json.load(open('funding.json',encoding='utf-8'));print(json.dumps({'summary':d['summary'],'sources_ok':d['sources_ok'],'sources_failed':d['sources_failed']},ensure_ascii=False,indent=2))" || echo "없음"
+          echo "=== 코인별 연환산 ==="
+          python -c "import json;d=json.load(open('funding.json',encoding='utf-8'));[print('%-5s best=%-12s %7.2f%%  median=%7.2f%%  venues=%d'%(c,v['best']['venue'],v['best']['decision_apr_pct'],v['median_apr_pct'],v['venue_count'])) for c,v in d['coins'].items()]" || echo "없음"
+
+      - name: Commit results
+        if: always() && inputs.dry_run != true
         run: |
           git config user.name  "signalgate-bot"
           git config user.email "signalgate-bot@users.noreply.github.com"
-          git add -A status.json history.jsonl || true
+          git add -A status.json history.jsonl funding.json funding_history.jsonl || true
           if git diff --staged --quiet; then
             echo "no change"
           else
