@@ -1,10 +1,14 @@
-# 인수인계서 — SIGNAL GATE 브리지
+# 인수인계서 — CARRYGATE
 
 > 이 문서만 읽으면 누구든(혹은 다른 AI 세션이든) 이어서 작업할 수 있게 쓴다.
 
 **최종 갱신:** 2026-09-15
 **작업 브랜치:** `claude/analysis-dwawzd`
 **저장소:** `morningstarlove/signalgate-bridge`
+**프로젝트명:** CARRYGATE — 게이트(신호등) + 캐리(이자) 두 축에서 따왔다.
+> 저장소 이름은 아직 `signalgate-bridge` 다. GitHub 저장소 → Settings → 맨 위
+> Repository name 에서 `carrygate` 로 바꾸면 된다(기존 주소는 자동 연결된다).
+> 코드·문서 안의 이름은 이미 CARRYGATE 로 정리했다.
 
 ---
 
@@ -131,7 +135,7 @@
 ```
 
 **결과만 보고 싶을 때 (저장 안 함):**
-GitHub 저장소 → Actions 탭 → `SIGNAL GATE daily bridge` → Run workflow
+GitHub 저장소 → Actions 탭 → `CARRYGATE daily` → Run workflow
 → `dry_run` 체크 → 실행. 로그에 코인별 연환산 수익률이 표로 찍힌다.
 
 **코드를 고쳤을 때:** 위와 똑같이 `dry_run` 으로 먼저 돌려 확인한 뒤 합친다.
@@ -144,7 +148,7 @@ GitHub 저장소 → Actions 탭 → `SIGNAL GATE daily bridge` → Run workflow
 | `funding.py` 상단 `ENTER_APR` / `EXIT_APR` | 진입·청산 문턱 (연 %) |
 | `funding.py` 상단 `AVG_DAYS` | 평균 구간 (기본 7일) |
 | `funding.py` `SOURCES` | 거래소 추가/제거 |
-| `.github/workflows/signalgate.yml` `cron` | 실행 시각 |
+| `.github/workflows/carrygate.yml` `cron` | 실행 시각 |
 
 **테스트:** 이 저장소는 외부 시세를 받아야 해서 로컬 테스트가 어렵다.
 계산 로직은 가짜 데이터로 검증했고(APR 환산, 7일 평균 필터, 판정 분기,

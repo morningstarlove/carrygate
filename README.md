@@ -1,4 +1,4 @@
-# SIGNAL GATE 브리지
+# CARRYGATE
 
 매일 자동으로 시장을 확인해서 **판단 근거만 기록하는 장치**다.
 주문은 넣지 않는다. 거래소 API 키도 쓰지 않는다. 읽기 전용이다.
@@ -78,7 +78,7 @@ GitHub Actions가 **매일 한국시간 오전 9시 18분**에 자동 실행한�
 결과는 `status.json` / `funding.json` 에 저장되고 저장소에 자동으로 커밋된다.
 과거 기록은 `history.jsonl` / `funding_history.jsonl` 에 하루 한 줄씩 쌓인다.
 
-수동으로 돌려보려면 GitHub 저장소 → **Actions** 탭 → **SIGNAL GATE daily bridge**
+수동으로 돌려보려면 GitHub 저장소 → **Actions** 탭 → **CARRYGATE daily**
 → **Run workflow**. 이때 `dry_run` 을 체크하면 **결과만 보고 저장은 하지 않는다.**
 
 ---

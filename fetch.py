@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-SIGNAL GATE 데이터 브리지
+CARRYGATE — 신호등(게이트) 브리지
 업비트 일봉 200개를 받아 SMA200 / EMA20 / 게이트 상태를 계산하고 status.json 으로 저장한다.
 주문 기능 없음. 읽기 전용 공개 API만 사용한다. API 키 불필요.
 """
@@ -9,7 +9,7 @@ from datetime import datetime, timezone, timedelta
 
 MARKETS = ["KRW-BTC", "KRW-ETH", "KRW-XRP", "KRW-TRX", "KRW-LINK", "KRW-DOGE"]
 KST = timezone(timedelta(hours=9))
-UA = {"User-Agent": "Mozilla/5.0 (compatible; signalgate-bridge/1.0)", "Accept": "application/json"}
+UA = {"User-Agent": "Mozilla/5.0 (compatible; carrygate/1.0)", "Accept": "application/json"}
 
 
 def http_json(url, tries=3):
@@ -89,7 +89,7 @@ def analyse(market):
 def main():
     now = datetime.now(KST)
     out = {
-        "schema": "signalgate-bridge/1",
+        "schema": "carrygate-gate/1",
         "date": now.strftime("%Y-%m-%d"),
         "generated_at_kst": now.strftime("%Y-%m-%d %H:%M:%S"),
         "source": "upbit /v1/candles/days count=200",

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-SIGNAL GATE 캐리(펀딩비) 브리지
+CARRYGATE — 캐리(펀딩비) 브리지
 
 무기한선물 펀딩비를 여러 거래소 공개 API에서 읽어
 연환산 수익률(APR)로 바꾸고 funding.json 으로 저장한다.
@@ -15,7 +15,7 @@ from datetime import datetime, timezone, timedelta
 
 COINS = ["BTC", "ETH", "XRP", "TRX", "LINK", "DOGE"]
 KST = timezone(timedelta(hours=9))
-UA = {"User-Agent": "Mozilla/5.0 (compatible; signalgate-bridge/1.0)",
+UA = {"User-Agent": "Mozilla/5.0 (compatible; carrygate/1.0)",
       "Accept": "application/json"}
 
 # 진입/청산 문턱 (연 %). 히스테리시스 — 문턱을 다르게 둬서 잦은 진출입을 막는다.
@@ -398,7 +398,7 @@ def main():
             best_coin, best["venue"], best["decision_apr_pct"], ENTER_APR)
 
     out = {
-        "schema": "signalgate-funding/1",
+        "schema": "carrygate-funding/1",
         "date": now.strftime("%Y-%m-%d"),
         "generated_at_kst": now.strftime("%Y-%m-%d %H:%M:%S"),
         "strategy": "현물 매수 + 무기한선물 동일수량 숏 (델타 중립) / 펀딩비 수취",
