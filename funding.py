@@ -311,9 +311,22 @@ def read_gate():
 
 
 def write_history(out):
-    """하루 한 줄. 같은 날짜가 이미 있으면 덮어쓴다 (재실행해도 중복되지 않게)."""
+    """하루 한 줄. 같은 날짜가 이미 있으면 덮어쓴다 (재실행해도 중복되지 않게).
+
+    코인별 수치까지 남긴다. 며칠 지켜볼 때 이자가 안정적인지 보려면
+    요약만으로는 부족하고 코인별 추이가 있어야 한다."""
     path = "funding_history.jsonl"
-    line = json.dumps({"date": out["date"], "summary": out["summary"]}, ensure_ascii=False)
+    coins = {}
+    for c, d in out["coins"].items():
+        coins[c] = {
+            "apr": d["best"]["decision_apr_pct"],
+            "venue": d["best"]["venue"],
+            "basis": d["best"]["basis"],
+            "median": d["median_apr_pct"],
+        }
+    rec = {"date": out["date"], "summary": out["summary"], "coins": coins,
+           "gate": out["gate_ref"].get("btc_gate")}
+    line = json.dumps(rec, ensure_ascii=False)
     try:
         with open(path, encoding="utf-8") as fp:
             rows = [l for l in fp.read().splitlines() if l.strip()]

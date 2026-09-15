@@ -43,6 +43,10 @@ jobs:
           echo "=== 코인별 연환산 ==="
           python -c "import json;d=json.load(open('funding.json',encoding='utf-8'));[print('%-5s best=%-12s %7.2f%%  median=%7.2f%%  venues=%d  기준=%s'%(c,v['best']['venue'],v['best']['decision_apr_pct'],v['median_apr_pct'],v['venue_count'],v['best']['basis'])) for c,v in d['coins'].items()]" || echo "없음"
 
+      - name: Show trend (며칠치 추이)
+        if: always()
+        run: python report.py || echo "기록 없음"
+
       - name: Commit results
         if: always() && inputs.dry_run != true
         run: |
