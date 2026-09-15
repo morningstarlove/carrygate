@@ -55,6 +55,20 @@ def apr(rate, interval_hours):
     return rate * (24.0 / interval_hours) * 365.0 * 100.0
 
 
+AVG_DAYS = 7   # 판정에 쓰는 평균 구간
+
+
+def avg_recent(pairs, days=AVG_DAYS):
+    """[(정산시각_ms, 비율)] -> 최근 N일 평균 비율. 값이 없으면 None.
+
+    거래소마다 정산 주기가 달라도 시각으로 잘라내면 동일 기간이 된다."""
+    if not pairs:
+        return None
+    cutoff = (time.time() - days * 86400) * 1000.0
+    vals = [r for t, r in pairs if t is not None and r is not None and t >= cutoff]
+    return sum(vals) / len(vals) if vals else None
+
+
 # ----------------------------------------------------------------- 거래소별
 
 def src_binance():
@@ -150,11 +164,22 @@ def src_okx():
                 continue
             t0, t1 = f(r.get("fundingTime")), f(r.get("nextFundingTime"))
             hours = round((t1 - t0) / 3600000.0) if (t0 and t1 and t1 > t0) else 8.0
+
+            avg = None
+            try:
+                h = http_json("https://www.okx.com/api/v5/public/funding-rate-history"
+                              "?instId=%s&limit=100" % inst)
+                avg = avg_recent([(f(x.get("fundingTime")), f(x.get("realizedRate") or x.get("fundingRate")))
+                                  for x in (h.get("data") or [])])
+            except Exception:
+                pass
+            time.sleep(0.15)
+
             out[c] = {
                 "venue": "okx",
                 "interval_hours": hours or 8.0,
                 "funding_rate_now": f(r.get("fundingRate")),
-                "funding_rate_avg7d": None,
+                "funding_rate_avg7d": avg,
                 "mark_price": None,
                 "index_price": None,
                 "premium_pct": None,
@@ -175,11 +200,23 @@ def src_gate():
             continue
         sec = f(r.get("funding_interval")) or 28800.0
         mark, index = f(r.get("mark_price")), f(r.get("index_price"))
+
+        avg = None
+        try:
+            h = http_json("https://api.gateio.ws/api/v4/futures/usdt/funding_rate"
+                          "?contract=%s_USDT&limit=100" % c)
+            # t 는 초 단위라 ms 로 맞춘다
+            avg = avg_recent([(f(x.get("t")) * 1000.0 if f(x.get("t")) else None, f(x.get("r")))
+                              for x in h])
+        except Exception:
+            pass
+        time.sleep(0.15)
+
         out[c] = {
             "venue": "gate",
             "interval_hours": sec / 3600.0,
             "funding_rate_now": f(r.get("funding_rate")),
-            "funding_rate_avg7d": None,
+            "funding_rate_avg7d": avg,
             "mark_price": mark,
             "index_price": index,
             "premium_pct": round((mark / index - 1.0) * 100, 4) if (mark and index) else None,
@@ -198,11 +235,22 @@ def src_hyperliquid():
         i = names.index(c)
         ctx = ctxs[i]
         mark, oracle = f(ctx.get("markPx")), f(ctx.get("oraclePx"))
+
+        avg = None
+        try:
+            start = int((time.time() - AVG_DAYS * 86400) * 1000)
+            h = http_json("https://api.hyperliquid.xyz/info",
+                          data={"type": "fundingHistory", "coin": c, "startTime": start})
+            avg = avg_recent([(f(x.get("time")), f(x.get("fundingRate"))) for x in h])
+        except Exception:
+            pass
+        time.sleep(0.15)
+
         out[c] = {
             "venue": "hyperliquid",
             "interval_hours": 1.0,          # 하이퍼리퀴드는 1시간마다 정산
             "funding_rate_now": f(ctx.get("funding")),
-            "funding_rate_avg7d": None,
+            "funding_rate_avg7d": avg,
             "mark_price": mark,
             "index_price": oracle,
             "premium_pct": round((mark / oracle - 1.0) * 100, 4) if (mark and oracle) else None,
@@ -227,8 +275,16 @@ def decorate(e):
     e["apr_now_pct"] = round(apr(e["funding_rate_now"], h), 4) if e["funding_rate_now"] is not None else None
     e["apr_avg7d_pct"] = round(apr(e["funding_rate_avg7d"], h), 4) if e["funding_rate_avg7d"] is not None else None
     # 7일 평균이 있으면 그걸 쓴다. 한 번의 값은 튀기 때문이다.
-    e["decision_apr_pct"] = e["apr_avg7d_pct"] if e["apr_avg7d_pct"] is not None else e["apr_now_pct"]
+    if e["apr_avg7d_pct"] is not None:
+        e["decision_apr_pct"], e["basis"] = e["apr_avg7d_pct"], "7일평균"
+    else:
+        e["decision_apr_pct"], e["basis"] = e["apr_now_pct"], "단발값"
     return e
+
+
+def rank(e):
+    """대표값 고르는 기준: 7일 평균이 있는 쪽 우선, 그다음 연환산이 높은 쪽."""
+    return (1 if e.get("basis") == "7일평균" else 0, e["decision_apr_pct"])
 
 
 def median(vals):
@@ -290,7 +346,8 @@ def main():
         vs = [v for v in per_coin[c] if v.get("decision_apr_pct") is not None]
         if not vs:
             continue
-        vs.sort(key=lambda v: v["decision_apr_pct"], reverse=True)
+        # 7일 평균이 있는 쪽을 먼저. 단발값은 크게 튀어서 대표값이 되면 안 된다.
+        vs.sort(key=rank, reverse=True)
         coins[c] = {
             "venues": vs,
             "best": vs[0],
@@ -302,16 +359,21 @@ def main():
 
     best_coin = best = None
     for c, d in coins.items():
-        if best is None or d["best"]["decision_apr_pct"] > best["decision_apr_pct"]:
+        if best is None or rank(d["best"]) > rank(best):
             best_coin, best = c, d["best"]
 
     if not coins:
         verdict, state = "데이터 없음 — 판정 불가", "미상"
     elif gate["btc_crash_flag"]:
         verdict, state = "급락 감지 — 캐리 중단 (거래소·시장 스트레스 구간)", "중단"
+    elif best["decision_apr_pct"] >= ENTER_APR and best["basis"] != "7일평균":
+        # 단발값은 크게 튄다. 평균 없이 진입 판정을 내리지 않는다.
+        state = "대기"
+        verdict = "%s %s 연 %.1f%% — 문턱은 넘었으나 7일 평균 없음(단발값). 진입 보류" % (
+            best_coin, best["venue"], best["decision_apr_pct"])
     elif best["decision_apr_pct"] >= ENTER_APR:
         state = "진입 가능"
-        verdict = "%s %s 연 %.1f%% — 진입 문턱(연 %.0f%%) 충족" % (
+        verdict = "%s %s 연 %.1f%% (7일평균) — 진입 문턱(연 %.0f%%) 충족" % (
             best_coin, best["venue"], best["decision_apr_pct"], ENTER_APR)
     elif best["decision_apr_pct"] < EXIT_APR:
         state = "청산"
@@ -337,6 +399,9 @@ def main():
             "best_coin": best_coin,
             "best_venue": best["venue"] if best else None,
             "best_apr_pct": best["decision_apr_pct"] if best else None,
+            "best_basis": best["basis"] if best else None,
+            "avg_coverage": "%d/%d" % (
+                sum(1 for d in coins.values() if d["best"]["basis"] == "7일평균"), len(coins)),
             "coins_covered": len(coins),
             "venues_ok": len(ok),
             "verdict": verdict,
