@@ -1,0 +1,386 @@
+{
+  "schema": "carrygate-funding/1",
+  "date": "2026-09-18",
+  "generated_at_kst": "2026-09-18 04:00:49",
+  "strategy": "현물 매수 + 무기한선물 동일수량 숏 (델타 중립) / 펀딩비 수취",
+  "thresholds": {
+    "enter_apr_pct": 8.0,
+    "exit_apr_pct": 2.0
+  },
+  "sources_ok": [
+    "okx",
+    "gate",
+    "hyperliquid"
+  ],
+  "sources_failed": {
+    "binance": "fetch failed https://fapi.binance.com/fapi/v1/premiumIndex : HTTP Error 451: ",
+    "bybit": "fetch failed https://api.bybit.com/v5/market/tickers?category=linear : HTTP Error 403: Forbidden"
+  },
+  "gate_ref": {
+    "date": "2026-09-18",
+    "btc_gate": "열림",
+    "btc_crash_flag": false
+  },
+  "coins": {
+    "BTC": {
+      "venues": [
+        {
+          "venue": "hyperliquid",
+          "interval_hours": 1.0,
+          "funding_rate_now": 5.317e-06,
+          "funding_rate_avg7d": 8.416274404761899e-06,
+          "mark_price": 76530.0,
+          "index_price": 76567.0,
+          "premium_pct": -0.0483,
+          "apr_now_pct": 4.6577,
+          "apr_avg7d_pct": 7.3727,
+          "decision_apr_pct": 7.3727,
+          "basis": "7일평균"
+        },
+        {
+          "venue": "okx",
+          "interval_hours": 8,
+          "funding_rate_now": 9.00349692349e-05,
+          "funding_rate_avg7d": 5.581050878318096e-05,
+          "mark_price": null,
+          "index_price": null,
+          "premium_pct": null,
+          "apr_now_pct": 9.8588,
+          "apr_avg7d_pct": 6.1113,
+          "decision_apr_pct": 6.1113,
+          "basis": "7일평균"
+        },
+        {
+          "venue": "gate",
+          "interval_hours": 8.0,
+          "funding_rate_now": 2e-05,
+          "funding_rate_avg7d": 4.571428571428572e-05,
+          "mark_price": 76530.22,
+          "index_price": 76569.81,
+          "premium_pct": -0.0517,
+          "apr_now_pct": 2.19,
+          "apr_avg7d_pct": 5.0057,
+          "decision_apr_pct": 5.0057,
+          "basis": "7일평균"
+        }
+      ],
+      "best": {
+        "venue": "hyperliquid",
+        "interval_hours": 1.0,
+        "funding_rate_now": 5.317e-06,
+        "funding_rate_avg7d": 8.416274404761899e-06,
+        "mark_price": 76530.0,
+        "index_price": 76567.0,
+        "premium_pct": -0.0483,
+        "apr_now_pct": 4.6577,
+        "apr_avg7d_pct": 7.3727,
+        "decision_apr_pct": 7.3727,
+        "basis": "7일평균"
+      },
+      "median_apr_pct": 6.1113,
+      "venue_count": 3
+    },
+    "ETH": {
+      "venues": [
+        {
+          "venue": "hyperliquid",
+          "interval_hours": 1.0,
+          "funding_rate_now": 1.21876e-05,
+          "funding_rate_avg7d": 8.953736904761892e-06,
+          "mark_price": 2451.0,
+          "index_price": 2452.09,
+          "premium_pct": -0.0445,
+          "apr_now_pct": 10.6763,
+          "apr_avg7d_pct": 7.8435,
+          "decision_apr_pct": 7.8435,
+          "basis": "7일평균"
+        },
+        {
+          "venue": "okx",
+          "interval_hours": 8,
+          "funding_rate_now": 4.89255045323e-05,
+          "funding_rate_avg7d": 3.670427965279524e-05,
+          "mark_price": null,
+          "index_price": null,
+          "premium_pct": null,
+          "apr_now_pct": 5.3573,
+          "apr_avg7d_pct": 4.0191,
+          "decision_apr_pct": 4.0191,
+          "basis": "7일평균"
+        },
+        {
+          "venue": "gate",
+          "interval_hours": 8.0,
+          "funding_rate_now": 4.8e-05,
+          "funding_rate_avg7d": 3.185714285714285e-05,
+          "mark_price": 2451.18,
+          "index_price": 2452.21,
+          "premium_pct": -0.042,
+          "apr_now_pct": 5.256,
+          "apr_avg7d_pct": 3.4884,
+          "decision_apr_pct": 3.4884,
+          "basis": "7일평균"
+        }
+      ],
+      "best": {
+        "venue": "hyperliquid",
+        "interval_hours": 1.0,
+        "funding_rate_now": 1.21876e-05,
+        "funding_rate_avg7d": 8.953736904761892e-06,
+        "mark_price": 2451.0,
+        "index_price": 2452.09,
+        "premium_pct": -0.0445,
+        "apr_now_pct": 10.6763,
+        "apr_avg7d_pct": 7.8435,
+        "decision_apr_pct": 7.8435,
+        "basis": "7일평균"
+      },
+      "median_apr_pct": 4.0191,
+      "venue_count": 3
+    },
+    "XRP": {
+      "venues": [
+        {
+          "venue": "hyperliquid",
+          "interval_hours": 1.0,
+          "funding_rate_now": 1.25e-05,
+          "funding_rate_avg7d": 8.17724285714285e-06,
+          "mark_price": 1.294349,
+          "index_price": 1.29475,
+          "premium_pct": -0.031,
+          "apr_now_pct": 10.95,
+          "apr_avg7d_pct": 7.1633,
+          "decision_apr_pct": 7.1633,
+          "basis": "7일평균"
+        },
+        {
+          "venue": "okx",
+          "interval_hours": 8,
+          "funding_rate_now": -1.20718979134e-05,
+          "funding_rate_avg7d": 3.8333953673890476e-05,
+          "mark_price": null,
+          "index_price": null,
+          "premium_pct": null,
+          "apr_now_pct": -1.3219,
+          "apr_avg7d_pct": 4.1976,
+          "decision_apr_pct": 4.1976,
+          "basis": "7일평균"
+        },
+        {
+          "venue": "gate",
+          "interval_hours": 8.0,
+          "funding_rate_now": -1.4e-05,
+          "funding_rate_avg7d": 2.7714285714285712e-05,
+          "mark_price": 1.294,
+          "index_price": 1.2949,
+          "premium_pct": -0.0695,
+          "apr_now_pct": -1.533,
+          "apr_avg7d_pct": 3.0347,
+          "decision_apr_pct": 3.0347,
+          "basis": "7일평균"
+        }
+      ],
+      "best": {
+        "venue": "hyperliquid",
+        "interval_hours": 1.0,
+        "funding_rate_now": 1.25e-05,
+        "funding_rate_avg7d": 8.17724285714285e-06,
+        "mark_price": 1.294349,
+        "index_price": 1.29475,
+        "premium_pct": -0.031,
+        "apr_now_pct": 10.95,
+        "apr_avg7d_pct": 7.1633,
+        "decision_apr_pct": 7.1633,
+        "basis": "7일평균"
+      },
+      "median_apr_pct": 4.1976,
+      "venue_count": 3
+    },
+    "TRX": {
+      "venues": [
+        {
+          "venue": "gate",
+          "interval_hours": 8.0,
+          "funding_rate_now": -0.000171,
+          "funding_rate_avg7d": -9.076190476190477e-05,
+          "mark_price": 0.33345,
+          "index_price": 0.333728,
+          "premium_pct": -0.0833,
+          "apr_now_pct": -18.7245,
+          "apr_avg7d_pct": -9.9384,
+          "decision_apr_pct": -9.9384,
+          "basis": "7일평균"
+        },
+        {
+          "venue": "hyperliquid",
+          "interval_hours": 1.0,
+          "funding_rate_now": -5.71954e-05,
+          "funding_rate_avg7d": -1.227766845238095e-05,
+          "mark_price": 0.3334,
+          "index_price": 0.333723,
+          "premium_pct": -0.0968,
+          "apr_now_pct": -50.1032,
+          "apr_avg7d_pct": -10.7552,
+          "decision_apr_pct": -10.7552,
+          "basis": "7일평균"
+        },
+        {
+          "venue": "okx",
+          "interval_hours": 8,
+          "funding_rate_now": -0.0003660629870268,
+          "funding_rate_avg7d": -0.00013712512530680954,
+          "mark_price": null,
+          "index_price": null,
+          "premium_pct": null,
+          "apr_now_pct": -40.0839,
+          "apr_avg7d_pct": -15.0152,
+          "decision_apr_pct": -15.0152,
+          "basis": "7일평균"
+        }
+      ],
+      "best": {
+        "venue": "gate",
+        "interval_hours": 8.0,
+        "funding_rate_now": -0.000171,
+        "funding_rate_avg7d": -9.076190476190477e-05,
+        "mark_price": 0.33345,
+        "index_price": 0.333728,
+        "premium_pct": -0.0833,
+        "apr_now_pct": -18.7245,
+        "apr_avg7d_pct": -9.9384,
+        "decision_apr_pct": -9.9384,
+        "basis": "7일평균"
+      },
+      "median_apr_pct": -10.7552,
+      "venue_count": 3
+    },
+    "LINK": {
+      "venues": [
+        {
+          "venue": "hyperliquid",
+          "interval_hours": 1.0,
+          "funding_rate_now": 1.25e-05,
+          "funding_rate_avg7d": 5.7227702380952416e-06,
+          "mark_price": 11.315,
+          "index_price": 11.3175,
+          "premium_pct": -0.0221,
+          "apr_now_pct": 10.95,
+          "apr_avg7d_pct": 5.0131,
+          "decision_apr_pct": 5.0131,
+          "basis": "7일평균"
+        },
+        {
+          "venue": "okx",
+          "interval_hours": 8,
+          "funding_rate_now": 6.61571146957e-05,
+          "funding_rate_avg7d": 1.6433907088538092e-05,
+          "mark_price": null,
+          "index_price": null,
+          "premium_pct": null,
+          "apr_now_pct": 7.2442,
+          "apr_avg7d_pct": 1.7995,
+          "decision_apr_pct": 1.7995,
+          "basis": "7일평균"
+        },
+        {
+          "venue": "gate",
+          "interval_hours": 8.0,
+          "funding_rate_now": 3.8e-05,
+          "funding_rate_avg7d": 1.5428571428571428e-05,
+          "mark_price": 11.312,
+          "index_price": 11.3175,
+          "premium_pct": -0.0486,
+          "apr_now_pct": 4.161,
+          "apr_avg7d_pct": 1.6894,
+          "decision_apr_pct": 1.6894,
+          "basis": "7일평균"
+        }
+      ],
+      "best": {
+        "venue": "hyperliquid",
+        "interval_hours": 1.0,
+        "funding_rate_now": 1.25e-05,
+        "funding_rate_avg7d": 5.7227702380952416e-06,
+        "mark_price": 11.315,
+        "index_price": 11.3175,
+        "premium_pct": -0.0221,
+        "apr_now_pct": 10.95,
+        "apr_avg7d_pct": 5.0131,
+        "decision_apr_pct": 5.0131,
+        "basis": "7일평균"
+      },
+      "median_apr_pct": 1.7995,
+      "venue_count": 3
+    },
+    "DOGE": {
+      "venues": [
+        {
+          "venue": "hyperliquid",
+          "interval_hours": 1.0,
+          "funding_rate_now": 1.25e-05,
+          "funding_rate_avg7d": 1.0503316071428564e-05,
+          "mark_price": 0.081385,
+          "index_price": 0.081425,
+          "premium_pct": -0.0491,
+          "apr_now_pct": 10.95,
+          "apr_avg7d_pct": 9.2009,
+          "decision_apr_pct": 9.2009,
+          "basis": "7일평균"
+        },
+        {
+          "venue": "okx",
+          "interval_hours": 8,
+          "funding_rate_now": 8.51345618931e-05,
+          "funding_rate_avg7d": 5.322726235833334e-05,
+          "mark_price": null,
+          "index_price": null,
+          "premium_pct": null,
+          "apr_now_pct": 9.3222,
+          "apr_avg7d_pct": 5.8284,
+          "decision_apr_pct": 5.8284,
+          "basis": "7일평균"
+        },
+        {
+          "venue": "gate",
+          "interval_hours": 8.0,
+          "funding_rate_now": 8.1e-05,
+          "funding_rate_avg7d": 2.842857142857144e-05,
+          "mark_price": 0.08139,
+          "index_price": 0.081433,
+          "premium_pct": -0.0528,
+          "apr_now_pct": 8.8695,
+          "apr_avg7d_pct": 3.1129,
+          "decision_apr_pct": 3.1129,
+          "basis": "7일평균"
+        }
+      ],
+      "best": {
+        "venue": "hyperliquid",
+        "interval_hours": 1.0,
+        "funding_rate_now": 1.25e-05,
+        "funding_rate_avg7d": 1.0503316071428564e-05,
+        "mark_price": 0.081385,
+        "index_price": 0.081425,
+        "premium_pct": -0.0491,
+        "apr_now_pct": 10.95,
+        "apr_avg7d_pct": 9.2009,
+        "decision_apr_pct": 9.2009,
+        "basis": "7일평균"
+      },
+      "median_apr_pct": 5.8284,
+      "venue_count": 3
+    }
+  },
+  "summary": {
+    "state": "진입 가능",
+    "best_coin": "DOGE",
+    "best_venue": "hyperliquid",
+    "best_apr_pct": 9.2009,
+    "best_basis": "7일평균",
+    "avg_coverage": "6/6",
+    "coins_covered": 6,
+    "venues_ok": 3,
+    "verdict": "DOGE hyperliquid 연 9.2% (7일평균) — 진입 문턱(연 8%) 충족",
+    "ok": true
+  }
+}
