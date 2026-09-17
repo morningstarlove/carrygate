@@ -4,11 +4,8 @@
 
 **최종 갱신:** 2026-09-17
 **작업 브랜치:** `claude/analysis-dwawzd`
-**저장소:** `morningstarlove/signalgate-bridge`
+**저장소:** `morningstarlove/carrygate` (2026-09-17 `signalgate-bridge` 에서 이름 변경)
 **프로젝트명:** CARRYGATE — 게이트(신호등) + 캐리(이자) 두 축에서 따왔다.
-> 저장소 이름은 아직 `signalgate-bridge` 다. GitHub 저장소 → Settings → 맨 위
-> Repository name 에서 `carrygate` 로 바꾸면 된다(기존 주소는 자동 연결된다).
-> 코드·문서 안의 이름은 이미 CARRYGATE 로 정리했다.
 
 ---
 
@@ -138,6 +135,12 @@
 
 **자동 점검 스케줄을 걸었다.** 매일 한국시간 오전 10시에 별도 세션이 깨어나
 그날 수집이 제대로 됐는지 확인하고, 7일치가 모이면 종합 판단을 보고한다.
+보고할 일이 없으면 조용히 끝난다. 알림이 오는 경우는 수집 중단, 검산 실패,
+판정 변화, 신호등 변화, 7·14·21일치 도달, 순수익 연 8% 3일 연속 초과다.
+
+**저장소 이름을 `carrygate` 로 바꿨다.** 예전 이름 `signalgate-bridge` 는 GitHub 에
+동명 프로젝트가 여럿이라 섞였다. 기존 주소는 GitHub 가 새 주소로 자동 연결하므로
+아무것도 깨지지 않는다. 다만 예전 주소로 저장해 둔 링크가 있으면 바꿔 두는 편이 낫다.
 
 ---
 
