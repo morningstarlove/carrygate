@@ -12,6 +12,17 @@ COL = 8          # 코인 열 너비
 MIN_DAYS = 3     # 이 일수 미만이면 판단하지 말라고 알린다
 
 
+def apr_of(row, coin):
+    """판단에 쓰는 연환산. 수수료 뺀 값이 있으면 그걸 쓴다.
+
+    apr_net 이 생기기 전에 기록된 날은 apr(수수료 전)밖에 없어 그대로 쓴다."""
+    c = row.get("coins", {}).get(coin)
+    if not c:
+        return None
+    v = c.get("apr_net")
+    return c.get("apr") if v is None else v
+
+
 def load(path="funding_history.jsonl"):
     rows = []
     try:
@@ -45,22 +56,27 @@ def main():
             if c not in coins:
                 coins.append(c)
 
-    print("=== 날짜별 연환산 이자율 (%) — 거래소 중 가장 높은 곳 기준 ===")
+    mixed = any("apr_net" not in r["coins"].get(c, {})
+                for r in rows for c in r["coins"])
+
+    print("=== 날짜별 연환산 순이자율 (%) — 수수료 차감 후, 거래소 중 최고 ===")
     print("%-12s %-7s %s" % ("날짜", "신호등",
                              "".join(("%" + str(COL) + "s") % c for c in coins)))
     for r in rows:
         cells = ""
         for c in coins:
-            v = r["coins"].get(c, {}).get("apr")
+            v = apr_of(r, c)
             cells += ("%" + str(COL) + "s") % ("%.1f" % v if v is not None else "-")
         print("%-12s %-7s %s" % (r["date"], r.get("gate") or "-", cells))
+
+    if mixed:
+        print("  ※ 수수료 차감 전 수치로 기록된 날이 섞여 있다(그 날은 실제보다 높게 보인다).")
 
     print()
     print("=== 코인별 안정성 (%d일치) ===" % len(rows))
     print("%-6s %8s %8s %8s %8s  %s" % ("코인", "최저", "평균", "최고", "폭", "판단"))
     for c in coins:
-        vals = [r["coins"][c]["apr"] for r in rows
-                if c in r["coins"] and r["coins"][c].get("apr") is not None]
+        vals = [apr_of(r, c) for r in rows if apr_of(r, c) is not None]
         if not vals:
             continue
         lo, hi = min(vals), max(vals)
@@ -84,8 +100,7 @@ def main():
     else:
         best = None
         for c in coins:
-            vals = [r["coins"][c]["apr"] for r in rows
-                    if c in r["coins"] and r["coins"][c].get("apr") is not None]
+            vals = [apr_of(r, c) for r in rows if apr_of(r, c) is not None]
             if not vals or min(vals) < 0:
                 continue
             avg = sum(vals) / len(vals)
