@@ -41,7 +41,7 @@ jobs:
           echo "=== funding.json ==="
           python -c "import json;d=json.load(open('funding.json',encoding='utf-8'));print(json.dumps({'summary':d['summary'],'sources_ok':d['sources_ok'],'sources_failed':d['sources_failed']},ensure_ascii=False,indent=2))" || echo "없음"
           echo "=== 코인별 연환산 ==="
-          python -c "import json;d=json.load(open('funding.json',encoding='utf-8'));[print('%-5s best=%-12s %7.2f%%  median=%7.2f%%  venues=%d  기준=%s'%(c,v['best']['venue'],v['best']['decision_apr_pct'],v['median_apr_pct'],v['venue_count'],v['best']['basis'])) for c,v in d['coins'].items()]" || echo "없음"
+          python -c "import json;d=json.load(open('funding.json',encoding='utf-8'));[print('%-5s best=%-12s 순%7.2f%% (총%7.2f%%)  순중앙값=%7.2f%%  venues=%d  기준=%s'%(c,v['best']['venue'],v['best']['decision_apr_pct'],v['best']['gross_apr_pct'],v['median_apr_pct'],v['venue_count'],v['best']['basis'])) for c,v in d['coins'].items()]" || echo "없음"
 
       - name: Show trend (며칠치 추이)
         if: always()
@@ -59,3 +59,8 @@ jobs:
             git commit -m "status $(date -u +%Y-%m-%d)"
             git push
           fi
+
+      # 저장된 값을 다시 계산해 대조한다. 어긋나면 여기서 실패해 빨간불로 알린다.
+      - name: Selfcheck (검산)
+        if: always()
+        run: python selfcheck.py

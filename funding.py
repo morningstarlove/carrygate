@@ -19,8 +19,23 @@ UA = {"User-Agent": "Mozilla/5.0 (compatible; carrygate/1.0)",
       "Accept": "application/json"}
 
 # 진입/청산 문턱 (연 %). 히스테리시스 — 문턱을 다르게 둬서 잦은 진출입을 막는다.
+# 문턱은 수수료를 뺀 순수익(net) 기준으로 비교한다.
 ENTER_APR = 8.0
 EXIT_APR = 2.0
+
+# --- 수수료 가정 -------------------------------------------------------------
+# 펀딩비만 보면 실제 손에 쥐는 돈을 과대평가한다. 캐리는 진입에 2번(현물 매수 +
+# 선물 숏), 청산에 2번(현물 매도 + 선물 숏 청산) 체결되므로 왕복 4회 수수료가 든다.
+# 이 수수료는 1회성이라, 오래 들고 있을수록 연환산 부담이 줄어든다.
+#
+# 아래 값은 "거래소를 아직 정하지 않았을 때의 보수적 가정"이다. 실제 거래소를
+# 정하면 그곳의 실제 수수료율로 바꿔야 한다. HANDOVER.md 참고.
+TAKER_FEE_SPOT_PCT = 0.10     # 현물 1회 체결 수수료 (%)
+TAKER_FEE_PERP_PCT = 0.05     # 선물 1회 체결 수수료 (%)
+HOLD_DAYS = 30.0              # 가정 보유기간 (일)
+
+ROUND_TRIP_FEE_PCT = 2.0 * (TAKER_FEE_SPOT_PCT + TAKER_FEE_PERP_PCT)
+FEE_DRAG_APR_PCT = ROUND_TRIP_FEE_PCT * 365.0 / HOLD_DAYS
 
 
 def http_json(url, tries=3, data=None):
@@ -270,15 +285,23 @@ SOURCES = [
 # ----------------------------------------------------------------- 집계
 
 def decorate(e):
-    """APR 계산 후 판단용 대표값(decision_apr_pct)을 붙인다."""
+    """APR 을 계산하고 수수료를 뺀 순수익(decision_apr_pct)까지 붙인다.
+
+    gross_apr_pct  : 펀딩비만 본 연환산 (수수료 전)
+    decision_apr_pct: 수수료를 뺀 연환산. 모든 판정은 이 값으로 한다.
+    """
     h = e["interval_hours"]
     e["apr_now_pct"] = round(apr(e["funding_rate_now"], h), 4) if e["funding_rate_now"] is not None else None
     e["apr_avg7d_pct"] = round(apr(e["funding_rate_avg7d"], h), 4) if e["funding_rate_avg7d"] is not None else None
     # 7일 평균이 있으면 그걸 쓴다. 한 번의 값은 튀기 때문이다.
     if e["apr_avg7d_pct"] is not None:
-        e["decision_apr_pct"], e["basis"] = e["apr_avg7d_pct"], "7일평균"
+        e["gross_apr_pct"], e["basis"] = e["apr_avg7d_pct"], "7일평균"
     else:
-        e["decision_apr_pct"], e["basis"] = e["apr_now_pct"], "단발값"
+        e["gross_apr_pct"], e["basis"] = e["apr_now_pct"], "단발값"
+
+    e["fee_drag_apr_pct"] = round(FEE_DRAG_APR_PCT, 4)
+    e["decision_apr_pct"] = (round(e["gross_apr_pct"] - FEE_DRAG_APR_PCT, 4)
+                             if e["gross_apr_pct"] is not None else None)
     return e
 
 
@@ -319,10 +342,14 @@ def write_history(out):
     coins = {}
     for c, d in out["coins"].items():
         coins[c] = {
-            "apr": d["best"]["decision_apr_pct"],
+            # apr 은 예전부터 "수수료 전" 값이었다. 뜻이 바뀌면 과거 줄과 섞이므로
+            # 그대로 두고, 수수료 뺀 값을 apr_net 으로 따로 남긴다.
+            "apr": d["best"]["gross_apr_pct"],
+            "apr_net": d["best"]["decision_apr_pct"],
             "venue": d["best"]["venue"],
             "basis": d["best"]["basis"],
-            "median": d["median_apr_pct"],
+            "median": d["median_gross_apr_pct"],
+            "median_net": d["median_apr_pct"],
         }
     rec = {"date": out["date"], "summary": out["summary"], "coins": coins,
            "gate": out["gate_ref"].get("btc_gate")}
@@ -365,6 +392,7 @@ def main():
             "venues": vs,
             "best": vs[0],
             "median_apr_pct": round(median([v["decision_apr_pct"] for v in vs]), 4),
+            "median_gross_apr_pct": round(median([v["gross_apr_pct"] for v in vs]), 4),
             "venue_count": len(vs),
         }
 
@@ -382,27 +410,39 @@ def main():
     elif best["decision_apr_pct"] >= ENTER_APR and best["basis"] != "7일평균":
         # 단발값은 크게 튄다. 평균 없이 진입 판정을 내리지 않는다.
         state = "대기"
-        verdict = "%s %s 연 %.1f%% — 문턱은 넘었으나 7일 평균 없음(단발값). 진입 보류" % (
+        verdict = "%s %s 순 연 %.1f%% — 문턱은 넘었으나 7일 평균 없음(단발값). 진입 보류" % (
             best_coin, best["venue"], best["decision_apr_pct"])
     elif best["decision_apr_pct"] >= ENTER_APR:
         state = "진입 가능"
-        verdict = "%s %s 연 %.1f%% (7일평균) — 진입 문턱(연 %.0f%%) 충족" % (
-            best_coin, best["venue"], best["decision_apr_pct"], ENTER_APR)
+        verdict = "%s %s 순 연 %.1f%% (펀딩 %.1f%% − 수수료 %.1f%%, 7일평균) — 진입 문턱(연 %.0f%%) 충족" % (
+            best_coin, best["venue"], best["decision_apr_pct"],
+            best["gross_apr_pct"], best["fee_drag_apr_pct"], ENTER_APR)
     elif best["decision_apr_pct"] < EXIT_APR:
         state = "청산"
-        verdict = "최고 %s %s 연 %.1f%% — 청산 문턱(연 %.0f%%) 미만" % (
-            best_coin, best["venue"], best["decision_apr_pct"], EXIT_APR)
+        verdict = "최고 %s %s 순 연 %.1f%% (펀딩 %.1f%% − 수수료 %.1f%%) — 청산 문턱(연 %.0f%%) 미만" % (
+            best_coin, best["venue"], best["decision_apr_pct"],
+            best["gross_apr_pct"], best["fee_drag_apr_pct"], EXIT_APR)
     else:
         state = "대기"
-        verdict = "최고 %s %s 연 %.1f%% — 진입 문턱(연 %.0f%%) 미달, 보유 중이면 유지" % (
-            best_coin, best["venue"], best["decision_apr_pct"], ENTER_APR)
+        verdict = "최고 %s %s 순 연 %.1f%% (펀딩 %.1f%% − 수수료 %.1f%%) — 진입 문턱(연 %.0f%%) 미달, 보유 중이면 유지" % (
+            best_coin, best["venue"], best["decision_apr_pct"],
+            best["gross_apr_pct"], best["fee_drag_apr_pct"], ENTER_APR)
 
     out = {
         "schema": "carrygate-funding/1",
         "date": now.strftime("%Y-%m-%d"),
         "generated_at_kst": now.strftime("%Y-%m-%d %H:%M:%S"),
         "strategy": "현물 매수 + 무기한선물 동일수량 숏 (델타 중립) / 펀딩비 수취",
-        "thresholds": {"enter_apr_pct": ENTER_APR, "exit_apr_pct": EXIT_APR},
+        "thresholds": {"enter_apr_pct": ENTER_APR, "exit_apr_pct": EXIT_APR,
+                       "compared_against": "수수료 차감 후 순수익(net)"},
+        "fee_assumption": {
+            "note": "거래소 미정 상태의 보수적 가정. 거래소를 정하면 실제 수수료율로 교체할 것.",
+            "taker_fee_spot_pct": TAKER_FEE_SPOT_PCT,
+            "taker_fee_perp_pct": TAKER_FEE_PERP_PCT,
+            "round_trip_fee_pct": round(ROUND_TRIP_FEE_PCT, 4),
+            "assumed_hold_days": HOLD_DAYS,
+            "fee_drag_apr_pct": round(FEE_DRAG_APR_PCT, 4),
+        },
         "sources_ok": ok,
         "sources_failed": failed,
         "gate_ref": gate,
@@ -412,6 +452,8 @@ def main():
             "best_coin": best_coin,
             "best_venue": best["venue"] if best else None,
             "best_apr_pct": best["decision_apr_pct"] if best else None,
+            "best_gross_apr_pct": best["gross_apr_pct"] if best else None,
+            "fee_drag_apr_pct": round(FEE_DRAG_APR_PCT, 4),
             "best_basis": best["basis"] if best else None,
             "avg_coverage": "%d/%d" % (
                 sum(1 for d in coins.values() if d["best"]["basis"] == "7일평균"), len(coins)),
