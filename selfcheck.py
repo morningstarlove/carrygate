@@ -14,6 +14,7 @@ import json, sys
 from datetime import datetime, timedelta
 
 TOL = 0.01          # 재계산과 저장값의 허용 오차 (연 %)
+HOLD_DAYS = 30.0    # funding.py 와 같은 보유기간 가정
 MAX_GAP_DAYS = 2    # 기록이 이 일수 넘게 끊기면 알린다
 
 
@@ -49,6 +50,8 @@ def check_math(d, problems, notes):
         notes.append("수수료 차감 정보 없음 — 예전 형식 파일로 보인다")
         fee = 0.0
 
+    # 보유기간은 funding.json 에 기록된 값을 우선한다 (가정이 바뀌어도 대조가 맞도록)
+    hold = (d.get("fee_assumption") or {}).get("assumed_hold_days") or HOLD_DAYS
     checked, legacy = 0, 0
     for coin, cd in (d.get("coins") or {}).items():
         for v in cd.get("venues", []):
@@ -74,10 +77,18 @@ def check_math(d, problems, notes):
                                 % (coin, v.get("venue"), gross, redone))
                 continue
 
+            # 거래소마다 수수료가 다르다. 저장된 체결 수수료율로 연 부담을 다시 계산한다.
+            sp, pp = v.get("fee_spot_taker_pct"), v.get("fee_perp_taker_pct")
+            vfee = (2.0 * (sp + pp) * 365.0 / hold) if (sp is not None and pp is not None) \
+                else v.get("fee_drag_apr_pct", fee)
+            if v.get("fee_drag_apr_pct") is not None and abs(vfee - v["fee_drag_apr_pct"]) > TOL:
+                problems.append("%s/%s: 수수료 연환산 불일치 (저장 %.4f vs 재계산 %.4f)"
+                                % (coin, v.get("venue"), v["fee_drag_apr_pct"], vfee))
+                continue
             net = v.get("decision_apr_pct")
-            if net is not None and abs((gross - fee) - net) > TOL:
+            if net is not None and abs((gross - vfee) - net) > TOL:
                 problems.append("%s/%s: 수수료 차감 불일치 (저장 %.4f vs 재계산 %.4f)"
-                                % (coin, v.get("venue"), net, gross - fee))
+                                % (coin, v.get("venue"), net, gross - vfee))
                 continue
             checked += 1
 

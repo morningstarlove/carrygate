@@ -28,14 +28,26 @@ EXIT_APR = 2.0
 # 선물 숏), 청산에 2번(현물 매도 + 선물 숏 청산) 체결되므로 왕복 4회 수수료가 든다.
 # 이 수수료는 1회성이라, 오래 들고 있을수록 연환산 부담이 줄어든다.
 #
-# 아래 값은 "거래소를 아직 정하지 않았을 때의 보수적 가정"이다. 실제 거래소를
-# 정하면 그곳의 실제 수수료율로 바꿔야 한다. HANDOVER.md 참고.
-TAKER_FEE_SPOT_PCT = 0.10     # 현물 1회 체결 수수료 (%)
-TAKER_FEE_PERP_PCT = 0.05     # 선물 1회 체결 수수료 (%)
+# 하이퍼리퀴드는 매 실행마다 API(userFees)에서 실제 수수료표를 받아 쓴다.
+# 나머지 거래소(okx/gate/binance/bybit)는 아래 보수적 기본 가정을 쓴다.
+TAKER_FEE_SPOT_PCT = 0.10     # 기본 가정: 현물 1회 체결 수수료 (%)
+TAKER_FEE_PERP_PCT = 0.05     # 기본 가정: 선물 1회 체결 수수료 (%)
 HOLD_DAYS = 30.0              # 가정 보유기간 (일)
 
+# 하이퍼리퀴드 API 가 실패했을 때만 쓰는 값 (공식 문서의 기본 등급 테이커 수수료).
+HL_DOC_PERP_TAKER_PCT = 0.045
+HL_DOC_SPOT_TAKER_PCT = 0.070
+HL_ZERO_ADDR = "0x" + "0" * 40   # 거래 이력 없는 주소 = 기본 등급(Tier 0) 수수료
+HL_STABLES = ("USDC", "USDH", "USDT0", "USDE")
+
+
+def fee_drag(spot_pct, perp_pct):
+    """1회 체결 수수료(%) -> 왕복 4회 수수료를 보유기간으로 나눈 연 % 부담."""
+    return 2.0 * (spot_pct + perp_pct) * 365.0 / HOLD_DAYS
+
+
 ROUND_TRIP_FEE_PCT = 2.0 * (TAKER_FEE_SPOT_PCT + TAKER_FEE_PERP_PCT)
-FEE_DRAG_APR_PCT = ROUND_TRIP_FEE_PCT * 365.0 / HOLD_DAYS
+FEE_DRAG_APR_PCT = fee_drag(TAKER_FEE_SPOT_PCT, TAKER_FEE_PERP_PCT)
 
 
 def http_json(url, tries=3, data=None):
@@ -284,7 +296,66 @@ SOURCES = [
 
 # ----------------------------------------------------------------- 집계
 
-def decorate(e):
+def hl_info():
+    """하이퍼리퀴드 실제 수수료(기본 등급)와 현물 상장 여부를 API 에서 읽는다.
+
+    캐리는 현물과 선물을 같이 들어야 한다. 하이퍼리퀴드에 그 코인의 현물이 없으면
+    현물은 다른 거래소에서 사야 하므로, 현물 수수료는 기본 가정으로 계산한다."""
+    out = {"perp_taker_pct": HL_DOC_PERP_TAKER_PCT,
+           "spot_taker_pct": HL_DOC_SPOT_TAKER_PCT,
+           "fee_source": "공식 문서 기준값 (API 조회 실패)",
+           "spot_pairs": {}, "spot_checked": False}
+    url = "https://api.hyperliquid.xyz/info"
+    try:
+        d = http_json(url, data={"type": "userFees", "user": HL_ZERO_ADDR})
+        fs = d.get("feeSchedule") or {}
+        perp = f(fs.get("cross"))
+        spot = f(fs.get("spotCross"))
+        if perp is None:
+            perp = f(d.get("userCrossRate"))
+        if spot is None:
+            spot = f(d.get("userSpotCrossRate"))
+        if perp is not None and spot is not None:
+            out["perp_taker_pct"] = perp * 100.0
+            out["spot_taker_pct"] = spot * 100.0
+            out["fee_source"] = "하이퍼리퀴드 API 실측 (userFees, 기본 등급 테이커)"
+    except Exception as e:
+        out["fee_error"] = str(e)[:150]
+
+    try:
+        m = http_json(url, data={"type": "spotMeta"})
+        names = {t.get("index"): t.get("name") for t in m.get("tokens", [])}
+        pairs = {}
+        for u in m.get("universe", []):
+            toks = u.get("tokens") or []
+            if len(toks) != 2:
+                continue
+            base, quote = names.get(toks[0]), names.get(toks[1])
+            if quote not in HL_STABLES:
+                continue
+            for c in COINS:
+                # 하이퍼리퀴드 현물은 BTC 를 UBTC 처럼 U 를 붙여 상장한 경우가 있다
+                if base in (c, "U" + c) and c not in pairs:
+                    pairs[c] = "%s/%s" % (base, quote)
+        out["spot_pairs"] = pairs
+        out["spot_checked"] = True
+    except Exception as e:
+        out["spot_error"] = str(e)[:150]
+    return out
+
+
+def venue_fees(venue, coin, hl):
+    """(현물 1회 %, 선물 1회 %, 설명) — 거래소·코인별 실제 적용 수수료."""
+    if venue == "hyperliquid" and hl:
+        pair = hl["spot_pairs"].get(coin)
+        if pair:
+            return hl["spot_taker_pct"], hl["perp_taker_pct"], "하이퍼리퀴드 현물(%s)+선물" % pair
+        why = "하이퍼리퀴드 현물 없음" if hl["spot_checked"] else "하이퍼리퀴드 현물 확인 불가"
+        return TAKER_FEE_SPOT_PCT, hl["perp_taker_pct"], "%s — 현물은 타 거래소 기본 가정" % why
+    return TAKER_FEE_SPOT_PCT, TAKER_FEE_PERP_PCT, "기본 가정"
+
+
+def decorate(e, fees=None):
     """APR 을 계산하고 수수료를 뺀 순수익(decision_apr_pct)까지 붙인다.
 
     gross_apr_pct  : 펀딩비만 본 연환산 (수수료 전)
@@ -299,8 +370,13 @@ def decorate(e):
     else:
         e["gross_apr_pct"], e["basis"] = e["apr_now_pct"], "단발값"
 
-    e["fee_drag_apr_pct"] = round(FEE_DRAG_APR_PCT, 4)
-    e["decision_apr_pct"] = (round(e["gross_apr_pct"] - FEE_DRAG_APR_PCT, 4)
+    spot_pct, perp_pct, note = fees or (TAKER_FEE_SPOT_PCT, TAKER_FEE_PERP_PCT, "기본 가정")
+    drag = fee_drag(spot_pct, perp_pct)
+    e["fee_spot_taker_pct"] = round(spot_pct, 4)
+    e["fee_perp_taker_pct"] = round(perp_pct, 4)
+    e["fee_note"] = note
+    e["fee_drag_apr_pct"] = round(drag, 4)
+    e["decision_apr_pct"] = (round(e["gross_apr_pct"] - drag, 4)
                              if e["gross_apr_pct"] is not None else None)
     return e
 
@@ -369,6 +445,7 @@ def main():
     now = datetime.now(KST)
     per_coin = {c: [] for c in COINS}
     ok, failed = [], {}
+    hl = hl_info()
 
     for name, fn in SOURCES:
         try:
@@ -376,7 +453,7 @@ def main():
             if not res:
                 raise RuntimeError("no rows")
             for c, e in res.items():
-                per_coin[c].append(decorate(e))
+                per_coin[c].append(decorate(e, venue_fees(e["venue"], c, hl)))
             ok.append(name)
         except Exception as e:
             failed[name] = str(e)[:200]
@@ -436,12 +513,23 @@ def main():
         "thresholds": {"enter_apr_pct": ENTER_APR, "exit_apr_pct": EXIT_APR,
                        "compared_against": "수수료 차감 후 순수익(net)"},
         "fee_assumption": {
-            "note": "거래소 미정 상태의 보수적 가정. 거래소를 정하면 실제 수수료율로 교체할 것.",
-            "taker_fee_spot_pct": TAKER_FEE_SPOT_PCT,
-            "taker_fee_perp_pct": TAKER_FEE_PERP_PCT,
-            "round_trip_fee_pct": round(ROUND_TRIP_FEE_PCT, 4),
+            "note": "하이퍼리퀴드는 API 실측 수수료, 나머지 거래소는 보수적 기본 가정.",
             "assumed_hold_days": HOLD_DAYS,
-            "fee_drag_apr_pct": round(FEE_DRAG_APR_PCT, 4),
+            "hyperliquid": {
+                "source": hl["fee_source"],
+                "perp_taker_pct": round(hl["perp_taker_pct"], 4),
+                "spot_taker_pct": round(hl["spot_taker_pct"], 4),
+                "spot_pairs": hl["spot_pairs"],
+                "spot_checked": hl["spot_checked"],
+                "fee_drag_apr_pct_with_hl_spot": round(
+                    fee_drag(hl["spot_taker_pct"], hl["perp_taker_pct"]), 4),
+            },
+            "default": {
+                "taker_fee_spot_pct": TAKER_FEE_SPOT_PCT,
+                "taker_fee_perp_pct": TAKER_FEE_PERP_PCT,
+                "round_trip_fee_pct": round(ROUND_TRIP_FEE_PCT, 4),
+                "fee_drag_apr_pct": round(FEE_DRAG_APR_PCT, 4),
+            },
         },
         "sources_ok": ok,
         "sources_failed": failed,
@@ -453,7 +541,8 @@ def main():
             "best_venue": best["venue"] if best else None,
             "best_apr_pct": best["decision_apr_pct"] if best else None,
             "best_gross_apr_pct": best["gross_apr_pct"] if best else None,
-            "fee_drag_apr_pct": round(FEE_DRAG_APR_PCT, 4),
+            "fee_drag_apr_pct": best["fee_drag_apr_pct"] if best else None,
+            "best_fee_note": best["fee_note"] if best else None,
             "best_basis": best["basis"] if best else None,
             "avg_coverage": "%d/%d" % (
                 sum(1 for d in coins.values() if d["best"]["basis"] == "7일평균"), len(coins)),

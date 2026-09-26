@@ -40,8 +40,10 @@ jobs:
           python -c "import json;print(json.dumps(json.load(open('status.json',encoding='utf-8'))['summary'],ensure_ascii=False,indent=2))" || echo "없음"
           echo "=== funding.json ==="
           python -c "import json;d=json.load(open('funding.json',encoding='utf-8'));print(json.dumps({'summary':d['summary'],'sources_ok':d['sources_ok'],'sources_failed':d['sources_failed']},ensure_ascii=False,indent=2))" || echo "없음"
+          echo "=== 하이퍼리퀴드 수수료 (실측) ==="
+          python -c "import json;d=json.load(open('funding.json',encoding='utf-8'));print(json.dumps(d['fee_assumption']['hyperliquid'],ensure_ascii=False,indent=2))" || echo "없음"
           echo "=== 코인별 연환산 ==="
-          python -c "import json;d=json.load(open('funding.json',encoding='utf-8'));[print('%-5s best=%-12s 순%7.2f%% (총%7.2f%%)  순중앙값=%7.2f%%  venues=%d  기준=%s'%(c,v['best']['venue'],v['best']['decision_apr_pct'],v['best']['gross_apr_pct'],v['median_apr_pct'],v['venue_count'],v['best']['basis'])) for c,v in d['coins'].items()]" || echo "없음"
+          python -c "import json;d=json.load(open('funding.json',encoding='utf-8'));[print('%-5s best=%-12s 순%7.2f%% (총%7.2f%% 수수료%5.2f%%)  venues=%d  기준=%s  [%s]'%(c,v['best']['venue'],v['best']['decision_apr_pct'],v['best']['gross_apr_pct'],v['best']['fee_drag_apr_pct'],v['venue_count'],v['best']['basis'],v['best'].get('fee_note',''))) for c,v in d['coins'].items()]" || echo "없음"
 
       - name: Show trend (며칠치 추이)
         if: always()
