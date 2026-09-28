@@ -177,7 +177,10 @@ def check_history(problems, notes):
 
 
 def check_scalp(problems, notes):
-    """초단타(scalp.json) 검산: 저장된 순수익을 총수익과 매매 건수에서 다시 계산해 대조한다."""
+    """초단타(scalp.json) 검산: 저장된 순수익을 총수익과 체결 비용에서 다시 계산해 대조한다.
+
+    체결 1회 비용 = 시장가면 수수료 + 호가폭/2, 지정가면 수수료. 규칙별로 시장가·지정가
+    체결 횟수(taker_sides / maker_sides)가 저장돼 있어 비용 총액을 그대로 재계산할 수 있다."""
     d = load_json("scalp.json")
     if d is None:
         notes.append("scalp.json 이 없다 — 초단타 검증이 아직 안 돌았다")
@@ -194,27 +197,30 @@ def check_scalp(problems, notes):
             problems.append("초단타 %s/%s: 시장 정보가 없다" % (r.get("venue"), r.get("coin")))
             continue
         cost = m.get("cost") or {}
-        rt_t, rt_m = cost.get("round_trip_taker_pct"), cost.get("round_trip_maker_pct")
-        if rt_t is None or rt_m is None:
-            problems.append("초단타 %s/%s: 왕복 비용이 비어 있다" % (r["venue"], r["coin"]))
+        taker, maker, spread = cost.get("taker_pct"), cost.get("maker_pct"), cost.get("spread_pct_est")
+        if None in (taker, maker, spread):
+            problems.append("초단타 %s/%s: 비용 정보가 비어 있다" % (r["venue"], r["coin"]))
             continue
-        # 왕복 비용 = 수수료 2회 + 호가 폭
-        redo = 2.0 * cost.get("taker_pct", 0) + cost.get("spread_pct_est", 0)
-        if abs(redo - rt_t) > TOL:
-            problems.append("초단타 %s/%s: 왕복 비용 불일치 (저장 %.5f vs 재계산 %.5f)" % (r["venue"], r["coin"], rt_t, redo))
-            continue
+        tag = "%s/%s/%s/%s" % (r["venue"], r["coin"], r.get("tf"), r.get("strategy"))
         n, g = r.get("trades", 0), r.get("gross_pct", 0.0)
-        tag = "%s/%s/%s" % (r["venue"], r["coin"], r.get("strategy"))
-        if abs((g - n * rt_t) - r.get("net_taker_pct", 0.0)) > TOL:
-            problems.append("초단타 %s: 시장가 순수익 불일치 (저장 %.4f vs 재계산 %.4f)" % (tag, r.get("net_taker_pct"), g - n * rt_t))
+        ms, ts = r.get("maker_sides"), r.get("taker_sides")
+        if ms is None or ts is None or ms + ts != 2 * n:
+            problems.append("초단타 %s: 체결 횟수가 매매 건수와 안 맞는다 (지정가 %s + 시장가 %s != 2×%d)" % (tag, ms, ts, n))
             continue
-        if abs((g - n * rt_m) - r.get("net_maker_pct", 0.0)) > TOL:
-            problems.append("초단타 %s: 지정가 순수익 불일치" % tag)
+        if r.get("exec") == "market" and ms != 0:
+            problems.append("초단타 %s: 시장가 규칙에 지정가 체결이 있다" % tag)
             continue
-        if abs(r.get("first_half_net_pct", 0.0) + r.get("second_half_net_pct", 0.0) - r.get("net_taker_pct", 0.0)) > TOL:
+        redo_fee = ms * maker + ts * (taker + spread / 2.0)
+        if abs(redo_fee - r.get("fee_pct", 0.0)) > TOL:
+            problems.append("초단타 %s: 비용 불일치 (저장 %.4f vs 재계산 %.4f)" % (tag, r.get("fee_pct"), redo_fee))
+            continue
+        if abs((g - redo_fee) - r.get("net_pct", 0.0)) > TOL:
+            problems.append("초단타 %s: 순수익 불일치 (저장 %.4f vs 재계산 %.4f)" % (tag, r.get("net_pct"), g - redo_fee))
+            continue
+        if abs(r.get("first_half_net_pct", 0.0) + r.get("second_half_net_pct", 0.0) - r.get("net_pct", 0.0)) > TOL:
             problems.append("초단타 %s: 앞·뒤 반나절 합이 하루 순수익과 다르다" % tag)
             continue
-        if r.get("robust") and (n < 10 or r.get("net_taker_pct", 0) <= 0 or not r.get("beats_baseline")):
+        if r.get("robust") and (n < 10 or r.get("net_pct", 0) <= 0 or not r.get("beats_baseline")):
             problems.append("초단타 %s: 견고 표시 조건이 안 맞는다" % tag)
             continue
         checked += 1
@@ -222,7 +228,7 @@ def check_scalp(problems, notes):
     real = [r for r in rows if r.get("strategy") != "baseline_hold5"]
     if s.get("rows_total") != len(real):
         problems.append("초단타: 요약의 조합 수(%s)가 실제(%d)와 다르다" % (s.get("rows_total"), len(real)))
-    pos = sum(1 for r in real if r.get("net_taker_pct", 0) > 0)
+    pos = sum(1 for r in real if r.get("net_pct", 0) > 0)
     if s.get("rows_positive") != pos:
         problems.append("초단타: 요약의 플러스 조합 수(%s)가 실제(%d)와 다르다" % (s.get("rows_positive"), pos))
     if len(markets) < 2:
