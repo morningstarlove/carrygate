@@ -6,6 +6,8 @@
   1) 계산 검산: funding.json 에 저장된 연환산 수치를, 원본 펀딩비와 정산주기로
      처음부터 다시 계산해 일치하는지 본다. 어긋나면 계산이나 저장 어딘가가 틀린 것이다.
   2) 기록 검산: funding_history.jsonl 의 날짜 중복·누락·순서와 수집 품질을 본다.
+  3) 초단타 검산: scalp.json 의 순수익을 총수익·매매 건수·왕복 비용에서 다시 계산해
+     대조하고, scalp_history.jsonl 의 날짜 중복·순서를 본다.
 
 문제를 찾으면 화면에 남기고 1번으로 끝낸다(워크플로가 빨간불로 알려준다).
 아무것도 고치지 않고 아무것도 저장하지 않는다.
@@ -174,6 +176,85 @@ def check_history(problems, notes):
                     parsed[-1].strftime("%Y-%m-%d") if parsed else "-"))
 
 
+def check_scalp(problems, notes):
+    """초단타(scalp.json) 검산: 저장된 순수익을 총수익과 매매 건수에서 다시 계산해 대조한다."""
+    d = load_json("scalp.json")
+    if d is None:
+        notes.append("scalp.json 이 없다 — 초단타 검증이 아직 안 돌았다")
+        return 0
+    rows = d.get("rows") or []
+    markets = d.get("markets") or {}
+    if not rows:
+        problems.append("초단타: 규칙 결과가 하나도 없다 (모든 시장 수집 실패)")
+        return 0
+    checked = 0
+    for r in rows:
+        m = markets.get("%s:%s" % (r.get("venue"), r.get("coin")))
+        if not m:
+            problems.append("초단타 %s/%s: 시장 정보가 없다" % (r.get("venue"), r.get("coin")))
+            continue
+        cost = m.get("cost") or {}
+        rt_t, rt_m = cost.get("round_trip_taker_pct"), cost.get("round_trip_maker_pct")
+        if rt_t is None or rt_m is None:
+            problems.append("초단타 %s/%s: 왕복 비용이 비어 있다" % (r["venue"], r["coin"]))
+            continue
+        # 왕복 비용 = 수수료 2회 + 호가 폭
+        redo = 2.0 * cost.get("taker_pct", 0) + cost.get("spread_pct_est", 0)
+        if abs(redo - rt_t) > TOL:
+            problems.append("초단타 %s/%s: 왕복 비용 불일치 (저장 %.5f vs 재계산 %.5f)" % (r["venue"], r["coin"], rt_t, redo))
+            continue
+        n, g = r.get("trades", 0), r.get("gross_pct", 0.0)
+        tag = "%s/%s/%s" % (r["venue"], r["coin"], r.get("strategy"))
+        if abs((g - n * rt_t) - r.get("net_taker_pct", 0.0)) > TOL:
+            problems.append("초단타 %s: 시장가 순수익 불일치 (저장 %.4f vs 재계산 %.4f)" % (tag, r.get("net_taker_pct"), g - n * rt_t))
+            continue
+        if abs((g - n * rt_m) - r.get("net_maker_pct", 0.0)) > TOL:
+            problems.append("초단타 %s: 지정가 순수익 불일치" % tag)
+            continue
+        if abs(r.get("first_half_net_pct", 0.0) + r.get("second_half_net_pct", 0.0) - r.get("net_taker_pct", 0.0)) > TOL:
+            problems.append("초단타 %s: 앞·뒤 반나절 합이 하루 순수익과 다르다" % tag)
+            continue
+        if r.get("robust") and (n < 10 or r.get("net_taker_pct", 0) <= 0 or not r.get("beats_baseline")):
+            problems.append("초단타 %s: 견고 표시 조건이 안 맞는다" % tag)
+            continue
+        checked += 1
+    s = d.get("summary") or {}
+    real = [r for r in rows if r.get("strategy") != "baseline_hold5"]
+    if s.get("rows_total") != len(real):
+        problems.append("초단타: 요약의 조합 수(%s)가 실제(%d)와 다르다" % (s.get("rows_total"), len(real)))
+    pos = sum(1 for r in real if r.get("net_taker_pct", 0) > 0)
+    if s.get("rows_positive") != pos:
+        problems.append("초단타: 요약의 플러스 조합 수(%s)가 실제(%d)와 다르다" % (s.get("rows_positive"), pos))
+    if len(markets) < 2:
+        notes.append("초단타: 시장 %d곳뿐 — 교차 확인이 약하다" % len(markets))
+    for k, v in (d.get("failed") or {}).items():
+        notes.append("초단타 수집 실패 %s: %s" % (k, str(v)[:80]))
+    return checked
+
+
+def check_scalp_history(problems, notes):
+    rows = load_rows("scalp_history.jsonl")
+    if not rows:
+        notes.append("초단타 기록 파일이 아직 없다")
+        return
+    seen, dates = {}, []
+    for n, r in rows:
+        if r is None:
+            problems.append("초단타 기록 %d번째 줄이 깨져 있다" % n)
+            continue
+        date = r.get("date")
+        if not date:
+            problems.append("초단타 기록 %d번째 줄에 날짜가 없다" % n)
+            continue
+        if date in seen:
+            problems.append("초단타 기록 날짜 %s 가 %d번, %d번 줄에 중복" % (date, seen[date], n))
+        seen[date] = n
+        dates.append(date)
+    if dates != sorted(dates):
+        problems.append("초단타 기록이 날짜순이 아니다")
+    notes.append("초단타 기록 %d일치 (%s ~ %s)" % (len(dates), dates[0] if dates else "-", dates[-1] if dates else "-"))
+
+
 def main():
     problems, notes = [], []
 
@@ -186,9 +267,11 @@ def main():
         check_quality(d, problems, notes)
 
     check_history(problems, notes)
+    scalp_checked = check_scalp(problems, notes)
+    check_scalp_history(problems, notes)
 
     print("=== 검산 ===")
-    print("재계산 대조: %d건 통과" % checked)
+    print("재계산 대조: 캐리 %d건, 초단타 %d건 통과" % (checked, scalp_checked))
     for m in notes:
         print("  · %s" % m)
 
