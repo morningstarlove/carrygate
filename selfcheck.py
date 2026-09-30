@@ -261,6 +261,26 @@ def check_scalp_history(problems, notes):
     notes.append("초단타 기록 %d일치 (%s ~ %s)" % (len(dates), dates[0] if dates else "-", dates[-1] if dates else "-"))
 
 
+def check_jsonl_dates(path, label, problems, notes):
+    """기록 파일의 날짜 중복·순서만 본다 (연구 파일은 수치 재계산 대상이 아니다)."""
+    rows = load_rows(path)
+    if not rows:
+        notes.append("%s 기록 파일이 아직 없다" % label)
+        return
+    seen, dates = {}, []
+    for n, r in rows:
+        if r is None or not r.get("date"):
+            problems.append("%s 기록 %d번째 줄이 깨졌거나 날짜가 없다" % (label, n))
+            continue
+        if r["date"] in seen:
+            problems.append("%s 기록 날짜 %s 가 %d번, %d번 줄에 중복" % (label, r["date"], seen[r["date"]], n))
+        seen[r["date"]] = n
+        dates.append(r["date"])
+    if dates != sorted(dates):
+        problems.append("%s 기록이 날짜순이 아니다" % label)
+    notes.append("%s 기록 %d일치 (%s ~ %s)" % (label, len(dates), dates[0] if dates else "-", dates[-1] if dates else "-"))
+
+
 def main():
     problems, notes = [], []
 
@@ -275,6 +295,8 @@ def main():
     check_history(problems, notes)
     scalp_checked = check_scalp(problems, notes)
     check_scalp_history(problems, notes)
+    check_jsonl_dates("research_history.jsonl", "보조 연구", problems, notes)
+    check_jsonl_dates("orderbook_history.jsonl", "호가창", problems, notes)
 
     print("=== 검산 ===")
     print("재계산 대조: 캐리 %d건, 초단타 %d건 통과" % (checked, scalp_checked))

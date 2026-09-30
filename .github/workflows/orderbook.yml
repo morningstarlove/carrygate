@@ -1,0 +1,62 @@
+name: CARRYGATE orderbook (호가창 표본)
+
+# 매일 22:00 KST(13:00 UTC)부터 약 5시간 30분 동안 10초마다 세 거래소 호가를 찍고,
+# 끝나면 불균형 예측력·호가 폭을 계산해 orderbook.json / orderbook_history.jsonl 에 남긴다.
+# 원본 표본(CSV)은 저장소에 커밋하지 않고 실행 산출물(artifact)로 7일 보관한다.
+on:
+  schedule:
+    - cron: "0 13 * * *"
+  workflow_dispatch:
+    inputs:
+      minutes:
+        description: "수집 시간(분). 시험은 2~3"
+        type: number
+        default: 330
+      dry_run:
+        description: "결과만 확인하고 커밋하지 않음"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 355
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Collect + analyze (수집·분석)
+        run: python orderbook.py --minutes ${{ inputs.minutes || 330 }}
+
+      - name: Upload raw samples (원본 표본 7일 보관)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: orderbook-samples-${{ github.run_id }}
+          path: orderbook_samples.csv
+          retention-days: 7
+          if-no-files-found: ignore
+
+      - name: Show trend (누적)
+        if: always()
+        run: python orderbook.py --report || echo "기록 없음"
+
+      - name: Commit results
+        if: always() && inputs.dry_run != true
+        run: |
+          git config user.name  "carrygate-bot"
+          git config user.email "carrygate-bot@users.noreply.github.com"
+          git add -A orderbook.json orderbook_history.jsonl || true
+          if git diff --staged --quiet; then
+            echo "no change"
+          else
+            git commit -m "orderbook $(date -u +%Y-%m-%d)"
+            git pull --rebase origin main || true
+            git push
+          fi
