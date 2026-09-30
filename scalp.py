@@ -31,7 +31,8 @@ UA = {"User-Agent": "Mozilla/5.0 (compatible; carrygate/1.0)",
       "Accept": "application/json"}
 
 EVAL_BARS = 1440      # 평가 구간: 하루 = 1분봉 1440개
-WARMUP_MIN = 1080     # 지표 계산용 준비 구간(분). 15분봉 기준 72봉 (가장 긴 지표 60봉 + 여유)
+WARMUP_MIN = 1440     # 지표 계산용 준비 구간(분) = 하루. 변동성 돌파가 전날(UTC) 고저 폭을 쓴다
+VB_K = 0.5            # 변동성 돌파 계수: 당일 시가 + 전날 폭 × K 를 넘으면 진입
 TIMEFRAMES = [1, 5, 15]   # 같은 규칙을 적용해 보는 봉 길이(분)
 SPREAD_TICKS = 1.0    # 시장가 체결 시 왕복으로 잃는 호가 폭 (틱 단위). 1틱 = 매수호가·매도호가 차이가 최소일 때
 LIMIT_TTL = 3         # 지정가 주문을 기다리는 최대 봉 수. 넘으면 진입은 취소, 청산은 시장가
@@ -271,6 +272,20 @@ class Ctx(object):
         for i in range(len(c)):
             if pv[i] is not None and vs[i] and std60[i]:
                 self.zvwap[i] = (c[i] - pv[i] / vs[i]) / std60[i]
+        # 변동성 돌파용: UTC 날짜별 시가와 전날 (고가-저가). 전날 자료가 없으면 None.
+        day = [t // 86400 for t in self.t]
+        self.last_of_day = [i + 1 < len(day) and day[i + 1] != day[i] for i in range(len(day))]
+        rng, opens = {}, {}
+        for i in range(len(c)):
+            d = day[i]
+            if d not in opens:
+                opens[d] = self.o[i]
+                rng[d] = [h[i], l[i]]
+            else:
+                rng[d][0] = max(rng[d][0], h[i])
+                rng[d][1] = min(rng[d][1], l[i])
+        self.day_open = [opens[d] for d in day]
+        self.prev_range = [(rng[d - 1][0] - rng[d - 1][1]) if (d - 1) in rng else None for d in day]
 
 
 # ----------------------------------------------------------------- 규칙 (고정)
@@ -328,6 +343,23 @@ def x_vwap(ctx, i, pos):
     return z is not None and (z >= 0 if pos["side"] == 1 else z <= 0)
 
 
+def e_vb(ctx, i):
+    """변동성 돌파: 당일 시가 + 전날 폭 × K 를 종가로 넘으면 롱, 시가 − 폭 × K 아래면 숏. 하루 마지막 봉엔 진입 안 함."""
+    r = ctx.prev_range[i]
+    if r is None or r <= 0 or ctx.last_of_day[i]:
+        return None
+    if ctx.c[i] > ctx.day_open[i] + VB_K * r:
+        return 1
+    if ctx.c[i] < ctx.day_open[i] - VB_K * r:
+        return -1
+    return None
+
+
+def x_dayend(ctx, i, pos):
+    """하루 마지막 봉에서 청산 신호 -> 다음 날 첫 봉 시가에 체결."""
+    return ctx.last_of_day[i]
+
+
 def e_base(ctx, i):
     return 1 if (i - ctx.eval_start) % 10 == 0 else None
 
@@ -351,6 +383,8 @@ STRATEGIES = [
      "desc": "60봉 거래량가중평균가에서 1.5σ 넘게 벗어나면 반대로 진입, 평균가 복귀 시 청산, 최대 60봉"},
     {"key": "vwap_fade_lim", "name": "VWAP 되돌림 지정가", "entry": e_vwap, "exit": x_vwap, "max_hold": 60, "exec": "limit",
      "desc": "VWAP 되돌림과 같은 신호를 지정가로. 신호 봉 종가에 주문, 가격이 지나쳐야 체결, 3봉 미체결 시 취소"},
+    {"key": "vb_05", "name": "변동성 돌파(전날 폭 0.5)", "entry": e_vb, "exit": x_dayend, "max_hold": 100000, "exec": "market",
+     "desc": "당일(UTC) 시가에서 전날 고저 폭의 절반만큼 오르면 추세 확정으로 보고 진입, 그날 끝(다음 날 첫 봉 시가)에 청산. 하루 1회 성격"},
     {"key": BASELINE, "name": "기준선(무작위 5봉 보유)", "entry": e_base, "exit": x_never, "max_hold": 5, "exec": "market",
      "desc": "규칙 없이 10봉마다 사서 5봉 뒤 파는 것. 다른 규칙이 이것도 못 이기면 규칙에 정보가 없는 것"},
 ]
@@ -703,6 +737,8 @@ def main(argv=None):
     ap.add_argument("--out", default="scalp.json")
     ap.add_argument("--history", default="scalp_history.jsonl")
     ap.add_argument("--eval-bars", type=int, default=EVAL_BARS)
+    ap.add_argument("--save-bars", default="bars_cache.json",
+                    help="받은 1분봉을 이 파일에 남긴다 (scalp_research.py 가 재사용). 빈 문자열이면 저장 안 함")
     a = ap.parse_args(argv)
     if a.report:
         return report(a.history)
@@ -741,6 +777,11 @@ def main(argv=None):
                 time.sleep(0.2)
             if got:
                 data[venue] = got
+
+    if a.save_bars and data:
+        with open(a.save_bars, "w", encoding="utf-8") as fp:
+            json.dump({"eval_day_utc": eval_day, "eval_t0": d0, "fees": fees,
+                       "bars": {v: {c: bars for c, bars in cs.items()} for v, cs in data.items()}}, fp)
 
     markets, rows = {}, []
     for venue in data:
