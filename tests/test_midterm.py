@@ -152,6 +152,17 @@ class Macro(unittest.TestCase):
         self.assertEqual(s["cpi"]["hit_rate_pct"], 50.0)
         self.assertAlmostEqual(s["cpi"]["signed_post30_bp"], (-50 + 30) / 2.0)
 
+    def test_apply_surprise_and_forward_flag(self):
+        rec = {"type": "cpi", "ts": me.RULE_FIXED_TS + 10, "forward": True}
+        me.apply_surprise(rec, {"actual": None, "forecast": 3.0})
+        self.assertNotIn("surprise_dir", rec)            # 실제치가 없으면 방향 없음
+        me.apply_surprise(rec, {"actual": 3.4, "forecast": 3.0, "previous": 2.9})
+        self.assertEqual(rec["surprise_dir"], -1)        # 물가가 예상보다 높으면 코인에 불리(−)
+        self.assertAlmostEqual(rec["surprise"], 0.4)
+        self.assertTrue(me.RULE_FIXED_TS - 1 < me.RULE_FIXED_TS)
+        from datetime import datetime, timezone
+        self.assertEqual(datetime.fromtimestamp(me.RULE_FIXED_TS, timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), me.RULE_FIXED_UTC)
+
     def test_surprise_direction_sign(self):
         ev = {"type": "cpi", "title": "x", "time_utc": "x", "ts": 0, "actual": 3.5, "forecast": 3.0}
         # process_event 는 네트워크를 쓰므로 부호 계산만 흉내낸다

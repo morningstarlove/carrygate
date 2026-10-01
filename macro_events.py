@@ -27,6 +27,10 @@ OUT_PATH = "macro.json"
 COINS = ["BTC", "ETH"]
 PRE_MIN = 30
 POST = (5, 15, 30, 60)
+# 규칙(아래 SURPRISE_SIGN)을 고정한 시각. 이 뒤의 발표는 "결과를 모르고 미리 정한 규칙"으로 맞힌 것이므로
+# 사전 등록 순방향 시험(forward)으로 따로 집계한다. 그 전 이벤트는 사후 검증(backfill)이다.
+RULE_FIXED_UTC = "2026-10-01T00:00:00Z"
+RULE_FIXED_TS = 1790812800
 # 서프라이즈 부호 -> 코인 가격 방향 가설. +1: 예상보다 높으면 오른다, -1: 예상보다 높으면 내린다.
 # 물가·고용이 예상보다 뜨거우면 금리 인하 기대가 줄어 위험자산에 불리(−1). 금리결정은 "높으면 불리"(−1).
 SURPRISE_SIGN = {"cpi": -1, "nfp": -1, "fomc": -1, "pce": -1, "gdp": -1}
@@ -114,14 +118,24 @@ def process_event(ev, coin):
     _, base = get_1m(coin, ts - 86400 - 5400, ts - 86400 + 5400)     # 전날 같은 시각 = 평소 기준
     b = reaction(base, ts - 86400) if base else None
     rec = {"type": ev["type"], "title": ev["title"], "time_utc": ev["time_utc"], "ts": ts, "coin": coin, "source": src,
-           "actual": ev.get("actual"), "forecast": ev.get("forecast"), "previous": ev.get("previous")}
+           "forward": ts >= RULE_FIXED_TS}
     rec.update(r)
     rec["base_abs_post30_bp"] = abs(b["post30_bp"]) if b else None
+    apply_surprise(rec, ev)
+    return rec
+
+
+def apply_surprise(rec, ev):
+    """달력의 실제·예상치를 이벤트 기록에 반영한다. 달력이 뒤에 갱신돼 값이 생기면 다시 호출해 채운다."""
+    rec["actual"], rec["forecast"], rec["previous"] = ev.get("actual"), ev.get("forecast"), ev.get("previous")
     a, fc = ev.get("actual"), ev.get("forecast")
     if a is not None and fc is not None:
         d = a - fc
         rec["surprise"] = d
-        rec["surprise_dir"] = (1 if d > 0 else (-1 if d < 0 else 0)) * SURPRISE_SIGN.get(ev["type"], -1)
+        rec["surprise_dir"] = (1 if d > 0 else (-1 if d < 0 else 0)) * SURPRISE_SIGN.get(ev.get("type") or rec.get("type"), -1)
+    else:
+        rec.pop("surprise", None)
+        rec.pop("surprise_dir", None)
     return rec
 
 
@@ -172,6 +186,14 @@ def report(path=OUT_PATH):
         return 0
     print("=== 매크로 발표 전후 반응 누적 (이벤트 %d건, 코인 %s) ===" % (len(d["events"]), ", ".join(COINS)))
     print_summary(d["summary"], len(d["events"]), d.get("upcoming", []))
+    fs = d.get("forward_summary") or {}
+    print()
+    print("--- 사전 등록 순방향 시험 (규칙 고정 %s 이후, %d건, 실제치 대기 %d건) ---"
+          % ((d.get("rule_fixed_utc") or "")[:10], d.get("forward_events", 0), d.get("forward_pending_surprise", 0)))
+    if fs:
+        print_summary(fs, d.get("forward_events", 0), [])
+    else:
+        print("아직 없음")
     return 0
 
 
@@ -210,10 +232,19 @@ def main(argv=None):
                 errors["%s@%s/%s" % (ev["type"], ev["time_utc"], coin)] = str(e)[:120]
             processed += 1
             time.sleep(0.15)
+    # 달력이 갱신돼 실제치가 채워졌으면 이미 기록한 이벤트의 서프라이즈도 갱신한다
+    cal_by = {(e["type"], e["ts"]): e for e in cal.get("events", [])}
+    for e in prev.get("events", []):
+        ev = cal_by.get((e["type"], e["ts"]))
+        if ev:
+            apply_surprise(e, ev)
+        e.setdefault("forward", e["ts"] >= RULE_FIXED_TS)
     events = sorted(prev.get("events", []) + new, key=lambda e: (e["ts"], e["coin"]))
     upcoming = [{"type": e["type"], "title": e["title"], "time_utc": e["time_utc"]}
                 for e in sorted(cal.get("events", []), key=lambda e: e["ts"]) if e["ts"] > now]
     summary = summarize(events) if events else {}
+    fwd = [e for e in events if e.get("forward")]
+    forward_summary = summarize(fwd) if fwd else {}
     now_kst = datetime.now(KST)
     cal_last = max((e["ts"] for e in cal.get("events", [])), default=0)
     stale = cal_last < now + 14 * 86400
@@ -224,11 +255,22 @@ def main(argv=None):
                       "surprise": "실제−예상 의 부호 × 가설 부호(%s). 양수면 '가설 방향대로 움직였다'" % SURPRISE_SIGN},
            "calendar_last_event_utc": datetime.fromtimestamp(cal_last, timezone.utc).strftime("%Y-%m-%d") if cal_last else None,
            "calendar_stale": stale,
+           "rule_fixed_utc": RULE_FIXED_UTC,
            "events": events, "new_today": len(new), "errors": errors,
-           "skipped": {"|".join(k): v for k, v in skipped.items()}, "upcoming": upcoming, "summary": summary}
+           "skipped": {"|".join(k): v for k, v in skipped.items()}, "upcoming": upcoming,
+           "summary": summary, "forward_summary": forward_summary, "forward_events": len(fwd),
+           "forward_pending_surprise": sum(1 for e in fwd if e.get("surprise_dir") is None)}
     print("=== 매크로 발표 전후 (%s) — 새로 처리 %d건, 누적 %d건, 자료 없어 건너뜀 %d건 ===" % (out["date"], len(new), len(events), len(skipped)))
     if events:
+        print("--- 전체 (사후 검증 포함) ---")
         print_summary(summary, len(events), upcoming)
+        print()
+        print("--- 사전 등록 순방향 시험 (규칙 고정 %s 이후 발표만, %d건, 실제치 대기 %d건) ---"
+              % (RULE_FIXED_UTC[:10], len(fwd), out["forward_pending_surprise"]))
+        if fwd:
+            print_summary(forward_summary, len(fwd), [])
+        else:
+            print("아직 없음 — 다음 발표부터 쌓인다")
     if errors:
         print("오류 %d건: %s" % (len(errors), json.dumps(dict(list(errors.items())[:5]), ensure_ascii=False)))
     if stale:
