@@ -52,7 +52,8 @@ def src_okx(now):
         rows = []
         for r in futs:
             inst = r.get("instId", "")
-            if not inst.startswith("%s-USDT-" % c):
+            # OKX 만기 선물은 USDT 마진(BTC-USDT-261226)·USD(코인) 마진(BTC-USD-261226)·USDC 마진이 있다. 모두 본다.
+            if not any(inst.startswith("%s-%s-" % (c, q)) for q in ("USDT", "USD", "USDC")):
                 continue
             # 만기: instId 끝 6자리 YYMMDD, 08:00 UTC 정산
             try:
