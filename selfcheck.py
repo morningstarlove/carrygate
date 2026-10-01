@@ -281,6 +281,34 @@ def check_jsonl_dates(path, label, problems, notes):
     notes.append("%s 기록 %d일치 (%s ~ %s)" % (label, len(dates), dates[0] if dates else "-", dates[-1] if dates else "-"))
 
 
+def check_basis(problems, notes):
+    """베이시스 캐리: 저장된 연환산을 선물가·현물가·만기일수에서 다시 계산해 대조한다."""
+    d = load_json("basis.json")
+    if d is None:
+        notes.append("basis.json 이 없다")
+        return 0
+    one_off = (d.get("fee_assumption") or {}).get("one_off_total_pct")
+    checked = 0
+    for coin, cd in (d.get("coins") or {}).items():
+        for c in cd.get("contracts", []):
+            days, fut, spot = c.get("days"), c.get("fut_px"), c.get("spot_px")
+            if not days or not fut or not spot:
+                problems.append("베이시스 %s/%s: 값이 비어 있다" % (coin, c.get("inst")))
+                continue
+            gross = (fut / spot - 1.0) * 365.0 / days * 100.0
+            fee = (one_off if one_off is not None else c.get("fee_one_off_pct", 0.0)) * 365.0 / days
+            if abs(gross - c.get("gross_apr_pct", 0)) > 0.05 or abs((gross - fee) - c.get("net_apr_pct", 0)) > 0.05:
+                problems.append("베이시스 %s/%s: 연환산 불일치 (저장 총 %.3f 순 %.3f vs 재계산 %.3f / %.3f)"
+                                % (coin, c.get("inst"), c.get("gross_apr_pct", 0), c.get("net_apr_pct", 0), gross, gross - fee))
+                continue
+            checked += 1
+        best = cd.get("best")
+        elig = [c for c in cd.get("contracts", []) if c.get("eligible")]
+        if best and elig and max(elig, key=lambda c: c["net_apr_pct"])["inst"] != best["inst"]:
+            problems.append("베이시스 %s: 대표 계약이 순수익 1위가 아니다" % coin)
+    return checked
+
+
 def main():
     problems, notes = [], []
 
@@ -297,9 +325,13 @@ def main():
     check_scalp_history(problems, notes)
     check_jsonl_dates("research_history.jsonl", "보조 연구", problems, notes)
     check_jsonl_dates("orderbook_history.jsonl", "호가창", problems, notes)
+    basis_checked = check_basis(problems, notes)
+    for path, label in (("basis_history.jsonl", "베이시스"), ("funding_signal_history.jsonl", "펀딩 신호"),
+                        ("kimchi_history.jsonl", "김치프리미엄"), ("momentum_history.jsonl", "듀얼 모멘텀")):
+        check_jsonl_dates(path, label, problems, notes)
 
     print("=== 검산 ===")
-    print("재계산 대조: 캐리 %d건, 초단타 %d건 통과" % (checked, scalp_checked))
+    print("재계산 대조: 캐리 %d건, 초단타 %d건, 베이시스 %d건 통과" % (checked, scalp_checked, basis_checked))
     for m in notes:
         print("  · %s" % m)
 
