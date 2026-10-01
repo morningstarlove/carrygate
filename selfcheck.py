@@ -330,7 +330,8 @@ def main():
     check_jsonl_dates("orderbook_history.jsonl", "호가창", problems, notes)
     basis_checked = check_basis(problems, notes)
     for path, label in (("basis_history.jsonl", "베이시스"), ("funding_signal_history.jsonl", "펀딩 신호"),
-                        ("kimchi_history.jsonl", "김치프리미엄"), ("momentum_history.jsonl", "듀얼 모멘텀")):
+                        ("kimchi_history.jsonl", "김치프리미엄"), ("momentum_history.jsonl", "듀얼 모멘텀"),
+                        ("live_history.jsonl", "실전 캐리")):
         check_jsonl_dates(path, label, problems, notes)
 
     print("=== 검산 ===")

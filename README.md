@@ -223,6 +223,8 @@ GitHub Actions가 **매일 한국시간 오전 9시 18분**에 자동 실행한�
 | `basis.py` / `funding_signal.py` / `kimchi.py` | 중기 연구 ②③④. 각각 `--report` |
 | `macro_events.py` / `listing.py` | 이벤트 연구 ⑤⑥ (누적 JSON). 각각 `--report` |
 | `momentum.py` / `etf_update.py` | 장기 ① ETF 듀얼 모멘텀 백테스트·신호 / 일봉 갱신 |
+| `live_monitor.py` | 실전 캐리 감시 — 하이퍼리퀴드 지갑 **주소만으로** 포지션·펀딩 수취·수수료 기록 (키 없음) |
+| `docs/LIVE_CARRY_PLAN.md` | 캐리 소액 실전 설계서 (준비·진입·운영·청산·판정표) |
 | `data/etf/` / `data/macro_calendar.json` | ETF 20년 일봉 / 매크로 발표 달력 |
 | `report.py` | 며칠치 추이를 표로 출력 |
 | `selfcheck.py` | **검산** — 저장값을 다시 계산해 대조하고 기록 누락을 잡는다 |
