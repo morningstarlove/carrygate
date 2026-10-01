@@ -106,7 +106,7 @@ def contract(venue, coin, inst, exp, days, fut, spot, bid, ask):
     gross = annualize(fut, spot, days)
     fa = fee_apr(days)
     return {"venue": venue, "coin": coin, "inst": inst, "expiry_utc": exp.strftime("%Y-%m-%d %H:%M"),
-            "days": round(days, 2), "fut_px": fut, "spot_px": spot,
+            "days": round(days, 4), "fut_px": fut, "spot_px": spot,
             "bid": bid, "ask": ask,
             "basis_pct": round((fut / spot - 1.0) * 100.0, 4),
             "gross_apr_pct": round(gross, 4), "fee_apr_pct": round(fa, 4),

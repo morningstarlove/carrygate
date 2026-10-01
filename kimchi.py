@@ -94,21 +94,12 @@ def upbit_daily(coin, count=DAYS):
 
 
 def okx_daily(coin, count=DAYS):
-    out, after = {}, None
-    for _ in range(4):
-        url = "https://www.okx.com/api/v5/market/history-candles?instId=%s-USDT&bar=1D&limit=100" % coin
-        if after:
-            url += "&after=%d" % after
-        rows = http_json(url).get("data") or []
-        if not rows:
-            break
-        for r in rows:
-            t = int(r[0]) // 1000
-            out[datetime.fromtimestamp(t, timezone.utc).strftime("%Y-%m-%d")] = f(r[4])
-        after = min(int(r[0]) for r in rows)
-        if len(out) >= count:
-            break
-        time.sleep(0.12)
+    """OKX 현물 일봉. candles 엔드포인트는 한 번에 300개를 준다."""
+    rows = http_json("https://www.okx.com/api/v5/market/candles?instId=%s-USDT&bar=1D&limit=300" % coin).get("data") or []
+    out = {}
+    for r in rows:
+        t = int(r[0]) // 1000
+        out[datetime.fromtimestamp(t, timezone.utc).strftime("%Y-%m-%d")] = f(r[4])
     return out
 
 

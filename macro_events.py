@@ -55,6 +55,37 @@ def hl_1m(coin, start, end):
     return {int(r["t"]) // 1000: (f(r["o"]), f(r["h"]), f(r["l"]), f(r["c"])) for r in rows}
 
 
+def okx_1m(coin, start, end):
+    """OKX 선물 1분봉 (과거 이력이 깊다). after= 로 과거 방향 페이지."""
+    out, after = {}, end * 1000
+    for _ in range(4):
+        d = http_json("https://www.okx.com/api/v5/market/history-candles?instId=%s-USDT-SWAP&bar=1m&limit=100&after=%d" % (coin, after))
+        rows = d.get("data") or []
+        if not rows:
+            break
+        for r in rows:
+            t = int(r[0]) // 1000
+            if start <= t < end:
+                out[t] = (f(r[1]), f(r[2]), f(r[3]), f(r[4]))
+        after = min(int(r[0]) for r in rows)
+        if after // 1000 <= start:
+            break
+        time.sleep(0.12)
+    return out
+
+
+def get_1m(coin, start, end):
+    """하이퍼리퀴드 1분봉, 없으면 OKX. (출처, 봉) 을 돌려준다."""
+    try:
+        b = hl_1m(coin, start, end)
+        if len(b) >= (end - start) // 60 * 0.8:
+            return "hyperliquid", b
+    except Exception:
+        pass
+    b = okx_1m(coin, start, end)
+    return ("okx", b) if b else (None, {})
+
+
 def reaction(bars, ts):
     """발표 시각 ts(분 경계) 기준: 직전 30분 수익률, 직후 5·15·30·60분 수익률(bp), 60분 내 최대 상승·하락폭."""
     t0 = ts - ts % 60
@@ -76,13 +107,13 @@ def reaction(bars, ts):
 
 def process_event(ev, coin):
     ts = ev["ts"]
-    bars = hl_1m(coin, ts - 5400, ts + 5400)
-    base = hl_1m(coin, ts - 86400 - 5400, ts - 86400 + 5400)     # 전날 같은 시각 = 평소 기준
-    r = reaction(bars, ts)
+    src, bars = get_1m(coin, ts - 5400, ts + 5400)
+    r = reaction(bars, ts) if bars else None
     if not r:
         return None
-    b = reaction(base, ts - 86400)
-    rec = {"type": ev["type"], "title": ev["title"], "time_utc": ev["time_utc"], "ts": ts, "coin": coin,
+    _, base = get_1m(coin, ts - 86400 - 5400, ts - 86400 + 5400)     # 전날 같은 시각 = 평소 기준
+    b = reaction(base, ts - 86400) if base else None
+    rec = {"type": ev["type"], "title": ev["title"], "time_utc": ev["time_utc"], "ts": ts, "coin": coin, "source": src,
            "actual": ev.get("actual"), "forecast": ev.get("forecast"), "previous": ev.get("previous")}
     rec.update(r)
     rec["base_abs_post30_bp"] = abs(b["post30_bp"]) if b else None
@@ -158,20 +189,23 @@ def main(argv=None):
     cal = load_json(a.calendar, {"events": []})
     prev = load_json(a.out, {"events": []})
     done = set((e["type"], e["ts"], e["coin"]) for e in prev.get("events", []))
+    skipped = {tuple(k.split("|")): v for k, v in (prev.get("skipped") or {}).items()}
     now = time.time()
     new, errors, processed = [], {}, 0
-    for ev in sorted(cal.get("events", []), key=lambda e: e["ts"]):
+    # 최신 이벤트부터. 오래된 것은 1분봉이 없을 수 있다 — 한 번 없다고 확인되면 skipped 에 적고 다시 받지 않는다.
+    for ev in sorted(cal.get("events", []), key=lambda e: -e["ts"]):
         if ev["ts"] + 7200 > now:          # 발표 뒤 2시간이 지나야 60분 뒤 가격까지 있다
             continue
         for coin in COINS:
-            if (ev["type"], ev["ts"], coin) in done or processed >= a.max_new:
+            key = (ev["type"], str(ev["ts"]), coin)
+            if (ev["type"], ev["ts"], coin) in done or key in skipped or processed >= a.max_new:
                 continue
             try:
                 rec = process_event(ev, coin)
                 if rec:
                     new.append(rec)
                 else:
-                    errors["%s@%s/%s" % (ev["type"], ev["time_utc"], coin)] = "1분봉 없음"
+                    skipped[key] = "1분봉 없음 (하이퍼리퀴드·OKX 모두)"
             except Exception as e:
                 errors["%s@%s/%s" % (ev["type"], ev["time_utc"], coin)] = str(e)[:120]
             processed += 1
@@ -190,8 +224,9 @@ def main(argv=None):
                       "surprise": "실제−예상 의 부호 × 가설 부호(%s). 양수면 '가설 방향대로 움직였다'" % SURPRISE_SIGN},
            "calendar_last_event_utc": datetime.fromtimestamp(cal_last, timezone.utc).strftime("%Y-%m-%d") if cal_last else None,
            "calendar_stale": stale,
-           "events": events, "new_today": len(new), "errors": errors, "upcoming": upcoming, "summary": summary}
-    print("=== 매크로 발표 전후 (%s) — 새로 처리 %d건, 누적 %d건 ===" % (out["date"], len(new), len(events)))
+           "events": events, "new_today": len(new), "errors": errors,
+           "skipped": {"|".join(k): v for k, v in skipped.items()}, "upcoming": upcoming, "summary": summary}
+    print("=== 매크로 발표 전후 (%s) — 새로 처리 %d건, 누적 %d건, 자료 없어 건너뜀 %d건 ===" % (out["date"], len(new), len(events), len(skipped)))
     if events:
         print_summary(summary, len(events), upcoming)
     if errors:

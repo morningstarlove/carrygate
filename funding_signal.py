@@ -91,22 +91,13 @@ def okx_funding(coin, start, end):
 
 
 def okx_daily(coin, start, end):
-    out, after = {}, None
-    for _ in range(4):
-        url = "https://www.okx.com/api/v5/market/history-candles?instId=%s-USDT-SWAP&bar=1D&limit=100" % coin
-        if after:
-            url += "&after=%d" % after
-        rows = http_json(url).get("data") or []
-        if not rows:
-            break
-        for r in rows:
-            t = int(r[0]) // 1000
-            if start <= t < end + 86400:
-                out[day_of(t)] = (f(r[1]), f(r[4]))
-        after = min(int(r[0]) for r in rows)
-        if after // 1000 < start:
-            break
-        time.sleep(0.12)
+    """OKX 일봉. candles 엔드포인트는 한 번에 300개(약 10개월)를 준다."""
+    rows = http_json("https://www.okx.com/api/v5/market/candles?instId=%s-USDT-SWAP&bar=1D&limit=300" % coin).get("data") or []
+    out = {}
+    for r in rows:
+        t = int(r[0]) // 1000
+        if start <= t < end + 86400:
+            out[day_of(t)] = (f(r[1]), f(r[4]))
     return out
 
 

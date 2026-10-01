@@ -6,7 +6,9 @@ CARRYGATE — 업비트 상장 공지 반응 연구 (⑥)
 공지 시각을 기준으로 해외 선물(OKX·하이퍼리퀴드) 가격이 5·15·60·240분 뒤 얼마나 움직였는지,
 60분 안 최고점(최대 상승폭)이 얼마였는지를 쌓는다. 드물지만 폭이 큰 이벤트라 수집부터 시작한다.
 
-공지: 업비트 공지 API (api-manager.upbit.com). 미국 서버에서 막히면 그날은 건너뛴다.
+공지: 업비트 공지 API (api-manager.upbit.com) — 2026-10-01 확인 결과 미국 서버에서 403 으로 막힌다.
+      그래서 **업비트 KRW 마켓 목록을 매일 저장해 두고 새로 등장한 마켓**을 상장 이벤트로 잡는다(공지 시각 대신
+      첫 거래 시각 기준). 공지 API 는 열리면 자동으로 함께 쓴다.
 주문 기능 없음. 읽기 전용 공개 API 만 쓴다.
 
 사용법
@@ -14,12 +16,13 @@ CARRYGATE — 업비트 상장 공지 반응 연구 (⑥)
   python listing.py --dry-run
   python listing.py --report
 """
-import json, sys, time, re, argparse
+import json, sys, time, re, os, argparse
 from datetime import datetime, timezone
 
 from scalp import http_json, f, KST
 
 OUT_PATH = "listing.json"
+MARKETS_SNAPSHOT = "data/upbit_markets.json"   # 어제의 마켓 목록. 오늘 목록과 비교해 새 마켓 = 상장
 PAGES = 3                 # 매일 확인할 공지 페이지 수 (20건/페이지). 첫 실행은 --pages 10
 POST = (5, 15, 60, 240)
 KEYWORDS = ("신규 거래지원", "거래지원 안내", "디지털 자산 추가", "원화 마켓 추가", "마켓 추가")
@@ -88,6 +91,72 @@ def parse_listings(notices):
     return out
 
 
+# ----------------------------------------------------------------- 마켓 목록 비교 (공지 API 대체)
+
+def fetch_markets():
+    rows = http_json("https://api.upbit.com/v1/market/all?isDetails=true")
+    return sorted(r["market"] for r in rows if r.get("market", "").startswith("KRW-"))
+
+
+def first_candle_time(market, max_pages=60):
+    """새 마켓의 첫 1분봉 시각(UTC 초). 200개씩 과거로 넘기며 더 없을 때까지. 최대 60페이지(약 8일)."""
+    to, oldest = None, None
+    for _ in range(max_pages):
+        url = "https://api.upbit.com/v1/candles/minutes/1?market=%s&count=200" % market
+        if to:
+            url += "&to=" + datetime.fromtimestamp(to, timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+        rows = http_json(url)
+        if not rows:
+            break
+        ts = [int(datetime.strptime(r["candle_date_time_utc"], "%Y-%m-%dT%H:%M:%S").replace(tzinfo=timezone.utc).timestamp()) for r in rows]
+        oldest = min(ts)
+        if len(rows) < 200:
+            break
+        to = oldest
+        time.sleep(0.12)
+    return oldest
+
+
+def upbit_1m(market, start, end):
+    out, to = {}, end
+    for _ in range(10):
+        url = "https://api.upbit.com/v1/candles/minutes/1?market=%s&count=200&to=%s" % (
+            market, datetime.fromtimestamp(to, timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"))
+        rows = http_json(url)
+        if not rows:
+            break
+        oldest = None
+        for r in rows:
+            t = int(datetime.strptime(r["candle_date_time_utc"], "%Y-%m-%dT%H:%M:%S").replace(tzinfo=timezone.utc).timestamp())
+            if start <= t < end:
+                out[t] = (f(r["opening_price"]), f(r["high_price"]), f(r["low_price"]), f(r["trade_price"]))
+            oldest = t if oldest is None else min(oldest, t)
+        if oldest is None or oldest <= start:
+            break
+        to = oldest
+        time.sleep(0.12)
+    return out
+
+
+def listings_from_market_diff(snapshot_path):
+    """어제 저장한 KRW 마켓 목록과 오늘 목록을 비교. 새 마켓마다 첫 거래 시각을 찾아 상장 이벤트로 만든다."""
+    today = fetch_markets()
+    prev = load_json(snapshot_path, None)
+    out = []
+    if prev and prev.get("markets"):
+        for m in today:
+            if m not in prev["markets"]:
+                t0 = first_candle_time(m)
+                if t0:
+                    out.append({"id": "mkt:%s:%d" % (m, t0), "title": "업비트 마켓 목록에 새로 등장: %s" % m, "ts": t0,
+                                "time_utc": datetime.fromtimestamp(t0, timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+                                "tickers": [m.split("-")[1]], "upbit_market": m})
+    os.makedirs(os.path.dirname(snapshot_path), exist_ok=True)
+    with open(snapshot_path, "w", encoding="utf-8") as fp:
+        json.dump({"date_utc": datetime.now(timezone.utc).strftime("%Y-%m-%d"), "markets": today}, fp, ensure_ascii=False)
+    return out, len(today), bool(prev)
+
+
 # ----------------------------------------------------------------- 가격 반응
 
 def okx_1m(coin, start, end):
@@ -132,6 +201,17 @@ def reaction(bars, ts):
 
 def process(listing, done):
     recs = []
+    if listing.get("upbit_market") and (listing["id"], listing["tickers"][0], "upbit") not in done:
+        try:
+            bars = upbit_1m(listing["upbit_market"], listing["ts"] - 60, listing["ts"] + 4 * 3600 + 120)
+            r = reaction(bars, listing["ts"])
+        except Exception:
+            r = None
+        rec = {"id": listing["id"], "title": listing["title"], "time_utc": listing["time_utc"], "ts": listing["ts"],
+               "ticker": listing["tickers"][0], "venue": "upbit", "listed_abroad": bool(r)}
+        if r:
+            rec.update(r)
+        recs.append(rec)
     for tk in listing["tickers"]:
         for venue, fn in (("okx", okx_1m), ("hyperliquid", hl_1m)):
             key = (listing["id"], tk, venue)
@@ -200,13 +280,19 @@ def main(argv=None):
     done = set((e["id"], e["ticker"], e["venue"]) for e in prev.get("events", []))
     # 첫 실행이면 더 깊이 거슬러 올라간다
     pages = a.pages if prev.get("events") else max(a.pages, 10)
-    errors, new, listings = {}, [], []
+    errors, new, listings, notices, n_markets, had_snapshot = {}, [], [], [], 0, False
     try:
         notices = fetch_notices(pages)
         listings = parse_listings(notices)
     except Exception as e:
         errors["notices"] = str(e)[:200]
-        notices = []
+    # 공지 API 와 무관하게 마켓 목록 비교는 항상 한다 (공지가 막혀도 상장 자체는 잡힌다)
+    try:
+        diff, n_markets, had_snapshot = listings_from_market_diff(MARKETS_SNAPSHOT)
+        known = set(x["id"] for x in listings)
+        listings.extend(x for x in diff if x["id"] not in known)
+    except Exception as e:
+        errors["markets"] = str(e)[:200]
     now = time.time()
     for L in listings:
         if L["ts"] + 4 * 3600 + 300 > now:        # 240분 뒤 가격까지 있어야 한다
@@ -219,10 +305,11 @@ def main(argv=None):
            "generated_at_kst": now_kst.strftime("%Y-%m-%d %H:%M:%S"),
            "method": {"notice": "업비트 공지(category=trade) 중 제목에 %s 가 있고 %s 가 없는 것. 괄호 안 티커 추출" % (KEYWORDS, EXCLUDE),
                       "reaction": "공지 시각(분)의 해외 선물 시가 대비 %s분 뒤 시가 수익률(%%), 60분 내 최고가 상승폭" % (POST,)},
-           "notices_seen": len(notices), "listings_seen": len(listings), "new_today": len(new),
+           "notices_seen": len(notices), "markets_krw": n_markets, "market_snapshot_existed": had_snapshot,
+           "listings_seen": len(listings), "new_today": len(new),
            "events": events, "errors": errors, "summary": summary}
-    print("=== 업비트 상장 공지 반응 (%s) — 공지 %d건 확인, 상장 공지 %d건, 새로 처리 %d쌍, 누적 %d쌍 ===" % (
-        out["date"], len(notices), len(listings), len(new), len(events)))
+    print("=== 업비트 상장 반응 (%s) — 공지 %d건 확인, KRW 마켓 %d개(어제 목록 %s), 상장 이벤트 %d건, 새로 처리 %d쌍, 누적 %d쌍 ===" % (
+        out["date"], len(notices), n_markets, "있음" if had_snapshot else "없음", len(listings), len(new), len(events)))
     if events:
         print_summary(summary, [e for e in sorted(events, key=lambda e: -e["ts"]) if e.get("listed_abroad")])
     if errors:
@@ -232,7 +319,7 @@ def main(argv=None):
         return 0
     with open(a.out, "w", encoding="utf-8") as fp:
         json.dump(out, fp, ensure_ascii=False, indent=1)
-    return 0 if not errors.get("notices") else 1
+    return 0 if not errors.get("markets") else 1
 
 
 if __name__ == "__main__":

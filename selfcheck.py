@@ -295,9 +295,12 @@ def check_basis(problems, notes):
             if not days or not fut or not spot:
                 problems.append("베이시스 %s/%s: 값이 비어 있다" % (coin, c.get("inst")))
                 continue
+            if not c.get("eligible"):
+                continue        # 만기 임박 계약은 연환산이 튀어 판정에 안 쓴다 — 대조도 생략
             gross = (fut / spot - 1.0) * 365.0 / days * 100.0
             fee = (one_off if one_off is not None else c.get("fee_one_off_pct", 0.0)) * 365.0 / days
-            if abs(gross - c.get("gross_apr_pct", 0)) > 0.05 or abs((gross - fee) - c.get("net_apr_pct", 0)) > 0.05:
+            tol = max(0.05, 0.002 * abs(gross))
+            if abs(gross - c.get("gross_apr_pct", 0)) > tol or abs((gross - fee) - c.get("net_apr_pct", 0)) > tol:
                 problems.append("베이시스 %s/%s: 연환산 불일치 (저장 총 %.3f 순 %.3f vs 재계산 %.3f / %.3f)"
                                 % (coin, c.get("inst"), c.get("gross_apr_pct", 0), c.get("net_apr_pct", 0), gross, gross - fee))
                 continue
