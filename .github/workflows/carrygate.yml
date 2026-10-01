@@ -43,6 +43,33 @@ jobs:
         continue-on-error: true
         run: python scalp_research.py
 
+      # ---- 중기·장기·이벤트 연구 (마일스톤 7). 각 단계는 실패해도 다음으로 넘어간다.
+      - name: Basis carry (분기 선물 베이시스)
+        continue-on-error: true
+        run: python basis.py
+
+      - name: Funding extreme signal (펀딩 극단값 역추세)
+        continue-on-error: true
+        run: python funding_signal.py
+
+      - name: Kimchi premium (김치프리미엄)
+        continue-on-error: true
+        run: python kimchi.py
+
+      - name: Macro events (매크로 발표 전후)
+        continue-on-error: true
+        run: python macro_events.py
+
+      - name: Upbit listings (상장 공지 반응)
+        continue-on-error: true
+        run: python listing.py
+
+      - name: ETF daily update + dual momentum (장기)
+        continue-on-error: true
+        run: |
+          python etf_update.py || echo "ETF 갱신 실패 — 기존 자료로 계산"
+          python momentum.py
+
       - name: Show results
         if: always()
         run: |
@@ -69,14 +96,16 @@ jobs:
 
       - name: Unit tests (계산 로직)
         if: always()
-        run: python -m unittest tests.test_scalp tests.test_research
+        run: python -m unittest tests.test_scalp tests.test_research tests.test_midterm tests.test_momentum
 
       - name: Commit results
         if: always() && inputs.dry_run != true
         run: |
           git config user.name  "carrygate-bot"
           git config user.email "carrygate-bot@users.noreply.github.com"
-          git add -A status.json history.jsonl funding.json funding_history.jsonl scalp.json scalp_history.jsonl research.json research_history.jsonl || true
+          git add -A status.json history.jsonl funding.json funding_history.jsonl scalp.json scalp_history.jsonl research.json research_history.jsonl \
+                     basis.json basis_history.jsonl funding_signal.json funding_signal_history.jsonl kimchi.json kimchi_history.jsonl \
+                     macro.json listing.json momentum.json momentum_history.jsonl data/etf data/upbit_markets.json || true
           if git diff --staged --quiet; then
             echo "no change"
           else
