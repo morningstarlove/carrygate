@@ -20,6 +20,7 @@
 | `macro.json` | **매크로 발표 전후** (이벤트) | CPI·고용·FOMC 뒤 30분 변동폭과 방향 |
 | `listing.json` | **업비트 상장 공지** (이벤트) | 공지 뒤 해외 선물이 얼마나 움직였나 |
 | `momentum.json` | **ETF 듀얼 모멘텀** (장기) | 20년 백테스트와 이달 보유 신호 |
+| `turtle.json` | **터틀 추세추종** (중기) | 20일 돌파·10일 이탈·2N 손절·1%÷N 규칙의 3년 성적과 오늘 진입·청산 가격 |
 
 ---
 
@@ -190,6 +191,7 @@ A·B 는 매일 아침 실행(`scalp_research.py`)에 포함되고, C 는 별도
 | `kimchi.py` | 김치프리미엄 과열 뒤 업비트 수익률 | 업비트/(OKX×환율)−1, 200일 백분위, 하루 안 되돌림 상관 | 업비트·OKX·두나무 환율 |
 | `macro_events.py` | 발표 뒤 30분 변동폭이 평소의 몇 배, 서프라이즈로 방향 적중 | `data/macro_calendar.json` 의 발표 시각 ±90분 1분봉 | 하이퍼리퀴드 BTC·ETH |
 | `listing.py` | 상장 공지 뒤 5·15·60·240분 해외 선물 수익률 | 업비트 공지 API 제목에서 티커 추출 | OKX·하이퍼리퀴드 |
+| `turtle.py` | 리처드 데니스 터틀 규칙(20일 돌파 진입, 10일 이탈 청산, 손절 2N, 수량 계좌 1%÷N)이 코인에서 통하나 | 업비트 현물(롱)·OKX 선물(롱·숏) 일봉 3년 백테스트 + 오늘 신호. 규칙 고정일 이후 매매는 순방향으로 따로 집계 | 업비트·OKX 일봉 (오프라인: `tests/fixtures/turtle/`) |
 | `momentum.py` | 월 1회 ETF 교체 전략의 20년 성적과 이달 신호 | GEM(SPY/EFA/AGG/BIL) 12·6개월·복합, 4자산 변형, SPY 보유·60/40 비교. 교체 비용 0.25% | `data/etf/*.csv` (TradingView 20년 + stooq 일 갱신) |
 
 **주의 (ETF 자료):** 가격은 분할만 조정되고 **배당은 반영되지 않았다.** 채권·현금 ETF(AGG·BIL·TLT·IEF)는
@@ -225,6 +227,7 @@ GitHub Actions가 **매일 한국시간 오전 9시 18분**에 자동 실행한�
 | `basis.py` / `funding_signal.py` / `kimchi.py` | 중기 연구 ②③④. 각각 `--report` |
 | `macro_events.py` / `listing.py` | 이벤트 연구 ⑤⑥ (누적 JSON). 각각 `--report` |
 | `momentum.py` / `etf_update.py` | 장기 ① ETF 듀얼 모멘텀 백테스트·신호 / 일봉 갱신 |
+| `turtle.py` | 중기 터틀 추세추종 규칙 — 3년 백테스트·오늘 신호·순방향 집계. `--report` 로 신호 변화 |
 | `live_monitor.py` | 실전 캐리 감시 — 하이퍼리퀴드 지갑 **주소만으로** 포지션·펀딩 수취·수수료 기록 (키 없음) |
 | `docs/LIVE_CARRY_PLAN.md` | 캐리 소액 실전 설계서 (준비·진입·운영·청산·판정표) |
 | `data/etf/` / `data/macro_calendar.json` | ETF 20년 일봉 / 매크로 발표 달력 |
@@ -241,7 +244,8 @@ GitHub Actions가 **매일 한국시간 오전 9시 18분**에 자동 실행한�
 | `tests/test_scalp.py` | 초단타 계산 로직 자동 시험 (가짜 데이터, 20건) |
 | `tests/test_research.py` | 보조 연구·호가창 계산 로직 자동 시험 (14건) |
 | `tests/test_midterm.py` / `tests/test_momentum.py` | 중기·이벤트·장기 모듈 자동 시험 (13건 / 18건) |
-| `tests/fixtures/` | 오프라인 검증용 실데이터 1분봉 CSV |
+| `tests/test_turtle.py` | 터틀 계산 로직 자동 시험 (10건) |
+| `tests/fixtures/` | 오프라인 검증용 실데이터 — 1분봉 CSV, `turtle/` 에 일봉 3년 CSV 12개 |
 | `HANDOVER.md` | 인수인계서 — 지금까지 한 것과 다음 할 것 |
 
 ---
