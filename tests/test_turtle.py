@@ -135,6 +135,49 @@ class Backtest(unittest.TestCase):
         used = sum(p["units"] * p["entry"] for p in res["state"].values() if p)
         self.assertAlmostEqual(used, 10_000.0, places=4)
 
+    def test_chandelier_exits_at_high_minus_atr(self):
+        """Chandelier 변형: 청산선 = 진입 후 최고가 − mult×ATR. 추세가 꺾이면 10일 최저가보다 먼저(높게) 나온다."""
+        bars = self._trend()
+        ch = {"atr_n": 5, "mult": 1.0}
+        res = turtle.run({"X": bars}, False, 0.0, 10_000.0, slip_pct=0.0, chandelier=ch)
+        base = turtle.run({"X": bars}, False, 0.0, 10_000.0, slip_pct=0.0)
+        self.assertEqual(len(res["trades"]), 1)
+        t = res["trades"][0]
+        self.assertEqual(t["reason"], "chandelier")
+        # 상승 중 TR=5 → ATR5=5. 최고가 141 → 청산선 136. 급락 첫날 시가 134 < 136 이므로 시가 체결
+        self.assertAlmostEqual(t["exit"], 134.0)
+        self.assertAlmostEqual(base["trades"][0]["exit"], 110.0)      # 기본 10일 최저가는 110 에서야 나온다
+        self.assertEqual(t["exit_date"], base["trades"][0]["exit_date"])
+        self.assertAlmostEqual(t["mfe_pct"], (141.0 / 102.0 - 1.0) * 100.0, places=3)
+        self.assertAlmostEqual(t["price_ret_pct"], (134.0 / 102.0 - 1.0) * 100.0, places=3)
+        st = turtle.stats(res, 10_000.0)
+        self.assertAlmostEqual(st["avg_giveback_pct"], t["mfe_pct"] - t["price_ret_pct"], places=3)
+
+    def test_chandelier_trail_ratchets_through_pullback(self):
+        """청산선은 올라가기만 한다. 변동폭이 커지는 눌림목에서도 내려오지 않고, 눌림목 저가가 청산선 위면 보유 유지."""
+        bars = flat(40)
+        n = len(bars)
+        bars.append(bar(n, 100, 110, 99, 109))
+        for k in range(1, 11):
+            px = 109 + k * 3
+            bars.append(bar(n + k, px - 1, px + 2, px - 2, px))     # 최고가 141, 종가 139
+        ch = {"atr_n": 5, "mult": 1.0}
+        before = turtle.run({"X": bars}, False, 0.0, 10_000.0, slip_pct=0.0, chandelier=ch)["state"]["X"]
+        self.assertIsNotNone(before)
+        self.assertAlmostEqual(before["best"], 141.0)
+        self.assertAlmostEqual(before["trail"], 136.0, delta=0.1)      # 와일더 ATR 이 5 로 수렴 중
+        # 눌림목 3일: 범위가 넓어져 ATR 이 커진다(원래 공식대로면 청산선이 내려감). 저가는 137 로 청산선(136) 위
+        for k in range(1, 4):
+            bars.append(bar(n + 10 + k, 139, 140, 137, 138))
+        after_res = turtle.run({"X": bars}, False, 0.0, 10_000.0, slip_pct=0.0, chandelier=ch)
+        after = after_res["state"]["X"]
+        self.assertEqual(after_res["trades"], [])                       # 안 나왔다
+        self.assertGreaterEqual(after["trail"], before["trail"])         # 래칫
+        sig = turtle.signal(bars, after, False, 10_000.0, chandelier=ch)
+        self.assertEqual(sig["position"], "long")
+        self.assertAlmostEqual(sig["exit_level"], after["trail"])
+        self.assertAlmostEqual(sig["chandelier"], after["trail"])
+
     def test_stats_and_signal(self):
         bars = self._trend()
         res = turtle.run({"X": bars}, False, 0.05, 10_000.0)

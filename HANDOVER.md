@@ -3,7 +3,7 @@
 > 이 문서만 읽으면 누구든(혹은 다른 AI 세션이든) 이어서 작업할 수 있게 쓴다.
 
 **최종 갱신:** 2026-10-02
-**작업 브랜치:** `claude/new-session-as7gis` (이번 작업, 터틀) / 이전 `claude/scalping-research-results-7mi7tf`, `claude/analysis-dwawzd`
+**작업 브랜치:** `claude/chandelier-exit-variant` (이번 작업, Chandelier 변형) / `claude/new-session-as7gis` (터틀) / 이전 `claude/scalping-research-results-7mi7tf`, `claude/analysis-dwawzd`
 **저장소:** `morningstarlove/carrygate` (2026-09-17 `signalgate-bridge` 에서 이름 변경)
 **프로젝트명:** CARRYGATE — 게이트(신호등) + 캐리(이자) 두 축에서 따왔다.
 
@@ -493,10 +493,32 @@ XRP·LINK·DOGE·TRX 는 하이퍼리퀴드에 현물이 없다.
 `bar=1Dutc` 로 고쳤다(저장 CSV 는 원래 00:00 UTC 기준이라 그대로).
 **재실행 #27 (03:13 UTC) 로 확인:** OKX 구간이 2023-09-28 ~ 2026-10-01 로 업비트와 같아졌고, 2025·2026 연도별 수치가 저장 CSV 결과와 일치한다(OKX 55/20: 2025 +14.9%, 2026 +26.7%). 검산 28건 통과.
 
+**변형 Chandelier Exit (`ch_22_3`, 2026-10-02 추가)** — 사용자가 공유한 "추세추종의 두 실수(추세 끝나고 못 나옴 / 눌림목에 일찍 나옴)와 Chandelier Exit" 카드를 검증했다.
+10일 최저가 대신 **진입 후 최고가 − 3×ATR(22일)** 을 청산선으로 쓴다(숏은 최저가 + 3×ATR). 청산선은 올라가기만 한다(래칫). 2N 손절은 그대로 바닥, 진입은 같은 20일 돌파. `turtle.json` → `venues.*.variants.ch_22_3`, 매매 기록에 `mfe_pct`(보유 중 최대 유리폭)·`price_ret_pct` 를 더해 **평균 반납**(최고점에서 청산가까지 돌려준 폭)을 잰다.
+
+| 한 계좌 6코인 (3년) | 기본 10일 최저가 | Chandelier 3×ATR22 | 평균 반납 (기본 → CH) |
+|---|---|---|---|
+| 업비트 현물 (롱만) | +173% (CAGR 36%, 낙폭 −30%, 125건) | **+232%** (CAGR 44%, 낙폭 **−19%**, 137건) | 12.9% → 12.7% |
+| OKX 선물 롱·숏 | +98% (CAGR 23%, 낙폭 −30%, 260건) | **+10%** (CAGR 3%, 낙폭 **−49%**, 286건) | 14.6% → 14.8% |
+| OKX 롱만 (참고) | +138% (CAGR 30%, 낙폭 −22%) | +56% (CAGR 15%, 낙폭 −36%) | |
+
+배수 2.0 / 2.5 / 3.0 / 3.5 / 4.0 (ATR22) 과 3.0×ATR20 도 돌렸다. 업비트는 모든 배수가 기본보다 순수익·낙폭이 좋고(순 +228~267%, 낙폭 −14~−22%), OKX 는 모든 배수가 기본보다 나쁘다(순 +10~65%, 낙폭 −30~−52%).
+단일 시장(롱만)으로 보면 12개 중 **9개에서 순수익이 줄고, 8개에서 낙폭이 준다** (예: 업비트 XRP 낙폭 −39% → −8%, DOGE 순 +101% → +42%).
+
+> **해석 6: Chandelier 는 "낙폭을 줄이는 대신 수익을 내주는" 교환이지, 두 실수를 동시에 없애는 장치가 아니다.** 카드의 주장은 과장이다.
+> 평균 반납은 기본과 거의 같다(12.9 vs 12.7%). 배수를 키우면 반납이 늘고(4.0: 17%), 줄이면 매매가 늘어 수수료·눌림목 이탈이 는다(2.0: 200건).
+>
+> **해석 7: 업비트 포트폴리오 +232% 는 믿지 않는다.** 같은 코인 6개인데 OKX 롱만에서는 반대로 나빠졌고(+138% → +56%), 단일 시장 9/12 에서 수익이 줄었다.
+> 업비트 결과는 2024년 한 해(+72% → +107%)의 포트폴리오 순서 효과(한 계좌 공유·명목가 캡)이고, 데이터 한 벌이 바뀌니 뒤집혔다. **기본 규칙(10일 최저가)을 유지**하고 변형은 기록만 한다.
+>
+> **해석 8: 코인에서 Chandelier 가 불리한 이유.** 코인 급등은 하루 ±10% 봉이 흔해 ATR 이 크고, "최고가 − 3×ATR" 이 10일 최저가보다 **낮게** 깔리는 날이 많다. 그래서 추세가 꺾인 뒤 더 깊이 내려가서 나온다(OKX 손절 건수 61 → 89). 반대로 조용한 상승에서는 ATR 이 작아 눌림목에서 먼저 털린다. 주식 일봉용 기본값(22일·3배)이 코인에 그대로 맞지 않는다.
+
+자동 시험 2건 추가(`tests/test_turtle.py`, 총 12건): 청산선 = 최고가 − ATR 로 10일선보다 먼저 나오는지(134 vs 110), 눌림목에서 청산선이 내려오지 않고(래칫) 보유가 유지되는지. 검산(`selfcheck.py`)은 변형 42항목 통과(저장 CSV 기준).
+
 **다음 단계**
 1. 순방향 매매가 **20건** 넘게 쌓이기 전에는 판단하지 않는다(코인당 월 1~2건이라 12시장이면 약 2~3개월).
 2. 캐리(연 8~12%)와 비교: 터틀은 CAGR 은 높지만 낙폭 −30% 를 견뎌야 한다. 소액 실전은 캐리 실전(마일스톤 8) 결과를 본 뒤.
-3. 규칙 문턱값(20/10/2N/1%)은 결과를 보고 고치지 않는다(원칙 5). 변형은 `VARIANTS` 에 **추가**로만 둔다(55/20 은 이미 있음).
+3. 규칙 문턱값(20/10/2N/1%)은 결과를 보고 고치지 않는다(원칙 5). 변형은 `VARIANTS` 에 **추가**로만 둔다(55/20, Chandelier 3×ATR22 이미 있음). 순방향에서 세 가지를 나란히 본다.
 
 ---
 
@@ -575,6 +597,7 @@ GitHub 저장소 → Actions 탭 → `CARRYGATE daily` → Run workflow
 | `data/macro_calendar.json` | 매크로 달력 — 매달 TradingView 경제 캘린더로 갱신 |
 | `turtle.py` 상단 `ENTRY_N`/`EXIT_N`/`STOP_MULT`/`RISK_PCT` | 터틀 규칙 (**고치면 `RULE_FIXED` 를 그날로 바꾸고 순방향 기록을 새로 센다**) |
 | `turtle.py` 상단 `VENUES` | 터틀 거래소·수수료·시작 계좌 (업비트 1,000만원 / OKX 1만 달러) |
+| `turtle.py` 상단 `VARIANTS` | 나란히 기록하는 변형 — `s2_55_20`(55/20), `ch_22_3`(Chandelier: `chandelier: {atr_n, mult}`). 추가만 하고 지우지 않는다 |
 | `scalp.py` 상단 `MIN_DAYS` / `MIN_POS_RATIO` | 후보 조건 (최소 일수 / 플러스 일수 비율) |
 | `.github/workflows/carrygate.yml` `cron` | 실행 시각 |
 
@@ -590,7 +613,7 @@ GitHub 저장소 → Actions 탭 → `CARRYGATE daily` → Run workflow
 - `python3 orderbook.py --minutes 2 --dry-run` — 호가창 2분 수집 시험 (인터넷 필요, Actions 에서 `minutes=2` 로 실행)
 - `python3 -m unittest tests.test_midterm tests.test_momentum` — 중기·이벤트·장기 모듈 계산 로직 (31건)
 - `python3 momentum.py --dry-run` — ETF 20년 백테스트 (저장된 자료, 인터넷 불필요)
-- `python3 -m unittest tests.test_turtle` — 터틀 계산 로직 (10건)
+- `python3 -m unittest tests.test_turtle` — 터틀 계산 로직 (12건, Chandelier 변형 2건 포함)
 - `python3 turtle.py --fixture tests/fixtures/turtle --dry-run` — 터틀 3년 백테스트를 저장된 일봉 CSV 로 (인터넷 불필요)
 
 ---

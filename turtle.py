@@ -20,6 +20,8 @@ CARRYGATE — 터틀(리처드 데니스) 추세추종 규칙 (중기)
   python turtle.py --dry-run            # 저장 안 함
   python turtle.py --fixture tests/fixtures/turtle --dry-run   # 저장된 일봉 CSV 로 (인터넷 불필요)
   python turtle.py --report             # 기록 누적 보고
+
+변형(VARIANTS)은 기본 규칙과 나란히 계산해 기록만 한다. ch_22_3 은 Chandelier Exit(청산선 = 진입 후 최고가 − 3×ATR22, 래칫).
 """
 import os, sys, json, math, csv, time, argparse
 from datetime import datetime, timezone, timedelta
@@ -35,8 +37,15 @@ RISK_PCT = 1.0          # 한 번에 계좌의 1% 만 흔들리게
 MAX_NOTIONAL_PCT = 100.0  # 포지션 명목가 합계 ≤ 계좌 100% (레버리지 1배, 현물 기준)
 SLIPPAGE_PCT = 0.05     # 돌파가 체결 시 불리하게 밀리는 가정
 RULE_FIXED = "2026-10-02"   # 이 날 이후 진입한 매매만 순방향 시험
-# 변형: 원래 터틀 System 2 (55일 돌파 진입 / 20일 이탈 청산). 손절·수량은 같다. 기본(20/10)과 나란히 기록만 한다.
-VARIANTS = {"s2_55_20": {"entry_n": 55, "exit_n": 20, "label": "System 2 (55일 돌파 / 20일 이탈)"}}
+# 변형: 기본(20/10)과 나란히 기록만 한다. 손절·수량은 같다.
+#  - s2_55_20: 원래 터틀 System 2 (55일 돌파 진입 / 20일 이탈 청산)
+#  - ch_22_3 : Chandelier Exit — 10일 최저가 대신 "진입 후 최고가 − 3×ATR(22일)" 를 청산선으로 쓴다 (숏은 최저가 + 3×ATR).
+#              청산선은 올라가기만 한다(래칫). 2N 손절은 그대로 바닥으로 둔다. 진입은 기본과 같은 20일 돌파.
+VARIANTS = {
+    "s2_55_20": {"entry_n": 55, "exit_n": 20, "label": "System 2 (55일 돌파 / 20일 이탈)"},
+    "ch_22_3": {"entry_n": 20, "exit_n": 10, "chandelier": {"atr_n": 22, "mult": 3.0},
+                "label": "Chandelier Exit (최고가 − 3×ATR22)"},
+}
 DAYS = 1100             # 받아올 일봉 수 (약 3년)
 MIN_BARS = ATR_N + ENTRY_N + 30
 
@@ -159,12 +168,15 @@ def channel(bars, i, n, key, fn):
 # ----------------------------------------------------------------- 백테스트 (여러 시장이 한 계좌를 나눠 쓴다)
 
 def run(markets, short_ok, fee_pct, equity0, slip_pct=SLIPPAGE_PCT, max_notional_pct=MAX_NOTIONAL_PCT,
-        entry_n=ENTRY_N, exit_n=EXIT_N):
+        entry_n=ENTRY_N, exit_n=EXIT_N, chandelier=None):
     """
     markets: {이름: 일봉 목록}. 한 계좌(equity0)를 모든 시장이 같이 쓴다. 시장이 하나면 단일 시장 성적.
+    chandelier: None 이면 기본(exit_n 일 채널 이탈). {"atr_n": 22, "mult": 3.0} 이면 채널 대신
+                "진입 후 최고가 − mult×ATR(atr_n)" 트레일링 청산선(래칫, 내려오지 않음). 2N 손절은 어느 쪽이든 바닥.
     반환: {"trades": [...], "curve": [(date, equity)], "equity": 마지막 계좌, "state": {이름: 포지션 또는 None}, "skipped": n}
     """
     atr = {m: wilder_atr(b) for m, b in markets.items()}
+    catr = {m: wilder_atr(b, chandelier["atr_n"]) for m, b in markets.items()} if chandelier else None
     idx = {m: {b["date"]: i for i, b in enumerate(bars)} for m, bars in markets.items()}
     dates = sorted(set(d for bars in markets.values() for d in (b["date"] for b in bars)))
     equity = float(equity0)
@@ -182,11 +194,13 @@ def run(markets, short_ok, fee_pct, equity0, slip_pct=SLIPPAGE_PCT, max_notional
                 continue
             b = bars[i]
             if p["dir"] > 0:
-                lvl = max(p["stop"], channel(bars, i, exit_n, "l", min))
+                trail = p["trail"] if chandelier else channel(bars, i, exit_n, "l", min)
+                lvl = max(p["stop"], trail)
                 hit = b["l"] <= lvl
                 fill = min(b["o"], lvl) * (1 - slip) if hit else None
             else:
-                lvl = min(p["stop"], channel(bars, i, exit_n, "h", max))
+                trail = p["trail"] if chandelier else channel(bars, i, exit_n, "h", max)
+                lvl = min(p["stop"], trail)
                 hit = b["h"] >= lvl
                 fill = max(b["o"], lvl) * (1 + slip) if hit else None
             if not hit:
@@ -200,8 +214,10 @@ def run(markets, short_ok, fee_pct, equity0, slip_pct=SLIPPAGE_PCT, max_notional
                 "market": m, "dir": "long" if p["dir"] > 0 else "short",
                 "entry_date": p["entry_date"], "exit_date": d, "days": p["days"],
                 "entry": rp(p["entry"]), "exit": rp(fill), "units": p["units"], "n_at_entry": rp(p["n"]),
-                "stop": rp(p["stop"]), "reason": "stop" if lvl == p["stop"] else "channel",
+                "stop": rp(p["stop"]), "reason": "stop" if lvl == p["stop"] else ("chandelier" if chandelier else "channel"),
                 "pnl": r4(pnl), "fees": r4(fees),
+                "mfe_pct": r4((p["best"] / p["entry"] - 1.0) * 100.0 * p["dir"]),        # 보유 중 최대 유리 가격 (반납 계산용)
+                "price_ret_pct": r4((fill / p["entry"] - 1.0) * 100.0 * p["dir"]),
                 "ret_pct": pnl / eq_before * 100.0,            # 계좌 대비 수익률 (복리 재계산용, 반올림 안 함)
                 "r_multiple": r4(pnl / (eq_before * RISK_PCT / 100.0)),
                 "forward": p["entry_date"] >= RULE_FIXED,
@@ -214,6 +230,8 @@ def run(markets, short_ok, fee_pct, equity0, slip_pct=SLIPPAGE_PCT, max_notional
         for m, bars in markets.items():
             i = idx[m].get(d)
             if pos[m] is not None or i is None or i < max(entry_n, ATR_N) or atr[m][i - 1] is None:
+                continue
+            if chandelier and catr[m][i - 1] is None:
                 continue
             if m in exited_today:
                 continue
@@ -237,16 +255,28 @@ def run(markets, short_ok, fee_pct, equity0, slip_pct=SLIPPAGE_PCT, max_notional
                 units, capped = cap / fill, True
             if units <= 0:
                 continue
-            pos[m] = {"dir": direction, "units": units, "entry": fill, "n": n,
-                      "stop": fill - direction * STOP_MULT * n, "entry_date": d, "days": 0, "capped": capped}
+            stop = fill - direction * STOP_MULT * n
+            pos[m] = {"dir": direction, "units": units, "entry": fill, "n": n, "stop": stop,
+                      "best": fill, "trail": stop,          # best: 진입 후 최고가(숏은 최저가), trail: Chandelier 청산선 (래칫)
+                      "entry_date": d, "days": 0, "capped": capped}
             used += units * fill
 
         # 3) 일별 계좌 가치 (미실현 포함)
         unreal = 0.0
         for m, p in pos.items():
             if p and d in idx[m]:
+                i = idx[m][d]
+                b = markets[m][i]
                 p["days"] += 1
-                unreal += (markets[m][idx[m][d]]["c"] - p["entry"]) * p["units"] * p["dir"]
+                unreal += (b["c"] - p["entry"]) * p["units"] * p["dir"]
+                if p["dir"] > 0:
+                    p["best"] = max(p["best"], b["h"])
+                    if chandelier and catr[m][i] is not None:
+                        p["trail"] = max(p["trail"], p["best"] - chandelier["mult"] * catr[m][i])
+                else:
+                    p["best"] = min(p["best"], b["l"])
+                    if chandelier and catr[m][i] is not None:
+                        p["trail"] = min(p["trail"], p["best"] + chandelier["mult"] * catr[m][i])
         curve.append((d, equity + unreal))
 
     return {"trades": trades, "curve": curve, "equity": equity, "state": pos, "skipped": skipped}
@@ -288,6 +318,8 @@ def stats(res, equity0, bars_by_market=None):
         "avg_r": r4(sum(t["r_multiple"] for t in tr) / len(tr)) if tr else None,
         "avg_hold_days": r4(sum(t["days"] for t in tr) / len(tr)) if tr else None,
         "stops": sum(1 for t in tr if t["reason"] == "stop"),
+        "avg_mfe_pct": r4(sum(t["mfe_pct"] for t in tr) / len(tr)) if tr else None,            # 보유 중 평균 최대 유리폭
+        "avg_giveback_pct": r4(sum(t["mfe_pct"] - t["price_ret_pct"] for t in tr) / len(tr)) if tr else None,   # 최고점에서 청산가까지 평균 반납
         "skipped_ambiguous_days": res["skipped"],
         "by_year": by_year,
         "forward": {"trades": len(fwd), "wins": sum(1 for t in fwd if t["pnl"] > 0),
@@ -302,7 +334,7 @@ def stats(res, equity0, bars_by_market=None):
 
 # ----------------------------------------------------------------- 오늘의 신호
 
-def signal(bars, state, short_ok, equity, entry_n=ENTRY_N, exit_n=EXIT_N):
+def signal(bars, state, short_ok, equity, entry_n=ENTRY_N, exit_n=EXIT_N, chandelier=None):
     """마지막 완성 봉 기준으로 내일 어느 가격에서 무엇을 할지."""
     i = len(bars)              # 다음 봉의 인덱스
     atr = wilder_atr(bars)
@@ -316,7 +348,12 @@ def signal(bars, state, short_ok, equity, entry_n=ENTRY_N, exit_n=EXIT_N):
            "high20": rp(hi20), "low20": rp(lo20), "low10": rp(lo10), "high10": rp(hi10)}
     if state:
         d = state["dir"]
-        exit_lvl = max(state["stop"], lo10) if d > 0 else min(state["stop"], hi10)
+        if chandelier:
+            exit_lvl = max(state["stop"], state["trail"]) if d > 0 else min(state["stop"], state["trail"])
+            out["chandelier"] = rp(state["trail"])
+            out["best_since_entry"] = rp(state["best"])
+        else:
+            exit_lvl = max(state["stop"], lo10) if d > 0 else min(state["stop"], hi10)
         out.update({
             "position": "long" if d > 0 else "short",
             "entry": rp(state["entry"]), "entry_date": state["entry_date"], "units": state["units"],
@@ -345,24 +382,25 @@ def signal(bars, state, short_ok, equity, entry_n=ENTRY_N, exit_n=EXIT_N):
 
 # ----------------------------------------------------------------- 실행
 
-def evaluate(bars_by, cfg, entry_n=ENTRY_N, exit_n=EXIT_N):
-    """한 거래소의 시장들에 규칙(entry_n/exit_n)을 적용해 시장별 성적·신호와 한 계좌 포트폴리오 성적을 만든다."""
+def evaluate(bars_by, cfg, entry_n=ENTRY_N, exit_n=EXIT_N, chandelier=None):
+    """한 거래소의 시장들에 규칙(entry_n/exit_n[/chandelier])을 적용해 시장별 성적·신호와 한 계좌 포트폴리오 성적을 만든다."""
     markets = {}
     for coin, bars in bars_by.items():
-        res = run({coin: bars}, cfg["short_ok"], cfg["fee_pct"], cfg["equity"], entry_n=entry_n, exit_n=exit_n)
+        res = run({coin: bars}, cfg["short_ok"], cfg["fee_pct"], cfg["equity"], entry_n=entry_n, exit_n=exit_n, chandelier=chandelier)
         markets[coin] = {
             "bars": len(bars), "stats": stats(res, cfg["equity"], {coin: bars}),
             "returns_pct": [t["ret_pct"] for t in res["trades"]],           # 검산용: 곱하면 realized_net 이 나와야 한다
             "forward_trades": [t for t in res["trades"] if t["forward"]],
             "recent_trades": res["trades"][-5:],
-            "signal": signal(bars, res["state"][coin], cfg["short_ok"], cfg["equity"], entry_n, exit_n),
+            "signal": signal(bars, res["state"][coin], cfg["short_ok"], cfg["equity"], entry_n, exit_n, chandelier),
         }
-    pres = run(bars_by, cfg["short_ok"], cfg["fee_pct"], cfg["equity"], entry_n=entry_n, exit_n=exit_n)
+    pres = run(bars_by, cfg["short_ok"], cfg["fee_pct"], cfg["equity"], entry_n=entry_n, exit_n=exit_n, chandelier=chandelier)
     portfolio = {
         "markets": sorted(bars_by), "stats": stats(pres, cfg["equity"]),
         "returns_pct": [t["ret_pct"] for t in pres["trades"]],
         "open_positions": {m: {"dir": "long" if p["dir"] > 0 else "short", "entry": rp(p["entry"]), "entry_date": p["entry_date"],
-                               "stop": rp(p["stop"]), "units": p["units"], "capped": p["capped"]}
+                               "stop": rp(p["stop"]), "units": p["units"], "capped": p["capped"],
+                               "trail": rp(p["trail"]) if chandelier else None, "best": rp(p["best"])}
                            for m, p in pres["state"].items() if p},
         "forward_trades": [t for t in pres["trades"] if t["forward"]],
         "equity_now": r4(pres["curve"][-1][1]) if pres["curve"] else None,
@@ -377,7 +415,8 @@ def build(fixture=None):
         "date": now.strftime("%Y-%m-%d"),
         "generated_at_kst": now.strftime("%Y-%m-%d %H:%M:%S"),
         "rules": {"entry_breakout_days": ENTRY_N, "exit_breakout_days": EXIT_N, "atr_days": ATR_N,
-                  "variants": {k: {"entry_breakout_days": v["entry_n"], "exit_breakout_days": v["exit_n"], "label": v["label"]} for k, v in VARIANTS.items()},
+                  "variants": {k: {"entry_breakout_days": v["entry_n"], "exit_breakout_days": v["exit_n"], "label": v["label"],
+                                   "chandelier": v.get("chandelier")} for k, v in VARIANTS.items()},
                   "stop_n_mult": STOP_MULT, "risk_pct_per_trade": RISK_PCT, "max_notional_pct": MAX_NOTIONAL_PCT,
                   "slippage_pct": SLIPPAGE_PCT, "rule_fixed": RULE_FIXED,
                   "fill": "돌파가에 스톱 주문 → max(시가, 돌파가) 체결. 청산도 같은 방식"},
@@ -409,8 +448,8 @@ def build(fixture=None):
         vd.update(evaluate(bars_by, cfg))
         vd["variants"] = {}
         for name, var in VARIANTS.items():
-            ev = evaluate(bars_by, cfg, var["entry_n"], var["exit_n"])
-            ev["label"], ev["entry_n"], ev["exit_n"] = var["label"], var["entry_n"], var["exit_n"]
+            ev = evaluate(bars_by, cfg, var["entry_n"], var["exit_n"], var.get("chandelier"))
+            ev["label"], ev["entry_n"], ev["exit_n"], ev["chandelier"] = var["label"], var["entry_n"], var["exit_n"], var.get("chandelier")
             vd["variants"][name] = ev
         out["venues"][v] = vd
 
@@ -438,7 +477,7 @@ def build(fixture=None):
 
 def history_line(out):
     line = {"date": out["date"], "summary": out["summary"], "signals": {}, "signals_variants": {}}
-    keys = ("position", "close", "n", "high20", "low20", "low10", "stop", "exit_level", "entry", "entry_date", "unrealized_pct", "long_distance_pct")
+    keys = ("position", "close", "n", "high20", "low20", "low10", "stop", "exit_level", "chandelier", "entry", "entry_date", "unrealized_pct", "long_distance_pct")
     for v, vd in out["venues"].items():
         for m, s in vd["markets"].items():
             line["signals"]["%s/%s" % (v, m)] = {k: s["signal"].get(k) for k in keys}
@@ -455,7 +494,7 @@ def print_summary(out):
         print("[%s] 포트폴리오 %s: 순 %+.1f%%  CAGR %+.1f%%  최대낙폭 %.1f%%  매매 %d  승률 %.0f%%  순방향 %d건" % (
             v, p["period"], p["net_pct"], p["cagr_pct"] or 0, p["max_drawdown_pct"], p["trades"], p["win_rate_pct"] or 0,
             p["forward"]["trades"]))
-        print("  연도별: %s" % json.dumps(p["by_year"]))
+        print("  연도별: %s   평균 최대유리폭 %s%%  평균 반납 %s%%" % (json.dumps(p["by_year"]), p["avg_mfe_pct"], p["avg_giveback_pct"]))
         for m, s in vd["markets"].items():
             st, sg = s["stats"], s["signal"]
             print("  %-5s 순 %+7.1f%% (보유 %+7.1f%%)  낙폭 %6.1f%%  매매 %3d  승률 %3.0f%%  PF %s  평균R %s | %s" % (
@@ -463,9 +502,9 @@ def print_summary(out):
                 st["profit_factor"], st["avg_r"], sg["action"]))
         for name, e in vd.get("variants", {}).items():
             q = e["portfolio"]["stats"]
-            print("  변형 %s: 순 %+.1f%%  CAGR %+.1f%%  낙폭 %.1f%%  매매 %d  승률 %.0f%%  연도별 %s  보유 %s" % (
+            print("  변형 %s: 순 %+.1f%%  CAGR %+.1f%%  낙폭 %.1f%%  매매 %d  승률 %.0f%%  평균반납 %s%%  연도별 %s  보유 %s" % (
                 e["label"], q["net_pct"], q["cagr_pct"] or 0, q["max_drawdown_pct"], q["trades"], q["win_rate_pct"] or 0,
-                json.dumps(q["by_year"]), [m for m, s in e["markets"].items() if s["signal"]["position"] != "flat"]))
+                q["avg_giveback_pct"], json.dumps(q["by_year"]), [m for m, s in e["markets"].items() if s["signal"]["position"] != "flat"]))
     if out["errors"]:
         print("ERRORS:", json.dumps(out["errors"], ensure_ascii=False))
 
