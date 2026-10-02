@@ -227,7 +227,7 @@ GitHub Actions가 **매일 한국시간 오전 9시 18분**에 자동 실행한�
 | `basis.py` / `funding_signal.py` / `kimchi.py` | 중기 연구 ②③④. 각각 `--report` |
 | `macro_events.py` / `listing.py` | 이벤트 연구 ⑤⑥ (누적 JSON). 각각 `--report` |
 | `momentum.py` / `etf_update.py` | 장기 ① ETF 듀얼 모멘텀 백테스트·신호 / 일봉 갱신 |
-| `turtle.py` | 중기 터틀 추세추종 규칙 — 3년 백테스트·오늘 신호·순방향 집계. `--report` 로 신호 변화 |
+| `turtle.py` | 중기 터틀 추세추종 규칙 — 3년 백테스트·오늘 신호·순방향 집계. 변형(55/20, Chandelier Exit) 나란히 기록. `--report` 로 신호 변화 |
 | `kr_relay.py` / `kr_relay.bat` | **한국 PC 에서** 바이낸스·바이비트 펀딩비를 읽어 `data/kr_funding.json` 으로 올리는 중계기 (설정: `docs/KR_RELAY_SETUP.md`) |
 | `live_monitor.py` | 실전 캐리 감시 — 하이퍼리퀴드 지갑 **주소만으로** 포지션·펀딩 수취·수수료 기록 (키 없음) |
 | `docs/LIVE_CARRY_PLAN.md` | 캐리 소액 실전 설계서 (준비·진입·운영·청산·판정표) |
@@ -245,7 +245,7 @@ GitHub Actions가 **매일 한국시간 오전 9시 18분**에 자동 실행한�
 | `tests/test_scalp.py` | 초단타 계산 로직 자동 시험 (가짜 데이터, 20건) |
 | `tests/test_research.py` | 보조 연구·호가창 계산 로직 자동 시험 (14건) |
 | `tests/test_midterm.py` / `tests/test_momentum.py` | 중기·이벤트·장기 모듈 자동 시험 (13건 / 18건) |
-| `tests/test_turtle.py` | 터틀 계산 로직 자동 시험 (10건) |
+| `tests/test_turtle.py` | 터틀 계산 로직 자동 시험 (12건) |
 | `tests/test_relay.py` | 한국 중계 처리 자동 시험 (7건) |
 | `tests/fixtures/` | 오프라인 검증용 실데이터 — 1분봉 CSV, `turtle/` 에 일봉 3년 CSV 12개 |
 | `HANDOVER.md` | 인수인계서 — 지금까지 한 것과 다음 할 것 |
