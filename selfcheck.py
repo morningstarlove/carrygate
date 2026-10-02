@@ -323,6 +323,10 @@ def check_turtle(problems, notes):
         items = [("%s/%s" % (v, m), md) for m, md in (vd.get("markets") or {}).items()]
         if vd.get("portfolio"):
             items.append(("%s/포트폴리오" % v, vd["portfolio"]))
+        for vn, e in (vd.get("variants") or {}).items():
+            items += [("%s/%s/%s" % (vn, v, m), md) for m, md in (e.get("markets") or {}).items()]
+            if e.get("portfolio"):
+                items.append(("%s/%s/포트폴리오" % (vn, v), e["portfolio"]))
         for name, md in items:
             rets = md.get("returns_pct") or []
             st = md.get("stats") or {}

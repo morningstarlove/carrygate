@@ -35,6 +35,8 @@ RISK_PCT = 1.0          # 한 번에 계좌의 1% 만 흔들리게
 MAX_NOTIONAL_PCT = 100.0  # 포지션 명목가 합계 ≤ 계좌 100% (레버리지 1배, 현물 기준)
 SLIPPAGE_PCT = 0.05     # 돌파가 체결 시 불리하게 밀리는 가정
 RULE_FIXED = "2026-10-02"   # 이 날 이후 진입한 매매만 순방향 시험
+# 변형: 원래 터틀 System 2 (55일 돌파 진입 / 20일 이탈 청산). 손절·수량은 같다. 기본(20/10)과 나란히 기록만 한다.
+VARIANTS = {"s2_55_20": {"entry_n": 55, "exit_n": 20, "label": "System 2 (55일 돌파 / 20일 이탈)"}}
 DAYS = 1100             # 받아올 일봉 수 (약 3년)
 MIN_BARS = ATR_N + ENTRY_N + 30
 
@@ -154,7 +156,8 @@ def channel(bars, i, n, key, fn):
 
 # ----------------------------------------------------------------- 백테스트 (여러 시장이 한 계좌를 나눠 쓴다)
 
-def run(markets, short_ok, fee_pct, equity0, slip_pct=SLIPPAGE_PCT, max_notional_pct=MAX_NOTIONAL_PCT):
+def run(markets, short_ok, fee_pct, equity0, slip_pct=SLIPPAGE_PCT, max_notional_pct=MAX_NOTIONAL_PCT,
+        entry_n=ENTRY_N, exit_n=EXIT_N):
     """
     markets: {이름: 일봉 목록}. 한 계좌(equity0)를 모든 시장이 같이 쓴다. 시장이 하나면 단일 시장 성적.
     반환: {"trades": [...], "curve": [(date, equity)], "equity": 마지막 계좌, "state": {이름: 포지션 또는 None}, "skipped": n}
@@ -177,11 +180,11 @@ def run(markets, short_ok, fee_pct, equity0, slip_pct=SLIPPAGE_PCT, max_notional
                 continue
             b = bars[i]
             if p["dir"] > 0:
-                lvl = max(p["stop"], channel(bars, i, EXIT_N, "l", min))
+                lvl = max(p["stop"], channel(bars, i, exit_n, "l", min))
                 hit = b["l"] <= lvl
                 fill = min(b["o"], lvl) * (1 - slip) if hit else None
             else:
-                lvl = min(p["stop"], channel(bars, i, EXIT_N, "h", max))
+                lvl = min(p["stop"], channel(bars, i, exit_n, "h", max))
                 hit = b["h"] >= lvl
                 fill = max(b["o"], lvl) * (1 + slip) if hit else None
             if not hit:
@@ -208,14 +211,14 @@ def run(markets, short_ok, fee_pct, equity0, slip_pct=SLIPPAGE_PCT, max_notional
         used = sum(p["units"] * markets[m][idx[m][d]]["c"] for m, p in pos.items() if p and d in idx[m])
         for m, bars in markets.items():
             i = idx[m].get(d)
-            if pos[m] is not None or i is None or i < max(ENTRY_N, ATR_N) or atr[m][i - 1] is None:
+            if pos[m] is not None or i is None or i < max(entry_n, ATR_N) or atr[m][i - 1] is None:
                 continue
             if m in exited_today:
                 continue
             b = bars[i]
             n = atr[m][i - 1]
-            hi = channel(bars, i, ENTRY_N, "h", max)
-            lo = channel(bars, i, ENTRY_N, "l", min)
+            hi = channel(bars, i, entry_n, "h", max)
+            lo = channel(bars, i, entry_n, "l", min)
             go_long = b["h"] > hi
             go_short = short_ok and b["l"] < lo
             if go_long and go_short:
@@ -297,16 +300,16 @@ def stats(res, equity0, bars_by_market=None):
 
 # ----------------------------------------------------------------- 오늘의 신호
 
-def signal(bars, state, short_ok, equity):
+def signal(bars, state, short_ok, equity, entry_n=ENTRY_N, exit_n=EXIT_N):
     """마지막 완성 봉 기준으로 내일 어느 가격에서 무엇을 할지."""
     i = len(bars)              # 다음 봉의 인덱스
     atr = wilder_atr(bars)
     n = atr[-1]
     close = bars[-1]["c"]
-    hi20 = channel(bars, i, ENTRY_N, "h", max)
-    lo20 = channel(bars, i, ENTRY_N, "l", min)
-    lo10 = channel(bars, i, EXIT_N, "l", min)
-    hi10 = channel(bars, i, EXIT_N, "h", max)
+    hi20 = channel(bars, i, entry_n, "h", max)
+    lo20 = channel(bars, i, entry_n, "l", min)
+    lo10 = channel(bars, i, exit_n, "l", min)
+    hi10 = channel(bars, i, exit_n, "h", max)
     out = {"last_bar": bars[-1]["date"], "close": rp(close), "n": rp(n), "n_pct": r4(n / close * 100.0) if n else None,
            "high20": rp(hi20), "low20": rp(lo20), "low10": rp(lo10), "high10": rp(hi10)}
     if state:
@@ -340,6 +343,31 @@ def signal(bars, state, short_ok, equity):
 
 # ----------------------------------------------------------------- 실행
 
+def evaluate(bars_by, cfg, entry_n=ENTRY_N, exit_n=EXIT_N):
+    """한 거래소의 시장들에 규칙(entry_n/exit_n)을 적용해 시장별 성적·신호와 한 계좌 포트폴리오 성적을 만든다."""
+    markets = {}
+    for coin, bars in bars_by.items():
+        res = run({coin: bars}, cfg["short_ok"], cfg["fee_pct"], cfg["equity"], entry_n=entry_n, exit_n=exit_n)
+        markets[coin] = {
+            "bars": len(bars), "stats": stats(res, cfg["equity"], {coin: bars}),
+            "returns_pct": [t["ret_pct"] for t in res["trades"]],           # 검산용: 곱하면 realized_net 이 나와야 한다
+            "forward_trades": [t for t in res["trades"] if t["forward"]],
+            "recent_trades": res["trades"][-5:],
+            "signal": signal(bars, res["state"][coin], cfg["short_ok"], cfg["equity"], entry_n, exit_n),
+        }
+    pres = run(bars_by, cfg["short_ok"], cfg["fee_pct"], cfg["equity"], entry_n=entry_n, exit_n=exit_n)
+    portfolio = {
+        "markets": sorted(bars_by), "stats": stats(pres, cfg["equity"]),
+        "returns_pct": [t["ret_pct"] for t in pres["trades"]],
+        "open_positions": {m: {"dir": "long" if p["dir"] > 0 else "short", "entry": rp(p["entry"]), "entry_date": p["entry_date"],
+                               "stop": rp(p["stop"]), "units": p["units"], "capped": p["capped"]}
+                           for m, p in pres["state"].items() if p},
+        "forward_trades": [t for t in pres["trades"] if t["forward"]],
+        "equity_now": r4(pres["curve"][-1][1]) if pres["curve"] else None,
+    }
+    return {"markets": markets, "portfolio": portfolio}
+
+
 def build(fixture=None):
     now = datetime.now(KST)
     out = {
@@ -347,6 +375,7 @@ def build(fixture=None):
         "date": now.strftime("%Y-%m-%d"),
         "generated_at_kst": now.strftime("%Y-%m-%d %H:%M:%S"),
         "rules": {"entry_breakout_days": ENTRY_N, "exit_breakout_days": EXIT_N, "atr_days": ATR_N,
+                  "variants": {k: {"entry_breakout_days": v["entry_n"], "exit_breakout_days": v["exit_n"], "label": v["label"]} for k, v in VARIANTS.items()},
                   "stop_n_mult": STOP_MULT, "risk_pct_per_trade": RISK_PCT, "max_notional_pct": MAX_NOTIONAL_PCT,
                   "slippage_pct": SLIPPAGE_PCT, "rule_fixed": RULE_FIXED,
                   "fill": "돌파가에 스톱 주문 → max(시가, 돌파가) 체결. 청산도 같은 방식"},
@@ -374,28 +403,13 @@ def build(fixture=None):
         if not bars_by:
             continue
         vd = {"kind": cfg["kind"], "quote": cfg["quote"], "fee_pct": cfg["fee_pct"], "fee_source": cfg["fee_source"],
-              "short_ok": cfg["short_ok"], "equity0": cfg["equity"], "markets": {}}
-        for coin, bars in bars_by.items():
-            res = run({coin: bars}, cfg["short_ok"], cfg["fee_pct"], cfg["equity"])
-            st = stats(res, cfg["equity"], {coin: bars})
-            vd["markets"][coin] = {
-                "bars": len(bars), "stats": st,
-                "returns_pct": [t["ret_pct"] for t in res["trades"]],           # 검산용: 곱하면 realized_net 이 나와야 한다
-                "forward_trades": [t for t in res["trades"] if t["forward"]],
-                "recent_trades": res["trades"][-5:],
-                "signal": signal(bars, res["state"][coin], cfg["short_ok"], cfg["equity"]),
-            }
-        pres = run(bars_by, cfg["short_ok"], cfg["fee_pct"], cfg["equity"])
-        pst = stats(pres, cfg["equity"])
-        vd["portfolio"] = {
-            "markets": sorted(bars_by), "stats": pst,
-            "returns_pct": [t["ret_pct"] for t in pres["trades"]],
-            "open_positions": {m: {"dir": "long" if p["dir"] > 0 else "short", "entry": rp(p["entry"]), "entry_date": p["entry_date"],
-                                   "stop": rp(p["stop"]), "units": p["units"], "capped": p["capped"]}
-                               for m, p in pres["state"].items() if p},
-            "forward_trades": [t for t in pres["trades"] if t["forward"]],
-            "equity_now": r4(pres["curve"][-1][1]) if pres["curve"] else None,
-        }
+              "short_ok": cfg["short_ok"], "equity0": cfg["equity"]}
+        vd.update(evaluate(bars_by, cfg))
+        vd["variants"] = {}
+        for name, var in VARIANTS.items():
+            ev = evaluate(bars_by, cfg, var["entry_n"], var["exit_n"])
+            ev["label"], ev["entry_n"], ev["exit_n"] = var["label"], var["entry_n"], var["exit_n"]
+            vd["variants"][name] = ev
         out["venues"][v] = vd
 
     # 요약
@@ -409,19 +423,26 @@ def build(fixture=None):
                                             if s["signal"]["position"] == "flat" and s["signal"].get("long_distance_pct") is not None),
                                            key=lambda x: x[1], default=None),
                    "forward_trades": p.get("forward", {}).get("trades"),
-                   "forward_net_pct": p.get("forward", {}).get("net_pct")}
+                   "forward_net_pct": p.get("forward", {}).get("net_pct"),
+                   "variants": {k: {"portfolio_net_pct": e["portfolio"]["stats"].get("net_pct"), "cagr_pct": e["portfolio"]["stats"].get("cagr_pct"),
+                                    "max_drawdown_pct": e["portfolio"]["stats"].get("max_drawdown_pct"), "trades": e["portfolio"]["stats"].get("trades"),
+                                    "forward_trades": e["portfolio"]["stats"].get("forward", {}).get("trades"),
+                                    "forward_net_pct": e["portfolio"]["stats"].get("forward", {}).get("net_pct"),
+                                    "open": {m: s["signal"]["position"] for m, s in e["markets"].items() if s["signal"]["position"] != "flat"}}
+                                for k, e in vd.get("variants", {}).items()}}
     out["summary"] = summ
     return out
 
 
 def history_line(out):
-    line = {"date": out["date"], "summary": out["summary"], "signals": {}}
+    line = {"date": out["date"], "summary": out["summary"], "signals": {}, "signals_variants": {}}
+    keys = ("position", "close", "n", "high20", "low20", "low10", "stop", "exit_level", "entry", "entry_date", "unrealized_pct", "long_distance_pct")
     for v, vd in out["venues"].items():
         for m, s in vd["markets"].items():
-            sg = s["signal"]
-            line["signals"]["%s/%s" % (v, m)] = {k: sg.get(k) for k in
-                                                 ("position", "close", "n", "high20", "low20", "low10", "stop", "exit_level",
-                                                  "entry", "entry_date", "unrealized_pct", "long_distance_pct")}
+            line["signals"]["%s/%s" % (v, m)] = {k: s["signal"].get(k) for k in keys}
+        for name, e in vd.get("variants", {}).items():
+            for m, s in e["markets"].items():
+                line["signals_variants"]["%s/%s/%s" % (name, v, m)] = {k: s["signal"].get(k) for k in keys}
     return line
 
 
@@ -438,6 +459,11 @@ def print_summary(out):
             print("  %-5s 순 %+7.1f%% (보유 %+7.1f%%)  낙폭 %6.1f%%  매매 %3d  승률 %3.0f%%  PF %s  평균R %s | %s" % (
                 m, st["net_pct"], st.get("buy_hold_pct") or 0, st["max_drawdown_pct"], st["trades"], st["win_rate_pct"] or 0,
                 st["profit_factor"], st["avg_r"], sg["action"]))
+        for name, e in vd.get("variants", {}).items():
+            q = e["portfolio"]["stats"]
+            print("  변형 %s: 순 %+.1f%%  CAGR %+.1f%%  낙폭 %.1f%%  매매 %d  승률 %.0f%%  연도별 %s  보유 %s" % (
+                e["label"], q["net_pct"], q["cagr_pct"] or 0, q["max_drawdown_pct"], q["trades"], q["win_rate_pct"] or 0,
+                json.dumps(q["by_year"]), [m for m, s in e["markets"].items() if s["signal"]["position"] != "flat"]))
     if out["errors"]:
         print("ERRORS:", json.dumps(out["errors"], ensure_ascii=False))
 
