@@ -94,7 +94,9 @@ def upbit_daily(coin, days=DAYS):
 
 
 def okx_daily(coin, days=DAYS):
-    """OKX 무기한선물 일봉(00:00 UTC). 최신 300개 + history-candles 100개씩. confirm=0(미완성) 은 뺀다."""
+    """OKX 무기한선물 일봉. bar=1Dutc 로 받아야 00:00 UTC 시작(업비트 09:00 KST 와 같은 날짜)이 된다 —
+    그냥 1D 는 홍콩시간(UTC+8) 기준이라 하루가 어긋난다(Actions 실행 #26 에서 확인). 최신 300개 + history-candles 100개씩.
+    confirm=0(미완성) 은 뺀다."""
     inst = "%s-USDT-SWAP" % coin
     out = {}
 
@@ -106,12 +108,12 @@ def okx_daily(coin, days=DAYS):
             d = datetime.fromtimestamp(t, timezone.utc).strftime("%Y-%m-%d")
             out[d] = {"date": d, "o": f(r[1]), "h": f(r[2]), "l": f(r[3]), "c": f(r[4]), "_ts": int(r[0])}
 
-    rows = http_json("https://www.okx.com/api/v5/market/candles?instId=%s&bar=1D&limit=300" % inst).get("data") or []
+    rows = http_json("https://www.okx.com/api/v5/market/candles?instId=%s&bar=1Dutc&limit=300" % inst).get("data") or []
     take(rows)
     while rows and len(out) < days:
         oldest = min(int(r[0]) for r in rows)
         time.sleep(0.25)
-        rows = http_json("https://www.okx.com/api/v5/market/history-candles?instId=%s&bar=1D&limit=100&after=%d"
+        rows = http_json("https://www.okx.com/api/v5/market/history-candles?instId=%s&bar=1Dutc&limit=100&after=%d"
                          % (inst, oldest)).get("data") or []
         take(rows)
     bars = [out[d] for d in sorted(out)]
@@ -379,7 +381,7 @@ def build(fixture=None):
                   "stop_n_mult": STOP_MULT, "risk_pct_per_trade": RISK_PCT, "max_notional_pct": MAX_NOTIONAL_PCT,
                   "slippage_pct": SLIPPAGE_PCT, "rule_fixed": RULE_FIXED,
                   "fill": "돌파가에 스톱 주문 → max(시가, 돌파가) 체결. 청산도 같은 방식"},
-        "source": "fixture %s" % fixture if fixture else "upbit /v1/candles/days (KRW 현물) + okx /v5/market/candles (USDT 무기한)",
+        "source": "fixture %s" % fixture if fixture else "upbit /v1/candles/days (KRW 현물) + okx /v5/market/candles bar=1Dutc (USDT 무기한)",
         "venues": {},
         "errors": {},
     }
