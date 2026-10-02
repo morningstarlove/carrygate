@@ -312,6 +312,44 @@ def check_basis(problems, notes):
     return checked
 
 
+def check_turtle(problems, notes):
+    """터틀: 저장된 실현 순수익을 매매별 수익률의 복리 곱에서 다시 계산해 대조하고, 손절가 산식을 본다."""
+    d = load_json("turtle.json")
+    if d is None:
+        notes.append("turtle.json 이 없다")
+        return 0
+    checked = 0
+    for v, vd in (d.get("venues") or {}).items():
+        items = [("%s/%s" % (v, m), md) for m, md in (vd.get("markets") or {}).items()]
+        if vd.get("portfolio"):
+            items.append(("%s/포트폴리오" % v, vd["portfolio"]))
+        for vn, e in (vd.get("variants") or {}).items():
+            items += [("%s/%s/%s" % (vn, v, m), md) for m, md in (e.get("markets") or {}).items()]
+            if e.get("portfolio"):
+                items.append(("%s/%s/포트폴리오" % (vn, v), e["portfolio"]))
+        for name, md in items:
+            rets = md.get("returns_pct") or []
+            st = md.get("stats") or {}
+            net = 1.0
+            for r in rets:
+                net *= 1.0 + r / 100.0
+            net = (net - 1.0) * 100.0
+            if st.get("trades") != len(rets):
+                problems.append("터틀 %s: 매매 수(%s)와 수익률 목록(%d)이 다르다" % (name, st.get("trades"), len(rets)))
+                continue
+            if abs(net - (st.get("realized_net_pct") or 0.0)) > max(0.01, 0.001 * abs(net)):
+                problems.append("터틀 %s: 실현 순수익 불일치 (저장 %.3f vs 재계산 %.3f)" % (name, st.get("realized_net_pct") or 0.0, net))
+                continue
+            mult = (d.get("rules") or {}).get("stop_n_mult", 2.0)
+            for t in (md.get("recent_trades") or []) + (md.get("forward_trades") or []):
+                sign = 1 if t.get("dir") == "long" else -1
+                if abs(t["stop"] - (t["entry"] - sign * mult * t["n_at_entry"])) > max(1e-6, 1e-3 * t["entry"]):
+                    problems.append("터틀 %s: 손절가가 진입가 ∓ %sN 이 아니다 (%s)" % (name, mult, t.get("entry_date")))
+                    break
+            checked += 1
+    return checked
+
+
 def main():
     problems, notes = [], []
 
@@ -329,13 +367,14 @@ def main():
     check_jsonl_dates("research_history.jsonl", "보조 연구", problems, notes)
     check_jsonl_dates("orderbook_history.jsonl", "호가창", problems, notes)
     basis_checked = check_basis(problems, notes)
+    turtle_checked = check_turtle(problems, notes)
     for path, label in (("basis_history.jsonl", "베이시스"), ("funding_signal_history.jsonl", "펀딩 신호"),
                         ("kimchi_history.jsonl", "김치프리미엄"), ("momentum_history.jsonl", "듀얼 모멘텀"),
-                        ("live_history.jsonl", "실전 캐리")):
+                        ("live_history.jsonl", "실전 캐리"), ("turtle_history.jsonl", "터틀")):
         check_jsonl_dates(path, label, problems, notes)
 
     print("=== 검산 ===")
-    print("재계산 대조: 캐리 %d건, 초단타 %d건, 베이시스 %d건 통과" % (checked, scalp_checked, basis_checked))
+    print("재계산 대조: 캐리 %d건, 초단타 %d건, 베이시스 %d건, 터틀 %d건 통과" % (checked, scalp_checked, basis_checked, turtle_checked))
     for m in notes:
         print("  · %s" % m)
 

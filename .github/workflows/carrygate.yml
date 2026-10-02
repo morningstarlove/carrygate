@@ -64,6 +64,10 @@ jobs:
         continue-on-error: true
         run: python listing.py
 
+      - name: Turtle trend rules (터틀 20일 돌파, 중기)
+        continue-on-error: true
+        run: python turtle.py
+
       - name: Live carry monitor (실전 캐리 감시, 지갑 주소만)
         continue-on-error: true
         run: python live_monitor.py
@@ -94,13 +98,17 @@ jobs:
         if: always()
         run: python scalp.py --report || echo "초단타 기록 없음"
 
+      - name: Show turtle trend (터틀 신호 추이)
+        if: always()
+        run: python turtle.py --report || echo "터틀 기록 없음"
+
       - name: Show research trend (보조 연구 누적)
         if: always()
         run: python scalp_research.py --report || echo "연구 기록 없음"
 
       - name: Unit tests (계산 로직)
         if: always()
-        run: python -m unittest tests.test_scalp tests.test_research tests.test_midterm tests.test_momentum tests.test_live
+        run: python -m unittest tests.test_scalp tests.test_research tests.test_midterm tests.test_momentum tests.test_live tests.test_turtle
 
       - name: Commit results
         if: always() && inputs.dry_run != true
@@ -109,7 +117,7 @@ jobs:
           git config user.email "carrygate-bot@users.noreply.github.com"
           git add -A status.json history.jsonl funding.json funding_history.jsonl scalp.json scalp_history.jsonl research.json research_history.jsonl \
                      basis.json basis_history.jsonl funding_signal.json funding_signal_history.jsonl kimchi.json kimchi_history.jsonl \
-                     macro.json listing.json momentum.json momentum_history.jsonl live.json live_history.jsonl data/etf data/upbit_markets.json || true
+                     macro.json listing.json momentum.json momentum_history.jsonl live.json live_history.jsonl turtle.json turtle_history.jsonl data/etf data/upbit_markets.json || true
           if git diff --staged --quiet; then
             echo "no change"
           else
