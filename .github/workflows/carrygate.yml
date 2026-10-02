@@ -108,7 +108,7 @@ jobs:
 
       - name: Unit tests (계산 로직)
         if: always()
-        run: python -m unittest tests.test_scalp tests.test_research tests.test_midterm tests.test_momentum tests.test_live tests.test_turtle
+        run: python -m unittest tests.test_scalp tests.test_research tests.test_midterm tests.test_momentum tests.test_live tests.test_turtle tests.test_relay
 
       - name: Commit results
         if: always() && inputs.dry_run != true
@@ -117,7 +117,7 @@ jobs:
           git config user.email "carrygate-bot@users.noreply.github.com"
           git add -A status.json history.jsonl funding.json funding_history.jsonl scalp.json scalp_history.jsonl research.json research_history.jsonl \
                      basis.json basis_history.jsonl funding_signal.json funding_signal_history.jsonl kimchi.json kimchi_history.jsonl \
-                     macro.json listing.json momentum.json momentum_history.jsonl live.json live_history.jsonl turtle.json turtle_history.jsonl data/etf data/upbit_markets.json || true
+                     macro.json listing.json momentum.json momentum_history.jsonl live.json live_history.jsonl turtle.json turtle_history.jsonl data/kr_funding.json data/etf data/upbit_markets.json || true
           if git diff --staged --quiet; then
             echo "no change"
           else

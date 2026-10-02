@@ -40,6 +40,18 @@ HL_DOC_SPOT_TAKER_PCT = 0.070
 HL_ZERO_ADDR = "0x" + "0" * 40   # 거래 이력 없는 주소 = 기본 등급(Tier 0) 수수료
 HL_STABLES = ("USDC", "USDH", "USDT0", "USDE")
 
+# --- 한국 중계 ---------------------------------------------------------------
+# 바이낸스(451)·바이비트(403)는 미국 서버에서 막힌다. 한국 PC 에서 kr_relay.py 가 하루 한 번
+# data/kr_funding.json 을 올리면, 두 거래소가 직접 수집에 실패했을 때 그 파일(36시간 안의 것)을 대신 쓴다.
+RELAY_PATH = "data/kr_funding.json"
+RELAY_MAX_AGE_H = 36.0
+RELAY_VENUES = ("binance", "bybit")
+# 두 거래소의 공식 수수료표(일반 등급 테이커). API 키 없이 실측할 수 없어 문서 값을 쓴다.
+VENUE_DOC_FEES = {
+    "binance": (0.10, 0.05,  "바이낸스 공식 수수료표 일반 등급 (현물 0.10%, 선물 0.05%)"),
+    "bybit":   (0.10, 0.055, "바이비트 공식 수수료표 일반 등급 (현물 0.10%, 선물 0.055%)"),
+}
+
 
 def fee_drag(spot_pct, perp_pct):
     """1회 체결 수수료(%) -> 왕복 4회 수수료를 보유기간으로 나눈 연 % 부담."""
@@ -344,8 +356,34 @@ def hl_info():
     return out
 
 
+def read_relay(path=RELAY_PATH, now=None):
+    """한국 중계 파일을 읽는다. 36시간보다 오래된 것은 쓰지 않는다(PC 가 꺼져 있었던 날)."""
+    info = {"present": False, "fresh": False, "age_hours": None, "generated_at_kst": None,
+            "max_age_hours": RELAY_MAX_AGE_H, "venues": {}}
+    try:
+        with open(path, encoding="utf-8") as fp:
+            d = json.load(fp)
+    except Exception:
+        return info
+    info["present"] = True
+    info["generated_at_kst"] = d.get("generated_at_kst")
+    try:
+        gen = datetime.strptime(d["generated_at_utc"], "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
+    except Exception:
+        return info
+    now = now or datetime.now(timezone.utc)
+    age = (now - gen).total_seconds() / 3600.0
+    info["age_hours"] = round(age, 1)
+    info["fresh"] = age <= RELAY_MAX_AGE_H
+    if info["fresh"]:
+        info["venues"] = {v: rows for v, rows in (d.get("venues") or {}).items() if v in RELAY_VENUES and rows}
+    return info
+
+
 def venue_fees(venue, coin, hl):
     """(현물 1회 %, 선물 1회 %, 설명) — 거래소·코인별 실제 적용 수수료."""
+    if venue in VENUE_DOC_FEES:
+        return VENUE_DOC_FEES[venue]
     if venue == "hyperliquid" and hl:
         pair = hl["spot_pairs"].get(coin)
         if pair:
@@ -458,6 +496,23 @@ def main():
         except Exception as e:
             failed[name] = str(e)[:200]
 
+    # 바이낸스·바이비트가 막혔으면 한국 중계 파일로 대신한다
+    relay = read_relay()
+    relay["used"] = []
+    for name in RELAY_VENUES:
+        if name in failed and name in relay["venues"]:
+            for c, e in relay["venues"][name].items():
+                if c not in per_coin:
+                    continue
+                e = dict(e)
+                e["via"] = "한국 중계"
+                e["relay_age_hours"] = relay["age_hours"]
+                per_coin[c].append(decorate(e, venue_fees(name, c, hl)))
+            ok.append(name)
+            relay["used"].append(name)
+            failed[name] = failed.pop(name)[:80] + " → 한국 중계 파일 사용"
+    relay.pop("venues", None)
+
     coins = {}
     for c in COINS:
         vs = [v for v in per_coin[c] if v.get("decision_apr_pct") is not None]
@@ -513,7 +568,7 @@ def main():
         "thresholds": {"enter_apr_pct": ENTER_APR, "exit_apr_pct": EXIT_APR,
                        "compared_against": "수수료 차감 후 순수익(net)"},
         "fee_assumption": {
-            "note": "하이퍼리퀴드는 API 실측 수수료, 나머지 거래소는 보수적 기본 가정.",
+            "note": "하이퍼리퀴드는 API 실측 수수료, 바이낸스·바이비트는 공식 수수료표, 나머지 거래소는 보수적 기본 가정.",
             "assumed_hold_days": HOLD_DAYS,
             "hyperliquid": {
                 "source": hl["fee_source"],
@@ -524,6 +579,8 @@ def main():
                 "fee_drag_apr_pct_with_hl_spot": round(
                     fee_drag(hl["spot_taker_pct"], hl["perp_taker_pct"]), 4),
             },
+            "documented": {v: {"spot_taker_pct": sp, "perp_taker_pct": pp, "source": note}
+                           for v, (sp, pp, note) in VENUE_DOC_FEES.items()},
             "default": {
                 "taker_fee_spot_pct": TAKER_FEE_SPOT_PCT,
                 "taker_fee_perp_pct": TAKER_FEE_PERP_PCT,
@@ -532,7 +589,9 @@ def main():
             },
         },
         "sources_ok": ok,
-        "sources_failed": failed,
+        "sources_failed": {k: v for k, v in failed.items() if k not in relay["used"]},
+        "sources_relayed": {k: failed[k] for k in relay["used"]},
+        "kr_relay": relay,
         "gate_ref": gate,
         "coins": coins,
         "summary": {

@@ -34,7 +34,8 @@ class Evaluate(unittest.TestCase):
         self.assertEqual(s["delta_mismatch_pct"], 0.0)
         self.assertEqual(s["liquidation_distance_pct"], 100.0)
         self.assertEqual(s["warnings"], [])
-        self.assertAlmostEqual(s["realized_vs_predicted"], round(s["realized_gross_apr_pct"] / 8.0, 2))
+        # 저장값은 반올림 전 연환산으로 나눈다. 반올림된 연환산으로 되짚으면 0.01 차이가 날 수 있다
+        self.assertAlmostEqual(s["realized_vs_predicted"], s["realized_gross_apr_pct"] / 8.0, delta=0.011)
 
     def test_warnings(self):
         self.spot["UETH"] = 0.03                 # 현물이 50% 많다

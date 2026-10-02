@@ -67,8 +67,8 @@
 거래소마다 이자 주는 주기가 다르다(8시간마다, 1시간마다 등).
 그래서 주기를 각 거래소에서 직접 읽어와 계산한다. 그냥 곱하면 틀린다.
 
-바이낸스는 **최근 7일 평균**도 같이 계산한다.
-한 번 찍힌 값은 튀기 때문에, 평균이 있으면 그걸로 판단한다.
+모든 거래소에서 **최근 7일 평균**을 계산한다. 한 번 찍힌 값은 튀기 때문에, 평균이 있으면 그걸로 판단한다.
+바이낸스·바이비트는 미국 서버에서 막혀 있어 **한국 PC 의 중계기**(`kr_relay.py`)가 올린 파일을 쓴다.
 
 ### 판정 규칙
 
@@ -228,6 +228,7 @@ GitHub Actions가 **매일 한국시간 오전 9시 18분**에 자동 실행한�
 | `macro_events.py` / `listing.py` | 이벤트 연구 ⑤⑥ (누적 JSON). 각각 `--report` |
 | `momentum.py` / `etf_update.py` | 장기 ① ETF 듀얼 모멘텀 백테스트·신호 / 일봉 갱신 |
 | `turtle.py` | 중기 터틀 추세추종 규칙 — 3년 백테스트·오늘 신호·순방향 집계. 변형(55/20, Chandelier Exit) 나란히 기록. `--report` 로 신호 변화 |
+| `kr_relay.py` / `kr_relay.bat` | **한국 PC 에서** 바이낸스·바이비트 펀딩비를 읽어 `data/kr_funding.json` 으로 올리는 중계기 (설정: `docs/KR_RELAY_SETUP.md`) |
 | `live_monitor.py` | 실전 캐리 감시 — 하이퍼리퀴드 지갑 **주소만으로** 포지션·펀딩 수취·수수료 기록 (키 없음) |
 | `docs/LIVE_CARRY_PLAN.md` | 캐리 소액 실전 설계서 (준비·진입·운영·청산·판정표) |
 | `data/etf/` / `data/macro_calendar.json` | ETF 20년 일봉 / 매크로 발표 달력 |
@@ -245,6 +246,7 @@ GitHub Actions가 **매일 한국시간 오전 9시 18분**에 자동 실행한�
 | `tests/test_research.py` | 보조 연구·호가창 계산 로직 자동 시험 (14건) |
 | `tests/test_midterm.py` / `tests/test_momentum.py` | 중기·이벤트·장기 모듈 자동 시험 (13건 / 18건) |
 | `tests/test_turtle.py` | 터틀 계산 로직 자동 시험 (12건) |
+| `tests/test_relay.py` | 한국 중계 처리 자동 시험 (7건) |
 | `tests/fixtures/` | 오프라인 검증용 실데이터 — 1분봉 CSV, `turtle/` 에 일봉 3년 CSV 12개 |
 | `HANDOVER.md` | 인수인계서 — 지금까지 한 것과 다음 할 것 |
 
