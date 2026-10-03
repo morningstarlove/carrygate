@@ -135,8 +135,9 @@ jobs:
             echo "no change"
           else
             git commit -m "status $(date -u +%Y-%m-%d)"
-            git pull --rebase origin main || true
-            git push
+            # 실행 중인 브랜치 기준으로 당긴다 (작업 브랜치에서 수동 실행했을 때 main 으로 리베이스하다 충돌·푸시 실패하던 문제)
+            git pull --rebase origin "$GITHUB_REF_NAME" || true
+            git push origin "HEAD:$GITHUB_REF_NAME"
           fi
 
       # 저장된 값을 다시 계산해 대조한다. 어긋나면 여기서 실패해 빨간불로 알린다.
