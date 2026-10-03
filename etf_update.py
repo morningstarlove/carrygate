@@ -8,7 +8,8 @@ data/etf/<TICKER>.csv 에 최신 일봉을 덧붙인다 (stooq 공개 CSV). 실�
 import csv, os, sys, io, urllib.request
 from datetime import datetime, timezone
 
-TICKERS = ["SPY", "EFA", "AGG", "BIL", "QQQ", "GLD", "TLT", "IEF"]
+TICKERS = ["SPY", "EFA", "AGG", "BIL", "QQQ", "GLD", "TLT", "IEF",
+           "SOXL", "TQQQ"]   # SOXL/TQQQ 는 그리드(종사종팔) 백테스트용. 파일이 없으면 stooq 전체 이력으로 새로 만든다
 DATA_DIR = "data/etf"
 UA = {"User-Agent": "Mozilla/5.0 (compatible; carrygate/1.0)"}
 
@@ -33,12 +34,20 @@ def fetch_stooq(ticker):
 
 def update(ticker):
     path = os.path.join(DATA_DIR, "%s.csv" % ticker)
-    if not os.path.exists(path):
-        return "%s: 파일 없음" % ticker
-    with open(path, encoding="utf-8") as fp:
-        have = list(csv.DictReader(fp))
-    last = have[-1]["date"] if have else "1900-01-01"
     rows = fetch_stooq(ticker)
+    created = False
+    if not os.path.exists(path):
+        # 새 티커: stooq 가 주는 전체 이력(분할 조정)으로 파일을 만든다. 응답이 비면 파일을 남기지 않는다.
+        if not rows:
+            return "%s: 파일 없음 (stooq 응답 비어 있음)" % ticker
+        os.makedirs(DATA_DIR, exist_ok=True)
+        with open(path, "w", encoding="utf-8", newline="") as fp:
+            fp.write("date,t,o,h,l,c,v\n")
+        have, created = [], True
+    else:
+        with open(path, encoding="utf-8") as fp:
+            have = list(csv.DictReader(fp))
+    last = have[-1]["date"] if have else "1900-01-01"
     add = [r for r in rows if r[0] > last]
     if not add:
         return "%s: 최신 (%s)" % (ticker, last)
@@ -47,6 +56,8 @@ def update(ticker):
         for d, o, h, l, c, v in add:
             t = int(datetime.strptime(d, "%Y-%m-%d").replace(hour=14, minute=30, tzinfo=timezone.utc).timestamp())
             w.writerow([d, t, o, h, l, c, v])
+    if created:
+        return "%s: 새로 생성 %d일 (%s -> %s)" % (ticker, len(add), add[0][0], add[-1][0])
     return "%s: %d일 추가 (%s -> %s)" % (ticker, len(add), last, add[-1][0])
 
 
