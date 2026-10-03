@@ -1,0 +1,1046 @@
+{
+ "date": "2026-10-04",
+ "generated_at": "2026-10-04T08:41:39+09:00",
+ "rules": {
+  "capital_usd": 10000.0,
+  "hold_days": 10,
+  "fee_pct_one_way": 0.09,
+  "start": "2010-04-05",
+  "rule_fixed": "2026-10-03",
+  "versions": {
+   "v4": {
+    "label": "종사종팔 v4",
+    "target_pct": 2.7,
+    "n_tiers": 10,
+    "reinvest": 0.7
+   },
+   "v5": {
+    "label": "종사종팔 v5",
+    "target_pct": 2.75,
+    "daily_buy_pct": 10.0
+   }
+  }
+ },
+ "method": "일봉 종가만 사용. 매일 종가에 한 티어 매수(그날 매도가 있었으면 매수 없음). 티어별 종가 ≥ 매수가×(1+익절률)이면 그 종가에 매도, 매수 후 HOLD_DAYS 거래일째 종가에는 무조건 매도. 체결마다 FEE_PCT(편도) 차감, 주식 수 소수점 허용. v4 하루 매수 금액 = 투자금/N_TIERS 에서 시작해 2사이클(=HOLD_DAYS 거래일) 전에 산 티어들의 실현 손익이 +면 그 REINVEST 만큼을 N_TIERS 로 나눠 더함(래칫, 줄이지 않음), 보유 티어 N_TIERS 개면 매수 없음. v5 하루 매수 금액 = 어제 종가 자산 × DAILY_BUY_PCT. 현금 부족 시 남은 현금만큼만 매수. 자산 = 현금 + 보유주 × 종가(일별). CAGR 은 달력일 기준 연환산, MDD 는 일별 자산 고점 대비.",
+ "blog_claims": {
+  "source": "https://m.blog.naver.com/ascbbs/224430179468",
+  "note": "블로그 글이 밝힌 백테스트 수치. 이 저장소는 같은 규칙을 stooq 분할조정 일봉으로 다시 계산해 아래 results 와 비교한다.",
+  "SOXL": {
+   "v4": {
+    "2010-04-05~2024-11-30": {
+     "cagr_pct": 39.5,
+     "mdd_pct": -36.4
+    },
+    "2010-04-05~2026-10": {
+     "cagr_pct": 42.4,
+     "mdd_pct": -51.8
+    }
+   },
+   "v5": {
+    "2010-04-05~2024-11-30": {
+     "cagr_pct": 27.9,
+     "mdd_pct": -31.3
+    },
+    "2010-04-05~2026-10": {
+     "cagr_pct": 29.9,
+     "mdd_pct": -40.2
+    }
+   }
+  }
+ },
+ "symbols": {
+  "SOXL": {
+   "data_range": [
+    "2010-04-01",
+    "2026-10-02"
+   ],
+   "bars": 200,
+   "last_close": 163.71,
+   "windows": {
+    "2010-04-05~2024-11-30": {
+     "label": "원문 소개글 구간",
+     "start": "2010-04-05",
+     "end": "2024-11-30",
+     "v4": {
+      "start": "2010-05-01",
+      "end": "2024-11-01",
+      "years": 14.5051,
+      "bars": 175,
+      "end_equity": 29509.8636,
+      "total_return_pct": 195.0986,
+      "cagr_pct": 7.7457,
+      "max_drawdown_pct": -16.4528,
+      "trades": 96,
+      "win_rate_pct": 92.7083,
+      "expired_sells": 7,
+      "expired_share_pct": 7.2917,
+      "avg_hold_days": 2.4375,
+      "avg_trade_ret_pct": 15.4999,
+      "max_tiers_held": 6,
+      "max_daily_buy_pct_of_equity": 10.2541,
+      "cash_short_days": 0,
+      "worst_year": {
+       "year": "2024",
+       "ret_pct": -6.276
+      },
+      "yearly_ret_pct": {
+       "2010": 7.7155,
+       "2011": -5.3781,
+       "2012": 19.1025,
+       "2013": 12.0594,
+       "2014": 9.2082,
+       "2015": 11.4018,
+       "2016": 6.64,
+       "2017": 5.5823,
+       "2018": -1.3301,
+       "2019": 24.1665,
+       "2020": 15.9641,
+       "2021": 5.2328,
+       "2022": -6.1675,
+       "2023": 20.4485,
+       "2024": -6.276
+      },
+      "recent_trades": [
+       {
+        "buy_date": "2023-10-01",
+        "sell_date": "2023-11-01",
+        "buy_px": 14.9,
+        "sell_px": 22.81,
+        "cost": 2250.1124,
+        "hold_days": 1,
+        "pnl": 1188.328,
+        "ret_pct": 52.8119,
+        "reason": "target"
+       },
+       {
+        "buy_date": "2023-08-01",
+        "sell_date": "2023-12-01",
+        "buy_px": 23.86,
+        "sell_px": 31.4,
+        "cost": 2250.1124,
+        "hold_days": 4,
+        "pnl": 705.7327,
+        "ret_pct": 31.3643,
+        "reason": "target"
+       },
+       {
+        "buy_date": "2024-01-01",
+        "sell_date": "2024-02-01",
+        "buy_px": 32.1,
+        "sell_px": 42.84,
+        "cost": 2250.1124,
+        "hold_days": 1,
+        "pnl": 747.441,
+        "ret_pct": 33.2179,
+        "reason": "target"
+       },
+       {
+        "buy_date": "2024-03-01",
+        "sell_date": "2024-05-01",
+        "buy_px": 46.53,
+        "sell_px": 48.59,
+        "cost": 2250.1124,
+        "hold_days": 2,
+        "pnl": 95.3925,
+        "ret_pct": 4.2395,
+        "reason": "target"
+       },
+       {
+        "buy_date": "2024-04-01",
+        "sell_date": "2024-05-01",
+        "buy_px": 38.18,
+        "sell_px": 48.59,
+        "cost": 2250.1124,
+        "hold_days": 1,
+        "pnl": 608.3564,
+        "ret_pct": 27.0367,
+        "reason": "target"
+       }
+      ]
+     },
+     "v5": {
+      "start": "2010-05-01",
+      "end": "2024-11-01",
+      "years": 14.5051,
+      "bars": 175,
+      "end_equity": 35049.0962,
+      "total_return_pct": 250.491,
+      "cagr_pct": 9.0312,
+      "max_drawdown_pct": -21.1526,
+      "trades": 96,
+      "win_rate_pct": 92.7083,
+      "expired_sells": 7,
+      "expired_share_pct": 7.2917,
+      "avg_hold_days": 2.4375,
+      "avg_trade_ret_pct": 15.4999,
+      "max_tiers_held": 6,
+      "max_daily_buy_pct_of_equity": 10.0,
+      "cash_short_days": 0,
+      "worst_year": {
+       "year": "2022",
+       "ret_pct": -10.019
+      },
+      "yearly_ret_pct": {
+       "2010": 7.8238,
+       "2011": -6.4569,
+       "2012": 20.8403,
+       "2013": 13.6004,
+       "2014": 10.8272,
+       "2015": 14.0186,
+       "2016": 8.0002,
+       "2017": 6.9714,
+       "2018": -2.2942,
+       "2019": 31.7811,
+       "2020": 21.0396,
+       "2021": 7.357,
+       "2022": -10.019,
+       "2023": 26.0494,
+       "2024": -8.6261
+      },
+      "recent_trades": [
+       {
+        "buy_date": "2023-10-01",
+        "sell_date": "2023-11-01",
+        "buy_px": 14.9,
+        "sell_px": 22.81,
+        "cost": 3402.075,
+        "hold_days": 1,
+        "pnl": 1796.7018,
+        "ret_pct": 52.8119,
+        "reason": "target"
+       },
+       {
+        "buy_date": "2023-08-01",
+        "sell_date": "2023-12-01",
+        "buy_px": 23.86,
+        "sell_px": 31.4,
+        "cost": 3475.3162,
+        "hold_days": 4,
+        "pnl": 1090.0097,
+        "ret_pct": 31.3643,
+        "reason": "target"
+       },
+       {
+        "buy_date": "2024-01-01",
+        "sell_date": "2024-02-01",
+        "buy_px": 32.1,
+        "sell_px": 42.84,
+        "cost": 3835.7889,
+        "hold_days": 1,
+        "pnl": 1274.1702,
+        "ret_pct": 33.2179,
+        "reason": "target"
+       },
+       {
+        "buy_date": "2024-03-01",
+        "sell_date": "2024-05-01",
+        "buy_px": 46.53,
+        "sell_px": 48.59,
+        "cost": 3963.2059,
+        "hold_days": 2,
+        "pnl": 168.0183,
+        "ret_pct": 4.2395,
+        "reason": "target"
+       },
+       {
+        "buy_date": "2024-04-01",
+        "sell_date": "2024-05-01",
+        "buy_px": 38.18,
+        "sell_px": 48.59,
+        "cost": 3962.8496,
+        "hold_days": 1,
+        "pnl": 1071.4242,
+        "ret_pct": 27.0367,
+        "reason": "target"
+       }
+      ]
+     }
+    },
+    "2010-04-05~2026-10-02": {
+     "label": "2026년 10월까지 (현재)",
+     "start": "2010-04-05",
+     "end": "2026-10-02",
+     "v4": {
+      "start": "2010-05-01",
+      "end": "2026-10-02",
+      "years": 16.4216,
+      "bars": 199,
+      "end_equity": 43151.532,
+      "total_return_pct": 331.5153,
+      "cagr_pct": 9.3121,
+      "max_drawdown_pct": -42.731,
+      "trades": 114,
+      "win_rate_pct": 89.4737,
+      "expired_sells": 12,
+      "expired_share_pct": 10.5263,
+      "avg_hold_days": 2.9035,
+      "avg_trade_ret_pct": 16.5147,
+      "max_tiers_held": 10,
+      "max_daily_buy_pct_of_equity": 10.2541,
+      "cash_short_days": 0,
+      "worst_year": {
+       "year": "2024",
+       "ret_pct": -7.2174
+      },
+      "yearly_ret_pct": {
+       "2010": 7.7155,
+       "2011": -5.3781,
+       "2012": 19.1025,
+       "2013": 12.0594,
+       "2014": 9.2082,
+       "2015": 11.4018,
+       "2016": 6.64,
+       "2017": 5.5823,
+       "2018": -1.3301,
+       "2019": 24.1665,
+       "2020": 15.9641,
+       "2021": 5.2328,
+       "2022": -6.1675,
+       "2023": 20.4485,
+       "2024": -7.2174,
+       "2025": 6.0589,
+       "2026": 39.2728
+      },
+      "recent_trades": [
+       {
+        "buy_date": "2026-02-01",
+        "sell_date": "2026-04-01",
+        "buy_px": 62.77,
+        "sell_px": 126.98,
+        "cost": 2531.3004,
+        "hold_days": 2,
+        "pnl": 2580.1619,
+        "ret_pct": 101.9303,
+        "reason": "target"
+       },
+       {
+        "buy_date": "2026-03-01",
+        "sell_date": "2026-04-01",
+        "buy_px": 47.91,
+        "sell_px": 126.98,
+        "cost": 2535.9973,
+        "hold_days": 1,
+        "pnl": 4173.2874,
+        "ret_pct": 164.562,
+        "reason": "target"
+       },
+       {
+        "buy_date": "2026-05-01",
+        "sell_date": "2026-06-01",
+        "buy_px": 224.34,
+        "sell_px": 266.71,
+        "cost": 2535.9973,
+        "hold_days": 1,
+        "pnl": 473.5393,
+        "ret_pct": 18.6727,
+        "reason": "target"
+       },
+       {
+        "buy_date": "2026-07-01",
+        "sell_date": "2026-09-01",
+        "buy_px": 114.72,
+        "sell_px": 147.86,
+        "cost": 2535.9973,
+        "hold_days": 2,
+        "pnl": 726.7138,
+        "ret_pct": 28.6559,
+        "reason": "target"
+       },
+       {
+        "buy_date": "2026-08-01",
+        "sell_date": "2026-09-01",
+        "buy_px": 112.79,
+        "sell_px": 147.86,
+        "cost": 2535.9973,
+        "hold_days": 1,
+        "pnl": 782.5435,
+        "ret_pct": 30.8574,
+        "reason": "target"
+       }
+      ]
+     },
+     "v5": {
+      "start": "2010-05-01",
+      "end": "2026-10-02",
+      "years": 16.4216,
+      "bars": 199,
+      "end_equity": 56558.9737,
+      "total_return_pct": 465.5897,
+      "cagr_pct": 11.1281,
+      "max_drawdown_pct": -53.9398,
+      "trades": 114,
+      "win_rate_pct": 89.4737,
+      "expired_sells": 12,
+      "expired_share_pct": 10.5263,
+      "avg_hold_days": 2.9035,
+      "avg_trade_ret_pct": 16.5147,
+      "max_tiers_held": 10,
+      "max_daily_buy_pct_of_equity": 10.0,
+      "cash_short_days": 0,
+      "worst_year": {
+       "year": "2022",
+       "ret_pct": -10.019
+      },
+      "yearly_ret_pct": {
+       "2010": 7.8238,
+       "2011": -6.4569,
+       "2012": 20.8403,
+       "2013": 13.6004,
+       "2014": 10.8272,
+       "2015": 14.0186,
+       "2016": 8.0002,
+       "2017": 6.9714,
+       "2018": -2.2942,
+       "2019": 31.7811,
+       "2020": 21.0396,
+       "2021": 7.357,
+       "2022": -10.019,
+       "2023": 26.0494,
+       "2024": -9.8699,
+       "2025": 5.3265,
+       "2026": 55.3244
+      },
+      "recent_trades": [
+       {
+        "buy_date": "2026-02-01",
+        "sell_date": "2026-04-01",
+        "buy_px": 62.77,
+        "sell_px": 126.98,
+        "cost": 4138.4926,
+        "hold_days": 2,
+        "pnl": 4218.3776,
+        "ret_pct": 101.9303,
+        "reason": "target"
+       },
+       {
+        "buy_date": "2026-03-01",
+        "sell_date": "2026-04-01",
+        "buy_px": 47.91,
+        "sell_px": 126.98,
+        "cost": 4138.1205,
+        "hold_days": 1,
+        "pnl": 6809.7731,
+        "ret_pct": 164.562,
+        "reason": "target"
+       },
+       {
+        "buy_date": "2026-05-01",
+        "sell_date": "2026-06-01",
+        "buy_px": 224.34,
+        "sell_px": 266.71,
+        "cost": 5241.3077,
+        "hold_days": 1,
+        "pnl": 978.694,
+        "ret_pct": 18.6727,
+        "reason": "target"
+       },
+       {
+        "buy_date": "2026-07-01",
+        "sell_date": "2026-09-01",
+        "buy_px": 114.72,
+        "sell_px": 147.86,
+        "cost": 5339.1771,
+        "hold_days": 2,
+        "pnl": 1529.9912,
+        "ret_pct": 28.6559,
+        "reason": "target"
+       },
+       {
+        "buy_date": "2026-08-01",
+        "sell_date": "2026-09-01",
+        "buy_px": 112.79,
+        "sell_px": 147.86,
+        "cost": 5338.697,
+        "hold_days": 1,
+        "pnl": 1647.3845,
+        "ret_pct": 30.8574,
+        "reason": "target"
+       }
+      ]
+     }
+    }
+   },
+   "fee_sensitivity": {
+    "v4": {
+     "0.030": {
+      "fee_pct_one_way": 0.03,
+      "cagr_pct": 9.3806,
+      "mdd_pct": -42.6239,
+      "end_equity": 43597.9502
+     },
+     "0.044": {
+      "fee_pct_one_way": 0.044,
+      "cagr_pct": 9.3647,
+      "mdd_pct": -42.6488,
+      "end_equity": 43493.4243
+     },
+     "0.090": {
+      "fee_pct_one_way": 0.09,
+      "cagr_pct": 9.3121,
+      "mdd_pct": -42.731,
+      "end_equity": 43151.532
+     },
+     "0.250": {
+      "fee_pct_one_way": 0.25,
+      "cagr_pct": 9.1292,
+      "mdd_pct": -43.02,
+      "end_equity": 41981.1764
+     }
+    },
+    "v5": {
+     "0.030": {
+      "fee_pct_one_way": 0.03,
+      "cagr_pct": 11.2325,
+      "mdd_pct": -53.9265,
+      "end_equity": 57437.8695
+     },
+     "0.044": {
+      "fee_pct_one_way": 0.044,
+      "cagr_pct": 11.2081,
+      "mdd_pct": -53.9296,
+      "end_equity": 57231.5064
+     },
+     "0.090": {
+      "fee_pct_one_way": 0.09,
+      "cagr_pct": 11.1281,
+      "mdd_pct": -53.9398,
+      "end_equity": 56558.9737
+     },
+     "0.250": {
+      "fee_pct_one_way": 0.25,
+      "cagr_pct": 10.8506,
+      "mdd_pct": -53.9752,
+      "end_equity": 54284.2496
+     }
+    }
+   },
+   "forward": {
+    "v4": {
+     "note": "규칙 고정일 이후 자료 없음"
+    },
+    "v5": {
+     "note": "규칙 고정일 이후 자료 없음"
+    }
+   }
+  },
+  "TQQQ": {
+   "data_range": [
+    "2010-03-01",
+    "2026-10-02"
+   ],
+   "bars": 201,
+   "last_close": 81.01,
+   "windows": {
+    "2010-04-05~2024-11-30": {
+     "label": "원문 소개글 구간",
+     "start": "2010-04-05",
+     "end": "2024-11-30",
+     "v4": {
+      "start": "2010-05-01",
+      "end": "2024-11-01",
+      "years": 14.5051,
+      "bars": 175,
+      "end_equity": 27028.7803,
+      "total_return_pct": 170.2878,
+      "cagr_pct": 7.0953,
+      "max_drawdown_pct": -22.492,
+      "trades": 104,
+      "win_rate_pct": 93.2692,
+      "expired_sells": 7,
+      "expired_share_pct": 6.7308,
+      "avg_hold_days": 2.5481,
+      "avg_trade_ret_pct": 11.5535,
+      "max_tiers_held": 6,
+      "max_daily_buy_pct_of_equity": 10.0009,
+      "cash_short_days": 0,
+      "worst_year": {
+       "year": "2022",
+       "ret_pct": -22.492
+      },
+      "yearly_ret_pct": {
+       "2010": 11.1861,
+       "2011": 3.5239,
+       "2012": 8.4108,
+       "2013": 9.1685,
+       "2014": 4.6084,
+       "2015": 11.5478,
+       "2016": 7.9497,
+       "2017": 6.0105,
+       "2018": 0.0722,
+       "2019": 19.1367,
+       "2020": 11.8144,
+       "2021": 10.0627,
+       "2022": -22.492,
+       "2023": 23.3822,
+       "2024": 5.894
+      },
+      "recent_trades": [
+       {
+        "buy_date": "2024-04-01",
+        "sell_date": "2024-05-01",
+        "buy_px": 26.37,
+        "sell_px": 31.265,
+        "cost": 2068.9693,
+        "hold_days": 1,
+        "pnl": 379.6462,
+        "ret_pct": 18.3495,
+        "reason": "target"
+       },
+       {
+        "buy_date": "2024-03-01",
+        "sell_date": "2024-06-01",
+        "buy_px": 30.78,
+        "sell_px": 36.91,
+        "cost": 2068.9693,
+        "hold_days": 3,
+        "pnl": 407.5843,
+        "ret_pct": 19.6999,
+        "reason": "target"
+       },
+       {
+        "buy_date": "2024-07-01",
+        "sell_date": "2024-09-01",
+        "buy_px": 34.14,
+        "sell_px": 36.245,
+        "cost": 2168.1391,
+        "hold_days": 2,
+        "pnl": 129.5433,
+        "ret_pct": 5.9749,
+        "reason": "target"
+       },
+       {
+        "buy_date": "2024-08-01",
+        "sell_date": "2024-09-01",
+        "buy_px": 34.305,
+        "sell_px": 36.245,
+        "cost": 2168.1391,
+        "hold_days": 1,
+        "pnl": 118.4918,
+        "ret_pct": 5.4651,
+        "reason": "target"
+       },
+       {
+        "buy_date": "2024-10-01",
+        "sell_date": "2024-11-01",
+        "buy_px": 34.725,
+        "sell_px": 39.945,
+        "cost": 2168.1391,
+        "hold_days": 1,
+        "pnl": 321.4381,
+        "ret_pct": 14.8255,
+        "reason": "target"
+       }
+      ]
+     },
+     "v5": {
+      "start": "2010-05-01",
+      "end": "2024-11-01",
+      "years": 14.5051,
+      "bars": 175,
+      "end_equity": 31106.9678,
+      "total_return_pct": 211.0697,
+      "cagr_pct": 8.138,
+      "max_drawdown_pct": -29.5598,
+      "trades": 104,
+      "win_rate_pct": 93.2692,
+      "expired_sells": 7,
+      "expired_share_pct": 6.7308,
+      "avg_hold_days": 2.5481,
+      "avg_trade_ret_pct": 11.5535,
+      "max_tiers_held": 6,
+      "max_daily_buy_pct_of_equity": 10.0,
+      "cash_short_days": 0,
+      "worst_year": {
+       "year": "2022",
+       "ret_pct": -29.5598
+      },
+      "yearly_ret_pct": {
+       "2010": 11.5076,
+       "2011": 3.8978,
+       "2012": 9.5778,
+       "2013": 10.3778,
+       "2014": 5.3163,
+       "2015": 13.4351,
+       "2016": 9.6776,
+       "2017": 7.3861,
+       "2018": -0.2847,
+       "2019": 24.632,
+       "2020": 15.3486,
+       "2021": 13.8248,
+       "2022": -29.5598,
+       "2023": 27.929,
+       "2024": 7.3008
+      },
+      "recent_trades": [
+       {
+        "buy_date": "2024-04-01",
+        "sell_date": "2024-05-01",
+        "buy_px": 26.37,
+        "sell_px": 31.265,
+        "cost": 2915.1122,
+        "hold_days": 1,
+        "pnl": 534.9095,
+        "ret_pct": 18.3495,
+        "reason": "target"
+       },
+       {
+        "buy_date": "2024-03-01",
+        "sell_date": "2024-06-01",
+        "buy_px": 30.78,
+        "sell_px": 36.91,
+        "cost": 2909.5941,
+        "hold_days": 3,
+        "pnl": 573.1863,
+        "ret_pct": 19.6999,
+        "reason": "target"
+       },
+       {
+        "buy_date": "2024-07-01",
+        "sell_date": "2024-09-01",
+        "buy_px": 34.14,
+        "sell_px": 36.245,
+        "cost": 3030.5844,
+        "hold_days": 2,
+        "pnl": 181.0732,
+        "ret_pct": 5.9749,
+        "reason": "target"
+       },
+       {
+        "buy_date": "2024-08-01",
+        "sell_date": "2024-09-01",
+        "buy_px": 34.305,
+        "sell_px": 36.245,
+        "cost": 3030.3119,
+        "hold_days": 1,
+        "pnl": 165.6108,
+        "ret_pct": 5.4651,
+        "reason": "target"
+       },
+       {
+        "buy_date": "2024-10-01",
+        "sell_date": "2024-11-01",
+        "buy_px": 34.725,
+        "sell_px": 39.945,
+        "cost": 3065.2528,
+        "hold_days": 1,
+        "pnl": 454.44,
+        "ret_pct": 14.8255,
+        "reason": "target"
+       }
+      ]
+     }
+    },
+    "2010-04-05~2026-10-02": {
+     "label": "2026년 10월까지 (현재)",
+     "start": "2010-04-05",
+     "end": "2026-10-02",
+     "v4": {
+      "start": "2010-05-01",
+      "end": "2026-10-02",
+      "years": 16.4216,
+      "bars": 199,
+      "end_equity": 32807.8552,
+      "total_return_pct": 228.0786,
+      "cagr_pct": 7.503,
+      "max_drawdown_pct": -22.492,
+      "trades": 118,
+      "win_rate_pct": 94.0678,
+      "expired_sells": 7,
+      "expired_share_pct": 5.9322,
+      "avg_hold_days": 2.5339,
+      "avg_trade_ret_pct": 12.3389,
+      "max_tiers_held": 6,
+      "max_daily_buy_pct_of_equity": 10.0009,
+      "cash_short_days": 0,
+      "worst_year": {
+       "year": "2022",
+       "ret_pct": -22.492
+      },
+      "yearly_ret_pct": {
+       "2010": 11.1861,
+       "2011": 3.5239,
+       "2012": 8.4108,
+       "2013": 9.1685,
+       "2014": 4.6084,
+       "2015": 11.5478,
+       "2016": 7.9497,
+       "2017": 6.0105,
+       "2018": 0.0722,
+       "2019": 19.1367,
+       "2020": 11.8144,
+       "2021": 10.0627,
+       "2022": -22.492,
+       "2023": 23.3822,
+       "2024": 5.8863,
+       "2025": 6.8069,
+       "2026": 13.6536
+      },
+      "recent_trades": [
+       {
+        "buy_date": "2026-01-01",
+        "sell_date": "2026-04-01",
+        "buy_px": 54.0,
+        "sell_px": 63.54,
+        "cost": 2315.3254,
+        "hold_days": 3,
+        "pnl": 404.1414,
+        "ret_pct": 17.4551,
+        "reason": "target"
+       },
+       {
+        "buy_date": "2026-02-01",
+        "sell_date": "2026-04-01",
+        "buy_px": 49.52,
+        "sell_px": 63.54,
+        "cost": 2315.3254,
+        "hold_days": 2,
+        "pnl": 650.1675,
+        "ret_pct": 28.081,
+        "reason": "target"
+       },
+       {
+        "buy_date": "2026-03-01",
+        "sell_date": "2026-04-01",
+        "buy_px": 41.68,
+        "sell_px": 63.54,
+        "cost": 2452.6254,
+        "hold_days": 1,
+        "pnl": 1279.6097,
+        "ret_pct": 52.1731,
+        "reason": "target"
+       },
+       {
+        "buy_date": "2026-07-01",
+        "sell_date": "2026-08-01",
+        "buy_px": 64.62,
+        "sell_px": 71.92,
+        "cost": 2452.6254,
+        "hold_days": 1,
+        "pnl": 272.1593,
+        "ret_pct": 11.0967,
+        "reason": "target"
+       },
+       {
+        "buy_date": "2026-09-01",
+        "sell_date": "2026-10-01",
+        "buy_px": 78.03,
+        "sell_px": 81.01,
+        "cost": 2452.6254,
+        "hold_days": 1,
+        "pnl": 89.0877,
+        "ret_pct": 3.6323,
+        "reason": "target"
+       }
+      ]
+     },
+     "v5": {
+      "start": "2010-05-01",
+      "end": "2026-10-02",
+      "years": 16.4216,
+      "bars": 199,
+      "end_equity": 39361.4422,
+      "total_return_pct": 293.6144,
+      "cagr_pct": 8.7019,
+      "max_drawdown_pct": -29.5598,
+      "trades": 118,
+      "win_rate_pct": 94.0678,
+      "expired_sells": 7,
+      "expired_share_pct": 5.9322,
+      "avg_hold_days": 2.5339,
+      "avg_trade_ret_pct": 12.3389,
+      "max_tiers_held": 6,
+      "max_daily_buy_pct_of_equity": 10.0,
+      "cash_short_days": 0,
+      "worst_year": {
+       "year": "2022",
+       "ret_pct": -29.5598
+      },
+      "yearly_ret_pct": {
+       "2010": 11.5076,
+       "2011": 3.8978,
+       "2012": 9.5778,
+       "2013": 10.3778,
+       "2014": 5.3163,
+       "2015": 13.4351,
+       "2016": 9.6776,
+       "2017": 7.3861,
+       "2018": -0.2847,
+       "2019": 24.632,
+       "2020": 15.3486,
+       "2021": 13.8248,
+       "2022": -29.5598,
+       "2023": 27.929,
+       "2024": 7.2912,
+       "2025": 8.393,
+       "2026": 16.7485
+      },
+      "recent_trades": [
+       {
+        "buy_date": "2026-01-01",
+        "sell_date": "2026-04-01",
+        "buy_px": 54.0,
+        "sell_px": 63.54,
+        "cost": 3371.474,
+        "hold_days": 3,
+        "pnl": 588.4928,
+        "ret_pct": 17.4551,
+        "reason": "target"
+       },
+       {
+        "buy_date": "2026-02-01",
+        "sell_date": "2026-04-01",
+        "buy_px": 49.52,
+        "sell_px": 63.54,
+        "cost": 3394.9014,
+        "hold_days": 2,
+        "pnl": 953.3236,
+        "ret_pct": 28.081,
+        "reason": "target"
+       },
+       {
+        "buy_date": "2026-03-01",
+        "sell_date": "2026-04-01",
+        "buy_px": 41.68,
+        "sell_px": 63.54,
+        "cost": 3283.5934,
+        "hold_days": 1,
+        "pnl": 1713.1512,
+        "ret_pct": 52.1731,
+        "reason": "target"
+       },
+       {
+        "buy_date": "2026-07-01",
+        "sell_date": "2026-08-01",
+        "buy_px": 64.62,
+        "sell_px": 71.92,
+        "cost": 3879.4181,
+        "hold_days": 1,
+        "pnl": 430.4855,
+        "ret_pct": 11.0967,
+        "reason": "target"
+       },
+       {
+        "buy_date": "2026-09-01",
+        "sell_date": "2026-10-01",
+        "buy_px": 78.03,
+        "sell_px": 81.01,
+        "cost": 3837.0276,
+        "hold_days": 1,
+        "pnl": 139.374,
+        "ret_pct": 3.6323,
+        "reason": "target"
+       }
+      ]
+     }
+    }
+   },
+   "fee_sensitivity": {
+    "v4": {
+     "0.030": {
+      "fee_pct_one_way": 0.03,
+      "cagr_pct": 7.5749,
+      "mdd_pct": -22.4185,
+      "end_equity": 33170.0886
+     },
+     "0.044": {
+      "fee_pct_one_way": 0.044,
+      "cagr_pct": 7.5581,
+      "mdd_pct": -22.4356,
+      "end_equity": 33085.2702
+     },
+     "0.090": {
+      "fee_pct_one_way": 0.09,
+      "cagr_pct": 7.503,
+      "mdd_pct": -22.492,
+      "end_equity": 32807.8552
+     },
+     "0.250": {
+      "fee_pct_one_way": 0.25,
+      "cagr_pct": 7.3108,
+      "mdd_pct": -22.6897,
+      "end_equity": 31857.9824
+     }
+    },
+    "v5": {
+     "0.030": {
+      "fee_pct_one_way": 0.03,
+      "cagr_pct": 8.8051,
+      "mdd_pct": -29.5225,
+      "end_equity": 39980.049
+     },
+     "0.044": {
+      "fee_pct_one_way": 0.044,
+      "cagr_pct": 8.781,
+      "mdd_pct": -29.5312,
+      "end_equity": 39834.7911
+     },
+     "0.090": {
+      "fee_pct_one_way": 0.09,
+      "cagr_pct": 8.7019,
+      "mdd_pct": -29.5598,
+      "end_equity": 39361.4422
+     },
+     "0.250": {
+      "fee_pct_one_way": 0.25,
+      "cagr_pct": 8.4274,
+      "mdd_pct": -29.6589,
+      "end_equity": 37760.9248
+     }
+    }
+   },
+   "forward": {
+    "v4": {
+     "note": "규칙 고정일 이후 자료 없음"
+    },
+    "v5": {
+     "note": "규칙 고정일 이후 자료 없음"
+    }
+   }
+  }
+ },
+ "comparison": {
+  "SOXL": [
+   {
+    "version": "v4",
+    "window": "2010-04-05~2024-11-30",
+    "blog_cagr_pct": 39.5,
+    "ours_cagr_pct": 7.7457,
+    "cagr_diff_pt": -31.7543,
+    "blog_mdd_pct": -36.4,
+    "ours_mdd_pct": -16.4528,
+    "mdd_diff_pt": 19.9472
+   },
+   {
+    "version": "v4",
+    "window": "2010-04-05~2026-10",
+    "blog_cagr_pct": 42.4,
+    "ours_cagr_pct": 9.3121,
+    "cagr_diff_pt": -33.0879,
+    "blog_mdd_pct": -51.8,
+    "ours_mdd_pct": -42.731,
+    "mdd_diff_pt": 9.069
+   },
+   {
+    "version": "v5",
+    "window": "2010-04-05~2024-11-30",
+    "blog_cagr_pct": 27.9,
+    "ours_cagr_pct": 9.0312,
+    "cagr_diff_pt": -18.8688,
+    "blog_mdd_pct": -31.3,
+    "ours_mdd_pct": -21.1526,
+    "mdd_diff_pt": 10.1474
+   },
+   {
+    "version": "v5",
+    "window": "2010-04-05~2026-10",
+    "blog_cagr_pct": 29.9,
+    "ours_cagr_pct": 11.1281,
+    "cagr_diff_pt": -18.7719,
+    "blog_mdd_pct": -40.2,
+    "ours_mdd_pct": -53.9398,
+    "mdd_diff_pt": -13.7398
+   }
+  ]
+ },
+ "missing": []
+}
