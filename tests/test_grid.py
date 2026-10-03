@@ -47,11 +47,11 @@ class TestRules(unittest.TestCase):
         self.assertAlmostEqual(first[0]["pnl"], 0.0, places=9)
 
     def test_fee_is_charged_both_ways(self):
-        # 가격 불변, 수수료 편도 1% → 왕복 약 1.99% 손실
+        # 가격 불변, 수수료 편도 1% → 매수 수량 = 금액/(가격×1.01), 매도 수취 = 수량×가격×0.99 (원문 식)
         bars = bars_from([100.0] * 12)
         sim = grid.simulate(bars, "v5", fee_pct=1.0)
         t = sim["trades"][0]
-        self.assertAlmostEqual(t["ret_pct"], (0.99 * 0.99 - 1.0) * 100.0, places=9)
+        self.assertAlmostEqual(t["ret_pct"], (0.99 / 1.01 - 1.0) * 100.0, places=9)
 
     def test_v5_daily_amount_is_pct_of_yesterday_equity(self):
         bars = bars_from([100, 100, 100])
@@ -89,10 +89,22 @@ class TestRules(unittest.TestCase):
         self.assertTrue(all(t["cost"] <= 1000.0 + 1e-9 for t in sim["trades"] + sim["tiers"]))
         self.assertGreater(sim["cash_short_days"], 0)         # 자산이 줄었는데 금액을 안 줄이니 현금이 모자라는 날이 생긴다
 
+    def test_v4_stops_at_n_tiers(self):
+        # v4: 가격이 계속 내려 익절이 없으면 10티어까지만 산다. 11일째는 티어가 가득 차 매수 없음(만기 매도 전).
+        bars = bars_from([100.0 - i for i in range(12)])
+        sim = grid.simulate(bars, "v4", fee_pct=0.0, capital=100000.0, hold_days=30)
+        self.assertEqual(sim["max_tiers"], 10)
+        self.assertEqual(len(sim["tiers"]), 10)
+        # v5 는 티어 수 제한이 없고 현금이 바닥날 때까지 산다 (매일 자산의 10% → 10일 남짓이면 현금 소진)
+        sim5 = grid.simulate(bars, "v5", fee_pct=0.0, capital=100000.0, hold_days=30)
+        self.assertEqual(len(sim5["tiers"]), 11)
+        self.assertGreaterEqual(sim5["cash_short_days"], 1)
+
     def test_cash_shortfall_is_recorded(self):
         # v4 로 자산이 반 토막 나도 1,000 씩 사려 들면 현금이 바닥난다 → 남은 만큼만 사고 cash_short_days 가 센다
-        bars = bars_from([100.0] * 1 + [50.0] * 25)
-        sim = grid.simulate(bars, "v4", fee_pct=0.0, capital=5000.0, hold_days=30)   # 만기 전이라 매도가 없어 매수만 이어진다
+        # 100 에 1티어, 이후 50 에 9티어(가득) → 만기 매도로 10티어가 5,000 으로 돌아옴 → 다시 1,000 씩 5번 사면 현금 0
+        bars = bars_from([100.0] + [50.0] * 30)
+        sim = grid.simulate(bars, "v4", fee_pct=0.0, capital=10000.0)
         self.assertGreater(sim["cash_short_days"], 0)
         self.assertGreaterEqual(sim["cash"], -1e-9)
 
