@@ -555,8 +555,24 @@ def main(argv=None):
     if not a.dry_run:
         with open("turtle.json", "w", encoding="utf-8") as fh:
             json.dump(out, fh, ensure_ascii=False, indent=1)
-        with open("turtle_history.jsonl", "a", encoding="utf-8") as fh:
-            fh.write(json.dumps(history_line(out), ensure_ascii=False) + "\n")
+        # 같은 날 두 번 돌면(수동 실행 등) 그날 줄을 바꿔 끼운다 — 날짜 중복이면 검산(selfcheck)이 실패한다
+        line = json.dumps(history_line(out), ensure_ascii=False)
+        try:
+            with open("turtle_history.jsonl", encoding="utf-8") as fh:
+                rows = [l for l in fh.read().splitlines() if l.strip()]
+        except IOError:
+            rows = []
+        keep = []
+        for l in rows:
+            try:
+                if json.loads(l).get("date") == out.get("date"):
+                    continue
+            except ValueError:
+                pass
+            keep.append(l)
+        keep.append(line)
+        with open("turtle_history.jsonl", "w", encoding="utf-8") as fh:
+            fh.write("\n".join(keep) + "\n")
     return 0
 
 
