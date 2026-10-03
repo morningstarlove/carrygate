@@ -78,6 +78,10 @@ jobs:
           python etf_update.py || echo "ETF 갱신 실패 — 기존 자료로 계산"
           python momentum.py
 
+      - name: Grid (종사종팔 v4/v5 — SOXL·TQQQ 백테스트 + 순방향 기록, 중기)
+        continue-on-error: true
+        run: python grid.py
+
       - name: Show results
         if: always()
         run: |
@@ -102,22 +106,31 @@ jobs:
         if: always()
         run: python turtle.py --report || echo "터틀 기록 없음"
 
+      - name: Show grid trend (그리드 순방향 계좌)
+        if: always()
+        run: python grid.py --report || echo "그리드 기록 없음"
+
       - name: Show research trend (보조 연구 누적)
         if: always()
         run: python scalp_research.py --report || echo "연구 기록 없음"
 
       - name: Unit tests (계산 로직)
         if: always()
-        run: python -m unittest tests.test_scalp tests.test_research tests.test_midterm tests.test_momentum tests.test_live tests.test_turtle tests.test_relay
+        run: python -m unittest tests.test_scalp tests.test_research tests.test_midterm tests.test_momentum tests.test_live tests.test_turtle tests.test_relay tests.test_grid
 
       - name: Commit results
         if: always() && inputs.dry_run != true
         run: |
           git config user.name  "carrygate-bot"
           git config user.email "carrygate-bot@users.noreply.github.com"
-          git add -A status.json history.jsonl funding.json funding_history.jsonl scalp.json scalp_history.jsonl research.json research_history.jsonl \
-                     basis.json basis_history.jsonl funding_signal.json funding_signal_history.jsonl kimchi.json kimchi_history.jsonl \
-                     macro.json listing.json momentum.json momentum_history.jsonl live.json live_history.jsonl turtle.json turtle_history.jsonl data/kr_funding.json data/etf data/upbit_markets.json || true
+          # 없는 파일이 하나라도 있으면 git add 전체가 실패해 아무것도 커밋되지 않는다(2026-10-02~03 live.json 없음으로 실제 발생).
+          # 그래서 있는 경로만 하나씩 추가한다.
+          for f in status.json history.jsonl funding.json funding_history.jsonl scalp.json scalp_history.jsonl research.json research_history.jsonl \
+                   basis.json basis_history.jsonl funding_signal.json funding_signal_history.jsonl kimchi.json kimchi_history.jsonl \
+                   macro.json listing.json momentum.json momentum_history.jsonl live.json live_history.jsonl turtle.json turtle_history.jsonl \
+                   grid.json grid_history.jsonl data/kr_funding.json data/etf data/upbit_markets.json; do
+            [ -e "$f" ] && git add -A "$f"
+          done
           if git diff --staged --quiet; then
             echo "no change"
           else

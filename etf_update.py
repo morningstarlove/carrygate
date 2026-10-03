@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-data/etf/<TICKER>.csv 에 최신 일봉을 덧붙인다 (stooq 공개 CSV). 실패해도 기존 파일은 그대로 둔다.
+data/etf/<TICKER>.csv 에 최신 일봉을 덧붙인다 (stooq 공개 CSV, 비어 있으면 야후 차트 API). 실패해도 기존 파일은 그대로 둔다.
 
 기존 파일은 TradingView 에서 받은 20년치(분할 조정, 배당 미반영)이고, 여기서 덧붙이는 stooq 값도
 같은 성격(분할 조정 가격)이다. 월말 종가로만 쓰므로 하루 이틀 지연은 문제가 되지 않는다.
 """
-import csv, os, sys, io, urllib.request
+import csv, os, sys, io, json, urllib.request, urllib.parse
 from datetime import datetime, timezone
 
 TICKERS = ["SPY", "EFA", "AGG", "BIL", "QQQ", "GLD", "TLT", "IEF",
@@ -32,14 +32,55 @@ def fetch_stooq(ticker):
     return out
 
 
+def fetch_yahoo(ticker):
+    """야후 차트 API (분할 조정 가격, 배당 미반영 — stooq 와 같은 성격). stooq 가 비었을 때 대신 쓴다."""
+    url = ("https://query2.finance.yahoo.com/v8/finance/chart/%s?range=max&interval=1d&includePrePost=false"
+           % urllib.parse.quote(ticker))
+    req = urllib.request.Request(url, headers=UA)
+    with urllib.request.urlopen(req, timeout=30) as r:
+        data = json.loads(r.read().decode("utf-8", "replace"))
+    res = ((data.get("chart") or {}).get("result") or [None])[0]
+    if not res:
+        return []
+    ts = res.get("timestamp") or []
+    q = ((res.get("indicators") or {}).get("quote") or [{}])[0]
+    out = []
+    for i, t in enumerate(ts):
+        try:
+            o, h, l, c = q["open"][i], q["high"][i], q["low"][i], q["close"][i]
+            if None in (o, h, l, c):
+                continue
+            v = q.get("volume", [None] * len(ts))[i] or 0
+        except (KeyError, IndexError, TypeError):
+            continue
+        d = datetime.fromtimestamp(t, tz=timezone.utc).strftime("%Y-%m-%d")
+        out.append((d, float(o), float(h), float(l), float(c), float(v)))
+    return out
+
+
+def fetch_rows(ticker):
+    """stooq 먼저, 비어 있으면(일일 한도 초과 등) 야후. 어디서 받았는지도 돌려준다."""
+    errors = []
+    for name, fn in (("stooq", fetch_stooq), ("yahoo", fetch_yahoo)):
+        try:
+            rows = fn(ticker)
+        except Exception as e:
+            errors.append("%s %s" % (name, str(e)[:60]))
+            continue
+        if rows:
+            return rows, name
+        errors.append("%s 응답 비어 있음" % name)
+    return [], "; ".join(errors)
+
+
 def update(ticker):
     path = os.path.join(DATA_DIR, "%s.csv" % ticker)
-    rows = fetch_stooq(ticker)
+    rows, source = fetch_rows(ticker)
     created = False
+    if not rows:
+        return "%s: 받은 자료 없음 (%s)" % (ticker, source)
     if not os.path.exists(path):
-        # 새 티커: stooq 가 주는 전체 이력(분할 조정)으로 파일을 만든다. 응답이 비면 파일을 남기지 않는다.
-        if not rows:
-            return "%s: 파일 없음 (stooq 응답 비어 있음)" % ticker
+        # 새 티커: 받은 전체 이력(분할 조정)으로 파일을 만든다.
         os.makedirs(DATA_DIR, exist_ok=True)
         with open(path, "w", encoding="utf-8", newline="") as fp:
             fp.write("date,t,o,h,l,c,v\n")
@@ -50,15 +91,15 @@ def update(ticker):
     last = have[-1]["date"] if have else "1900-01-01"
     add = [r for r in rows if r[0] > last]
     if not add:
-        return "%s: 최신 (%s)" % (ticker, last)
+        return "%s: 최신 (%s, %s 기준)" % (ticker, last, source)
     with open(path, "a", encoding="utf-8", newline="") as fp:
         w = csv.writer(fp)
         for d, o, h, l, c, v in add:
             t = int(datetime.strptime(d, "%Y-%m-%d").replace(hour=14, minute=30, tzinfo=timezone.utc).timestamp())
             w.writerow([d, t, o, h, l, c, v])
     if created:
-        return "%s: 새로 생성 %d일 (%s -> %s)" % (ticker, len(add), add[0][0], add[-1][0])
-    return "%s: %d일 추가 (%s -> %s)" % (ticker, len(add), last, add[-1][0])
+        return "%s: 새로 생성 %d일 (%s -> %s, %s)" % (ticker, len(add), add[0][0], add[-1][0], source)
+    return "%s: %d일 추가 (%s -> %s, %s)" % (ticker, len(add), last, add[-1][0], source)
 
 
 def main():
