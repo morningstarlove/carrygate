@@ -5,7 +5,7 @@ data/etf/<TICKER>.csv 에 최신 일봉을 덧붙인다 (stooq 공개 CSV, 비�
 기존 파일은 TradingView 에서 받은 20년치(분할 조정, 배당 미반영)이고, 여기서 덧붙이는 stooq 값도
 같은 성격(분할 조정 가격)이다. 월말 종가로만 쓰므로 하루 이틀 지연은 문제가 되지 않는다.
 """
-import csv, os, sys, io, json, urllib.request, urllib.parse
+import csv, os, sys, io, json, time, urllib.request, urllib.parse
 from datetime import datetime, timezone
 
 TICKERS = ["SPY", "EFA", "AGG", "BIL", "QQQ", "GLD", "TLT", "IEF",
@@ -34,14 +34,17 @@ def fetch_stooq(ticker):
 
 def fetch_yahoo(ticker):
     """야후 차트 API (분할 조정 가격, 배당 미반영 — stooq 와 같은 성격). stooq 가 비었을 때 대신 쓴다."""
-    url = ("https://query2.finance.yahoo.com/v8/finance/chart/%s?range=max&interval=1d&includePrePost=false"
-           % urllib.parse.quote(ticker))
+    # range=max 로 부르면 야후가 일봉 대신 월봉을 돌려준다(2026-10-03 실행 #33 에서 확인). 기간을 직접 지정한다.
+    url = ("https://query2.finance.yahoo.com/v8/finance/chart/%s?period1=0&period2=%d&interval=1d&includePrePost=false"
+           % (urllib.parse.quote(ticker), int(time.time())))
     req = urllib.request.Request(url, headers=UA)
     with urllib.request.urlopen(req, timeout=30) as r:
         data = json.loads(r.read().decode("utf-8", "replace"))
     res = ((data.get("chart") or {}).get("result") or [None])[0]
     if not res:
         return []
+    if (res.get("meta") or {}).get("dataGranularity", "1d") != "1d":
+        return []      # 일봉이 아니면 쓰지 않는다 (월봉이 섞여 들어오면 월말 종가·그리드 계산이 다 틀어진다)
     ts = res.get("timestamp") or []
     q = ((res.get("indicators") or {}).get("quote") or [{}])[0]
     out = []
