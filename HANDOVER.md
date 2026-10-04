@@ -2,7 +2,7 @@
 
 > 이 문서만 읽으면 누구든(혹은 다른 AI 세션이든) 이어서 작업할 수 있게 쓴다.
 
-**최종 갱신:** 2026-10-02
+**최종 갱신:** 2026-10-04 (AI 보조 도구 4종 설치)
 **작업 브랜치:** `claude/chandelier-exit-variant` (이번 작업, Chandelier 변형) / `claude/new-session-as7gis` (터틀) / 이전 `claude/scalping-research-results-7mi7tf`, `claude/analysis-dwawzd`
 **저장소:** `morningstarlove/carrygate` (2026-09-17 `signalgate-bridge` 에서 이름 변경)
 **프로젝트명:** CARRYGATE — 게이트(신호등) + 캐리(이자) 두 축에서 따왔다.
@@ -733,6 +733,16 @@ GitHub 저장소 → Actions 탭 → `CARRYGATE daily` → Run workflow
 | `kr_ohlcv.py` 상단 `SOURCES` | 일봉 경로 순서 (야후 → 네이버 API → fchart) |
 | `.github/workflows/kr_breakout.yml` `cron` | 한국 주식 실행 시각 (평일 06:45 UTC = 15:45 KST) |
 | `.github/workflows/carrygate.yml` `cron` | 실행 시각 |
+
+**AI 보조 도구 (2026-10-04 설치):** 코드 작성·분석을 돕는 도구 4종. 클라우드 세션 컨테이너는 매번 새로 만들어지므로
+전역 설치분은 사라진다 — 새 세션에서는 `bash scripts/install_ai_tools.sh` 한 줄로 다시 깐다.
+
+| 도구 | 역할 | 설치 위치 / 상태 |
+|---|---|---|
+| Graft (`@nanonets/graft`) | 저장소를 함수·호출 관계 지도(`graft/`)로 만들어 Claude Code 가 코드를 읽기 전에 참고. MCP 서버 + 훅 | 저장소에 커밋됨: `.claude/settings.json`(훅), `.claude/skills/graft/`, `.mcp.json`. 그래프는 `graft build` 로 재생성 (git 제외) |
+| Agency Agents (msitarzewski/agency-agents) | 18개 부서 282명 전문가 페르소나(엔지니어링 65·마케팅 37·보안 12·금융 5 등) | `~/.claude/agents/*.md` (전역, 세션마다 재설치). 사용: "금융 분석가 에이전트로 ~ 해줘" |
+| Codebase Memory MCP (DeusData/codebase-memory-mcp) | 코드 지식 그래프 MCP 서버. 수정 시 엉뚱한 코드 건드림 방지 | **미설치** — 자동 모드 안전장치가 외부 바이너리 설치를 막음. 사람이 `bash scripts/install_ai_tools.sh cbm` 실행 필요 |
+| OpenMontage (calesthio/OpenMontage) | 주제 → 대본·이미지·내레이션·자막·편집까지 자동 영상 제작 | `~/tools/OpenMontage` 에 클론만 됨. `make setup`(의존성 설치)은 같은 이유로 **미실행** — `bash scripts/install_ai_tools.sh openmontage` |
 
 **테스트:** 이 저장소는 외부 시세를 받아야 해서 로컬 테스트가 어렵다.
 계산 로직은 가짜 데이터로 검증했고(APR 환산, 7일 평균 필터, 판정 분기,
