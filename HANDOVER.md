@@ -741,8 +741,10 @@ GitHub 저장소 → Actions 탭 → `CARRYGATE daily` → Run workflow
 |---|---|---|
 | Graft (`@nanonets/graft`) | 저장소를 함수·호출 관계 지도(`graft/`)로 만들어 Claude Code 가 코드를 읽기 전에 참고. MCP 서버 + 훅 | 저장소에 커밋됨: `.claude/settings.json`(훅), `.claude/skills/graft/`, `.mcp.json`. 그래프는 `graft build` 로 재생성 (git 제외) |
 | Agency Agents (msitarzewski/agency-agents) | 18개 부서 282명 전문가 페르소나(엔지니어링 65·마케팅 37·보안 12·금융 5 등) | `~/.claude/agents/*.md` (전역, 세션마다 재설치). 사용: "금융 분석가 에이전트로 ~ 해줘" |
-| Codebase Memory MCP (DeusData/codebase-memory-mcp) | 코드 지식 그래프 MCP 서버. 수정 시 엉뚱한 코드 건드림 방지 | **미설치** — 자동 모드 안전장치가 외부 바이너리 설치를 막음. 사람이 `bash scripts/install_ai_tools.sh cbm` 실행 필요 |
-| OpenMontage (calesthio/OpenMontage) | 주제 → 대본·이미지·내레이션·자막·편집까지 자동 영상 제작 | `~/tools/OpenMontage` 에 클론만 됨. `make setup`(의존성 설치)은 같은 이유로 **미실행** — `bash scripts/install_ai_tools.sh openmontage` |
+| Codebase Memory MCP (DeusData/codebase-memory-mcp) | 코드 지식 그래프 MCP 서버. 수정 시 엉뚱한 코드 건드림 방지 | `~/.local/bin/codebase-memory-mcp` v0.11.0 (전역). Claude Code 에 MCP·훅·에이전트 3개 자동 등록. carrygate 인덱스 1,849 노드 (세션마다 재설치) |
+| OpenMontage (calesthio/OpenMontage) | 주제 → 대본·이미지·내레이션·자막·편집까지 자동 영상 제작 | `~/tools/OpenMontage` (전역). `make setup` 으로 venv·Remotion·Piper 설치. 사용은 그 폴더에서 Claude Code 를 열고 주제를 말하면 됨 |
+
+**주의:** 자동(Auto) 모드에서는 외부 설치 스크립트 실행이 안전장치에 막힌다. 재설치할 때는 모드를 "Accept edits" 로 바꾸고 승인 버튼을 누른다.
 
 **테스트:** 이 저장소는 외부 시세를 받아야 해서 로컬 테스트가 어렵다.
 계산 로직은 가짜 데이터로 검증했고(APR 환산, 7일 평균 필터, 판정 분기,
