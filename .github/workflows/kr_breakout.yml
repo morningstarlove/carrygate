@@ -2,7 +2,12 @@ name: KR sector breakout (한국 주식, 장 마감 뒤)
 
 # 한국 주식 거래대금 상위 100 → 업종 동조 (설계서 docs/KR_SECTOR_BREAKOUT_PLAN.md).
 # 평일 15:45 KST (06:45 UTC) — 장 마감(15:30) 뒤 그날 봉이 확정된 시각. 휴장일은 kr_universe.py 가 중복으로 표시한다.
+# 기본 브랜치에 없는 워크플로는 workflow_dispatch 로 못 돌린다(GitHub 제한). 그래서 claude/ 브랜치에 push 되면
+# 저장 없이(dry-run) 한 번 돌아 접속·계산을 확인한다. 저장은 cron 과 수동 실행에서만 한다.
 on:
+  push:
+    branches: ["claude/**"]
+    paths: ["kr_universe.py", "tests/test_kr_universe.py", ".github/workflows/kr_breakout.yml"]
   schedule:
     - cron: "45 6 * * 1-5"
   workflow_dispatch:
@@ -33,7 +38,11 @@ jobs:
         id: universe
         continue-on-error: true
         run: |
-          if [ "${{ inputs.dry_run }}" = "true" ]; then python kr_universe.py --dry-run; else python kr_universe.py; fi
+          if [ "${{ inputs.dry_run }}" = "true" ] || [ "${{ github.event_name }}" = "push" ]; then
+            python kr_universe.py --dry-run
+          else
+            python kr_universe.py
+          fi
 
       - name: Show trend (동조 업종 추이)
         if: always()
@@ -44,7 +53,7 @@ jobs:
         run: python -m unittest tests.test_kr_universe
 
       - name: Commit results
-        if: always() && inputs.dry_run != true
+        if: always() && inputs.dry_run != true && github.event_name != 'push'
         run: |
           git config user.name  "carrygate-bot"
           git config user.email "carrygate-bot@users.noreply.github.com"
