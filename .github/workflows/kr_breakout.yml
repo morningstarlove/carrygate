@@ -7,7 +7,7 @@ name: KR sector breakout (한국 주식, 장 마감 뒤)
 on:
   push:
     branches: ["claude/**"]
-    paths: ["kr_universe.py", "tests/test_kr_universe.py", ".github/workflows/kr_breakout.yml"]
+    paths: ["kr_universe.py", "kr_ohlcv.py", "patterns.py", "kr_breakout.py", "tests/**", ".github/workflows/kr_breakout.yml"]
   schedule:
     - cron: "45 6 * * 1-5"
   workflow_dispatch:
@@ -42,6 +42,25 @@ jobs:
             python kr_universe.py --dry-run
           else
             python kr_universe.py
+          fi
+
+      - name: Probe daily-bar sources (일봉 경로 시험, push 때만)
+        if: github.event_name == 'push'
+        continue-on-error: true
+        run: python kr_ohlcv.py --probe 005930 058470 043260
+
+      - name: Save pattern fixtures (실데이터 일봉, 없을 때만)
+        if: github.event_name == 'push'
+        continue-on-error: true
+        run: |
+          if [ ! -f tests/fixtures/kr/ohlcv/058470.csv ]; then
+            python kr_ohlcv.py --save 058470 080220 043260 005930 --days 160 --out tests/fixtures/kr/ohlcv
+            git config user.name  "carrygate-bot"
+            git config user.email "carrygate-bot@users.noreply.github.com"
+            git add tests/fixtures/kr/ohlcv
+            git commit -m "패턴 시험용 실데이터 일봉 fixture (Actions 수집)" && git push || echo "fixture 커밋 없음"
+          else
+            echo "fixture 이미 있음"
           fi
 
       - name: Show trend (동조 업종 추이)
