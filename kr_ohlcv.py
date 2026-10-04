@@ -3,9 +3,13 @@
 CARRYGATE — 한국 주식 일봉 수집 (공개 API, 키 없음, 표준 라이브러리만)
 
 경로를 순서대로 시도한다. 성공한 첫 경로의 자료를 쓰고 어느 경로였는지 남긴다.
-  1. 네이버 fchart   https://fchart.stock.naver.com/sise.nhn?symbol=CODE&timeframe=day&count=N&requestType=0   (XML, 수정주가 아님)
+  1. 야후 파이낸스    https://query1.finance.yahoo.com/v8/finance/chart/CODE.KS|.KQ?range=..&interval=1d           (JSON, 수정주가, 정규장만)
   2. 네이버 stock API https://api.stock.naver.com/chart/domestic/item/CODE/day?startDateTime=..&endDateTime=..     (JSON)
-  3. 야후 파이낸스    https://query1.finance.yahoo.com/v8/finance/chart/CODE.KS|.KQ?range=..&interval=1d           (JSON, 수정주가)
+  3. 네이버 fchart   https://fchart.stock.naver.com/sise.nhn?symbol=CODE&timeframe=day&count=N&requestType=0   (XML euc-kr)
+
+왜 야후가 먼저인가 (2026-10-04 Actions 실행 #2 로 확인): 네이버 API 의 고가·종가에는 **시간외 거래(16~18시)** 가 섞인다.
+리노공업 10/1 네이버 고가·종가 81,900 vs 야후·TradingView 81,400. 우리는 15:45 KST(정규장 마감 뒤, 시간외 전)에 판단하므로
+정규장 값인 야후가 맞다. 네이버는 야후가 막힐 때의 예비.
 
 봉 형식(모든 경로 공통): {"date": "YYYY-MM-DD", "o","h","l","c": float, "v": float(주), "value": float|None(원)}  오래된 것부터.
 
@@ -49,7 +53,11 @@ def _f(x):
 # ----------------------------------------------------------------- 경로별
 def naver_fchart(code, days):
     raw = _get("https://fchart.stock.naver.com/sise.nhn?symbol=%s&timeframe=day&count=%d&requestType=0" % (code, days))
-    root = ET.fromstring(raw)
+    # 응답이 <?xml encoding="euc-kr"?> 로 와서 ElementTree 가 바이트 그대로는 못 읽는다 — 문자열로 바꾸고 선언을 뗀다
+    txt = raw.decode("euc-kr", "replace")
+    if txt.startswith("<?xml"):
+        txt = txt[txt.index("?>") + 2:]
+    root = ET.fromstring(txt)
     out = []
     for it in root.iter("item"):
         p = (it.get("data") or "").split("|")
@@ -111,7 +119,7 @@ def yahoo(code, days):
     raise RuntimeError(str(last))
 
 
-SOURCES = [("naver_fchart", naver_fchart), ("naver_api", naver_api), ("yahoo", yahoo)]
+SOURCES = [("yahoo", yahoo), ("naver_api", naver_api), ("naver_fchart", naver_fchart)]
 
 
 def fetch_daily(code, days=160, sources=None):

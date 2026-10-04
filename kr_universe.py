@@ -90,8 +90,8 @@ def scanner_payload(top=TOP_N):
             "range": [0, int(top * 1.5)], "ignore_unknown_fields": False}
 
 
-def fetch_scanner():
-    raw = http_json(SCANNER_URL, data=scanner_payload())
+def fetch_scanner(top=TOP_N):
+    raw = http_json(SCANNER_URL, data=scanner_payload(top))
     if not isinstance(raw, dict) or "data" not in raw:
         raise RuntimeError("scanner: unexpected response %s" % str(raw)[:200])
     return {"columns": COLUMNS, "data": raw["data"], "totalCount": raw.get("totalCount"),
@@ -127,8 +127,8 @@ def is_excluded(name, code=""):
     return bool(_EXCLUDE_RE.search(name or "")) or bool(_EXCLUDE_RE.search(code or ""))
 
 
-def parse_rows(resp):
-    """스캐너 응답 → 종목 dict 목록 (거래대금 내림차순, 제외어 종목 뺀 뒤 TOP_N 개)."""
+def parse_rows(resp, top=TOP_N):
+    """스캐너 응답 → 종목 dict 목록 (거래대금 내림차순, 제외어 종목 뺀 뒤 top 개)."""
     cols = resp["columns"]
     out = []
     for item in resp.get("data") or []:
@@ -151,7 +151,7 @@ def parse_rows(resp):
         })
     out = [r for r in out if r["value_traded_krw"] is not None]
     out.sort(key=lambda r: -r["value_traded_krw"])
-    out = out[:TOP_N]
+    out = out[:top]
     for i, r in enumerate(out, 1):
         r["rank"] = i
         hi = r["high_3m"]
@@ -233,7 +233,9 @@ def save(result):
            "sync_groups": {g: {"n": v["n"], "up_ratio": v["up_ratio"], "median_change_pct": v["median_change_pct"],
                                "median_week_pct": v["median_week_pct"], "by": v["sync_by"]}
                            for g, v in result["groups"].items() if v["sync"]},
-           "top10": [r["code"] for r in result["universe"][:10]]}
+           "top10": [r["code"] for r in result["universe"][:10]],
+           # 순방향 시험(kr_breakout.py)이 그날의 유니버스를 그대로 다시 쓰도록 전체를 남긴다 (코드, 업종)
+           "universe": [[r["code"], r.get("industry") or "(미분류)"] for r in result["universe"]]}
     with open(HISTORY_PATH, "a", encoding="utf-8") as fp:
         fp.write(json.dumps(rec, ensure_ascii=False) + "\n")
 

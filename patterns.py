@@ -218,8 +218,9 @@ DETECTORS = [box, triangle, flag, cup_handle]
 
 
 # ----------------------------------------------------------------- 종합
-def scan(bars, i=None):
-    """bars[i](기본: 마지막 봉)를 돌파 확인 봉으로 보고 공통 필터 + 4패턴을 판정한다."""
+def scan(bars, i=None, detect_all=False):
+    """bars[i](기본: 마지막 봉)를 돌파 확인 봉으로 보고 공통 필터 + 4패턴을 판정한다.
+    필터에서 떨어진 날은 패턴을 보지 않는다(속도). detect_all=True 면 그래도 본다(디버그·시험)."""
     if i is None:
         i = len(bars) - 1
     res = {"date": bars[i]["date"] if bars else None, "ok": False, "filters": {}, "patterns": [], "reason": None}
@@ -247,7 +248,7 @@ def scan(bars, i=None):
         res["reason"] = "상한가(추격 금지)"
     elif not f["vol_ok"]:
         res["reason"] = "거래량 부족(%.2fx)" % vol_ratio
-    for det in DETECTORS:
+    for det in (DETECTORS if (res["reason"] is None or detect_all) else []):
         p = det(bars, i)
         if p:
             p["resistance"] = round(p["resistance"], 2); p["pattern_low"] = round(p["pattern_low"], 2)

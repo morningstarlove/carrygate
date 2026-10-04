@@ -16,6 +16,10 @@ on:
         description: "결과만 확인하고 커밋하지 않음 (테스트용)"
         type: boolean
         default: false
+      backtest:
+        description: "3년 백테스트를 다시 돌려 kr_backtest.json 갱신"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -44,6 +48,30 @@ jobs:
             python kr_universe.py
           fi
 
+      - name: Signals + paper trading, forward (4~5단계 순방향)
+        id: breakout
+        continue-on-error: true
+        run: |
+          if [ "${{ inputs.dry_run }}" = "true" ] || [ "${{ github.event_name }}" = "push" ]; then
+            python kr_breakout.py --dry-run
+          else
+            python kr_breakout.py
+          fi
+
+      - name: Backtest 3y (없을 때만 — 종목 300 일봉 수집, 몇 분 걸린다)
+        if: github.event_name == 'push' || inputs.backtest == true
+        continue-on-error: true
+        run: |
+          if [ ! -f kr_backtest.json ] || [ "${{ inputs.backtest }}" = "true" ]; then
+            python kr_breakout.py --backtest
+            git config user.name  "carrygate-bot"
+            git config user.email "carrygate-bot@users.noreply.github.com"
+            git add kr_backtest.json
+            git commit -m "kr_backtest $(date -u +%Y-%m-%d)" && git pull --rebase origin "${GITHUB_REF_NAME}" && git push || echo "백테스트 커밋 없음"
+          else
+            echo "kr_backtest.json 이미 있음 (다시 돌리려면 수동 실행에서 backtest 체크)"
+          fi
+
       - name: Probe daily-bar sources (일봉 경로 시험, push 때만)
         if: github.event_name == 'push'
         continue-on-error: true
@@ -63,20 +91,22 @@ jobs:
             echo "fixture 이미 있음"
           fi
 
-      - name: Show trend (동조 업종 추이)
+      - name: Show trend (동조 업종·순방향 추이)
         if: always()
-        run: python kr_universe.py --report || echo "기록 없음"
+        run: |
+          python kr_universe.py --report || echo "기록 없음"
+          python kr_breakout.py --report || echo "순방향 기록 없음"
 
       - name: Unit tests (계산 로직, 저장된 실데이터)
         if: always()
-        run: python -m unittest tests.test_kr_universe
+        run: python -m unittest tests.test_kr_universe tests.test_patterns tests.test_kr_breakout
 
       - name: Commit results
         if: always() && inputs.dry_run != true && github.event_name != 'push'
         run: |
           git config user.name  "carrygate-bot"
           git config user.email "carrygate-bot@users.noreply.github.com"
-          git add -A kr_sector.json kr_sector_history.jsonl || true
+          git add -A kr_sector.json kr_sector_history.jsonl kr_breakout.json kr_breakout_history.jsonl || true
           if git diff --staged --quiet; then
             echo "no change"
           else

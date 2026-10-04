@@ -50,9 +50,10 @@ class Box(unittest.TestCase):
 
     def test_no_breakout_without_volume(self):
         bars = flat(45) + box_bars(20) + [bar(70, 105, 112, 104, 111, 1_200_000)]   # 1.2배뿐
-        r = P.scan(bars)
+        r = P.scan(bars, detect_all=True)
         self.assertFalse(r["ok"]); self.assertIn("거래량", r["reason"])
         self.assertEqual([p["pattern"] for p in r["patterns"]], ["box"])     # 패턴은 있으나 필터 탈락
+        self.assertEqual(P.scan(bars)["patterns"], [])                        # 기본은 필터 탈락이면 패턴을 안 본다
 
     def test_close_below_top_is_not_breakout(self):
         bars = flat(45) + box_bars(20) + [bar(70, 103, 106, 102, 104.5, 3_000_000)]  # 고가는 넘었지만 종가는 아래
