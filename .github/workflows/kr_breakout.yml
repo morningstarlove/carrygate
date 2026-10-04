@@ -1,0 +1,64 @@
+name: KR sector breakout (한국 주식, 장 마감 뒤)
+
+# 한국 주식 거래대금 상위 100 → 업종 동조 (설계서 docs/KR_SECTOR_BREAKOUT_PLAN.md).
+# 평일 15:45 KST (06:45 UTC) — 장 마감(15:30) 뒤 그날 봉이 확정된 시각. 휴장일은 kr_universe.py 가 중복으로 표시한다.
+on:
+  schedule:
+    - cron: "45 6 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "결과만 확인하고 커밋하지 않음 (테스트용)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kr-breakout
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Universe + sector sync (1~3단계)
+        id: universe
+        continue-on-error: true
+        run: |
+          if [ "${{ inputs.dry_run }}" = "true" ]; then python kr_universe.py --dry-run; else python kr_universe.py; fi
+
+      - name: Show trend (동조 업종 추이)
+        if: always()
+        run: python kr_universe.py --report || echo "기록 없음"
+
+      - name: Unit tests (계산 로직, 저장된 실데이터)
+        if: always()
+        run: python -m unittest tests.test_kr_universe
+
+      - name: Commit results
+        if: always() && inputs.dry_run != true
+        run: |
+          git config user.name  "carrygate-bot"
+          git config user.email "carrygate-bot@users.noreply.github.com"
+          git add -A kr_sector.json kr_sector_history.jsonl || true
+          if git diff --staged --quiet; then
+            echo "no change"
+          else
+            git commit -m "kr_sector $(date -u +%Y-%m-%d)"
+            git pull --rebase origin "${GITHUB_REF_NAME}" || true
+            git push
+          fi
+
+      - name: Fail if universe step failed
+        if: steps.universe.outcome == 'failure'
+        run: |
+          echo "유니버스 수집 실패 — 스캐너·중계 파일 모두 안 됨. 로그의 '스캐너 실패' 줄을 본다."
+          exit 1
