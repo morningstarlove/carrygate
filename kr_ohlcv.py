@@ -16,7 +16,7 @@ CARRYGATE — 한국 주식 일봉 수집 (공개 API, 키 없음, 표준 라이
   python kr_ohlcv.py --probe 005930 058470        # 각 경로가 되는지 Actions 로그로 확인 (저장 안 함)
   python kr_ohlcv.py --save 058470 080220 043260 --days 160 --out tests/fixtures/kr/ohlcv   # CSV 로 저장 (시험 자료)
 """
-import os, sys, csv, json, time, argparse, urllib.request, urllib.error, xml.etree.ElementTree as ET
+import os, sys, csv, json, time, argparse, urllib.request, urllib.error, urllib.parse, xml.etree.ElementTree as ET
 from datetime import datetime, timezone, timedelta
 
 UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/124.0 Safari/537.36",
@@ -88,6 +88,27 @@ def naver_api(code, days):
                     "value": _f(it.get("accumulatedTradingValue"))})
     if not out:
         raise RuntimeError("naver api: 빈 응답")
+    return out[-days:]
+
+
+def yahoo_symbol(symbol, days):
+    """야후 심볼 그대로 (지수 ^KS11, ^KQ11 등). 수정주가, 정규장."""
+    rng = "%dd" % int(days * 1.6 + 10) if days < 600 else "%dy" % (days // 250 + 1)
+    url = "https://query1.finance.yahoo.com/v8/finance/chart/%s?range=%s&interval=1d" % (urllib.parse.quote(symbol), rng)
+    d = json.loads(_get(url, tries=2).decode("utf-8"))
+    res = (d.get("chart") or {}).get("result") or []
+    if not res:
+        raise RuntimeError("yahoo: result 없음")
+    r0 = res[0]; ts = r0.get("timestamp") or []
+    q = (r0.get("indicators") or {}).get("quote", [{}])[0]
+    out = []
+    for i, t in enumerate(ts):
+        o, h, l, c, v = (_f((q.get(k) or [None] * len(ts))[i]) for k in ("open", "high", "low", "close", "volume"))
+        if c is None or c <= 0:
+            continue
+        out.append({"date": datetime.fromtimestamp(t, timezone(timedelta(hours=9))).strftime("%Y-%m-%d"),
+                    "o": o or c, "h": h or c, "l": l or c, "c": c, "v": v or 0.0, "value": None})
+    out.sort(key=lambda b: b["date"])
     return out[-days:]
 
 

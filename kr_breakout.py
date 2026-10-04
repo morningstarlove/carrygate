@@ -186,9 +186,9 @@ class Sim:
         wins = [x for x in t if x["pnl_krw"] > 0]; losses = [x for x in t if x["pnl_krw"] <= 0]
         gp = sum(x["pnl_krw"] for x in wins); gl = -sum(x["pnl_krw"] for x in losses)
         final = self.curve[-1][1] if self.curve else EQUITY0
-        by_pat, by_sync, by_why = {}, {}, {}
+        by_pat, by_sync, by_why, by_year = {}, {}, {}, {}
         for x in t:
-            for k, d in ((x["pattern"], by_pat), (x["sync_by"] or "none", by_sync), (x["why"], by_why)):
+            for k, d in ((x["pattern"], by_pat), (x["sync_by"] or "none", by_sync), (x["why"], by_why), (x["exit_date"][:4], by_year)):
                 e = d.setdefault(k, {"n": 0, "wins": 0, "pnl_krw": 0})
                 e["n"] += 1; e["wins"] += 1 if x["pnl_krw"] > 0 else 0; e["pnl_krw"] += x["pnl_krw"]
         return {"label": self.cfg["label"], "signals": self.signals, "trades": len(t), "wins": len(wins), "win_rate": r2(len(wins) / len(t) * 100) if t else None,
@@ -198,11 +198,57 @@ class Sim:
                 "profit_factor": r2(gp / gl) if gl > 0 else None,
                 "total_return_pct": r2((final / EQUITY0 - 1) * 100), "equity_final": round(final), "max_drawdown_pct": r2(self.max_dd),
                 "avg_hold_days": r2(statistics.mean(x["hold_days"] for x in t)) if t else None,
-                "skipped": self.skipped, "by_pattern": by_pat, "by_sync": by_sync, "by_exit": by_why,
+                "skipped": self.skipped, "by_pattern": by_pat, "by_sync": by_sync, "by_exit": by_why, "by_year": by_year,
+                "yearly_return_pct": yearly(self.curve),
                 "open_positions": [{"code": c, "name": p.get("name"), "group": p["group"], "pattern": p["pattern"], "entry_date": p["entry_date"],
                                     "entry": r2(p["entry"]), "stop": r2(p["stop"]), "shares": p["shares"], "bars_held": p["bars_held"],
                                     "last_close": p["last_close"], "unrealized_pct": r2((p["last_close"] / p["entry"] - 1) * 100)}
                                    for c, p in self.positions.items()]}
+
+
+def yearly(curve):
+    """평가액 곡선 → 연도별 수익률(%). 첫 해는 시작 계좌 기준."""
+    out, last = {}, EQUITY0
+    for date, eq in curve:
+        out.setdefault(date[:4], {"start": last, "end": eq})["end"] = eq
+        last = eq
+    ys = sorted(out)
+    res = {}
+    prev_end = EQUITY0
+    for y in ys:
+        res[y] = r2((out[y]["end"] / prev_end - 1) * 100)
+        prev_end = out[y]["end"]
+    return res
+
+
+def benchmark(first, last, fixture=None):
+    """같은 기간 코스피·코스닥 단순 보유 수익률 (야후 ^KS11, ^KQ11). 못 받으면 None."""
+    out = {}
+    if fixture:
+        return out
+    for name, sym in (("KOSPI", "^KS11"), ("KOSDAQ", "^KQ11")):
+        try:
+            bars = KO.yahoo_symbol(sym, BT_DAYS)
+            bars = [b for b in bars if first <= b["date"] <= last]
+            if len(bars) > 2:
+                closes = [b["c"] for b in bars]
+                peak, mdd = closes[0], 0.0
+                for c in closes:
+                    peak = max(peak, c); mdd = max(mdd, (peak - c) / peak * 100)
+                out[name] = {"from": bars[0]["date"], "to": bars[-1]["date"], "return_pct": r2((closes[-1] / closes[0] - 1) * 100),
+                             "max_drawdown_pct": r2(mdd), "by_year": yearly_from_closes(bars)}
+        except Exception as e:
+            out[name] = {"error": str(e)[:160]}
+        time.sleep(KO.PAUSE)
+    return out
+
+
+def yearly_from_closes(bars):
+    res, prev = {}, bars[0]["c"]
+    for y in sorted({b["date"][:4] for b in bars}):
+        end = [b["c"] for b in bars if b["date"][:4] == y][-1]
+        res[y] = r2((end / prev - 1) * 100); prev = end
+    return res
 
 
 def simulate(days, all_bars, names=None):
@@ -322,6 +368,7 @@ def run_backtest(fixture=None, universe_n=BT_UNIVERSE):
            "by_source": {s: sum(1 for v in sources.values() if v == s) for s in set(sources.values())}},
            "caveat": "생존 편향: 지금 거래대금 상위 종목의 과거만 본다. 그 사이 상장폐지·거래정지 종목이 빠져 실제보다 좋게 나올 수 있다. 업종은 지금 분류.",
            "sync_days": sum(1 for d in days if d["sync_groups"]),
+           "benchmark": benchmark(first, last, fixture) if first else {},
            "variants": {k: s.stats() for k, s in sims.items()},
            "trades": {k: s.trades for k, s in sims.items()},
            "curve": {k: s.curve[::5] for k, s in sims.items()},
@@ -383,6 +430,9 @@ def print_stats(out):
         print("패턴별(base):", ", ".join("%s n=%d 승%d %+d원" % (k, v["n"], v["wins"], v["pnl_krw"]) for k, v in b["by_pattern"].items()))
     if b["by_exit"]:
         print("청산별(base):", ", ".join("%s n=%d %+d원" % (k, v["n"], v["pnl_krw"]) for k, v in b["by_exit"].items()))
+    if b.get("yearly_return_pct"):
+        print("연도별(base):", ", ".join("%s %+.1f%%" % (y, v) for y, v in b["yearly_return_pct"].items()),
+              "| 벤치마크:", ", ".join("%s %s%% (낙폭 %s%%)" % (k, v.get("return_pct"), v.get("max_drawdown_pct")) for k, v in (out.get("benchmark") or {}).items()))
     if out.get("pass"):
         print("합격선:", json.dumps(out["pass"], ensure_ascii=False))
     for k, v in (out.get("signals_today") or {}).items():
