@@ -88,10 +88,10 @@ TradingView 스크리너(한국 시장, 주식만, 거래대금 정렬)로 받�
 | 경로 | 쓰는 곳 | 상태 |
 |---|---|---|
 | **TradingView MCP** (스크리너·일봉) | 이 Claude 세션 안에서 설계·백테스트 자료 수집 | **오늘 확인됨** |
-| TradingView 공개 스캐너 API (`scanner.tradingview.com/korea/scan`, 키 불필요) | GitHub Actions 매일 실행 | **미확인** → 마일스톤 12-1 에서 `dry_run` 으로 시험 |
-| 네이버 금융(일봉 API·거래대금 상위) | Actions 가 막히면 **한국 PC 중계기**(`kr_relay.py` 확장)로 수집해 `data/kr_universe.json` 업로드 | 중계기 틀은 이미 있음(마일스톤 11) |
+| TradingView 공개 스캐너 API (`scanner.tradingview.com/korea/scan`, 키 불필요) | GitHub Actions 매일 실행 | **확인됨 (2026-10-04, Actions 실행 #1)** — 미국 서버에서 바로 받아진다 |
+| 네이버 금융(일봉 API·거래대금 상위) | 스캐너가 막히는 날을 위한 **예비**. 한국 PC 중계기로 `data/kr_universe.json` 업로드 | 지금은 필요 없음. 스캐너가 막히면 그때 만든다 |
 
-판단 순서: Actions 에서 스캐너가 되면 그걸 쓰고, 안 되면 중계기. 이 세션 컨테이너는 외부 접속이 제한돼 네이버·KRX 모두 403 이었다(Actions 결과와 무관).
+판단 결과: **Actions 에서 스캐너가 된다.** `kr_universe.py` 는 스캐너 → 중계 파일(36시간 안) 순서로 시도한다. 이 세션 컨테이너는 외부 접속이 제한돼 네이버·KRX 모두 403 이었다(Actions 결과와 무관).
 
 실행 시각: 기존 `carrygate.yml` 은 00:18 UTC(09:18 KST, 장 시작 직후)라 한국 주식에는 안 맞는다. **별도 워크플로 `kr_breakout.yml`, cron 06:45 UTC(15:45 KST)**, 평일만.
 
@@ -120,7 +120,7 @@ TradingView 스크리너(한국 시장, 주식만, 거래대금 정렬)로 받�
 
 | 번호 | 내용 | 완료 기준 |
 |---|---|---|
-| 12-1 | `kr_universe.py` + Actions 접속 시험 | Actions `dry_run` 로그에 상위 100·동조 업종 표가 찍힘(또는 중계기 경로 확정) |
+| 12-1 ✅ | `kr_universe.py` + Actions 접속 시험 | **완료 2026-10-04.** Actions 로그에 상위 100·동조 4업종 표가 찍힘, 스캐너 직접 접속 확인 |
 | 12-2 | `patterns.py` + 단위시험 | 시험 통과 + 오늘 사례 3종목(리노·제주반도체·성호전자)이 실데이터로 잡힘 |
 | 12-3 | 3년 백테스트 | 4절 보고 항목 전부, 합격/불합격 기록 |
 | 12-4 | 순방향 기록 시작, 통합 현황판 연결 | `RULE_FIXED` 설정, 매일 자동 기록 4주 |

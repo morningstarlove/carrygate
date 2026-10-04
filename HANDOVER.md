@@ -552,6 +552,31 @@ Chandelier 변형: 업비트 +187% / CAGR 42% / 낙폭 −19% / 124건, OKX −5
 
 ---
 
+### 마일스톤 12-1 — 한국 주식 유니버스 + 업종 동조 수집기 (완료, 2026-10-04)
+
+설계서 `docs/KR_SECTOR_BREAKOUT_PLAN.md` 의 1~3단계. 새 파일 `kr_universe.py`, `tests/test_kr_universe.py`,
+`tests/fixtures/kr/top100_2026-10-03.json`(실데이터), `.github/workflows/kr_breakout.yml`.
+
+**실제로 확인된 사실 (Actions 실행 #1, 2026-10-04 00:49 UTC, push 트리거 dry-run):**
+- **GitHub Actions(미국 서버)에서 TradingView 공개 스캐너(`scanner.tradingview.com/korea/scan`)가 바로 된다.** 키 없음.
+  한국 PC 중계기 없이도 한국 주식 트랙이 돈다. 중계 파일(`data/kr_universe.json`) 경로는 예비로만 남겨 둔다.
+- 로그: `자료=scanner 유니버스 100종목 거래대금 합계 18.2조원 업종 34개 동조 4개` — 전날 세션 안에서 받은 fixture 와 **동일**.
+- 동조 업종 4개: 전기제품(11중 10 상승, 당일 중앙값 +3.5%), 항공·방산(5중 4, +5.1%), 특수화학(3중 3, +4.3%),
+  반도체(18중 12, 당일 +0.9% 로 미달이지만 5일 +8.8% 로 주간 조건). 정유는 2종목뿐이라 제외.
+- 단위시험 9건 통과(Actions 와 로컬 모두).
+
+**만들며 잡은 버그:** 스팩 제외어 `SPAC` 를 부분 문자열로 찾으면 **Aero*spac*e** 가 걸려 방산 3종목이 빠졌다(96종목).
+단어 단위(`\bSPAC\b`)로 고쳤고 시험에 그 사례를 넣었다.
+
+**워크플로 특이점:** 기본 브랜치(main)에 없는 워크플로는 GitHub 가 수동 실행(workflow_dispatch)을 404 로 거부한다.
+그래서 `claude/**` 브랜치에 `kr_universe.py`·시험·워크플로가 push 되면 **저장 없이(dry-run)** 한 번 돈다.
+저장(커밋)은 cron 과 수동 실행에서만 한다. main 에 합쳐지기 전에는 매일 기록이 쌓이지 않는다.
+
+**휴장일 처리:** 스캐너는 휴장일에도 직전 거래일 자료를 그대로 준다. `kr_universe.py` 는 직전 기록과 거래대금 합계가
+같으면 `duplicate_of_previous: true` 로 표시한다(그날 신호로 세지 않기 위해).
+
+---
+
 ## 3. 아직 안 한 것 (다음 단계)
 
 ### 다음 마일스톤 3 — 실거래 연결
@@ -577,12 +602,11 @@ Chandelier 변형: 업비트 +187% / CAGR 42% / 낙폭 −19% / 124건, OKX −5
 
 마일스톤 5의 "다음 단계" 참조. 요약: 7일 누적(첫 가설: 15분봉 VWAP 되돌림) → 소액 실전 → 안 되면 30·60분봉.
 
-### 한국 주식 "거래대금 상위 → 업종 동조 → 패턴 돌파" 트랙 (설계만 완료, 2026-10-03)
+### 한국 주식 "거래대금 상위 → 업종 동조 → 패턴 돌파" 트랙 (마일스톤 12, 진행 중)
 
-SNS 게시글의 5단계(거래대금 상위 100 → 업종 묶기 → 동반 상승 업종 → 박스권·삼각수렴·깃발·컵앤핸들 → 매수)를
-숫자 규칙으로 고정한 설계서: **`docs/KR_SECTOR_BREAKOUT_PLAN.md`**. 오늘 실물 데이터(TradingView 스크리너, 한국 시장)로
-1~3단계가 작동하는 것과 4단계 실제 사례 3종목(리노공업·제주반도체 박스권, 성호전자 깃발형)을 확인했다.
-다음 작업은 설계서 6절 마일스톤 12-1(`kr_universe.py` + Actions 접속 시험)부터. 코드는 아직 없다.
+설계서 **`docs/KR_SECTOR_BREAKOUT_PLAN.md`**. 12-1(유니버스·동조 수집기) 완료. 다음은 **12-2 `patterns.py`**
+(박스권·삼각수렴·깃발·컵앤핸들 판정, 단위시험, 리노공업·제주반도체·성호전자 실데이터로 검증) → 12-3 3년 백테스트.
+브랜치 `claude/kr-sector-breakout-design` 은 아직 main 에 합치지 않았다 — 합쳐야 cron(평일 15:45 KST)이 돈다.
 
 ### 그 외 개선 여지
 
@@ -637,6 +661,9 @@ GitHub 저장소 → Actions 탭 → `CARRYGATE daily` → Run workflow
 | `funding.py` 상단 `RELAY_MAX_AGE_H` / `VENUE_DOC_FEES` | 한국 중계 파일 허용 나이(36h) / 바이낸스·바이비트 공식 수수료 |
 | `kr_relay.py` (한국 PC) | 중계 수집기. 저장소 파일에 의존하지 않으므로 고치면 PC 의 파일도 다시 받아야 한다 |
 | `scalp.py` 상단 `MIN_DAYS` / `MIN_POS_RATIO` | 후보 조건 (최소 일수 / 플러스 일수 비율) |
+| `kr_universe.py` 상단 `MIN_GROUP` / `UP_RATIO` / `MED_CHANGE_PCT` / `MED_WEEK_PCT` | 업종 동조 규칙 (**고치면 `RULE_FIXED` 를 그날로 바꾼다**) |
+| `kr_universe.py` 상단 `EXCLUDE_WORDS` / `GROUP_KEY` | 제외어(스팩·ETF·ETN) / 묶음 기준(industry) |
+| `.github/workflows/kr_breakout.yml` `cron` | 한국 주식 실행 시각 (평일 06:45 UTC = 15:45 KST) |
 | `.github/workflows/carrygate.yml` `cron` | 실행 시각 |
 
 **테스트:** 이 저장소는 외부 시세를 받아야 해서 로컬 테스트가 어렵다.
@@ -655,6 +682,8 @@ GitHub 저장소 → Actions 탭 → `CARRYGATE daily` → Run workflow
 - `python3 turtle.py --fixture tests/fixtures/turtle --dry-run` — 터틀 3년 백테스트를 저장된 일봉 CSV 로 (인터넷 불필요)
 - `python3 -m unittest tests.test_relay` — 한국 중계 처리 (7건)
 - `python kr_relay.py --no-upload` — (한국 PC 에서) 바이낸스·바이비트 수집만 시험
+- `python3 -m unittest tests.test_kr_universe` — 한국 주식 유니버스·업종 동조 (9건, 2026-10-03 실데이터 fixture 포함)
+- `python3 kr_universe.py --fixture tests/fixtures/kr/top100_2026-10-03.json --dry-run` — 저장된 상위 100 으로 전체 흐름 (인터넷 불필요)
 
 ---
 
