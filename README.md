@@ -21,6 +21,9 @@
 | `listing.json` | **업비트 상장 공지** (이벤트) | 공지 뒤 해외 선물이 얼마나 움직였나 |
 | `momentum.json` | **ETF 듀얼 모멘텀** (장기) | 20년 백테스트와 이달 보유 신호 |
 | `turtle.json` | **터틀 추세추종** (중기) | 20일 돌파·10일 이탈·2N 손절·1%÷N 규칙의 3년 성적과 오늘 진입·청산 가격 |
+| `kr_sector.json` | **한국 주식 업종 동조** (단기) | 거래대금 상위 100 안에서 오늘 "같이 오른" 업종이 어디인가 |
+| `kr_breakout.json` | **한국 주식 패턴 돌파** (단기, 종이매매) | 동조 업종 안에서 박스권·삼각수렴·깃발·컵앤핸들을 돌파한 종목과 고정 규칙 종이매매 성적 |
+| `kr_backtest.json` | 위 규칙의 **3년 백테스트** | 수수료 뺀 승률·손익비·낙폭, 대조군(업종 동조 없이)과 비교 |
 
 ---
 
@@ -203,19 +206,38 @@ A·B 는 매일 아침 실행(`scalp_research.py`)에 포함되고, C 는 별도
 
 ---
 
-## 6. 언제 어떻게 돌아가나
+## 6. 한국 주식 — 업종 동조 + 패턴 돌파 (마일스톤 12)
+
+SNS 에 돌던 5문장("거래대금 상위 100 → 같은 업종끼리 묶기 → 같이 오른 업종 → 박스권·삼각수렴·깃발·컵앤핸들이면 → 매수")을
+**기계가 매일 똑같이 판정하는 숫자 규칙**으로 바꾼 것이다. 설계서 `docs/KR_SECTOR_BREAKOUT_PLAN.md`. 주문은 넣지 않는다.
+
+| 단계 | 파일 | 하는 일 |
+|---|---|---|
+| 1~3 | `kr_universe.py` → `kr_sector.json` | 거래대금 상위 100(ETF·스팩 제외)을 업종(industry)으로 묶고, 3종목 이상·60% 이상 상승·중앙값 +2%(또는 5일 +5%)면 **동조** |
+| 4 | `patterns.py` | 일봉으로 4패턴 판정. 공통: 종가 > 저항선, 거래량 20일 평균의 1.5배, 20일선 위, 거래대금 100억+, 상한가 제외 |
+| 5 | `kr_breakout.py` → `kr_breakout.json` | 동조 업종 안의 돌파 종목을 **다음날 시가** 종이매매. 손절 −7%(또는 패턴 하단), 10일 최저가 이탈·20일 보유 청산, 1% 위험, 최대 5종목 |
+| 일봉 | `kr_ohlcv.py` | 야후 → 네이버 순서로 일봉 수집 (네이버는 시간외 거래가 섞여 2순위) |
+
+세 변형을 나란히 기록한다: `base`(동조 필요) / `no_sector`(패턴만, **업종 동조가 실제로 보태는 게 있는지 보는 대조군**) / `hold_10`.
+백테스트(`--backtest`, 3년, 지금 거래대금 상위 300 종목)는 **생존 편향**이 있어 실제보다 좋게 나올 수 있다. 진짜 시험은 규칙 고정일
+이후 매일 쌓이는 **순방향 기록**이다. 워크플로 **KR sector breakout** 이 평일 15:45 KST(장 마감 뒤)에 돈다.
+
+---
+
+## 7. 언제 어떻게 돌아가나
 
 GitHub Actions가 **매일 한국시간 오전 9시 18분**에 자동 실행한다.
 결과는 `status.json` / `funding.json` / `scalp.json` / `research.json` 에 저장되고 저장소에 자동으로 커밋된다.
 과거 기록은 `history.jsonl` / `funding_history.jsonl` / `scalp_history.jsonl` / `research_history.jsonl` 에 하루 한 줄씩 쌓인다.
 호가창 워크플로(**CARRYGATE orderbook**)는 매일 한국시간 22시에 시작해 `orderbook.json` / `orderbook_history.jsonl` 을 남긴다.
+한국 주식 워크플로(**KR sector breakout**)는 평일 한국시간 15시 45분에 `kr_sector.json` / `kr_breakout.json` 과 각 이력을 남긴다.
 
 수동으로 돌려보려면 GitHub 저장소 → **Actions** 탭 → **CARRYGATE daily**
 → **Run workflow**. 이때 `dry_run` 을 체크하면 **결과만 보고 저장은 하지 않는다.**
 
 ---
 
-## 7. 파일 목록
+## 8. 파일 목록
 
 | 파일 | 설명 |
 |---|---|
@@ -228,6 +250,7 @@ GitHub Actions가 **매일 한국시간 오전 9시 18분**에 자동 실행한�
 | `macro_events.py` / `listing.py` | 이벤트 연구 ⑤⑥ (누적 JSON). 각각 `--report` |
 | `momentum.py` / `etf_update.py` | 장기 ① ETF 듀얼 모멘텀 백테스트·신호 / 일봉 갱신 |
 | `turtle.py` | 중기 터틀 추세추종 규칙 — 3년 백테스트·오늘 신호·순방향 집계. 변형(55/20, Chandelier Exit) 나란히 기록. `--report` 로 신호 변화 |
+| `kr_universe.py` / `patterns.py` / `kr_breakout.py` / `kr_ohlcv.py` | 한국 주식 트랙 (6절). 각각 유니버스·동조 / 패턴 판정 / 신호·종이매매·백테스트(`--backtest`, `--report`) / 일봉 수집(`--probe`) |
 | `kr_relay.py` / `kr_relay.bat` | **한국 PC 에서** 바이낸스·바이비트 펀딩비를 읽어 `data/kr_funding.json` 으로 올리는 중계기 (설정: `docs/KR_RELAY_SETUP.md`) |
 | `live_monitor.py` | 실전 캐리 감시 — 하이퍼리퀴드 지갑 **주소만으로** 포지션·펀딩 수취·수수료 기록 (키 없음) |
 | `docs/LIVE_CARRY_PLAN.md` | 캐리 소액 실전 설계서 (준비·진입·운영·청산·판정표) |
@@ -247,7 +270,8 @@ GitHub Actions가 **매일 한국시간 오전 9시 18분**에 자동 실행한�
 | `tests/test_midterm.py` / `tests/test_momentum.py` | 중기·이벤트·장기 모듈 자동 시험 (13건 / 18건) |
 | `tests/test_turtle.py` | 터틀 계산 로직 자동 시험 (12건) |
 | `tests/test_relay.py` | 한국 중계 처리 자동 시험 (7건) |
-| `tests/fixtures/` | 오프라인 검증용 실데이터 — 1분봉 CSV, `turtle/` 에 일봉 3년 CSV 12개 |
+| `tests/test_kr_universe.py` / `tests/test_patterns.py` / `tests/test_kr_breakout.py` | 한국 주식 트랙 자동 시험 (9건 / 22건 / 11건, 실데이터 fixture 포함) |
+| `tests/fixtures/` | 오프라인 검증용 실데이터 — 1분봉 CSV, `turtle/` 에 일봉 3년 CSV 12개, `kr/` 에 상위 100 스캐너 응답 + 일봉 160봉 4종목 |
 | `HANDOVER.md` | 인수인계서 — 지금까지 한 것과 다음 할 것 |
 
 ---

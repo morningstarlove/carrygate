@@ -1,0 +1,122 @@
+name: KR sector breakout (한국 주식, 장 마감 뒤)
+
+# 한국 주식 거래대금 상위 100 → 업종 동조 (설계서 docs/KR_SECTOR_BREAKOUT_PLAN.md).
+# 평일 15:45 KST (06:45 UTC) — 장 마감(15:30) 뒤 그날 봉이 확정된 시각. 휴장일은 kr_universe.py 가 중복으로 표시한다.
+# 기본 브랜치에 없는 워크플로는 workflow_dispatch 로 못 돌린다(GitHub 제한). 그래서 claude/ 브랜치에 push 되면
+# 저장 없이(dry-run) 한 번 돌아 접속·계산을 확인한다. 저장은 cron 과 수동 실행에서만 한다.
+on:
+  push:
+    branches: ["claude/**"]
+    paths: ["kr_universe.py", "kr_ohlcv.py", "patterns.py", "kr_breakout.py", "tests/**", ".github/workflows/kr_breakout.yml"]
+  schedule:
+    - cron: "45 6 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "결과만 확인하고 커밋하지 않음 (테스트용)"
+        type: boolean
+        default: false
+      backtest:
+        description: "3년 백테스트를 다시 돌려 kr_backtest.json 갱신"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kr-breakout
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Universe + sector sync (1~3단계)
+        id: universe
+        continue-on-error: true
+        run: |
+          if [ "${{ inputs.dry_run }}" = "true" ] || [ "${{ github.event_name }}" = "push" ]; then
+            python kr_universe.py --dry-run
+          else
+            python kr_universe.py
+          fi
+
+      - name: Signals + paper trading, forward (4~5단계 순방향)
+        id: breakout
+        continue-on-error: true
+        run: |
+          if [ "${{ inputs.dry_run }}" = "true" ] || [ "${{ github.event_name }}" = "push" ]; then
+            python kr_breakout.py --dry-run
+          else
+            python kr_breakout.py
+          fi
+
+      - name: Backtest 3y (없을 때만 — 종목 300 일봉 수집, 몇 분 걸린다)
+        if: github.event_name == 'push' || inputs.backtest == true
+        continue-on-error: true
+        run: |
+          if [ ! -f kr_backtest.json ] || [ "${{ inputs.backtest }}" = "true" ]; then
+            python kr_breakout.py --backtest
+            git config user.name  "carrygate-bot"
+            git config user.email "carrygate-bot@users.noreply.github.com"
+            git add kr_backtest.json
+            git commit -m "kr_backtest $(date -u +%Y-%m-%d)" && git pull --rebase origin "${GITHUB_REF_NAME}" && git push || echo "백테스트 커밋 없음"
+          else
+            echo "kr_backtest.json 이미 있음 (다시 돌리려면 수동 실행에서 backtest 체크)"
+          fi
+
+      - name: Probe daily-bar sources (일봉 경로 시험, push 때만)
+        if: github.event_name == 'push'
+        continue-on-error: true
+        run: python kr_ohlcv.py --probe 005930 058470 043260
+
+      - name: Save pattern fixtures (실데이터 일봉, 없을 때만)
+        if: github.event_name == 'push'
+        continue-on-error: true
+        run: |
+          if [ ! -f tests/fixtures/kr/ohlcv/058470.csv ]; then
+            python kr_ohlcv.py --save 058470 080220 043260 005930 --days 160 --out tests/fixtures/kr/ohlcv
+            git config user.name  "carrygate-bot"
+            git config user.email "carrygate-bot@users.noreply.github.com"
+            git add tests/fixtures/kr/ohlcv
+            git commit -m "패턴 시험용 실데이터 일봉 fixture (Actions 수집)" && git push || echo "fixture 커밋 없음"
+          else
+            echo "fixture 이미 있음"
+          fi
+
+      - name: Show trend (동조 업종·순방향 추이)
+        if: always()
+        run: |
+          python kr_universe.py --report || echo "기록 없음"
+          python kr_breakout.py --report || echo "순방향 기록 없음"
+
+      - name: Unit tests (계산 로직, 저장된 실데이터)
+        if: always()
+        run: python -m unittest tests.test_kr_universe tests.test_patterns tests.test_kr_breakout
+
+      - name: Commit results
+        if: always() && inputs.dry_run != true && github.event_name != 'push'
+        run: |
+          git config user.name  "carrygate-bot"
+          git config user.email "carrygate-bot@users.noreply.github.com"
+          git add -A kr_sector.json kr_sector_history.jsonl kr_breakout.json kr_breakout_history.jsonl || true
+          if git diff --staged --quiet; then
+            echo "no change"
+          else
+            git commit -m "kr_sector $(date -u +%Y-%m-%d)"
+            git pull --rebase origin "${GITHUB_REF_NAME}" || true
+            git push
+          fi
+
+      - name: Fail if universe step failed
+        if: steps.universe.outcome == 'failure'
+        run: |
+          echo "유니버스 수집 실패 — 스캐너·중계 파일 모두 안 됨. 로그의 '스캐너 실패' 줄을 본다."
+          exit 1
