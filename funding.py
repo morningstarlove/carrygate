@@ -630,7 +630,6 @@ def main():
                         per_coin[c].append(decorate(e, venue_fees(v, c, hl)))
                 ok.append(v)
                 cg["used"].append(v)
-                relay["used"].append(v)
                 failed[v] = failed.pop(v)[:80] + " → CoinGecko 대체"
             if new:
                 cg["samples"] = cg_snapshots_save(cg_snapshots_load(), new)
@@ -713,8 +712,8 @@ def main():
             },
         },
         "sources_ok": ok,
-        "sources_failed": {k: v for k, v in failed.items() if k not in relay["used"]},
-        "sources_relayed": {k: failed[k] for k in relay["used"]},
+        "sources_failed": {k: v for k, v in failed.items() if k not in relay["used"] + cg["used"]},
+        "sources_relayed": {k: failed[k] for k in relay["used"] + cg["used"]},
         "kr_relay": relay,
         "coingecko": cg,
         "gate_ref": gate,
