@@ -1,6 +1,6 @@
 {
- "date": "2026-10-05",
- "generated_at_utc": "2026-10-05T07:39:05Z",
+ "date": "2026-10-06",
+ "generated_at_utc": "2026-10-05T15:17:36Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -60,12 +60,16 @@
   }
  },
  "forward": {
-  "days": 1,
+  "days": 0,
   "from": "2026-10-05",
   "to": "2026-10-05",
   "codes": 100,
   "bar_errors": 0,
-  "stale_codes": 100
+  "stale_codes": 100,
+  "skipped_days": [
+   "2026-10-05"
+  ],
+  "note": "마지막 기록일(2026-10-05)의 봉이 없다 — 휴장일이거나 자료가 아직 안 왔다. 매매일로 세지 않았다"
  },
  "signals_today": {
   "base": [],
@@ -99,9 +103,7 @@
    "by_sync": {},
    "by_exit": {},
    "by_year": {},
-   "yearly_return_pct": {
-    "2026": 0.0
-   },
+   "yearly_return_pct": {},
    "open_positions": []
   },
   "no_sector": {
@@ -129,9 +131,7 @@
    "by_sync": {},
    "by_exit": {},
    "by_year": {},
-   "yearly_return_pct": {
-    "2026": 0.0
-   },
+   "yearly_return_pct": {},
    "open_positions": []
   },
   "hold_10": {
@@ -159,9 +159,7 @@
    "by_sync": {},
    "by_exit": {},
    "by_year": {},
-   "yearly_return_pct": {
-    "2026": 0.0
-   },
+   "yearly_return_pct": {},
    "open_positions": []
   },
   "risk_2": {
@@ -189,9 +187,7 @@
    "by_sync": {},
    "by_exit": {},
    "by_year": {},
-   "yearly_return_pct": {
-    "2026": 0.0
-   },
+   "yearly_return_pct": {},
    "open_positions": []
   }
  },
