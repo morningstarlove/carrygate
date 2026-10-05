@@ -134,7 +134,7 @@ jobs:
           for p in status.json history.jsonl funding.json funding_history.jsonl scalp.json scalp_history.jsonl research.json research_history.jsonl \
                    basis.json basis_history.jsonl funding_signal.json funding_signal_history.jsonl kimchi.json kimchi_history.jsonl \
                    macro.json listing.json momentum.json momentum_history.jsonl live.json live_history.jsonl turtle.json turtle_history.jsonl \
-                   data/kr_funding.json data/etf data/upbit_markets.json; do
+                   data/kr_funding.json data/cg_funding_snapshots.jsonl data/etf data/upbit_markets.json; do
             if [ -e "$p" ]; then git add -A "$p"; else echo "없음(건너뜀): $p"; fi
           done
           if git diff --staged --quiet; then
