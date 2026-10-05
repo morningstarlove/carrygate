@@ -1,0 +1,227 @@
+{
+ "date": "2026-10-05",
+ "generated_at_utc": "2026-10-05T07:39:05Z",
+ "mode": "forward",
+ "rule_fixed": "2026-10-05",
+ "rules": {
+  "equity0": 10000000.0,
+  "risk_pct": 1.0,
+  "max_pos": 5,
+  "max_per_group": 2,
+  "max_pos_pct": 20.0,
+  "stop_pct": 7.0,
+  "gap_skip_pct": 8.0,
+  "exit_low_n": 10,
+  "hold_max": 20,
+  "cooldown": 10,
+  "fee_pct": 0.015,
+  "tax_pct": 0.15,
+  "slip_pct": 0.3,
+  "variants": {
+   "base": {
+    "label": "동조 업종 + 패턴 돌파 (기본)",
+    "risk_pct": 1.0,
+    "max_pos_pct": 20.0,
+    "hold_max": 20,
+    "need_sync": true
+   },
+   "no_sector": {
+    "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
+    "risk_pct": 1.0,
+    "max_pos_pct": 20.0,
+    "hold_max": 20,
+    "need_sync": false
+   },
+   "hold_10": {
+    "label": "동조 + 패턴, 보유 10일",
+    "risk_pct": 1.0,
+    "max_pos_pct": 20.0,
+    "hold_max": 10,
+    "need_sync": true
+   },
+   "risk_2": {
+    "label": "동조 + 패턴, 위험 2% (명목 상한 30%)",
+    "risk_pct": 2.0,
+    "max_pos_pct": 30.0,
+    "hold_max": 20,
+    "need_sync": true
+   }
+  },
+  "pattern_rules": {
+   "vol_mult": 1.5,
+   "min_value_krw": 10000000000.0,
+   "limit_up_pct": 29.5
+  },
+  "sync_rules": {
+   "min_group": 3,
+   "up_ratio": 0.6,
+   "median_change_pct": 2.0,
+   "median_week_pct": 5.0
+  }
+ },
+ "forward": {
+  "days": 1,
+  "from": "2026-10-05",
+  "to": "2026-10-05",
+  "codes": 100,
+  "bar_errors": 0,
+  "stale_codes": 100
+ },
+ "signals_today": {
+  "base": [],
+  "no_sector": [],
+  "hold_10": [],
+  "risk_2": []
+ },
+ "variants": {
+  "base": {
+   "label": "동조 업종 + 패턴 돌파 (기본)",
+   "signals": 0,
+   "trades": 0,
+   "wins": 0,
+   "win_rate": null,
+   "avg_win_pct": null,
+   "avg_loss_pct": null,
+   "payoff": null,
+   "profit_factor": null,
+   "total_return_pct": 0.0,
+   "equity_final": 10000000,
+   "max_drawdown_pct": 0.0,
+   "avg_hold_days": null,
+   "skipped": {
+    "gap": 0,
+    "limit": 0,
+    "cooldown": 0,
+    "size": 0,
+    "no_bar": 0
+   },
+   "by_pattern": {},
+   "by_sync": {},
+   "by_exit": {},
+   "by_year": {},
+   "yearly_return_pct": {
+    "2026": 0.0
+   },
+   "open_positions": []
+  },
+  "no_sector": {
+   "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
+   "signals": 0,
+   "trades": 0,
+   "wins": 0,
+   "win_rate": null,
+   "avg_win_pct": null,
+   "avg_loss_pct": null,
+   "payoff": null,
+   "profit_factor": null,
+   "total_return_pct": 0.0,
+   "equity_final": 10000000,
+   "max_drawdown_pct": 0.0,
+   "avg_hold_days": null,
+   "skipped": {
+    "gap": 0,
+    "limit": 0,
+    "cooldown": 0,
+    "size": 0,
+    "no_bar": 0
+   },
+   "by_pattern": {},
+   "by_sync": {},
+   "by_exit": {},
+   "by_year": {},
+   "yearly_return_pct": {
+    "2026": 0.0
+   },
+   "open_positions": []
+  },
+  "hold_10": {
+   "label": "동조 + 패턴, 보유 10일",
+   "signals": 0,
+   "trades": 0,
+   "wins": 0,
+   "win_rate": null,
+   "avg_win_pct": null,
+   "avg_loss_pct": null,
+   "payoff": null,
+   "profit_factor": null,
+   "total_return_pct": 0.0,
+   "equity_final": 10000000,
+   "max_drawdown_pct": 0.0,
+   "avg_hold_days": null,
+   "skipped": {
+    "gap": 0,
+    "limit": 0,
+    "cooldown": 0,
+    "size": 0,
+    "no_bar": 0
+   },
+   "by_pattern": {},
+   "by_sync": {},
+   "by_exit": {},
+   "by_year": {},
+   "yearly_return_pct": {
+    "2026": 0.0
+   },
+   "open_positions": []
+  },
+  "risk_2": {
+   "label": "동조 + 패턴, 위험 2% (명목 상한 30%)",
+   "signals": 0,
+   "trades": 0,
+   "wins": 0,
+   "win_rate": null,
+   "avg_win_pct": null,
+   "avg_loss_pct": null,
+   "payoff": null,
+   "profit_factor": null,
+   "total_return_pct": 0.0,
+   "equity_final": 10000000,
+   "max_drawdown_pct": 0.0,
+   "avg_hold_days": null,
+   "skipped": {
+    "gap": 0,
+    "limit": 0,
+    "cooldown": 0,
+    "size": 0,
+    "no_bar": 0
+   },
+   "by_pattern": {},
+   "by_sync": {},
+   "by_exit": {},
+   "by_year": {},
+   "yearly_return_pct": {
+    "2026": 0.0
+   },
+   "open_positions": []
+  }
+ },
+ "trades": {
+  "base": [],
+  "no_sector": [],
+  "hold_10": [],
+  "risk_2": []
+ },
+ "errors": {},
+ "stale": [
+  "000150",
+  "000250",
+  "000270",
+  "000500",
+  "000660",
+  "000720",
+  "001440",
+  "001820",
+  "003160",
+  "003490",
+  "0035S0",
+  "005380",
+  "005490",
+  "005930",
+  "005935",
+  "006400",
+  "007660",
+  "007810",
+  "009150",
+  "009830"
+ ]
+}
