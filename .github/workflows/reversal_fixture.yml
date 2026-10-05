@@ -1,0 +1,42 @@
+name: reversal fixture (4시간봉 3년치 저장)
+
+# 추세 전환 매매법(reversal.py)의 오프라인 검증용 실데이터를 거래소 API 에서 받아 tests/fixtures/reversal/ 에 CSV 로 저장하고
+# 이 브랜치에 커밋한다. 클라우드 세션 컨테이너에서는 거래소 접속이 막혀 있어 Actions(미국 서버)에서 받는다.
+# 업비트·OKX 는 미국 IP 에서 열려 있다(인수인계서 2절). 수동 실행 전용.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fixture:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Fetch 4h bars + backtest (저장 안 함, fixture 만 저장)
+        run: python reversal.py --dry-run --save-fixture tests/fixtures/reversal
+
+      - name: Re-run from fixture (오프라인 경로가 같은 결과를 내는지)
+        run: python reversal.py --fixture tests/fixtures/reversal --dry-run
+
+      - name: Unit tests
+        run: python -m unittest tests.test_reversal
+
+      - name: Commit fixtures
+        run: |
+          git config user.name  "carrygate-bot"
+          git config user.email "carrygate-bot@users.noreply.github.com"
+          git add -A tests/fixtures/reversal
+          if git diff --staged --quiet; then
+            echo "no change"
+          else
+            git commit -m "reversal fixture $(date -u +%Y-%m-%d) (4시간봉 실데이터)"
+            git pull --rebase origin "${GITHUB_REF_NAME}" || true
+            git push
+          fi

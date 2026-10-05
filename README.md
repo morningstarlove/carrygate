@@ -21,6 +21,7 @@
 | `listing.json` | **업비트 상장 공지** (이벤트) | 공지 뒤 해외 선물이 얼마나 움직였나 |
 | `momentum.json` | **ETF 듀얼 모멘텀** (장기) | 20년 백테스트와 이달 보유 신호 |
 | `turtle.json` | **터틀 추세추종** (중기) | 20일 돌파·10일 이탈·2N 손절·1%÷N 규칙의 3년 성적과 오늘 진입·청산 가격 |
+| `reversal.json` | **추세 전환 매매법** (4시간봉, 중기) | 하락추세 뒤 저점이 안 깨지고 직전 고점을 거래량 실어 뚫은 뒤 눌림에 진입하는 규칙의 3년 성적과 오늘 단계(구조·돌파·보유) |
 | `kr_sector.json` | **한국 주식 업종 동조** (단기) | 거래대금 상위 100 안에서 오늘 "같이 오른" 업종이 어디인가 |
 | `kr_breakout.json` | **한국 주식 패턴 돌파** (단기, 종이매매) | 동조 업종 안에서 박스권·삼각수렴·깃발·컵앤핸들을 돌파한 종목과 고정 규칙 종이매매 성적 |
 | `kr_backtest.json` | 위 규칙의 **3년 백테스트** | 수수료 뺀 승률·손익비·낙폭, 대조군(업종 동조 없이)과 비교 |
@@ -196,6 +197,7 @@ A·B 는 매일 아침 실행(`scalp_research.py`)에 포함되고, C 는 별도
 | `macro_events.py` | 발표 뒤 30분 변동폭이 평소의 몇 배, 서프라이즈로 방향 적중 | `data/macro_calendar.json` 의 발표 시각 ±90분 1분봉 | 하이퍼리퀴드 BTC·ETH |
 | `listing.py` | 상장 공지 뒤 5·15·60·240분 해외 선물 수익률 | 업비트 공지 API 제목에서 티커 추출 | OKX·하이퍼리퀴드 |
 | `turtle.py` | 리처드 데니스 터틀 규칙(20일 돌파 진입, 10일 이탈 청산, 손절 2N, 수량 계좌 1%÷N)이 코인에서 통하나 | 업비트 현물(롱)·OKX 선물(롱·숏) 일봉 3년 백테스트 + 오늘 신호. 규칙 고정일 이후 매매는 순방향으로 따로 집계 | 업비트·OKX 일봉 (오프라인: `tests/fixtures/turtle/`) |
+| `reversal.py` | SNS 카드의 "추세 전환 매매법"(4시간봉, 저점 유지 → 목선 거래량 2배 돌파 → 눌림 진입, 저점 깨지면 손절)이 코인에서 통하나 | 업비트 현물·OKX 선물 4시간봉 3년 백테스트(롱만) + 오늘 단계. 변형(거래량 조건 없음 / 눌림 안 기다림) 나란히. 규칙 고정일 이후 매매는 순방향 | 업비트·OKX 4시간봉 (오프라인: `tests/fixtures/reversal/`) |
 | `momentum.py` | 월 1회 ETF 교체 전략의 20년 성적과 이달 신호 | GEM(SPY/EFA/AGG/BIL) 12·6개월·복합, 4자산 변형, SPY 보유·60/40 비교. 교체 비용 0.25% | `data/etf/*.csv` (TradingView 20년 + stooq 일 갱신) |
 
 **주의 (ETF 자료):** 가격은 분할만 조정되고 **배당은 반영되지 않았다.** 채권·현금 ETF(AGG·BIL·TLT·IEF)는
@@ -251,6 +253,7 @@ GitHub Actions가 **매일 한국시간 오전 9시 18분**에 자동 실행한�
 | `macro_events.py` / `listing.py` | 이벤트 연구 ⑤⑥ (누적 JSON). 각각 `--report` |
 | `momentum.py` / `etf_update.py` | 장기 ① ETF 듀얼 모멘텀 백테스트·신호 / 일봉 갱신 |
 | `turtle.py` | 중기 터틀 추세추종 규칙 — 3년 백테스트·오늘 신호·순방향 집계. 변형(55/20, Chandelier Exit) 나란히 기록. `--report` 로 신호 변화 |
+| `reversal.py` | 중기 추세 전환 매매법(4시간봉) — 3년 백테스트·오늘 단계·순방향 집계. 변형(`no_vol`, `break_entry`) 나란히 기록. `--report` 로 단계 변화. 설계서 `docs/REVERSAL_4H_PLAN.md` |
 | `kr_universe.py` / `patterns.py` / `kr_breakout.py` / `kr_ohlcv.py` | 한국 주식 트랙 (6절). 각각 유니버스·동조 / 패턴 판정 / 신호·종이매매·백테스트(`--backtest`, `--report`) / 일봉 수집(`--probe`) |
 | `kr_relay.py` / `kr_relay.bat` | **한국 PC 에서** 바이낸스·바이비트 펀딩비를 읽어 `data/kr_funding.json` 으로 올리는 중계기 (설정: `docs/KR_RELAY_SETUP.md`) |
 | `live_monitor.py` | 실전 캐리 감시 — 하이퍼리퀴드 지갑 **주소만으로** 포지션·펀딩 수취·수수료 기록 (키 없음) |
@@ -270,9 +273,10 @@ GitHub Actions가 **매일 한국시간 오전 9시 18분**에 자동 실행한�
 | `tests/test_research.py` | 보조 연구·호가창 계산 로직 자동 시험 (14건) |
 | `tests/test_midterm.py` / `tests/test_momentum.py` | 중기·이벤트·장기 모듈 자동 시험 (13건 / 18건) |
 | `tests/test_turtle.py` | 터틀 계산 로직 자동 시험 (12건) |
+| `tests/test_reversal.py` | 추세 전환 계산 로직 자동 시험 (13건) |
 | `tests/test_relay.py` | 한국 중계 처리 자동 시험 (7건) |
 | `tests/test_kr_universe.py` / `tests/test_patterns.py` / `tests/test_kr_breakout.py` | 한국 주식 트랙 자동 시험 (9건 / 22건 / 11건, 실데이터 fixture 포함) |
-| `tests/fixtures/` | 오프라인 검증용 실데이터 — 1분봉 CSV, `turtle/` 에 일봉 3년 CSV 12개, `kr/` 에 상위 100 스캐너 응답 + 일봉 160봉 4종목 |
+| `tests/fixtures/` | 오프라인 검증용 실데이터 — 1분봉 CSV, `turtle/` 에 일봉 3년 CSV 12개, `reversal/` 에 4시간봉 3년 CSV 12개(거래량 포함), `kr/` 에 상위 100 스캐너 응답 + 일봉 160봉 4종목 |
 | `HANDOVER.md` | 인수인계서 — 지금까지 한 것과 다음 할 것 |
 
 ---
