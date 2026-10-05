@@ -1,0 +1,32 @@
+name: probe (거래소 대체 경로 접속 시험)
+
+# 미국 서버에서 바이낸스·바이비트 펀딩비를 받을 수 있는 다른 경로가 있는지 한 번 찍어 본다. 결과는 로그에만 남는다.
+on:
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe
+        run: |
+          for u in \
+            "https://fapi.binance.com/fapi/v1/premiumIndex?symbol=BTCUSDT" \
+            "https://www.binance.com/bapi/futures/v1/public/future/common/get-funding-rate-history?symbol=BTCUSDT&page=1&rows=3" \
+            "https://data.binance.vision/?prefix=data/futures/um/daily/" \
+            "https://data-api.binance.vision/api/v3/ping" \
+            "https://eapi.binance.com/eapi/v1/ping" \
+            "https://api.bybit.com/v5/market/tickers?category=linear&symbol=BTCUSDT" \
+            "https://api.bytick.com/v5/market/tickers?category=linear&symbol=BTCUSDT" \
+            "https://api2.bybit.com/v5/market/tickers?category=linear&symbol=BTCUSDT" \
+            "https://api.bybit.nl/v5/market/tickers?category=linear&symbol=BTCUSDT" \
+            "https://api.bybit-tr.com/v5/market/tickers?category=linear&symbol=BTCUSDT" \
+            "https://api.coinalyze.net/v1/exchanges" \
+            "https://open-api.coinglass.com/public/v2/funding?symbol=BTC" \
+            "https://api.coingecko.com/api/v3/derivatives/exchanges/binance_futures?include_tickers=unexpired" \
+            "https://api.coingecko.com/api/v3/derivatives/exchanges/bybit?include_tickers=unexpired" \
+            "https://fapi.binance.com/fapi/v1/fundingRate?symbol=BTCUSDT&limit=3" ; do
+            code=$(curl -sS -m 20 -o /tmp/body -w "%{http_code}" -A "Mozilla/5.0" "$u" 2>/dev/null || echo "ERR")
+            echo "== $code  $u"
+            head -c 300 /tmp/body; echo; echo
+          done
