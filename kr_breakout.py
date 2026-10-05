@@ -15,7 +15,7 @@ CARRYGATE — 한국 주식 "업종 동조 + 패턴 돌파" 신호·종이매매
   청산   직전 EXIT_LOW_N 일 최저가 아래 종가 → 다음날 시가 / 보유 HOLD_MAX 봉 → 다음날 시가
   수량   계좌×RISK_PCT ÷ (진입가−손절가), 명목가 ≤ 계좌×MAX_POS_PCT. 동시 MAX_POS 종목, 같은 업종 MAX_PER_GROUP
   비용   매수 수수료 FEE_PCT, 매도 수수료 FEE_PCT + 거래세 TAX_PCT, 양쪽 슬리피지 SLIP_PCT
-  변형   base(동조 필요, 20일) / no_sector(동조 없이 패턴만 — 대조군) / hold_10(동조 필요, 10일). 나란히 기록만 한다.
+  변형   base(동조 필요, 20일) / no_sector(동조 없이 패턴만 — 대조군) / hold_10(동조 필요, 10일) / risk_2(위험 2%). 나란히 기록만 한다.
 
   python kr_breakout.py                 # 순방향 계산·저장 (kr_breakout.json, kr_breakout_history.jsonl)
   python kr_breakout.py --dry-run
@@ -47,10 +47,14 @@ COOLDOWN = 10                   # 청산 뒤 같은 종목 재진입 금지 봉 
 FEE_PCT = 0.015                 # 증권사 수수료 (비대면 기준)
 TAX_PCT = 0.15                  # 매도 거래세(농특세 포함)
 SLIP_PCT = 0.30
+# 변형: 기본과 나란히 기록만 한다. risk_pct / max_pos_pct 를 안 쓰면 위 기본값.
+#  - risk_2 (2026-10-05 추가): 한 번에 계좌의 2% 를 건다. 손절 7% 면 명목가가 계좌의 약 28.6% 라 종목당 상한을 30% 로 둔다
+#    (5종목이면 현금이 먼저 바닥나므로 실제로는 3종목 남짓). 수익과 낙폭이 둘 다 대략 2배가 되는지 보는 변형.
 VARIANTS = {
     "base":      {"need_sync": True,  "hold_max": HOLD_MAX, "label": "동조 업종 + 패턴 돌파 (기본)"},
     "no_sector": {"need_sync": False, "hold_max": HOLD_MAX, "label": "패턴 돌파만 (업종 동조 없음, 대조군)"},
     "hold_10":   {"need_sync": True,  "hold_max": 10,       "label": "동조 + 패턴, 보유 10일"},
+    "risk_2":    {"need_sync": True,  "hold_max": HOLD_MAX, "risk_pct": 2.0, "max_pos_pct": 30.0, "label": "동조 + 패턴, 위험 2% (명목 상한 30%)"},
 }
 BT_UNIVERSE = 300               # 백테스트 유니버스: 지금 거래대금 상위 N
 BT_DAYS = 760                   # 약 3년 일봉
@@ -131,8 +135,8 @@ class Sim:
             stop = max(sig["pattern_low"], entry * (1 - STOP_PCT / 100))
             if stop >= entry:
                 self.skipped["size"] += 1; continue
-            risk_amt = eq_open * RISK_PCT / 100
-            shares = int(min(risk_amt / (entry - stop), eq_open * MAX_POS_PCT / 100 / entry))
+            risk_amt = eq_open * self.cfg.get("risk_pct", RISK_PCT) / 100
+            shares = int(min(risk_amt / (entry - stop), eq_open * self.cfg.get("max_pos_pct", MAX_POS_PCT) / 100 / entry))
             if shares < 1 or shares * entry > self.cash:
                 self.skipped["size"] += 1; continue
             cost_in = shares * entry * (1 + FEE_PCT / 100)
@@ -414,7 +418,9 @@ def run_forward(fixture=None, dry_run=False):
 def rules_dict():
     return {"equity0": EQUITY0, "risk_pct": RISK_PCT, "max_pos": MAX_POS, "max_per_group": MAX_PER_GROUP, "max_pos_pct": MAX_POS_PCT,
             "stop_pct": STOP_PCT, "gap_skip_pct": GAP_SKIP_PCT, "exit_low_n": EXIT_LOW_N, "hold_max": HOLD_MAX, "cooldown": COOLDOWN,
-            "fee_pct": FEE_PCT, "tax_pct": TAX_PCT, "slip_pct": SLIP_PCT, "variants": {k: v["label"] for k, v in VARIANTS.items()},
+            "fee_pct": FEE_PCT, "tax_pct": TAX_PCT, "slip_pct": SLIP_PCT,
+            "variants": {k: dict(label=v["label"], risk_pct=v.get("risk_pct", RISK_PCT), max_pos_pct=v.get("max_pos_pct", MAX_POS_PCT),
+                                 hold_max=v["hold_max"], need_sync=v["need_sync"]) for k, v in VARIANTS.items()},
             "pattern_rules": {"vol_mult": P.VOL_MULT, "min_value_krw": P.MIN_VALUE_KRW, "limit_up_pct": P.LIMIT_UP_PCT},
             "sync_rules": {"min_group": KU.MIN_GROUP, "up_ratio": KU.UP_RATIO, "median_change_pct": KU.MED_CHANGE_PCT, "median_week_pct": KU.MED_WEEK_PCT}}
 
