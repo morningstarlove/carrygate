@@ -260,5 +260,23 @@ class HistoryFile(unittest.TestCase):
             self.assertEqual(rows[0]["rows"]["okx:BTC:1m:mr_z20"]["f"], 0.3)
 
 
+class BackfillDay(unittest.TestCase):
+    """--day 로 지난 날을 되채울 때 평가일·기록 날짜가 그 날짜 기준으로 잡히는지 (수집은 비워 두고 날짜 계산만 본다)."""
+
+    def test_day_sets_eval_and_record_dates(self):
+        import io, contextlib
+        saved = (scalp.SOURCES, scalp.hl_live_fees)
+        scalp.SOURCES, scalp.hl_live_fees = [], lambda: None
+        buf = io.StringIO()
+        try:
+            with contextlib.redirect_stdout(buf):
+                scalp.main(["--day", "2026-10-03", "--dry-run", "--save-bars", ""])
+        finally:
+            scalp.SOURCES, scalp.hl_live_fees = saved
+        out = buf.getvalue()
+        self.assertIn("(2026-10-04, 평가일 2026-10-03 UTC)", out)   # 기록 날짜 = 평가일 다음 날
+        self.assertIn("데이터 없음", out)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -374,6 +374,11 @@ def main(argv=None):
 
     data, fees, eval_t0, eval_day, mode = load_bars(a)
     now = datetime.now(KST)
+    if eval_day != "fixture":
+        # 기록 날짜는 평가일 다음 날(KST). 되채우기로 지난 날을 받았을 때도 그날 자리에 들어가게.
+        rec_day = datetime.strptime(eval_day, "%Y-%m-%d").replace(tzinfo=timezone.utc) + timedelta(days=1)
+        if rec_day.date() < now.date():
+            now = rec_day.astimezone(KST).replace(hour=9, minute=18)
     d1 = eval_t0 + scalp.EVAL_BARS * 60
 
     # A1

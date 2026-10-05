@@ -9,6 +9,10 @@ on:
         description: "결과만 확인하고 커밋하지 않음 (테스트용)"
         type: boolean
         default: false
+      day:
+        description: "초단타 되채우기: 평가할 날짜(UTC, YYYY-MM-DD). 지정하면 초단타·보조 연구만 그 날짜로 돌려 저장"
+        type: string
+        default: ""
 
 permissions:
   contents: write
@@ -24,11 +28,13 @@ jobs:
           python-version: "3.11"
 
       - name: Fetch Upbit data (게이트)
+        if: inputs.day == ''
         id: fetch
         continue-on-error: true
         run: python fetch.py
 
       - name: Fetch funding rates (캐리)
+        if: inputs.day == ''
         id: funding
         continue-on-error: true
         run: python funding.py
@@ -36,7 +42,7 @@ jobs:
       - name: Fetch 1m candles + scalp research (초단타)
         id: scalp
         continue-on-error: true
-        run: python scalp.py
+        run: python scalp.py ${{ inputs.day != '' && format('--day {0}', inputs.day) || '' }}
 
       - name: Scalp side research (시간대·펀딩·선행후행)
         id: research
@@ -45,34 +51,42 @@ jobs:
 
       # ---- 중기·장기·이벤트 연구 (마일스톤 7). 각 단계는 실패해도 다음으로 넘어간다.
       - name: Basis carry (분기 선물 베이시스)
+        if: inputs.day == ''
         continue-on-error: true
         run: python basis.py
 
       - name: Funding extreme signal (펀딩 극단값 역추세)
+        if: inputs.day == ''
         continue-on-error: true
         run: python funding_signal.py
 
       - name: Kimchi premium (김치프리미엄)
+        if: inputs.day == ''
         continue-on-error: true
         run: python kimchi.py
 
       - name: Macro events (매크로 발표 전후)
+        if: inputs.day == ''
         continue-on-error: true
         run: python macro_events.py
 
       - name: Upbit listings (상장 공지 반응)
+        if: inputs.day == ''
         continue-on-error: true
         run: python listing.py
 
       - name: Turtle trend rules (터틀 20일 돌파, 중기)
+        if: inputs.day == ''
         continue-on-error: true
         run: python turtle.py
 
       - name: Live carry monitor (실전 캐리 감시, 지갑 주소만)
+        if: inputs.day == ''
         continue-on-error: true
         run: python live_monitor.py
 
       - name: ETF daily update + dual momentum (장기)
+        if: inputs.day == ''
         continue-on-error: true
         run: |
           python etf_update.py || echo "ETF 갱신 실패 — 기존 자료로 계산"
@@ -115,14 +129,23 @@ jobs:
         run: |
           git config user.name  "carrygate-bot"
           git config user.email "carrygate-bot@users.noreply.github.com"
-          git add -A status.json history.jsonl funding.json funding_history.jsonl scalp.json scalp_history.jsonl research.json research_history.jsonl \
-                     basis.json basis_history.jsonl funding_signal.json funding_signal_history.jsonl kimchi.json kimchi_history.jsonl \
-                     macro.json listing.json momentum.json momentum_history.jsonl live.json live_history.jsonl turtle.json turtle_history.jsonl data/kr_funding.json data/etf data/upbit_markets.json || true
+          # 없는 파일(예: 실전 지갑 미설정 때의 live.json)이 하나라도 섞이면 git add 전체가 실패해
+          # 아무것도 저장되지 않는다(2026-10-02~04 결과 유실). 있는 경로만 하나씩 추가한다.
+          for p in status.json history.jsonl funding.json funding_history.jsonl scalp.json scalp_history.jsonl research.json research_history.jsonl \
+                   basis.json basis_history.jsonl funding_signal.json funding_signal_history.jsonl kimchi.json kimchi_history.jsonl \
+                   macro.json listing.json momentum.json momentum_history.jsonl live.json live_history.jsonl turtle.json turtle_history.jsonl \
+                   data/kr_funding.json data/etf data/upbit_markets.json; do
+            if [ -e "$p" ]; then git add -A "$p"; else echo "없음(건너뜀): $p"; fi
+          done
           if git diff --staged --quiet; then
             echo "no change"
           else
-            git commit -m "status $(date -u +%Y-%m-%d)"
-            git pull --rebase origin main || true
+            if [ -n "${{ inputs.day }}" ]; then
+              git commit -m "scalp backfill ${{ inputs.day }}"
+            else
+              git commit -m "status $(date -u +%Y-%m-%d)"
+            fi
+            git pull --rebase origin "${GITHUB_REF_NAME}" || true
             git push
           fi
 

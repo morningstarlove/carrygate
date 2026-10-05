@@ -737,6 +737,7 @@ def main(argv=None):
     ap.add_argument("--out", default="scalp.json")
     ap.add_argument("--history", default="scalp_history.jsonl")
     ap.add_argument("--eval-bars", type=int, default=EVAL_BARS)
+    ap.add_argument("--day", help="평가할 날짜(UTC, YYYY-MM-DD). 생략하면 어제. 빠진 날을 되채울 때 쓴다")
     ap.add_argument("--save-bars", default="bars_cache.json",
                     help="받은 1분봉을 이 파일에 남긴다 (scalp_research.py 가 재사용). 빈 문자열이면 저장 안 함")
     a = ap.parse_args(argv)
@@ -756,13 +757,19 @@ def main(argv=None):
         live = hl_live_fees()
         if live:
             fees["hyperliquid"].update(live)
-        today = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0)
+        if a.day:
+            # 되채우기: 평가일 다음 날 00:00 UTC 를 끝으로 잡고, 기록 날짜도 그날(KST)로 맞춘다
+            today = datetime.strptime(a.day, "%Y-%m-%d").replace(tzinfo=timezone.utc) + timedelta(days=1)
+            now = today.astimezone(KST).replace(hour=9, minute=18)
+        else:
+            today = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0)
         end = int(today.timestamp())
         d0 = end - a.eval_bars * 60
         start = d0 - WARMUP_MIN * 60
         eval_day = (today - timedelta(days=1)).strftime("%Y-%m-%d")
-        mode = "실시간 수집 %s ~ %s UTC" % (datetime.fromtimestamp(start, timezone.utc).strftime("%m-%d %H:%M"),
-                                          today.strftime("%m-%d %H:%M"))
+        mode = "%s %s ~ %s UTC" % ("되채우기 수집" if a.day else "실시간 수집",
+                                  datetime.fromtimestamp(start, timezone.utc).strftime("%m-%d %H:%M"),
+                                  today.strftime("%m-%d %H:%M"))
         for venue, fn in SOURCES:
             got = {}
             for c in COINS:
