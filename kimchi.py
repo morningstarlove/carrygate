@@ -94,8 +94,10 @@ def upbit_daily(coin, count=DAYS):
 
 
 def okx_daily(coin, count=DAYS):
-    """OKX 현물 일봉. candles 엔드포인트는 한 번에 300개를 준다."""
-    rows = http_json("https://www.okx.com/api/v5/market/candles?instId=%s-USDT&bar=1D&limit=300" % coin).get("data") or []
+    """OKX 현물 일봉. candles 엔드포인트는 한 번에 300개를 준다.
+    bar=1Dutc 로 받아야 00:00 UTC 시작(업비트 candle_date_time_utc 와 같은 날짜·같은 종가 시각)이 된다 —
+    그냥 1D 는 홍콩시간(UTC+8) 기준이라 종가가 16시간 어긋난다(turtle.py 와 같은 이유, 2026-10-05 수정)."""
+    rows = http_json("https://www.okx.com/api/v5/market/candles?instId=%s-USDT&bar=1Dutc&limit=300" % coin).get("data") or []
     out = {}
     for r in rows:
         t = int(r[0]) // 1000
