@@ -1,6 +1,6 @@
 {
- "date": "2026-10-04",
- "generated_at_utc": "2026-10-04T01:14:03Z",
+ "date": "2026-10-05",
+ "generated_at_utc": "2026-10-05T07:05:36Z",
  "mode": "backtest",
  "rule_fixed": "2026-10-06",
  "rules": {
@@ -18,9 +18,34 @@
   "tax_pct": 0.15,
   "slip_pct": 0.3,
   "variants": {
-   "base": "동조 업종 + 패턴 돌파 (기본)",
-   "no_sector": "패턴 돌파만 (업종 동조 없음, 대조군)",
-   "hold_10": "동조 + 패턴, 보유 10일"
+   "base": {
+    "label": "동조 업종 + 패턴 돌파 (기본)",
+    "risk_pct": 1.0,
+    "max_pos_pct": 20.0,
+    "hold_max": 20,
+    "need_sync": true
+   },
+   "no_sector": {
+    "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
+    "risk_pct": 1.0,
+    "max_pos_pct": 20.0,
+    "hold_max": 20,
+    "need_sync": false
+   },
+   "hold_10": {
+    "label": "동조 + 패턴, 보유 10일",
+    "risk_pct": 1.0,
+    "max_pos_pct": 20.0,
+    "hold_max": 10,
+    "need_sync": true
+   },
+   "risk_2": {
+    "label": "동조 + 패턴, 위험 2% (명목 상한 30%)",
+    "risk_pct": 2.0,
+    "max_pos_pct": 30.0,
+    "hold_max": 20,
+    "need_sync": true
+   }
   },
   "pattern_rules": {
    "vol_mult": 1.5,
@@ -585,6 +610,148 @@
      "bars_held": 2,
      "last_close": 59500.0,
      "unrealized_pct": 3.89
+    }
+   ]
+  },
+  "risk_2": {
+   "label": "동조 + 패턴, 위험 2% (명목 상한 30%)",
+   "signals": 2003,
+   "trades": 193,
+   "wins": 52,
+   "win_rate": 26.94,
+   "avg_win_pct": 19.71,
+   "avg_loss_pct": -6.99,
+   "payoff": 2.64,
+   "profit_factor": 0.97,
+   "total_return_pct": 8.72,
+   "equity_final": 10871711,
+   "max_drawdown_pct": 44.02,
+   "avg_hold_days": 9.66,
+   "skipped": {
+    "gap": 29,
+    "limit": 72,
+    "cooldown": 394,
+    "size": 1695,
+    "no_bar": 0
+   },
+   "by_pattern": {
+    "flag": {
+     "n": 65,
+     "wins": 11,
+     "pnl_krw": -4960951
+    },
+    "cup_handle": {
+     "n": 23,
+     "wins": 5,
+     "pnl_krw": -31114
+    },
+    "box": {
+     "n": 70,
+     "wins": 25,
+     "pnl_krw": -81517
+    },
+    "triangle": {
+     "n": 35,
+     "wins": 11,
+     "pnl_krw": 4253127
+    }
+   },
+   "by_sync": {
+    "day": {
+     "n": 173,
+     "wins": 46,
+     "pnl_krw": 242077
+    },
+    "week": {
+     "n": 20,
+     "wins": 6,
+     "pnl_krw": -1062532
+    }
+   },
+   "by_exit": {
+    "stop": {
+     "n": 123,
+     "wins": 0,
+     "pnl_krw": -29493016
+    },
+    "hold20": {
+     "n": 48,
+     "wins": 46,
+     "pnl_krw": 29122997
+    },
+    "low10": {
+     "n": 22,
+     "wins": 6,
+     "pnl_krw": -450436
+    }
+   },
+   "by_year": {
+    "2023": {
+     "n": 6,
+     "wins": 1,
+     "pnl_krw": -992384
+    },
+    "2024": {
+     "n": 59,
+     "wins": 18,
+     "pnl_krw": -1373016
+    },
+    "2025": {
+     "n": 62,
+     "wins": 23,
+     "pnl_krw": 5606477
+    },
+    "2026": {
+     "n": 66,
+     "wins": 10,
+     "pnl_krw": -4061532
+    }
+   },
+   "yearly_return_pct": {
+    "2023": -4.89,
+    "2024": -17.89,
+    "2025": 73.3,
+    "2026": -19.67
+   },
+   "open_positions": [
+    {
+     "code": "003160",
+     "name": "DI Corporation",
+     "group": "Electronic Equipment/Instruments",
+     "pattern": "flag",
+     "entry_date": "2026-09-03",
+     "entry": 30591.5,
+     "stop": 28450.09,
+     "shares": 100,
+     "bars_held": 20,
+     "last_close": 42800.0,
+     "unrealized_pct": 39.91
+    },
+    {
+     "code": "353200",
+     "name": "Daeduck Electronics Co., Ltd.",
+     "group": "Electronic Components",
+     "pattern": "triangle",
+     "entry_date": "2026-09-30",
+     "entry": 130690.9,
+     "stop": 121542.54,
+     "shares": 21,
+     "bars_held": 3,
+     "last_close": 147800.0,
+     "unrealized_pct": 13.09
+    },
+    {
+     "code": "080220",
+     "name": "Jeju Semiconductor Corp.",
+     "group": "Semiconductors",
+     "pattern": "triangle",
+     "entry_date": "2026-10-02",
+     "entry": 89066.4,
+     "stop": 82831.75,
+     "shares": 34,
+     "bars_held": 1,
+     "last_close": 92400.0,
+     "unrealized_pct": 3.74
     }
    ]
   }
@@ -2536,27 +2703,6 @@
     "hold_days": 7
    },
    {
-    "code": "298040",
-    "name": "Hyosung Heavy Industries Corp.",
-    "group": "Electrical Products",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "sync_by": "day",
-    "signal_date": "2024-10-07",
-    "entry_date": "2024-10-08",
-    "entry": 369605.5,
-    "stop": 343733.11,
-    "exit_date": "2024-11-06",
-    "exit": 457623.0,
-    "why": "hold20",
-    "shares": 4,
-    "pnl_krw": 348828,
-    "pnl_pct": 23.59,
-    "hold_days": 20
-   },
-   {
     "code": "012450",
     "name": "Hanwha Aerospace Co., Ltd.",
     "group": "Aerospace & Defense",
@@ -2575,6 +2721,27 @@
     "shares": 5,
     "pnl_krw": 48509,
     "pnl_pct": 2.75,
+    "hold_days": 20
+   },
+   {
+    "code": "298040",
+    "name": "Hyosung Heavy Industries Corp.",
+    "group": "Electrical Products",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-10-07",
+    "entry_date": "2024-10-08",
+    "entry": 369605.5,
+    "stop": 343733.11,
+    "exit_date": "2024-11-06",
+    "exit": 457623.0,
+    "why": "hold20",
+    "shares": 4,
+    "pnl_krw": 348828,
+    "pnl_pct": 23.59,
     "hold_days": 20
    },
    {
@@ -2922,27 +3089,6 @@
     "hold_days": 14
    },
    {
-    "code": "005690",
-    "name": "Pharmicell Co., Ltd",
-    "group": "Pharmaceuticals: Major",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "sync_by": "day",
-    "signal_date": "2024-12-10",
-    "entry_date": "2024-12-11",
-    "entry": 6268.75,
-    "stop": 5829.94,
-    "exit_date": "2025-01-13",
-    "exit": 8913.18,
-    "why": "hold20",
-    "shares": 255,
-    "pnl_krw": 670340,
-    "pnl_pct": 41.93,
-    "hold_days": 20
-   },
-   {
     "code": "214450",
     "name": "PharmaResearch Co., Ltd.",
     "group": "Pharmaceuticals: Major",
@@ -2961,6 +3107,27 @@
     "shares": 6,
     "pnl_krw": 33636,
     "pnl_pct": 2.34,
+    "hold_days": 20
+   },
+   {
+    "code": "005690",
+    "name": "Pharmicell Co., Ltd",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-12-10",
+    "entry_date": "2024-12-11",
+    "entry": 6268.75,
+    "stop": 5829.94,
+    "exit_date": "2025-01-13",
+    "exit": 8913.18,
+    "why": "hold20",
+    "shares": 255,
+    "pnl_krw": 670340,
+    "pnl_pct": 41.93,
     "hold_days": 20
    },
    {
@@ -3219,6 +3386,27 @@
     "hold_days": 14
    },
    {
+    "code": "277810",
+    "name": "Rainbow Robotics, Inc.",
+    "group": "Industrial Machinery",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-02-04",
+    "entry_date": "2025-02-05",
+    "entry": 345533.5,
+    "stop": 321346.15,
+    "exit_date": "2025-03-04",
+    "exit": 341472.5,
+    "why": "low10",
+    "shares": 5,
+    "pnl_krw": -23381,
+    "pnl_pct": -1.35,
+    "hold_days": 18
+   },
+   {
     "code": "086790",
     "name": "Hana Financial Group Inc.",
     "group": "Major Banks",
@@ -3239,27 +3427,6 @@
     "pnl_krw": -10386,
     "pnl_pct": -0.44,
     "hold_days": 20
-   },
-   {
-    "code": "277810",
-    "name": "Rainbow Robotics, Inc.",
-    "group": "Industrial Machinery",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "sync_by": "day",
-    "signal_date": "2025-02-04",
-    "entry_date": "2025-02-05",
-    "entry": 345533.5,
-    "stop": 321346.15,
-    "exit_date": "2025-03-04",
-    "exit": 341472.5,
-    "why": "low10",
-    "shares": 5,
-    "pnl_krw": -23381,
-    "pnl_pct": -1.35,
-    "hold_days": 18
    },
    {
     "code": "450080",
@@ -4529,27 +4696,6 @@
     "hold_days": 20
    },
    {
-    "code": "103590",
-    "name": "Iljin Electric Co., Ltd.",
-    "group": "Electrical Products",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "sync_by": "day",
-    "signal_date": "2025-10-14",
-    "entry_date": "2025-10-15",
-    "entry": 40721.8,
-    "stop": 37871.27,
-    "exit_date": "2025-11-12",
-    "exit": 62711.3,
-    "why": "hold20",
-    "shares": 54,
-    "pnl_krw": 1181516,
-    "pnl_pct": 53.72,
-    "hold_days": 20
-   },
-   {
     "code": "003670",
     "name": "POSCO FUTURE M CO., LTD.",
     "group": "Electronic Equipment/Instruments",
@@ -4568,6 +4714,27 @@
     "shares": 12,
     "pnl_krw": 477143,
     "pnl_pct": 22.95,
+    "hold_days": 20
+   },
+   {
+    "code": "103590",
+    "name": "Iljin Electric Co., Ltd.",
+    "group": "Electrical Products",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-10-14",
+    "entry_date": "2025-10-15",
+    "entry": 40721.8,
+    "stop": 37871.27,
+    "exit_date": "2025-11-12",
+    "exit": 62711.3,
+    "why": "hold20",
+    "shares": 54,
+    "pnl_krw": 1181516,
+    "pnl_pct": 53.72,
     "hold_days": 20
    },
    {
@@ -6017,6 +6184,28 @@
     "hold_days": 4
    },
    {
+    "code": "332570",
+    "name": "Pentastone Electronics, Inc.",
+    "group": "Telecommunications Equipment",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-04-13",
+    "entry_date": "2026-04-14",
+    "entry": 6780.28,
+    "stop": 6305.66,
+    "exit_date": "2026-05-14",
+    "exit": 14137.46,
+    "why": "hold20",
+    "shares": 404,
+    "pnl_krw": 2962466,
+    "pnl_pct": 108.13,
+    "hold_days": 20
+   },
+   {
     "code": "034020",
     "name": "Doosan Enerbility Co., Ltd.",
     "group": "Trucks/Construction/Farm Machinery",
@@ -6038,28 +6227,6 @@
     "pnl_krw": 218006,
     "pnl_pct": 8.11,
     "hold_days": 17
-   },
-   {
-    "code": "332570",
-    "name": "Pentastone Electronics, Inc.",
-    "group": "Telecommunications Equipment",
-    "pattern": "triangle",
-    "patterns": [
-     "box",
-     "triangle"
-    ],
-    "sync_by": "day",
-    "signal_date": "2026-04-13",
-    "entry_date": "2026-04-14",
-    "entry": 6780.28,
-    "stop": 6305.66,
-    "exit_date": "2026-05-14",
-    "exit": 14137.46,
-    "why": "hold20",
-    "shares": 404,
-    "pnl_krw": 2962466,
-    "pnl_pct": 108.13,
-    "hold_days": 20
    },
    {
     "code": "004710",
@@ -7059,28 +7226,6 @@
     "hold_days": 5
    },
    {
-    "code": "017670",
-    "name": "SK Telecom Co., Ltd.",
-    "group": "Wireless Telecommunications",
-    "pattern": "triangle",
-    "patterns": [
-     "box",
-     "triangle"
-    ],
-    "sync_by": null,
-    "signal_date": "2023-11-14",
-    "entry_date": "2023-11-15",
-    "entry": 51855.1,
-    "stop": 48811.03,
-    "exit_date": "2023-12-13",
-    "exit": 49550.9,
-    "why": "hold20",
-    "shares": 32,
-    "pnl_krw": -76600,
-    "pnl_pct": -4.62,
-    "hold_days": 20
-   },
-   {
     "code": "138040",
     "name": "Meritz Financial Group Inc.",
     "group": "Investment Banks/Brokers",
@@ -7100,6 +7245,28 @@
     "shares": 24,
     "pnl_krw": 17965,
     "pnl_pct": 1.3,
+    "hold_days": 20
+   },
+   {
+    "code": "017670",
+    "name": "SK Telecom Co., Ltd.",
+    "group": "Wireless Telecommunications",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle"
+    ],
+    "sync_by": null,
+    "signal_date": "2023-11-14",
+    "entry_date": "2023-11-15",
+    "entry": 51855.1,
+    "stop": 48811.03,
+    "exit_date": "2023-12-13",
+    "exit": 49550.9,
+    "why": "hold20",
+    "shares": 32,
+    "pnl_krw": -76600,
+    "pnl_pct": -4.62,
     "hold_days": 20
    },
    {
@@ -7659,27 +7826,6 @@
     "hold_days": 19
    },
    {
-    "code": "000270",
-    "name": "Kia Corporation",
-    "group": "Motor Vehicles",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "sync_by": null,
-    "signal_date": "2024-01-26",
-    "entry_date": "2024-01-29",
-    "entry": 94984.1,
-    "stop": 88335.21,
-    "exit_date": "2024-02-28",
-    "exit": 112262.2,
-    "why": "hold20",
-    "shares": 13,
-    "pnl_krw": 222022,
-    "pnl_pct": 17.98,
-    "hold_days": 20
-   },
-   {
     "code": "028260",
     "name": "SAMSUNG C&T CORP",
     "group": "Engineering & Construction",
@@ -7699,6 +7845,27 @@
     "pnl_krw": 58253,
     "pnl_pct": 4.61,
     "hold_days": 17
+   },
+   {
+    "code": "000270",
+    "name": "Kia Corporation",
+    "group": "Motor Vehicles",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": null,
+    "signal_date": "2024-01-26",
+    "entry_date": "2024-01-29",
+    "entry": 94984.1,
+    "stop": 88335.21,
+    "exit_date": "2024-02-28",
+    "exit": 112262.2,
+    "why": "hold20",
+    "shares": 13,
+    "pnl_krw": 222022,
+    "pnl_pct": 17.98,
+    "hold_days": 20
    },
    {
     "code": "005380",
@@ -8593,27 +8760,6 @@
     "hold_days": 3
    },
    {
-    "code": "323280",
-    "name": "TAESUNG CO., LTD.",
-    "group": "Industrial Machinery",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "sync_by": null,
-    "signal_date": "2024-05-30",
-    "entry_date": "2024-05-31",
-    "entry": 7251.69,
-    "stop": 6744.07,
-    "exit_date": "2024-07-01",
-    "exit": 11136.49,
-    "why": "hold20",
-    "shares": 209,
-    "pnl_krw": 807855,
-    "pnl_pct": 53.29,
-    "hold_days": 20
-   },
-   {
     "code": "031980",
     "name": "PSK HOLDINGS INC.",
     "group": "Semiconductors",
@@ -8633,6 +8779,27 @@
     "pnl_krw": 102232,
     "pnl_pct": 7.47,
     "hold_days": 16
+   },
+   {
+    "code": "323280",
+    "name": "TAESUNG CO., LTD.",
+    "group": "Industrial Machinery",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": null,
+    "signal_date": "2024-05-30",
+    "entry_date": "2024-05-31",
+    "entry": 7251.69,
+    "stop": 6744.07,
+    "exit_date": "2024-07-01",
+    "exit": 11136.49,
+    "why": "hold20",
+    "shares": 209,
+    "pnl_krw": 807855,
+    "pnl_pct": 53.29,
+    "hold_days": 20
    },
    {
     "code": "010120",
@@ -9080,27 +9247,6 @@
     "hold_days": 17
    },
    {
-    "code": "033780",
-    "name": "KT & G Corporation",
-    "group": "Tobacco",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "sync_by": null,
-    "signal_date": "2024-08-08",
-    "entry_date": "2024-08-09",
-    "entry": 95285.0,
-    "stop": 88615.05,
-    "exit_date": "2024-09-09",
-    "exit": 109171.5,
-    "why": "hold20",
-    "shares": 15,
-    "pnl_krw": 205381,
-    "pnl_pct": 14.37,
-    "hold_days": 20
-   },
-   {
     "code": "452280",
     "name": "HanSun Engineering Co., Ltd.",
     "group": "Industrial Machinery",
@@ -9120,6 +9266,27 @@
     "pnl_krw": -43386,
     "pnl_pct": -2.8,
     "hold_days": 16
+   },
+   {
+    "code": "033780",
+    "name": "KT & G Corporation",
+    "group": "Tobacco",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": null,
+    "signal_date": "2024-08-08",
+    "entry_date": "2024-08-09",
+    "entry": 95285.0,
+    "stop": 88615.05,
+    "exit_date": "2024-09-09",
+    "exit": 109171.5,
+    "why": "hold20",
+    "shares": 15,
+    "pnl_krw": 205381,
+    "pnl_pct": 14.37,
+    "hold_days": 20
    },
    {
     "code": "323280",
@@ -9693,27 +9860,6 @@
     "hold_days": 2
    },
    {
-    "code": "062040",
-    "name": "Sanil Electric Co., Ltd.",
-    "group": "Electrical Products",
-    "pattern": "triangle",
-    "patterns": [
-     "triangle"
-    ],
-    "sync_by": null,
-    "signal_date": "2024-11-01",
-    "entry_date": "2024-11-04",
-    "entry": 45135.0,
-    "stop": 41975.55,
-    "exit_date": "2024-11-27",
-    "exit": 55931.7,
-    "why": "low10",
-    "shares": 30,
-    "pnl_krw": 320929,
-    "pnl_pct": 23.7,
-    "hold_days": 17
-   },
-   {
     "code": "047810",
     "name": "Korea Aerospace Industries, Ltd.",
     "group": "Aerospace & Defense",
@@ -9734,6 +9880,27 @@
     "pnl_krw": -68644,
     "pnl_pct": -5.27,
     "hold_days": 14
+   },
+   {
+    "code": "062040",
+    "name": "Sanil Electric Co., Ltd.",
+    "group": "Electrical Products",
+    "pattern": "triangle",
+    "patterns": [
+     "triangle"
+    ],
+    "sync_by": null,
+    "signal_date": "2024-11-01",
+    "entry_date": "2024-11-04",
+    "entry": 45135.0,
+    "stop": 41975.55,
+    "exit_date": "2024-11-27",
+    "exit": 55931.7,
+    "why": "low10",
+    "shares": 30,
+    "pnl_krw": 320929,
+    "pnl_pct": 23.7,
+    "hold_days": 17
    },
    {
     "code": "352820",
@@ -10334,28 +10501,6 @@
     "hold_days": 20
    },
    {
-    "code": "277810",
-    "name": "Rainbow Robotics, Inc.",
-    "group": "Industrial Machinery",
-    "pattern": "flag",
-    "patterns": [
-     "box",
-     "flag"
-    ],
-    "sync_by": null,
-    "signal_date": "2025-01-31",
-    "entry_date": "2025-02-03",
-    "entry": 294882.0,
-    "stop": 274240.26,
-    "exit_date": "2025-03-04",
-    "exit": 341472.5,
-    "why": "low10",
-    "shares": 4,
-    "pnl_krw": 183931,
-    "pnl_pct": 15.59,
-    "hold_days": 20
-   },
-   {
     "code": "064350",
     "name": "Hyundai Rotem Co.",
     "group": "Trucks/Construction/Farm Machinery",
@@ -10376,6 +10521,28 @@
     "pnl_krw": 143697,
     "pnl_pct": 10.75,
     "hold_days": 16
+   },
+   {
+    "code": "277810",
+    "name": "Rainbow Robotics, Inc.",
+    "group": "Industrial Machinery",
+    "pattern": "flag",
+    "patterns": [
+     "box",
+     "flag"
+    ],
+    "sync_by": null,
+    "signal_date": "2025-01-31",
+    "entry_date": "2025-02-03",
+    "entry": 294882.0,
+    "stop": 274240.26,
+    "exit_date": "2025-03-04",
+    "exit": 341472.5,
+    "why": "low10",
+    "shares": 4,
+    "pnl_krw": 183931,
+    "pnl_pct": 15.59,
+    "hold_days": 20
    },
    {
     "code": "457190",
@@ -10547,27 +10714,6 @@
     "hold_days": 16
    },
    {
-    "code": "005490",
-    "name": "POSCO Holdings Inc.",
-    "group": "Steel",
-    "pattern": "cup_handle",
-    "patterns": [
-     "cup_handle"
-    ],
-    "sync_by": null,
-    "signal_date": "2025-03-07",
-    "entry_date": "2025-03-10",
-    "entry": 314942.0,
-    "stop": 292896.06,
-    "exit_date": "2025-03-28",
-    "exit": 298103.0,
-    "why": "low10",
-    "shares": 4,
-    "pnl_krw": -69512,
-    "pnl_pct": -5.52,
-    "hold_days": 14
-   },
-   {
     "code": "068270",
     "name": "Celltrion, Inc.",
     "group": "Biotechnology",
@@ -10589,6 +10735,27 @@
     "pnl_krw": -66196,
     "pnl_pct": -4.27,
     "hold_days": 20
+   },
+   {
+    "code": "005490",
+    "name": "POSCO Holdings Inc.",
+    "group": "Steel",
+    "pattern": "cup_handle",
+    "patterns": [
+     "cup_handle"
+    ],
+    "sync_by": null,
+    "signal_date": "2025-03-07",
+    "entry_date": "2025-03-10",
+    "entry": 314942.0,
+    "stop": 292896.06,
+    "exit_date": "2025-03-28",
+    "exit": 298103.0,
+    "why": "low10",
+    "shares": 4,
+    "pnl_krw": -69512,
+    "pnl_pct": -5.52,
+    "hold_days": 14
    },
    {
     "code": "000660",
@@ -11556,6 +11723,28 @@
     "hold_days": 20
    },
    {
+    "code": "247540",
+    "name": "Ecopro BM Co., Ltd.",
+    "group": "Electrical Products",
+    "pattern": "cup_handle",
+    "patterns": [
+     "box",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-08-05",
+    "entry_date": "2025-08-06",
+    "entry": 125074.1,
+    "stop": 116318.91,
+    "exit_date": "2025-08-29",
+    "exit": 126419.6,
+    "why": "low10",
+    "shares": 12,
+    "pnl_krw": 13418,
+    "pnl_pct": 0.89,
+    "hold_days": 16
+   },
+   {
     "code": "009150",
     "name": "Samsung Electro-Mechanics Co., Ltd",
     "group": "Semiconductors",
@@ -11577,28 +11766,6 @@
     "pnl_krw": 109717,
     "pnl_pct": 7.28,
     "hold_days": 20
-   },
-   {
-    "code": "247540",
-    "name": "Ecopro BM Co., Ltd.",
-    "group": "Electrical Products",
-    "pattern": "cup_handle",
-    "patterns": [
-     "box",
-     "cup_handle"
-    ],
-    "sync_by": "day",
-    "signal_date": "2025-08-05",
-    "entry_date": "2025-08-06",
-    "entry": 125074.1,
-    "stop": 116318.91,
-    "exit_date": "2025-08-29",
-    "exit": 126419.6,
-    "why": "low10",
-    "shares": 12,
-    "pnl_krw": 13418,
-    "pnl_pct": 0.89,
-    "hold_days": 16
    },
    {
     "code": "138040",
@@ -11643,6 +11810,27 @@
     "hold_days": 16
    },
    {
+    "code": "298380",
+    "name": "ABL Bio, Inc.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-08-26",
+    "entry_date": "2025-08-27",
+    "entry": 93780.5,
+    "stop": 87215.86,
+    "exit_date": "2025-09-25",
+    "exit": 98204.5,
+    "why": "hold20",
+    "shares": 15,
+    "pnl_krw": 63718,
+    "pnl_pct": 4.53,
+    "hold_days": 20
+   },
+   {
     "code": "010140",
     "name": "Samsung Heavy Industries Co., Ltd",
     "group": "Trucks/Construction/Farm Machinery",
@@ -11683,27 +11871,6 @@
     "pnl_krw": 13118,
     "pnl_pct": 0.9,
     "hold_days": 18
-   },
-   {
-    "code": "298380",
-    "name": "ABL Bio, Inc.",
-    "group": "Pharmaceuticals: Major",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "sync_by": "day",
-    "signal_date": "2025-08-26",
-    "entry_date": "2025-08-27",
-    "entry": 93780.5,
-    "stop": 87215.86,
-    "exit_date": "2025-09-25",
-    "exit": 98204.5,
-    "why": "hold20",
-    "shares": 15,
-    "pnl_krw": 63718,
-    "pnl_pct": 4.53,
-    "hold_days": 20
    },
    {
     "code": "032820",
@@ -13325,27 +13492,6 @@
     "hold_days": 18
    },
    {
-    "code": "009150",
-    "name": "Samsung Electro-Mechanics Co., Ltd",
-    "group": "Semiconductors",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "sync_by": "day",
-    "signal_date": "2026-04-10",
-    "entry_date": "2026-04-13",
-    "entry": 556665.0,
-    "stop": 517698.45,
-    "exit_date": "2026-05-13",
-    "exit": 920231.0,
-    "why": "hold20",
-    "shares": 3,
-    "pnl_krw": 1085892,
-    "pnl_pct": 65.01,
-    "hold_days": 20
-   },
-   {
     "code": "005290",
     "name": "Dongjin Semichem Co., Ltd",
     "group": "Electronic Production Equipment",
@@ -13364,6 +13510,27 @@
     "shares": 38,
     "pnl_krw": 181723,
     "pnl_pct": 9.44,
+    "hold_days": 20
+   },
+   {
+    "code": "009150",
+    "name": "Samsung Electro-Mechanics Co., Ltd",
+    "group": "Semiconductors",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-04-10",
+    "entry_date": "2026-04-13",
+    "entry": 556665.0,
+    "stop": 517698.45,
+    "exit_date": "2026-05-13",
+    "exit": 920231.0,
+    "why": "hold20",
+    "shares": 3,
+    "pnl_krw": 1085892,
+    "pnl_pct": 65.01,
     "hold_days": 20
    },
    {
@@ -14720,27 +14887,6 @@
     "hold_days": 6
    },
    {
-    "code": "012450",
-    "name": "Hanwha Aerospace Co., Ltd.",
-    "group": "Aerospace & Defense",
-    "pattern": "triangle",
-    "patterns": [
-     "triangle"
-    ],
-    "sync_by": "day",
-    "signal_date": "2023-11-29",
-    "entry_date": "2023-11-30",
-    "entry": 135697.16,
-    "stop": 131149.71,
-    "exit_date": "2023-12-14",
-    "exit": 136214.33,
-    "why": "hold10",
-    "shares": 14,
-    "pnl_krw": 3809,
-    "pnl_pct": 0.2,
-    "hold_days": 10
-   },
-   {
     "code": "018260",
     "name": "SAMSUNG SDS CO., LTD.",
     "group": "Information Technology Services",
@@ -14759,6 +14905,27 @@
     "shares": 8,
     "pnl_krw": 50955,
     "pnl_pct": 3.82,
+    "hold_days": 10
+   },
+   {
+    "code": "012450",
+    "name": "Hanwha Aerospace Co., Ltd.",
+    "group": "Aerospace & Defense",
+    "pattern": "triangle",
+    "patterns": [
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2023-11-29",
+    "entry_date": "2023-11-30",
+    "entry": 135697.16,
+    "stop": 131149.71,
+    "exit_date": "2023-12-14",
+    "exit": 136214.33,
+    "why": "hold10",
+    "shares": 14,
+    "pnl_krw": 3809,
+    "pnl_pct": 0.2,
     "hold_days": 10
    },
    {
@@ -15173,27 +15340,6 @@
     "hold_days": 10
    },
    {
-    "code": "000270",
-    "name": "Kia Corporation",
-    "group": "Motor Vehicles",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "sync_by": "day",
-    "signal_date": "2024-01-29",
-    "entry_date": "2024-01-30",
-    "entry": 101303.0,
-    "stop": 94211.79,
-    "exit_date": "2024-02-15",
-    "exit": 118942.1,
-    "why": "hold10",
-    "shares": 13,
-    "pnl_krw": 226559,
-    "pnl_pct": 17.2,
-    "hold_days": 10
-   },
-   {
     "code": "005380",
     "name": "Hyundai Motor Company",
     "group": "Motor Vehicles",
@@ -15212,6 +15358,27 @@
     "shares": 7,
     "pnl_krw": 365549,
     "pnl_pct": 26.56,
+    "hold_days": 10
+   },
+   {
+    "code": "000270",
+    "name": "Kia Corporation",
+    "group": "Motor Vehicles",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-01-29",
+    "entry_date": "2024-01-30",
+    "entry": 101303.0,
+    "stop": 94211.79,
+    "exit_date": "2024-02-15",
+    "exit": 118942.1,
+    "why": "hold10",
+    "shares": 13,
+    "pnl_krw": 226559,
+    "pnl_pct": 17.2,
     "hold_days": 10
    },
    {
@@ -15977,27 +16144,6 @@
     "hold_days": 3
    },
    {
-    "code": "009540",
-    "name": "HD KOREA SHIPBUILDING & OFFSHORE ENGINEERING CO. LTD.",
-    "group": "Trucks/Construction/Farm Machinery",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "sync_by": "day",
-    "signal_date": "2024-04-23",
-    "entry_date": "2024-04-24",
-    "entry": 125776.2,
-    "stop": 116971.87,
-    "exit_date": "2024-05-10",
-    "exit": 131005.8,
-    "why": "hold10",
-    "shares": 11,
-    "pnl_krw": 54940,
-    "pnl_pct": 3.97,
-    "hold_days": 10
-   },
-   {
     "code": "329180",
     "name": "HD Hyundai Heavy Industries Co., Ltd.",
     "group": "Trucks/Construction/Farm Machinery",
@@ -16016,6 +16162,27 @@
     "shares": 11,
     "pnl_krw": 83150,
     "pnl_pct": 5.87,
+    "hold_days": 10
+   },
+   {
+    "code": "009540",
+    "name": "HD KOREA SHIPBUILDING & OFFSHORE ENGINEERING CO. LTD.",
+    "group": "Trucks/Construction/Farm Machinery",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-04-23",
+    "entry_date": "2024-04-24",
+    "entry": 125776.2,
+    "stop": 116971.87,
+    "exit_date": "2024-05-10",
+    "exit": 131005.8,
+    "why": "hold10",
+    "shares": 11,
+    "pnl_krw": 54940,
+    "pnl_pct": 3.97,
     "hold_days": 10
    },
    {
@@ -17346,6 +17513,27 @@
     "hold_days": 1
    },
    {
+    "code": "079550",
+    "name": "LIG Defense&Aerospace",
+    "group": "Aerospace & Defense",
+    "pattern": "triangle",
+    "patterns": [
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-09-12",
+    "entry_date": "2024-09-13",
+    "entry": 203107.5,
+    "stop": 188889.97,
+    "exit_date": "2024-10-04",
+    "exit": 218841.5,
+    "why": "hold10",
+    "shares": 6,
+    "pnl_krw": 92055,
+    "pnl_pct": 7.55,
+    "hold_days": 10
+   },
+   {
     "code": "000150",
     "name": "Doosan Corporation",
     "group": "Trucks/Construction/Farm Machinery",
@@ -17365,27 +17553,6 @@
     "shares": 7,
     "pnl_krw": 43520,
     "pnl_pct": 3.87,
-    "hold_days": 10
-   },
-   {
-    "code": "079550",
-    "name": "LIG Defense&Aerospace",
-    "group": "Aerospace & Defense",
-    "pattern": "triangle",
-    "patterns": [
-     "triangle"
-    ],
-    "sync_by": "day",
-    "signal_date": "2024-09-12",
-    "entry_date": "2024-09-13",
-    "entry": 203107.5,
-    "stop": 188889.97,
-    "exit_date": "2024-10-04",
-    "exit": 218841.5,
-    "why": "hold10",
-    "shares": 6,
-    "pnl_krw": 92055,
-    "pnl_pct": 7.55,
     "hold_days": 10
    },
    {
@@ -18031,8 +18198,8 @@
     "hold_days": 7
    },
    {
-    "code": "005690",
-    "name": "Pharmicell Co., Ltd",
+    "code": "214450",
+    "name": "PharmaResearch Co., Ltd.",
     "group": "Pharmaceuticals: Major",
     "pattern": "box",
     "patterns": [
@@ -18041,14 +18208,14 @@
     "sync_by": "day",
     "signal_date": "2024-12-10",
     "entry_date": "2024-12-11",
-    "entry": 6268.75,
-    "stop": 5829.94,
+    "entry": 239215.5,
+    "stop": 222470.41,
     "exit_date": "2024-12-26",
-    "exit": 8175.4,
+    "exit": 268691.5,
     "why": "hold10",
-    "shares": 201,
-    "pnl_krw": 380336,
-    "pnl_pct": 30.18,
+    "shares": 5,
+    "pnl_krw": 144984,
+    "pnl_pct": 12.12,
     "hold_days": 10
    },
    {
@@ -18074,8 +18241,8 @@
     "hold_days": 10
    },
    {
-    "code": "214450",
-    "name": "PharmaResearch Co., Ltd.",
+    "code": "005690",
+    "name": "Pharmicell Co., Ltd",
     "group": "Pharmaceuticals: Major",
     "pattern": "box",
     "patterns": [
@@ -18084,14 +18251,14 @@
     "sync_by": "day",
     "signal_date": "2024-12-10",
     "entry_date": "2024-12-11",
-    "entry": 239215.5,
-    "stop": 222470.41,
+    "entry": 6268.75,
+    "stop": 5829.94,
     "exit_date": "2024-12-26",
-    "exit": 268691.5,
+    "exit": 8175.4,
     "why": "hold10",
-    "shares": 5,
-    "pnl_krw": 144984,
-    "pnl_pct": 12.12,
+    "shares": 201,
+    "pnl_krw": 380336,
+    "pnl_pct": 30.18,
     "hold_days": 10
    },
    {
@@ -18202,27 +18369,6 @@
     "hold_days": 10
    },
    {
-    "code": "089030",
-    "name": "Techwing, Inc.",
-    "group": "Industrial Machinery",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "sync_by": "day",
-    "signal_date": "2024-12-27",
-    "entry_date": "2024-12-30",
-    "entry": 38615.5,
-    "stop": 35912.41,
-    "exit_date": "2025-01-15",
-    "exit": 46310.65,
-    "why": "hold10",
-    "shares": 34,
-    "pnl_krw": 258840,
-    "pnl_pct": 19.71,
-    "hold_days": 10
-   },
-   {
     "code": "039030",
     "name": "EO Technics Co., Ltd",
     "group": "Industrial Machinery",
@@ -18241,6 +18387,27 @@
     "shares": 10,
     "pnl_krw": 188313,
     "pnl_pct": 13.6,
+    "hold_days": 10
+   },
+   {
+    "code": "089030",
+    "name": "Techwing, Inc.",
+    "group": "Industrial Machinery",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-12-27",
+    "entry_date": "2024-12-30",
+    "entry": 38615.5,
+    "stop": 35912.41,
+    "exit_date": "2025-01-15",
+    "exit": 46310.65,
+    "why": "hold10",
+    "shares": 34,
+    "pnl_krw": 258840,
+    "pnl_pct": 19.71,
     "hold_days": 10
    },
    {
@@ -18485,6 +18652,27 @@
     "hold_days": 2
    },
    {
+    "code": "079550",
+    "name": "LIG Defense&Aerospace",
+    "group": "Aerospace & Defense",
+    "pattern": "cup_handle",
+    "patterns": [
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-02-04",
+    "entry_date": "2025-02-05",
+    "entry": 248744.0,
+    "stop": 231331.92,
+    "exit_date": "2025-02-19",
+    "exit": 306079.0,
+    "why": "hold10",
+    "shares": 6,
+    "pnl_krw": 340756,
+    "pnl_pct": 22.83,
+    "hold_days": 10
+   },
+   {
     "code": "454910",
     "name": "Doosan Robotics Inc.",
     "group": "Industrial Machinery",
@@ -18505,27 +18693,6 @@
     "shares": 21,
     "pnl_krw": 94996,
     "pnl_pct": 6.36,
-    "hold_days": 10
-   },
-   {
-    "code": "079550",
-    "name": "LIG Defense&Aerospace",
-    "group": "Aerospace & Defense",
-    "pattern": "cup_handle",
-    "patterns": [
-     "cup_handle"
-    ],
-    "sync_by": "day",
-    "signal_date": "2025-02-04",
-    "entry_date": "2025-02-05",
-    "entry": 248744.0,
-    "stop": 231331.92,
-    "exit_date": "2025-02-19",
-    "exit": 306079.0,
-    "why": "hold10",
-    "shares": 6,
-    "pnl_krw": 340756,
-    "pnl_pct": 22.83,
     "hold_days": 10
    },
    {
@@ -18807,27 +18974,6 @@
     "hold_days": 10
    },
    {
-    "code": "047810",
-    "name": "Korea Aerospace Industries, Ltd.",
-    "group": "Aerospace & Defense",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "sync_by": "day",
-    "signal_date": "2025-03-04",
-    "entry_date": "2025-03-05",
-    "entry": 66900.1,
-    "stop": 62217.09,
-    "exit_date": "2025-03-19",
-    "exit": 86439.9,
-    "why": "hold10",
-    "shares": 21,
-    "pnl_krw": 407130,
-    "pnl_pct": 28.97,
-    "hold_days": 10
-   },
-   {
     "code": "214450",
     "name": "PharmaResearch Co., Ltd.",
     "group": "Pharmaceuticals: Major",
@@ -18847,6 +18993,27 @@
     "shares": 4,
     "pnl_krw": 53912,
     "pnl_pct": 4.28,
+    "hold_days": 10
+   },
+   {
+    "code": "047810",
+    "name": "Korea Aerospace Industries, Ltd.",
+    "group": "Aerospace & Defense",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-03-04",
+    "entry_date": "2025-03-05",
+    "entry": 66900.1,
+    "stop": 62217.09,
+    "exit_date": "2025-03-19",
+    "exit": 86439.9,
+    "why": "hold10",
+    "shares": 21,
+    "pnl_krw": 407130,
+    "pnl_pct": 28.97,
     "hold_days": 10
    },
    {
@@ -19082,6 +19249,27 @@
     "hold_days": 10
    },
    {
+    "code": "141080",
+    "name": "LigaChem Biosciences Inc.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-04-11",
+    "entry_date": "2025-04-14",
+    "entry": 109527.6,
+    "stop": 101860.67,
+    "exit_date": "2025-04-28",
+    "exit": 109969.1,
+    "why": "hold10",
+    "shares": 13,
+    "pnl_krw": 3167,
+    "pnl_pct": 0.22,
+    "hold_days": 10
+   },
+   {
     "code": "161890",
     "name": "KOLMAR KOREA CO. LTD",
     "group": "Household/Personal Care",
@@ -19101,27 +19289,6 @@
     "shares": 20,
     "pnl_krw": 20470,
     "pnl_pct": 1.4,
-    "hold_days": 10
-   },
-   {
-    "code": "141080",
-    "name": "LigaChem Biosciences Inc.",
-    "group": "Pharmaceuticals: Major",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "sync_by": "day",
-    "signal_date": "2025-04-11",
-    "entry_date": "2025-04-14",
-    "entry": 109527.6,
-    "stop": 101860.67,
-    "exit_date": "2025-04-28",
-    "exit": 109969.1,
-    "why": "hold10",
-    "shares": 13,
-    "pnl_krw": 3167,
-    "pnl_pct": 0.22,
     "hold_days": 10
    },
    {
@@ -19580,6 +19747,27 @@
     "hold_days": 10
    },
    {
+    "code": "347850",
+    "name": "D&D Pharmatech Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-06-11",
+    "entry_date": "2025-06-12",
+    "entry": 23445.12,
+    "stop": 21803.97,
+    "exit_date": "2025-06-26",
+    "exit": 30931.92,
+    "why": "hold10",
+    "shares": 75,
+    "pnl_krw": 557418,
+    "pnl_pct": 31.7,
+    "hold_days": 10
+   },
+   {
     "code": "042700",
     "name": "Hanmi Semiconductor Co., Ltd",
     "group": "Industrial Machinery",
@@ -19599,27 +19787,6 @@
     "shares": 28,
     "pnl_krw": 527632,
     "pnl_pct": 22.02,
-    "hold_days": 10
-   },
-   {
-    "code": "347850",
-    "name": "D&D Pharmatech Co., Ltd.",
-    "group": "Pharmaceuticals: Major",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "sync_by": "day",
-    "signal_date": "2025-06-11",
-    "entry_date": "2025-06-12",
-    "entry": 23445.12,
-    "stop": 21803.97,
-    "exit_date": "2025-06-26",
-    "exit": 30931.92,
-    "why": "hold10",
-    "shares": 75,
-    "pnl_krw": 557418,
-    "pnl_pct": 31.7,
     "hold_days": 10
    },
    {
@@ -19774,28 +19941,6 @@
     "hold_days": 4
    },
    {
-    "code": "000270",
-    "name": "Kia Corporation",
-    "group": "Motor Vehicles",
-    "pattern": "cup_handle",
-    "patterns": [
-     "box",
-     "cup_handle"
-    ],
-    "sync_by": "day",
-    "signal_date": "2025-06-25",
-    "entry_date": "2025-06-26",
-    "entry": 101002.1,
-    "stop": 94400.0,
-    "exit_date": "2025-07-10",
-    "exit": 99600.3,
-    "why": "hold10",
-    "shares": 21,
-    "pnl_krw": -33207,
-    "pnl_pct": -1.57,
-    "hold_days": 10
-   },
-   {
     "code": "005380",
     "name": "Hyundai Motor Company",
     "group": "Motor Vehicles",
@@ -19815,6 +19960,28 @@
     "shares": 9,
     "pnl_krw": -55361,
     "pnl_pct": -2.86,
+    "hold_days": 10
+   },
+   {
+    "code": "000270",
+    "name": "Kia Corporation",
+    "group": "Motor Vehicles",
+    "pattern": "cup_handle",
+    "patterns": [
+     "box",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-06-25",
+    "entry_date": "2025-06-26",
+    "entry": 101002.1,
+    "stop": 94400.0,
+    "exit_date": "2025-07-10",
+    "exit": 99600.3,
+    "why": "hold10",
+    "shares": 21,
+    "pnl_krw": -33207,
+    "pnl_pct": -1.57,
     "hold_days": 10
    },
    {
@@ -20013,6 +20180,27 @@
     "hold_days": 8
    },
    {
+    "code": "006400",
+    "name": "Samsung SDI Co., Ltd",
+    "group": "Electrical Products",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-07-24",
+    "entry_date": "2025-07-25",
+    "entry": 193879.9,
+    "stop": 180308.31,
+    "exit_date": "2025-08-08",
+    "exit": 220835.5,
+    "why": "hold10",
+    "shares": 10,
+    "pnl_krw": 265621,
+    "pnl_pct": 13.7,
+    "hold_days": 10
+   },
+   {
     "code": "373220",
     "name": "LG Energy Solution Ltd.",
     "group": "Electrical Products",
@@ -20032,27 +20220,6 @@
     "shares": 5,
     "pnl_krw": 92832,
     "pnl_pct": 5.09,
-    "hold_days": 10
-   },
-   {
-    "code": "006400",
-    "name": "Samsung SDI Co., Ltd",
-    "group": "Electrical Products",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "sync_by": "day",
-    "signal_date": "2025-07-24",
-    "entry_date": "2025-07-25",
-    "entry": 193879.9,
-    "stop": 180308.31,
-    "exit_date": "2025-08-08",
-    "exit": 220835.5,
-    "why": "hold10",
-    "shares": 10,
-    "pnl_krw": 265621,
-    "pnl_pct": 13.7,
     "hold_days": 10
    },
    {
@@ -20332,8 +20499,8 @@
     "hold_days": 10
    },
    {
-    "code": "322000",
-    "name": "HD HYUNDAI ENERGY SOLUTIONS CO. LTD.",
+    "code": "058470",
+    "name": "Leeno Industrial Inc.",
     "group": "Semiconductors",
     "pattern": "box",
     "patterns": [
@@ -20342,14 +20509,14 @@
     "sync_by": "day",
     "signal_date": "2025-09-08",
     "entry_date": "2025-09-09",
-    "entry": 51654.5,
-    "stop": 48038.68,
+    "entry": 50250.3,
+    "stop": 46732.78,
     "exit_date": "2025-09-24",
-    "exit": 51245.8,
+    "exit": 51544.9,
     "why": "hold10",
-    "shares": 37,
-    "pnl_krw": -18537,
-    "pnl_pct": -0.97,
+    "shares": 38,
+    "pnl_krw": 45677,
+    "pnl_pct": 2.39,
     "hold_days": 10
    },
    {
@@ -20374,8 +20541,8 @@
     "hold_days": 10
    },
    {
-    "code": "058470",
-    "name": "Leeno Industrial Inc.",
+    "code": "322000",
+    "name": "HD HYUNDAI ENERGY SOLUTIONS CO. LTD.",
     "group": "Semiconductors",
     "pattern": "box",
     "patterns": [
@@ -20384,14 +20551,14 @@
     "sync_by": "day",
     "signal_date": "2025-09-08",
     "entry_date": "2025-09-09",
-    "entry": 50250.3,
-    "stop": 46732.78,
+    "entry": 51654.5,
+    "stop": 48038.68,
     "exit_date": "2025-09-24",
-    "exit": 51544.9,
+    "exit": 51245.8,
     "why": "hold10",
-    "shares": 38,
-    "pnl_krw": 45677,
-    "pnl_pct": 2.39,
+    "shares": 37,
+    "pnl_krw": -18537,
+    "pnl_pct": -0.97,
     "hold_days": 10
    },
    {
@@ -20586,27 +20753,6 @@
     "hold_days": 10
    },
    {
-    "code": "353200",
-    "name": "Daeduck Electronics Co., Ltd.",
-    "group": "Electronic Components",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "sync_by": "day",
-    "signal_date": "2025-10-01",
-    "entry_date": "2025-10-02",
-    "entry": 31042.85,
-    "stop": 28869.85,
-    "exit_date": "2025-10-23",
-    "exit": 30807.3,
-    "why": "hold10",
-    "shares": 63,
-    "pnl_krw": -18335,
-    "pnl_pct": -0.94,
-    "hold_days": 10
-   },
-   {
     "code": "003160",
     "name": "DI Corporation",
     "group": "Electronic Equipment/Instruments",
@@ -20629,24 +20775,24 @@
     "hold_days": 10
    },
    {
-    "code": "006400",
-    "name": "Samsung SDI Co., Ltd",
-    "group": "Electrical Products",
+    "code": "353200",
+    "name": "Daeduck Electronics Co., Ltd.",
+    "group": "Electronic Components",
     "pattern": "box",
     "patterns": [
      "box"
     ],
     "sync_by": "day",
-    "signal_date": "2025-10-14",
-    "entry_date": "2025-10-15",
-    "entry": 223669.0,
-    "stop": 208012.17,
-    "exit_date": "2025-10-29",
-    "exit": 311562.5,
+    "signal_date": "2025-10-01",
+    "entry_date": "2025-10-02",
+    "entry": 31042.85,
+    "stop": 28869.85,
+    "exit_date": "2025-10-23",
+    "exit": 30807.3,
     "why": "hold10",
-    "shares": 8,
-    "pnl_krw": 698767,
-    "pnl_pct": 39.05,
+    "shares": 63,
+    "pnl_krw": -18335,
+    "pnl_pct": -0.94,
     "hold_days": 10
    },
    {
@@ -20668,6 +20814,27 @@
     "shares": 11,
     "pnl_krw": 700154,
     "pnl_pct": 36.74,
+    "hold_days": 10
+   },
+   {
+    "code": "006400",
+    "name": "Samsung SDI Co., Ltd",
+    "group": "Electrical Products",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-10-14",
+    "entry_date": "2025-10-15",
+    "entry": 223669.0,
+    "stop": 208012.17,
+    "exit_date": "2025-10-29",
+    "exit": 311562.5,
+    "why": "hold10",
+    "shares": 8,
+    "pnl_krw": 698767,
+    "pnl_pct": 39.05,
     "hold_days": 10
    },
    {
@@ -20842,9 +21009,9 @@
     "hold_days": 10
    },
    {
-    "code": "086790",
-    "name": "Hana Financial Group Inc.",
-    "group": "Major Banks",
+    "code": "024110",
+    "name": "Industrial Bank Of Korea",
+    "group": "Regional Banks",
     "pattern": "box",
     "patterns": [
      "box"
@@ -20852,14 +21019,14 @@
     "sync_by": "day",
     "signal_date": "2025-11-06",
     "entry_date": "2025-11-07",
-    "entry": 94984.1,
-    "stop": 88335.21,
+    "entry": 20360.9,
+    "stop": 18935.64,
     "exit_date": "2025-11-21",
-    "exit": 92521.6,
+    "exit": 20039.7,
     "why": "hold10",
-    "shares": 21,
-    "pnl_krw": -55218,
-    "pnl_pct": -2.77,
+    "shares": 100,
+    "pnl_krw": -35732,
+    "pnl_pct": -1.75,
     "hold_days": 10
    },
    {
@@ -20906,9 +21073,9 @@
     "hold_days": 10
    },
    {
-    "code": "024110",
-    "name": "Industrial Bank Of Korea",
-    "group": "Regional Banks",
+    "code": "086790",
+    "name": "Hana Financial Group Inc.",
+    "group": "Major Banks",
     "pattern": "box",
     "patterns": [
      "box"
@@ -20916,14 +21083,14 @@
     "sync_by": "day",
     "signal_date": "2025-11-06",
     "entry_date": "2025-11-07",
-    "entry": 20360.9,
-    "stop": 18935.64,
+    "entry": 94984.1,
+    "stop": 88335.21,
     "exit_date": "2025-11-21",
-    "exit": 20039.7,
+    "exit": 92521.6,
     "why": "hold10",
-    "shares": 100,
-    "pnl_krw": -35732,
-    "pnl_pct": -1.75,
+    "shares": 21,
+    "pnl_krw": -55218,
+    "pnl_pct": -2.77,
     "hold_days": 10
    },
    {
@@ -21374,6 +21541,27 @@
     "hold_days": 2
    },
    {
+    "code": "298380",
+    "name": "ABL Bio, Inc.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "triangle",
+    "patterns": [
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-12-26",
+    "entry_date": "2025-12-29",
+    "entry": 203609.0,
+    "stop": 189356.37,
+    "exit_date": "2026-01-14",
+    "exit": 198403.0,
+    "why": "hold10",
+    "shares": 10,
+    "pnl_krw": -55639,
+    "pnl_pct": -2.73,
+    "hold_days": 10
+   },
+   {
     "code": "005930",
     "name": "Samsung Electronics Co., Ltd.",
     "group": "Semiconductors",
@@ -21393,27 +21581,6 @@
     "shares": 18,
     "pnl_krw": 298574,
     "pnl_pct": 13.85,
-    "hold_days": 10
-   },
-   {
-    "code": "298380",
-    "name": "ABL Bio, Inc.",
-    "group": "Pharmaceuticals: Major",
-    "pattern": "triangle",
-    "patterns": [
-     "triangle"
-    ],
-    "sync_by": "day",
-    "signal_date": "2025-12-26",
-    "entry_date": "2025-12-29",
-    "entry": 203609.0,
-    "stop": 189356.37,
-    "exit_date": "2026-01-14",
-    "exit": 198403.0,
-    "why": "hold10",
-    "shares": 10,
-    "pnl_krw": -55639,
-    "pnl_pct": -2.73,
     "hold_days": 10
    },
    {
@@ -21649,27 +21816,6 @@
     "hold_days": 10
    },
    {
-    "code": "001440",
-    "name": "Taihan Cable & Solution Co., Ltd.",
-    "group": "Metal Fabrication",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "sync_by": "day",
-    "signal_date": "2026-01-20",
-    "entry_date": "2026-01-21",
-    "entry": 27933.55,
-    "stop": 25978.2,
-    "exit_date": "2026-02-04",
-    "exit": 30358.65,
-    "why": "hold10",
-    "shares": 83,
-    "pnl_krw": 196778,
-    "pnl_pct": 8.49,
-    "hold_days": 10
-   },
-   {
     "code": "055550",
     "name": "Shinhan Financial Group Co., Ltd.",
     "group": "Major Banks",
@@ -21688,6 +21834,27 @@
     "shares": 28,
     "pnl_krw": 252374,
     "pnl_pct": 10.92,
+    "hold_days": 10
+   },
+   {
+    "code": "001440",
+    "name": "Taihan Cable & Solution Co., Ltd.",
+    "group": "Metal Fabrication",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-01-20",
+    "entry_date": "2026-01-21",
+    "entry": 27933.55,
+    "stop": 25978.2,
+    "exit_date": "2026-02-04",
+    "exit": 30358.65,
+    "why": "hold10",
+    "shares": 83,
+    "pnl_krw": 196778,
+    "pnl_pct": 8.49,
     "hold_days": 10
    },
    {
@@ -21901,27 +22068,6 @@
     "hold_days": 1
    },
    {
-    "code": "068270",
-    "name": "Celltrion, Inc.",
-    "group": "Biotechnology",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "sync_by": "day",
-    "signal_date": "2026-02-09",
-    "entry_date": "2026-02-10",
-    "entry": 217794.29,
-    "stop": 202548.69,
-    "exit_date": "2026-02-27",
-    "exit": 229310.0,
-    "why": "hold10",
-    "shares": 10,
-    "pnl_krw": 111047,
-    "pnl_pct": 5.1,
-    "hold_days": 10
-   },
-   {
     "code": "316140",
     "name": "Woori Financial Group, Inc.",
     "group": "Major Banks",
@@ -21940,6 +22086,27 @@
     "shares": 66,
     "pnl_krw": 99880,
     "pnl_pct": 4.23,
+    "hold_days": 10
+   },
+   {
+    "code": "068270",
+    "name": "Celltrion, Inc.",
+    "group": "Biotechnology",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-02-09",
+    "entry_date": "2026-02-10",
+    "entry": 217794.29,
+    "stop": 202548.69,
+    "exit_date": "2026-02-27",
+    "exit": 229310.0,
+    "why": "hold10",
+    "shares": 10,
+    "pnl_krw": 111047,
+    "pnl_pct": 5.1,
     "hold_days": 10
    },
    {
@@ -23645,27 +23812,6 @@
     "hold_days": 10
    },
    {
-    "code": "010140",
-    "name": "Samsung Heavy Industries Co., Ltd",
-    "group": "Trucks/Construction/Farm Machinery",
-    "pattern": "triangle",
-    "patterns": [
-     "triangle"
-    ],
-    "sync_by": "day",
-    "signal_date": "2026-09-03",
-    "entry_date": "2026-09-04",
-    "entry": 21564.5,
-    "stop": 20054.98,
-    "exit_date": "2026-09-18",
-    "exit": 21485.35,
-    "why": "hold10",
-    "shares": 79,
-    "pnl_krw": -9309,
-    "pnl_pct": -0.55,
-    "hold_days": 10
-   },
-   {
     "code": "375500",
     "name": "DL E&C Co., Ltd.",
     "group": "Engineering & Construction",
@@ -23684,6 +23830,27 @@
     "shares": 23,
     "pnl_krw": 273148,
     "pnl_pct": 16.31,
+    "hold_days": 10
+   },
+   {
+    "code": "010140",
+    "name": "Samsung Heavy Industries Co., Ltd",
+    "group": "Trucks/Construction/Farm Machinery",
+    "pattern": "triangle",
+    "patterns": [
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-09-03",
+    "entry_date": "2026-09-04",
+    "entry": 21564.5,
+    "stop": 20054.98,
+    "exit_date": "2026-09-18",
+    "exit": 21485.35,
+    "why": "hold10",
+    "shares": 79,
+    "pnl_krw": -9309,
+    "pnl_pct": -0.55,
     "hold_days": 10
    },
    {
@@ -23772,6 +23939,4124 @@
     "pnl_krw": -145815,
     "pnl_pct": -8.69,
     "hold_days": 10
+   }
+  ],
+  "risk_2": [
+   {
+    "code": "036930",
+    "name": "Jusung Engineering Co., Ltd",
+    "group": "Industrial Machinery",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2023-11-15",
+    "entry_date": "2023-11-16",
+    "entry": 36810.1,
+    "stop": 34233.39,
+    "exit_date": "2023-11-21",
+    "exit": 34130.69,
+    "why": "stop",
+    "shares": 78,
+    "pnl_krw": -213817,
+    "pnl_pct": -7.45,
+    "hold_days": 4
+   },
+   {
+    "code": "089010",
+    "name": "Chemtronics Co., Ltd.",
+    "group": "Chemicals: Specialty",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2023-11-14",
+    "entry_date": "2023-11-15",
+    "entry": 25275.6,
+    "stop": 23506.31,
+    "exit_date": "2023-11-27",
+    "exit": 23435.79,
+    "why": "stop",
+    "shares": 113,
+    "pnl_krw": -212697,
+    "pnl_pct": -7.45,
+    "hold_days": 9
+   },
+   {
+    "code": "353200",
+    "name": "Daeduck Electronics Co., Ltd.",
+    "group": "Electronic Components",
+    "pattern": "cup_handle",
+    "patterns": [
+     "box",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2023-11-27",
+    "entry_date": "2023-11-28",
+    "entry": 27281.6,
+    "stop": 25371.89,
+    "exit_date": "2023-12-07",
+    "exit": 25295.77,
+    "why": "stop",
+    "shares": 99,
+    "pnl_krw": -201134,
+    "pnl_pct": -7.45,
+    "hold_days": 8
+   },
+   {
+    "code": "005930",
+    "name": "Samsung Electronics Co., Ltd.",
+    "group": "Semiconductors",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2023-11-15",
+    "entry_date": "2023-11-16",
+    "entry": 72717.5,
+    "stop": 67627.27,
+    "exit_date": "2023-12-14",
+    "exit": 73877.7,
+    "why": "hold20",
+    "shares": 39,
+    "pnl_krw": 40068,
+    "pnl_pct": 1.41,
+    "hold_days": 20
+   },
+   {
+    "code": "010140",
+    "name": "Samsung Heavy Industries Co., Ltd",
+    "group": "Trucks/Construction/Farm Machinery",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2023-11-22",
+    "entry_date": "2023-11-23",
+    "entry": 7993.91,
+    "stop": 7434.34,
+    "exit_date": "2023-12-18",
+    "exit": 7412.03,
+    "why": "stop",
+    "shares": 348,
+    "pnl_krw": -207166,
+    "pnl_pct": -7.45,
+    "hold_days": 18
+   },
+   {
+    "code": "036830",
+    "name": "Soulbrain Holdings Co., Ltd.",
+    "group": "Chemicals: Specialty",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2023-12-18",
+    "entry_date": "2023-12-19",
+    "entry": 47391.75,
+    "stop": 44074.33,
+    "exit_date": "2023-12-21",
+    "exit": 43942.1,
+    "why": "stop",
+    "shares": 56,
+    "pnl_krw": -197638,
+    "pnl_pct": -7.45,
+    "hold_days": 3
+   },
+   {
+    "code": "128940",
+    "name": "Hanmi Pharmaceutical Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "cup_handle",
+    "patterns": [
+     "box",
+     "triangle",
+     "cup_handle"
+    ],
+    "sync_by": "week",
+    "signal_date": "2023-12-07",
+    "entry_date": "2023-12-08",
+    "entry": 323024.99,
+    "stop": 300413.24,
+    "exit_date": "2024-01-10",
+    "exit": 351442.5,
+    "why": "hold20",
+    "shares": 8,
+    "pnl_krw": 222313,
+    "pnl_pct": 8.6,
+    "hold_days": 20
+   },
+   {
+    "code": "007810",
+    "name": "Korea Circuit Co., Ltd.",
+    "group": "Electronic Components",
+    "pattern": "cup_handle",
+    "patterns": [
+     "box",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2023-12-13",
+    "entry_date": "2023-12-14",
+    "entry": 20511.35,
+    "stop": 19075.56,
+    "exit_date": "2024-01-10",
+    "exit": 19018.33,
+    "why": "stop",
+    "shares": 131,
+    "pnl_krw": -200100,
+    "pnl_pct": -7.45,
+    "hold_days": 17
+   },
+   {
+    "code": "196170",
+    "name": "ALTEOGEN Inc.",
+    "group": "Biotechnology",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2023-12-21",
+    "entry_date": "2023-12-22",
+    "entry": 67123.85,
+    "stop": 62425.18,
+    "exit_date": "2024-01-19",
+    "exit": 64114.77,
+    "why": "low10",
+    "shares": 39,
+    "pnl_krw": -121873,
+    "pnl_pct": -4.65,
+    "hold_days": 17
+   },
+   {
+    "code": "050890",
+    "name": "SOLiD Inc.",
+    "group": "Computer Communications",
+    "pattern": "cup_handle",
+    "patterns": [
+     "box",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-01-11",
+    "entry_date": "2024-01-12",
+    "entry": 6790.31,
+    "stop": 6314.99,
+    "exit_date": "2024-01-24",
+    "exit": 6296.04,
+    "why": "stop",
+    "shares": 387,
+    "pnl_krw": -195696,
+    "pnl_pct": -7.45,
+    "hold_days": 9
+   },
+   {
+    "code": "103590",
+    "name": "Iljin Electric Co., Ltd.",
+    "group": "Electrical Products",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-01-18",
+    "entry_date": "2024-01-19",
+    "entry": 12487.35,
+    "stop": 11613.24,
+    "exit_date": "2024-01-29",
+    "exit": 11578.4,
+    "why": "stop",
+    "shares": 216,
+    "pnl_krw": -200865,
+    "pnl_pct": -7.45,
+    "hold_days": 7
+   },
+   {
+    "code": "032500",
+    "name": "KMW, Inc.",
+    "group": "Electronic Production Equipment",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-01-11",
+    "entry_date": "2024-01-12",
+    "entry": 13941.7,
+    "stop": 12965.78,
+    "exit_date": "2024-02-13",
+    "exit": 15254.1,
+    "why": "hold20",
+    "shares": 188,
+    "pnl_krw": 241606,
+    "pnl_pct": 9.22,
+    "hold_days": 20
+   },
+   {
+    "code": "055550",
+    "name": "Shinhan Financial Group Co., Ltd.",
+    "group": "Major Banks",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "week",
+    "signal_date": "2024-01-24",
+    "entry_date": "2024-01-25",
+    "entry": 39819.1,
+    "stop": 37031.76,
+    "exit_date": "2024-02-26",
+    "exit": 42322.65,
+    "why": "hold20",
+    "shares": 64,
+    "pnl_krw": 155376,
+    "pnl_pct": 6.1,
+    "hold_days": 20
+   },
+   {
+    "code": "005935",
+    "name": "Samsung Electronics Co Ltd Pfd Non-Voting",
+    "group": "Semiconductors",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-02-08",
+    "entry_date": "2024-02-13",
+    "entry": 64693.5,
+    "stop": 60164.95,
+    "exit_date": "2024-02-28",
+    "exit": 61315.5,
+    "why": "low10",
+    "shares": 41,
+    "pnl_krw": -143044,
+    "pnl_pct": -5.39,
+    "hold_days": 11
+   },
+   {
+    "code": "000270",
+    "name": "Kia Corporation",
+    "group": "Motor Vehicles",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-01-29",
+    "entry_date": "2024-01-30",
+    "entry": 101303.0,
+    "stop": 94211.79,
+    "exit_date": "2024-02-29",
+    "exit": 117945.1,
+    "why": "hold20",
+    "shares": 25,
+    "pnl_krw": 410807,
+    "pnl_pct": 16.22,
+    "hold_days": 20
+   },
+   {
+    "code": "138040",
+    "name": "Meritz Financial Group Inc.",
+    "group": "Investment Banks/Brokers",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-02-23",
+    "entry_date": "2024-02-26",
+    "entry": 81543.9,
+    "stop": 75835.83,
+    "exit_date": "2024-03-26",
+    "exit": 85143.8,
+    "why": "hold20",
+    "shares": 32,
+    "pnl_krw": 110310,
+    "pnl_pct": 4.23,
+    "hold_days": 20
+   },
+   {
+    "code": "272210",
+    "name": "Hanwha Systems Co., Ltd.",
+    "group": "Aerospace & Defense",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-02-27",
+    "entry_date": "2024-02-28",
+    "entry": 17281.69,
+    "stop": 16071.97,
+    "exit_date": "2024-03-28",
+    "exit": 17646.9,
+    "why": "hold20",
+    "shares": 151,
+    "pnl_krw": 50359,
+    "pnl_pct": 1.93,
+    "hold_days": 20
+   },
+   {
+    "code": "042700",
+    "name": "Hanmi Semiconductor Co., Ltd",
+    "group": "Industrial Machinery",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-02-28",
+    "entry_date": "2024-02-29",
+    "entry": 87963.1,
+    "stop": 81805.68,
+    "exit_date": "2024-03-29",
+    "exit": 133996.8,
+    "why": "hold20",
+    "shares": 30,
+    "pnl_krw": 1373982,
+    "pnl_pct": 52.06,
+    "hold_days": 20
+   },
+   {
+    "code": "247540",
+    "name": "Ecopro BM Co., Ltd.",
+    "group": "Electrical Products",
+    "pattern": "cup_handle",
+    "patterns": [
+     "box",
+     "cup_handle"
+    ],
+    "sync_by": "week",
+    "signal_date": "2024-03-25",
+    "entry_date": "2024-03-26",
+    "entry": 295383.5,
+    "stop": 274706.65,
+    "exit_date": "2024-03-29",
+    "exit": 273882.54,
+    "why": "stop",
+    "shares": 9,
+    "pnl_krw": -197975,
+    "pnl_pct": -7.45,
+    "hold_days": 4
+   },
+   {
+    "code": "103590",
+    "name": "Iljin Electric Co., Ltd.",
+    "group": "Electrical Products",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-03-27",
+    "entry_date": "2024-03-28",
+    "entry": 20661.8,
+    "stop": 19215.47,
+    "exit_date": "2024-03-29",
+    "exit": 19157.83,
+    "why": "stop",
+    "shares": 139,
+    "pnl_krw": -213877,
+    "pnl_pct": -7.45,
+    "hold_days": 2
+   },
+   {
+    "code": "080220",
+    "name": "Jeju Semiconductor Corp.",
+    "group": "Semiconductors",
+    "pattern": "triangle",
+    "patterns": [
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-03-28",
+    "entry_date": "2024-03-29",
+    "entry": 28685.8,
+    "stop": 26677.79,
+    "exit_date": "2024-04-03",
+    "exit": 26597.76,
+    "why": "stop",
+    "shares": 105,
+    "pnl_krw": -224304,
+    "pnl_pct": -7.45,
+    "hold_days": 4
+   },
+   {
+    "code": "005290",
+    "name": "Dongjin Semichem Co., Ltd",
+    "group": "Electronic Production Equipment",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-03-29",
+    "entry_date": "2024-04-01",
+    "entry": 48795.95,
+    "stop": 45380.23,
+    "exit_date": "2024-04-09",
+    "exit": 45244.09,
+    "why": "stop",
+    "shares": 61,
+    "pnl_krw": -221664,
+    "pnl_pct": -7.45,
+    "hold_days": 7
+   },
+   {
+    "code": "067310",
+    "name": "Hana Micron Inc.",
+    "group": "Semiconductors",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-04-04",
+    "entry_date": "2024-04-05",
+    "entry": 27403.83,
+    "stop": 25485.56,
+    "exit_date": "2024-04-09",
+    "exit": 25409.1,
+    "why": "stop",
+    "shares": 107,
+    "pnl_krw": -218361,
+    "pnl_pct": -7.45,
+    "hold_days": 3
+   },
+   {
+    "code": "010170",
+    "name": "Taihan Fiberoptics Co., Ltd",
+    "group": "Electrical Products",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "week",
+    "signal_date": "2024-04-09",
+    "entry_date": "2024-04-11",
+    "entry": 1174.51,
+    "stop": 1092.3,
+    "exit_date": "2024-04-22",
+    "exit": 1089.02,
+    "why": "stop",
+    "shares": 2379,
+    "pnl_krw": -208081,
+    "pnl_pct": -7.45,
+    "hold_days": 8
+   },
+   {
+    "code": "095610",
+    "name": "TES Co., Ltd.",
+    "group": "Electronic Production Equipment",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-03-29",
+    "entry_date": "2024-04-01",
+    "entry": 21865.4,
+    "stop": 20334.82,
+    "exit_date": "2024-04-30",
+    "exit": 24775.45,
+    "why": "hold20",
+    "shares": 136,
+    "pnl_krw": 389761,
+    "pnl_pct": 13.11,
+    "hold_days": 20
+   },
+   {
+    "code": "183300",
+    "name": "KoMiCo Ltd.",
+    "group": "Semiconductors",
+    "pattern": "flag",
+    "patterns": [
+     "box",
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-04-11",
+    "entry_date": "2024-04-12",
+    "entry": 16228.54,
+    "stop": 15092.54,
+    "exit_date": "2024-05-14",
+    "exit": 18105.52,
+    "why": "hold20",
+    "shares": 177,
+    "pnl_krw": 326507,
+    "pnl_pct": 11.37,
+    "hold_days": 20
+   },
+   {
+    "code": "009540",
+    "name": "HD KOREA SHIPBUILDING & OFFSHORE ENGINEERING CO. LTD.",
+    "group": "Trucks/Construction/Farm Machinery",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-04-23",
+    "entry_date": "2024-04-24",
+    "entry": 125776.2,
+    "stop": 116971.87,
+    "exit_date": "2024-05-27",
+    "exit": 137087.5,
+    "why": "hold20",
+    "shares": 22,
+    "pnl_krw": 243457,
+    "pnl_pct": 8.8,
+    "hold_days": 20
+   },
+   {
+    "code": "006340",
+    "name": "Daewon Cable Co., Ltd.",
+    "group": "Electrical Products",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-04-29",
+    "entry_date": "2024-04-30",
+    "entry": 3329.96,
+    "stop": 3096.86,
+    "exit_date": "2024-05-31",
+    "exit": 3678.93,
+    "why": "low10",
+    "shares": 883,
+    "pnl_krw": 302339,
+    "pnl_pct": 10.28,
+    "hold_days": 20
+   },
+   {
+    "code": "003350",
+    "name": "Hankook Cosmetics Manufacturing Co., Ltd",
+    "group": "Household/Personal Care",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-05-30",
+    "entry_date": "2024-05-31",
+    "entry": 11053.06,
+    "stop": 10279.35,
+    "exit_date": "2024-06-04",
+    "exit": 10248.51,
+    "why": "stop",
+    "shares": 286,
+    "pnl_krw": -235412,
+    "pnl_pct": -7.45,
+    "hold_days": 3
+   },
+   {
+    "code": "267260",
+    "name": "HD Hyundai Electric",
+    "group": "Electrical Products",
+    "pattern": "flag",
+    "patterns": [
+     "box",
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-05-24",
+    "entry_date": "2024-05-27",
+    "entry": 285855.0,
+    "stop": 265845.15,
+    "exit_date": "2024-06-07",
+    "exit": 265047.61,
+    "why": "stop",
+    "shares": 11,
+    "pnl_krw": -234164,
+    "pnl_pct": -7.45,
+    "hold_days": 9
+   },
+   {
+    "code": "090460",
+    "name": "BH Co., Ltd.",
+    "group": "Electronic Components",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-05-13",
+    "entry_date": "2024-05-14",
+    "entry": 22968.7,
+    "stop": 21360.89,
+    "exit_date": "2024-06-11",
+    "exit": 21296.81,
+    "why": "stop",
+    "shares": 147,
+    "pnl_krw": -251440,
+    "pnl_pct": -7.45,
+    "hold_days": 19
+   },
+   {
+    "code": "003670",
+    "name": "POSCO FUTURE M CO., LTD.",
+    "group": "Electronic Equipment/Instruments",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-06-11",
+    "entry_date": "2024-06-12",
+    "entry": 287861.0,
+    "stop": 267710.73,
+    "exit_date": "2024-06-17",
+    "exit": 266907.6,
+    "why": "stop",
+    "shares": 10,
+    "pnl_krw": -214370,
+    "pnl_pct": -7.45,
+    "hold_days": 4
+   },
+   {
+    "code": "000270",
+    "name": "Kia Corporation",
+    "group": "Motor Vehicles",
+    "pattern": "cup_handle",
+    "patterns": [
+     "box",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-06-17",
+    "entry_date": "2024-06-18",
+    "entry": 130289.7,
+    "stop": 121169.42,
+    "exit_date": "2024-07-03",
+    "exit": 124425.6,
+    "why": "low10",
+    "shares": 22,
+    "pnl_krw": -133957,
+    "pnl_pct": -4.67,
+    "hold_days": 11
+   },
+   {
+    "code": "196170",
+    "name": "ALTEOGEN Inc.",
+    "group": "Biotechnology",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-06-04",
+    "entry_date": "2024-06-05",
+    "entry": 177839.61,
+    "stop": 165390.84,
+    "exit_date": "2024-07-04",
+    "exit": 196715.76,
+    "why": "hold20",
+    "shares": 17,
+    "pnl_krw": 314923,
+    "pnl_pct": 10.42,
+    "hold_days": 20
+   },
+   {
+    "code": "319660",
+    "name": "PSK INC",
+    "group": "Industrial Machinery",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "week",
+    "signal_date": "2024-06-07",
+    "entry_date": "2024-06-10",
+    "entry": 33500.2,
+    "stop": 31155.19,
+    "exit_date": "2024-07-08",
+    "exit": 36639.75,
+    "why": "hold20",
+    "shares": 92,
+    "pnl_krw": 282814,
+    "pnl_pct": 9.17,
+    "hold_days": 20
+   },
+   {
+    "code": "005930",
+    "name": "Samsung Electronics Co., Ltd.",
+    "group": "Semiconductors",
+    "pattern": "cup_handle",
+    "patterns": [
+     "box",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-07-05",
+    "entry_date": "2024-07-08",
+    "entry": 88163.7,
+    "stop": 81992.24,
+    "exit_date": "2024-07-23",
+    "exit": 83947.4,
+    "why": "low10",
+    "shares": 34,
+    "pnl_krw": -148513,
+    "pnl_pct": -4.95,
+    "hold_days": 11
+   },
+   {
+    "code": "000250",
+    "name": "Sam Chun Dang Pharm. Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-07-03",
+    "entry_date": "2024-07-04",
+    "entry": 179537.0,
+    "stop": 166969.41,
+    "exit_date": "2024-07-26",
+    "exit": 174375.3,
+    "why": "low10",
+    "shares": 16,
+    "pnl_krw": -87622,
+    "pnl_pct": -3.05,
+    "hold_days": 16
+   },
+   {
+    "code": "090430",
+    "name": "Amorepacific Corp.",
+    "group": "Household/Personal Care",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-07-22",
+    "entry_date": "2024-07-23",
+    "entry": 178233.1,
+    "stop": 165756.78,
+    "exit_date": "2024-07-29",
+    "exit": 165259.51,
+    "why": "stop",
+    "shares": 16,
+    "pnl_krw": -212368,
+    "pnl_pct": -7.45,
+    "hold_days": 5
+   },
+   {
+    "code": "232140",
+    "name": "YC Corporation",
+    "group": "Electronic Equipment/Instruments",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-07-29",
+    "entry_date": "2024-07-30",
+    "entry": 17612.68,
+    "stop": 16379.79,
+    "exit_date": "2024-07-30",
+    "exit": 16330.65,
+    "why": "stop",
+    "shares": 167,
+    "pnl_krw": -219040,
+    "pnl_pct": -7.45,
+    "hold_days": 1
+   },
+   {
+    "code": "055550",
+    "name": "Shinhan Financial Group Co., Ltd.",
+    "group": "Major Banks",
+    "pattern": "cup_handle",
+    "patterns": [
+     "box",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-07-02",
+    "entry_date": "2024-07-03",
+    "entry": 49748.8,
+    "stop": 46266.38,
+    "exit_date": "2024-07-31",
+    "exit": 59321.5,
+    "why": "hold20",
+    "shares": 59,
+    "pnl_krw": 558574,
+    "pnl_pct": 19.03,
+    "hold_days": 20
+   },
+   {
+    "code": "010140",
+    "name": "Samsung Heavy Industries Co., Ltd",
+    "group": "Trucks/Construction/Farm Machinery",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-07-26",
+    "entry_date": "2024-07-29",
+    "entry": 12025.97,
+    "stop": 11184.15,
+    "exit_date": "2024-08-02",
+    "exit": 11150.6,
+    "why": "stop",
+    "shares": 245,
+    "pnl_krw": -219415,
+    "pnl_pct": -7.45,
+    "hold_days": 5
+   },
+   {
+    "code": "141080",
+    "name": "LigaChem Biosciences Inc.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "cup_handle",
+    "patterns": [
+     "box",
+     "flag",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-07-30",
+    "entry_date": "2024-07-31",
+    "entry": 89969.1,
+    "stop": 83671.26,
+    "exit_date": "2024-08-02",
+    "exit": 83420.25,
+    "why": "stop",
+    "shares": 31,
+    "pnl_krw": -207700,
+    "pnl_pct": -7.45,
+    "hold_days": 3
+   },
+   {
+    "code": "047810",
+    "name": "Korea Aerospace Industries, Ltd.",
+    "group": "Aerospace & Defense",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "week",
+    "signal_date": "2024-08-14",
+    "entry_date": "2024-08-16",
+    "entry": 59177.0,
+    "stop": 55034.61,
+    "exit_date": "2024-08-21",
+    "exit": 54869.51,
+    "why": "stop",
+    "shares": 46,
+    "pnl_krw": -202718,
+    "pnl_pct": -7.45,
+    "hold_days": 4
+   },
+   {
+    "code": "009830",
+    "name": "HANWHA SOLUTIONS CORPORATION",
+    "group": "Semiconductors",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-08-14",
+    "entry_date": "2024-08-16",
+    "entry": 28585.5,
+    "stop": 26584.51,
+    "exit_date": "2024-08-21",
+    "exit": 26504.76,
+    "why": "stop",
+    "shares": 96,
+    "pnl_krw": -204361,
+    "pnl_pct": -7.45,
+    "hold_days": 4
+   },
+   {
+    "code": "047040",
+    "name": "Daewoo Engineering & Construction Co., Ltd",
+    "group": "Homebuilding",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "week",
+    "signal_date": "2024-08-21",
+    "entry_date": "2024-08-22",
+    "entry": 4282.81,
+    "stop": 3983.01,
+    "exit_date": "2024-08-30",
+    "exit": 3971.06,
+    "why": "stop",
+    "shares": 619,
+    "pnl_krw": -197424,
+    "pnl_pct": -7.45,
+    "hold_days": 7
+   },
+   {
+    "code": "005380",
+    "name": "Hyundai Motor Company",
+    "group": "Motor Vehicles",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-08-28",
+    "entry_date": "2024-08-29",
+    "entry": 262284.5,
+    "stop": 244500.0,
+    "exit_date": "2024-09-03",
+    "exit": 243268.0,
+    "why": "stop",
+    "shares": 10,
+    "pnl_krw": -194572,
+    "pnl_pct": -7.42,
+    "hold_days": 4
+   },
+   {
+    "code": "028300",
+    "name": "HLB Co., Ltd.",
+    "group": "Biotechnology",
+    "pattern": "triangle",
+    "patterns": [
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-08-30",
+    "entry_date": "2024-09-02",
+    "entry": 91273.0,
+    "stop": 84883.89,
+    "exit_date": "2024-09-04",
+    "exit": 84445.9,
+    "why": "stop",
+    "shares": 29,
+    "pnl_krw": -202424,
+    "pnl_pct": -7.65,
+    "hold_days": 3
+   },
+   {
+    "code": "452280",
+    "name": "HanSun Engineering Co., Ltd.",
+    "group": "Industrial Machinery",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-08-14",
+    "entry_date": "2024-08-16",
+    "entry": 12286.75,
+    "stop": 11426.68,
+    "exit_date": "2024-09-09",
+    "exit": 11964.0,
+    "why": "low10",
+    "shares": 225,
+    "pnl_krw": -77475,
+    "pnl_pct": -2.8,
+    "hold_days": 16
+   },
+   {
+    "code": "278470",
+    "name": "APR Co.,Ltd.",
+    "group": "Household/Personal Care",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-09-03",
+    "entry_date": "2024-09-04",
+    "entry": 55365.6,
+    "stop": 53606.67,
+    "exit_date": "2024-09-25",
+    "exit": 54934.7,
+    "why": "low10",
+    "shares": 48,
+    "pnl_krw": -25433,
+    "pnl_pct": -0.96,
+    "hold_days": 12
+   },
+   {
+    "code": "090430",
+    "name": "Amorepacific Corp.",
+    "group": "Household/Personal Care",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-09-09",
+    "entry_date": "2024-09-10",
+    "entry": 139717.9,
+    "stop": 129937.65,
+    "exit_date": "2024-10-07",
+    "exit": 131304.9,
+    "why": "low10",
+    "shares": 17,
+    "pnl_krw": -147060,
+    "pnl_pct": -6.19,
+    "hold_days": 14
+   },
+   {
+    "code": "323280",
+    "name": "TAESUNG CO., LTD.",
+    "group": "Industrial Machinery",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-10-04",
+    "entry_date": "2024-10-07",
+    "entry": 33099.0,
+    "stop": 30782.07,
+    "exit_date": "2024-10-07",
+    "exit": 30689.72,
+    "why": "stop",
+    "shares": 75,
+    "pnl_krw": -184866,
+    "pnl_pct": -7.45,
+    "hold_days": 1
+   },
+   {
+    "code": "214450",
+    "name": "PharmaResearch Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "triangle",
+    "patterns": [
+     "triangle",
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-09-06",
+    "entry_date": "2024-09-09",
+    "entry": 182646.3,
+    "stop": 171813.03,
+    "exit_date": "2024-10-15",
+    "exit": 214853.5,
+    "why": "hold20",
+    "shares": 14,
+    "pnl_krw": 445554,
+    "pnl_pct": 17.42,
+    "hold_days": 20
+   },
+   {
+    "code": "051910",
+    "name": "LG Chem Ltd.",
+    "group": "Chemicals: Specialty",
+    "pattern": "cup_handle",
+    "patterns": [
+     "cup_handle"
+    ],
+    "sync_by": "week",
+    "signal_date": "2024-09-24",
+    "entry_date": "2024-09-25",
+    "entry": 350548.5,
+    "stop": 326010.1,
+    "exit_date": "2024-10-16",
+    "exit": 344962.0,
+    "why": "low10",
+    "shares": 7,
+    "pnl_krw": -43458,
+    "pnl_pct": -1.77,
+    "hold_days": 12
+   },
+   {
+    "code": "347850",
+    "name": "D&D Pharmatech Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "flag",
+    "patterns": [
+     "box",
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-10-15",
+    "entry_date": "2024-10-16",
+    "entry": 11885.55,
+    "stop": 11053.56,
+    "exit_date": "2024-10-25",
+    "exit": 11020.4,
+    "why": "stop",
+    "shares": 211,
+    "pnl_krw": -186759,
+    "pnl_pct": -7.45,
+    "hold_days": 8
+   },
+   {
+    "code": "055550",
+    "name": "Shinhan Financial Group Co., Ltd.",
+    "group": "Major Banks",
+    "pattern": "triangle",
+    "patterns": [
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-10-25",
+    "entry_date": "2024-10-28",
+    "entry": 57572.2,
+    "stop": 55351.98,
+    "exit_date": "2024-10-30",
+    "exit": 55185.92,
+    "why": "stop",
+    "shares": 46,
+    "pnl_krw": -114355,
+    "pnl_pct": -4.32,
+    "hold_days": 3
+   },
+   {
+    "code": "012450",
+    "name": "Hanwha Aerospace Co., Ltd.",
+    "group": "Aerospace & Defense",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-10-07",
+    "entry_date": "2024-10-08",
+    "entry": 352554.5,
+    "stop": 327875.68,
+    "exit_date": "2024-11-06",
+    "exit": 362908.0,
+    "why": "hold20",
+    "shares": 7,
+    "pnl_krw": 67913,
+    "pnl_pct": 2.75,
+    "hold_days": 20
+   },
+   {
+    "code": "247540",
+    "name": "Ecopro BM Co., Ltd.",
+    "group": "Electrical Products",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-11-04",
+    "entry_date": "2024-11-05",
+    "entry": 180840.9,
+    "stop": 168182.04,
+    "exit_date": "2024-11-06",
+    "exit": 167677.49,
+    "why": "stop",
+    "shares": 13,
+    "pnl_krw": -175074,
+    "pnl_pct": -7.45,
+    "hold_days": 2
+   },
+   {
+    "code": "034020",
+    "name": "Doosan Enerbility Co., Ltd.",
+    "group": "Trucks/Construction/Farm Machinery",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-10-15",
+    "entry_date": "2024-10-16",
+    "entry": 18876.46,
+    "stop": 17834.29,
+    "exit_date": "2024-11-13",
+    "exit": 20937.0,
+    "why": "hold20",
+    "shares": 140,
+    "pnl_krw": 283243,
+    "pnl_pct": 10.72,
+    "hold_days": 20
+   },
+   {
+    "code": "000150",
+    "name": "Doosan Corporation",
+    "group": "Trucks/Construction/Farm Machinery",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-11-06",
+    "entry_date": "2024-11-07",
+    "entry": 219155.5,
+    "stop": 203814.61,
+    "exit_date": "2024-11-19",
+    "exit": 203203.17,
+    "why": "stop",
+    "shares": 11,
+    "pnl_krw": -179525,
+    "pnl_pct": -7.45,
+    "hold_days": 9
+   },
+   {
+    "code": "047810",
+    "name": "Korea Aerospace Industries, Ltd.",
+    "group": "Aerospace & Defense",
+    "pattern": "cup_handle",
+    "patterns": [
+     "box",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-11-06",
+    "entry_date": "2024-11-07",
+    "entry": 61985.4,
+    "stop": 57646.42,
+    "exit_date": "2024-11-27",
+    "exit": 58823.0,
+    "why": "low10",
+    "shares": 39,
+    "pnl_krw": -127481,
+    "pnl_pct": -5.27,
+    "hold_days": 14
+   },
+   {
+    "code": "082740",
+    "name": "Hanwha Engine Co., Ltd.",
+    "group": "Trucks/Construction/Farm Machinery",
+    "pattern": "flag",
+    "patterns": [
+     "flag",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-11-22",
+    "entry_date": "2024-11-25",
+    "entry": 16820.31,
+    "stop": 15642.89,
+    "exit_date": "2024-12-02",
+    "exit": 15595.96,
+    "why": "stop",
+    "shares": 143,
+    "pnl_krw": -179123,
+    "pnl_pct": -7.45,
+    "hold_days": 6
+   },
+   {
+    "code": "036570",
+    "name": "NC Corporation",
+    "group": "Packaged Software",
+    "pattern": "cup_handle",
+    "patterns": [
+     "box",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-12-02",
+    "entry_date": "2024-12-03",
+    "entry": 247239.5,
+    "stop": 229932.73,
+    "exit_date": "2024-12-05",
+    "exit": 229242.94,
+    "why": "stop",
+    "shares": 9,
+    "pnl_krw": -165707,
+    "pnl_pct": -7.45,
+    "hold_days": 3
+   },
+   {
+    "code": "347850",
+    "name": "D&D Pharmatech Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "week",
+    "signal_date": "2024-12-05",
+    "entry_date": "2024-12-06",
+    "entry": 11020.46,
+    "stop": 10249.03,
+    "exit_date": "2024-12-09",
+    "exit": 10218.28,
+    "why": "stop",
+    "shares": 201,
+    "pnl_krw": -164959,
+    "pnl_pct": -7.45,
+    "hold_days": 2
+   },
+   {
+    "code": "035420",
+    "name": "NAVER Corp.",
+    "group": "Packaged Software",
+    "pattern": "cup_handle",
+    "patterns": [
+     "box",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-11-27",
+    "entry_date": "2024-11-28",
+    "entry": 204612.0,
+    "stop": 190289.16,
+    "exit_date": "2024-12-27",
+    "exit": 198103.9,
+    "why": "low10",
+    "shares": 11,
+    "pnl_krw": -75522,
+    "pnl_pct": -3.35,
+    "hold_days": 20
+   },
+   {
+    "code": "068270",
+    "name": "Celltrion, Inc.",
+    "group": "Biotechnology",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-11-28",
+    "entry_date": "2024-11-29",
+    "entry": 163667.63,
+    "stop": 152210.89,
+    "exit_date": "2024-12-30",
+    "exit": 164340.67,
+    "why": "hold20",
+    "shares": 14,
+    "pnl_krw": 5283,
+    "pnl_pct": 0.23,
+    "hold_days": 20
+   },
+   {
+    "code": "214450",
+    "name": "PharmaResearch Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-12-10",
+    "entry_date": "2024-12-11",
+    "entry": 239215.5,
+    "stop": 222470.41,
+    "exit_date": "2025-01-13",
+    "exit": 245262.0,
+    "why": "hold20",
+    "shares": 9,
+    "pnl_krw": 50453,
+    "pnl_pct": 2.34,
+    "hold_days": 20
+   },
+   {
+    "code": "005380",
+    "name": "Hyundai Motor Company",
+    "group": "Motor Vehicles",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-01-10",
+    "entry_date": "2025-01-13",
+    "entry": 226176.5,
+    "stop": 210344.14,
+    "exit_date": "2025-01-20",
+    "exit": 209713.11,
+    "why": "stop",
+    "shares": 11,
+    "pnl_krw": -185277,
+    "pnl_pct": -7.45,
+    "hold_days": 6
+   },
+   {
+    "code": "066970",
+    "name": "L & F Co., Ltd.",
+    "group": "Electronic Production Equipment",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-01-20",
+    "entry_date": "2025-01-21",
+    "entry": 91273.0,
+    "stop": 84883.89,
+    "exit_date": "2025-01-31",
+    "exit": 84629.24,
+    "why": "stop",
+    "shares": 28,
+    "pnl_krw": -190319,
+    "pnl_pct": -7.45,
+    "hold_days": 5
+   },
+   {
+    "code": "042660",
+    "name": "Hanwha Ocean Co., Ltd.",
+    "group": "Trucks/Construction/Farm Machinery",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-12-26",
+    "entry_date": "2024-12-27",
+    "entry": 37762.95,
+    "stop": 35119.54,
+    "exit_date": "2025-02-03",
+    "exit": 55532.9,
+    "why": "hold20",
+    "shares": 59,
+    "pnl_krw": 1042687,
+    "pnl_pct": 46.79,
+    "hold_days": 20
+   },
+   {
+    "code": "089030",
+    "name": "Techwing, Inc.",
+    "group": "Industrial Machinery",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2024-12-27",
+    "entry_date": "2024-12-30",
+    "entry": 38615.5,
+    "stop": 35912.41,
+    "exit_date": "2025-02-04",
+    "exit": 42472.2,
+    "why": "low10",
+    "shares": 57,
+    "pnl_krw": 215507,
+    "pnl_pct": 9.79,
+    "hold_days": 20
+   },
+   {
+    "code": "316140",
+    "name": "Woori Financial Group, Inc.",
+    "group": "Major Banks",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-01-31",
+    "entry_date": "2025-02-03",
+    "entry": 15937.67,
+    "stop": 15394.9,
+    "exit_date": "2025-02-07",
+    "exit": 15348.72,
+    "why": "stop",
+    "shares": 161,
+    "pnl_krw": -99284,
+    "pnl_pct": -3.87,
+    "hold_days": 5
+   },
+   {
+    "code": "161580",
+    "name": "Philoptics Co., Ltd.",
+    "group": "Industrial Machinery",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-02-07",
+    "entry_date": "2025-02-10",
+    "entry": 43580.35,
+    "stop": 40529.73,
+    "exit_date": "2025-02-27",
+    "exit": 40408.14,
+    "why": "stop",
+    "shares": 59,
+    "pnl_krw": -191480,
+    "pnl_pct": -7.45,
+    "hold_days": 14
+   },
+   {
+    "code": "277810",
+    "name": "Rainbow Robotics, Inc.",
+    "group": "Industrial Machinery",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-02-04",
+    "entry_date": "2025-02-05",
+    "entry": 345533.5,
+    "stop": 321346.15,
+    "exit_date": "2025-03-04",
+    "exit": 341472.5,
+    "why": "low10",
+    "shares": 7,
+    "pnl_krw": -32734,
+    "pnl_pct": -1.35,
+    "hold_days": 18
+   },
+   {
+    "code": "086790",
+    "name": "Hana Financial Group Inc.",
+    "group": "Major Banks",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-01-31",
+    "entry_date": "2025-02-03",
+    "entry": 59879.1,
+    "stop": 56606.45,
+    "exit_date": "2025-03-04",
+    "exit": 59720.3,
+    "why": "low10",
+    "shares": 43,
+    "pnl_krw": -11452,
+    "pnl_pct": -0.44,
+    "hold_days": 20
+   },
+   {
+    "code": "042660",
+    "name": "Hanwha Ocean Co., Ltd.",
+    "group": "Trucks/Construction/Farm Machinery",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-03-04",
+    "entry_date": "2025-03-05",
+    "entry": 83549.9,
+    "stop": 77701.41,
+    "exit_date": "2025-03-05",
+    "exit": 77468.3,
+    "why": "stop",
+    "shares": 28,
+    "pnl_krw": -174215,
+    "pnl_pct": -7.45,
+    "hold_days": 1
+   },
+   {
+    "code": "452280",
+    "name": "HanSun Engineering Co., Ltd.",
+    "group": "Industrial Machinery",
+    "pattern": "triangle",
+    "patterns": [
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-03-05",
+    "entry_date": "2025-03-06",
+    "entry": 8465.32,
+    "stop": 7872.75,
+    "exit_date": "2025-03-06",
+    "exit": 7849.13,
+    "why": "stop",
+    "shares": 280,
+    "pnl_krw": -176515,
+    "pnl_pct": -7.45,
+    "hold_days": 1
+   },
+   {
+    "code": "011070",
+    "name": "LG Innotek Co., Ltd",
+    "group": "Electronic Production Equipment",
+    "pattern": "cup_handle",
+    "patterns": [
+     "box",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-03-06",
+    "entry_date": "2025-03-07",
+    "entry": 178032.5,
+    "stop": 165570.22,
+    "exit_date": "2025-03-11",
+    "exit": 165073.51,
+    "why": "stop",
+    "shares": 13,
+    "pnl_krw": -172355,
+    "pnl_pct": -7.45,
+    "hold_days": 3
+   },
+   {
+    "code": "456010",
+    "name": "ICTK Co., Ltd.",
+    "group": "Semiconductors",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-03-12",
+    "entry_date": "2025-03-13",
+    "entry": 13169.39,
+    "stop": 12247.53,
+    "exit_date": "2025-03-20",
+    "exit": 12210.79,
+    "why": "stop",
+    "shares": 187,
+    "pnl_krw": -183395,
+    "pnl_pct": -7.45,
+    "hold_days": 6
+   },
+   {
+    "code": "047810",
+    "name": "Korea Aerospace Industries, Ltd.",
+    "group": "Aerospace & Defense",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-03-04",
+    "entry_date": "2025-03-05",
+    "entry": 66900.1,
+    "stop": 62217.09,
+    "exit_date": "2025-03-27",
+    "exit": 79760.0,
+    "why": "low10",
+    "shares": 35,
+    "pnl_krw": 445139,
+    "pnl_pct": 19.01,
+    "hold_days": 16
+   },
+   {
+    "code": "278470",
+    "name": "APR Co.,Ltd.",
+    "group": "Household/Personal Care",
+    "pattern": "flag",
+    "patterns": [
+     "box",
+     "flag",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-02-27",
+    "entry_date": "2025-02-28",
+    "entry": 59277.3,
+    "stop": 55127.89,
+    "exit_date": "2025-03-31",
+    "exit": 68394.2,
+    "why": "hold20",
+    "shares": 41,
+    "pnl_krw": 368801,
+    "pnl_pct": 15.17,
+    "hold_days": 20
+   },
+   {
+    "code": "373220",
+    "name": "LG Energy Solution Ltd.",
+    "group": "Electrical Products",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-03-26",
+    "entry_date": "2025-03-27",
+    "entry": 355563.5,
+    "stop": 330674.05,
+    "exit_date": "2025-03-31",
+    "exit": 329682.03,
+    "why": "stop",
+    "shares": 6,
+    "pnl_krw": -158873,
+    "pnl_pct": -7.45,
+    "hold_days": 3
+   },
+   {
+    "code": "005930",
+    "name": "Samsung Electronics Co., Ltd.",
+    "group": "Semiconductors",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "week",
+    "signal_date": "2025-03-20",
+    "entry_date": "2025-03-21",
+    "entry": 61082.7,
+    "stop": 56806.91,
+    "exit_date": "2025-04-04",
+    "exit": 56031.4,
+    "why": "low10",
+    "shares": 39,
+    "pnl_krw": -200964,
+    "pnl_pct": -8.43,
+    "hold_days": 10
+   },
+   {
+    "code": "214450",
+    "name": "PharmaResearch Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "flag",
+    "patterns": [
+     "box",
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-04-01",
+    "entry_date": "2025-04-02",
+    "entry": 351050.0,
+    "stop": 326476.5,
+    "exit_date": "2025-04-07",
+    "exit": 317046.0,
+    "why": "stop",
+    "shares": 6,
+    "pnl_krw": -207479,
+    "pnl_pct": -9.85,
+    "hold_days": 4
+   },
+   {
+    "code": "087010",
+    "name": "Peptron, Inc.",
+    "group": "Biotechnology",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-04-01",
+    "entry_date": "2025-04-02",
+    "entry": 106819.5,
+    "stop": 99342.13,
+    "exit_date": "2025-04-30",
+    "exit": 173677.4,
+    "why": "hold20",
+    "shares": 21,
+    "pnl_krw": 1397661,
+    "pnl_pct": 62.3,
+    "hold_days": 20
+   },
+   {
+    "code": "259960",
+    "name": "Krafton, Inc.",
+    "group": "Packaged Software",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-04-04",
+    "entry_date": "2025-04-07",
+    "entry": 362083.0,
+    "stop": 336737.19,
+    "exit_date": "2025-05-08",
+    "exit": 381851.0,
+    "why": "hold20",
+    "shares": 6,
+    "pnl_krw": 114502,
+    "pnl_pct": 5.27,
+    "hold_days": 20
+   },
+   {
+    "code": "272210",
+    "name": "Hanwha Systems Co., Ltd.",
+    "group": "Aerospace & Defense",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-05-07",
+    "entry_date": "2025-05-08",
+    "entry": 46037.7,
+    "stop": 42815.06,
+    "exit_date": "2025-05-12",
+    "exit": 42686.62,
+    "why": "stop",
+    "shares": 61,
+    "pnl_krw": -209134,
+    "pnl_pct": -7.45,
+    "hold_days": 3
+   },
+   {
+    "code": "329180",
+    "name": "HD Hyundai Heavy Industries Co., Ltd.",
+    "group": "Trucks/Construction/Farm Machinery",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-04-10",
+    "entry_date": "2025-04-11",
+    "entry": 336005.0,
+    "stop": 312484.65,
+    "exit_date": "2025-05-14",
+    "exit": 408770.0,
+    "why": "hold20",
+    "shares": 6,
+    "pnl_krw": 432241,
+    "pnl_pct": 21.44,
+    "hold_days": 20
+   },
+   {
+    "code": "005935",
+    "name": "Samsung Electronics Co Ltd Pfd Non-Voting",
+    "group": "Semiconductors",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-05-12",
+    "entry_date": "2025-05-13",
+    "entry": 48093.85,
+    "stop": 44727.28,
+    "exit_date": "2025-05-26",
+    "exit": 44366.5,
+    "why": "low10",
+    "shares": 57,
+    "pnl_krw": -217043,
+    "pnl_pct": -7.92,
+    "hold_days": 9
+   },
+   {
+    "code": "347850",
+    "name": "D&D Pharmatech Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-05-13",
+    "entry_date": "2025-05-14",
+    "entry": 21564.5,
+    "stop": 20054.98,
+    "exit_date": "2025-05-30",
+    "exit": 21634.9,
+    "why": "low10",
+    "shares": 128,
+    "pnl_krw": 4028,
+    "pnl_pct": 0.15,
+    "hold_days": 12
+   },
+   {
+    "code": "006800",
+    "name": "MIRAE ASSET SECURITIES CO., LTD.",
+    "group": "Investment Banks/Brokers",
+    "pattern": "flag",
+    "patterns": [
+     "box",
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-05-29",
+    "entry_date": "2025-05-30",
+    "entry": 16469.06,
+    "stop": 15316.22,
+    "exit_date": "2025-05-30",
+    "exit": 15270.27,
+    "why": "stop",
+    "shares": 169,
+    "pnl_krw": -207270,
+    "pnl_pct": -7.45,
+    "hold_days": 1
+   },
+   {
+    "code": "062040",
+    "name": "Sanil Electric Co., Ltd.",
+    "group": "Electrical Products",
+    "pattern": "triangle",
+    "patterns": [
+     "triangle",
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-04-29",
+    "entry_date": "2025-04-30",
+    "entry": 57070.7,
+    "stop": 53075.75,
+    "exit_date": "2025-06-02",
+    "exit": 67297.5,
+    "why": "hold20",
+    "shares": 48,
+    "pnl_krw": 485146,
+    "pnl_pct": 17.71,
+    "hold_days": 20
+   },
+   {
+    "code": "375500",
+    "name": "DL E&C Co., Ltd.",
+    "group": "Engineering & Construction",
+    "pattern": "cup_handle",
+    "patterns": [
+     "box",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-05-23",
+    "entry_date": "2025-05-26",
+    "entry": 50049.7,
+    "stop": 46546.22,
+    "exit_date": "2025-06-20",
+    "exit": 46406.58,
+    "why": "stop",
+    "shares": 56,
+    "pnl_krw": -208723,
+    "pnl_pct": -7.45,
+    "hold_days": 18
+   },
+   {
+    "code": "090430",
+    "name": "Amorepacific Corp.",
+    "group": "Household/Personal Care",
+    "pattern": "cup_handle",
+    "patterns": [
+     "box",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-06-20",
+    "entry_date": "2025-06-23",
+    "entry": 142125.1,
+    "stop": 132176.34,
+    "exit_date": "2025-06-26",
+    "exit": 131779.81,
+    "why": "stop",
+    "shares": 19,
+    "pnl_krw": -201097,
+    "pnl_pct": -7.45,
+    "hold_days": 4
+   },
+   {
+    "code": "011790",
+    "name": "SKC Co., Ltd.",
+    "group": "Chemicals: Specialty",
+    "pattern": "flag",
+    "patterns": [
+     "box",
+     "flag"
+    ],
+    "sync_by": "week",
+    "signal_date": "2025-06-26",
+    "entry_date": "2025-06-27",
+    "entry": 116849.5,
+    "stop": 108670.03,
+    "exit_date": "2025-07-01",
+    "exit": 108344.02,
+    "why": "stop",
+    "shares": 23,
+    "pnl_krw": -200141,
+    "pnl_pct": -7.45,
+    "hold_days": 3
+   },
+   {
+    "code": "055550",
+    "name": "Shinhan Financial Group Co., Ltd.",
+    "group": "Major Banks",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "week",
+    "signal_date": "2025-05-30",
+    "entry_date": "2025-06-02",
+    "entry": 57772.8,
+    "stop": 53728.7,
+    "exit_date": "2025-07-02",
+    "exit": 62113.1,
+    "why": "hold20",
+    "shares": 47,
+    "pnl_krw": 198770,
+    "pnl_pct": 7.32,
+    "hold_days": 20
+   },
+   {
+    "code": "086790",
+    "name": "Hana Financial Group Inc.",
+    "group": "Major Banks",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "week",
+    "signal_date": "2025-05-30",
+    "entry_date": "2025-06-02",
+    "entry": 71513.9,
+    "stop": 66507.93,
+    "exit_date": "2025-07-02",
+    "exit": 87038.1,
+    "why": "hold20",
+    "shares": 37,
+    "pnl_krw": 568685,
+    "pnl_pct": 21.49,
+    "hold_days": 20
+   },
+   {
+    "code": "005930",
+    "name": "Samsung Electronics Co., Ltd.",
+    "group": "Semiconductors",
+    "pattern": "cup_handle",
+    "patterns": [
+     "box",
+     "triangle",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-07-03",
+    "entry_date": "2025-07-04",
+    "entry": 64894.1,
+    "stop": 60351.51,
+    "exit_date": "2025-07-09",
+    "exit": 60170.46,
+    "why": "stop",
+    "shares": 44,
+    "pnl_krw": -212637,
+    "pnl_pct": -7.45,
+    "hold_days": 4
+   },
+   {
+    "code": "071050",
+    "name": "KOREA INVESTMENT HOLDINGS CO LTD",
+    "group": "Investment Banks/Brokers",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-07-09",
+    "entry_date": "2025-07-10",
+    "entry": 150349.7,
+    "stop": 139825.22,
+    "exit_date": "2025-07-28",
+    "exit": 139405.75,
+    "why": "stop",
+    "shares": 19,
+    "pnl_krw": -212734,
+    "pnl_pct": -7.45,
+    "hold_days": 13
+   },
+   {
+    "code": "051910",
+    "name": "LG Chem Ltd.",
+    "group": "Chemicals: Specialty",
+    "pattern": "cup_handle",
+    "patterns": [
+     "box",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-07-01",
+    "entry_date": "2025-07-02",
+    "entry": 227681.0,
+    "stop": 211743.33,
+    "exit_date": "2025-07-30",
+    "exit": 303586.5,
+    "why": "hold20",
+    "shares": 12,
+    "pnl_krw": 904445,
+    "pnl_pct": 33.1,
+    "hold_days": 20
+   },
+   {
+    "code": "068270",
+    "name": "Celltrion, Inc.",
+    "group": "Biotechnology",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-07-02",
+    "entry_date": "2025-07-03",
+    "entry": 160288.96,
+    "stop": 151523.81,
+    "exit_date": "2025-07-31",
+    "exit": 171009.24,
+    "why": "hold20",
+    "shares": 18,
+    "pnl_krw": 187453,
+    "pnl_pct": 6.5,
+    "hold_days": 20
+   },
+   {
+    "code": "052690",
+    "name": "KEPCO Engineering & Construction Co., Inc.",
+    "group": "Engineering & Construction",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-07-29",
+    "entry_date": "2025-07-30",
+    "entry": 94382.3,
+    "stop": 87775.54,
+    "exit_date": "2025-08-01",
+    "exit": 87512.21,
+    "why": "stop",
+    "shares": 31,
+    "pnl_krw": -217888,
+    "pnl_pct": -7.45,
+    "hold_days": 3
+   },
+   {
+    "code": "005930",
+    "name": "Samsung Electronics Co., Ltd.",
+    "group": "Semiconductors",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-07-28",
+    "entry_date": "2025-07-29",
+    "entry": 71012.4,
+    "stop": 66041.53,
+    "exit_date": "2025-08-27",
+    "exit": 69889.7,
+    "why": "hold20",
+    "shares": 41,
+    "pnl_krw": -51195,
+    "pnl_pct": -1.76,
+    "hold_days": 20
+   },
+   {
+    "code": "009150",
+    "name": "Samsung Electro-Mechanics Co., Ltd",
+    "group": "Semiconductors",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-07-30",
+    "entry_date": "2025-07-31",
+    "entry": 150750.9,
+    "stop": 140198.34,
+    "exit_date": "2025-08-29",
+    "exit": 162012.5,
+    "why": "hold20",
+    "shares": 19,
+    "pnl_krw": 208462,
+    "pnl_pct": 7.28,
+    "hold_days": 20
+   },
+   {
+    "code": "006400",
+    "name": "Samsung SDI Co., Ltd",
+    "group": "Electrical Products",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-08-05",
+    "entry_date": "2025-08-06",
+    "entry": 212636.0,
+    "stop": 197751.48,
+    "exit_date": "2025-09-01",
+    "exit": 201892.5,
+    "why": "low10",
+    "shares": 13,
+    "pnl_krw": -144411,
+    "pnl_pct": -5.22,
+    "hold_days": 17
+   },
+   {
+    "code": "032820",
+    "name": "Woori Technology Inc.",
+    "group": "Electronics/Appliances",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-08-28",
+    "entry_date": "2025-08-29",
+    "entry": 4037.07,
+    "stop": 3754.48,
+    "exit_date": "2025-09-01",
+    "exit": 3743.22,
+    "why": "stop",
+    "shares": 738,
+    "pnl_krw": -221873,
+    "pnl_pct": -7.45,
+    "hold_days": 2
+   },
+   {
+    "code": "272210",
+    "name": "Hanwha Systems Co., Ltd.",
+    "group": "Aerospace & Defense",
+    "pattern": "triangle",
+    "patterns": [
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-09-02",
+    "entry_date": "2025-09-03",
+    "entry": 55867.1,
+    "stop": 51956.4,
+    "exit_date": "2025-09-05",
+    "exit": 51800.53,
+    "why": "stop",
+    "shares": 51,
+    "pnl_krw": -212181,
+    "pnl_pct": -7.45,
+    "hold_days": 3
+   },
+   {
+    "code": "298380",
+    "name": "ABL Bio, Inc.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-08-26",
+    "entry_date": "2025-08-27",
+    "entry": 93780.5,
+    "stop": 87215.86,
+    "exit_date": "2025-09-25",
+    "exit": 98204.5,
+    "why": "hold20",
+    "shares": 31,
+    "pnl_krw": 131685,
+    "pnl_pct": 4.53,
+    "hold_days": 20
+   },
+   {
+    "code": "080220",
+    "name": "Jeju Semiconductor Corp.",
+    "group": "Semiconductors",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "week",
+    "signal_date": "2025-08-29",
+    "entry_date": "2025-09-01",
+    "entry": 15666.86,
+    "stop": 14570.18,
+    "exit_date": "2025-09-30",
+    "exit": 18454.47,
+    "why": "hold20",
+    "shares": 182,
+    "pnl_krw": 501375,
+    "pnl_pct": 17.58,
+    "hold_days": 20
+   },
+   {
+    "code": "035420",
+    "name": "NAVER Corp.",
+    "group": "Packaged Software",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-09-29",
+    "entry_date": "2025-09-30",
+    "entry": 279837.0,
+    "stop": 260248.41,
+    "exit_date": "2025-10-01",
+    "exit": 259467.66,
+    "why": "stop",
+    "shares": 11,
+    "pnl_krw": -229234,
+    "pnl_pct": -7.45,
+    "hold_days": 2
+   },
+   {
+    "code": "012450",
+    "name": "Hanwha Aerospace Co., Ltd.",
+    "group": "Aerospace & Defense",
+    "pattern": "cup_handle",
+    "patterns": [
+     "box",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-09-24",
+    "entry_date": "2025-09-25",
+    "entry": 1065186.0,
+    "stop": 994000.0,
+    "exit_date": "2025-10-13",
+    "exit": 991018.0,
+    "why": "stop",
+    "shares": 3,
+    "pnl_krw": -227889,
+    "pnl_pct": -7.13,
+    "hold_days": 8
+   },
+   {
+    "code": "082740",
+    "name": "Hanwha Engine Co., Ltd.",
+    "group": "Trucks/Construction/Farm Machinery",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-10-01",
+    "entry_date": "2025-10-02",
+    "entry": 49598.35,
+    "stop": 46126.47,
+    "exit_date": "2025-10-14",
+    "exit": 45988.09,
+    "why": "stop",
+    "shares": 63,
+    "pnl_krw": -232696,
+    "pnl_pct": -7.45,
+    "hold_days": 4
+   },
+   {
+    "code": "083650",
+    "name": "BHI Co. Ltd.",
+    "group": "Industrial Machinery",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "week",
+    "signal_date": "2025-10-13",
+    "entry_date": "2025-10-14",
+    "entry": 57973.4,
+    "stop": 53915.26,
+    "exit_date": "2025-10-14",
+    "exit": 53753.52,
+    "why": "stop",
+    "shares": 50,
+    "pnl_krw": -215864,
+    "pnl_pct": -7.45,
+    "hold_days": 1
+   },
+   {
+    "code": "347850",
+    "name": "D&D Pharmatech Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "flag",
+    "patterns": [
+     "box",
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-09-08",
+    "entry_date": "2025-09-09",
+    "entry": 40847.17,
+    "stop": 37987.87,
+    "exit_date": "2025-10-15",
+    "exit": 44914.85,
+    "why": "low10",
+    "shares": 72,
+    "pnl_krw": 287096,
+    "pnl_pct": 9.76,
+    "hold_days": 20
+   },
+   {
+    "code": "003670",
+    "name": "POSCO FUTURE M CO., LTD.",
+    "group": "Electronic Equipment/Instruments",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-10-14",
+    "entry_date": "2025-10-15",
+    "entry": 173218.1,
+    "stop": 161092.83,
+    "exit_date": "2025-11-12",
+    "exit": 213358.0,
+    "why": "hold20",
+    "shares": 16,
+    "pnl_krw": 636190,
+    "pnl_pct": 22.95,
+    "hold_days": 20
+   },
+   {
+    "code": "103590",
+    "name": "Iljin Electric Co., Ltd.",
+    "group": "Electrical Products",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-10-14",
+    "entry_date": "2025-10-15",
+    "entry": 40721.8,
+    "stop": 37871.27,
+    "exit_date": "2025-11-12",
+    "exit": 62711.3,
+    "why": "hold20",
+    "shares": 68,
+    "pnl_krw": 1487834,
+    "pnl_pct": 53.72,
+    "hold_days": 20
+   },
+   {
+    "code": "006400",
+    "name": "Samsung SDI Co., Ltd",
+    "group": "Electrical Products",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-10-14",
+    "entry_date": "2025-10-15",
+    "entry": 223669.0,
+    "stop": 208012.17,
+    "exit_date": "2025-11-12",
+    "exit": 323526.5,
+    "why": "hold20",
+    "shares": 12,
+    "pnl_krw": 1191482,
+    "pnl_pct": 44.38,
+    "hold_days": 20
+   },
+   {
+    "code": "356860",
+    "name": "TLB Co., Ltd.",
+    "group": "Electronic Components",
+    "pattern": "triangle",
+    "patterns": [
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-11-11",
+    "entry_date": "2025-11-12",
+    "entry": 32367.39,
+    "stop": 30101.68,
+    "exit_date": "2025-11-12",
+    "exit": 30011.37,
+    "why": "stop",
+    "shares": 116,
+    "pnl_krw": -279606,
+    "pnl_pct": -7.45,
+    "hold_days": 1
+   },
+   {
+    "code": "000990",
+    "name": "DB HiTek Co. LTD",
+    "group": "Semiconductors",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-11-11",
+    "entry_date": "2025-11-12",
+    "entry": 68404.6,
+    "stop": 63616.28,
+    "exit_date": "2025-11-21",
+    "exit": 62811.0,
+    "why": "stop",
+    "shares": 54,
+    "pnl_krw": -308205,
+    "pnl_pct": -8.34,
+    "hold_days": 8
+   },
+   {
+    "code": "226950",
+    "name": "OliX Pharmaceuticals, Inc.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-11-12",
+    "entry_date": "2025-11-13",
+    "entry": 140620.6,
+    "stop": 130777.16,
+    "exit_date": "2025-11-21",
+    "exit": 130384.83,
+    "why": "stop",
+    "shares": 26,
+    "pnl_krw": -272272,
+    "pnl_pct": -7.45,
+    "hold_days": 7
+   },
+   {
+    "code": "141080",
+    "name": "LigaChem Biosciences Inc.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-11-12",
+    "entry_date": "2025-11-13",
+    "entry": 168403.7,
+    "stop": 156615.44,
+    "exit_date": "2025-12-11",
+    "exit": 190427.0,
+    "why": "hold20",
+    "shares": 22,
+    "pnl_krw": 477044,
+    "pnl_pct": 12.87,
+    "hold_days": 20
+   },
+   {
+    "code": "058470",
+    "name": "Leeno Industrial Inc.",
+    "group": "Semiconductors",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-11-25",
+    "entry_date": "2025-11-26",
+    "entry": 65897.1,
+    "stop": 61284.3,
+    "exit_date": "2025-12-15",
+    "exit": 61100.45,
+    "why": "stop",
+    "shares": 53,
+    "pnl_krw": -260090,
+    "pnl_pct": -7.45,
+    "hold_days": 14
+   },
+   {
+    "code": "000250",
+    "name": "Sam Chun Dang Pharm. Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-12-10",
+    "entry_date": "2025-12-11",
+    "entry": 239717.0,
+    "stop": 222936.81,
+    "exit_date": "2025-12-15",
+    "exit": 222268.0,
+    "why": "stop",
+    "shares": 16,
+    "pnl_krw": -285627,
+    "pnl_pct": -7.45,
+    "hold_days": 3
+   },
+   {
+    "code": "161580",
+    "name": "Philoptics Co., Ltd.",
+    "group": "Industrial Machinery",
+    "pattern": "triangle",
+    "patterns": [
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-12-15",
+    "entry_date": "2025-12-16",
+    "entry": 48444.9,
+    "stop": 45053.76,
+    "exit_date": "2025-12-16",
+    "exit": 44918.6,
+    "why": "stop",
+    "shares": 82,
+    "pnl_krw": -295830,
+    "pnl_pct": -7.45,
+    "hold_days": 1
+   },
+   {
+    "code": "475830",
+    "name": "Orum Therapeutics, Inc.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-12-19",
+    "entry_date": "2025-12-22",
+    "entry": 102907.8,
+    "stop": 95704.25,
+    "exit_date": "2025-12-22",
+    "exit": 95417.14,
+    "why": "stop",
+    "shares": 39,
+    "pnl_krw": -298878,
+    "pnl_pct": -7.45,
+    "hold_days": 1
+   },
+   {
+    "code": "488280",
+    "name": "S2W Inc.",
+    "group": "Packaged Software",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-12-22",
+    "entry_date": "2025-12-23",
+    "entry": 37913.4,
+    "stop": 35259.46,
+    "exit_date": "2025-12-23",
+    "exit": 35153.68,
+    "why": "stop",
+    "shares": 107,
+    "pnl_krw": -302105,
+    "pnl_pct": -7.45,
+    "hold_days": 1
+   },
+   {
+    "code": "058610",
+    "name": "SPG Co., Ltd",
+    "group": "Electrical Products",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-11-27",
+    "entry_date": "2025-11-28",
+    "entry": 51855.1,
+    "stop": 48225.24,
+    "exit_date": "2025-12-29",
+    "exit": 84445.9,
+    "why": "hold20",
+    "shares": 69,
+    "pnl_krw": 2238614,
+    "pnl_pct": 62.56,
+    "hold_days": 20
+   },
+   {
+    "code": "277810",
+    "name": "Rainbow Robotics, Inc.",
+    "group": "Industrial Machinery",
+    "pattern": "flag",
+    "patterns": [
+     "box",
+     "flag"
+    ],
+    "sync_by": "week",
+    "signal_date": "2025-12-23",
+    "entry_date": "2025-12-24",
+    "entry": 498491.0,
+    "stop": 463596.63,
+    "exit_date": "2025-12-30",
+    "exit": 462205.84,
+    "why": "stop",
+    "shares": 7,
+    "pnl_krw": -259858,
+    "pnl_pct": -7.45,
+    "hold_days": 4
+   },
+   {
+    "code": "005935",
+    "name": "Samsung Electronics Co Ltd Pfd Non-Voting",
+    "group": "Semiconductors",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-12-17",
+    "entry_date": "2025-12-18",
+    "entry": 83048.4,
+    "stop": 79722.22,
+    "exit_date": "2026-01-20",
+    "exit": 109769.7,
+    "why": "hold20",
+    "shares": 47,
+    "pnl_krw": 1246803,
+    "pnl_pct": 31.94,
+    "hold_days": 20
+   },
+   {
+    "code": "005380",
+    "name": "Hyundai Motor Company",
+    "group": "Motor Vehicles",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-01-19",
+    "entry_date": "2026-01-20",
+    "entry": 495482.0,
+    "stop": 460798.26,
+    "exit_date": "2026-01-20",
+    "exit": 459415.87,
+    "why": "stop",
+    "shares": 9,
+    "pnl_krw": -332086,
+    "pnl_pct": -7.45,
+    "hold_days": 1
+   },
+   {
+    "code": "005930",
+    "name": "Samsung Electronics Co., Ltd.",
+    "group": "Semiconductors",
+    "pattern": "cup_handle",
+    "patterns": [
+     "box",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2025-12-26",
+    "entry_date": "2025-12-29",
+    "entry": 119758.2,
+    "stop": 111375.13,
+    "exit_date": "2026-01-28",
+    "exit": 162112.2,
+    "why": "hold20",
+    "shares": 32,
+    "pnl_krw": 1346194,
+    "pnl_pct": 35.12,
+    "hold_days": 20
+   },
+   {
+    "code": "042700",
+    "name": "Hanmi Semiconductor Co., Ltd",
+    "group": "Industrial Machinery",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-01-02",
+    "entry_date": "2026-01-05",
+    "entry": 155364.7,
+    "stop": 144489.17,
+    "exit_date": "2026-02-02",
+    "exit": 204385.0,
+    "why": "hold20",
+    "shares": 26,
+    "pnl_krw": 1265154,
+    "pnl_pct": 31.32,
+    "hold_days": 20
+   },
+   {
+    "code": "035420",
+    "name": "NAVER Corp.",
+    "group": "Packaged Software",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-01-27",
+    "entry_date": "2026-01-28",
+    "entry": 285855.0,
+    "stop": 265845.15,
+    "exit_date": "2026-02-02",
+    "exit": 265047.61,
+    "why": "stop",
+    "shares": 16,
+    "pnl_krw": -340601,
+    "pnl_pct": -7.45,
+    "hold_days": 4
+   },
+   {
+    "code": "080220",
+    "name": "Jeju Semiconductor Corp.",
+    "group": "Semiconductors",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-01-30",
+    "entry_date": "2026-02-02",
+    "entry": 42677.65,
+    "stop": 39690.21,
+    "exit_date": "2026-02-02",
+    "exit": 39571.14,
+    "why": "stop",
+    "shares": 111,
+    "pnl_krw": -352780,
+    "pnl_pct": -7.45,
+    "hold_days": 1
+   },
+   {
+    "code": "272210",
+    "name": "Hanwha Systems Co., Ltd.",
+    "group": "Aerospace & Defense",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-02-03",
+    "entry_date": "2026-02-04",
+    "entry": 125174.4,
+    "stop": 116412.19,
+    "exit_date": "2026-02-05",
+    "exit": 116062.96,
+    "why": "stop",
+    "shares": 37,
+    "pnl_krw": -344904,
+    "pnl_pct": -7.45,
+    "hold_days": 2
+   },
+   {
+    "code": "009150",
+    "name": "Samsung Electro-Mechanics Co., Ltd",
+    "group": "Semiconductors",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-02-03",
+    "entry_date": "2026-02-04",
+    "entry": 303909.0,
+    "stop": 282635.37,
+    "exit_date": "2026-02-06",
+    "exit": 278661.5,
+    "why": "stop",
+    "shares": 15,
+    "pnl_krw": -386293,
+    "pnl_pct": -8.47,
+    "hold_days": 3
+   },
+   {
+    "code": "006800",
+    "name": "MIRAE ASSET SECURITIES CO., LTD.",
+    "group": "Investment Banks/Brokers",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-02-09",
+    "entry_date": "2026-02-10",
+    "entry": 54166.67,
+    "stop": 50375.0,
+    "exit_date": "2026-02-11",
+    "exit": 50223.87,
+    "why": "stop",
+    "shares": 84,
+    "pnl_krw": -338838,
+    "pnl_pct": -7.45,
+    "hold_days": 2
+   },
+   {
+    "code": "066570",
+    "name": "LG Electronics Inc.",
+    "group": "Electronics/Appliances",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-02-11",
+    "entry_date": "2026-02-12",
+    "entry": 128183.4,
+    "stop": 119210.56,
+    "exit_date": "2026-02-12",
+    "exit": 118852.93,
+    "why": "stop",
+    "shares": 35,
+    "pnl_krw": -334103,
+    "pnl_pct": -7.45,
+    "hold_days": 1
+   },
+   {
+    "code": "005690",
+    "name": "Pharmicell Co., Ltd",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-02-12",
+    "entry_date": "2026-02-13",
+    "entry": 18064.03,
+    "stop": 16799.55,
+    "exit_date": "2026-02-13",
+    "exit": 16749.15,
+    "why": "stop",
+    "shares": 247,
+    "pnl_krw": -332271,
+    "pnl_pct": -7.45,
+    "hold_days": 1
+   },
+   {
+    "code": "001440",
+    "name": "Taihan Cable & Solution Co., Ltd.",
+    "group": "Metal Fabrication",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-01-20",
+    "entry_date": "2026-01-21",
+    "entry": 27933.55,
+    "stop": 25978.2,
+    "exit_date": "2026-02-23",
+    "exit": 33399.5,
+    "why": "hold20",
+    "shares": 155,
+    "pnl_krw": 838031,
+    "pnl_pct": 19.35,
+    "hold_days": 20
+   },
+   {
+    "code": "016360",
+    "name": "Samsung Securities Co., Ltd.",
+    "group": "Investment Banks/Brokers",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-02-13",
+    "entry_date": "2026-02-19",
+    "entry": 108324.0,
+    "stop": 100741.32,
+    "exit_date": "2026-03-03",
+    "exit": 100439.1,
+    "why": "stop",
+    "shares": 40,
+    "pnl_krw": -322675,
+    "pnl_pct": -7.45,
+    "hold_days": 8
+   },
+   {
+    "code": "034020",
+    "name": "Doosan Enerbility Co., Ltd.",
+    "group": "Trucks/Construction/Farm Machinery",
+    "pattern": "cup_handle",
+    "patterns": [
+     "box",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-02-20",
+    "entry_date": "2026-02-23",
+    "entry": 105615.9,
+    "stop": 98222.79,
+    "exit_date": "2026-03-03",
+    "exit": 97928.12,
+    "why": "stop",
+    "shares": 42,
+    "pnl_krw": -330339,
+    "pnl_pct": -7.45,
+    "hold_days": 6
+   },
+   {
+    "code": "055550",
+    "name": "Shinhan Financial Group Co., Ltd.",
+    "group": "Major Banks",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "week",
+    "signal_date": "2026-02-06",
+    "entry_date": "2026-02-09",
+    "entry": 96288.0,
+    "stop": 89547.84,
+    "exit_date": "2026-03-04",
+    "exit": 89279.2,
+    "why": "stop",
+    "shares": 47,
+    "pnl_krw": -337016,
+    "pnl_pct": -7.45,
+    "hold_days": 14
+   },
+   {
+    "code": "012450",
+    "name": "Hanwha Aerospace Co., Ltd.",
+    "group": "Aerospace & Defense",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-03-03",
+    "entry_date": "2026-03-04",
+    "entry": 1530578.0,
+    "stop": 1423437.54,
+    "exit_date": "2026-03-04",
+    "exit": 1419167.23,
+    "why": "stop",
+    "shares": 2,
+    "pnl_krw": -227964,
+    "pnl_pct": -7.45,
+    "hold_days": 1
+   },
+   {
+    "code": "095340",
+    "name": "ISC Co., Ltd.",
+    "group": "Semiconductors",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-03-05",
+    "entry_date": "2026-03-06",
+    "entry": 201603.0,
+    "stop": 187490.79,
+    "exit_date": "2026-03-09",
+    "exit": 186928.32,
+    "why": "stop",
+    "shares": 19,
+    "pnl_krw": -285254,
+    "pnl_pct": -7.45,
+    "hold_days": 2
+   },
+   {
+    "code": "006800",
+    "name": "MIRAE ASSET SECURITIES CO., LTD.",
+    "group": "Investment Banks/Brokers",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-03-11",
+    "entry_date": "2026-03-12",
+    "entry": 71193.32,
+    "stop": 66209.79,
+    "exit_date": "2026-03-13",
+    "exit": 66011.16,
+    "why": "stop",
+    "shares": 54,
+    "pnl_krw": -286295,
+    "pnl_pct": -7.45,
+    "hold_days": 2
+   },
+   {
+    "code": "006340",
+    "name": "Daewon Cable Co., Ltd.",
+    "group": "Electrical Products",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-03-18",
+    "entry_date": "2026-03-19",
+    "entry": 6308.87,
+    "stop": 5867.25,
+    "exit_date": "2026-03-23",
+    "exit": 5849.65,
+    "why": "stop",
+    "shares": 602,
+    "pnl_krw": -282832,
+    "pnl_pct": -7.45,
+    "hold_days": 3
+   },
+   {
+    "code": "050890",
+    "name": "SOLiD Inc.",
+    "group": "Computer Communications",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "week",
+    "signal_date": "2026-03-25",
+    "entry_date": "2026-03-26",
+    "entry": 15436.17,
+    "stop": 14355.64,
+    "exit_date": "2026-03-26",
+    "exit": 14312.57,
+    "why": "stop",
+    "shares": 245,
+    "pnl_krw": -281635,
+    "pnl_pct": -7.45,
+    "hold_days": 1
+   },
+   {
+    "code": "222800",
+    "name": "Simmtech Co., Ltd.",
+    "group": "Semiconductors",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-03-16",
+    "entry_date": "2026-03-17",
+    "entry": 58876.1,
+    "stop": 54754.77,
+    "exit_date": "2026-03-27",
+    "exit": 54590.51,
+    "why": "stop",
+    "shares": 64,
+    "pnl_krw": -280608,
+    "pnl_pct": -7.45,
+    "hold_days": 9
+   },
+   {
+    "code": "403870",
+    "name": "HPSP Co., Ltd.",
+    "group": "Semiconductors",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-03-18",
+    "entry_date": "2026-03-19",
+    "entry": 48444.9,
+    "stop": 45053.76,
+    "exit_date": "2026-03-27",
+    "exit": 43718.45,
+    "why": "stop",
+    "shares": 78,
+    "pnl_krw": -374856,
+    "pnl_pct": -9.92,
+    "hold_days": 7
+   },
+   {
+    "code": "009420",
+    "name": "Hanall Biopharma Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-03-26",
+    "entry_date": "2026-03-27",
+    "entry": 63891.1,
+    "stop": 59418.72,
+    "exit_date": "2026-03-30",
+    "exit": 59240.47,
+    "why": "stop",
+    "shares": 55,
+    "pnl_krw": -261688,
+    "pnl_pct": -7.45,
+    "hold_days": 2
+   },
+   {
+    "code": "047040",
+    "name": "Daewoo Engineering & Construction Co., Ltd",
+    "group": "Homebuilding",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-04-01",
+    "entry_date": "2026-04-02",
+    "entry": 19708.95,
+    "stop": 18329.32,
+    "exit_date": "2026-04-02",
+    "exit": 18274.34,
+    "why": "stop",
+    "shares": 172,
+    "pnl_krw": -252448,
+    "pnl_pct": -7.45,
+    "hold_days": 1
+   },
+   {
+    "code": "218410",
+    "name": "RFHIC Corp.",
+    "group": "Semiconductors",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle",
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-04-01",
+    "entry_date": "2026-04-02",
+    "entry": 98193.7,
+    "stop": 91320.14,
+    "exit_date": "2026-04-02",
+    "exit": 91046.18,
+    "why": "stop",
+    "shares": 34,
+    "pnl_krw": -248624,
+    "pnl_pct": -7.45,
+    "hold_days": 1
+   },
+   {
+    "code": "010170",
+    "name": "Taihan Fiberoptics Co., Ltd",
+    "group": "Electrical Products",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-04-06",
+    "entry_date": "2026-04-07",
+    "entry": 13640.8,
+    "stop": 12685.94,
+    "exit_date": "2026-04-07",
+    "exit": 12647.89,
+    "why": "stop",
+    "shares": 242,
+    "pnl_krw": -245831,
+    "pnl_pct": -7.45,
+    "hold_days": 1
+   },
+   {
+    "code": "425040",
+    "name": "TEMC Co. Ltd.",
+    "group": "Chemicals: Specialty",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-04-06",
+    "entry_date": "2026-04-07",
+    "entry": 14062.06,
+    "stop": 13077.72,
+    "exit_date": "2026-04-13",
+    "exit": 13038.48,
+    "why": "stop",
+    "shares": 234,
+    "pnl_krw": -245045,
+    "pnl_pct": -7.45,
+    "hold_days": 5
+   },
+   {
+    "code": "000720",
+    "name": "Hyundai Engineering & Construction Co., Ltd",
+    "group": "Homebuilding",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-04-08",
+    "entry_date": "2026-04-09",
+    "entry": 183047.5,
+    "stop": 170234.17,
+    "exit_date": "2026-04-13",
+    "exit": 169723.47,
+    "why": "stop",
+    "shares": 17,
+    "pnl_krw": -231736,
+    "pnl_pct": -7.45,
+    "hold_days": 3
+   },
+   {
+    "code": "043260",
+    "name": "Sungho Electronics Corp.",
+    "group": "Electronic Components",
+    "pattern": "triangle",
+    "patterns": [
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-04-13",
+    "entry_date": "2026-04-14",
+    "entry": 49397.75,
+    "stop": 45939.91,
+    "exit_date": "2026-04-14",
+    "exit": 45802.09,
+    "why": "stop",
+    "shares": 64,
+    "pnl_krw": -235433,
+    "pnl_pct": -7.45,
+    "hold_days": 1
+   },
+   {
+    "code": "006800",
+    "name": "MIRAE ASSET SECURITIES CO., LTD.",
+    "group": "Investment Banks/Brokers",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-04-14",
+    "entry_date": "2026-04-15",
+    "entry": 73620.2,
+    "stop": 68466.79,
+    "exit_date": "2026-04-21",
+    "exit": 68261.39,
+    "why": "stop",
+    "shares": 41,
+    "pnl_krw": -224782,
+    "pnl_pct": -7.45,
+    "hold_days": 5
+   },
+   {
+    "code": "267270",
+    "name": "HD Construction Equipment Co., Ltd.",
+    "group": "Trucks/Construction/Farm Machinery",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-04-01",
+    "entry_date": "2026-04-02",
+    "entry": 146638.6,
+    "stop": 136373.9,
+    "exit_date": "2026-04-30",
+    "exit": 197306.3,
+    "why": "hold20",
+    "shares": 23,
+    "pnl_krw": 1157363,
+    "pnl_pct": 34.31,
+    "hold_days": 20
+   },
+   {
+    "code": "047040",
+    "name": "Daewoo Engineering & Construction Co., Ltd",
+    "group": "Homebuilding",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-04-21",
+    "entry_date": "2026-04-22",
+    "entry": 31945.55,
+    "stop": 29709.36,
+    "exit_date": "2026-05-06",
+    "exit": 29620.23,
+    "why": "stop",
+    "shares": 103,
+    "pnl_krw": -245035,
+    "pnl_pct": -7.45,
+    "hold_days": 9
+   },
+   {
+    "code": "417200",
+    "name": "LS Materials Co. Ltd.",
+    "group": "Electronic Components",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-04-29",
+    "entry_date": "2026-04-30",
+    "entry": 31694.8,
+    "stop": 29476.16,
+    "exit_date": "2026-05-06",
+    "exit": 29387.74,
+    "why": "stop",
+    "shares": 112,
+    "pnl_krw": -264355,
+    "pnl_pct": -7.45,
+    "hold_days": 3
+   },
+   {
+    "code": "005935",
+    "name": "Samsung Electronics Co Ltd Pfd Non-Voting",
+    "group": "Semiconductors",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-05-06",
+    "entry_date": "2026-05-07",
+    "entry": 190168.8,
+    "stop": 176856.98,
+    "exit_date": "2026-05-07",
+    "exit": 176326.41,
+    "why": "stop",
+    "shares": 18,
+    "pnl_krw": -254913,
+    "pnl_pct": -7.45,
+    "hold_days": 1
+   },
+   {
+    "code": "034020",
+    "name": "Doosan Enerbility Co., Ltd.",
+    "group": "Trucks/Construction/Farm Machinery",
+    "pattern": "flag",
+    "patterns": [
+     "box",
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-05-07",
+    "entry_date": "2026-05-08",
+    "entry": 134903.5,
+    "stop": 125600.0,
+    "exit_date": "2026-05-12",
+    "exit": 125223.2,
+    "why": "stop",
+    "shares": 25,
+    "pnl_krw": -247679,
+    "pnl_pct": -7.34,
+    "hold_days": 3
+   },
+   {
+    "code": "332570",
+    "name": "Pentastone Electronics, Inc.",
+    "group": "Telecommunications Equipment",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-04-13",
+    "entry_date": "2026-04-14",
+    "entry": 6780.28,
+    "stop": 6305.66,
+    "exit_date": "2026-05-14",
+    "exit": 14137.46,
+    "why": "hold20",
+    "shares": 470,
+    "pnl_krw": 3446433,
+    "pnl_pct": 108.13,
+    "hold_days": 20
+   },
+   {
+    "code": "004710",
+    "name": "Hansol Technics Co., Ltd",
+    "group": "Electronic Production Equipment",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "week",
+    "signal_date": "2026-05-12",
+    "entry_date": "2026-05-13",
+    "entry": 14593.65,
+    "stop": 13572.09,
+    "exit_date": "2026-05-14",
+    "exit": 13531.38,
+    "why": "stop",
+    "shares": 256,
+    "pnl_krw": -278218,
+    "pnl_pct": -7.45,
+    "hold_days": 2
+   },
+   {
+    "code": "330860",
+    "name": "NEPES ARK CORP.",
+    "group": "Industrial Machinery",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-05-13",
+    "entry_date": "2026-05-14",
+    "entry": 48093.85,
+    "stop": 44727.28,
+    "exit_date": "2026-05-15",
+    "exit": 44593.1,
+    "why": "stop",
+    "shares": 82,
+    "pnl_krw": -293687,
+    "pnl_pct": -7.45,
+    "hold_days": 2
+   },
+   {
+    "code": "003550",
+    "name": "LG Corp",
+    "group": "Electronics/Appliances",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-05-15",
+    "entry_date": "2026-05-18",
+    "entry": 132396.0,
+    "stop": 123128.28,
+    "exit_date": "2026-05-18",
+    "exit": 122758.9,
+    "why": "stop",
+    "shares": 29,
+    "pnl_krw": -285926,
+    "pnl_pct": -7.45,
+    "hold_days": 1
+   },
+   {
+    "code": "039030",
+    "name": "EO Technics Co., Ltd",
+    "group": "Industrial Machinery",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-05-21",
+    "entry_date": "2026-05-22",
+    "entry": 549644.0,
+    "stop": 511168.92,
+    "exit_date": "2026-05-27",
+    "exit": 509635.41,
+    "why": "stop",
+    "shares": 8,
+    "pnl_krw": -327455,
+    "pnl_pct": -7.45,
+    "hold_days": 3
+   },
+   {
+    "code": "307950",
+    "name": "Hyundai Autoever Corp.",
+    "group": "Information Technology Services",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-05-27",
+    "entry_date": "2026-05-28",
+    "entry": 758268.0,
+    "stop": 705189.24,
+    "exit_date": "2026-05-28",
+    "exit": 703073.67,
+    "why": "stop",
+    "shares": 5,
+    "pnl_krw": -282341,
+    "pnl_pct": -7.45,
+    "hold_days": 1
+   },
+   {
+    "code": "005930",
+    "name": "Samsung Electronics Co., Ltd.",
+    "group": "Semiconductors",
+    "pattern": "cup_handle",
+    "patterns": [
+     "box",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-05-06",
+    "entry_date": "2026-05-07",
+    "entry": 272816.0,
+    "stop": 253718.88,
+    "exit_date": "2026-06-08",
+    "exit": 292121.0,
+    "why": "hold20",
+    "shares": 12,
+    "pnl_krw": 225385,
+    "pnl_pct": 6.88,
+    "hold_days": 20
+   },
+   {
+    "code": "055550",
+    "name": "Shinhan Financial Group Co., Ltd.",
+    "group": "Major Banks",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-06-05",
+    "entry_date": "2026-06-08",
+    "entry": 105014.1,
+    "stop": 97663.11,
+    "exit_date": "2026-06-08",
+    "exit": 97370.12,
+    "why": "stop",
+    "shares": 35,
+    "pnl_krw": -273714,
+    "pnl_pct": -7.45,
+    "hold_days": 1
+   },
+   {
+    "code": "319660",
+    "name": "PSK INC",
+    "group": "Industrial Machinery",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-06-12",
+    "entry_date": "2026-06-15",
+    "entry": 176828.9,
+    "stop": 164450.88,
+    "exit_date": "2026-06-15",
+    "exit": 163957.52,
+    "why": "stop",
+    "shares": 22,
+    "pnl_krw": -289705,
+    "pnl_pct": -7.45,
+    "hold_days": 1
+   },
+   {
+    "code": "080220",
+    "name": "Jeju Semiconductor Corp.",
+    "group": "Semiconductors",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-05-14",
+    "entry_date": "2026-05-15",
+    "entry": 76228.0,
+    "stop": 70892.04,
+    "exit_date": "2026-06-16",
+    "exit": 104585.3,
+    "why": "hold20",
+    "shares": 52,
+    "pnl_krw": 1465012,
+    "pnl_pct": 36.95,
+    "hold_days": 20
+   },
+   {
+    "code": "007810",
+    "name": "Korea Circuit Co., Ltd.",
+    "group": "Electronic Components",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-06-11",
+    "entry_date": "2026-06-12",
+    "entry": 142225.4,
+    "stop": 132269.62,
+    "exit_date": "2026-06-16",
+    "exit": 131872.81,
+    "why": "stop",
+    "shares": 27,
+    "pnl_krw": -285971,
+    "pnl_pct": -7.45,
+    "hold_days": 3
+   },
+   {
+    "code": "006360",
+    "name": "GS Engineering & Construction Corporation",
+    "group": "Homebuilding",
+    "pattern": "triangle",
+    "patterns": [
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-06-16",
+    "entry_date": "2026-06-17",
+    "entry": 32697.8,
+    "stop": 30408.95,
+    "exit_date": "2026-06-17",
+    "exit": 30317.73,
+    "why": "stop",
+    "shares": 115,
+    "pnl_krw": -280025,
+    "pnl_pct": -7.45,
+    "hold_days": 1
+   },
+   {
+    "code": "347850",
+    "name": "D&D Pharmatech Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-06-17",
+    "entry_date": "2026-06-18",
+    "entry": 108123.4,
+    "stop": 100554.76,
+    "exit_date": "2026-06-23",
+    "exit": 99799.7,
+    "why": "stop",
+    "shares": 34,
+    "pnl_krw": -289156,
+    "pnl_pct": -7.86,
+    "hold_days": 4
+   },
+   {
+    "code": "067310",
+    "name": "Hana Micron Inc.",
+    "group": "Semiconductors",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-06-22",
+    "entry_date": "2026-06-23",
+    "entry": 55465.9,
+    "stop": 51583.29,
+    "exit_date": "2026-06-23",
+    "exit": 51428.54,
+    "why": "stop",
+    "shares": 65,
+    "pnl_krw": -268485,
+    "pnl_pct": -7.45,
+    "hold_days": 1
+   },
+   {
+    "code": "141080",
+    "name": "LigaChem Biosciences Inc.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-06-24",
+    "entry_date": "2026-06-25",
+    "entry": 151553.3,
+    "stop": 140944.57,
+    "exit_date": "2026-06-26",
+    "exit": 140521.74,
+    "why": "stop",
+    "shares": 23,
+    "pnl_krw": -259582,
+    "pnl_pct": -7.45,
+    "hold_days": 2
+   },
+   {
+    "code": "214450",
+    "name": "PharmaResearch Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-06-29",
+    "entry_date": "2026-06-30",
+    "entry": 350047.0,
+    "stop": 325543.71,
+    "exit_date": "2026-07-06",
+    "exit": 324567.08,
+    "why": "stop",
+    "shares": 10,
+    "pnl_krw": -260680,
+    "pnl_pct": -7.45,
+    "hold_days": 5
+   },
+   {
+    "code": "009420",
+    "name": "Hanall Biopharma Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "triangle",
+    "patterns": [
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-06-24",
+    "entry_date": "2026-06-25",
+    "entry": 58073.7,
+    "stop": 54008.54,
+    "exit_date": "2026-07-14",
+    "exit": 53846.52,
+    "why": "stop",
+    "shares": 60,
+    "pnl_krw": -259485,
+    "pnl_pct": -7.45,
+    "hold_days": 14
+   },
+   {
+    "code": "161890",
+    "name": "KOLMAR KOREA CO. LTD",
+    "group": "Household/Personal Care",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-06-29",
+    "entry_date": "2026-06-30",
+    "entry": 97993.1,
+    "stop": 91133.58,
+    "exit_date": "2026-07-21",
+    "exit": 99101.8,
+    "why": "low10",
+    "shares": 36,
+    "pnl_krw": 33497,
+    "pnl_pct": 0.95,
+    "hold_days": 14
+   },
+   {
+    "code": "006360",
+    "name": "GS Engineering & Construction Corporation",
+    "group": "Homebuilding",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-07-23",
+    "entry_date": "2026-07-24",
+    "entry": 33450.05,
+    "stop": 31108.55,
+    "exit_date": "2026-07-24",
+    "exit": 31015.22,
+    "why": "stop",
+    "shares": 99,
+    "pnl_krw": -246611,
+    "pnl_pct": -7.45,
+    "hold_days": 1
+   },
+   {
+    "code": "112610",
+    "name": "CS Wind Corp.",
+    "group": "Electrical Products",
+    "pattern": "triangle",
+    "patterns": [
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-07-23",
+    "entry_date": "2026-07-24",
+    "entry": 44031.7,
+    "stop": 40949.48,
+    "exit_date": "2026-07-27",
+    "exit": 40826.63,
+    "why": "stop",
+    "shares": 75,
+    "pnl_krw": -245928,
+    "pnl_pct": -7.45,
+    "hold_days": 2
+   },
+   {
+    "code": "267270",
+    "name": "HD Construction Equipment Co., Ltd.",
+    "group": "Trucks/Construction/Farm Machinery",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-08-05",
+    "entry_date": "2026-08-06",
+    "entry": 141122.1,
+    "stop": 131243.55,
+    "exit_date": "2026-08-19",
+    "exit": 128513.3,
+    "why": "stop",
+    "shares": 22,
+    "pnl_krw": -282524,
+    "pnl_pct": -9.1,
+    "hold_days": 9
+   },
+   {
+    "code": "207940",
+    "name": "SAMSUNG BIOLOGICS Co., Ltd.",
+    "group": "Biotechnology",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-07-24",
+    "entry_date": "2026-07-27",
+    "entry": 1503497.0,
+    "stop": 1398252.21,
+    "exit_date": "2026-08-25",
+    "exit": 1546347.0,
+    "why": "hold20",
+    "shares": 2,
+    "pnl_krw": 80146,
+    "pnl_pct": 2.66,
+    "hold_days": 20
+   },
+   {
+    "code": "068270",
+    "name": "Celltrion, Inc.",
+    "group": "Biotechnology",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-07-30",
+    "entry_date": "2026-07-31",
+    "entry": 189767.6,
+    "stop": 176483.87,
+    "exit_date": "2026-08-31",
+    "exit": 187436.0,
+    "why": "hold20",
+    "shares": 16,
+    "pnl_krw": -42709,
+    "pnl_pct": -1.41,
+    "hold_days": 20
+   },
+   {
+    "code": "192820",
+    "name": "COSMAX, Inc.",
+    "group": "Household/Personal Care",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-08-28",
+    "entry_date": "2026-08-31",
+    "entry": 297891.0,
+    "stop": 277038.63,
+    "exit_date": "2026-09-02",
+    "exit": 276207.51,
+    "why": "stop",
+    "shares": 10,
+    "pnl_krw": -221839,
+    "pnl_pct": -7.45,
+    "hold_days": 3
+   },
+   {
+    "code": "247540",
+    "name": "Ecopro BM Co., Ltd.",
+    "group": "Electrical Products",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-08-24",
+    "entry_date": "2026-08-25",
+    "entry": 112904.55,
+    "stop": 105001.23,
+    "exit_date": "2026-09-03",
+    "exit": 104686.23,
+    "why": "stop",
+    "shares": 27,
+    "pnl_krw": -227016,
+    "pnl_pct": -7.45,
+    "hold_days": 8
+   },
+   {
+    "code": "066970",
+    "name": "L & F Co., Ltd.",
+    "group": "Electronic Production Equipment",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-08-24",
+    "entry_date": "2026-08-25",
+    "entry": 120360.0,
+    "stop": 111934.8,
+    "exit_date": "2026-09-08",
+    "exit": 111599.0,
+    "why": "stop",
+    "shares": 26,
+    "pnl_krw": -233043,
+    "pnl_pct": -7.45,
+    "hold_days": 11
+   },
+   {
+    "code": "052690",
+    "name": "KEPCO Engineering & Construction Co., Inc.",
+    "group": "Engineering & Construction",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "week",
+    "signal_date": "2026-09-08",
+    "entry_date": "2026-09-09",
+    "entry": 151854.2,
+    "stop": 141224.41,
+    "exit_date": "2026-09-09",
+    "exit": 140800.73,
+    "why": "stop",
+    "shares": 18,
+    "pnl_krw": -203554,
+    "pnl_pct": -7.45,
+    "hold_days": 1
+   },
+   {
+    "code": "010170",
+    "name": "Taihan Fiberoptics Co., Ltd",
+    "group": "Electrical Products",
+    "pattern": "triangle",
+    "patterns": [
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-09-09",
+    "entry_date": "2026-09-10",
+    "entry": 15085.12,
+    "stop": 14029.16,
+    "exit_date": "2026-09-14",
+    "exit": 13808.45,
+    "why": "stop",
+    "shares": 188,
+    "pnl_krw": -244723,
+    "pnl_pct": -8.63,
+    "hold_days": 3
+   },
+   {
+    "code": "010140",
+    "name": "Samsung Heavy Industries Co., Ltd",
+    "group": "Trucks/Construction/Farm Machinery",
+    "pattern": "triangle",
+    "patterns": [
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-09-03",
+    "entry_date": "2026-09-04",
+    "entry": 21564.5,
+    "stop": 20054.98,
+    "exit_date": "2026-09-28",
+    "exit": 19994.82,
+    "why": "stop",
+    "shares": 138,
+    "pnl_krw": -221615,
+    "pnl_pct": -7.45,
+    "hold_days": 15
+   },
+   {
+    "code": "010060",
+    "name": "OCI Holdings Company Ltd.",
+    "group": "Chemicals: Specialty",
+    "pattern": "triangle",
+    "patterns": [
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-09-28",
+    "entry_date": "2026-09-29",
+    "entry": 222666.0,
+    "stop": 216404.84,
+    "exit_date": "2026-09-29",
+    "exit": 215755.63,
+    "why": "stop",
+    "shares": 13,
+    "pnl_krw": -94897,
+    "pnl_pct": -3.28,
+    "hold_days": 1
+   },
+   {
+    "code": "316140",
+    "name": "Woori Financial Group, Inc.",
+    "group": "Major Banks",
+    "pattern": "cup_handle",
+    "patterns": [
+     "box",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-09-14",
+    "entry_date": "2026-09-15",
+    "entry": 36459.05,
+    "stop": 33906.92,
+    "exit_date": "2026-10-01",
+    "exit": 33349.65,
+    "why": "stop",
+    "shares": 75,
+    "pnl_krw": -237742,
+    "pnl_pct": -8.69,
+    "hold_days": 11
    }
   ]
  },
@@ -25593,10 +29878,616 @@
     "2026-09-28",
     11611566
    ]
+  ],
+  "risk_2": [
+   [
+    "2023-08-23",
+    10000000
+   ],
+   [
+    "2023-08-30",
+    10000000
+   ],
+   [
+    "2023-09-06",
+    10000000
+   ],
+   [
+    "2023-09-13",
+    10000000
+   ],
+   [
+    "2023-09-20",
+    10000000
+   ],
+   [
+    "2023-09-27",
+    10000000
+   ],
+   [
+    "2023-10-11",
+    10000000
+   ],
+   [
+    "2023-10-18",
+    10000000
+   ],
+   [
+    "2023-10-25",
+    10000000
+   ],
+   [
+    "2023-11-01",
+    10000000
+   ],
+   [
+    "2023-11-08",
+    10000000
+   ],
+   [
+    "2023-11-15",
+    10137929
+   ],
+   [
+    "2023-11-22",
+    9734804
+   ],
+   [
+    "2023-11-29",
+    9552757
+   ],
+   [
+    "2023-12-06",
+    9395887
+   ],
+   [
+    "2023-12-13",
+    9323931
+   ],
+   [
+    "2023-12-20",
+    9183762
+   ],
+   [
+    "2023-12-28",
+    9511106
+   ],
+   [
+    "2024-01-08",
+    9164065
+   ],
+   [
+    "2024-01-15",
+    9509930
+   ],
+   [
+    "2024-01-22",
+    9343928
+   ],
+   [
+    "2024-01-29",
+    8897919
+   ],
+   [
+    "2024-02-05",
+    9591104
+   ],
+   [
+    "2024-02-14",
+    9344611
+   ],
+   [
+    "2024-02-21",
+    9280711
+   ],
+   [
+    "2024-02-28",
+    9261856
+   ],
+   [
+    "2024-03-07",
+    9593090
+   ],
+   [
+    "2024-03-14",
+    9651700
+   ],
+   [
+    "2024-03-21",
+    9358010
+   ],
+   [
+    "2024-03-28",
+    10526300
+   ],
+   [
+    "2024-04-04",
+    10499097
+   ],
+   [
+    "2024-04-12",
+    10009652
+   ],
+   [
+    "2024-04-19",
+    10366082
+   ],
+   [
+    "2024-04-26",
+    10367356
+   ],
+   [
+    "2024-05-07",
+    11220012
+   ],
+   [
+    "2024-05-14",
+    11834426
+   ],
+   [
+    "2024-05-22",
+    11000611
+   ],
+   [
+    "2024-05-29",
+    11392648
+   ],
+   [
+    "2024-06-05",
+    10572932
+   ],
+   [
+    "2024-06-13",
+    10417084
+   ],
+   [
+    "2024-06-20",
+    10331260
+   ],
+   [
+    "2024-06-27",
+    10562983
+   ],
+   [
+    "2024-07-04",
+    10526953
+   ],
+   [
+    "2024-07-11",
+    10752732
+   ],
+   [
+    "2024-07-18",
+    10535032
+   ],
+   [
+    "2024-07-25",
+    10242377
+   ],
+   [
+    "2024-08-01",
+    9967557
+   ],
+   [
+    "2024-08-08",
+    9680907
+   ],
+   [
+    "2024-08-16",
+    9583553
+   ],
+   [
+    "2024-08-23",
+    9344558
+   ],
+   [
+    "2024-08-30",
+    9505732
+   ],
+   [
+    "2024-09-06",
+    8611227
+   ],
+   [
+    "2024-09-13",
+    8861793
+   ],
+   [
+    "2024-09-25",
+    8915100
+   ],
+   [
+    "2024-10-04",
+    8680000
+   ],
+   [
+    "2024-10-14",
+    8709683
+   ],
+   [
+    "2024-10-21",
+    9220816
+   ],
+   [
+    "2024-10-28",
+    8914340
+   ],
+   [
+    "2024-11-04",
+    8603204
+   ],
+   [
+    "2024-11-11",
+    8914529
+   ],
+   [
+    "2024-11-18",
+    8542373
+   ],
+   [
+    "2024-11-25",
+    8447994
+   ],
+   [
+    "2024-12-02",
+    7985217
+   ],
+   [
+    "2024-12-09",
+    7516555
+   ],
+   [
+    "2024-12-16",
+    8062424
+   ],
+   [
+    "2024-12-23",
+    7895841
+   ],
+   [
+    "2025-01-02",
+    7797978
+   ],
+   [
+    "2025-01-09",
+    8736928
+   ],
+   [
+    "2025-01-16",
+    8807979
+   ],
+   [
+    "2025-01-23",
+    8852990
+   ],
+   [
+    "2025-02-05",
+    8795560
+   ],
+   [
+    "2025-02-12",
+    8745859
+   ],
+   [
+    "2025-02-19",
+    9587459
+   ],
+   [
+    "2025-02-26",
+    8802959
+   ],
+   [
+    "2025-03-06",
+    8436087
+   ],
+   [
+    "2025-03-13",
+    8670456
+   ],
+   [
+    "2025-03-20",
+    8576836
+   ],
+   [
+    "2025-03-27",
+    8496847
+   ],
+   [
+    "2025-04-03",
+    7957948
+   ],
+   [
+    "2025-04-10",
+    8282181
+   ],
+   [
+    "2025-04-17",
+    9246348
+   ],
+   [
+    "2025-04-24",
+    9513348
+   ],
+   [
+    "2025-05-02",
+    9767351
+   ],
+   [
+    "2025-05-13",
+    9627583
+   ],
+   [
+    "2025-05-20",
+    10031686
+   ],
+   [
+    "2025-05-27",
+    9911000
+   ],
+   [
+    "2025-06-04",
+    9759838
+   ],
+   [
+    "2025-06-12",
+    9829438
+   ],
+   [
+    "2025-06-19",
+    9844138
+   ],
+   [
+    "2025-06-26",
+    9696422
+   ],
+   [
+    "2025-07-03",
+    10149974
+   ],
+   [
+    "2025-07-10",
+    10320165
+   ],
+   [
+    "2025-07-17",
+    10276122
+   ],
+   [
+    "2025-07-24",
+    10590022
+   ],
+   [
+    "2025-07-31",
+    10308071
+   ],
+   [
+    "2025-08-07",
+    10299991
+   ],
+   [
+    "2025-08-14",
+    10574791
+   ],
+   [
+    "2025-08-22",
+    10312491
+   ],
+   [
+    "2025-08-29",
+    10074609
+   ],
+   [
+    "2025-09-05",
+    10285489
+   ],
+   [
+    "2025-09-12",
+    10542872
+   ],
+   [
+    "2025-09-22",
+    11900592
+   ],
+   [
+    "2025-09-29",
+    11112491
+   ],
+   [
+    "2025-10-13",
+    10196052
+   ],
+   [
+    "2025-10-20",
+    10897957
+   ],
+   [
+    "2025-10-27",
+    12253757
+   ],
+   [
+    "2025-11-03",
+    13307357
+   ],
+   [
+    "2025-11-10",
+    12922957
+   ],
+   [
+    "2025-11-17",
+    13099567
+   ],
+   [
+    "2025-11-24",
+    12297577
+   ],
+   [
+    "2025-12-01",
+    13614468
+   ],
+   [
+    "2025-12-08",
+    14107368
+   ],
+   [
+    "2025-12-15",
+    14017803
+   ],
+   [
+    "2025-12-22",
+    14390834
+   ],
+   [
+    "2025-12-30",
+    13533588
+   ],
+   [
+    "2026-01-08",
+    15523399
+   ],
+   [
+    "2026-01-15",
+    15768699
+   ],
+   [
+    "2026-01-22",
+    15619777
+   ],
+   [
+    "2026-01-29",
+    16826691
+   ],
+   [
+    "2026-02-05",
+    16118195
+   ],
+   [
+    "2026-02-12",
+    15731815
+   ],
+   [
+    "2026-02-24",
+    15191931
+   ],
+   [
+    "2026-03-04",
+    13957395
+   ],
+   [
+    "2026-03-11",
+    13672142
+   ],
+   [
+    "2026-03-18",
+    13431611
+   ],
+   [
+    "2026-03-25",
+    13442010
+   ],
+   [
+    "2026-04-01",
+    11904227
+   ],
+   [
+    "2026-04-08",
+    11598515
+   ],
+   [
+    "2026-04-15",
+    10562026
+   ],
+   [
+    "2026-04-22",
+    11793089
+   ],
+   [
+    "2026-04-29",
+    12447139
+   ],
+   [
+    "2026-05-08",
+    12434302
+   ],
+   [
+    "2026-05-15",
+    13527105
+   ],
+   [
+    "2026-05-22",
+    15584167
+   ],
+   [
+    "2026-06-01",
+    14415782
+   ],
+   [
+    "2026-06-09",
+    13552537
+   ],
+   [
+    "2026-06-16",
+    13185523
+   ],
+   [
+    "2026-06-23",
+    12347856
+   ],
+   [
+    "2026-06-30",
+    12530054
+   ],
+   [
+    "2026-07-07",
+    12551970
+   ],
+   [
+    "2026-07-14",
+    11866630
+   ],
+   [
+    "2026-07-22",
+    11601608
+   ],
+   [
+    "2026-07-29",
+    11059624
+   ],
+   [
+    "2026-08-05",
+    11091687
+   ],
+   [
+    "2026-08-12",
+    11336735
+   ],
+   [
+    "2026-08-20",
+    11035963
+   ],
+   [
+    "2026-08-27",
+    11267282
+   ],
+   [
+    "2026-09-03",
+    10414088
+   ],
+   [
+    "2026-09-10",
+    9868565
+   ],
+   [
+    "2026-09-17",
+    9772511
+   ],
+   [
+    "2026-09-28",
+    10062744
+   ]
   ]
  },
  "errors": {},
- "elapsed_sec": 247,
+ "elapsed_sec": 287,
  "pass": {
   "criteria": {
    "min_trades": 100,
