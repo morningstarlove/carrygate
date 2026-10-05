@@ -1,7 +1,7 @@
 {
  "schema": "carrygate-funding-signal/1",
  "date": "2026-10-05",
- "generated_at_kst": "2026-10-05 10:55:19",
+ "generated_at_kst": "2026-10-05 14:50:06",
  "lookback_days": 180,
  "method": {
   "signal": "최근 3일 평균 일간 펀딩(%)의 과거 대비 백분위. ≥90 과열, ≤10 냉각",
@@ -327,14 +327,14 @@
      "fwd1_pos_pct": 33.3,
      "fwd3_pct": -0.2664,
      "fwd3_pos_pct": 33.3,
-     "fwd7_pct": -0.3611,
+     "fwd7_pct": -0.5623,
      "fwd7_pos_pct": 40.0
     },
     "mid": {
      "n": 46,
-     "fwd1_pct": 0.4633,
+     "fwd1_pct": 0.4419,
      "fwd1_pos_pct": 56.5,
-     "fwd3_pct": 1.5461,
+     "fwd3_pct": 1.5238,
      "fwd3_pos_pct": 59.1,
      "fwd7_pct": 2.6772,
      "fwd7_pos_pct": 65.9
@@ -382,11 +382,11 @@
     },
     "mid": {
      "n": 54,
-     "fwd1_pct": 0.6358,
+     "fwd1_pct": 0.6227,
      "fwd1_pos_pct": 57.4,
-     "fwd3_pct": 1.5168,
+     "fwd3_pct": 1.5032,
      "fwd3_pos_pct": 67.3,
-     "fwd7_pct": 2.7652,
+     "fwd7_pct": 2.7504,
      "fwd7_pos_pct": 70.8
     }
    },
@@ -432,11 +432,11 @@
     },
     "mid": {
      "n": 47,
-     "fwd1_pct": 0.9193,
+     "fwd1_pct": 0.8995,
      "fwd1_pos_pct": 51.1,
-     "fwd3_pct": 3.0616,
-     "fwd3_pos_pct": 46.7,
-     "fwd7_pct": 6.3256,
+     "fwd3_pct": 3.0409,
+     "fwd3_pos_pct": 44.4,
+     "fwd7_pct": 6.3028,
      "fwd7_pos_pct": 56.1
     }
    },
@@ -473,8 +473,8 @@
     },
     "low": {
      "n": 7,
-     "fwd1_pct": 0.5065,
-     "fwd1_pos_pct": 71.4,
+     "fwd1_pct": 0.4507,
+     "fwd1_pos_pct": 57.1,
      "fwd3_pct": 1.1661,
      "fwd3_pos_pct": 83.3,
      "fwd7_pct": 2.4522,
@@ -484,9 +484,9 @@
      "n": 49,
      "fwd1_pct": 0.039,
      "fwd1_pos_pct": 55.1,
-     "fwd3_pct": 0.1093,
+     "fwd3_pct": 0.1012,
      "fwd3_pos_pct": 54.2,
-     "fwd7_pct": 0.1626,
+     "fwd7_pct": 0.1541,
      "fwd7_pos_pct": 52.2
     }
    },
@@ -532,11 +532,11 @@
     },
     "mid": {
      "n": 46,
-     "fwd1_pct": 0.9802,
-     "fwd1_pos_pct": 60.9,
-     "fwd3_pct": 2.6913,
+     "fwd1_pct": 0.9707,
+     "fwd1_pos_pct": 58.7,
+     "fwd3_pct": 2.6814,
      "fwd3_pos_pct": 59.1,
-     "fwd7_pct": 5.1338,
+     "fwd7_pct": 5.1231,
      "fwd7_pos_pct": 72.5
     }
    },
@@ -568,7 +568,7 @@
      "fwd1_pos_pct": 61.1,
      "fwd3_pct": 0.0072,
      "fwd3_pos_pct": 44.4,
-     "fwd7_pct": 0.5612,
+     "fwd7_pct": 0.4983,
      "fwd7_pos_pct": 40.0
     },
     "low": {
@@ -582,9 +582,9 @@
     },
     "mid": {
      "n": 46,
-     "fwd1_pct": 0.7608,
+     "fwd1_pct": 0.7404,
      "fwd1_pos_pct": 56.5,
-     "fwd3_pct": 2.4502,
+     "fwd3_pct": 2.4291,
      "fwd3_pos_pct": 54.5,
      "fwd7_pct": 5.3814,
      "fwd7_pos_pct": 65.1
@@ -615,19 +615,19 @@
    "n": 318,
    "fwd1_pct": 0.1578,
    "fwd3_pct": 0.2851,
-   "fwd7_pct": 0.976
+   "fwd7_pct": 0.9724
   },
   "low": {
    "n": 109,
-   "fwd1_pct": -0.1052,
+   "fwd1_pct": -0.1088,
    "fwd3_pct": -0.0406,
-   "fwd7_pct": 1.4815
+   "fwd7_pct": 1.4704
   },
   "mid": {
    "n": 869,
-   "fwd1_pct": 0.2743,
-   "fwd3_pct": 0.8847,
-   "fwd7_pct": 1.9129
+   "fwd1_pct": 0.2697,
+   "fwd3_pct": 0.8795,
+   "fwd7_pct": 1.9097
   },
   "rule": {
    "n": 417,
@@ -719,6 +719,6 @@
   "cold": [
    "hyperliquid:LINK"
   ],
-  "verdict": "과열 뒤 3일 0.2851% (n=318) vs 냉각 뒤 -0.0406% (n=109) vs 중립 0.8847%. 규칙 건당 순 -0.255% (n=417). 오늘 과열 hyperliquid:ETH, hyperliquid:XRP, hyperliquid:DOGE / 냉각 hyperliquid:LINK"
+  "verdict": "과열 뒤 3일 0.2851% (n=318) vs 냉각 뒤 -0.0406% (n=109) vs 중립 0.8795%. 규칙 건당 순 -0.255% (n=417). 오늘 과열 hyperliquid:ETH, hyperliquid:XRP, hyperliquid:DOGE / 냉각 hyperliquid:LINK"
  }
 }
