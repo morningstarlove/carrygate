@@ -2,8 +2,8 @@
 
 > 이 문서만 읽으면 누구든(혹은 다른 AI 세션이든) 이어서 작업할 수 있게 쓴다.
 
-**최종 갱신:** 2026-10-04 (AI 보조 도구 4종 설치)
-**작업 브랜치:** `claude/chandelier-exit-variant` (이번 작업, Chandelier 변형) / `claude/new-session-as7gis` (터틀) / 이전 `claude/scalping-research-results-7mi7tf`, `claude/analysis-dwawzd`
+**최종 갱신:** 2026-10-05 (터틀 기록 중복 수정 PR #22·#23, AI 보조 도구 4종 설치 PR #19, 워크플로 커밋 복구 PR #20)
+**작업 브랜치:** 모두 `main` 에 병합됨. 최근 작업 브랜치(참고용): `claude/turtle-history-dedupe`(터틀 기록 중복), `claude/chandelier-exit-variant`(Chandelier 변형), `claude/new-session-as7gis`(터틀), 한국 주식 트랙 PR #17·#18
 **저장소:** `morningstarlove/carrygate` (2026-09-17 `signalgate-bridge` 에서 이름 변경)
 **프로젝트명:** CARRYGATE — 게이트(신호등) + 캐리(이자) 두 축에서 따왔다.
 
