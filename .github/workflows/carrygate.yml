@@ -80,6 +80,11 @@ jobs:
         continue-on-error: true
         run: python turtle.py
 
+      - name: Trend reversal rules (추세 전환 4시간봉, 중기)
+        if: inputs.day == ''
+        continue-on-error: true
+        run: python reversal.py
+
       - name: Live carry monitor (실전 캐리 감시, 지갑 주소만)
         if: inputs.day == ''
         continue-on-error: true
@@ -116,13 +121,17 @@ jobs:
         if: always()
         run: python turtle.py --report || echo "터틀 기록 없음"
 
+      - name: Show reversal trend (추세 전환 신호 추이)
+        if: always()
+        run: python reversal.py --report || echo "추세 전환 기록 없음"
+
       - name: Show research trend (보조 연구 누적)
         if: always()
         run: python scalp_research.py --report || echo "연구 기록 없음"
 
       - name: Unit tests (계산 로직)
         if: always()
-        run: python -m unittest tests.test_scalp tests.test_research tests.test_midterm tests.test_momentum tests.test_live tests.test_turtle tests.test_relay
+        run: python -m unittest tests.test_scalp tests.test_research tests.test_midterm tests.test_momentum tests.test_live tests.test_turtle tests.test_reversal tests.test_relay
 
       - name: Commit results
         if: always() && inputs.dry_run != true
@@ -133,7 +142,7 @@ jobs:
           # 아무것도 저장되지 않는다(2026-10-02~04 결과 유실). 있는 경로만 하나씩 추가한다.
           for p in status.json history.jsonl funding.json funding_history.jsonl scalp.json scalp_history.jsonl research.json research_history.jsonl \
                    basis.json basis_history.jsonl funding_signal.json funding_signal_history.jsonl kimchi.json kimchi_history.jsonl \
-                   macro.json listing.json momentum.json momentum_history.jsonl live.json live_history.jsonl turtle.json turtle_history.jsonl \
+                   macro.json listing.json momentum.json momentum_history.jsonl live.json live_history.jsonl turtle.json turtle_history.jsonl reversal.json reversal_history.jsonl \
                    data/kr_funding.json data/cg_funding_snapshots.jsonl data/etf data/upbit_markets.json; do
             if [ -e "$p" ]; then git add -A "$p"; else echo "없음(건너뜀): $p"; fi
           done
