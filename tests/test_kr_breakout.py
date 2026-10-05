@@ -109,6 +109,15 @@ class Engine(unittest.TestCase):
         self.assertLessEqual(risk, KB.EQUITY0 * KB.RISK_PCT / 100 + p["entry"])          # 1% 이하 (1주 단위 오차)
         self.assertLessEqual(p["shares"] * p["entry"], KB.EQUITY0 * KB.MAX_POS_PCT / 100 + p["entry"])
 
+    def test_risk_2_variant_sizes_double(self):
+        bars = box_then_breakout(after=[(112, 115, 110, 114)] * 3)
+        sims, _ = run({"A": bars}, {"A": "G"})
+        p1 = sims["base"].positions["A"]; p2 = sims["risk_2"].positions["A"]
+        r1 = p1["shares"] * (p1["entry"] - p1["stop"]); r2 = p2["shares"] * (p2["entry"] - p2["stop"])
+        self.assertGreater(r2, r1 * 1.8)                                              # 위험 금액 약 2배 (1주 단위 오차)
+        self.assertLessEqual(p2["shares"] * p2["entry"], KB.EQUITY0 * 0.30 + p2["entry"])   # 명목 상한 30%
+        self.assertEqual(p1["stop"], p2["stop"])                                      # 손절 규칙은 같다
+
     def test_cooldown_blocks_reentry(self):
         after = [(113, 114, 100, 101)] + [(101, 102, 99, 100)] * 2     # 바로 손절
         bars = box_then_breakout(after=after)
