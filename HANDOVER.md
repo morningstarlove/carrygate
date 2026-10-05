@@ -635,6 +635,12 @@ Chandelier 변형: 업비트 +187% / CAGR 42% / 낙폭 −19% / 124건, OKX −5
   파일이 아직 없으면 "첫 실행 전"으로 표시된다. 세 렌더러를 실제 JSON 으로 돌려 오류·빈 값 없음을 확인했다(화면은 claude.ai 안에서만 열린다).
 - 현황판 HTML 은 저장소에 없다(아티팩트에만 있음). 고치려면 Claude 세션에서 아티팩트 URL 을 읽어 수정해 같은 URL 로 다시 올린다.
 
+**변형 risk_2 추가 (2026-10-05, PR #25, 사용자 결정 "1·2번 같이"):** 한 번에 계좌의 2% 를 거는 변형(명목 상한 30%)을 나란히 기록만 한다.
+3년 백테스트 다시 돌린 결과(Actions 수동 실행, `kr_backtest.json` 2026-10-05): **risk_2 는 매매 193건, 수익 +8.7%, 최대낙폭 44.0%** (base +90.3% / 25.5%).
+위험을 2배로 올려도 수익이 2배가 되지 않았다. 종목당 28% 를 넣으니 3종목이면 현금이 바닥나 이후 신호 1,695건을 "돈 없음"으로 버렸고(base 는 5종목 분산),
+다른 종목 조합을 잡아 2024 −17.9%(base +18.3%), 2026 −19.7%(base +4.6%). **이 규칙의 수익은 5종목 분산 + 작은 베팅에서 나온다.**
+베팅을 키우면 분산이 깨진다. 수익을 키우려면 종목당 위험이 아니라 계좌 자체를 키우는 쪽이다(1% 규칙은 계좌 크기에 비례). 변형은 그대로 두고 순방향에서도 기록한다.
+
 **순방향 4주 뒤 볼 것 (2026-11 초):** `python kr_breakout.py --report` 또는 현황판 ② 카드.
 백테스트와 견줄 기준 — 승률 25~35%, 손절 매매는 전부 −7% 안팎, 20일 보유까지 간 매매의 승 비율 90% 안팎, 신호의 대부분이 "자리 없음"으로 버려짐.
 이 모양이 비슷하면 규칙이 살아 있는 것이고, 승률이 15% 아래로 떨어지거나 20일 보유 매매가 지기 시작하면 백테스트의 생존 편향이 드러난 것이다.
@@ -731,7 +737,7 @@ GitHub 저장소 → Actions 탭 → `CARRYGATE daily` → Run workflow
 | `kr_universe.py` 상단 `MIN_GROUP` / `UP_RATIO` / `MED_CHANGE_PCT` / `MED_WEEK_PCT` | 업종 동조 규칙 (**고치면 `RULE_FIXED` 를 그날로 바꾼다**) |
 | `kr_universe.py` 상단 `EXCLUDE_WORDS` / `GROUP_KEY` | 제외어(스팩·ETF·ETN) / 묶음 기준(industry) |
 | `patterns.py` 상단 `VOL_MULT` / `BOX_*` / `TRI_*` / `FLAG_*` / `CUP_*` | 패턴 숫자 규칙 (**고치면 과최적화 — 변형 추가로만**) |
-| `kr_breakout.py` 상단 `RISK_PCT` / `MAX_POS` / `STOP_PCT` / `HOLD_MAX` / `VARIANTS` | 매매 규칙·변형 (**고치면 `RULE_FIXED` 를 그날로**) / `BT_UNIVERSE` 백테스트 종목 수 |
+| `kr_breakout.py` 상단 `RISK_PCT` / `MAX_POS` / `STOP_PCT` / `HOLD_MAX` / `VARIANTS` | 매매 규칙·변형 (**고치면 `RULE_FIXED` 를 그날로**; 변형은 `risk_pct`/`max_pos_pct`/`hold_max`/`need_sync` 로 추가만) / `BT_UNIVERSE` 백테스트 종목 수 |
 | `kr_ohlcv.py` 상단 `SOURCES` | 일봉 경로 순서 (야후 → 네이버 API → fchart) |
 | `.github/workflows/kr_breakout.yml` `cron` | 한국 주식 실행 시각 (평일 06:45 UTC = 15:45 KST) |
 | `.github/workflows/carrygate.yml` `cron` | 실행 시각 |
