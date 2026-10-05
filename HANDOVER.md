@@ -547,8 +547,27 @@ Chandelier 변형: 업비트 +187% / CAGR 42% / 낙폭 −19% / 124건, OKX −5
 - 자동 시험 7건(`tests/test_relay.py`): 신선/오래됨/깨진 파일, 공식 수수료, 중계 항목 연환산, 7일 창, 설정 검증.
 - **실제 바이낸스·바이비트 API 호출은 이 세션 서버에서 막혀 확인하지 못했다.** 사용자가 2단계(`kr_relay.bat` 더블클릭)에서 처음 확인한다. 실패하면 검은 창의 메시지를 그대로 보내면 된다.
 
+**추가 (2026-10-05) — PC 없이 되는 길을 찾았다: CoinGecko 대체 경로.**
+사용자가 "네가 직접 할 수 없나"라고 해서, 미국 서버에서 열리는 다른 경로를 `probe.yml`(수동 실행 워크플로)로 전부 찍어 봤다.
+
+| 경로 | 결과 |
+|---|---|
+| 바이낸스 `fapi` / `eapi` / `www.binance.com/bapi` | 451 / 451 / 400 — 차단 |
+| 바이비트 `api.bybit.com` / `api.bytick.com` / `api.bybit.nl` / `api.bybit-tr.com` | 전부 403 (CloudFront 국가 차단) |
+| `data.binance.vision`, `data-api.binance.vision` | 200 — 그러나 현물 전용·월간 파일이라 현재 펀딩비는 못 받는다 |
+| Coinalyze / Coinglass | API 키 필요 |
+| **CoinGecko `derivatives/exchanges/binance_futures`, `/bybit`** | **200, 키 없음** — 무기한 쌍별 `funding_rate`, `last`, `index` |
+
+그래서 `funding.py` 에 세 번째 경로를 넣었다: 직접 수집 → (실패) 한국 중계 파일(36h) → (없으면) **CoinGecko**.
+- CoinGecko 는 현재값만 주므로 매일 한 표본을 `data/cg_funding_snapshots.jsonl` 에 모아(같은 날 중복은 마지막 것, 14일 보관)
+  **표본 5개 이상일 때만 7일 평균**으로 친다. 그 전에는 단발값이라 진입 판정에 안 쓴다(원칙 2). 즉 **10/10 부터** 두 거래소가 판정에 들어온다.
+- 정산주기는 CoinGecko 가 안 주므로 8시간으로 가정하고 `interval_assumed: true` 로 표시한다(`CG_INTERVAL_HOURS` 에 예외 기입).
+- `CG_RATE_IS_PERCENT = True`(0.01 = 0.01%) 가정. **첫 실행에서 OKX·하이퍼리퀴드 직접값과 크기를 비교해 확인한다.** 100배 어긋나면 이 상수를 뒤집는다.
+- 결과는 `funding.json` 의 `coingecko: {used, samples, error}`, 항목의 `via: "coingecko 일별 표본"`.
+- 자동 시험 3건 추가(단위·필터, 표본 최소치·창, 같은 날 중복·보관 기간). PC 중계기는 **선택 사항**이 됐다(더 정확: 실제 정산 이력·정산주기).
+
 **다음 단계**
-1. 사용자가 `docs/KR_RELAY_SETUP.md` 를 따라 PC 설정 (20~30분). 첫 업로드 확인.
+1. (선택) 사용자가 `docs/KR_RELAY_SETUP.md` 를 따라 PC 설정하면 7일 평균이 첫날부터 나온다. 안 해도 10/10 부터는 CoinGecko 표본으로 판정된다.
 2. 7일 뒤(중계 7일 누적) 바이낸스·바이비트 순 연수익이 문턱(8%)을 넘는지 본다. 하이퍼리퀴드와 나란히 비교.
 3. 넘으면 `docs/LIVE_CARRY_PLAN.md` 를 바이낸스/바이비트 판으로 고쳐 소액 실전. 감시(`live_monitor.py`)는 읽기 전용 API 키가 필요하므로 그때 설계한다(원칙 1 의 예외를 "읽기 전용 키, 한국 PC 에만 보관"으로 한정).
 

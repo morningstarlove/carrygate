@@ -66,6 +66,55 @@ class Fees(unittest.TestCase):
         self.assertAlmostEqual(d["decision_apr_pct"], d["gross_apr_pct"] - d["fee_drag_apr_pct"], places=3)
 
 
+class CoinGecko(unittest.TestCase):
+    def _payload(self):
+        return {"name": "Binance (Futures)", "tickers": [
+            {"symbol": "BTCUSDT", "base": "BTC", "target": "USDT", "contract_type": "perpetual", "funding_rate": 0.0085, "last": 100.0, "index": 99.9},
+            {"symbol": "BTCUSD_260327", "base": "BTC", "target": "USD", "contract_type": "futures", "funding_rate": 0.0, "last": 101.0, "index": 99.9},
+            {"symbol": "DOGEUSDT", "base": "DOGE", "target": "USDT", "contract_type": "perpetual", "funding_rate": -0.02, "last": 0.1, "index": 0.1},
+            {"symbol": "ETHBTC", "base": "ETH", "target": "BTC", "contract_type": "perpetual", "funding_rate": 0.01, "last": 0.03, "index": 0.03},
+        ]}
+
+    def test_parse_percent_units_and_filters(self):
+        now = 1_800_000_000_000
+        rows, new = funding.cg_parse("binance", self._payload(), [], now)
+        self.assertEqual(sorted(rows), ["BTC", "DOGE"])                  # 만기 선물·BTC 마진 쌍은 제외
+        self.assertAlmostEqual(rows["BTC"]["funding_rate_now"], 0.000085)   # 0.0085% -> 비율
+        self.assertIsNone(rows["BTC"]["funding_rate_avg7d"])               # 표본 1개 — 평균 없음
+        self.assertEqual(rows["BTC"]["avg_samples"], 1)
+        self.assertEqual(rows["BTC"]["interval_hours"], 8.0)
+        self.assertTrue(rows["BTC"]["interval_assumed"])
+        self.assertEqual(len(new), 2)
+        d = funding.decorate(dict(rows["BTC"]), funding.venue_fees("binance", "BTC", None))
+        self.assertEqual(d["basis"], "단발값")
+
+    def test_avg_needs_min_samples_and_window(self):
+        now = 1_800_000_000_000
+        day = 86400_000
+        snaps = [{"t_ms": now - k * day, "venue": "binance", "coin": "BTC", "rate": 0.0001 * (k + 1)} for k in range(1, 5)]   # 4개
+        self.assertEqual(funding.cg_avg7(snaps, "binance", "BTC", now), (None, 4))
+        rows, _ = funding.cg_parse("binance", self._payload(), snaps, now)      # 오늘 것이 더해져 5개
+        self.assertEqual(rows["BTC"]["avg_samples"], 5)
+        self.assertAlmostEqual(rows["BTC"]["funding_rate_avg7d"], (0.0002 + 0.0003 + 0.0004 + 0.0005 + 0.000085) / 5)
+        old = snaps + [{"t_ms": now - 9 * day, "venue": "binance", "coin": "BTC", "rate": 1.0}]   # 9일 전은 창 밖
+        self.assertEqual(funding.cg_avg7(old, "binance", "BTC", now)[1], 4)
+
+    def test_snapshot_save_dedupes_same_day_and_prunes(self):
+        now = 1_800_000_000_000
+        day = 86400_000
+        fd, path = tempfile.mkstemp(suffix=".jsonl")
+        os.close(fd)
+        self.addCleanup(os.remove, path)
+        old = [{"t_ms": now - 20 * day, "venue": "bybit", "coin": "BTC", "rate": 0.5},        # 14일 넘음 — 삭제
+               {"t_ms": now - 1 * day, "venue": "bybit", "coin": "BTC", "rate": 0.1},
+               {"t_ms": now - 3600_000, "venue": "bybit", "coin": "BTC", "rate": 0.2}]        # 오늘 아침 (dry_run)
+        new = [{"t_ms": now, "venue": "bybit", "coin": "BTC", "rate": 0.3}]                     # 오늘 다시 — 덮어쓴다
+        n = funding.cg_snapshots_save(old, new, path=path, now_ms=now)
+        self.assertEqual(n, 2)
+        kept = funding.cg_snapshots_load(path)
+        self.assertEqual([r["rate"] for r in kept], [0.1, 0.3])
+
+
 class KrRelay(unittest.TestCase):
     def test_avg_recent_window(self):
         now_ms = time.time() * 1000
