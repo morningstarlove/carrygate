@@ -149,6 +149,17 @@ class Inputs(unittest.TestCase):
         self.assertEqual(days[0]["sync_groups"], {"G"}); self.assertEqual(days[0]["sync_by"], {"G": "week"})
         self.assertEqual(days[1]["universe"], [("A", "G")])
 
+    def test_holiday_day_without_bars_is_skipped(self):
+        bars = box_then_breakout(after=[(112, 115, 110, 114)] * 3)
+        days = KB.days_from_bars({"A": bars}, {"A": "G"})
+        for day in days:
+            day["sync_groups"] = {"G"}; day["sync_by"] = {"G": "day"}
+        # 휴장일: 기록은 있는데 그날 봉이 없다 (스캐너가 전 거래일 자료를 그대로 준 경우)
+        days.append({"date": "2099-01-01", "universe": [("A", "G")], "sync_groups": {"G"}, "sync_by": {"G": "day"}})
+        sims = KB.simulate(days, {"A": bars})
+        self.assertEqual(sims["base"].skipped_days, ["2099-01-01"])
+        self.assertEqual(sims["base"].day_no, len(days) - 1)
+
     def test_days_from_bars_reconstructs_top_and_sync(self):
         bars = {c: box_then_breakout(after=[(112, 115, 110, 114)] * 3) for c in ("A", "B", "C")}
         days = KB.days_from_bars(bars, {"A": "G", "B": "G", "C": "G"})

@@ -259,6 +259,7 @@ def simulate(days, all_bars, names=None):
     """days: [{date, universe: [(code, group)], sync_groups: set, sync_by: {group: by}}] 날짜 오름차순. all_bars: code -> 봉 목록."""
     index = {code: {b["date"]: i for i, b in enumerate(bars)} for code, bars in all_bars.items()}
     sims = {k: Sim(k, v) for k, v in VARIANTS.items()}
+    skipped_days = []
     for d in days:
         date = d["date"]
         bars_today, idx_today = {}, {}
@@ -266,9 +267,15 @@ def simulate(days, all_bars, names=None):
             i = index[code].get(date)
             if i is not None:
                 bars_today[code] = all_bars[code][i]; idx_today[code] = i
+        if not bars_today:
+            # 그날 봉이 하나도 없다 = 휴장일(스캐너가 직전 거래일 자료를 그대로 준 날) 또는 자료 미도착. 매매일로 세지 않는다.
+            skipped_days.append(date)
+            continue
         meta = {"sync_by": d.get("sync_by") or {}, "names": names or {}}
         for s in sims.values():
             s.step(date, bars_today, idx_today, all_bars, d["universe"], d["sync_groups"], meta)
+    for s in sims.values():
+        s.skipped_days = skipped_days
     return sims
 
 
@@ -402,8 +409,11 @@ def run_forward(fixture=None, dry_run=False):
     today_sig = {k: [e for e in s.pending_entries] for k, s in sims.items()}
     out = {"date": datetime.now(KST).strftime("%Y-%m-%d"), "generated_at_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
            "mode": "forward", "rule_fixed": RULE_FIXED, "rules": rules_dict(),
-           "forward": {"days": len(days), "from": days[0]["date"] if days else None, "to": last_date,
-                       "codes": len(all_bars), "bar_errors": len(errors), "stale_codes": len(stale)},
+           "forward": {"days": len(days) - len(sims["base"].skipped_days), "from": days[0]["date"] if days else None, "to": last_date,
+                       "codes": len(all_bars), "bar_errors": len(errors), "stale_codes": len(stale),
+                       "skipped_days": sims["base"].skipped_days,
+                       "note": ("마지막 기록일(%s)의 봉이 없다 — 휴장일이거나 자료가 아직 안 왔다. 매매일로 세지 않았다" % last_date)
+                               if last_date in sims["base"].skipped_days else None},
            "signals_today": {k: [{"code": e["code"], "name": e.get("name"), "group": e["group"], "pattern": e["pattern"], "patterns": e["patterns"],
                                    "signal_close": e["signal_close"], "pattern_low": e["pattern_low"], "sync_by": e["sync_by"],
                                    "entry_plan": "내일 시가 (시가가 %.0f 이상이면 포기)" % (e["signal_close"] * (1 + GAP_SKIP_PCT / 100)),
