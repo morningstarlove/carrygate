@@ -1,7 +1,7 @@
 {
  "schema": "carrygate-macro/1",
- "date": "2026-10-01",
- "generated_at_kst": "2026-10-01 15:06:14",
+ "date": "2026-10-05",
+ "generated_at_kst": "2026-10-05 10:55:54",
  "method": {
   "window": "발표 분의 시가를 기준가로, 직전 30분과 직후 (5, 15, 30, 60)분 수익률(bp), 60분 내 최대 상승·하락",
   "baseline": "전날 같은 시각의 30분 변동폭 = 평소 기준",
@@ -9,7 +9,272 @@
  },
  "calendar_last_event_utc": "2026-10-29",
  "calendar_stale": false,
+ "rule_fixed_utc": "2026-10-01T00:00:00Z",
  "events": [
+  {
+   "type": "cpi",
+   "title": "Inflation Rate YoY",
+   "time_utc": "2025-10-24T12:30:00Z",
+   "ts": 1761309000,
+   "coin": "BTC",
+   "source": "okx",
+   "forward": false,
+   "pre30_bp": -5.75,
+   "post5_bp": 50.5,
+   "post15_bp": 49.77,
+   "post30_bp": 26.74,
+   "post60_bp": 20.72,
+   "maxup60_bp": 109.79,
+   "maxdown60_bp": -13.28,
+   "base_abs_post30_bp": 3.16,
+   "actual": 3,
+   "forecast": 3.1,
+   "previous": 2.9,
+   "surprise": -0.10000000000000009,
+   "surprise_dir": 1
+  },
+  {
+   "type": "cpi",
+   "title": "Inflation Rate YoY",
+   "time_utc": "2025-10-24T12:30:00Z",
+   "ts": 1761309000,
+   "coin": "ETH",
+   "source": "okx",
+   "forward": false,
+   "pre30_bp": 20.99,
+   "post5_bp": 78.34,
+   "post15_bp": 56.89,
+   "post30_bp": 23.55,
+   "post60_bp": 29.4,
+   "maxup60_bp": 194.71,
+   "maxdown60_bp": -12.95,
+   "base_abs_post30_bp": 9.83,
+   "actual": 3,
+   "forecast": 3.1,
+   "previous": 2.9,
+   "surprise": -0.10000000000000009,
+   "surprise_dir": 1
+  },
+  {
+   "type": "fomc",
+   "title": "Fed Interest Rate Decision",
+   "time_utc": "2025-10-29T18:00:00Z",
+   "ts": 1761760800,
+   "coin": "BTC",
+   "source": "okx",
+   "forward": false,
+   "pre30_bp": 59.02,
+   "post5_bp": -21.65,
+   "post15_bp": -60.16,
+   "post30_bp": -38.12,
+   "post60_bp": -96.79,
+   "maxup60_bp": 16.97,
+   "maxdown60_bp": -242.4,
+   "base_abs_post30_bp": 35.04,
+   "actual": 4,
+   "forecast": 4,
+   "previous": 4.25,
+   "surprise": 0,
+   "surprise_dir": 0
+  },
+  {
+   "type": "fomc",
+   "title": "Fed Interest Rate Decision",
+   "time_utc": "2025-10-29T18:00:00Z",
+   "ts": 1761760800,
+   "coin": "ETH",
+   "source": "okx",
+   "forward": false,
+   "pre30_bp": 119.83,
+   "post5_bp": -40.89,
+   "post15_bp": -79.42,
+   "post30_bp": -55.62,
+   "post60_bp": -243.46,
+   "maxup60_bp": 10.76,
+   "maxdown60_bp": -443.7,
+   "base_abs_post30_bp": 31.9,
+   "actual": 4,
+   "forecast": 4,
+   "previous": 4.25,
+   "surprise": 0,
+   "surprise_dir": 0
+  },
+  {
+   "type": "gdp",
+   "title": "GDP Growth Rate QoQ Adv",
+   "time_utc": "2025-10-30T12:30:00Z",
+   "ts": 1761827400,
+   "coin": "BTC",
+   "source": "okx",
+   "forward": false,
+   "pre30_bp": -85.07,
+   "post5_bp": 26.2,
+   "post15_bp": -27.49,
+   "post30_bp": -35.54,
+   "post60_bp": -27.21,
+   "maxup60_bp": 30.35,
+   "maxdown60_bp": -58.07,
+   "base_abs_post30_bp": 7.28,
+   "actual": 4.3,
+   "forecast": 3,
+   "previous": 3.8,
+   "surprise": 1.2999999999999998,
+   "surprise_dir": -1
+  },
+  {
+   "type": "gdp",
+   "title": "GDP Growth Rate QoQ Adv",
+   "time_utc": "2025-10-30T12:30:00Z",
+   "ts": 1761827400,
+   "coin": "ETH",
+   "source": "okx",
+   "forward": false,
+   "pre30_bp": -67.0,
+   "post5_bp": 7.03,
+   "post15_bp": -111.54,
+   "post30_bp": -96.62,
+   "post60_bp": -89.56,
+   "maxup60_bp": 12.9,
+   "maxdown60_bp": -157.61,
+   "base_abs_post30_bp": 29.48,
+   "actual": 4.3,
+   "forecast": 3,
+   "previous": 3.8,
+   "surprise": 1.2999999999999998,
+   "surprise_dir": -1
+  },
+  {
+   "type": "nfp",
+   "title": "Non Farm Payrolls",
+   "time_utc": "2025-11-20T13:30:00Z",
+   "ts": 1763645400,
+   "coin": "BTC",
+   "source": "okx",
+   "forward": false,
+   "pre30_bp": 8.28,
+   "post5_bp": 6.06,
+   "post15_bp": -30.96,
+   "post30_bp": -41.31,
+   "post60_bp": -48.94,
+   "maxup60_bp": 73.76,
+   "maxdown60_bp": -160.65,
+   "base_abs_post30_bp": 42.7,
+   "actual": 119,
+   "forecast": 50,
+   "previous": -4,
+   "surprise": 69,
+   "surprise_dir": -1
+  },
+  {
+   "type": "nfp",
+   "title": "Non Farm Payrolls",
+   "time_utc": "2025-11-20T13:30:00Z",
+   "ts": 1763645400,
+   "coin": "ETH",
+   "source": "okx",
+   "forward": false,
+   "pre30_bp": -19.03,
+   "post5_bp": -14.4,
+   "post15_bp": -71.06,
+   "post30_bp": -75.49,
+   "post60_bp": -31.57,
+   "maxup60_bp": 93.07,
+   "maxdown60_bp": -197.95,
+   "base_abs_post30_bp": 89.67,
+   "actual": 119,
+   "forecast": 50,
+   "previous": -4,
+   "surprise": 69,
+   "surprise_dir": -1
+  },
+  {
+   "type": "pce",
+   "title": "Core PCE Price Index MoM",
+   "time_utc": "2025-12-05T15:00:00Z",
+   "ts": 1764946800,
+   "coin": "BTC",
+   "source": "okx",
+   "forward": false,
+   "pre30_bp": -16.66,
+   "post5_bp": 98.02,
+   "post15_bp": 82.03,
+   "post30_bp": 101.43,
+   "post60_bp": 17.84,
+   "maxup60_bp": 131.62,
+   "maxdown60_bp": -5.03,
+   "base_abs_post30_bp": 74.32,
+   "actual": 0.2,
+   "forecast": 0.2,
+   "previous": 0.2,
+   "surprise": 0.0,
+   "surprise_dir": 0
+  },
+  {
+   "type": "pce",
+   "title": "Core PCE Price Index MoM",
+   "time_utc": "2025-12-05T15:00:00Z",
+   "ts": 1764946800,
+   "coin": "ETH",
+   "source": "okx",
+   "forward": false,
+   "pre30_bp": 8.19,
+   "post5_bp": 132.13,
+   "post15_bp": 120.3,
+   "post30_bp": 112.82,
+   "post60_bp": 9.22,
+   "maxup60_bp": 176.39,
+   "maxdown60_bp": -30.98,
+   "base_abs_post30_bp": 91.31,
+   "actual": 0.2,
+   "forecast": 0.2,
+   "previous": 0.2,
+   "surprise": 0.0,
+   "surprise_dir": 0
+  },
+  {
+   "type": "fomc",
+   "title": "Fed Interest Rate Decision",
+   "time_utc": "2025-12-10T19:00:00Z",
+   "ts": 1765393200,
+   "coin": "BTC",
+   "source": "okx",
+   "forward": false,
+   "pre30_bp": 28.87,
+   "post5_bp": -51.75,
+   "post15_bp": 53.66,
+   "post30_bp": -3.29,
+   "post60_bp": 48.2,
+   "maxup60_bp": 84.77,
+   "maxdown60_bp": -90.65,
+   "base_abs_post30_bp": 6.57,
+   "actual": 3.75,
+   "forecast": 3.75,
+   "previous": 4,
+   "surprise": 0.0,
+   "surprise_dir": 0
+  },
+  {
+   "type": "fomc",
+   "title": "Fed Interest Rate Decision",
+   "time_utc": "2025-12-10T19:00:00Z",
+   "ts": 1765393200,
+   "coin": "ETH",
+   "source": "okx",
+   "forward": false,
+   "pre30_bp": 25.93,
+   "post5_bp": -56.66,
+   "post15_bp": 51.16,
+   "post30_bp": -15.24,
+   "post60_bp": 25.98,
+   "maxup60_bp": 162.95,
+   "maxdown60_bp": -108.44,
+   "base_abs_post30_bp": 14.37,
+   "actual": 3.75,
+   "forecast": 3.75,
+   "previous": 4,
+   "surprise": 0.0,
+   "surprise_dir": 0
+  },
   {
    "type": "nfp",
    "title": "Non Farm Payrolls",
@@ -27,7 +292,8 @@
    "post60_bp": -51.03,
    "maxup60_bp": 49.44,
    "maxdown60_bp": -148.21,
-   "base_abs_post30_bp": 2.38
+   "base_abs_post30_bp": 2.38,
+   "forward": false
   },
   {
    "type": "nfp",
@@ -46,7 +312,8 @@
    "post60_bp": -108.6,
    "maxup60_bp": 65.65,
    "maxdown60_bp": -270.02,
-   "base_abs_post30_bp": 18.49
+   "base_abs_post30_bp": 18.49,
+   "forward": false
   },
   {
    "type": "cpi",
@@ -67,7 +334,8 @@
    "maxdown60_bp": 0.0,
    "base_abs_post30_bp": 60.41,
    "surprise": -0.3999999999999999,
-   "surprise_dir": 1
+   "surprise_dir": 1,
+   "forward": false
   },
   {
    "type": "cpi",
@@ -88,7 +356,8 @@
    "maxdown60_bp": -0.03,
    "base_abs_post30_bp": 59.34,
    "surprise": -0.3999999999999999,
-   "surprise_dir": 1
+   "surprise_dir": 1,
+   "forward": false
   },
   {
    "type": "gdp",
@@ -109,7 +378,8 @@
    "maxdown60_bp": -48.34,
    "base_abs_post30_bp": 23.81,
    "surprise": 1.0,
-   "surprise_dir": -1
+   "surprise_dir": -1,
+   "forward": false
   },
   {
    "type": "gdp",
@@ -130,7 +400,8 @@
    "maxdown60_bp": -115.01,
    "base_abs_post30_bp": 19.34,
    "surprise": 1.0,
-   "surprise_dir": -1
+   "surprise_dir": -1,
+   "forward": false
   },
   {
    "type": "nfp",
@@ -151,7 +422,8 @@
    "maxdown60_bp": -39.85,
    "base_abs_post30_bp": 11.98,
    "surprise": -10,
-   "surprise_dir": 1
+   "surprise_dir": 1,
+   "forward": false
   },
   {
    "type": "nfp",
@@ -172,7 +444,8 @@
    "maxdown60_bp": -69.54,
    "base_abs_post30_bp": 10.3,
    "surprise": -10,
-   "surprise_dir": 1
+   "surprise_dir": 1,
+   "forward": false
   },
   {
    "type": "cpi",
@@ -193,7 +466,8 @@
    "maxdown60_bp": -41.11,
    "base_abs_post30_bp": 7.64,
    "surprise": 0.0,
-   "surprise_dir": 0
+   "surprise_dir": 0,
+   "forward": false
   },
   {
    "type": "cpi",
@@ -214,7 +488,8 @@
    "maxdown60_bp": -38.09,
    "base_abs_post30_bp": 5.02,
    "surprise": 0.0,
-   "surprise_dir": 0
+   "surprise_dir": 0,
+   "forward": false
   },
   {
    "type": "pce",
@@ -233,7 +508,8 @@
    "post60_bp": -10.01,
    "maxup60_bp": 42.74,
    "maxdown60_bp": -66.47,
-   "base_abs_post30_bp": 25.73
+   "base_abs_post30_bp": 25.73,
+   "forward": false
   },
   {
    "type": "pce",
@@ -252,7 +528,8 @@
    "post60_bp": 2.65,
    "maxup60_bp": 94.51,
    "maxdown60_bp": -120.46,
-   "base_abs_post30_bp": 37.72
+   "base_abs_post30_bp": 37.72,
+   "forward": false
   },
   {
    "type": "fomc",
@@ -273,7 +550,8 @@
    "maxdown60_bp": -59.93,
    "base_abs_post30_bp": 4.06,
    "surprise": 0.0,
-   "surprise_dir": 0
+   "surprise_dir": 0,
+   "forward": false
   },
   {
    "type": "fomc",
@@ -294,7 +572,8 @@
    "maxdown60_bp": -63.5,
    "base_abs_post30_bp": 15.45,
    "surprise": 0.0,
-   "surprise_dir": 0
+   "surprise_dir": 0,
+   "forward": false
   },
   {
    "type": "nfp",
@@ -315,7 +594,8 @@
    "maxdown60_bp": -21.06,
    "base_abs_post30_bp": 43.92,
    "surprise": 60,
-   "surprise_dir": -1
+   "surprise_dir": -1,
+   "forward": false
   },
   {
    "type": "nfp",
@@ -336,7 +616,8 @@
    "maxdown60_bp": -31.17,
    "base_abs_post30_bp": 43.22,
    "surprise": 60,
-   "surprise_dir": -1
+   "surprise_dir": -1,
+   "forward": false
   },
   {
    "type": "cpi",
@@ -357,7 +638,8 @@
    "maxdown60_bp": -34.2,
    "base_abs_post30_bp": 90.38,
    "surprise": -0.10000000000000009,
-   "surprise_dir": 1
+   "surprise_dir": 1,
+   "forward": false
   },
   {
    "type": "cpi",
@@ -378,7 +660,8 @@
    "maxdown60_bp": -31.15,
    "base_abs_post30_bp": 71.05,
    "surprise": -0.10000000000000009,
-   "surprise_dir": 1
+   "surprise_dir": 1,
+   "forward": false
   },
   {
    "type": "gdp",
@@ -399,7 +682,8 @@
    "maxdown60_bp": -111.16,
    "base_abs_post30_bp": 39.36,
    "surprise": -1.6,
-   "surprise_dir": 1
+   "surprise_dir": 1,
+   "forward": false
   },
   {
    "type": "pce",
@@ -420,7 +704,8 @@
    "maxdown60_bp": -111.16,
    "base_abs_post30_bp": 39.36,
    "surprise": 0.10000000000000003,
-   "surprise_dir": -1
+   "surprise_dir": -1,
+   "forward": false
   },
   {
    "type": "gdp",
@@ -441,7 +726,8 @@
    "maxdown60_bp": -124.11,
    "base_abs_post30_bp": 58.13,
    "surprise": -1.6,
-   "surprise_dir": 1
+   "surprise_dir": 1,
+   "forward": false
   },
   {
    "type": "pce",
@@ -462,7 +748,8 @@
    "maxdown60_bp": -124.11,
    "base_abs_post30_bp": 58.13,
    "surprise": 0.10000000000000003,
-   "surprise_dir": -1
+   "surprise_dir": -1,
+   "forward": false
   },
   {
    "type": "nfp",
@@ -483,7 +770,8 @@
    "maxdown60_bp": -208.18,
    "base_abs_post30_bp": 9.57,
    "surprise": -151,
-   "surprise_dir": 1
+   "surprise_dir": 1,
+   "forward": false
   },
   {
    "type": "nfp",
@@ -504,7 +792,8 @@
    "maxdown60_bp": -257.02,
    "base_abs_post30_bp": 25.96,
    "surprise": -151,
-   "surprise_dir": 1
+   "surprise_dir": 1,
+   "forward": false
   },
   {
    "type": "cpi",
@@ -525,7 +814,8 @@
    "maxdown60_bp": -41.9,
    "base_abs_post30_bp": 19.0,
    "surprise": 0.0,
-   "surprise_dir": 0
+   "surprise_dir": 0,
+   "forward": false
   },
   {
    "type": "cpi",
@@ -546,7 +836,8 @@
    "maxdown60_bp": -37.71,
    "base_abs_post30_bp": 12.38,
    "surprise": 0.0,
-   "surprise_dir": 0
+   "surprise_dir": 0,
+   "forward": false
   },
   {
    "type": "pce",
@@ -567,7 +858,8 @@
    "maxdown60_bp": -13.03,
    "base_abs_post30_bp": 4.29,
    "surprise": 0.0,
-   "surprise_dir": 0
+   "surprise_dir": 0,
+   "forward": false
   },
   {
    "type": "pce",
@@ -588,7 +880,8 @@
    "maxdown60_bp": -10.15,
    "base_abs_post30_bp": 4.75,
    "surprise": 0.0,
-   "surprise_dir": 0
+   "surprise_dir": 0,
+   "forward": false
   },
   {
    "type": "fomc",
@@ -609,7 +902,8 @@
    "maxdown60_bp": -91.86,
    "base_abs_post30_bp": 14.77,
    "surprise": 0.0,
-   "surprise_dir": 0
+   "surprise_dir": 0,
+   "forward": false
   },
   {
    "type": "fomc",
@@ -630,7 +924,8 @@
    "maxdown60_bp": -128.53,
    "base_abs_post30_bp": 30.53,
    "surprise": 0.0,
-   "surprise_dir": 0
+   "surprise_dir": 0,
+   "forward": false
   },
   {
    "type": "nfp",
@@ -651,7 +946,8 @@
    "maxdown60_bp": -83.55,
    "base_abs_post30_bp": 14.85,
    "surprise": 118,
-   "surprise_dir": -1
+   "surprise_dir": -1,
+   "forward": false
   },
   {
    "type": "nfp",
@@ -672,7 +968,8 @@
    "maxdown60_bp": -126.24,
    "base_abs_post30_bp": 19.7,
    "surprise": 118,
-   "surprise_dir": -1
+   "surprise_dir": -1,
+   "forward": false
   },
   {
    "type": "pce",
@@ -693,7 +990,8 @@
    "maxdown60_bp": -29.78,
    "base_abs_post30_bp": 39.55,
    "surprise": 0.0,
-   "surprise_dir": 0
+   "surprise_dir": 0,
+   "forward": false
   },
   {
    "type": "pce",
@@ -714,7 +1012,8 @@
    "maxdown60_bp": -46.29,
    "base_abs_post30_bp": 32.53,
    "surprise": 0.0,
-   "surprise_dir": 0
+   "surprise_dir": 0,
+   "forward": false
   },
   {
    "type": "cpi",
@@ -735,7 +1034,8 @@
    "maxdown60_bp": -17.86,
    "base_abs_post30_bp": 1.6,
    "surprise": 0.0,
-   "surprise_dir": 0
+   "surprise_dir": 0,
+   "forward": false
   },
   {
    "type": "cpi",
@@ -756,7 +1056,8 @@
    "maxdown60_bp": -43.23,
    "base_abs_post30_bp": 4.81,
    "surprise": 0.0,
-   "surprise_dir": 0
+   "surprise_dir": 0,
+   "forward": false
   },
   {
    "type": "fomc",
@@ -777,7 +1078,8 @@
    "maxdown60_bp": -165.6,
    "base_abs_post30_bp": 6.07,
    "surprise": 0.0,
-   "surprise_dir": 0
+   "surprise_dir": 0,
+   "forward": false
   },
   {
    "type": "fomc",
@@ -798,7 +1100,8 @@
    "maxdown60_bp": -280.27,
    "base_abs_post30_bp": 16.69,
    "surprise": 0.0,
-   "surprise_dir": 0
+   "surprise_dir": 0,
+   "forward": false
   },
   {
    "type": "gdp",
@@ -819,7 +1122,8 @@
    "maxdown60_bp": -22.55,
    "base_abs_post30_bp": 0.78,
    "surprise": -0.2999999999999998,
-   "surprise_dir": 1
+   "surprise_dir": 1,
+   "forward": false
   },
   {
    "type": "pce",
@@ -840,7 +1144,8 @@
    "maxdown60_bp": -22.55,
    "base_abs_post30_bp": 0.78,
    "surprise": 0.0,
-   "surprise_dir": 0
+   "surprise_dir": 0,
+   "forward": false
   },
   {
    "type": "gdp",
@@ -861,7 +1166,8 @@
    "maxdown60_bp": -43.82,
    "base_abs_post30_bp": 7.22,
    "surprise": -0.2999999999999998,
-   "surprise_dir": 1
+   "surprise_dir": 1,
+   "forward": false
   },
   {
    "type": "pce",
@@ -882,7 +1188,8 @@
    "maxdown60_bp": -43.82,
    "base_abs_post30_bp": 7.22,
    "surprise": 0.0,
-   "surprise_dir": 0
+   "surprise_dir": 0,
+   "forward": false
   },
   {
    "type": "nfp",
@@ -903,7 +1210,8 @@
    "maxdown60_bp": -89.49,
    "base_abs_post30_bp": 11.08,
    "surprise": 53,
-   "surprise_dir": -1
+   "surprise_dir": -1,
+   "forward": false
   },
   {
    "type": "nfp",
@@ -924,7 +1232,8 @@
    "maxdown60_bp": -90.54,
    "base_abs_post30_bp": 1.59,
    "surprise": 53,
-   "surprise_dir": -1
+   "surprise_dir": -1,
+   "forward": false
   },
   {
    "type": "cpi",
@@ -945,7 +1254,8 @@
    "maxdown60_bp": -26.01,
    "base_abs_post30_bp": 30.3,
    "surprise": 0.09999999999999964,
-   "surprise_dir": -1
+   "surprise_dir": -1,
+   "forward": false
   },
   {
    "type": "cpi",
@@ -966,7 +1276,8 @@
    "maxdown60_bp": -46.19,
    "base_abs_post30_bp": 32.19,
    "surprise": 0.09999999999999964,
-   "surprise_dir": -1
+   "surprise_dir": -1,
+   "forward": false
   },
   {
    "type": "pce",
@@ -987,7 +1298,8 @@
    "maxdown60_bp": -57.2,
    "base_abs_post30_bp": 33.91,
    "surprise": -0.09999999999999998,
-   "surprise_dir": 1
+   "surprise_dir": 1,
+   "forward": false
   },
   {
    "type": "pce",
@@ -1008,7 +1320,8 @@
    "maxdown60_bp": -38.48,
    "base_abs_post30_bp": 30.32,
    "surprise": -0.09999999999999998,
-   "surprise_dir": 1
+   "surprise_dir": 1,
+   "forward": false
   },
   {
    "type": "nfp",
@@ -1029,7 +1342,8 @@
    "maxdown60_bp": -98.56,
    "base_abs_post30_bp": 78.93,
    "surprise": 87,
-   "surprise_dir": -1
+   "surprise_dir": -1,
+   "forward": false
   },
   {
    "type": "nfp",
@@ -1050,7 +1364,8 @@
    "maxdown60_bp": -111.45,
    "base_abs_post30_bp": 58.58,
    "surprise": 87,
-   "surprise_dir": -1
+   "surprise_dir": -1,
+   "forward": false
   },
   {
    "type": "cpi",
@@ -1071,7 +1386,8 @@
    "maxdown60_bp": -8.6,
    "base_abs_post30_bp": 1.23,
    "surprise": 0.0,
-   "surprise_dir": 0
+   "surprise_dir": 0,
+   "forward": false
   },
   {
    "type": "cpi",
@@ -1092,7 +1408,8 @@
    "maxdown60_bp": -10.03,
    "base_abs_post30_bp": 0.72,
    "surprise": 0.0,
-   "surprise_dir": 0
+   "surprise_dir": 0,
+   "forward": false
   },
   {
    "type": "fomc",
@@ -1113,7 +1430,8 @@
    "maxdown60_bp": -199.33,
    "base_abs_post30_bp": 10.02,
    "surprise": 0.0,
-   "surprise_dir": 0
+   "surprise_dir": 0,
+   "forward": false
   },
   {
    "type": "fomc",
@@ -1134,7 +1452,8 @@
    "maxdown60_bp": -242.02,
    "base_abs_post30_bp": 1.17,
    "surprise": 0.0,
-   "surprise_dir": 0
+   "surprise_dir": 0,
+   "forward": false
   },
   {
    "type": "pce",
@@ -1155,7 +1474,8 @@
    "maxdown60_bp": 0.0,
    "base_abs_post30_bp": 32.09,
    "surprise": 0.0,
-   "surprise_dir": 0
+   "surprise_dir": 0,
+   "forward": false
   },
   {
    "type": "pce",
@@ -1176,7 +1496,8 @@
    "maxdown60_bp": -0.06,
    "base_abs_post30_bp": 32.04,
    "surprise": 0.0,
-   "surprise_dir": 0
+   "surprise_dir": 0,
+   "forward": false
   },
   {
    "type": "nfp",
@@ -1197,7 +1518,8 @@
    "maxdown60_bp": -25.88,
    "base_abs_post30_bp": 6.8,
    "surprise": -53,
-   "surprise_dir": 1
+   "surprise_dir": 1,
+   "forward": false
   },
   {
    "type": "nfp",
@@ -1218,7 +1540,8 @@
    "maxdown60_bp": -82.24,
    "base_abs_post30_bp": 0.51,
    "surprise": -53,
-   "surprise_dir": 1
+   "surprise_dir": 1,
+   "forward": false
   },
   {
    "type": "cpi",
@@ -1239,7 +1562,8 @@
    "maxdown60_bp": -2.24,
    "base_abs_post30_bp": 18.48,
    "surprise": -0.2999999999999998,
-   "surprise_dir": 1
+   "surprise_dir": 1,
+   "forward": false
   },
   {
    "type": "cpi",
@@ -1260,7 +1584,8 @@
    "maxdown60_bp": -2.67,
    "base_abs_post30_bp": 27.53,
    "surprise": -0.2999999999999998,
-   "surprise_dir": 1
+   "surprise_dir": 1,
+   "forward": false
   },
   {
    "type": "fomc",
@@ -1281,7 +1606,8 @@
    "maxdown60_bp": -79.9,
    "base_abs_post30_bp": 1.57,
    "surprise": 0.0,
-   "surprise_dir": 0
+   "surprise_dir": 0,
+   "forward": false
   },
   {
    "type": "fomc",
@@ -1302,7 +1628,8 @@
    "maxdown60_bp": -118.09,
    "base_abs_post30_bp": 38.4,
    "surprise": 0.0,
-   "surprise_dir": 0
+   "surprise_dir": 0,
+   "forward": false
   },
   {
    "type": "gdp",
@@ -1323,7 +1650,8 @@
    "maxdown60_bp": -11.09,
    "base_abs_post30_bp": 9.48,
    "surprise": -0.6000000000000001,
-   "surprise_dir": 1
+   "surprise_dir": 1,
+   "forward": false
   },
   {
    "type": "pce",
@@ -1344,7 +1672,8 @@
    "maxdown60_bp": -11.09,
    "base_abs_post30_bp": 9.48,
    "surprise": -0.1,
-   "surprise_dir": 1
+   "surprise_dir": 1,
+   "forward": false
   },
   {
    "type": "gdp",
@@ -1365,7 +1694,8 @@
    "maxdown60_bp": -14.21,
    "base_abs_post30_bp": 5.14,
    "surprise": -0.6000000000000001,
-   "surprise_dir": 1
+   "surprise_dir": 1,
+   "forward": false
   },
   {
    "type": "pce",
@@ -1386,7 +1716,8 @@
    "maxdown60_bp": -14.21,
    "base_abs_post30_bp": 5.14,
    "surprise": -0.1,
-   "surprise_dir": 1
+   "surprise_dir": 1,
+   "forward": false
   },
   {
    "type": "nfp",
@@ -1407,7 +1738,8 @@
    "maxdown60_bp": -25.79,
    "base_abs_post30_bp": 20.2,
    "surprise": -103,
-   "surprise_dir": 1
+   "surprise_dir": 1,
+   "forward": false
   },
   {
    "type": "nfp",
@@ -1428,7 +1760,8 @@
    "maxdown60_bp": -56.46,
    "base_abs_post30_bp": 31.14,
    "surprise": -103,
-   "surprise_dir": 1
+   "surprise_dir": 1,
+   "forward": false
   },
   {
    "type": "cpi",
@@ -1449,7 +1782,8 @@
    "maxdown60_bp": -78.56,
    "base_abs_post30_bp": 1.6,
    "surprise": 0.0,
-   "surprise_dir": 0
+   "surprise_dir": 0,
+   "forward": false
   },
   {
    "type": "cpi",
@@ -1470,7 +1804,8 @@
    "maxdown60_bp": -87.83,
    "base_abs_post30_bp": 11.49,
    "surprise": 0.0,
-   "surprise_dir": 0
+   "surprise_dir": 0,
+   "forward": false
   },
   {
    "type": "pce",
@@ -1491,7 +1826,8 @@
    "maxdown60_bp": -107.99,
    "base_abs_post30_bp": 11.89,
    "surprise": 0.0,
-   "surprise_dir": 0
+   "surprise_dir": 0,
+   "forward": false
   },
   {
    "type": "pce",
@@ -1512,7 +1848,8 @@
    "maxdown60_bp": -132.84,
    "base_abs_post30_bp": 23.06,
    "surprise": 0.0,
-   "surprise_dir": 0
+   "surprise_dir": 0,
+   "forward": false
   },
   {
    "type": "nfp",
@@ -1533,7 +1870,8 @@
    "maxdown60_bp": -265.59,
    "base_abs_post30_bp": 87.65,
    "surprise": 106,
-   "surprise_dir": -1
+   "surprise_dir": -1,
+   "forward": false
   },
   {
    "type": "nfp",
@@ -1554,7 +1892,8 @@
    "maxdown60_bp": -381.91,
    "base_abs_post30_bp": 64.57,
    "surprise": 106,
-   "surprise_dir": -1
+   "surprise_dir": -1,
+   "forward": false
   },
   {
    "type": "cpi",
@@ -1575,7 +1914,8 @@
    "maxdown60_bp": -154.31,
    "base_abs_post30_bp": 117.95,
    "surprise": 0.0,
-   "surprise_dir": 0
+   "surprise_dir": 0,
+   "forward": false
   },
   {
    "type": "cpi",
@@ -1596,7 +1936,8 @@
    "maxdown60_bp": -129.46,
    "base_abs_post30_bp": 184.46,
    "surprise": 0.0,
-   "surprise_dir": 0
+   "surprise_dir": 0,
+   "forward": false
   },
   {
    "type": "fomc",
@@ -1617,7 +1958,8 @@
    "maxdown60_bp": -98.77,
    "base_abs_post30_bp": 6.42,
    "surprise": 0,
-   "surprise_dir": 0
+   "surprise_dir": 0,
+   "forward": false
   },
   {
    "type": "fomc",
@@ -1638,7 +1980,8 @@
    "maxdown60_bp": -100.09,
    "base_abs_post30_bp": 23.2,
    "surprise": 0,
-   "surprise_dir": 0
+   "surprise_dir": 0,
+   "forward": false
   },
   {
    "type": "pce",
@@ -1659,7 +2002,8 @@
    "maxdown60_bp": -7.15,
    "base_abs_post30_bp": 16.28,
    "surprise": -0.09999999999999998,
-   "surprise_dir": 1
+   "surprise_dir": 1,
+   "forward": false
   },
   {
    "type": "pce",
@@ -1680,18 +2024,54 @@
    "maxdown60_bp": -12.94,
    "base_abs_post30_bp": 2.19,
    "surprise": -0.09999999999999998,
-   "surprise_dir": 1
-  }
- ],
- "new_today": 80,
- "errors": {},
- "skipped": {},
- "upcoming": [
+   "surprise_dir": 1,
+   "forward": false
+  },
   {
    "type": "nfp",
    "title": "Non Farm Payrolls",
-   "time_utc": "2026-10-02T12:30:00Z"
+   "time_utc": "2026-10-02T12:30:00Z",
+   "ts": 1790944200,
+   "coin": "BTC",
+   "source": "hyperliquid",
+   "forward": true,
+   "pre30_bp": 25.23,
+   "post5_bp": 22.4,
+   "post15_bp": -16.74,
+   "post30_bp": 21.47,
+   "post60_bp": -1.39,
+   "maxup60_bp": 71.58,
+   "maxdown60_bp": -24.59,
+   "base_abs_post30_bp": 19.91,
+   "actual": null,
+   "forecast": 90,
+   "previous": 162
   },
+  {
+   "type": "nfp",
+   "title": "Non Farm Payrolls",
+   "time_utc": "2026-10-02T12:30:00Z",
+   "ts": 1790944200,
+   "coin": "ETH",
+   "source": "hyperliquid",
+   "forward": true,
+   "pre30_bp": 13.1,
+   "post5_bp": 15.63,
+   "post15_bp": -31.99,
+   "post30_bp": 19.27,
+   "post60_bp": 0.36,
+   "maxup60_bp": 57.8,
+   "maxdown60_bp": -39.26,
+   "base_abs_post30_bp": 48.76,
+   "actual": null,
+   "forecast": 90,
+   "previous": 162
+  }
+ ],
+ "new_today": 14,
+ "errors": {},
+ "skipped": {},
+ "upcoming": [
   {
    "type": "cpi",
    "title": "Inflation Rate YoY",
@@ -1715,75 +2095,98 @@
  ],
  "summary": {
   "cpi": {
-   "n": 20,
-   "n_surprise": 8,
-   "abs_post30_bp": 76.001,
-   "base_abs_post30_bp": 37.879,
-   "ratio_vs_base": 2.006,
-   "abs_post5_bp": 40.709,
-   "maxup60_bp": 124.303,
-   "maxdown60_bp": -41.559,
-   "signed_post30_bp": 110.711,
-   "signed_post60_bp": 127.915,
-   "hit_rate_pct": 75.0
+   "n": 22,
+   "n_surprise": 10,
+   "abs_post30_bp": 71.378,
+   "base_abs_post30_bp": 35.026,
+   "ratio_vs_base": 2.038,
+   "abs_post5_bp": 42.864,
+   "maxup60_bp": 126.844,
+   "maxdown60_bp": -38.973,
+   "signed_post30_bp": 93.598,
+   "signed_post60_bp": 107.344,
+   "hit_rate_pct": 80.0
   },
   "fomc": {
-   "n": 12,
+   "n": 16,
    "n_surprise": 0,
-   "abs_post30_bp": 70.913,
-   "base_abs_post30_bp": 14.029,
-   "ratio_vs_base": 5.055,
-   "abs_post5_bp": 52.352,
-   "maxup60_bp": 54.412,
-   "maxdown60_bp": -135.657,
+   "abs_post30_bp": 60.202,
+   "base_abs_post30_bp": 16.014,
+   "ratio_vs_base": 3.759,
+   "abs_post5_bp": 49.949,
+   "maxup60_bp": 58.024,
+   "maxdown60_bp": -157.068,
    "signed_post30_bp": null,
    "signed_post60_bp": null,
    "hit_rate_pct": null
   },
   "gdp": {
-   "n": 8,
-   "n_surprise": 8,
-   "abs_post30_bp": 30.964,
-   "base_abs_post30_bp": 20.407,
-   "ratio_vs_base": 1.517,
-   "abs_post5_bp": 14.976,
-   "maxup60_bp": 9.834,
-   "maxdown60_bp": -61.286,
-   "signed_post30_bp": -2.831,
-   "signed_post60_bp": -4.326,
-   "hit_rate_pct": 50.0
+   "n": 10,
+   "n_surprise": 10,
+   "abs_post30_bp": 37.987,
+   "base_abs_post30_bp": 20.002,
+   "ratio_vs_base": 1.899,
+   "abs_post5_bp": 15.304,
+   "maxup60_bp": 12.192,
+   "maxdown60_bp": -70.597,
+   "signed_post30_bp": 10.951,
+   "signed_post60_bp": 8.216,
+   "hit_rate_pct": 60.0
   },
   "nfp": {
-   "n": 20,
-   "n_surprise": 18,
-   "abs_post30_bp": 80.206,
-   "base_abs_post30_bp": 28.071,
-   "ratio_vs_base": 2.857,
-   "abs_post5_bp": 61.419,
-   "maxup60_bp": 78.884,
-   "maxdown60_bp": -124.138,
-   "signed_post30_bp": 27.257,
-   "signed_post60_bp": 18.63,
-   "hit_rate_pct": 55.6
+   "n": 24,
+   "n_surprise": 20,
+   "abs_post30_bp": 73.402,
+   "base_abs_post30_bp": 31.769,
+   "ratio_vs_base": 2.31,
+   "abs_post5_bp": 53.62,
+   "maxup60_bp": 78.079,
+   "maxdown60_bp": -121.05,
+   "signed_post30_bp": 30.372,
+   "signed_post60_bp": 20.792,
+   "hit_rate_pct": 60.0
   },
   "pce": {
-   "n": 20,
+   "n": 22,
    "n_surprise": 8,
-   "abs_post30_bp": 46.758,
-   "base_abs_post30_bp": 22.323,
-   "ratio_vs_base": 2.095,
-   "abs_post5_bp": 27.399,
-   "maxup60_bp": 68.087,
-   "maxdown60_bp": -48.489,
+   "abs_post30_bp": 52.245,
+   "base_abs_post30_bp": 27.822,
+   "ratio_vs_base": 1.878,
+   "abs_post5_bp": 35.37,
+   "maxup60_bp": 75.898,
+   "maxdown60_bp": -45.718,
    "signed_post30_bp": 56.556,
    "signed_post60_bp": 32.355,
    "hit_rate_pct": 100.0
   },
   "all": {
-   "n": 80,
-   "abs_post30_bp": 64.475,
-   "base_abs_post30_bp": 26.213,
-   "ratio_vs_base": 2.46
+   "n": 94,
+   "abs_post30_bp": 61.963,
+   "base_abs_post30_bp": 27.674,
+   "ratio_vs_base": 2.239
   }
- }
+ },
+ "forward_summary": {
+  "nfp": {
+   "n": 2,
+   "n_surprise": 0,
+   "abs_post30_bp": 20.37,
+   "base_abs_post30_bp": 34.335,
+   "ratio_vs_base": 0.593,
+   "abs_post5_bp": 19.015,
+   "maxup60_bp": 64.69,
+   "maxdown60_bp": -31.925,
+   "signed_post30_bp": null,
+   "signed_post60_bp": null,
+   "hit_rate_pct": null
+  },
+  "all": {
+   "n": 2,
+   "abs_post30_bp": 20.37,
+   "base_abs_post30_bp": 34.335,
+   "ratio_vs_base": 0.593
+  }
+ },
+ "forward_events": 2,
+ "forward_pending_surprise": 2
 }
