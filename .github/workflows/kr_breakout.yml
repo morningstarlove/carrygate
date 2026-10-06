@@ -9,7 +9,7 @@ on:
     branches: ["claude/**"]
     paths: ["kr_universe.py", "kr_ohlcv.py", "patterns.py", "kr_breakout.py", "tests/**", ".github/workflows/kr_breakout.yml"]
   schedule:
-    - cron: "45 6 * * 1-5"
+    - cron: "50 6 * * 1-5"   # 2026-10-06 변경: 처음 등록한 45분 예약이 10/5 에 안 뜨고 15:16 UTC 에 엉뚱하게 떠서 다시 등록
   workflow_dispatch:
     inputs:
       dry_run:
@@ -75,7 +75,9 @@ jobs:
       - name: Probe daily-bar sources (일봉 경로 시험, push 때만)
         if: github.event_name == 'push'
         continue-on-error: true
-        run: python kr_ohlcv.py --probe 005930 058470 043260
+        run: |
+          STALE=$(python -c "import json;print(' '.join(json.load(open('kr_breakout.json'))['stale'][:3]))" 2>/dev/null || true)
+          python kr_ohlcv.py --probe 005930 058470 $STALE
 
       - name: Save pattern fixtures (실데이터 일봉, 없을 때만)
         if: github.event_name == 'push'

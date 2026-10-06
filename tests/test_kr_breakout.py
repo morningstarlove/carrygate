@@ -130,6 +130,23 @@ class Engine(unittest.TestCase):
         self.assertGreaterEqual(sims["base"].skipped["cooldown"], 0)
 
 
+class FetchMerge(unittest.TestCase):
+    def test_fill_missing_days_from_next_source(self):
+        import kr_ohlcv as KO
+        def yahoo(code, days):      # 10/2 까지만
+            return [{"date": "2026-10-0%d" % d, "o": 1, "h": 1, "l": 1, "c": 1, "v": 1, "value": None} for d in (1, 2)]
+        def naver(code, days):      # 10/6 까지, 시간외 섞인 값이지만 빠진 날만 쓴다
+            return [{"date": "2026-10-0%d" % d, "o": 2, "h": 2, "l": 2, "c": 2, "v": 2, "value": None} for d in (1, 2, 5, 6)]
+        bars, src = KO.fetch_daily("X", 10, sources=[("yahoo", yahoo), ("naver_api", naver)], need_date="2026-10-06")
+        self.assertEqual(src, "yahoo+naver_api")
+        self.assertEqual([b["date"] for b in bars], ["2026-10-01", "2026-10-02", "2026-10-05", "2026-10-06"])
+        self.assertEqual(bars[1]["c"], 1); self.assertEqual(bars[-1]["c"], 2)      # 겹치는 날은 야후 값 유지
+        bars2, src2 = KO.fetch_daily("X", 10, sources=[("yahoo", yahoo), ("naver_api", naver)], need_date="2026-10-02")
+        self.assertEqual(src2, "yahoo"); self.assertEqual(len(bars2), 2)            # 이미 최신이면 안 메운다
+        bars3, src3 = KO.fetch_daily("X", 10, sources=[("yahoo", yahoo), ("naver_api", naver)])
+        self.assertEqual(src3, "yahoo")                                              # need_date 없으면 예전 동작
+
+
 class Inputs(unittest.TestCase):
     def test_days_from_history_filters(self):
         fd, path = tempfile.mkstemp(suffix=".jsonl")
