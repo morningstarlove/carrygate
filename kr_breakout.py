@@ -328,7 +328,7 @@ def days_from_history(path=KU.HISTORY_PATH, since=RULE_FIXED):
     return days
 
 
-def load_bars(codes, days, fixture=None, log=print):
+def load_bars(codes, days, fixture=None, log=print, need_date=None):
     all_bars, sources, errors = {}, {}, {}
     for n, code in enumerate(sorted(codes), 1):
         try:
@@ -338,7 +338,7 @@ def load_bars(codes, days, fixture=None, log=print):
                     continue
                 all_bars[code], sources[code] = KO.load_csv(path), "fixture"
             else:
-                all_bars[code], sources[code] = KO.fetch_daily(code, days)
+                all_bars[code], sources[code] = KO.fetch_daily(code, days, need_date=need_date)
                 time.sleep(KO.PAUSE)
         except Exception as e:
             errors[code] = str(e)[:200]
@@ -401,9 +401,10 @@ def run_forward(fixture=None, dry_run=False):
             names = {r["code"]: r["name"] for r in ks.get("universe") or []}
         except Exception:
             pass
-    all_bars, sources, errors = load_bars(codes, FWD_BARS, fixture) if codes else ({}, {}, {})
-    # 오늘 봉이 빠진 종목(자료 지연)은 표시한다 — 그날 신호가 하루 늦게 잡힌다
     last_date = days[-1]["date"] if days else None
+    # 마지막 기록일의 봉이 야후에 아직 없으면(코스닥은 하루 늦다) 그날만 네이버로 메운다
+    all_bars, sources, errors = load_bars(codes, FWD_BARS, fixture, need_date=last_date) if codes else ({}, {}, {})
+    # 그래도 오늘 봉이 빠진 종목(자료 지연)은 표시한다 — 그날 신호가 하루 늦게 잡힌다
     stale = [c for c, bars in all_bars.items() if last_date and (not bars or bars[-1]["date"] < last_date)]
     sims = simulate(days, all_bars, names)
     today_sig = {k: [e for e in s.pending_entries] for k, s in sims.items()}
@@ -411,6 +412,7 @@ def run_forward(fixture=None, dry_run=False):
            "mode": "forward", "rule_fixed": RULE_FIXED, "rules": rules_dict(),
            "forward": {"days": len(days) - len(sims["base"].skipped_days), "from": days[0]["date"] if days else None, "to": last_date,
                        "codes": len(all_bars), "bar_errors": len(errors), "stale_codes": len(stale),
+                       "by_source": {k: sum(1 for v in sources.values() if v == k) for k in set(sources.values())},
                        "skipped_days": sims["base"].skipped_days,
                        "note": ("마지막 기록일(%s)의 봉이 없다 — 휴장일이거나 자료가 아직 안 왔다. 매매일로 세지 않았다" % last_date)
                                if last_date in sims["base"].skipped_days else None},

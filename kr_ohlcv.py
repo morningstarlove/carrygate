@@ -143,16 +143,32 @@ def yahoo(code, days):
 SOURCES = [("yahoo", yahoo), ("naver_api", naver_api), ("naver_fchart", naver_fchart)]
 
 
-def fetch_daily(code, days=160, sources=None):
-    """(봉 목록, 출처 이름). 모두 실패하면 RuntimeError 에 경로별 사유."""
+def fetch_daily(code, days=160, sources=None, need_date=None):
+    """(봉 목록, 출처 이름). 모두 실패하면 RuntimeError 에 경로별 사유.
+
+    need_date 를 주면(YYYY-MM-DD) 첫 경로의 마지막 봉이 그 날짜보다 이르면 다음 경로에서 **빠진 날만** 받아 뒤에 붙인다.
+    2026-10-06 확인: 야후는 코스닥(.KQ) 일봉이 하루 이상 늦다(10/6 15:45 KST 에 10/2 까지만). 네이버는 그날 봉이 있다.
+    과거 봉은 야후(정규장만, 수정주가)를 그대로 쓰고, 야후가 아직 안 준 최근 며칠만 네이버로 메운다. 출처 이름은 "yahoo+naver_api" 처럼 남긴다."""
     errors = {}
-    for name, fn in (sources or SOURCES):
+    srcs = list(sources or SOURCES)
+    for i, (name, fn) in enumerate(srcs):
         try:
             bars = fn(code, days)
             bars.sort(key=lambda b: b["date"])
-            return bars, name
         except Exception as e:
             errors[name] = str(e)[:160]
+            continue
+        if need_date and bars and bars[-1]["date"] < need_date:
+            for name2, fn2 in srcs[i + 1:]:
+                try:
+                    extra = [b for b in fn2(code, 10) if b["date"] > bars[-1]["date"] and b["date"] <= need_date]
+                except Exception as e:
+                    errors[name2] = str(e)[:160]
+                    continue
+                if extra:
+                    extra.sort(key=lambda b: b["date"])
+                    return bars + extra, "%s+%s" % (name, name2)
+        return bars, name
     raise RuntimeError("일봉 실패 %s: %s" % (code, json.dumps(errors, ensure_ascii=False)))
 
 
