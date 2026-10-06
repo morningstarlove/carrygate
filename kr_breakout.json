@@ -1,6 +1,6 @@
 {
  "date": "2026-10-06",
- "generated_at_utc": "2026-10-06T07:22:30Z",
+ "generated_at_utc": "2026-10-06T07:29:05Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -65,7 +65,11 @@
   "to": "2026-10-06",
   "codes": 124,
   "bar_errors": 0,
-  "stale_codes": 20,
+  "stale_codes": 0,
+  "by_source": {
+   "yahoo": 104,
+   "yahoo+naver_api": 20
+  },
   "skipped_days": [
    "2026-10-05"
   ],
@@ -133,6 +137,20 @@
     "stop_plan": "max(350923, 진입가×0.93)"
    },
    {
+    "code": "158430",
+    "name": "ATON, Inc.",
+    "group": "Packaged Software",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 6960.0,
+    "pattern_low": 5200.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 7517 이상이면 포기)",
+    "stop_plan": "max(5200, 진입가×0.93)"
+   },
+   {
     "code": "488280",
     "name": "S2W Inc.",
     "group": "Packaged Software",
@@ -145,6 +163,21 @@
     "sync_by": "day",
     "entry_plan": "내일 시가 (시가가 19278 이상이면 포기)",
     "stop_plan": "max(13700, 진입가×0.93)"
+   },
+   {
+    "code": "247540",
+    "name": "Ecopro BM Co., Ltd.",
+    "group": "Electrical Products",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle"
+    ],
+    "signal_close": 129400.0,
+    "pattern_low": 105697.17,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 139752 이상이면 포기)",
+    "stop_plan": "max(105697, 진입가×0.93)"
    },
    {
     "code": "054920",
@@ -188,6 +221,48 @@
     "sync_by": "day",
     "entry_plan": "내일 시가 (시가가 96120 이상이면 포기)",
     "stop_plan": "max(72200, 진입가×0.93)"
+   },
+   {
+    "code": "203650",
+    "name": "Dream Security Co., Ltd.",
+    "group": "Packaged Software",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 3055.0,
+    "pattern_low": 2575.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 3299 이상이면 포기)",
+    "stop_plan": "max(2575, 진입가×0.93)"
+   },
+   {
+    "code": "263860",
+    "name": "GENIANS, INC.",
+    "group": "Packaged Software",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 24400.0,
+    "pattern_low": 18920.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 26352 이상이면 포기)",
+    "stop_plan": "max(18920, 진입가×0.93)"
+   },
+   {
+    "code": "456010",
+    "name": "ICTK Co., Ltd.",
+    "group": "Semiconductors",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 28500.0,
+    "pattern_low": 22050.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 30780 이상이면 포기)",
+    "stop_plan": "max(22050, 진입가×0.93)"
    }
   ],
   "no_sector": [
@@ -296,6 +371,20 @@
     "stop_plan": "max(350923, 진입가×0.93)"
    },
    {
+    "code": "158430",
+    "name": "ATON, Inc.",
+    "group": "Packaged Software",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 6960.0,
+    "pattern_low": 5200.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 7517 이상이면 포기)",
+    "stop_plan": "max(5200, 진입가×0.93)"
+   },
+   {
     "code": "086520",
     "name": "Ecopro Co., Ltd.",
     "group": "Chemicals: Major Diversified",
@@ -351,6 +440,21 @@
     "sync_by": null,
     "entry_plan": "내일 시가 (시가가 88236 이상이면 포기)",
     "stop_plan": "max(74187, 진입가×0.93)"
+   },
+   {
+    "code": "247540",
+    "name": "Ecopro BM Co., Ltd.",
+    "group": "Electrical Products",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle"
+    ],
+    "signal_close": 129400.0,
+    "pattern_low": 105697.17,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 139752 이상이면 포기)",
+    "stop_plan": "max(105697, 진입가×0.93)"
    },
    {
     "code": "054920",
@@ -423,6 +527,48 @@
     "sync_by": null,
     "entry_plan": "내일 시가 (시가가 4201 이상이면 포기)",
     "stop_plan": "max(3165, 진입가×0.93)"
+   },
+   {
+    "code": "203650",
+    "name": "Dream Security Co., Ltd.",
+    "group": "Packaged Software",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 3055.0,
+    "pattern_low": 2575.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 3299 이상이면 포기)",
+    "stop_plan": "max(2575, 진입가×0.93)"
+   },
+   {
+    "code": "263860",
+    "name": "GENIANS, INC.",
+    "group": "Packaged Software",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 24400.0,
+    "pattern_low": 18920.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 26352 이상이면 포기)",
+    "stop_plan": "max(18920, 진입가×0.93)"
+   },
+   {
+    "code": "456010",
+    "name": "ICTK Co., Ltd.",
+    "group": "Semiconductors",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 28500.0,
+    "pattern_low": 22050.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 30780 이상이면 포기)",
+    "stop_plan": "max(22050, 진입가×0.93)"
    }
   ],
   "hold_10": [
@@ -486,6 +632,20 @@
     "stop_plan": "max(350923, 진입가×0.93)"
    },
    {
+    "code": "158430",
+    "name": "ATON, Inc.",
+    "group": "Packaged Software",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 6960.0,
+    "pattern_low": 5200.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 7517 이상이면 포기)",
+    "stop_plan": "max(5200, 진입가×0.93)"
+   },
+   {
     "code": "488280",
     "name": "S2W Inc.",
     "group": "Packaged Software",
@@ -498,6 +658,21 @@
     "sync_by": "day",
     "entry_plan": "내일 시가 (시가가 19278 이상이면 포기)",
     "stop_plan": "max(13700, 진입가×0.93)"
+   },
+   {
+    "code": "247540",
+    "name": "Ecopro BM Co., Ltd.",
+    "group": "Electrical Products",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle"
+    ],
+    "signal_close": 129400.0,
+    "pattern_low": 105697.17,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 139752 이상이면 포기)",
+    "stop_plan": "max(105697, 진입가×0.93)"
    },
    {
     "code": "054920",
@@ -541,6 +716,48 @@
     "sync_by": "day",
     "entry_plan": "내일 시가 (시가가 96120 이상이면 포기)",
     "stop_plan": "max(72200, 진입가×0.93)"
+   },
+   {
+    "code": "203650",
+    "name": "Dream Security Co., Ltd.",
+    "group": "Packaged Software",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 3055.0,
+    "pattern_low": 2575.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 3299 이상이면 포기)",
+    "stop_plan": "max(2575, 진입가×0.93)"
+   },
+   {
+    "code": "263860",
+    "name": "GENIANS, INC.",
+    "group": "Packaged Software",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 24400.0,
+    "pattern_low": 18920.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 26352 이상이면 포기)",
+    "stop_plan": "max(18920, 진입가×0.93)"
+   },
+   {
+    "code": "456010",
+    "name": "ICTK Co., Ltd.",
+    "group": "Semiconductors",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 28500.0,
+    "pattern_low": 22050.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 30780 이상이면 포기)",
+    "stop_plan": "max(22050, 진입가×0.93)"
    }
   ],
   "risk_2": [
@@ -604,6 +821,20 @@
     "stop_plan": "max(350923, 진입가×0.93)"
    },
    {
+    "code": "158430",
+    "name": "ATON, Inc.",
+    "group": "Packaged Software",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 6960.0,
+    "pattern_low": 5200.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 7517 이상이면 포기)",
+    "stop_plan": "max(5200, 진입가×0.93)"
+   },
+   {
     "code": "488280",
     "name": "S2W Inc.",
     "group": "Packaged Software",
@@ -616,6 +847,21 @@
     "sync_by": "day",
     "entry_plan": "내일 시가 (시가가 19278 이상이면 포기)",
     "stop_plan": "max(13700, 진입가×0.93)"
+   },
+   {
+    "code": "247540",
+    "name": "Ecopro BM Co., Ltd.",
+    "group": "Electrical Products",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle"
+    ],
+    "signal_close": 129400.0,
+    "pattern_low": 105697.17,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 139752 이상이면 포기)",
+    "stop_plan": "max(105697, 진입가×0.93)"
    },
    {
     "code": "054920",
@@ -659,13 +905,55 @@
     "sync_by": "day",
     "entry_plan": "내일 시가 (시가가 96120 이상이면 포기)",
     "stop_plan": "max(72200, 진입가×0.93)"
+   },
+   {
+    "code": "203650",
+    "name": "Dream Security Co., Ltd.",
+    "group": "Packaged Software",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 3055.0,
+    "pattern_low": 2575.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 3299 이상이면 포기)",
+    "stop_plan": "max(2575, 진입가×0.93)"
+   },
+   {
+    "code": "263860",
+    "name": "GENIANS, INC.",
+    "group": "Packaged Software",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 24400.0,
+    "pattern_low": 18920.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 26352 이상이면 포기)",
+    "stop_plan": "max(18920, 진입가×0.93)"
+   },
+   {
+    "code": "456010",
+    "name": "ICTK Co., Ltd.",
+    "group": "Semiconductors",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 28500.0,
+    "pattern_low": 22050.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 30780 이상이면 포기)",
+    "stop_plan": "max(22050, 진입가×0.93)"
    }
   ]
  },
  "variants": {
   "base": {
    "label": "동조 업종 + 패턴 돌파 (기본)",
-   "signals": 8,
+   "signals": 13,
    "trades": 0,
    "wins": 0,
    "win_rate": null,
@@ -695,7 +983,7 @@
   },
   "no_sector": {
    "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
-   "signals": 16,
+   "signals": 21,
    "trades": 0,
    "wins": 0,
    "win_rate": null,
@@ -725,7 +1013,7 @@
   },
   "hold_10": {
    "label": "동조 + 패턴, 보유 10일",
-   "signals": 8,
+   "signals": 13,
    "trades": 0,
    "wins": 0,
    "win_rate": null,
@@ -755,7 +1043,7 @@
   },
   "risk_2": {
    "label": "동조 + 패턴, 위험 2% (명목 상한 30%)",
-   "signals": 8,
+   "signals": 13,
    "trades": 0,
    "wins": 0,
    "win_rate": null,
@@ -791,26 +1079,5 @@
   "risk_2": []
  },
  "errors": {},
- "stale": [
-  "047920",
-  "089970",
-  "108490",
-  "158430",
-  "178320",
-  "203650",
-  "218410",
-  "232140",
-  "240810",
-  "247540",
-  "263860",
-  "274090",
-  "319660",
-  "327260",
-  "347700",
-  "347850",
-  "356680",
-  "403870",
-  "440110",
-  "456010"
- ]
+ "stale": []
 }
