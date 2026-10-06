@@ -499,8 +499,7 @@ def main():
         for k, v in out["variants"].items():
             rec[k] = {"signals": v["signals"], "trades": v["trades"], "win_rate": v["win_rate"], "total_return_pct": v["total_return_pct"],
                       "max_drawdown_pct": v["max_drawdown_pct"], "open": len(v["open_positions"])}
-        with open(HISTORY_PATH, "a", encoding="utf-8") as fp:
-            fp.write(json.dumps(rec, ensure_ascii=False) + "\n")
+        KU.append_history(HISTORY_PATH, rec)        # 같은 날짜는 덮어쓴다
         print("저장: %s, %s" % (OUT_PATH, HISTORY_PATH))
     return 0
 

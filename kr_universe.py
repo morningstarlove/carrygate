@@ -226,11 +226,24 @@ def mark_duplicate(result, history_path=HISTORY_PATH):
     with open(history_path, encoding="utf-8") as fp:
         for line in fp:
             if line.strip():
-                last = json.loads(line)
-    if last and last.get("value_traded_total_krw") == result["summary"]["value_traded_total_krw"] \
-            and last.get("date") != result["date"]:
+                r = json.loads(line)
+                if r.get("date") != result["date"]:          # 같은 날 다시 돌린 기록은 비교 대상이 아니다
+                    last = r
+    if last and last.get("value_traded_total_krw") == result["summary"]["value_traded_total_krw"]:
         result["duplicate_of_previous"] = True
         result["duplicate_note"] = "직전 기록(%s)과 거래대금 합계가 같다 — 휴장일 재실행으로 보인다" % last.get("date")
+
+
+def append_history(path, rec):
+    """하루 한 줄. 같은 날짜가 이미 있으면 덮어쓴다 (수동 실행 뒤 정기 실행이 와도 중복되지 않게 — turtle.py 와 같은 방식)."""
+    rows = []
+    if os.path.exists(path):
+        with open(path, encoding="utf-8") as fp:
+            rows = [l for l in fp.read().splitlines() if l.strip()]
+    rows = [l for l in rows if json.loads(l).get("date") != rec["date"]]
+    rows.append(json.dumps(rec, ensure_ascii=False))
+    with open(path, "w", encoding="utf-8") as fp:
+        fp.write("\n".join(rows) + "\n")
 
 
 def save(result):
@@ -245,8 +258,7 @@ def save(result):
            "top10": [r["code"] for r in result["universe"][:10]],
            # 순방향 시험(kr_breakout.py)이 그날의 유니버스를 그대로 다시 쓰도록 전체를 남긴다 (코드, 업종)
            "universe": [[r["code"], r.get("industry") or "(미분류)"] for r in result["universe"]]}
-    with open(HISTORY_PATH, "a", encoding="utf-8") as fp:
-        fp.write(json.dumps(rec, ensure_ascii=False) + "\n")
+    append_history(HISTORY_PATH, rec)
 
 
 def print_result(result):

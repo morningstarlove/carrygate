@@ -131,6 +131,23 @@ class RelayAndHistory(unittest.TestCase):
         ku.mark_duplicate(r2, "/nonexistent.jsonl")
         self.assertFalse(r2["duplicate_of_previous"])
 
+    def test_history_overwrites_same_date(self):
+        fd, hp = tempfile.mkstemp(suffix=".jsonl"); os.close(fd); self.addCleanup(os.remove, hp)
+        ku.append_history(hp, {"date": "2026-10-05", "v": 1})
+        ku.append_history(hp, {"date": "2026-10-06", "v": 2})
+        ku.append_history(hp, {"date": "2026-10-06", "v": 3})      # 같은 날 다시 → 덮어씀
+        rows = [json.loads(l) for l in open(hp, encoding="utf-8") if l.strip()]
+        self.assertEqual([(r["date"], r["v"]) for r in rows], [("2026-10-05", 1), ("2026-10-06", 3)])
+
+    def test_duplicate_compares_to_previous_different_date(self):
+        # 같은 날 두 번째 실행: 비교 대상은 그날 첫 기록이 아니라 전 거래일 기록
+        fd, hp = tempfile.mkstemp(suffix=".jsonl"); os.close(fd); self.addCleanup(os.remove, hp)
+        ku.append_history(hp, {"date": "2026-10-02", "value_traded_total_krw": 5000000000})
+        ku.append_history(hp, {"date": "2026-10-06", "value_traded_total_krw": 7000000000})
+        r = ku.build(resp([row("1", "a", 1.0, 5e9)]), {"kind": "x"}, now=datetime(2026, 10, 6, 7, 20, tzinfo=timezone.utc))
+        ku.mark_duplicate(r, hp)
+        self.assertTrue(r["duplicate_of_previous"])                 # 10/2 와 같은 값 → 중복
+
     def test_scanner_payload_shape(self):
         p = ku.scanner_payload()
         self.assertEqual(p["columns"], ku.COLUMNS)
