@@ -208,9 +208,18 @@ def build(resp, source, now=None):
 
 
 # ----------------------------------------------------------------- 저장·보고
+MARKET_CLOSE_KST = "15:35"   # 이 시각(KST) 전에 돌면 그날 자료가 아니다 (정규장 15:30 마감)
+
+
 def mark_duplicate(result, history_path=HISTORY_PATH):
-    """휴장일에 돌면 스캐너가 전 거래일 자료를 그대로 준다. 직전 기록과 거래대금 합계가 같으면 표시한다."""
+    """휴장일에 돌면 스캐너가 전 거래일 자료를 그대로 준다. 직전 기록과 거래대금 합계가 같으면 표시한다.
+    장 마감 전(KST 15:35 이전)에 돈 기록도 그날 자료가 아니므로 같은 표시를 한다 (cron 이 엉뚱한 시각에 뜬 경우)."""
     result["duplicate_of_previous"] = False
+    kst_time = result["generated_at_kst"][11:16]
+    if kst_time < MARKET_CLOSE_KST:
+        result["duplicate_of_previous"] = True
+        result["duplicate_note"] = "장 마감 전(%s KST) 실행 — 그날 자료가 아니다. 매매일로 세지 않는다" % kst_time
+        return
     if not os.path.exists(history_path):
         return
     last = None

@@ -121,6 +121,16 @@ class RelayAndHistory(unittest.TestCase):
         ku.mark_duplicate(r2, hp)
         self.assertFalse(r2["duplicate_of_previous"])
 
+    def test_before_close_marked_duplicate(self):
+        # KST 00:16 (= 전날 15:16 UTC) 에 돈 기록은 그날 자료가 아니다
+        r = ku.build(resp([row("1", "a", 1.0, 5e9)]), {"kind": "x"}, now=datetime(2026, 10, 5, 15, 16, tzinfo=timezone.utc))
+        self.assertEqual(r["date"], "2026-10-06")
+        ku.mark_duplicate(r, "/nonexistent.jsonl")
+        self.assertTrue(r["duplicate_of_previous"]); self.assertIn("장 마감 전", r["duplicate_note"])
+        r2 = ku.build(resp([row("1", "a", 1.0, 5e9)]), {"kind": "x"}, now=datetime(2026, 10, 6, 7, 20, tzinfo=timezone.utc))
+        ku.mark_duplicate(r2, "/nonexistent.jsonl")
+        self.assertFalse(r2["duplicate_of_previous"])
+
     def test_scanner_payload_shape(self):
         p = ku.scanner_payload()
         self.assertEqual(p["columns"], ku.COLUMNS)
