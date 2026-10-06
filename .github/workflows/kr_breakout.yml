@@ -58,6 +58,11 @@ jobs:
             python kr_breakout.py
           fi
 
+      - name: Verdict (판정 규율 — 순방향 채점, 사전 등록 기준)
+        if: inputs.dry_run != true && github.event_name != 'push'
+        continue-on-error: true
+        run: python verdict.py
+
       - name: Backtest 3y (없을 때만 — 종목 300 일봉 수집, 몇 분 걸린다)
         if: github.event_name == 'push' || inputs.backtest == true
         continue-on-error: true
@@ -101,14 +106,14 @@ jobs:
 
       - name: Unit tests (계산 로직, 저장된 실데이터)
         if: always()
-        run: python -m unittest tests.test_kr_universe tests.test_patterns tests.test_kr_breakout
+        run: python -m unittest tests.test_kr_universe tests.test_patterns tests.test_kr_breakout tests.test_verdict
 
       - name: Commit results
         if: always() && inputs.dry_run != true && github.event_name != 'push'
         run: |
           git config user.name  "carrygate-bot"
           git config user.email "carrygate-bot@users.noreply.github.com"
-          git add -A kr_sector.json kr_sector_history.jsonl kr_breakout.json kr_breakout_history.jsonl || true
+          git add -A kr_sector.json kr_sector_history.jsonl kr_breakout.json kr_breakout_history.jsonl verdict.json verdict_history.jsonl || true
           if git diff --staged --quiet; then
             echo "no change"
           else
