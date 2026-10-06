@@ -1,0 +1,185 @@
+{
+  "schema": "carrygate-verdict/1",
+  "date": "2026-10-07",
+  "generated_at_utc": "2026-10-06T20:42:34Z",
+  "criteria_sealed": "2026-10-06",
+  "tracks": {
+    "kr_breakout": {
+      "variant": "base",
+      "forward_days": 1,
+      "rule_fixed": "2026-10-05",
+      "trades": 0,
+      "wins": 0,
+      "win_rate_pct": null,
+      "total_return_pct": 0.0,
+      "max_drawdown_pct": 0.0,
+      "signals": 13,
+      "skipped_no_slot": 0,
+      "backtest_win_rate_pct": 28.86,
+      "luck": null,
+      "checks": {},
+      "warnings": [],
+      "control": {
+        "variant": "no_sector",
+        "trades": 0,
+        "win_rate_pct": null,
+        "total_return_pct": 0.0,
+        "return_delta_pct": 0
+      },
+      "status": "NOT_YET",
+      "reason": "순방향 매매 0건 — 최소 15건 전에는 판단하지 않는다"
+    },
+    "turtle": {
+      "rule_fixed": "2026-10-02",
+      "status": "NOT_YET",
+      "reason": "순방향 합계 0건: upbit=NOT_YET, okx=NOT_YET",
+      "forward_trades_total": 0,
+      "venues": {
+        "upbit": {
+          "trades": 0,
+          "wins": 0,
+          "win_rate_pct": null,
+          "net_pct": null,
+          "profit_factor": null,
+          "avg_r": null,
+          "backtest_win_rate_pct": 37.8378,
+          "backtest_profit_factor": 1.8385,
+          "backtest_trades": 111,
+          "luck": null,
+          "variants": {
+            "s2_55_20": {
+              "trades": 0,
+              "wins": 0,
+              "net_pct": null,
+              "profit_factor": null
+            },
+            "ch_22_3": {
+              "trades": 0,
+              "wins": 0,
+              "net_pct": null,
+              "profit_factor": null
+            }
+          },
+          "warnings": [],
+          "status": "NOT_YET",
+          "reason": "순방향 0건 — 최소 20건 전에는 판단하지 않는다"
+        },
+        "okx": {
+          "trades": 0,
+          "wins": 0,
+          "win_rate_pct": null,
+          "net_pct": null,
+          "profit_factor": null,
+          "avg_r": null,
+          "backtest_win_rate_pct": 34.6154,
+          "backtest_profit_factor": 1.3212,
+          "backtest_trades": 234,
+          "luck": null,
+          "variants": {
+            "s2_55_20": {
+              "trades": 0,
+              "wins": 0,
+              "net_pct": null,
+              "profit_factor": null
+            },
+            "ch_22_3": {
+              "trades": 0,
+              "wins": 0,
+              "net_pct": null,
+              "profit_factor": null
+            }
+          },
+          "warnings": [],
+          "status": "NOT_YET",
+          "reason": "순방향 0건 — 최소 20건 전에는 판단하지 않는다"
+        }
+      }
+    },
+    "reversal": {
+      "rule_fixed": "2026-10-05",
+      "status": "NOT_YET",
+      "reason": "순방향 합계 0건: upbit=NOT_YET, okx=NOT_YET",
+      "forward_trades_total": 0,
+      "venues": {
+        "upbit": {
+          "trades": 0,
+          "wins": 0,
+          "win_rate_pct": null,
+          "net_pct": null,
+          "profit_factor": null,
+          "avg_r": null,
+          "backtest_win_rate_pct": 37.0861,
+          "backtest_profit_factor": 2.8167,
+          "backtest_trades": 151,
+          "luck": null,
+          "variants": {
+            "no_vol": {
+              "trades": 0,
+              "wins": 0,
+              "net_pct": null,
+              "profit_factor": null
+            },
+            "break_entry": {
+              "trades": 0,
+              "wins": 0,
+              "net_pct": null,
+              "profit_factor": null
+            }
+          },
+          "warnings": [],
+          "status": "NOT_YET",
+          "reason": "순방향 0건 — 최소 20건 전에는 판단하지 않는다"
+        },
+        "okx": {
+          "trades": 0,
+          "wins": 0,
+          "win_rate_pct": null,
+          "net_pct": null,
+          "profit_factor": null,
+          "avg_r": null,
+          "backtest_win_rate_pct": 34.4156,
+          "backtest_profit_factor": 1.4425,
+          "backtest_trades": 154,
+          "luck": null,
+          "variants": {
+            "no_vol": {
+              "trades": 0,
+              "wins": 0,
+              "net_pct": null,
+              "profit_factor": null
+            },
+            "break_entry": {
+              "trades": 0,
+              "wins": 0,
+              "net_pct": null,
+              "profit_factor": null
+            }
+          },
+          "warnings": [],
+          "status": "NOT_YET",
+          "reason": "순방향 0건 — 최소 20건 전에는 판단하지 않는다"
+        }
+      }
+    },
+    "scalp": {
+      "history_days": 8,
+      "rows_total": 378,
+      "rows_positive": 78,
+      "rows_robust": 0,
+      "scalp_verdict": "378개 조합 중 순수익 플러스 78개, 견고 0개. 본전 승률: 5분 보유 88~234%, 30분 보유 66~163%. 규칙 합산이 가장 나은 시간 단위 15m. 기록 8일차 — 7일 이상 모여야 후보 판단",
+      "status": "FAIL",
+      "reason": "기록 8일에 견고한 조합 0개 — 지금 규칙 중 비용을 이기는 것이 없다"
+    }
+  },
+  "errors": {},
+  "rules_lock": {
+    "ok": true,
+    "diffs": []
+  },
+  "summary": {
+    "kr_breakout": "NOT_YET",
+    "turtle": "NOT_YET",
+    "reversal": "NOT_YET",
+    "scalp": "FAIL"
+  }
+}

@@ -2,7 +2,7 @@
 
 > 이 문서만 읽으면 누구든(혹은 다른 AI 세션이든) 이어서 작업할 수 있게 쓴다.
 
-**최종 갱신:** 2026-10-05 (마일스톤 13 추세 전환 매매법 4시간봉 PR #32 병합, 현황판 카드 연결; 그 전: 터틀 기록 중복 수정 PR #22·#23, AI 보조 도구 PR #19)
+**최종 갱신:** 2026-10-06 (마일스톤 14 판정 규율 — Phil 방식 이식: `verdict.py`·`criteria.json`·`rules_lock.json`·`proposals.md`; 그 전: 마일스톤 13 추세 전환 매매법 4시간봉 PR #32 병합, 현황판 카드 연결; 그 전: 터틀 기록 중복 수정 PR #22·#23, AI 보조 도구 PR #19)
 **작업 브랜치:** 모두 `main` 에 병합됨. 최근 작업 브랜치(참고용): `claude/turtle-history-dedupe`(터틀 기록 중복), `claude/chandelier-exit-variant`(Chandelier 변형), `claude/new-session-as7gis`(터틀), 한국 주식 트랙 PR #17·#18
 **저장소:** `morningstarlove/carrygate` (2026-09-17 `signalgate-bridge` 에서 이름 변경)
 **프로젝트명:** CARRYGATE — 게이트(신호등) + 캐리(이자) 두 축에서 따왔다.
@@ -42,6 +42,19 @@
 | 청산 | 연 2% 미만 |
 
 ---
+
+### 마일스톤 14 — 판정 규율: Phil 방식 이식 (완료 14-1, 2026-10-06)
+
+오픈소스 AI 트레이더 Phil(`docs/PHIL_ANALYSIS.md`) 은 68일 동안 시장을 못 이겼지만, **"기준을 먼저 봉인하고, 운을 보정하고, 규칙 변경을 기계로 막는"** 방법은 가져올 만했다. 설계서 `docs/VERDICT_PLAN.md`.
+
+| 파일 | 역할 |
+|---|---|
+| `criteria.json` | 사전 등록 합격선(봉인 2026-10-06). 돌파 15건·추세전환 20건·터틀 20건·초단타 7일 전에는 판단하지 않는다 |
+| `verdict.py` | 네 트랙 순방향을 한 곳에서 채점 → `verdict.json`, `verdict_history.jsonl`. PASS / FAIL / NOT_YET + 운 보정 z |
+| `rules_lock.json` + `tests/test_verdict.py` | 규칙 상수가 사전 등록 없이 바뀌면 CI 빨간불. 바꾸는 길: `proposals.md` → `RULE_FIXED` 새 날짜 → `python verdict.py --lock` |
+| `proposals.md` | 제안함. 미뤄 둔 것 7건(P1~P7)을 옮겨 적음. P6(터틀 합격선)은 사용자가 2026-10-06 "그대로 둔다"로 확인 |
+
+2026-10-06 첫 판정: 돌파·터틀·추세전환 NOT_YET(0건), 초단타 FAIL(8일, 견고 조합 0). 규칙 잠금 일치. 두 워크플로에 채점 단계·시험·커밋 연결.
 
 ## 2. 실제로 확인된 사실 (추측 아님)
 
@@ -793,6 +806,12 @@ TRX 바이낸스 −0.052% / OKX −0.046%. 크기가 같은 범위다. 첫날 �
 
 설계서 `docs/REVERSAL_4H_PLAN.md`. 완료. **기다리는 단계** — 매일 자동 기록, 손댈 것 없음. 순방향 20건 뒤 판단. 미뤄 둔 것: 4시간 주기 실행.
 
+### Phil(bennyjo/phil) 분석 — 2026-10-06
+
+오픈소스 "자기 전략을 고치는 AI 트레이더" Phil 을 분석했다. **68일, 61건 정산, -2.2%, 시장 가격보다 예측이 못함(brier delta +0.067), 순방향 검증 FAIL, 실거래 0건.**
+돈 버는 도구가 아니다. 가져올 것은 방법(보호 엔진/편집 전략 분리, 시장 대비 Brier, 사전 등록 + 순방향 검증, 정산마다 반성문)이다.
+보고서와 선택지: `docs/PHIL_ANALYSIS.md`. 선택지 A 채택 → **마일스톤 14 로 구현 완료**(`docs/VERDICT_PLAN.md`). 남은 것: 14-2 현황판 카드, 14-3 첫 판정(돌파 약 4주, 코인 2~3개월), (P6 은 확인 완료).
+
 ### 그 외 개선 여지
 
 - 실행 주기: 지금은 하루 1회. 펀딩은 8시간마다 정산되므로 8시간 주기가 더 맞다.
@@ -824,6 +843,7 @@ GitHub 저장소 → Actions 탭 → `CARRYGATE daily` → Run workflow
 | `funding.py` `SOURCES` | 거래소 추가/제거 |
 | `funding.py` 상단 `TAKER_FEE_*` / `HOLD_DAYS` | 하이퍼리퀴드 외 거래소 수수료 가정 / 보유기간 |
 | `funding.py` 상단 `HL_DOC_*` | 하이퍼리퀴드 API 실패 시에만 쓰는 대체 수수료 |
+| `criteria.json` | 순방향 합격선 (바꾸면 `proposals.md` 기록 + `python verdict.py --lock`) |
 | `selfcheck.py` 상단 `TOL` / `MAX_GAP_DAYS` | 검산 허용 오차 / 기록 공백 경고 기준 |
 | `scalp.py` 상단 `VENUES` | 초단타 거래소별 수수료(시장가·지정가)·숏 가능 여부 |
 | `scalp.py` 상단 `SPREAD_TICKS` | 시장가 체결 시 잃는 호가 폭(틱). 기본 1틱 |
@@ -904,3 +924,4 @@ GitHub 저장소 → Actions 탭 → `CARRYGATE daily` → Run workflow
 4. **실데이터로 확인한 것만 사실로 적는다.** 위 "확인된 사실"은 모두 실행 로그 근거다.
 5. **초단타 규칙은 결과를 보고 고치지 않는다.** 고치면 그날부터 새 규칙으로 기록을 다시 센다.
    규칙 추가는 되지만 기존 규칙의 문턱값을 사후에 조정하는 것은 과최적화다.
+   **(2026-10-06 추가)** 이 원칙은 이제 기계가 지킨다: 규칙 상수와 `criteria.json` 은 `rules_lock.json` 에 잠겨 있고, 바꾸려면 `proposals.md` → `RULE_FIXED` 새 날짜 → `python verdict.py --lock` 순서만 허용된다.
