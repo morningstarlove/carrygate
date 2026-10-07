@@ -1,6 +1,6 @@
 {
  "date": "2026-10-07",
- "generated_at_utc": "2026-10-07T09:15:01Z",
+ "generated_at_utc": "2026-10-07T14:01:05Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -67,8 +67,8 @@
   "bar_errors": 0,
   "stale_codes": 0,
   "by_source": {
-   "yahoo": 121,
-   "yahoo+naver_api": 22
+   "yahoo+naver_api": 22,
+   "yahoo": 121
   },
   "skipped_days": [
    "2026-10-05"
@@ -270,9 +270,10 @@
   ]
  },
  "signal_date": "2026-10-07",
- "signals_frozen": false,
+ "signals_frozen": true,
  "frozen_dates": [
-  "2026-10-06"
+  "2026-10-06",
+  "2026-10-07"
  ],
  "variants": {
   "base": {
@@ -285,9 +286,9 @@
    "avg_loss_pct": -7.45,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -2.71,
-   "equity_final": 9728755,
-   "max_drawdown_pct": 2.71,
+   "total_return_pct": -2.63,
+   "equity_final": 9736875,
+   "max_drawdown_pct": 2.63,
    "avg_hold_days": 1,
    "skipped": {
     "gap": 0,
@@ -325,7 +326,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -2.71
+    "2026": -2.63
    },
    "open_positions": [
     {
@@ -364,8 +365,8 @@
      "stop": 6529.53,
      "shares": 203,
      "bars_held": 1,
-     "last_close": 6720.0,
-     "unrealized_pct": -4.29
+     "last_close": 6760.0,
+     "unrealized_pct": -3.72
     }
    ]
   },
@@ -386,7 +387,7 @@
    "skipped": {
     "gap": 0,
     "limit": 16,
-    "cooldown": 4,
+    "cooldown": 0,
     "size": 0,
     "no_bar": 0
    },
@@ -462,9 +463,9 @@
    "avg_loss_pct": -7.45,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -2.71,
-   "equity_final": 9728755,
-   "max_drawdown_pct": 2.71,
+   "total_return_pct": -2.63,
+   "equity_final": 9736875,
+   "max_drawdown_pct": 2.63,
    "avg_hold_days": 1,
    "skipped": {
     "gap": 0,
@@ -502,7 +503,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -2.71
+    "2026": -2.63
    },
    "open_positions": [
     {
@@ -541,8 +542,8 @@
      "stop": 6529.53,
      "shares": 203,
      "bars_held": 1,
-     "last_close": 6720.0,
-     "unrealized_pct": -4.29
+     "last_close": 6760.0,
+     "unrealized_pct": -3.72
     }
    ]
   },
