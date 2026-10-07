@@ -31,7 +31,7 @@
 | 한국 주식 돌파 + 판정 | 평일 15:50 (예약이 자주 안 뜸) | GitHub Actions `kr_breakout.yml` |
 | 한국 주식 대신 실행 (그날 안 돌았으면) | 평일 16:10 | Routine trig_01XXMiN7QmGH5EgE9SiYrxZt → 세션 session_01WP7a8oLwaHMUj5MimZSF6k |
 | 현황판 결과 파일 갱신 | 매일 17:37 | Routine trig_01NtBpUqqUuZxogBQxRWurDj (새 세션) |
-| 매일 점검·이상 보고 | 매일 10:00 | Routine trig_01T529xQcka6vj6YYZFAnuyL (새 세션) |
+| 매일 점검·이상 보고 (10/7부터 판정 변화·규칙 잠금 불일치·운 보정 경고도 보고, 보고 끝에 판정 한 줄) | 매일 10:00 | Routine trig_01T529xQcka6vj6YYZFAnuyL (새 세션) |
 | 매크로 달력 갱신 | 매주 월 11:10 | Routine trig_01CBFoNkLZyBHafCjmsAK5Jp |
 | 초단타 2주 재확인 | 2026-10-21 16:30, 1회 | Routine trig_01WWuHJTvmZxK7GWpuvdSZca → 세션 session_01WP7a8oLwaHMUj5MimZSF6k |
 
