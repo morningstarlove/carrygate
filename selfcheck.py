@@ -350,6 +350,42 @@ def check_turtle(problems, notes):
     return checked
 
 
+def check_grid(problems, notes):
+    """그리드(종사종팔): 저장된 승률·만기 비율이 매매 수와 맞는지, 순방향 티어의 익절가가 매수가×(1+익절률)인지 본다."""
+    d = load_json("grid.json")
+    if d is None:
+        notes.append("grid.json 이 없다")
+        return 0
+    checked = 0
+    versions = (d.get("rules") or {}).get("versions") or {}
+    for sym, res in (d.get("symbols") or {}).items():
+        for wk, w in (res.get("windows") or {}).items():
+            for v in versions:
+                m = w.get(v)
+                if not m:
+                    continue
+                if m.get("max_drawdown_pct", 0) > 1e-9:
+                    problems.append("그리드 %s %s %s: 최대낙폭이 양수다" % (sym, wk, v))
+                    continue
+                if m.get("trades") and m.get("expired_sells") is not None:
+                    share = m["expired_sells"] / m["trades"] * 100.0
+                    if abs(share - (m.get("expired_share_pct") or 0.0)) > 0.05:
+                        problems.append("그리드 %s %s %s: 만기 매도 비율 불일치 (저장 %.2f vs 재계산 %.2f)" % (
+                            sym, wk, v, m.get("expired_share_pct") or 0.0, share))
+                        continue
+                checked += 1
+        for v, fw in (res.get("forward") or {}).items():
+            tgt = (versions.get(v) or {}).get("target_pct")
+            for t in fw.get("tiers") or []:
+                if tgt is None:
+                    break
+                want = t["buy_px"] * (1.0 + tgt / 100.0)
+                if abs(t["target_px"] - want) > max(1e-6, 1e-4 * want):
+                    problems.append("그리드 %s %s 순방향: 익절가가 매수가×(1+%s%%) 가 아니다 (%s)" % (sym, v, tgt, t.get("buy_date")))
+                    break
+    return checked
+
+
 def check_reversal(problems, notes):
     """추세 전환(4시간봉): 실현 순수익을 매매별 수익률의 복리 곱에서 다시 계산해 대조하고, 손절·진입 규칙을 본다.
     - 손절 시작값(pattern_low) 은 최종 손절선 이하여야 한다(손절선은 올라가기만 한다)
@@ -418,14 +454,15 @@ def main():
     basis_checked = check_basis(problems, notes)
     turtle_checked = check_turtle(problems, notes)
     reversal_checked = check_reversal(problems, notes)
+    grid_checked = check_grid(problems, notes)
     for path, label in (("basis_history.jsonl", "베이시스"), ("funding_signal_history.jsonl", "펀딩 신호"),
                         ("kimchi_history.jsonl", "김치프리미엄"), ("momentum_history.jsonl", "듀얼 모멘텀"),
                         ("live_history.jsonl", "실전 캐리"), ("turtle_history.jsonl", "터틀"),
-                        ("reversal_history.jsonl", "추세 전환")):
+                        ("reversal_history.jsonl", "추세 전환"), ("grid_history.jsonl", "그리드")):
         check_jsonl_dates(path, label, problems, notes)
 
     print("=== 검산 ===")
-    print("재계산 대조: 캐리 %d건, 초단타 %d건, 베이시스 %d건, 터틀 %d건, 추세전환 %d건 통과" % (checked, scalp_checked, basis_checked, turtle_checked, reversal_checked))
+    print("재계산 대조: 캐리 %d건, 초단타 %d건, 베이시스 %d건, 터틀 %d건, 추세전환 %d건, 그리드 %d건 통과" % (checked, scalp_checked, basis_checked, turtle_checked, reversal_checked, grid_checked))
     for m in notes:
         print("  · %s" % m)
 
