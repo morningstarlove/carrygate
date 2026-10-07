@@ -1,6 +1,6 @@
 {
- "date": "2026-10-06",
- "generated_at_utc": "2026-10-06T07:29:05Z",
+ "date": "2026-10-07",
+ "generated_at_utc": "2026-10-07T09:08:42Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -60,15 +60,15 @@
   }
  },
  "forward": {
-  "days": 1,
+  "days": 2,
   "from": "2026-10-05",
-  "to": "2026-10-06",
-  "codes": 124,
+  "to": "2026-10-07",
+  "codes": 143,
   "bar_errors": 0,
   "stale_codes": 0,
   "by_source": {
-   "yahoo": 104,
-   "yahoo+naver_api": 20
+   "yahoo": 121,
+   "yahoo+naver_api": 22
   },
   "skipped_days": [
    "2026-10-05"
@@ -78,6 +78,536 @@
  "signals_today": {
   "base": [
    {
+    "code": "278470",
+    "name": "APR Co.,Ltd.",
+    "group": "Household/Personal Care",
+    "pattern": "cup_handle",
+    "patterns": [
+     "cup_handle"
+    ],
+    "signal_close": 379000.0,
+    "pattern_low": 356500.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 409320 이상이면 포기)",
+    "stop_plan": "max(356500, 진입가×0.93)"
+   },
+   {
+    "code": "192820",
+    "name": "COSMAX, Inc.",
+    "group": "Household/Personal Care",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 308500.0,
+    "pattern_low": 230500.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 333180 이상이면 포기)",
+    "stop_plan": "max(230500, 진입가×0.93)"
+   }
+  ],
+  "no_sector": [
+   {
+    "code": "042510",
+    "name": "RaonSecure Co., Ltd.",
+    "group": "Computer Communications",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 16710.0,
+    "pattern_low": 10590.0,
+    "sync_by": null,
+    "entry_plan": "내일 시가 (시가가 18047 이상이면 포기)",
+    "stop_plan": "max(10590, 진입가×0.93)"
+   },
+   {
+    "code": "069540",
+    "name": "LIGHTRON FIBER-OPTIC DEVICES INC.",
+    "group": "Semiconductors",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 5210.0,
+    "pattern_low": 3850.0,
+    "sync_by": null,
+    "entry_plan": "내일 시가 (시가가 5627 이상이면 포기)",
+    "stop_plan": "max(3850, 진입가×0.93)"
+   },
+   {
+    "code": "038500",
+    "name": "SAMPYO Cement Co. Ltd.",
+    "group": "Construction Materials",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle"
+    ],
+    "signal_close": 7820.0,
+    "pattern_low": 6602.7,
+    "sync_by": null,
+    "entry_plan": "내일 시가 (시가가 8446 이상이면 포기)",
+    "stop_plan": "max(6603, 진입가×0.93)"
+   },
+   {
+    "code": "278470",
+    "name": "APR Co.,Ltd.",
+    "group": "Household/Personal Care",
+    "pattern": "cup_handle",
+    "patterns": [
+     "cup_handle"
+    ],
+    "signal_close": 379000.0,
+    "pattern_low": 356500.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 409320 이상이면 포기)",
+    "stop_plan": "max(356500, 진입가×0.93)"
+   },
+   {
+    "code": "142280",
+    "name": "GC Medical Science Corporation",
+    "group": "Medical Specialties",
+    "pattern": "triangle",
+    "patterns": [
+     "triangle"
+    ],
+    "signal_close": 4200.0,
+    "pattern_low": 3141.67,
+    "sync_by": null,
+    "entry_plan": "내일 시가 (시가가 4536 이상이면 포기)",
+    "stop_plan": "max(3142, 진입가×0.93)"
+   },
+   {
+    "code": "131290",
+    "name": "TSE Co., Ltd",
+    "group": "Semiconductors",
+    "pattern": "cup_handle",
+    "patterns": [
+     "triangle",
+     "cup_handle"
+    ],
+    "signal_close": 316000.0,
+    "pattern_low": 282000.0,
+    "sync_by": null,
+    "entry_plan": "내일 시가 (시가가 341280 이상이면 포기)",
+    "stop_plan": "max(282000, 진입가×0.93)"
+   },
+   {
+    "code": "192820",
+    "name": "COSMAX, Inc.",
+    "group": "Household/Personal Care",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 308500.0,
+    "pattern_low": 230500.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 333180 이상이면 포기)",
+    "stop_plan": "max(230500, 진입가×0.93)"
+   }
+  ],
+  "hold_10": [
+   {
+    "code": "278470",
+    "name": "APR Co.,Ltd.",
+    "group": "Household/Personal Care",
+    "pattern": "cup_handle",
+    "patterns": [
+     "cup_handle"
+    ],
+    "signal_close": 379000.0,
+    "pattern_low": 356500.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 409320 이상이면 포기)",
+    "stop_plan": "max(356500, 진입가×0.93)"
+   },
+   {
+    "code": "192820",
+    "name": "COSMAX, Inc.",
+    "group": "Household/Personal Care",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 308500.0,
+    "pattern_low": 230500.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 333180 이상이면 포기)",
+    "stop_plan": "max(230500, 진입가×0.93)"
+   }
+  ],
+  "risk_2": [
+   {
+    "code": "278470",
+    "name": "APR Co.,Ltd.",
+    "group": "Household/Personal Care",
+    "pattern": "cup_handle",
+    "patterns": [
+     "cup_handle"
+    ],
+    "signal_close": 379000.0,
+    "pattern_low": 356500.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 409320 이상이면 포기)",
+    "stop_plan": "max(356500, 진입가×0.93)"
+   },
+   {
+    "code": "192820",
+    "name": "COSMAX, Inc.",
+    "group": "Household/Personal Care",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 308500.0,
+    "pattern_low": 230500.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 333180 이상이면 포기)",
+    "stop_plan": "max(230500, 진입가×0.93)"
+   }
+  ]
+ },
+ "variants": {
+  "base": {
+   "label": "동조 업종 + 패턴 돌파 (기본)",
+   "signals": 16,
+   "trades": 2,
+   "wins": 0,
+   "win_rate": 0.0,
+   "avg_win_pct": null,
+   "avg_loss_pct": -7.45,
+   "payoff": null,
+   "profit_factor": 0.0,
+   "total_return_pct": -1.89,
+   "equity_final": 9810608,
+   "max_drawdown_pct": 1.89,
+   "avg_hold_days": 1,
+   "skipped": {
+    "gap": 0,
+    "limit": 9,
+    "cooldown": 0,
+    "size": 0,
+    "no_bar": 0
+   },
+   "by_pattern": {
+    "flag": {
+     "n": 2,
+     "wins": 0,
+     "pnl_krw": -201186
+    }
+   },
+   "by_sync": {
+    "day": {
+     "n": 2,
+     "wins": 0,
+     "pnl_krw": -201186
+    }
+   },
+   "by_exit": {
+    "stop": {
+     "n": 2,
+     "wins": 0,
+     "pnl_krw": -201186
+    }
+   },
+   "by_year": {
+    "2026": {
+     "n": 2,
+     "wins": 0,
+     "pnl_krw": -201186
+    }
+   },
+   "yearly_return_pct": {
+    "2026": -1.89
+   },
+   "open_positions": [
+    {
+     "code": "006400",
+     "name": "Samsung SDI Co., Ltd",
+     "group": "Electrical Products",
+     "pattern": "box",
+     "entry_date": "2026-10-07",
+     "entry": 572713.0,
+     "stop": 532623.09,
+     "shares": 2,
+     "bars_held": 1,
+     "last_close": 562000.0,
+     "unrealized_pct": -1.87
+    },
+    {
+     "code": "373220",
+     "name": "LG Energy Solution Ltd.",
+     "group": "Electrical Products",
+     "pattern": "triangle",
+     "entry_date": "2026-10-07",
+     "entry": 386656.5,
+     "stop": 359590.54,
+     "shares": 3,
+     "bars_held": 1,
+     "last_close": 391000.0,
+     "unrealized_pct": 1.12
+    },
+    {
+     "code": "069540",
+     "name": "LIGHTRON FIBER-OPTIC DEVICES INC.",
+     "group": "Semiconductors",
+     "pattern": "flag",
+     "entry_date": "2026-10-07",
+     "entry": 5135.36,
+     "stop": 4775.88,
+     "shares": 278,
+     "bars_held": 1,
+     "last_close": 5210.0,
+     "unrealized_pct": 1.45
+    }
+   ]
+  },
+  "no_sector": {
+   "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
+   "signals": 29,
+   "trades": 4,
+   "wins": 0,
+   "win_rate": 0.0,
+   "avg_win_pct": null,
+   "avg_loss_pct": -7.45,
+   "payoff": null,
+   "profit_factor": 0.0,
+   "total_return_pct": -4.23,
+   "equity_final": 9577112,
+   "max_drawdown_pct": 4.23,
+   "avg_hold_days": 1,
+   "skipped": {
+    "gap": 0,
+    "limit": 17,
+    "cooldown": 4,
+    "size": 0,
+    "no_bar": 0
+   },
+   "by_pattern": {
+    "flag": {
+     "n": 2,
+     "wins": 0,
+     "pnl_krw": -201186
+    },
+    "triangle": {
+     "n": 2,
+     "wins": 0,
+     "pnl_krw": -200103
+    }
+   },
+   "by_sync": {
+    "day": {
+     "n": 2,
+     "wins": 0,
+     "pnl_krw": -201186
+    },
+    "none": {
+     "n": 2,
+     "wins": 0,
+     "pnl_krw": -200103
+    }
+   },
+   "by_exit": {
+    "stop": {
+     "n": 4,
+     "wins": 0,
+     "pnl_krw": -401289
+    }
+   },
+   "by_year": {
+    "2026": {
+     "n": 4,
+     "wins": 0,
+     "pnl_krw": -401289
+    }
+   },
+   "yearly_return_pct": {
+    "2026": -4.23
+   },
+   "open_positions": [
+    {
+     "code": "006400",
+     "name": "Samsung SDI Co., Ltd",
+     "group": "Electrical Products",
+     "pattern": "box",
+     "entry_date": "2026-10-07",
+     "entry": 572713.0,
+     "stop": 532623.09,
+     "shares": 2,
+     "bars_held": 1,
+     "last_close": 562000.0,
+     "unrealized_pct": -1.87
+    }
+   ]
+  },
+  "hold_10": {
+   "label": "동조 + 패턴, 보유 10일",
+   "signals": 16,
+   "trades": 2,
+   "wins": 0,
+   "win_rate": 0.0,
+   "avg_win_pct": null,
+   "avg_loss_pct": -7.45,
+   "payoff": null,
+   "profit_factor": 0.0,
+   "total_return_pct": -1.89,
+   "equity_final": 9810608,
+   "max_drawdown_pct": 1.89,
+   "avg_hold_days": 1,
+   "skipped": {
+    "gap": 0,
+    "limit": 9,
+    "cooldown": 0,
+    "size": 0,
+    "no_bar": 0
+   },
+   "by_pattern": {
+    "flag": {
+     "n": 2,
+     "wins": 0,
+     "pnl_krw": -201186
+    }
+   },
+   "by_sync": {
+    "day": {
+     "n": 2,
+     "wins": 0,
+     "pnl_krw": -201186
+    }
+   },
+   "by_exit": {
+    "stop": {
+     "n": 2,
+     "wins": 0,
+     "pnl_krw": -201186
+    }
+   },
+   "by_year": {
+    "2026": {
+     "n": 2,
+     "wins": 0,
+     "pnl_krw": -201186
+    }
+   },
+   "yearly_return_pct": {
+    "2026": -1.89
+   },
+   "open_positions": [
+    {
+     "code": "006400",
+     "name": "Samsung SDI Co., Ltd",
+     "group": "Electrical Products",
+     "pattern": "box",
+     "entry_date": "2026-10-07",
+     "entry": 572713.0,
+     "stop": 532623.09,
+     "shares": 2,
+     "bars_held": 1,
+     "last_close": 562000.0,
+     "unrealized_pct": -1.87
+    },
+    {
+     "code": "373220",
+     "name": "LG Energy Solution Ltd.",
+     "group": "Electrical Products",
+     "pattern": "triangle",
+     "entry_date": "2026-10-07",
+     "entry": 386656.5,
+     "stop": 359590.54,
+     "shares": 3,
+     "bars_held": 1,
+     "last_close": 391000.0,
+     "unrealized_pct": 1.12
+    },
+    {
+     "code": "069540",
+     "name": "LIGHTRON FIBER-OPTIC DEVICES INC.",
+     "group": "Semiconductors",
+     "pattern": "flag",
+     "entry_date": "2026-10-07",
+     "entry": 5135.36,
+     "stop": 4775.88,
+     "shares": 278,
+     "bars_held": 1,
+     "last_close": 5210.0,
+     "unrealized_pct": 1.45
+    }
+   ]
+  },
+  "risk_2": {
+   "label": "동조 + 패턴, 위험 2% (명목 상한 30%)",
+   "signals": 16,
+   "trades": 2,
+   "wins": 0,
+   "win_rate": 0.0,
+   "avg_win_pct": null,
+   "avg_loss_pct": -7.45,
+   "payoff": null,
+   "profit_factor": 0.0,
+   "total_return_pct": -4.55,
+   "equity_final": 9544639,
+   "max_drawdown_pct": 4.55,
+   "avg_hold_days": 1,
+   "skipped": {
+    "gap": 0,
+    "limit": 0,
+    "cooldown": 0,
+    "size": 11,
+    "no_bar": 0
+   },
+   "by_pattern": {
+    "flag": {
+     "n": 2,
+     "wins": 0,
+     "pnl_krw": -412165
+    }
+   },
+   "by_sync": {
+    "day": {
+     "n": 2,
+     "wins": 0,
+     "pnl_krw": -412165
+    }
+   },
+   "by_exit": {
+    "stop": {
+     "n": 2,
+     "wins": 0,
+     "pnl_krw": -412165
+    }
+   },
+   "by_year": {
+    "2026": {
+     "n": 2,
+     "wins": 0,
+     "pnl_krw": -412165
+    }
+   },
+   "yearly_return_pct": {
+    "2026": -4.55
+   },
+   "open_positions": [
+    {
+     "code": "006400",
+     "name": "Samsung SDI Co., Ltd",
+     "group": "Electrical Products",
+     "pattern": "box",
+     "entry_date": "2026-10-07",
+     "entry": 572713.0,
+     "stop": 532623.09,
+     "shares": 4,
+     "bars_held": 1,
+     "last_close": 562000.0,
+     "unrealized_pct": -1.87
+    }
+   ]
+  }
+ },
+ "trades": {
+  "base": [
+   {
     "code": "036930",
     "name": "Jusung Engineering Co., Ltd",
     "group": "Industrial Machinery",
@@ -85,25 +615,18 @@
     "patterns": [
      "flag"
     ],
-    "signal_close": 278500.0,
-    "pattern_low": 189200.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 300780 이상이면 포기)",
-    "stop_plan": "max(189200, 진입가×0.93)"
-   },
-   {
-    "code": "006400",
-    "name": "Samsung SDI Co., Ltd",
-    "group": "Electrical Products",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 575000.0,
-    "pattern_low": 503000.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 621000 이상이면 포기)",
-    "stop_plan": "max(503000, 진입가×0.93)"
+    "signal_date": "2026-10-06",
+    "entry_date": "2026-10-07",
+    "entry": 277329.5,
+    "stop": 257916.43,
+    "exit_date": "2026-10-07",
+    "exit": 257142.69,
+    "why": "stop",
+    "shares": 5,
+    "pnl_krw": -103263,
+    "pnl_pct": -7.45,
+    "hold_days": 1
    },
    {
     "code": "007660",
@@ -114,155 +637,18 @@
      "box",
      "flag"
     ],
-    "signal_close": 131900.0,
-    "pattern_low": 111500.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 142452 이상이면 포기)",
-    "stop_plan": "max(111500, 진입가×0.93)"
-   },
-   {
-    "code": "373220",
-    "name": "LG Energy Solution Ltd.",
-    "group": "Electrical Products",
-    "pattern": "triangle",
-    "patterns": [
-     "box",
-     "triangle",
-     "cup_handle"
-    ],
-    "signal_close": 390000.0,
-    "pattern_low": 350922.73,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 421200 이상이면 포기)",
-    "stop_plan": "max(350923, 진입가×0.93)"
-   },
-   {
-    "code": "158430",
-    "name": "ATON, Inc.",
-    "group": "Packaged Software",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 6960.0,
-    "pattern_low": 5200.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 7517 이상이면 포기)",
-    "stop_plan": "max(5200, 진입가×0.93)"
-   },
-   {
-    "code": "488280",
-    "name": "S2W Inc.",
-    "group": "Packaged Software",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 17850.0,
-    "pattern_low": 13700.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 19278 이상이면 포기)",
-    "stop_plan": "max(13700, 진입가×0.93)"
-   },
-   {
-    "code": "247540",
-    "name": "Ecopro BM Co., Ltd.",
-    "group": "Electrical Products",
-    "pattern": "triangle",
-    "patterns": [
-     "box",
-     "triangle"
-    ],
-    "signal_close": 129400.0,
-    "pattern_low": 105697.17,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 139752 이상이면 포기)",
-    "stop_plan": "max(105697, 진입가×0.93)"
-   },
-   {
-    "code": "054920",
-    "name": "Hancom WITH Inc",
-    "group": "Industrial Machinery",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 5630.0,
-    "pattern_low": 4580.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 6080 이상이면 포기)",
-    "stop_plan": "max(4580, 진입가×0.93)"
-   },
-   {
-    "code": "098460",
-    "name": "Koh Young Technology Inc.",
-    "group": "Semiconductors",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 36450.0,
-    "pattern_low": 26150.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 39366 이상이면 포기)",
-    "stop_plan": "max(26150, 진입가×0.93)"
-   },
-   {
-    "code": "053800",
-    "name": "AhnLab, Inc.",
-    "group": "Packaged Software",
-    "pattern": "flag",
-    "patterns": [
-     "flag",
-     "cup_handle"
-    ],
-    "signal_close": 89000.0,
-    "pattern_low": 72200.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 96120 이상이면 포기)",
-    "stop_plan": "max(72200, 진입가×0.93)"
-   },
-   {
-    "code": "203650",
-    "name": "Dream Security Co., Ltd.",
-    "group": "Packaged Software",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 3055.0,
-    "pattern_low": 2575.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 3299 이상이면 포기)",
-    "stop_plan": "max(2575, 진입가×0.93)"
-   },
-   {
-    "code": "263860",
-    "name": "GENIANS, INC.",
-    "group": "Packaged Software",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 24400.0,
-    "pattern_low": 18920.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 26352 이상이면 포기)",
-    "stop_plan": "max(18920, 진입가×0.93)"
-   },
-   {
-    "code": "456010",
-    "name": "ICTK Co., Ltd.",
-    "group": "Semiconductors",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 28500.0,
-    "pattern_low": 22050.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 30780 이상이면 포기)",
-    "stop_plan": "max(22050, 진입가×0.93)"
+    "signal_date": "2026-10-06",
+    "entry_date": "2026-10-07",
+    "entry": 131493.3,
+    "stop": 122288.77,
+    "exit_date": "2026-10-07",
+    "exit": 121921.9,
+    "why": "stop",
+    "shares": 10,
+    "pnl_krw": -97923,
+    "pnl_pct": -7.45,
+    "hold_days": 1
    }
   ],
   "no_sector": [
@@ -274,41 +660,41 @@
     "patterns": [
      "flag"
     ],
-    "signal_close": 278500.0,
-    "pattern_low": 189200.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 300780 이상이면 포기)",
-    "stop_plan": "max(189200, 진입가×0.93)"
-   },
-   {
-    "code": "006400",
-    "name": "Samsung SDI Co., Ltd",
-    "group": "Electrical Products",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 575000.0,
-    "pattern_low": 503000.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 621000 이상이면 포기)",
-    "stop_plan": "max(503000, 진입가×0.93)"
+    "signal_date": "2026-10-06",
+    "entry_date": "2026-10-07",
+    "entry": 277329.5,
+    "stop": 257916.43,
+    "exit_date": "2026-10-07",
+    "exit": 257142.69,
+    "why": "stop",
+    "shares": 5,
+    "pnl_krw": -103263,
+    "pnl_pct": -7.45,
+    "hold_days": 1
    },
    {
     "code": "066570",
     "name": "LG Electronics Inc.",
     "group": "Electronics/Appliances",
-    "pattern": "cup_handle",
+    "pattern": "triangle",
     "patterns": [
      "box",
      "triangle",
      "cup_handle"
     ],
-    "signal_close": 232500.0,
-    "pattern_low": 205000.0,
     "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 251100 이상이면 포기)",
-    "stop_plan": "max(205000, 진입가×0.93)"
+    "signal_date": "2026-10-06",
+    "entry_date": "2026-10-07",
+    "entry": 232194.5,
+    "stop": 215940.88,
+    "exit_date": "2026-10-07",
+    "exit": 215293.06,
+    "why": "stop",
+    "shares": 6,
+    "pnl_krw": -103749,
+    "pnl_pct": -7.45,
+    "hold_days": 1
    },
    {
     "code": "011070",
@@ -319,11 +705,18 @@
      "box",
      "triangle"
     ],
-    "signal_close": 644000.0,
-    "pattern_low": 537054.55,
     "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 695520 이상이면 포기)",
-    "stop_plan": "max(537055, 진입가×0.93)"
+    "signal_date": "2026-10-06",
+    "entry_date": "2026-10-07",
+    "entry": 646935.0,
+    "stop": 601649.55,
+    "exit_date": "2026-10-07",
+    "exit": 599844.6,
+    "why": "stop",
+    "shares": 2,
+    "pnl_krw": -96354,
+    "pnl_pct": -7.45,
+    "hold_days": 1
    },
    {
     "code": "007660",
@@ -334,241 +727,18 @@
      "box",
      "flag"
     ],
-    "signal_close": 131900.0,
-    "pattern_low": 111500.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 142452 이상이면 포기)",
-    "stop_plan": "max(111500, 진입가×0.93)"
-   },
-   {
-    "code": "217590",
-    "name": "TMC Co., Ltd.",
-    "group": "Metal Fabrication",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 19090.0,
-    "pattern_low": 13400.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 20617 이상이면 포기)",
-    "stop_plan": "max(13400, 진입가×0.93)"
-   },
-   {
-    "code": "373220",
-    "name": "LG Energy Solution Ltd.",
-    "group": "Electrical Products",
-    "pattern": "triangle",
-    "patterns": [
-     "box",
-     "triangle",
-     "cup_handle"
-    ],
-    "signal_close": 390000.0,
-    "pattern_low": 350922.73,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 421200 이상이면 포기)",
-    "stop_plan": "max(350923, 진입가×0.93)"
-   },
-   {
-    "code": "158430",
-    "name": "ATON, Inc.",
-    "group": "Packaged Software",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 6960.0,
-    "pattern_low": 5200.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 7517 이상이면 포기)",
-    "stop_plan": "max(5200, 진입가×0.93)"
-   },
-   {
-    "code": "086520",
-    "name": "Ecopro Co., Ltd.",
-    "group": "Chemicals: Major Diversified",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 95400.0,
-    "pattern_low": 77700.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 103032 이상이면 포기)",
-    "stop_plan": "max(77700, 진입가×0.93)"
-   },
-   {
-    "code": "488280",
-    "name": "S2W Inc.",
-    "group": "Packaged Software",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 17850.0,
-    "pattern_low": 13700.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 19278 이상이면 포기)",
-    "stop_plan": "max(13700, 진입가×0.93)"
-   },
-   {
-    "code": "003670",
-    "name": "POSCO FUTURE M CO., LTD.",
-    "group": "Electronic Equipment/Instruments",
-    "pattern": "triangle",
-    "patterns": [
-     "box",
-     "triangle"
-    ],
-    "signal_close": 204500.0,
-    "pattern_low": 182217.43,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 220860 이상이면 포기)",
-    "stop_plan": "max(182217, 진입가×0.93)"
-   },
-   {
-    "code": "272210",
-    "name": "Hanwha Systems Co., Ltd.",
-    "group": "Aerospace & Defense",
-    "pattern": "triangle",
-    "patterns": [
-     "triangle"
-    ],
-    "signal_close": 81700.0,
-    "pattern_low": 74186.92,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 88236 이상이면 포기)",
-    "stop_plan": "max(74187, 진입가×0.93)"
-   },
-   {
-    "code": "247540",
-    "name": "Ecopro BM Co., Ltd.",
-    "group": "Electrical Products",
-    "pattern": "triangle",
-    "patterns": [
-     "box",
-     "triangle"
-    ],
-    "signal_close": 129400.0,
-    "pattern_low": 105697.17,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 139752 이상이면 포기)",
-    "stop_plan": "max(105697, 진입가×0.93)"
-   },
-   {
-    "code": "054920",
-    "name": "Hancom WITH Inc",
-    "group": "Industrial Machinery",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 5630.0,
-    "pattern_low": 4580.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 6080 이상이면 포기)",
-    "stop_plan": "max(4580, 진입가×0.93)"
-   },
-   {
-    "code": "098460",
-    "name": "Koh Young Technology Inc.",
-    "group": "Semiconductors",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 36450.0,
-    "pattern_low": 26150.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 39366 이상이면 포기)",
-    "stop_plan": "max(26150, 진입가×0.93)"
-   },
-   {
-    "code": "053800",
-    "name": "AhnLab, Inc.",
-    "group": "Packaged Software",
-    "pattern": "flag",
-    "patterns": [
-     "flag",
-     "cup_handle"
-    ],
-    "signal_close": 89000.0,
-    "pattern_low": 72200.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 96120 이상이면 포기)",
-    "stop_plan": "max(72200, 진입가×0.93)"
-   },
-   {
-    "code": "192820",
-    "name": "COSMAX, Inc.",
-    "group": "Household/Personal Care",
-    "pattern": "triangle",
-    "patterns": [
-     "box",
-     "triangle"
-    ],
-    "signal_close": 298000.0,
-    "pattern_low": 262181.82,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 321840 이상이면 포기)",
-    "stop_plan": "max(262182, 진입가×0.93)"
-   },
-   {
-    "code": "018880",
-    "name": "Hanon Systems",
-    "group": "Auto Parts: OEM",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 3890.0,
-    "pattern_low": 3165.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 4201 이상이면 포기)",
-    "stop_plan": "max(3165, 진입가×0.93)"
-   },
-   {
-    "code": "203650",
-    "name": "Dream Security Co., Ltd.",
-    "group": "Packaged Software",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 3055.0,
-    "pattern_low": 2575.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 3299 이상이면 포기)",
-    "stop_plan": "max(2575, 진입가×0.93)"
-   },
-   {
-    "code": "263860",
-    "name": "GENIANS, INC.",
-    "group": "Packaged Software",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 24400.0,
-    "pattern_low": 18920.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 26352 이상이면 포기)",
-    "stop_plan": "max(18920, 진입가×0.93)"
-   },
-   {
-    "code": "456010",
-    "name": "ICTK Co., Ltd.",
-    "group": "Semiconductors",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 28500.0,
-    "pattern_low": 22050.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 30780 이상이면 포기)",
-    "stop_plan": "max(22050, 진입가×0.93)"
+    "signal_date": "2026-10-06",
+    "entry_date": "2026-10-07",
+    "entry": 131493.3,
+    "stop": 122288.77,
+    "exit_date": "2026-10-07",
+    "exit": 121921.9,
+    "why": "stop",
+    "shares": 10,
+    "pnl_krw": -97923,
+    "pnl_pct": -7.45,
+    "hold_days": 1
    }
   ],
   "hold_10": [
@@ -580,25 +750,18 @@
     "patterns": [
      "flag"
     ],
-    "signal_close": 278500.0,
-    "pattern_low": 189200.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 300780 이상이면 포기)",
-    "stop_plan": "max(189200, 진입가×0.93)"
-   },
-   {
-    "code": "006400",
-    "name": "Samsung SDI Co., Ltd",
-    "group": "Electrical Products",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 575000.0,
-    "pattern_low": 503000.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 621000 이상이면 포기)",
-    "stop_plan": "max(503000, 진입가×0.93)"
+    "signal_date": "2026-10-06",
+    "entry_date": "2026-10-07",
+    "entry": 277329.5,
+    "stop": 257916.43,
+    "exit_date": "2026-10-07",
+    "exit": 257142.69,
+    "why": "stop",
+    "shares": 5,
+    "pnl_krw": -103263,
+    "pnl_pct": -7.45,
+    "hold_days": 1
    },
    {
     "code": "007660",
@@ -609,155 +772,18 @@
      "box",
      "flag"
     ],
-    "signal_close": 131900.0,
-    "pattern_low": 111500.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 142452 이상이면 포기)",
-    "stop_plan": "max(111500, 진입가×0.93)"
-   },
-   {
-    "code": "373220",
-    "name": "LG Energy Solution Ltd.",
-    "group": "Electrical Products",
-    "pattern": "triangle",
-    "patterns": [
-     "box",
-     "triangle",
-     "cup_handle"
-    ],
-    "signal_close": 390000.0,
-    "pattern_low": 350922.73,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 421200 이상이면 포기)",
-    "stop_plan": "max(350923, 진입가×0.93)"
-   },
-   {
-    "code": "158430",
-    "name": "ATON, Inc.",
-    "group": "Packaged Software",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 6960.0,
-    "pattern_low": 5200.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 7517 이상이면 포기)",
-    "stop_plan": "max(5200, 진입가×0.93)"
-   },
-   {
-    "code": "488280",
-    "name": "S2W Inc.",
-    "group": "Packaged Software",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 17850.0,
-    "pattern_low": 13700.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 19278 이상이면 포기)",
-    "stop_plan": "max(13700, 진입가×0.93)"
-   },
-   {
-    "code": "247540",
-    "name": "Ecopro BM Co., Ltd.",
-    "group": "Electrical Products",
-    "pattern": "triangle",
-    "patterns": [
-     "box",
-     "triangle"
-    ],
-    "signal_close": 129400.0,
-    "pattern_low": 105697.17,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 139752 이상이면 포기)",
-    "stop_plan": "max(105697, 진입가×0.93)"
-   },
-   {
-    "code": "054920",
-    "name": "Hancom WITH Inc",
-    "group": "Industrial Machinery",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 5630.0,
-    "pattern_low": 4580.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 6080 이상이면 포기)",
-    "stop_plan": "max(4580, 진입가×0.93)"
-   },
-   {
-    "code": "098460",
-    "name": "Koh Young Technology Inc.",
-    "group": "Semiconductors",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 36450.0,
-    "pattern_low": 26150.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 39366 이상이면 포기)",
-    "stop_plan": "max(26150, 진입가×0.93)"
-   },
-   {
-    "code": "053800",
-    "name": "AhnLab, Inc.",
-    "group": "Packaged Software",
-    "pattern": "flag",
-    "patterns": [
-     "flag",
-     "cup_handle"
-    ],
-    "signal_close": 89000.0,
-    "pattern_low": 72200.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 96120 이상이면 포기)",
-    "stop_plan": "max(72200, 진입가×0.93)"
-   },
-   {
-    "code": "203650",
-    "name": "Dream Security Co., Ltd.",
-    "group": "Packaged Software",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 3055.0,
-    "pattern_low": 2575.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 3299 이상이면 포기)",
-    "stop_plan": "max(2575, 진입가×0.93)"
-   },
-   {
-    "code": "263860",
-    "name": "GENIANS, INC.",
-    "group": "Packaged Software",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 24400.0,
-    "pattern_low": 18920.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 26352 이상이면 포기)",
-    "stop_plan": "max(18920, 진입가×0.93)"
-   },
-   {
-    "code": "456010",
-    "name": "ICTK Co., Ltd.",
-    "group": "Semiconductors",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 28500.0,
-    "pattern_low": 22050.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 30780 이상이면 포기)",
-    "stop_plan": "max(22050, 진입가×0.93)"
+    "signal_date": "2026-10-06",
+    "entry_date": "2026-10-07",
+    "entry": 131493.3,
+    "stop": 122288.77,
+    "exit_date": "2026-10-07",
+    "exit": 121921.9,
+    "why": "stop",
+    "shares": 10,
+    "pnl_krw": -97923,
+    "pnl_pct": -7.45,
+    "hold_days": 1
    }
   ],
   "risk_2": [
@@ -769,25 +795,18 @@
     "patterns": [
      "flag"
     ],
-    "signal_close": 278500.0,
-    "pattern_low": 189200.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 300780 이상이면 포기)",
-    "stop_plan": "max(189200, 진입가×0.93)"
-   },
-   {
-    "code": "006400",
-    "name": "Samsung SDI Co., Ltd",
-    "group": "Electrical Products",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 575000.0,
-    "pattern_low": 503000.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 621000 이상이면 포기)",
-    "stop_plan": "max(503000, 진입가×0.93)"
+    "signal_date": "2026-10-06",
+    "entry_date": "2026-10-07",
+    "entry": 277329.5,
+    "stop": 257916.43,
+    "exit_date": "2026-10-07",
+    "exit": 257142.69,
+    "why": "stop",
+    "shares": 10,
+    "pnl_krw": -206527,
+    "pnl_pct": -7.45,
+    "hold_days": 1
    },
    {
     "code": "007660",
@@ -798,285 +817,20 @@
      "box",
      "flag"
     ],
-    "signal_close": 131900.0,
-    "pattern_low": 111500.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 142452 이상이면 포기)",
-    "stop_plan": "max(111500, 진입가×0.93)"
-   },
-   {
-    "code": "373220",
-    "name": "LG Energy Solution Ltd.",
-    "group": "Electrical Products",
-    "pattern": "triangle",
-    "patterns": [
-     "box",
-     "triangle",
-     "cup_handle"
-    ],
-    "signal_close": 390000.0,
-    "pattern_low": 350922.73,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 421200 이상이면 포기)",
-    "stop_plan": "max(350923, 진입가×0.93)"
-   },
-   {
-    "code": "158430",
-    "name": "ATON, Inc.",
-    "group": "Packaged Software",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 6960.0,
-    "pattern_low": 5200.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 7517 이상이면 포기)",
-    "stop_plan": "max(5200, 진입가×0.93)"
-   },
-   {
-    "code": "488280",
-    "name": "S2W Inc.",
-    "group": "Packaged Software",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 17850.0,
-    "pattern_low": 13700.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 19278 이상이면 포기)",
-    "stop_plan": "max(13700, 진입가×0.93)"
-   },
-   {
-    "code": "247540",
-    "name": "Ecopro BM Co., Ltd.",
-    "group": "Electrical Products",
-    "pattern": "triangle",
-    "patterns": [
-     "box",
-     "triangle"
-    ],
-    "signal_close": 129400.0,
-    "pattern_low": 105697.17,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 139752 이상이면 포기)",
-    "stop_plan": "max(105697, 진입가×0.93)"
-   },
-   {
-    "code": "054920",
-    "name": "Hancom WITH Inc",
-    "group": "Industrial Machinery",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 5630.0,
-    "pattern_low": 4580.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 6080 이상이면 포기)",
-    "stop_plan": "max(4580, 진입가×0.93)"
-   },
-   {
-    "code": "098460",
-    "name": "Koh Young Technology Inc.",
-    "group": "Semiconductors",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 36450.0,
-    "pattern_low": 26150.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 39366 이상이면 포기)",
-    "stop_plan": "max(26150, 진입가×0.93)"
-   },
-   {
-    "code": "053800",
-    "name": "AhnLab, Inc.",
-    "group": "Packaged Software",
-    "pattern": "flag",
-    "patterns": [
-     "flag",
-     "cup_handle"
-    ],
-    "signal_close": 89000.0,
-    "pattern_low": 72200.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 96120 이상이면 포기)",
-    "stop_plan": "max(72200, 진입가×0.93)"
-   },
-   {
-    "code": "203650",
-    "name": "Dream Security Co., Ltd.",
-    "group": "Packaged Software",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 3055.0,
-    "pattern_low": 2575.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 3299 이상이면 포기)",
-    "stop_plan": "max(2575, 진입가×0.93)"
-   },
-   {
-    "code": "263860",
-    "name": "GENIANS, INC.",
-    "group": "Packaged Software",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 24400.0,
-    "pattern_low": 18920.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 26352 이상이면 포기)",
-    "stop_plan": "max(18920, 진입가×0.93)"
-   },
-   {
-    "code": "456010",
-    "name": "ICTK Co., Ltd.",
-    "group": "Semiconductors",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 28500.0,
-    "pattern_low": 22050.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 30780 이상이면 포기)",
-    "stop_plan": "max(22050, 진입가×0.93)"
+    "signal_date": "2026-10-06",
+    "entry_date": "2026-10-07",
+    "entry": 131493.3,
+    "stop": 122288.77,
+    "exit_date": "2026-10-07",
+    "exit": 121921.9,
+    "why": "stop",
+    "shares": 21,
+    "pnl_krw": -205638,
+    "pnl_pct": -7.45,
+    "hold_days": 1
    }
   ]
- },
- "variants": {
-  "base": {
-   "label": "동조 업종 + 패턴 돌파 (기본)",
-   "signals": 13,
-   "trades": 0,
-   "wins": 0,
-   "win_rate": null,
-   "avg_win_pct": null,
-   "avg_loss_pct": null,
-   "payoff": null,
-   "profit_factor": null,
-   "total_return_pct": 0.0,
-   "equity_final": 10000000,
-   "max_drawdown_pct": 0.0,
-   "avg_hold_days": null,
-   "skipped": {
-    "gap": 0,
-    "limit": 0,
-    "cooldown": 0,
-    "size": 0,
-    "no_bar": 0
-   },
-   "by_pattern": {},
-   "by_sync": {},
-   "by_exit": {},
-   "by_year": {},
-   "yearly_return_pct": {
-    "2026": 0.0
-   },
-   "open_positions": []
-  },
-  "no_sector": {
-   "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
-   "signals": 21,
-   "trades": 0,
-   "wins": 0,
-   "win_rate": null,
-   "avg_win_pct": null,
-   "avg_loss_pct": null,
-   "payoff": null,
-   "profit_factor": null,
-   "total_return_pct": 0.0,
-   "equity_final": 10000000,
-   "max_drawdown_pct": 0.0,
-   "avg_hold_days": null,
-   "skipped": {
-    "gap": 0,
-    "limit": 0,
-    "cooldown": 0,
-    "size": 0,
-    "no_bar": 0
-   },
-   "by_pattern": {},
-   "by_sync": {},
-   "by_exit": {},
-   "by_year": {},
-   "yearly_return_pct": {
-    "2026": 0.0
-   },
-   "open_positions": []
-  },
-  "hold_10": {
-   "label": "동조 + 패턴, 보유 10일",
-   "signals": 13,
-   "trades": 0,
-   "wins": 0,
-   "win_rate": null,
-   "avg_win_pct": null,
-   "avg_loss_pct": null,
-   "payoff": null,
-   "profit_factor": null,
-   "total_return_pct": 0.0,
-   "equity_final": 10000000,
-   "max_drawdown_pct": 0.0,
-   "avg_hold_days": null,
-   "skipped": {
-    "gap": 0,
-    "limit": 0,
-    "cooldown": 0,
-    "size": 0,
-    "no_bar": 0
-   },
-   "by_pattern": {},
-   "by_sync": {},
-   "by_exit": {},
-   "by_year": {},
-   "yearly_return_pct": {
-    "2026": 0.0
-   },
-   "open_positions": []
-  },
-  "risk_2": {
-   "label": "동조 + 패턴, 위험 2% (명목 상한 30%)",
-   "signals": 13,
-   "trades": 0,
-   "wins": 0,
-   "win_rate": null,
-   "avg_win_pct": null,
-   "avg_loss_pct": null,
-   "payoff": null,
-   "profit_factor": null,
-   "total_return_pct": 0.0,
-   "equity_final": 10000000,
-   "max_drawdown_pct": 0.0,
-   "avg_hold_days": null,
-   "skipped": {
-    "gap": 0,
-    "limit": 0,
-    "cooldown": 0,
-    "size": 0,
-    "no_bar": 0
-   },
-   "by_pattern": {},
-   "by_sync": {},
-   "by_exit": {},
-   "by_year": {},
-   "yearly_return_pct": {
-    "2026": 0.0
-   },
-   "open_positions": []
-  }
- },
- "trades": {
-  "base": [],
-  "no_sector": [],
-  "hold_10": [],
-  "risk_2": []
  },
  "errors": {},
  "stale": []
