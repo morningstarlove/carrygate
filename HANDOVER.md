@@ -2,10 +2,46 @@
 
 > 이 문서만 읽으면 누구든(혹은 다른 AI 세션이든) 이어서 작업할 수 있게 쓴다.
 
-**최종 갱신:** 2026-10-07 (현황판 결과 파일 내장·매일 자동 갱신; 초단타 첫 합격·채점기 수정 P9, 한국 주식 첫 체결; 그 전 2026-10-06 마일스톤 14 판정 규율 — Phil 방식 이식: `verdict.py`·`criteria.json`·`rules_lock.json`·`proposals.md`; 그 전: 마일스톤 13 추세 전환 매매법 4시간봉 PR #32 병합, 현황판 카드 연결; 그 전: 터틀 기록 중복 수정 PR #22·#23, AI 보조 도구 PR #19)
-**작업 브랜치:** 모두 `main` 에 병합됨. 최근 작업 브랜치(참고용): `claude/turtle-history-dedupe`(터틀 기록 중복), `claude/chandelier-exit-variant`(Chandelier 변형), `claude/new-session-as7gis`(터틀), 한국 주식 트랙 PR #17·#18
+**최종 갱신:** 2026-10-07 (0절 "지금 상태 한눈에" 추가, 작업 기록 `docs/sessions/2026-10-07_phil_verdict.md`; 현황판 결과 파일 내장·매일 자동 갱신; 초단타 첫 합격·채점기 수정 P9, 한국 주식 첫 체결; 그 전 2026-10-06 마일스톤 14 판정 규율 — Phil 방식 이식: `verdict.py`·`criteria.json`·`rules_lock.json`·`proposals.md`; 그 전: 마일스톤 13 추세 전환 매매법 4시간봉 PR #32 병합, 현황판 카드 연결; 그 전: 터틀 기록 중복 수정 PR #22·#23, AI 보조 도구 PR #19)
+**작업 브랜치:** 모두 `main` 에 병합됨. 최근 작업 브랜치(참고용): `claude/phil-analysis`·`claude/verdict-scalp-cumulative`·`claude/decisions-1007`(마일스톤 14, PR #38~#44), `claude/turtle-history-dedupe`(터틀 기록 중복), `claude/chandelier-exit-variant`(Chandelier 변형), `claude/new-session-as7gis`(터틀), 한국 주식 트랙 PR #17·#18
 **저장소:** `morningstarlove/carrygate` (2026-09-17 `signalgate-bridge` 에서 이름 변경)
 **프로젝트명:** CARRYGATE — 게이트(신호등) + 캐리(이자) 두 축에서 따왔다.
+
+---
+
+## 0. 지금 상태 한눈에 (2026-10-07)
+
+> 이 절만 읽어도 "지금 무엇이 돌고, 무엇을 기다리고, 누가 결정할 것"을 안다. 자세한 근거는 아래 절과 `docs/sessions/`.
+
+**판정 (`python verdict.py`, 현황판 맨 위 카드):**
+
+| 트랙 | 판정 | 다음 판정 |
+|---|---|---|
+| 한국 주식 돌파 | 판단 전 (순방향 2건) | 15건 쌓이면 (약 4주) |
+| 터틀 | 판단 전 (0건) | 거래소별 20건 (2~3개월) |
+| 추세 전환 4H | 판단 전 (0건) | 거래소별 20건 (2~3개월) |
+| 초단타 | **합격** (누적 9일, 후보 12개) | 10/21 재확인 — 남으면 소액 체결 시험 설계 |
+
+**자동으로 도는 것 (CARRYGATE 관련):**
+
+| 무엇 | 언제 (KST) | 어디 |
+|---|---|---|
+| CARRYGATE daily (신호등·캐리·초단타·연구·터틀·추세전환·판정) | 매일 09:18 | GitHub Actions `carrygate.yml` |
+| 호가창 표본 | 매일 22:00 | GitHub Actions `orderbook.yml` |
+| 한국 주식 돌파 + 판정 | 평일 15:50 (예약이 자주 안 뜸) | GitHub Actions `kr_breakout.yml` |
+| 한국 주식 대신 실행 (그날 안 돌았으면) | 평일 16:10 | Routine trig_01XXMiN7QmGH5EgE9SiYrxZt → 세션 session_01WP7a8oLwaHMUj5MimZSF6k |
+| 현황판 결과 파일 갱신 | 매일 17:37 | Routine trig_01NtBpUqqUuZxogBQxRWurDj (새 세션) |
+| 매일 점검·이상 보고 | 매일 10:00 | Routine trig_01T529xQcka6vj6YYZFAnuyL (새 세션) |
+| 매크로 달력 갱신 | 매주 월 11:10 | Routine trig_01CBFoNkLZyBHafCjmsAK5Jp |
+| 초단타 2주 재확인 | 2026-10-21 16:30, 1회 | Routine trig_01WWuHJTvmZxK7GWpuvdSZca → 세션 session_01WP7a8oLwaHMUj5MimZSF6k |
+
+세션 session_01WP7a8oLwaHMUj5MimZSF6k 를 보관(archive)하면 그 세션으로 배달되는 Routine 2개가 멈춘다.
+
+**사용자 결정 대기:** 없음. 다음 결정은 10/21(초단타 소액 시험 여부)과 첫 판정이 뜨는 날.
+
+**규칙을 바꾸고 싶을 때:** `proposals.md` 에 근거 → 그 트랙 `RULE_FIXED` 새 날짜 → `python verdict.py --lock`. 이 순서 없이 바꾸면 CI 가 막는다(원칙 5).
+
+**절 지도:** 1절 만든 것(마일스톤별) · 2절 실제로 확인된 사실(실행 로그 근거) · 3절 아직 안 한 것 · 4절 이어서 작업하는 방법 · 5절 원칙 · 작업 기록 `docs/sessions/` · 제안함 `proposals.md`
 
 ---
 
