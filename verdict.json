@@ -1,7 +1,7 @@
 {
   "schema": "carrygate-verdict/1",
   "date": "2026-10-07",
-  "generated_at_utc": "2026-10-06T20:42:34Z",
+  "generated_at_utc": "2026-10-07T06:17:26Z",
   "criteria_sealed": "2026-10-06",
   "tracks": {
     "kr_breakout": {
@@ -43,7 +43,7 @@
           "profit_factor": null,
           "avg_r": null,
           "backtest_win_rate_pct": 37.8378,
-          "backtest_profit_factor": 1.8385,
+          "backtest_profit_factor": 1.8202,
           "backtest_trades": 111,
           "luck": null,
           "variants": {
@@ -71,9 +71,9 @@
           "net_pct": null,
           "profit_factor": null,
           "avg_r": null,
-          "backtest_win_rate_pct": 34.6154,
-          "backtest_profit_factor": 1.3212,
-          "backtest_trades": 234,
+          "backtest_win_rate_pct": 34.0426,
+          "backtest_profit_factor": 1.2944,
+          "backtest_trades": 235,
           "luck": null,
           "variants": {
             "s2_55_20": {
@@ -162,13 +162,13 @@
       }
     },
     "scalp": {
-      "history_days": 8,
+      "history_days": 9,
       "rows_total": 378,
-      "rows_positive": 78,
-      "rows_robust": 0,
-      "scalp_verdict": "378개 조합 중 순수익 플러스 78개, 견고 0개. 본전 승률: 5분 보유 88~234%, 30분 보유 66~163%. 규칙 합산이 가장 나은 시간 단위 15m. 기록 8일차 — 7일 이상 모여야 후보 판단",
-      "status": "FAIL",
-      "reason": "기록 8일에 견고한 조합 0개 — 지금 규칙 중 비용을 이기는 것이 없다"
+      "rows_positive": 94,
+      "rows_robust": 12,
+      "scalp_verdict": "378개 조합 중 순수익 플러스 94개, 견고 12개. 본전 승률: 5분 보유 96~272%, 30분 보유 69~165%. 규칙 합산이 가장 나은 시간 단위 15m. 기록 9일차 — 7일 이상 모여야 후보 판단",
+      "status": "PASS",
+      "reason": "견고한 조합 12개 — scalp.py 기준(순수익>0, 양수일 60%, 기준선 초과) 통과"
     }
   },
   "errors": {},
@@ -180,6 +180,6 @@
     "kr_breakout": "NOT_YET",
     "turtle": "NOT_YET",
     "reversal": "NOT_YET",
-    "scalp": "FAIL"
+    "scalp": "PASS"
   }
 }
