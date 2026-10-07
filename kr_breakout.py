@@ -165,6 +165,18 @@ class Sim:
         self.peak = max(self.peak, eq)
         self.max_dd = max(self.max_dd, (self.peak - eq) / self.peak * 100)
         # 5) 오늘 종가 신호 → 내일 시가 후보
+        frozen = (meta.get("frozen") or {}).get(self.name)
+        if frozen is not None:
+            # 그날 기록해 둔 신호를 그대로 쓴다 (다음 날 다시 받은 일봉으로 과거 신호가 바뀌지 않게 — 2026-10-07 라이트론 사례)
+            for e in frozen:
+                code = e["code"]
+                if code in self.positions or code in self.pending_exits:
+                    continue
+                if self.cooldown.get(code, -1) > self.day_no:
+                    self.skipped["cooldown"] += 1; continue
+                self.signals += 1
+                self.pending_entries.append(dict(e, date=date, name=e.get("name") or (meta.get("names") or {}).get(code)))
+            return
         for code, group in universe:
             if self.cfg["need_sync"] and group not in sync_groups:
                 continue
@@ -255,8 +267,9 @@ def yearly_from_closes(bars):
     return res
 
 
-def simulate(days, all_bars, names=None):
-    """days: [{date, universe: [(code, group)], sync_groups: set, sync_by: {group: by}}] 날짜 오름차순. all_bars: code -> 봉 목록."""
+def simulate(days, all_bars, names=None, frozen=None):
+    """days: [{date, universe: [(code, group)], sync_groups: set, sync_by: {group: by}}] 날짜 오름차순. all_bars: code -> 봉 목록.
+    frozen: {date: {variant: [신호, …]}} — 순방향에서 그날 기록해 둔 신호. 있으면 그날은 패턴을 다시 계산하지 않는다."""
     index = {code: {b["date"]: i for i, b in enumerate(bars)} for code, bars in all_bars.items()}
     sims = {k: Sim(k, v) for k, v in VARIANTS.items()}
     skipped_days = []
@@ -271,7 +284,7 @@ def simulate(days, all_bars, names=None):
             # 그날 봉이 하나도 없다 = 휴장일(스캐너가 직전 거래일 자료를 그대로 준 날) 또는 자료 미도착. 매매일로 세지 않는다.
             skipped_days.append(date)
             continue
-        meta = {"sync_by": d.get("sync_by") or {}, "names": names or {}}
+        meta = {"sync_by": d.get("sync_by") or {}, "names": names or {}, "frozen": (frozen or {}).get(date)}
         for s in sims.values():
             s.step(date, bars_today, idx_today, all_bars, d["universe"], d["sync_groups"], meta)
     for s in sims.values():
@@ -326,6 +339,22 @@ def days_from_history(path=KU.HISTORY_PATH, since=RULE_FIXED):
                      "sync_groups": set(sg), "sync_by": {k: v.get("by") for k, v in sg.items()}})
     days.sort(key=lambda d: d["date"])
     return days
+
+
+SIGNAL_KEYS = ("code", "group", "pattern", "patterns", "pattern_low", "signal_close", "sync_by", "name")
+
+
+def frozen_signals(path=HISTORY_PATH):
+    """kr_breakout_history.jsonl 에 기록된 날짜별 신호 {signal_date: {variant: [신호]}}. 한 번 기록된 날짜의 신호는 바뀌지 않는다."""
+    out = {}
+    if not os.path.exists(path):
+        return out
+    for line in open(path, encoding="utf-8"):
+        if line.strip():
+            r = json.loads(line)
+            if r.get("signal_date") and r.get("signals") is not None:
+                out.setdefault(r["signal_date"], r["signals"])
+    return out
 
 
 def load_bars(codes, days, fixture=None, log=print, need_date=None):
@@ -406,8 +435,10 @@ def run_forward(fixture=None, dry_run=False):
     all_bars, sources, errors = load_bars(codes, FWD_BARS, fixture, need_date=last_date) if codes else ({}, {}, {})
     # 그래도 오늘 봉이 빠진 종목(자료 지연)은 표시한다 — 그날 신호가 하루 늦게 잡힌다
     stale = [c for c, bars in all_bars.items() if last_date and (not bars or bars[-1]["date"] < last_date)]
-    sims = simulate(days, all_bars, names)
+    frozen = frozen_signals()
+    sims = simulate(days, all_bars, names, frozen=frozen)
     today_sig = {k: [e for e in s.pending_entries] for k, s in sims.items()}
+    signal_date = None if (not last_date or last_date in sims["base"].skipped_days) else last_date
     out = {"date": datetime.now(KST).strftime("%Y-%m-%d"), "generated_at_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
            "mode": "forward", "rule_fixed": RULE_FIXED, "rules": rules_dict(),
            "forward": {"days": len(days) - len(sims["base"].skipped_days), "from": days[0]["date"] if days else None, "to": last_date,
@@ -421,6 +452,9 @@ def run_forward(fixture=None, dry_run=False):
                                    "entry_plan": "내일 시가 (시가가 %.0f 이상이면 포기)" % (e["signal_close"] * (1 + GAP_SKIP_PCT / 100)),
                                    "stop_plan": "max(%.0f, 진입가×%.2f)" % (e["pattern_low"], 1 - STOP_PCT / 100)} for e in v]
                              for k, v in today_sig.items()},
+           "signal_date": signal_date,
+           "signals_frozen": bool(signal_date and signal_date in frozen),
+           "frozen_dates": sorted(frozen),
            "variants": {k: s.stats() for k, s in sims.items()},
            "trades": {k: s.trades[-100:] for k, s in sims.items()},
            "errors": dict(list(errors.items())[:20]), "stale": stale[:20]}
@@ -496,6 +530,13 @@ def main():
         json.dump(out, open(OUT_PATH, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
         rec = {"date": out["date"], "forward_days": out["forward"]["days"],
                "signals_today": [e["code"] for e in out["signals_today"]["base"]]}
+        sd = out.get("signal_date")
+        if sd and not out["signals_frozen"] and out["forward"]["stale_codes"] == 0:
+            rec["signal_date"] = sd
+            rec["signals"] = {k: [{x: e.get(x) for x in SIGNAL_KEYS} for e in v] for k, v in out["signals_today"].items()}
+        elif sd and out["signals_frozen"]:
+            rec["signal_date"] = sd
+            rec["signals"] = frozen_signals().get(sd)
         for k, v in out["variants"].items():
             rec[k] = {"signals": v["signals"], "trades": v["trades"], "win_rate": v["win_rate"], "total_return_pct": v["total_return_pct"],
                       "max_drawdown_pct": v["max_drawdown_pct"], "open": len(v["open_positions"])}

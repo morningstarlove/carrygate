@@ -118,6 +118,31 @@ class Engine(unittest.TestCase):
         self.assertLessEqual(p2["shares"] * p2["entry"], KB.EQUITY0 * 0.30 + p2["entry"])   # 명목 상한 30%
         self.assertEqual(p1["stop"], p2["stop"])                                      # 손절 규칙은 같다
 
+    def test_frozen_signals_are_used_instead_of_rescan(self):
+        bars = box_then_breakout(after=[(112, 115, 110, 114)] * 3)
+        days = KB.days_from_bars({"A": bars, "B": bars}, {"A": "G", "B": "G"})
+        for day in days:
+            day["sync_groups"] = {"G"}; day["sync_by"] = {"G": "day"}
+        sig_day = d(65)
+        # 기록된 신호: 그날은 B 만 신호였다 (A 는 다시 계산하면 신호지만 그날 기록에는 없다)
+        frz = {sig_day: {k: [{"code": "B", "group": "G", "pattern": "box", "patterns": ["box"], "pattern_low": 95.0,
+                              "signal_close": 111.0, "sync_by": "day", "name": None}] for k in KB.VARIANTS}}
+        sims = KB.simulate(days, {"A": bars, "B": bars}, frozen=frz)
+        self.assertIn("B", sims["base"].positions)
+        self.assertNotIn("A", sims["base"].positions)
+        # 고정이 없으면 둘 다 들어간다
+        sims2 = KB.simulate(days, {"A": bars, "B": bars})
+        self.assertEqual(set(sims2["base"].positions), {"A", "B"})
+
+    def test_frozen_signals_read_first_record_wins(self):
+        fd, hp = tempfile.mkstemp(suffix=".jsonl"); os.close(fd); self.addCleanup(os.remove, hp)
+        with open(hp, "w", encoding="utf-8") as fp:
+            fp.write(json.dumps({"date": "2026-10-06", "signal_date": "2026-10-06", "signals": {"base": [{"code": "X"}]}}) + "\n")
+            fp.write(json.dumps({"date": "2026-10-07", "signal_date": "2026-10-06", "signals": {"base": [{"code": "Y"}]}}) + "\n")
+            fp.write(json.dumps({"date": "2026-10-08"}) + "\n")
+        f = KB.frozen_signals(hp)
+        self.assertEqual(f, {"2026-10-06": {"base": [{"code": "X"}]}})
+
     def test_cooldown_blocks_reentry(self):
         after = [(113, 114, 100, 101)] + [(101, 102, 99, 100)] * 2     # 바로 손절
         bars = box_then_breakout(after=after)
