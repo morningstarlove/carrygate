@@ -282,6 +282,7 @@ GitHub Actions가 **매일 한국시간 오전 9시 18분**에 자동 실행한�
 | `tests/test_relay.py` | 한국 중계 처리 자동 시험 (7건) |
 | `tests/test_kr_universe.py` / `tests/test_patterns.py` / `tests/test_kr_breakout.py` | 한국 주식 트랙 자동 시험 (9건 / 22건 / 11건, 실데이터 fixture 포함) |
 | `tests/fixtures/` | 오프라인 검증용 실데이터 — 1분봉 CSV, `turtle/` 에 일봉 3년 CSV 12개, `reversal/` 에 4시간봉 3년 CSV 12개(거래량 포함), `kr/` 에 상위 100 스캐너 응답 + 일봉 160봉 4종목 |
+| `dashboard/index.html` | 통합 현황판 화면 코드 백업 (원본은 아티팩트, 결과 파일은 매일 루틴이 실어 줌) |
 | `HANDOVER.md` | 인수인계서 — 지금까지 한 것과 다음 할 것 |
 
 ---
