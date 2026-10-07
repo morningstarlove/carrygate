@@ -119,12 +119,41 @@ class VenueTracks(unittest.TestCase):
         self.assertIn("운 보정", out["venues"]["upbit"]["reason"])
 
 
+def scalp_day(date, nt, base_nt=-1.0, key="okx:XRP:15m:vwap_fade_lim"):
+    base_key = ":".join(key.split(":")[:3] + ["baseline_hold5"])
+    return {"date": date, "rows": {key: {"n": 3, "g": 0, "f": 0, "nt": nt, "rb": False},
+                                   base_key: {"n": 10, "g": 0, "f": 0, "nt": base_nt, "rb": False}}}
+
+
 class Scalp(unittest.TestCase):
-    def test_states(self):
-        c = CRIT["scalp"]
-        self.assertEqual(V.judge_scalp({"summary": {"history_days": 3, "rows_robust": 0}}, c)["status"], V.NOT_YET)
-        self.assertEqual(V.judge_scalp({"summary": {"history_days": 8, "rows_robust": 0}}, c)["status"], V.FAIL)
-        self.assertEqual(V.judge_scalp({"summary": {"history_days": 8, "rows_robust": 2}}, c)["status"], V.PASS)
+    """누적 기록(scalp_history)에 scalp.py 의 후보 규칙을 적용하는지 본다. 하루치 견고 표시는 쓰지 않는다."""
+    c = CRIT["scalp"]
+
+    def test_not_yet_under_min_days(self):
+        rows = [scalp_day("2026-10-0%d" % i, 1.0) for i in range(1, 7)]
+        self.assertEqual(V.judge_scalp(rows, self.c)["status"], V.NOT_YET)
+
+    def test_pass_on_cumulative_rule(self):
+        # 9일 중 6일 플러스, 누적 +3, 기준선(−9) 초과 → 후보
+        nts = [1.0, 1.0, -0.5, 1.0, -0.5, 1.0, 0.5, -0.5, 1.0]
+        rows = [scalp_day("2026-10-%02d" % (i + 1), x) for i, x in enumerate(nts)]
+        out = V.judge_scalp(rows, self.c)
+        self.assertEqual(out["status"], V.PASS)
+        self.assertEqual(out["candidates"], 1)
+        self.assertEqual(out["combos"], 1)
+        self.assertTrue(out["warnings"])
+
+    def test_fail_when_too_few_positive_days(self):
+        # 누적은 플러스지만 9일 중 4일만 플러스(44%) → 후보 아님
+        nts = [5.0, -0.5, -0.5, 1.0, -0.5, 1.0, -0.5, 1.0, -0.5]
+        rows = [scalp_day("2026-10-%02d" % (i + 1), x) for i, x in enumerate(nts)]
+        self.assertEqual(V.judge_scalp(rows, self.c)["status"], V.FAIL)
+
+    def test_one_day_robust_flag_is_ignored(self):
+        # 하루치 rb=True 가 있어도 누적 규칙을 못 넘으면 불합격
+        rows = [scalp_day("2026-10-%02d" % (i + 1), -0.3) for i in range(8)]
+        rows[-1]["rows"]["okx:XRP:15m:vwap_fade_lim"]["rb"] = True
+        self.assertEqual(V.judge_scalp(rows, self.c)["status"], V.FAIL)
 
 
 class RulesLock(unittest.TestCase):
@@ -145,15 +174,15 @@ class RulesLock(unittest.TestCase):
 class History(unittest.TestCase):
     def test_same_date_overwritten(self):
         out = {"date": "2026-10-06", "summary": {"scalp": "FAIL"}, "rules_lock": {"ok": True},
-               "tracks": {"scalp": {"history_days": 8, "rows_robust": 0}}}
+               "tracks": {"scalp": {"history_days": 8, "candidates": 0}}}
         with tempfile.TemporaryDirectory() as d:
             p = os.path.join(d, "h.jsonl")
             V.write_history(out, p)
-            out2 = dict(out, tracks={"scalp": {"history_days": 9, "rows_robust": 1}})
+            out2 = dict(out, tracks={"scalp": {"history_days": 9, "candidates": 1}})
             V.write_history(out2, p)
             rows = [json.loads(l) for l in open(p, encoding="utf-8") if l.strip()]
             self.assertEqual(len(rows), 1)
-            self.assertEqual(rows[0]["scalp"]["robust"], 1)
+            self.assertEqual(rows[0]["scalp"]["candidates"], 1)
 
 
 if __name__ == "__main__":

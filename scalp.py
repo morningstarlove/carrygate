@@ -669,11 +669,8 @@ MIN_DAYS = 7       # 이 일수 미만이면 후보를 뽑지 않는다
 MIN_POS_RATIO = 0.6
 
 
-def report(path="scalp_history.jsonl"):
-    rows = load_history(path)
-    if not rows:
-        print("기록 없음 — scalp.py 가 하루 한 번 실행되면서 쌓인다.")
-        return 0
+def accumulate(rows):
+    """이력 줄들 → 조합별 누적 {days, pos, nt, n, rb}. report() 와 verdict.py 가 같이 쓴다."""
     acc = {}
     for r in rows:
         for k, v in r.get("rows", {}).items():
@@ -683,6 +680,30 @@ def report(path="scalp_history.jsonl"):
             a["nt"] += v["nt"]
             a["n"] += v["n"]
             a["rb"] += 1 if v.get("rb") else 0
+    return acc
+
+
+def cumulative_candidates(acc):
+    """후보 = 기록 MIN_DAYS 이상 + 누적 순수익 > 0 + 플러스 일수 MIN_POS_RATIO 이상 + 같은 시장·봉의 기준선 초과.
+    누적 순수익 큰 순서로 [(키, 누적)] 를 돌려준다."""
+    cands = []
+    for k, a in acc.items():
+        venue, coin, tf, st = split_key(k)
+        if st == BASELINE or a["days"] < MIN_DAYS:
+            continue
+        base = acc.get("%s:%s:%s:%s" % (venue, coin, tf, BASELINE), {"nt": 0.0})
+        if a["nt"] > 0 and a["pos"] / a["days"] >= MIN_POS_RATIO and a["nt"] > base["nt"]:
+            cands.append((k, a))
+    cands.sort(key=lambda kv: kv[1]["nt"], reverse=True)
+    return cands
+
+
+def report(path="scalp_history.jsonl"):
+    rows = load_history(path)
+    if not rows:
+        print("기록 없음 — scalp.py 가 하루 한 번 실행되면서 쌓인다.")
+        return 0
+    acc = accumulate(rows)
     days = len(rows)
     print("=== 초단타 규칙별 누적 성적 (%d일치: %s ~ %s) ===" % (days, rows[0]["date"], rows[-1]["date"]))
     print("%-38s %4s %6s %12s %6s %5s" % ("거래소:코인:봉:규칙", "일수", "플러스", "누적순수익%", "매매", "견고"))
@@ -708,16 +729,8 @@ def report(path="scalp_history.jsonl"):
     if days < MIN_DAYS:
         print("아직 %d일치뿐이다. 최소 %d일은 모여야 후보를 말할 수 있다." % (days, MIN_DAYS))
         return 0
-    cands = []
-    for k, a in acc.items():
-        venue, coin, tf, st = split_key(k)
-        if st == BASELINE or a["days"] < MIN_DAYS:
-            continue
-        base = acc.get("%s:%s:%s:%s" % (venue, coin, tf, BASELINE), {"nt": 0.0})
-        if a["nt"] > 0 and a["pos"] / a["days"] >= MIN_POS_RATIO and a["nt"] > base["nt"]:
-            cands.append((k, a))
+    cands = cumulative_candidates(acc)
     if cands:
-        cands.sort(key=lambda kv: kv[1]["nt"], reverse=True)
         print("후보 (누적 플러스 + 플러스 일수 %.0f%% 이상 + 기준선 초과):" % (MIN_POS_RATIO * 100))
         for k, a in cands:
             print("  %s — 누적 순 %+.3f%% (%d일 중 %d일 플러스, 매매 %d건)" % (k, a["nt"], a["days"], a["pos"], a["n"]))
