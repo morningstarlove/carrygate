@@ -1,0 +1,556 @@
+<title>CARRYGATE 현황판</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* 레이아웃: 요약 띠 → 트랙별 카드. 폰에서 한 열, 넓으면 두 열. 숫자는 고정폭. */
+:root{
+  --bg:#f6f5f1; --surface:#ffffff; --fg:#1d2320; --muted:#66706b; --line:#dcdad2;
+  --accent:#1f6f6b; --accent-soft:#e2f0ee;
+  --good:#1e7f4f; --good-soft:#e3f3ea; --warn:#9a6a08; --warn-soft:#fbefd2; --bad:#b4372f; --bad-soft:#f9e3e0;
+  --font-body:"IBM Plex Sans KR",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --font-num:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#141716; --surface:#1d2120; --fg:#e8e9e4; --muted:#9aa39e; --line:#2e3432;
+  --accent:#5fbdb6; --accent-soft:#1c3331;
+  --good:#5fc78f; --good-soft:#193426; --warn:#e0b352; --warn-soft:#3a2f14; --bad:#ef7b72; --bad-soft:#3f1f1c; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#141716; --surface:#1d2120; --fg:#e8e9e4; --muted:#9aa39e; --line:#2e3432;
+  --accent:#5fbdb6; --accent-soft:#1c3331;
+  --good:#5fc78f; --good-soft:#193426; --warn:#e0b352; --warn-soft:#3a2f14; --bad:#ef7b72; --bad-soft:#3f1f1c; color-scheme:dark }
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:15px/1.5 var(--font-body);margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding-block:20px 48px;padding-inline:16px}
+header{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 16px;margin-bottom:14px}
+header h1{font-size:22px;font-weight:600;margin:0;letter-spacing:-.01em}
+header .sub{color:var(--muted);font-size:13px}
+header button{margin-left:auto;border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:8px;padding:6px 12px;font:inherit;font-size:13px;cursor:pointer}
+header button:focus-visible,details summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.notice{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:10px 14px;font-size:13px;color:var(--muted);margin-bottom:14px}
+.notice.bad{border-color:var(--bad);color:var(--fg)}
+.strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
+@media (max-width:760px){ .strip{grid-template-columns:repeat(2,1fr)} }
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;min-width:0}
+.tile .k{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.tile .v{font:500 20px/1.2 var(--font-num);margin-top:4px;font-variant-numeric:tabular-nums}
+.tile .d{font-size:12px;color:var(--muted);margin-top:4px;overflow-wrap:anywhere}
+.group{margin-top:22px}
+.group:first-child{margin-top:0}
+.group h3{font-size:14px;font-weight:600;color:var(--fg);margin:0 0 4px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.group h3 .count{font:12px var(--font-num);color:var(--muted);font-weight:400}
+.group .desc{font-size:13px;color:var(--muted);margin:0 0 10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,470px),1fr));gap:14px;align-items:start}
+section.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;min-width:0}
+section.card.wide{grid-column:1 / -1}
+section.card h2{font-size:15px;font-weight:600;margin:0;display:flex;align-items:center;gap:8px;flex-wrap:wrap;text-wrap:balance}
+section.card h2 .when{font:12px var(--font-num);color:var(--muted);margin-left:auto}
+.verdict{font-size:13px;color:var(--muted);margin:8px 0 10px;overflow-wrap:anywhere}
+.pill{display:inline-block;border-radius:999px;padding:1px 9px;font-size:12px;font-weight:500;line-height:1.6;white-space:nowrap}
+.pill.good{background:var(--good-soft);color:var(--good)} .pill.warn{background:var(--warn-soft);color:var(--warn)}
+.pill.bad{background:var(--bad-soft);color:var(--bad)} .pill.neutral{background:var(--accent-soft);color:var(--accent)}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:12.5px}
+th,td{padding:4px 7px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+th{color:var(--muted);font-weight:500;font-size:12px}
+td.n,th.n{text-align:right;font-family:var(--font-num);font-variant-numeric:tabular-nums}
+tr:last-child td{border-bottom:0}
+td .pill{font-size:11px;padding:0 6px}
+.tbl.wrapfirst td:first-child,.tbl.wrapfirst th:first-child{white-space:normal;min-width:120px}
+.pos{color:var(--good)} .neg{color:var(--bad)}
+.note{font-size:12px;color:var(--muted);margin-top:8px}
+.err{font-size:13px;color:var(--muted);padding:6px 0}
+.err.bad{color:var(--bad)}
+details{margin-top:8px} summary{cursor:pointer;font-size:13px;color:var(--accent)}
+.skeleton{height:14px;border-radius:6px;background:var(--line);opacity:.6;margin:6px 0;width:70%}
+@media (prefers-reduced-motion: no-preference){ .skeleton{animation:pulse 1.4s ease-in-out infinite} @keyframes pulse{50%{opacity:.3}} }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>CARRYGATE 현황판</h1>
+    <span class="sub" id="asof">결과 파일을 읽는 중</span>
+    <button id="refresh" type="button">새로 고침</button>
+  </header>
+  <div class="notice" id="notice" hidden></div>
+
+  <div class="strip" id="strip">
+    <div class="tile"><div class="k">판정 규율</div><div class="v" id="t-verdict">…</div><div class="d" id="t-verdict-d"></div></div>
+    <div class="tile"><div class="k">신호등 BTC</div><div class="v" id="t-gate">…</div><div class="d" id="t-gate-d"></div></div>
+    <div class="tile"><div class="k">캐리 (펀딩)</div><div class="v" id="t-carry">…</div><div class="d" id="t-carry-d"></div></div>
+    <div class="tile"><div class="k">베이시스 캐리</div><div class="v" id="t-basis">…</div><div class="d" id="t-basis-d"></div></div>
+    <div class="tile"><div class="k">터틀 추세</div><div class="v" id="t-turtle">…</div><div class="d" id="t-turtle-d"></div></div>
+    <div class="tile"><div class="k">추세 전환 4H</div><div class="v" id="t-rev">…</div><div class="d" id="t-rev-d"></div></div>
+    <div class="tile"><div class="k">한국 주식 돌파</div><div class="v" id="t-kr">…</div><div class="d" id="t-kr-d"></div></div>
+    <div class="tile"><div class="k">초단타 기록</div><div class="v" id="t-scalp">…</div><div class="d" id="t-scalp-d"></div></div>
+    <div class="tile"><div class="k">실전 계좌</div><div class="v" id="t-live">…</div><div class="d" id="t-live-d"></div></div>
+  </div>
+
+  <div class="group">
+    <h3>매매 전략 <span class="count">규칙 고정 · 백테스트 · 순방향 기록</span></h3>
+    <p class="desc">주문은 넣지 않고 판단만 기록한다. 규칙 고정일 이후 생긴 매매만 순방향(진짜 시험)으로 센다.</p>
+    <div class="grid">
+      <section class="card wide" id="s-verdict"><h2>판정 규율 (사전 등록 기준 · 운 보정 z · 규칙 잠금) <span class="when"></span></h2><div class="body"><div class="skeleton"></div><div class="skeleton"></div></div></section>
+      <section class="card" id="s-status"><h2>신호등 (200일선) <span class="when"></span></h2><div class="body"><div class="skeleton"></div><div class="skeleton"></div></div></section>
+      <section class="card" id="s-basis"><h2>베이시스 캐리 (분기 선물, 확정형) <span class="when"></span></h2><div class="body"><div class="skeleton"></div></div></section>
+      <section class="card wide" id="s-funding"><h2>캐리 이자율 (현물 + 선물 숏, 수수료 후) <span class="when"></span></h2><div class="body"><div class="skeleton"></div><div class="skeleton"></div></div></section>
+      <section class="card wide" id="s-momentum"><h2>ETF 듀얼 모멘텀 (장기, 월 1회) <span class="when"></span></h2><div class="body"><div class="skeleton"></div></div></section>
+      <section class="card wide" id="s-turtle"><h2>터틀 추세추종 (일봉 · 20일 돌파 · 10일 이탈 · 2N · 1%÷N) <span class="when"></span></h2><div class="body"><div class="skeleton"></div><div class="skeleton"></div></div></section>
+      <section class="card wide" id="s-reversal"><h2>추세 전환 매매법 (4시간봉 · 저점 유지 · 목선 거래량 돌파 · 눌림 진입) <span class="when"></span></h2><div class="body"><div class="skeleton"></div><div class="skeleton"></div></div></section>
+      <section class="card" id="s-kr"><h2>한국 주식 ① 거래대금 상위 100 · 업종 동조 <span class="when"></span></h2><div class="body"><div class="skeleton"></div><div class="skeleton"></div></div></section>
+      <section class="card" id="s-krb"><h2>한국 주식 ② 패턴 돌파 종이매매 (순방향) <span class="when"></span></h2><div class="body"><div class="skeleton"></div><div class="skeleton"></div></div></section>
+      <section class="card wide" id="s-krbt"><h2>한국 주식 ③ 3년 백테스트 <span class="when"></span></h2><div class="body"><div class="skeleton"></div></div></section>
+      <section class="card wide" id="s-grid"><h2>그리드 · 종사종팔 v4/v5 (SOXL, 종가 분할 매매) <span class="when"></span></h2><div class="body"><div class="skeleton"></div><div class="skeleton"></div></div></section>
+    </div>
+  </div>
+
+  <div class="group">
+    <h3>실전 <span class="count">실제 계좌 감시</span></h3>
+    <p class="desc">지갑 주소만으로 읽는다. 키 없음.</p>
+    <div class="grid">
+      <section class="card" id="s-live"><h2>실전 캐리 감시 (하이퍼리퀴드) <span class="when"></span></h2><div class="body"><div class="skeleton"></div></div></section>
+    </div>
+  </div>
+
+  <div class="group">
+    <h3>연구 <span class="count">판단에 참고하는 사실 수집</span></h3>
+    <p class="desc">매매 규칙이 아니라 "언제·무엇이 통하나"를 매일 쌓는 것. 결론이 나면 위의 매매 전략으로 올라간다.</p>
+    <div class="grid">
+      <section class="card" id="s-scalp"><h2>초단타 고정 규칙 성적표 (1·5·15분봉) <span class="when"></span></h2><div class="body"><div class="skeleton"></div><div class="skeleton"></div></div></section>
+      <section class="card" id="s-research"><h2>초단타 보조 연구 (시간대 · 펀딩 · 선행) <span class="when"></span></h2><div class="body"><div class="skeleton"></div></div></section>
+      <section class="card" id="s-orderbook"><h2>호가창 (호가 폭 · 잔량 불균형) <span class="when"></span></h2><div class="body"><div class="skeleton"></div></div></section>
+      <section class="card" id="s-fsig"><h2>펀딩 극단값 신호 (과열 · 냉각 뒤 수익률) <span class="when"></span></h2><div class="body"><div class="skeleton"></div></div></section>
+      <section class="card" id="s-kimchi"><h2>김치프리미엄 <span class="when"></span></h2><div class="body"><div class="skeleton"></div></div></section>
+      <section class="card" id="s-macro"><h2>매크로 발표 전후 (CPI · 고용 · FOMC) <span class="when"></span></h2><div class="body"><div class="skeleton"></div></div></section>
+      <section class="card" id="s-listing"><h2>업비트 상장 반응 <span class="when"></span></h2><div class="body"><div class="skeleton"></div></div></section>
+    </div>
+  </div>
+  <p class="note">모든 수치는 비용(수수료·호가)을 뺀 순수익 기준. 이 페이지는 읽기만 하며 주문을 넣지 않는다. 결과 파일은 GitHub Actions 가 매일(코인 09:18, 한국 주식 평일 15:50, 호가창 밤) 만들고, 매일 17:40 KST 에 자동 작업이 이 현황판에 옮겨 싣는다. "최신으로" 는 GitHub 커넥터로 저장소를 직접 읽는다.</p>
+</div>
+
+<script>
+(function(){
+  var OWNER="morningstarlove", REPO="carrygate", SERVER="github";
+  var FILES={status:"status.json",funding:"funding.json",basis:"basis.json",turtle:"turtle.json",reversal:"reversal.json",live:"live.json",scalp:"scalp.json",
+             research:"research.json",orderbook:"orderbook.json",fsig:"funding_signal.json",kimchi:"kimchi.json",
+             macro:"macro.json",listing:"listing.json",momentum:"momentum.json",grid:"grid.json",
+             kr:"kr_sector.json",krb:"kr_breakout.json",krbt:"kr_backtest.json",verdict:"verdict.json"};
+  var $=function(id){return document.getElementById(id);};
+  function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+  function num(x,d){ if(x==null||isNaN(x)) return "-"; return Number(x).toFixed(d==null?2:d); }
+  function sgn(x,d,suf){ if(x==null||isNaN(x)) return "-"; var v=Number(x); var cls=v>0?"pos":(v<0?"neg":""); return '<span class="'+cls+'">'+(v>0?"+":"")+v.toFixed(d==null?2:d)+(suf||"")+"</span>"; }
+  function px(x){ if(x==null||isNaN(x)) return "-"; var v=Number(x); return Math.abs(v)>=1000? v.toLocaleString("en-US",{maximumFractionDigits:0}) : Number(v.toPrecision(4)).toString(); }
+  function pill(text,kind){return '<span class="pill '+kind+'">'+esc(text)+'</span>';}
+  function section(id){var s=$(id);return {when:s.querySelector(".when"),body:s.querySelector(".body")};}
+  function setErr(id,code,msg){
+    var s=section(id); var txt, bad=false;
+    if(code==="tool_error" && /404|not found|Not Found/i.test(msg||"")) txt="아직 결과 파일이 없다 (첫 실행 전)";
+    else if(code==="tool_error") txt="파일을 읽지 못했다: "+(msg||"");
+    else if(code==="server_not_connected") {txt="GitHub 연결이 없다. claude.ai 설정 → 커넥터에서 GitHub 를 추가"; bad=true;}
+    else if(code==="needs_reauth") {txt="GitHub 연결을 다시 해야 한다 (설정 → 커넥터)"; bad=true;}
+    else if(code==="not_in_manifest"||code==="consent_required") {txt="이 페이지의 GitHub 읽기가 허용되지 않았다. 새로 고침 뒤 허용"; bad=true;}
+    else if(code==="server_unavailable") txt="GitHub 가 잠시 응답하지 않는다. 잠시 뒤 새로 고침";
+    else if(code==="no_mcp") {txt="이 화면에서는 저장소를 읽을 수 없다 (claude.ai 안에서 열어야 한다)"; bad=true;}
+    else txt="읽기 실패 ("+esc(code||"?")+") "+esc(msg||"");
+    s.body.innerHTML='<div class="err'+(bad?" bad":"")+'">'+esc(txt)+'</div>';
+  }
+  function parseResult(r){
+    if(r && r.payload && typeof r.payload==="object") return r.payload;
+    var blocks=(r&&r.content)||[];
+    for(var i=0;i<blocks.length;i++){
+      var b=blocks[i]; var t=(b&&b.text)||(b&&b.resource&&b.resource.text)||"";
+      if(typeof t!=="string") continue;
+      var j=t.indexOf("{"); if(j<0) continue;
+      try{ return JSON.parse(t.slice(j)); }catch(e){}
+    }
+    throw {code:"tool_error",message:"JSON 아님"};
+  }
+  function tbl(head,rows){ return '<div class="tbl"><table><thead><tr>'+head.map(function(h){return '<th class="'+(h.n?"n":"")+'">'+esc(h.t)+'</th>';}).join("")+'</tr></thead><tbody>'+
+    rows.map(function(r){return '<tr>'+r.map(function(c,i){return '<td class="'+(head[i]&&head[i].n?"n":"")+'">'+c+'</td>';}).join("")+'</tr>';}).join("")+'</tbody></table></div>'; }
+
+  // ---------------- 렌더러 ----------------
+  function rStatus(d){
+    var s=section("s-status"); s.when.textContent=d.date||"";
+    var sm=d.summary||{}; var g=sm.btc_gate;
+    $("t-gate").innerHTML=pill(g||"-", g==="열림"?"good":"bad"); $("t-gate-d").textContent="200일선 대비 "+num(sm.btc_sma200_gap_pct,1)+"% · 열린 코인 "+sm.breadth_open+"/"+sm.breadth_total;
+    var rows=Object.keys(d.coins||{}).map(function(k){var c=d.coins[k];return [esc(k.replace("KRW-","")), pill(c.gate,c.gate==="열림"?"good":"bad"), sgn(c.sma200_gap_pct,1,"%"), sgn(c.change_pct,2,"%"), c.crash_flag?pill("급락","bad"):"-"];});
+    s.body.innerHTML='<div class="verdict">'+esc(sm.verdict||"")+'</div>'+tbl([{t:"코인"},{t:"게이트"},{t:"200일선 대비",n:1},{t:"전일 대비",n:1},{t:"급락"}],rows);
+  }
+  function rFunding(d){
+    var s=section("s-funding"); s.when.textContent=d.date||"";
+    var sm=d.summary||{}; var kind=sm.state==="진입 가능"?"good":(sm.state==="중단"||sm.state==="청산"?"bad":"warn");
+    $("t-carry").innerHTML=pill(sm.state||"-",kind); $("t-carry-d").textContent=(sm.best_coin||"")+" 순 연 "+num(sm.best_apr_pct,1)+"% ("+(sm.best_venue||"")+")";
+    // 코인 × 거래소 전체 표. 바이낸스·바이비트는 한국 중계 파일 또는 CoinGecko 로 들어온다.
+    var VN={hyperliquid:"하이퍼리퀴드",binance:"바이낸스",bybit:"바이비트",okx:"OKX",gate:"게이트"};
+    var order=["hyperliquid","binance","bybit","okx","gate"];
+    var coins=Object.keys(d.coins||{}); var seen={};
+    coins.forEach(function(c){ (d.coins[c].venues||[]).forEach(function(v){ seen[v.venue]=1; }); });
+    var vlist=order.filter(function(v){return seen[v];}).concat(Object.keys(seen).filter(function(v){return order.indexOf(v)<0;}));
+    var head=[{t:"코인"}].concat(vlist.map(function(v){return {t:VN[v]||v,n:1};}));
+    var rows=coins.map(function(c){ var by={}; (d.coins[c].venues||[]).forEach(function(v){by[v.venue]=v;}); var best=(d.coins[c].best||{}).venue;
+      return [esc(c)].concat(vlist.map(function(v){ var x=by[v]; if(!x||x.decision_apr_pct==null) return '<span class="pill neutral">없음</span>';
+        var cell=sgn(x.decision_apr_pct,1,"%"); var tag=x.basis==="7일평균"?"":' <span class="pill warn">단발</span>';
+        if(x.via) tag+=' <span class="pill neutral">'+(/coingecko/i.test(x.via)?"CG":"중계")+'</span>';
+        return (v===best?'<b>'+cell+'</b>':cell)+tag; })); });
+    var brows=coins.map(function(c){var b=d.coins[c].best||{}; var one=/현물\(/.test(b.fee_note||""); return [esc(c), sgn(b.decision_apr_pct,1,"%"), num(b.gross_apr_pct,1)+"%", esc(VN[b.venue]||b.venue), one?pill("한 거래소","good"):pill("두 거래소","warn"), esc(b.basis||"")];});
+    var cg=d.coingecko||{}; var rl=d.kr_relay||{}; var src=[];
+    if(rl.present&&rl.fresh&&(rl.used||[]).length) src.push("한국 PC 중계 "+rl.used.map(function(v){return VN[v]||v;}).join("·")+" ("+num(rl.age_hours,0)+"시간 전)");
+    if((cg.used||[]).length) src.push("CoinGecko "+cg.used.map(function(v){return VN[v]||v;}).join("·")+" (하루 한 표본, 5개부터 7일 평균 · 표본 "+(cg.samples!=null?cg.samples:"-")+"개)");
+    s.body.innerHTML='<div class="verdict">'+esc(sm.verdict||"")+'</div>'+tbl(head,rows)+
+      '<div class="note">순 연수익(수수료 차감 후, 7일 평균 기준). <b>굵게</b> = 코인별 대표 거래소. "단발" = 7일 평균이 아직 없어 진입 판정에 쓰지 않음. CG = CoinGecko 경유. 문턱: 8% 이상 진입 가능 · 2% 미만 청산.'+(src.length?'<br>대체 경로: '+esc(src.join(" / ")):'')+'</div>'+
+      '<details><summary>코인별 대표 거래소 · 운용 방식</summary>'+tbl([{t:"코인"},{t:"순 연수익",n:1},{t:"총",n:1},{t:"거래소"},{t:"운용"},{t:"기준"}],brows)+'<div class="note">두 거래소 = 현물을 다른 거래소에서 사야 함.</div></details>';
+  }
+  function rBasis(d){
+    var s=section("s-basis"); s.when.textContent=d.date||"";
+    var sm=d.summary||{};
+    $("t-basis").innerHTML=sm.best_net_apr_pct!=null?sgn(sm.best_net_apr_pct,1,"%"):"-"; $("t-basis-d").textContent=(sm.best_coin||"")+" "+(sm.best_inst||"")+" · "+(sm.state||"");
+    var rows=Object.keys(d.coins||{}).filter(function(c){return d.coins[c].best;}).map(function(c){var b=d.coins[c].best; return [esc(c), esc(b.venue+" "+b.inst), num(b.days,0)+"일", sgn(b.net_apr_pct,2,"%"), d.coins[c].funding_net_apr_pct!=null?sgn(d.coins[c].funding_net_apr_pct,2,"%"):"-"];});
+    s.body.innerHTML='<div class="verdict">'+esc(sm.verdict||"")+'</div>'+tbl([{t:"코인"},{t:"계약"},{t:"만기",n:1},{t:"확정 순연",n:1},{t:"펀딩 순연",n:1}],rows)+'<div class="note">만기 7일 미만 계약은 제외. 1회성 수수료 0.30%를 만기까지 연환산해 차감.</div>';
+  }
+  function rTurtle(d){
+    var s=section("s-turtle"); s.when.textContent=d.date||"";
+    var sm=d.summary||{}; var ven=d.venues||{}; var names={upbit:"업비트 현물 (롱)",okx:"OKX 선물 (롱·숏)"};
+    var open=[]; Object.keys(ven).forEach(function(v){ Object.keys(ven[v].markets||{}).forEach(function(m){ var p=ven[v].markets[m].signal||{}; if(p.position&&p.position!=="flat") open.push(v+" "+m); }); });
+    var fwd=0, fwdNet=null; Object.keys(ven).forEach(function(v){ var f=((ven[v].portfolio||{}).stats||{}).forward||{}; fwd+=(f.trades||0); });
+    $("t-turtle").innerHTML=pill("보유 "+open.length+"/"+(sm.markets||0),"neutral"); $("t-turtle-d").textContent="순방향 매매 "+fwd+"건 (규칙 고정 "+((d.rules||{}).rule_fixed||"")+")";
+    // 포트폴리오 성적: 기본 규칙 + 변형
+    var prow=[]; Object.keys(ven).forEach(function(v){
+      var p=(ven[v].portfolio||{}).stats||{}; prow.push([esc(names[v]||v), esc(p.period||""), sgn(p.net_pct,0,"%"), sgn(p.cagr_pct,0,"%"), sgn(p.max_drawdown_pct,0,"%"), p.trades!=null?p.trades:"-", p.win_rate_pct!=null?num(p.win_rate_pct,0)+"%":"-", (p.forward||{}).trades!=null?((p.forward.trades)+"건 "+((p.forward.net_pct!=null)?sgn(p.forward.net_pct,1,"%"):"")):"-"]);
+      var vs=ven[v].variants||{}; Object.keys(vs).forEach(function(k){ var q=(vs[k].portfolio||{}).stats||{}; prow.push([esc((names[v]||v)+" · "+(vs[k].label||k)), esc(q.period||""), sgn(q.net_pct,0,"%"), sgn(q.cagr_pct,0,"%"), sgn(q.max_drawdown_pct,0,"%"), q.trades!=null?q.trades:"-", q.win_rate_pct!=null?num(q.win_rate_pct,0)+"%":"-", (q.forward||{}).trades!=null?((q.forward.trades)+"건 "+((q.forward.net_pct!=null)?sgn(q.forward.net_pct,1,"%"):"")):"-"]); });
+    });
+    // 시장별 오늘 신호
+    var mrow=[]; Object.keys(ven).forEach(function(v){ var mk=ven[v].markets||{}; Object.keys(mk).forEach(function(m){
+      var g=mk[m].signal||{}; var st=mk[m].stats||{}; var inpos=g.position&&g.position!=="flat";
+      mrow.push([esc(v+" "+m), inpos?pill(g.position==="long"?"롱 보유":"숏 보유","good"):pill("대기","neutral"), px(g.close),
+        inpos?px(g.entry)+" ("+esc(g.entry_date||"")+")":px(g.entry_long_at)+(g.long_distance_pct!=null?" (+"+num(g.long_distance_pct,1)+"%)":""),
+        inpos?px(g.exit_level)+(g.exit_distance_pct!=null?" ("+num(g.exit_distance_pct,1)+"%)":""):px(g.stop_if_long),
+        inpos?sgn(g.unrealized_pct,1,"%"):"-", g.n_pct!=null?num(g.n_pct,1)+"%":"-", sgn(st.net_pct,0,"%")+" / "+sgn(st.buy_hold_pct,0,"%")]); }); });
+    s.body.innerHTML='<div class="verdict">리처드 데니스 규칙 3개를 그대로 고정. 20일 최고가 돌파 → 진입, 10일 최저가 이탈 → 청산, 손절 진입가−2N, 수량 계좌 1%÷N. 규칙 고정일 이후 매매만 순방향(진짜 시험).</div>'+
+      tbl([{t:"한 계좌 6코인"},{t:"기간"},{t:"순수익",n:1},{t:"CAGR",n:1},{t:"낙폭",n:1},{t:"매매",n:1},{t:"승률",n:1},{t:"순방향",n:1}],prow)+
+      '<details open><summary>시장별 오늘 신호 (진입가 = 20일 최고가, 청산가 = 10일 최저가·손절 중 높은 쪽)</summary>'+
+      tbl([{t:"시장"},{t:"상태"},{t:"종가",n:1},{t:"진입가 (거리)",n:1},{t:"청산가 (거리)",n:1},{t:"미실현",n:1},{t:"N/가격",n:1},{t:"3년 순 / 보유",n:1}],mrow)+'</details>'+
+      '<div class="note">단일 코인은 대부분 그냥 보유보다 낮고 낙폭이 작다. 6개를 한 계좌로 묶어야 수익이 난다. 이미 보유 중인 코인에 뒤늦게 타지 않는다 — 다음 돌파를 기다린다. 2025년 횡보장은 거의 못 벌었다.</div>';
+  }
+
+  // ---------------- 추세 전환 매매법 (마일스톤 13) ----------------
+  var PHASE={scan:["구조 없음","neutral"],armed:["돌파 대기","warn"],broken:["눌림 대기","warn"],long:["보유","good"]};
+  function rReversal(d){
+    var s=section("s-reversal"); s.when.textContent=d.date||"";
+    var sm=d.summary||{}; var ven=d.venues||{}; var rules=d.rules||{}; var names={upbit:"업비트 현물",okx:"OKX 선물 (롱만)"};
+    var held=0, waiting=0, fwd=0, lastBar="";
+    Object.keys(ven).forEach(function(v){
+      Object.keys(ven[v].markets||{}).forEach(function(m){ var g=ven[v].markets[m].signal||{}; if(g.phase==="long") held++; else if(g.phase==="armed"||g.phase==="broken") waiting++; lastBar=g.last_bar||lastBar; });
+      fwd+=((((ven[v].portfolio||{}).stats||{}).forward||{}).trades)||0;
+    });
+    $("t-rev").innerHTML=pill("보유 "+held+"/"+(sm.markets||0), held?"good":"neutral")+(waiting?" "+pill("대기 "+waiting,"warn"):"");
+    $("t-rev-d").textContent="순방향 매매 "+fwd+"건 (규칙 고정 "+(rules.rule_fixed||"")+")";
+    var prow=[]; Object.keys(ven).forEach(function(v){
+      var p=(ven[v].portfolio||{}).stats||{};
+      var line=function(label,q){ return [esc(label), sgn(q.net_pct,0,"%"), sgn(q.cagr_pct,0,"%"), sgn(q.max_drawdown_pct,0,"%"), q.trades!=null?q.trades:"-", q.win_rate_pct!=null?num(q.win_rate_pct,0)+"%":"-", q.profit_factor!=null?num(q.profit_factor,1):"-", (q.forward||{}).trades!=null?((q.forward.trades)+"건 "+((q.forward.net_pct!=null)?sgn(q.forward.net_pct,1,"%"):"")):"-"]; };
+      prow.push(line(names[v]||v,p));
+      var vs=ven[v].variants||{}; Object.keys(vs).forEach(function(k){ prow.push(line((names[v]||v)+" · "+(vs[k].label||k),(vs[k].portfolio||{}).stats||{})); });
+    });
+    var mrow=[]; Object.keys(ven).forEach(function(v){ var mk=ven[v].markets||{}; Object.keys(mk).forEach(function(m){
+      var g=mk[m].signal||{}; var st=mk[m].stats||{}; var ph=PHASE[g.phase]||[g.phase||"-","neutral"]; var inpos=g.phase==="long";
+      var level = inpos ? px(g.entry)+" ("+esc((g.entry_date||"").slice(5,16))+")" : (g.neckline!=null ? px(g.neckline)+(g.neckline_distance_pct!=null?" ("+(g.neckline_distance_pct>0?"+":"")+num(g.neckline_distance_pct,1)+"%)":"") : "-");
+      var stop = g.stop!=null ? px(g.stop)+(inpos&&g.stop_distance_pct!=null?" ("+num(g.stop_distance_pct,1)+"%)":"") : "-";
+      var extra = inpos ? sgn(g.unrealized_pct,1,"%") : (g.bars_left!=null ? g.bars_left+"봉" : "-");
+      mrow.push([esc(v+" "+m), pill(ph[0],ph[1]), px(g.close), level, stop, extra, sgn(st.net_pct,0,"%")+" / "+sgn(st.buy_hold_pct,0,"%")]); }); });
+    var c=((ven.upbit||ven.okx||{}).portfolio||{}).stats||{}; var cn=c.counts||{};
+    s.body.innerHTML='<div class="verdict">SNS 카드의 5문장을 그대로 고정. 하락추세(저점 깨짐·고점 낮아짐) 뒤 새 저점이 바닥을 안 깨면 구조, 목선(바닥~저점 사이 최고가) 위 종가 + 거래량 20봉 평균×2 면 돌파, 12봉 안에 목선까지 눌리면 지정가 진입. 손절 = 유지된 저점, 이후 생기는 저점마다 손절선 올림. 계좌 1%÷손절거리, 롱만. 규칙 고정일 이후 매매만 순방향.</div>'+
+      tbl([{t:"한 계좌 6코인 (3년)"},{t:"순수익",n:1},{t:"CAGR",n:1},{t:"낙폭",n:1},{t:"매매",n:1},{t:"승률",n:1},{t:"손익비",n:1},{t:"순방향",n:1}],prow)+
+      '<details open><summary>시장별 오늘 단계 (마지막 4시간봉 '+esc(lastBar)+' UTC · 목선 = 돌파·지정가 가격, 손절 = 유지 저점)</summary>'+
+      tbl([{t:"시장"},{t:"단계"},{t:"종가",n:1},{t:"목선 / 진입가",n:1},{t:"손절",n:1},{t:"미실현 / 남은봉",n:1},{t:"3년 순 / 보유",n:1}],mrow)+'</details>'+
+      '<div class="note">업비트 3년 구조 '+(cn.setups||0)+'개 중 진입 전 저점 이탈 '+(cn.stopped_before_entry||0)+' · 거래량 부족 돌파 '+(cn.fake_breaks||0)+' · 눌림 없음 '+(cn.no_pullback||0)+' · 만료 '+(cn.expired||0)+'. '+
+      '같은 코인인데 업비트와 OKX 성적이 크게 다르고 매매 겹침이 절반 이하라 봉 하나 차이에 민감한 규칙이다. OKX 숫자를 실력으로 본다. 거래량 2배 조건은 수익이 아니라 낙폭·매매 수를 줄이는 장치였고, 눌림 대기는 OKX 에서 손해였다. 순방향 20건 전엔 판단하지 않는다. 하루 1회 기록이라 4시간봉 6개 중 마지막 봉 상태만 남는다.</div>';
+  }
+
+  // ---------------- 한국 주식 트랙 (마일스톤 12) ----------------
+  var PAT={box:"박스권",triangle:"삼각수렴",flag:"깃발형",cup_handle:"컵앤핸들"};
+  var WHY={stop:"손절",low10:"10일 최저가",hold20:"20일 보유",hold10:"10일 보유"};
+  function pat(k){return PAT[k]||k;}
+  function rKr(d){
+    var s=section("s-kr"); s.when.textContent=(d.date||"")+(d.duplicate_of_previous?" (휴장일 중복)":"");
+    var sm=d.summary||{}; var g=d.groups||{};
+    var syncs=(sm.sync_groups||[]);
+    $("t-kr").innerHTML=pill("동조 "+syncs.length+"업종", syncs.length?"good":"neutral");
+    $("t-kr-d").textContent="상위 100 거래대금 "+num((sm.value_traded_total_krw||0)/1e12,1)+"조원 · 업종 "+(sm.group_n||0)+"개";
+    var rows=Object.keys(g).filter(function(k){return g[k].sync||g[k].n>=3;}).slice(0,14).map(function(k){var v=g[k];
+      return [esc(k), v.n, v.up+" ("+num(v.up_ratio*100,0)+"%)", sgn(v.median_change_pct,1,"%"), sgn(v.median_week_pct,1,"%"), sgn(v.median_month_pct,1,"%"), v.sync?pill(v.sync_by==="day"?"동조(당일)":"동조(주간)","good"):"-"];});
+    var top=(d.universe||[]).slice(0,10).map(function(r){return [esc(r.code), esc((r.name||"").slice(0,16)), esc(r.industry||""), px(r.close), sgn(r.change_pct,1,"%"), num((r.value_traded_krw||0)/1e9,0)+"억"];});
+    s.body.innerHTML='<div class="verdict">거래대금 상위 100(ETF·스팩 제외)을 업종으로 묶고, 3종목 이상 · 60% 이상 상승 · 당일 중앙값 +2%(또는 5일 +5%)면 동조. 동조 업종 안의 종목만 패턴 돌파 후보가 된다.</div>'+
+      tbl([{t:"업종"},{t:"n",n:1},{t:"상승",n:1},{t:"당일 중앙",n:1},{t:"5일",n:1},{t:"1달",n:1},{t:"판정"}],rows).replace('class="tbl"','class="tbl wrapfirst"')+
+      '<details><summary>거래대금 상위 10</summary>'+tbl([{t:"코드"},{t:"종목"},{t:"업종"},{t:"종가",n:1},{t:"등락",n:1},{t:"거래대금",n:1}],top)+'</details>';
+  }
+  function rKrb(d){
+    var s=section("s-krb"); s.when.textContent=d.date||"";
+    var v=d.variants||{}; var b=v.base||{}; var fw=d.forward||{};
+    var sig=((d.signals_today||{}).base)||[]; var open=b.open_positions||[];
+    $("t-kr-d").textContent=($("t-kr-d").textContent||"")+" · 순방향 "+(fw.days||0)+"일 보유 "+open.length+" 신호 "+sig.length;
+    var vrows=Object.keys(v).map(function(k){var x=v[k]; return [esc(x.label||k), x.signals||0, x.trades||0, x.win_rate!=null?num(x.win_rate,0)+"%":"-", x.profit_factor!=null?num(x.profit_factor,2):"-", sgn(x.total_return_pct,1,"%"), x.max_drawdown_pct!=null?num(x.max_drawdown_pct,1)+"%":"-", x.avg_hold_days!=null?num(x.avg_hold_days,1):"-"];});
+    var srows=sig.map(function(e){return [esc(e.code), esc(e.name||""), esc(e.group||""), pill(pat(e.pattern),"neutral"), px(e.signal_close), px(e.pattern_low), esc(e.sync_by==="day"?"당일":"주간")];});
+    var orows=open.map(function(p){return [esc(p.code), esc(p.name||""), pill(pat(p.pattern),"neutral"), esc(p.entry_date||""), px(p.entry), px(p.stop), px(p.last_close), sgn(p.unrealized_pct,1,"%"), p.bars_held+"일"];});
+    var trades=((d.trades||{}).base||[]).slice(-8).reverse().map(function(t){return [esc(t.code), esc(t.name||""), pill(pat(t.pattern),"neutral"), esc(t.entry_date||""), esc(t.exit_date||""), esc(WHY[t.why]||t.why), sgn(t.pnl_pct,1,"%")];});
+    s.body.innerHTML='<div class="verdict">동조 업종 안의 종목이 박스권·삼각수렴·깃발·컵앤핸들을 종가로 돌파(거래량 1.5배)하면 다음날 시가 매수. 손절 −7%(또는 패턴 하단), 10일 최저가 이탈·20일 보유로 청산, 계좌 1% 위험, 최대 5종목. 규칙 고정 '+esc(d.rule_fixed||"")+' 이후 기록만 센다 (주문 없음, 종이매매).</div>'+
+      (sig.length?'<details open><summary>오늘 신호 → 내일 시가 매수 후보 ('+sig.length+')</summary>'+tbl([{t:"코드"},{t:"종목"},{t:"업종"},{t:"패턴"},{t:"신호 종가",n:1},{t:"패턴 하단",n:1},{t:"동조"}],srows)+'</details>':'<div class="note">오늘 신호 없음.</div>')+
+      (open.length?'<details open><summary>보유 중 ('+open.length+')</summary>'+tbl([{t:"코드"},{t:"종목"},{t:"패턴"},{t:"진입일"},{t:"진입가",n:1},{t:"손절가",n:1},{t:"종가",n:1},{t:"미실현",n:1},{t:"보유",n:1}],orows)+'</details>':'')+
+      '<details><summary>변형별 순방향 성적 ('+esc(fw.from||"")+' ~ '+esc(fw.to||"")+', '+(fw.days||0)+'거래일)</summary>'+tbl([{t:"변형"},{t:"신호",n:1},{t:"매매",n:1},{t:"승률",n:1},{t:"PF",n:1},{t:"수익",n:1},{t:"낙폭",n:1},{t:"보유일",n:1}],vrows)+'</details>'+
+      (trades.length?'<details><summary>최근 닫힌 매매 (base)</summary>'+tbl([{t:"코드"},{t:"종목"},{t:"패턴"},{t:"진입"},{t:"청산"},{t:"사유"},{t:"손익",n:1}],trades)+'</details>':'')+
+      (fw.stale_codes?'<div class="note">'+pill("일봉 지연 "+fw.stale_codes+"종목","warn")+' 그 종목의 오늘 신호는 하루 늦게 잡힌다.</div>':'');
+  }
+  function rKrbt(d){
+    var s=section("s-krbt"); s.when.textContent=(d.date||"")+" · "+esc(((d.period||{}).from)||"")+" ~ "+esc(((d.period||{}).to)||"");
+    var v=d.variants||{}; var b=v.base||{}; var bm=d.benchmark||{}; var ps=d.pass||{};
+    var vrows=Object.keys(v).map(function(k){var x=v[k]; return [esc(x.label||k), x.trades||0, x.win_rate!=null?num(x.win_rate,0)+"%":"-", sgn(x.avg_win_pct,1,"%"), sgn(x.avg_loss_pct,1,"%"), x.payoff!=null?num(x.payoff,2):"-", x.profit_factor!=null?num(x.profit_factor,2):"-", sgn(x.total_return_pct,0,"%"), x.max_drawdown_pct!=null?num(x.max_drawdown_pct,1)+"%":"-"];});
+    Object.keys(bm).forEach(function(k){var x=bm[k]; if(x&&x.return_pct!=null) vrows.push([esc(k+" 단순 보유"), "-","-","-","-","-","-", sgn(x.return_pct,0,"%"), num(x.max_drawdown_pct,1)+"%"]);});
+    var years=Object.keys(b.yearly_return_pct||{}); var yrows=[];
+    if(years.length){ var line=function(name,obj){return [esc(name)].concat(years.map(function(y){return sgn((obj||{})[y],1,"%");}));};
+      yrows.push(line("base",b.yearly_return_pct)); if(v.no_sector) yrows.push(line("no_sector",v.no_sector.yearly_return_pct));
+      Object.keys(bm).forEach(function(k){ if(bm[k]&&bm[k].by_year) yrows.push(line(k,bm[k].by_year)); }); }
+    var bp=b.by_pattern||{}; var prow=Object.keys(bp).map(function(k){var x=bp[k]; return [pill(pat(k),"neutral"), x.n, x.wins+" ("+num(x.wins/x.n*100,0)+"%)", sgn(x.pnl_krw/10000,0,"만원")];});
+    var be=b.by_exit||{}; var erow=Object.keys(be).map(function(k){var x=be[k]; return [esc(WHY[k]||k), x.n, x.wins, sgn(x.pnl_krw/10000,0,"만원")];});
+    var passTxt=ps.all?pill("합격","good"):pill("불합격","bad");
+    s.body.innerHTML='<div class="verdict">지금 거래대금 상위 300 종목의 3년 일봉으로 매일 상위 100 을 다시 만들어 같은 규칙을 돌린 것. 합격선: 매매 100건 이상 · 수수료 후 플러스 · 최대낙폭 25% 미만 → '+passTxt+
+      ' (매매 '+(ps.trades_ok?"○":"×")+' · 수익 '+(ps.return_ok?"○":"×")+' · 낙폭 '+(ps.dd_ok?"○":"×")+'). 규칙은 결과를 보고 고치지 않는다.</div>'+
+      tbl([{t:"변형"},{t:"매매",n:1},{t:"승률",n:1},{t:"평균 이익",n:1},{t:"평균 손실",n:1},{t:"손익비",n:1},{t:"PF",n:1},{t:"수익",n:1},{t:"낙폭",n:1}],vrows)+
+      (yrows.length?'<details open><summary>연도별 (첫 해는 시작일부터)</summary>'+tbl([{t:""}].concat(years.map(function(y){return {t:y,n:1};})),yrows)+'</details>':'')+
+      '<details><summary>패턴별 · 청산 사유별 (base)</summary>'+tbl([{t:"패턴"},{t:"매매",n:1},{t:"승",n:1},{t:"손익",n:1}],prow)+tbl([{t:"청산"},{t:"매매",n:1},{t:"승",n:1},{t:"손익",n:1}],erow)+'</details>'+
+      '<div class="note">'+esc(d.caveat||"")+' 하락장(2024)에서 플러스를 낸 것이 이 규칙의 값이고, 폭등장에선 계좌 1%만 거는 규칙이라 지수를 못 따라간다. 돈은 20일을 버틴 매매에서 나고 손절은 전부 손실이다.</div>';
+  }
+
+  function rLive(d){
+    var s=section("s-live"); s.when.textContent=d.date||"";
+    var st=d.status||{}; var w=st.warnings||[];
+    $("t-live").innerHTML=w.length?pill("경고 "+w.length,"bad"):pill(st.coin+" "+Math.floor(st.days||0)+"일차","good");
+    $("t-live-d").textContent="실현 순 연 "+num(st.realized_net_apr_pct,1)+"% / 예측 "+num(st.predicted_net_apr_pct,1)+"%";
+    var rows=[["경과",num(st.days,1)+"일"],["현물 / 선물 숏 수량",num(st.spot_qty,5)+" / "+num(st.perp_short_qty,5)+" (차이 "+num(st.delta_mismatch_pct,1)+"%)"],
+      ["명목",num(st.notional_usdc,2)+" USDC"],["펀딩 수취 / 수수료",num(st.funding_received_usdc,4)+" / "+num(st.fees_paid_usdc,4)+" USDC"],
+      ["실현 연환산 총 / 순",num(st.realized_gross_apr_pct,2)+"% / "+num(st.realized_net_apr_pct,2)+"%"],["실현 ÷ 예측",num(st.realized_vs_predicted,2)],
+      ["강제청산 거리",num(st.liquidation_distance_pct,0)+"%"]];
+    s.body.innerHTML=tbl([{t:"항목"},{t:"값"}],rows.map(function(r){return [esc(r[0]),esc(r[1])];}))+(w.length?'<div class="note">'+w.map(function(x){return pill(x,"bad");}).join(" ")+'</div>':'');
+  }
+  function rLiveMissing(){
+    $("t-live").innerHTML=pill("미설정","neutral"); $("t-live-d").textContent="설계서 8절: 지갑 주소 등록 전";
+    section("s-live").body.innerHTML='<div class="err">실전 지갑이 아직 등록되지 않았다. docs/LIVE_CARRY_PLAN.md 의 절차대로 진입한 뒤 data/live_wallet.json 에 주소를 넣으면 다음 날부터 여기에 표시된다.</div>';
+  }
+  function rKrMissing(key){
+    if(key==="kr"){ $("t-kr").innerHTML=pill("첫 실행 전","neutral"); $("t-kr-d").textContent="평일 15:50 KST 실행 뒤 표시"; }
+    section(SECTION[key]).body.innerHTML='<div class="err">아직 결과 파일이 없다. 워크플로 KR sector breakout 이 평일 15:50 KST 에 돌면 생긴다.</div>';
+  }
+  function rGridMissing(){
+    section("s-grid").body.innerHTML='<div class="err">아직 결과 파일이 없다 (grid.json). 그리드 모듈이 저장소 main 에 합쳐져 매일 실행되면 여기에 표시된다. 그 전까지는 이 카드만 비어 있는 것이 정상이다.</div>';
+  }
+  function rRevMissing(){
+    $("t-rev").innerHTML=pill("첫 실행 전","neutral"); $("t-rev-d").textContent="매일 09:18 KST 실행 뒤 표시";
+    section("s-reversal").body.innerHTML='<div class="err">아직 결과 파일이 없다. 마일스톤 13 병합 뒤 CARRYGATE daily 가 처음 돌면(매일 09:18 KST) 생긴다. 3년 백테스트 결과는 인수인계서 마일스톤 13 과 docs/REVERSAL_4H_PLAN.md 에 있다.</div>';
+  }
+  function rScalp(d){
+    var s=section("s-scalp"); s.when.textContent=(d.date||"")+" (평가 "+(d.eval_day_utc||"")+")";
+    var sm=d.summary||{};
+    $("t-scalp").textContent=(sm.history_days||0)+"일차"; $("t-scalp-d").textContent="플러스 "+sm.rows_positive+"/"+sm.rows_total+" · 견고 "+sm.rows_robust;
+    var by=sm.by_tf_strategy||{}; var tfs=["1m","5m","15m"]; var names={};
+    (d.method&&d.method.strategies||[]).forEach(function(x){names[x.key]=x.name;});
+    var keys=Object.keys(by).map(function(k){return k.split(":")[1];}).filter(function(v,i,a){return a.indexOf(v)===i;});
+    var rows=keys.map(function(k){return [esc(names[k]||k)].concat(tfs.map(function(tf){var a=by[tf+":"+k]; return a?sgn(a.net_pct,1,"%")+' <span class="pill neutral">'+a.rows_positive+'/'+a.rows_total+'</span>':"-";}));});
+    var top=(sm.top||[]).slice(0,5).map(function(r){return [esc(r.venue+" "+r.coin), esc(r.tf), esc(r.strategy_name), r.trades, sgn(r.net_pct,2,"%"), r.robust?pill("견고","good"):"-"];});
+    s.body.innerHTML='<div class="verdict">'+esc(sm.verdict||"")+'</div>'+tbl([{t:"규칙"},{t:"1분봉 순수익·플러스시장",n:1},{t:"5분봉",n:1},{t:"15분봉",n:1}],rows)+
+      '<details><summary>어제 상위 5개 조합</summary>'+tbl([{t:"시장"},{t:"봉"},{t:"규칙"},{t:"매매",n:1},{t:"순수익",n:1},{t:""}],top)+'</details>'+
+      '<div class="note">후보 조건: 7일 이상, 누적 플러스, 플러스 일수 60% 이상, 기준선 초과. 규칙은 결과를 보고 고치지 않는다.</div>';
+  }
+  function rResearch(d){
+    var s=section("s-research"); s.when.textContent=d.date||"";
+    var pairs=d.leadlag_by_pair||{}; var rows=Object.keys(pairs).map(function(p){var x=pairs[p];return [esc(p), num(x.corr_lead_next1,3), num(x.corr_reverse_next1,3), sgn(x.follow_big_next1_bp,1), sgn(x.follow_big_next5_bp,1), x.follow_big_hit_rate_pct!=null?num(x.follow_big_hit_rate_pct,0)+"%":"-"];});
+    var fs=d.funding_summary||{}; var frows=Object.keys(fs).map(function(v){var x=fs[v];return [esc(v), x.n||0, sgn(x.signed_pre15_bp,1), sgn(x.signed_post15_bp,1), x.post15_hit_rate_pct!=null?num(x.post15_hit_rate_pct,0)+"%":"-"];});
+    var hb=d.hourly_by_venue||{}; var best=Object.keys(hb).map(function(v){var arr=hb[v]||[]; var idx=arr.map(function(x,i){return [x,i];}).filter(function(p){return p[0]!=null;}).sort(function(a,b){return a[0]-b[0];}).slice(0,3); return esc(v)+": "+idx.map(function(p){return ((p[1]+9)%24).toString().padStart(2,"0")+"시 "+num(p[0],0)+"%";}).join(", ");}).join("<br>");
+    s.body.innerHTML='<div class="verdict">'+esc((d.summary||{}).verdict||"")+'</div>'+
+      '<div class="note">A1 가장 유리한 시간(한국시간, 15분 본전 승률):<br>'+best+'</div>'+
+      tbl([{t:"선행→후행"},{t:"선행상관",n:1},{t:"역상관",n:1},{t:"큰움직임 1분bp",n:1},{t:"5분bp",n:1},{t:"적중",n:1}],rows)+
+      '<details><summary>A2 펀딩 정산 전후</summary>'+tbl([{t:"거래소"},{t:"이벤트",n:1},{t:"직전15분bp",n:1},{t:"직후15분bp",n:1},{t:"적중",n:1}],frows)+'</details>'+
+      '<div class="note">업비트 시장가 왕복 비용 약 10bp. 따라가기 bp 가 그 아래면 그대로는 남지 않는다.</div>';
+  }
+  function rOrderbook(d){
+    var s=section("s-orderbook"); s.when.textContent=(d.date||"")+" · 표본 "+(d.samples||0);
+    var sm=d.summary||{}; var rows=Object.keys(sm).map(function(v){var x=sm[v];return [esc(v), num(x.spread_bp_mean,2), num(x.maker_fee_bp,1), sgn(x.half_spread_minus_maker_fee_bp,2), sgn(x.imb_signed60_bp,2), sgn(x.imb_signed300_bp,2), x.imb_hit60_pct!=null?num(x.imb_hit60_pct,0)+"%":"-"];});
+    s.body.innerHTML='<div class="verdict">'+esc(d.verdict||"")+'</div>'+tbl([{t:"거래소"},{t:"호가폭bp",n:1},{t:"지정가수수료",n:1},{t:"반폭−수수료",n:1},{t:"불균형→1분",n:1},{t:"→5분",n:1},{t:"적중",n:1}],rows)+
+      '<div class="note">반폭−수수료가 양수면 양쪽 지정가로 한 번 왕복에 남을 여지가 있다(체결·역선택은 별도).</div>';
+  }
+  function rFsig(d){
+    var s=section("s-fsig"); s.when.textContent=(d.date||"")+" · "+(d.lookback_days||"")+"일";
+    var p=d.pooled||{}; var rows=[["과열(상위10%)",p.high],["냉각(하위10%)",p.low],["중립",p.mid]].map(function(r){var x=r[1]||{};return [esc(r[0]), x.n||0, sgn(x.fwd1_pct,2,"%"), sgn(x.fwd3_pct,2,"%"), sgn(x.fwd7_pct,2,"%")];});
+    var sig=d.signals||{}; var hot=Object.keys(sig).filter(function(k){return sig[k].state==="과열";}); var cold=Object.keys(sig).filter(function(k){return sig[k].state==="냉각";});
+    s.body.innerHTML='<div class="verdict">'+esc((d.summary||{}).verdict||"")+'</div>'+tbl([{t:"신호"},{t:"n",n:1},{t:"1일후",n:1},{t:"3일후",n:1},{t:"7일후",n:1}],rows)+
+      '<div class="note">규칙(과열 숏·냉각 롱 3일): 건당 순 '+sgn((p.rule||{}).net_avg_pct,3,"%")+' (n='+((p.rule||{}).n||0)+')<br>오늘 과열: '+(hot.length?hot.map(function(h){return pill(h,"warn");}).join(" "):"없음")+' · 냉각: '+(cold.length?cold.map(function(h){return pill(h,"neutral");}).join(" "):"없음")+'</div>';
+  }
+  function rKimchi(d){
+    var s=section("s-kimchi"); s.when.textContent=(d.date||"")+" · 환율 "+num(d.fx_usdkrw,0);
+    var rows=Object.keys(d.coins||{}).map(function(c){var x=d.coins[c]; var hi=(x.event_study||{}).high||{}; var pr=x.percentile; var k=pr>=90?"bad":(pr<=10?"neutral":"good"); return [esc(c), sgn(x.premium_pct,2,"%"), pill(num(pr,0),k), num(x.hist_mean_pct,2)+"%", "n="+(hi.n||0)+" "+sgn(hi.upbit_fwd3_pct,2,"%"), sgn(hi.rel_vs_okx_fwd3_pct,2,"%"), x.intraday&&x.intraday.reversion_corr_15m!=null?num(x.intraday.reversion_corr_15m,2):"-"];});
+    s.body.innerHTML='<div class="verdict">'+esc((d.summary||{}).verdict||"")+'</div>'+tbl([{t:"코인"},{t:"프리미엄",n:1},{t:"백분위",n:1},{t:"200일 평균",n:1},{t:"과열 뒤 3일 업비트",n:1},{t:"해외 대비",n:1},{t:"하루 되돌림",n:1}],rows)+
+      '<div class="note">백분위 90 이상 = 과열(붉은 표시). 되돌림 상관이 음수면 하루 안에 벌어진 프리미엄이 되돌아온다.</div>';
+  }
+  function rMacro(d){
+    var s=section("s-macro"); s.when.textContent=(d.date||"")+" · 누적 "+((d.events||[]).length)+"건";
+    var sm=d.summary||{}; var rows=Object.keys(sm).filter(function(k){return k!=="all";}).map(function(t){var x=sm[t];return [esc(t.toUpperCase()), x.n, num(x.abs_post30_bp,0), num(x.base_abs_post30_bp,0), num(x.ratio_vs_base,1)+"배", sgn(x.signed_post30_bp,0), x.hit_rate_pct!=null?num(x.hit_rate_pct,0)+"%":"-"];});
+    var up=(d.upcoming||[]).slice(0,4).map(function(e){return esc(e.type.toUpperCase()+" "+e.time_utc.replace("T"," ").replace(":00Z","Z"));}).join(" · ");
+    var all=sm.all||{};
+    s.body.innerHTML='<div class="verdict">전체 n='+(all.n||0)+' — 발표 뒤 30분 변동폭 '+num(all.abs_post30_bp,0)+'bp vs 평소 '+num(all.base_abs_post30_bp,0)+'bp ('+num(all.ratio_vs_base,1)+'배)</div>'+
+      tbl([{t:"발표"},{t:"n",n:1},{t:"30분폭bp",n:1},{t:"평소bp",n:1},{t:"배수",n:1},{t:"방향대로 30분bp",n:1},{t:"적중",n:1}],rows)+
+      '<div class="note">다음 발표(UTC): '+(up||"-")+(d.calendar_stale?'<br>'+pill("달력 갱신 필요","warn"):"")+'</div>';
+  }
+  function rListing(d){
+    var s=section("s-listing"); s.when.textContent=d.date||"";
+    var sm=d.summary||{}; var bv=sm.by_venue||{}; var rows=Object.keys(bv).map(function(v){var x=bv[v];return [esc(v), x.n, sgn(x.post5_pct,2,"%"), sgn(x.post15_pct,2,"%"), sgn(x.post60_pct,2,"%"), sgn(x.post240_pct,2,"%"), sgn(x.maxup60_pct,2,"%")];});
+    s.body.innerHTML='<div class="verdict">상장 이벤트 '+(sm.notices||0)+'건 · 해외 선물 가격 있는 쌍 '+(sm.with_price||0)+' · KRW 마켓 '+(d.markets_krw||"-")+'개</div>'+
+      (rows.length?tbl([{t:"거래소"},{t:"n",n:1},{t:"5분",n:1},{t:"15분",n:1},{t:"60분",n:1},{t:"240분",n:1},{t:"60분 최고",n:1}],rows):'<div class="err">아직 상장 이벤트가 없다. 마켓 목록을 매일 비교해 새 마켓이 생기면 기록된다.</div>')+
+      (d.errors&&d.errors.notices?'<div class="note">업비트 공지 API 는 미국 서버에서 막혀 쓰지 않는다 (정상).</div>':'');
+  }
+  function rMomentum(d){
+    var s=section("s-momentum"); s.when.textContent=d.date||"";
+    var res=d.results||{}; var order=["gem_12","gem_comp","gem_6","dm_4","spy_hold","6040"];
+    var rows=order.filter(function(k){return res[k];}).map(function(k){var m=res[k].metrics||{}; return [esc(res[k].name||k), sgn(m.cagr_pct,1,"%"), sgn(m.max_drawdown_pct,1,"%"), num(m.volatility_pct,1)+"%", sgn(m.worst_12m_pct,1,"%"), m.switches!=null?m.switches:"-"];});
+    var sig=d.signals||{}; var sigs=Object.keys(sig).map(function(k){return esc((res[k]&&res[k].name)||k)+": "+pill(sig[k].asset,"neutral");}).join(" &nbsp; ");
+    var w=d.window||{};
+    s.body.innerHTML='<div class="verdict">'+esc(w.start||"")+' ~ '+esc(w.end||"")+' 월 1회 교체, 비용 '+num(d.cost_pct,2)+'%. 배당 미반영 가격이라 절대 수익률은 1~3%p 낮게 본다.</div>'+
+      tbl([{t:"전략"},{t:"CAGR",n:1},{t:"최대낙폭",n:1},{t:"변동성",n:1},{t:"최악 12개월",n:1},{t:"교체",n:1}],rows)+
+      '<div class="note">이달 보유 신호 — '+(sigs||"-")+'</div>';
+  }
+
+  function rGrid(d){
+    var s=section("s-grid"); s.when.textContent=d.date||"";
+    var syms=d.symbols||{}; var rules=d.rules||{}; var vers=Object.keys((rules.versions)||{v4:1,v5:1});
+    var rows=[]; Object.keys(syms).forEach(function(sym){ var res=syms[sym]; var ws=res.windows||{};
+      Object.keys(ws).forEach(function(wk){ var w=ws[wk]; vers.forEach(function(v){ var m=w[v]; if(!m) return;
+        rows.push([esc(sym+" "+v), esc(w.start+" ~ "+w.end), sgn(m.cagr_pct,1,"%"), sgn(m.max_drawdown_pct,1,"%"), m.trades!=null?m.trades:"-", m.win_rate_pct!=null?num(m.win_rate_pct,0)+"%":"-", m.expired_share_pct!=null?num(m.expired_share_pct,0)+"%":"-", m.max_daily_buy_pct_of_equity!=null?num(m.max_daily_buy_pct_of_equity,0)+"%":"-", m.cash_short_days!=null?m.cash_short_days:"-"]); }); }); });
+    var cmp=[]; Object.keys(d.comparison||{}).forEach(function(sym){ (d.comparison[sym]||[]).forEach(function(r){ cmp.push([esc(sym+" "+r.version), esc(r.window), num(r.blog_cagr_pct,1)+"%", sgn(r.ours_cagr_pct,1,"%"), sgn(r.cagr_diff_pt,1,"p"), num(r.blog_mdd_pct,1)+"%", sgn(r.ours_mdd_pct,1,"%"), sgn(r.mdd_diff_pt,1,"p")]); }); });
+    var fw=[]; Object.keys(syms).forEach(function(sym){ var f=syms[sym].forward||{}; vers.forEach(function(v){ var x=f[v]; if(!x||x.equity==null) return; fw.push([esc(sym+" "+v), num(x.equity,2), x.tiers_held, num(x.next_buy_usd,2), x.closed_trades, sgn(x.realized_pnl,2)]); }); });
+    var fee=[]; Object.keys(syms).forEach(function(sym){ var fs=syms[sym].fee_sensitivity||{}; vers.forEach(function(v){ var o=fs[v]||{}; var parts=Object.keys(o).map(function(k){return esc(k)+"%: "+sgn(o[k].cagr_pct,1,"%")+" / "+sgn(o[k].mdd_pct,0,"%");}); if(parts.length) fee.push(esc(sym+" "+v)+" — "+parts.join(" · ")); }); });
+    s.body.innerHTML='<div class="verdict">매일 종가 1티어 매수, 티어별 +2.7%(v4)/+2.75%(v5) 익절, 10거래일 만기 매도, 매도일 매수 없음. v4 고정 금액(수익 70% 래칫), v5 어제 자산 10%. 투자금 $'+num(rules.capital_usd,0)+', 수수료 편도 '+num(rules.fee_pct_one_way,2)+'%. 규칙 고정 '+esc(rules.rule_fixed||"")+' 이후는 가상 계좌 순방향.</div>'+
+      tbl([{t:"종목·버전"},{t:"구간"},{t:"CAGR",n:1},{t:"최대낙폭",n:1},{t:"매매",n:1},{t:"승률",n:1},{t:"만기매도",n:1},{t:"최대 하루매수/자산",n:1},{t:"현금부족일",n:1}],rows)+
+      (cmp.length?'<details open><summary>블로그(와치독) 주장 대비 재계산</summary>'+tbl([{t:"버전"},{t:"구간"},{t:"블로그 CAGR",n:1},{t:"재계산",n:1},{t:"차이",n:1},{t:"블로그 MDD",n:1},{t:"재계산",n:1},{t:"차이",n:1}],cmp)+'</details>':'')+
+      (fw.length?'<details><summary>순방향 가상 계좌 ('+esc(rules.rule_fixed||"")+' ~)</summary>'+tbl([{t:"종목·버전"},{t:"자산 $",n:1},{t:"보유 티어",n:1},{t:"내일 매수 $",n:1},{t:"닫힌 매매",n:1},{t:"실현 손익 $",n:1}],fw)+'</details>':'<div class="note">순방향 가상 계좌는 규칙 고정일 다음 거래일부터 쌓인다.</div>')+
+      (fee.length?'<div class="note">수수료 민감도 (편도 %, CAGR / MDD): <br>'+fee.join("<br>")+'</div>':'')+
+      '<div class="note">승률 80% 안팎이라 평소엔 꾸준히 버는 것처럼 보이지만, 급락 한 번에 그동안 번 것을 내놓는 구조. 낙폭 −40~−50% 를 실제로 견딜 수 있는지가 핵심.</div>';
+  }
+
+  // ---------------- 판정 규율 (마일스톤 14, Phil 방식) ----------------
+  var VST={NOT_YET:["판단 전","neutral"],PASS:["합격","good"],FAIL:["불합격","bad"]};
+  function vpill(st){ var x=VST[st]||[st||"-","neutral"]; return pill(x[0],x[1]); }
+  function zcell(l){ if(!l||l.z==null) return "-"; var k=l.z<-2?"bad":(l.z<-1?"warn":"good"); return pill((l.z>0?"+":"")+num(l.z,2),k)+' <span class="pill neutral">기대 '+num(l.expected_wins,1)+'승</span>'; }
+  function rVerdict(d){
+    var s=section("s-verdict"); s.when.textContent=(d.date||"")+" · 기준 봉인 "+(d.criteria_sealed||"");
+    var t=d.tracks||{}; var sm=d.summary||{}; var rl=d.rules_lock||{};
+    var order=["kr_breakout","turtle","reversal","scalp"]; var NM={kr_breakout:"한국 주식 돌파",turtle:"터틀",reversal:"추세 전환",scalp:"초단타"};
+    var MIN={kr_breakout:"15건",turtle:"20건/거래소",reversal:"20건/거래소",scalp:"7일"};
+    var pass=order.filter(function(k){return sm[k]==="PASS";}).length, fail=order.filter(function(k){return sm[k]==="FAIL";}).length, wait=order.filter(function(k){return sm[k]==="NOT_YET";}).length;
+    $("t-verdict").innerHTML=(pass?pill("합격 "+pass,"good")+" ":"")+(fail?pill("불합격 "+fail,"bad")+" ":"")+pill("판단 전 "+wait,"neutral");
+    $("t-verdict-d").textContent="규칙 잠금 "+(rl.ok?"일치":"불일치")+" · 기준 봉인 "+(d.criteria_sealed||"");
+    var rows=[];
+    if(t.kr_breakout){ var k=t.kr_breakout;
+      rows.push([esc(NM.kr_breakout+" (base)"), vpill(k.status), (k.trades||0)+"건 / "+(k.wins||0)+"승", k.win_rate_pct!=null?num(k.win_rate_pct,0)+"% (백테스트 "+num(k.backtest_win_rate_pct,0)+"%)":"-", sgn(k.total_return_pct,1,"%"), zcell(k.luck), MIN.kr_breakout, esc(k.reason||"")]);
+      if(k.control) rows.push([esc("  대조군 "+k.control.variant), pill("기록만","neutral"), (k.control.trades||0)+"건", k.control.win_rate_pct!=null?num(k.control.win_rate_pct,0)+"%":"-", sgn(k.control.total_return_pct,1,"%")+" (차이 "+sgn(k.control.return_delta_pct,1,"%p")+")", "-", "-", "업종 동조가 실제로 보태는지"]);
+    }
+    ["turtle","reversal"].forEach(function(name){ var tr=t[name]; if(!tr) return;
+      rows.push([esc(NM[name]), vpill(tr.status), (tr.forward_trades_total||0)+"건", "-", "-", "-", MIN[name], esc(tr.reason||"")]);
+      Object.keys(tr.venues||{}).forEach(function(v){ var f=tr.venues[v];
+        rows.push([esc("  "+v), vpill(f.status), (f.trades||0)+"건 / "+(f.wins||0)+"승", f.win_rate_pct!=null?num(f.win_rate_pct,0)+"% (백테스트 "+num(f.backtest_win_rate_pct,0)+"%)":"백테스트 "+num(f.backtest_win_rate_pct,0)+"%", (f.profit_factor!=null?"손익비 "+num(f.profit_factor,2):"손익비 -")+(f.net_pct!=null?" · "+sgn(f.net_pct,1,"%"):""), zcell(f.luck), "-", esc(f.reason||"")]); }); });
+    if(t.scalp){ var c=t.scalp;
+      var top=(c.top||[])[0]; var cw=(c.warnings||[]).length?' '+pill("다중 비교 주의","warn"):"";
+      rows.push([esc(NM.scalp), vpill(c.status)+cw, (c.history_days||0)+"일", top?(top.pos_days+"/"+top.days+"일 플러스"):"-", "후보 "+(c.candidates||0)+" / 조합 "+(c.combos||0)+(top?"<br>1위 "+esc(top.key)+" "+sgn(top.net_pct,2,"%"):""), "-", MIN.scalp, esc(c.reason||"")]); }
+    var errs=Object.keys(d.errors||{}).map(function(k){return esc(k+": "+d.errors[k]);});
+    s.body.innerHTML='<div class="verdict">합격선은 결과가 나오기 전에 <code>criteria.json</code> 에 봉인했고, <code>verdict.py</code> 가 매일 기계로 판정한다. 최소 건수 전에는 "판단 전". 운 보정 z = (실제 승수 − 백테스트 승률대로의 기대 승수) ÷ 표준편차. z 가 −2 아래면 불운이 아니라 백테스트가 부풀려진 것(생존 편향)으로 본다. 규칙 상수는 <code>rules_lock.json</code> 에 잠겨 있어 사전 등록(<code>proposals.md</code>) 없이 바꾸면 CI 가 막는다.</div>'+
+      tbl([{t:"트랙"},{t:"판정"},{t:"순방향",n:1},{t:"승률",n:1},{t:"성적",n:1},{t:"운 보정 z"},{t:"최소"},{t:"사유"}],rows).replace('class="tbl"','class="tbl wrapfirst"')+
+      '<div class="note">규칙 잠금: '+(rl.ok?pill("일치","good"):pill("불일치 — 사전 등록 없이 규칙이 바뀌었다","bad")+(rl.diffs&&rl.diffs.length?'<br>'+rl.diffs.map(esc).join("<br>"):""))+
+      (errs.length?'<br>오류: '+errs.join(" · "):"")+'<br>합격 = 소액 실전 설계 후보. 불합격 = 규칙은 고치지 않고 "이 규칙은 안 된다"로 기록. 초단타 불합격은 날마다 다시 계산된다.</div>';
+  }
+  function rVerdictMissing(){
+    $("t-verdict").innerHTML=pill("첫 실행 전","neutral"); $("t-verdict-d").textContent="마일스톤 14 병합 뒤 첫 실행 때 생성";
+    section("s-verdict").body.innerHTML='<div class="err">아직 결과 파일이 없다 (verdict.json). CARRYGATE daily(매일 09:18 KST) 또는 KR sector breakout(평일 15:50 KST) 이 처음 돌면 생긴다.</div>';
+  }
+
+  var RENDER={status:rStatus,funding:rFunding,basis:rBasis,turtle:rTurtle,reversal:rReversal,live:rLive,scalp:rScalp,research:rResearch,orderbook:rOrderbook,fsig:rFsig,kimchi:rKimchi,macro:rMacro,listing:rListing,momentum:rMomentum,grid:rGrid,kr:rKr,krb:rKrb,krbt:rKrbt,verdict:rVerdict};
+  var SECTION={status:"s-status",funding:"s-funding",basis:"s-basis",turtle:"s-turtle",reversal:"s-reversal",live:"s-live",scalp:"s-scalp",research:"s-research",orderbook:"s-orderbook",fsig:"s-fsig",kimchi:"s-kimchi",macro:"s-macro",listing:"s-listing",momentum:"s-momentum",grid:"s-grid",kr:"s-kr",krb:"s-krb",krbt:"s-krbt",verdict:"s-verdict"};
+
+  function safeRender(key,data){
+    try{ RENDER[key](data); }catch(e){ setErr(SECTION[key],"render",String(e&&e.message||e)); }
+  }
+  function markTileFail(key){
+    var map={status:"t-gate",funding:"t-carry",basis:"t-basis",turtle:"t-turtle",reversal:"t-rev",scalp:"t-scalp",live:"t-live",kr:"t-kr",verdict:"t-verdict"};
+    if(map[key]){ $(map[key]).textContent="-"; }
+  }
+  // ---------------- 불러오기 ----------------
+  // 1) 현황판에 함께 실린 결과 파일(data/*.json)을 바로 읽어 그린다. 커넥터·허용 창 없이 폰에서도 열린다.
+  //    이 사본은 매일 자동 작업이 저장소 main 의 최신 파일로 갈아 끼운다(data/_meta.json 에 시각 기록).
+  // 2) "최신으로" 버튼을 누르면 GitHub 커넥터로 main 을 직접 읽어, 사본보다 새 파일만 다시 그린다.
+  var shown={};            // key -> 화면에 그린 데이터의 date
+  var dates=[], META=null;
+  function missing(k){
+    if(k==="live"){ rLiveMissing(); return true; }
+    if(k==="reversal"){ rRevMissing(); return true; }
+    if(k==="grid"){ rGridMissing(); return true; }
+    if(k==="verdict"){ rVerdictMissing(); return true; }
+    if(k==="kr"||k==="krb"||k==="krbt"){ rKrMissing(k); return true; }
+    return false;
+  }
+  function todayKst(){ return new Date(Date.now()+9*3600e3).toISOString().slice(0,10); }
+  function daysBetween(a,b){ return Math.round((Date.parse(b)-Date.parse(a))/864e5); }
+  function updateAsof(meta){
+    var newest=dates.slice().sort().slice(-1)[0]||"-";
+    var lag=newest!=="-"?daysBetween(newest,todayKst()):null;
+    var txt="기준일 "+newest+(meta&&meta.published_at_kst?" · 현황판 반영 "+meta.published_at_kst+" KST":"");
+    $("asof").textContent=txt;
+    if(lag!=null && lag>=2){
+      var n=$("notice"); n.hidden=false; n.className="notice bad";
+      n.textContent="결과가 "+lag+"일 묵었다(기준일 "+newest+"). 매일 갱신 작업이나 GitHub Actions 가 멈췄을 수 있다. \"최신으로\" 를 눌러 저장소를 직접 읽어 본다.";
+    }
+  }
+  function take(k,data,src){
+    if(!data) return;
+    var d=data.date||"";
+    if(shown[k]!=null && src==="live" && d && shown[k]>=d) return;   // 사본과 같거나 오래되면 그대로 둔다
+    shown[k]=d; if(d) dates.push(d);
+    safeRender(k,data);
+  }
+  function loadSnapshot(){
+    var keys=Object.keys(FILES), left=keys.length;
+    var done=function(){ if(--left>0) return; updateAsof(META); };
+    fetch("data/_meta.json",{cache:"no-store"}).then(function(r){return r.ok?r.json():null;}).then(function(m){META=m; if(left===0) updateAsof(META);}).catch(function(){});
+    keys.forEach(function(k){
+      fetch("data/"+FILES[k],{cache:"no-store"}).then(function(r){
+        if(r.status===404) return null;
+        if(!r.ok) throw new Error("HTTP "+r.status);
+        return r.json();
+      }).then(function(data){
+        if(data===null){ if(!missing(k)) setErr(SECTION[k],"tool_error","404"); }
+        else take(k,data,"snapshot");
+      }).catch(function(e){
+        markTileFail(k); setErr(SECTION[k],"snapshot",String(e&&e.message||e));
+      }).then(done);
+    });
+  }
+  function withTimeout(p,ms){ return Promise.race([p,new Promise(function(_,rej){setTimeout(function(){rej({code:"timeout",message:ms/1000+"초 안에 응답 없음"});},ms);})]); }
+  function loadLive(){
+    var btn=$("refresh"), n=$("notice");
+    btn.disabled=true; btn.textContent="읽는 중…";
+    n.hidden=false; n.className="notice"; n.textContent="GitHub 커넥터로 저장소 main 을 직접 읽는 중. 처음이면 허용 창이 뜬다.";
+    var fin=function(msg,bad){ btn.disabled=false; btn.textContent="최신으로"; n.hidden=false; n.className="notice"+(bad?" bad":""); n.textContent=msg; };
+    withTimeout(window.claude&&window.claude.use?window.claude.use("mcp"):Promise.resolve(null),12000).then(function(mcp){
+      if(!mcp){ fin("이 화면에서는 GitHub 커넥터를 쓸 수 없다. 아래는 현황판에 실린 사본(매일 자동 갱신)이다.",false); return; }
+      var keys=Object.keys(FILES), left=keys.length, newer=0, fails={};
+      keys.forEach(function(k){
+        withTimeout(mcp.callTool(SERVER,"get_file_contents",{owner:OWNER,repo:REPO,path:FILES[k]},{cache:{refresh:true}}),25000).then(function(r){
+          var data=parseResult(r); var before=shown[k]; take(k,data,"live"); if(shown[k]!==before) newer++;
+        }).catch(function(e){ var c=(e&&e.code)||"error"; if(!(c==="tool_error"&&/404|not found/i.test((e&&e.message)||""))) fails[c]=(fails[c]||0)+1; })
+        .then(function(){
+          if(--left>0) return;
+          updateAsof(META);
+          var fk=Object.keys(fails);
+          if(!fk.length) fin("저장소 main 과 맞췄다. 새로 바뀐 카드 "+newer+"개.",false);
+          else if(fails.server_not_connected) fin("GitHub 커넥터가 연결돼 있지 않다(claude.ai 설정 → 커넥터). 아래는 현황판에 실린 사본이다.",true);
+          else if(fails.consent_required||fails.not_in_manifest||fails.not_granted) fin("GitHub 읽기를 허용하지 않았다. 아래는 현황판에 실린 사본이다.",true);
+          else fin("일부를 직접 읽지 못했다("+fk.map(function(c){return c+" "+fails[c];}).join(", ")+"). 나머지는 현황판에 실린 사본이다. 새로 바뀐 카드 "+newer+"개.",true);
+        });
+      });
+    }).catch(function(e){ fin("GitHub 커넥터가 응답하지 않는다("+((e&&e.message)||"오류")+"). 아래는 현황판에 실린 사본이다.",true); });
+  }
+  $("refresh").textContent="최신으로";
+  $("refresh").addEventListener("click",loadLive);
+  loadSnapshot();
+})();
+</script>
