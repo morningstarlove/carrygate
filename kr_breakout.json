@@ -1,6 +1,6 @@
 {
  "date": "2026-10-07",
- "generated_at_utc": "2026-10-07T09:08:42Z",
+ "generated_at_utc": "2026-10-07T09:15:01Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -269,10 +269,15 @@
    }
   ]
  },
+ "signal_date": "2026-10-07",
+ "signals_frozen": false,
+ "frozen_dates": [
+  "2026-10-06"
+ ],
  "variants": {
   "base": {
    "label": "동조 업종 + 패턴 돌파 (기본)",
-   "signals": 16,
+   "signals": 15,
    "trades": 2,
    "wins": 0,
    "win_rate": 0.0,
@@ -280,13 +285,13 @@
    "avg_loss_pct": -7.45,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -1.89,
-   "equity_final": 9810608,
-   "max_drawdown_pct": 1.89,
+   "total_return_pct": -2.71,
+   "equity_final": 9728755,
+   "max_drawdown_pct": 2.71,
    "avg_hold_days": 1,
    "skipped": {
     "gap": 0,
-    "limit": 9,
+    "limit": 8,
     "cooldown": 0,
     "size": 0,
     "no_bar": 0
@@ -320,7 +325,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -1.89
+    "2026": -2.71
    },
    "open_positions": [
     {
@@ -350,23 +355,23 @@
      "unrealized_pct": 1.12
     },
     {
-     "code": "069540",
-     "name": "LIGHTRON FIBER-OPTIC DEVICES INC.",
-     "group": "Semiconductors",
+     "code": "158430",
+     "name": "ATON, Inc.",
+     "group": "Packaged Software",
      "pattern": "flag",
      "entry_date": "2026-10-07",
-     "entry": 5135.36,
-     "stop": 4775.88,
-     "shares": 278,
+     "entry": 7021.0,
+     "stop": 6529.53,
+     "shares": 203,
      "bars_held": 1,
-     "last_close": 5210.0,
-     "unrealized_pct": 1.45
+     "last_close": 6720.0,
+     "unrealized_pct": -4.29
     }
    ]
   },
   "no_sector": {
    "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
-   "signals": 29,
+   "signals": 28,
    "trades": 4,
    "wins": 0,
    "win_rate": 0.0,
@@ -380,7 +385,7 @@
    "avg_hold_days": 1,
    "skipped": {
     "gap": 0,
-    "limit": 17,
+    "limit": 16,
     "cooldown": 4,
     "size": 0,
     "no_bar": 0
@@ -391,10 +396,15 @@
      "wins": 0,
      "pnl_krw": -201186
     },
-    "triangle": {
-     "n": 2,
+    "cup_handle": {
+     "n": 1,
      "wins": 0,
-     "pnl_krw": -200103
+     "pnl_krw": -103749
+    },
+    "triangle": {
+     "n": 1,
+     "wins": 0,
+     "pnl_krw": -96354
     }
    },
    "by_sync": {
@@ -444,7 +454,7 @@
   },
   "hold_10": {
    "label": "동조 + 패턴, 보유 10일",
-   "signals": 16,
+   "signals": 15,
    "trades": 2,
    "wins": 0,
    "win_rate": 0.0,
@@ -452,13 +462,13 @@
    "avg_loss_pct": -7.45,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -1.89,
-   "equity_final": 9810608,
-   "max_drawdown_pct": 1.89,
+   "total_return_pct": -2.71,
+   "equity_final": 9728755,
+   "max_drawdown_pct": 2.71,
    "avg_hold_days": 1,
    "skipped": {
     "gap": 0,
-    "limit": 9,
+    "limit": 8,
     "cooldown": 0,
     "size": 0,
     "no_bar": 0
@@ -492,7 +502,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -1.89
+    "2026": -2.71
    },
    "open_positions": [
     {
@@ -522,23 +532,23 @@
      "unrealized_pct": 1.12
     },
     {
-     "code": "069540",
-     "name": "LIGHTRON FIBER-OPTIC DEVICES INC.",
-     "group": "Semiconductors",
+     "code": "158430",
+     "name": "ATON, Inc.",
+     "group": "Packaged Software",
      "pattern": "flag",
      "entry_date": "2026-10-07",
-     "entry": 5135.36,
-     "stop": 4775.88,
-     "shares": 278,
+     "entry": 7021.0,
+     "stop": 6529.53,
+     "shares": 203,
      "bars_held": 1,
-     "last_close": 5210.0,
-     "unrealized_pct": 1.45
+     "last_close": 6720.0,
+     "unrealized_pct": -4.29
     }
    ]
   },
   "risk_2": {
    "label": "동조 + 패턴, 위험 2% (명목 상한 30%)",
-   "signals": 16,
+   "signals": 15,
    "trades": 2,
    "wins": 0,
    "win_rate": 0.0,
@@ -554,7 +564,7 @@
     "gap": 0,
     "limit": 0,
     "cooldown": 0,
-    "size": 11,
+    "size": 10,
     "no_bar": 0
    },
    "by_pattern": {
@@ -677,7 +687,7 @@
     "code": "066570",
     "name": "LG Electronics Inc.",
     "group": "Electronics/Appliances",
-    "pattern": "triangle",
+    "pattern": "cup_handle",
     "patterns": [
      "box",
      "triangle",
