@@ -1,7 +1,7 @@
 {
   "schema": "carrygate-verdict/1",
   "date": "2026-10-07",
-  "generated_at_utc": "2026-10-07T09:08:42Z",
+  "generated_at_utc": "2026-10-07T09:10:15Z",
   "criteria_sealed": "2026-10-06",
   "tracks": {
     "kr_breakout": {
@@ -167,12 +167,85 @@
     },
     "scalp": {
       "history_days": 9,
-      "rows_total": 378,
-      "rows_positive": 94,
-      "rows_robust": 12,
-      "scalp_verdict": "378개 조합 중 순수익 플러스 94개, 견고 12개. 본전 승률: 5분 보유 96~272%, 30분 보유 69~165%. 규칙 합산이 가장 나은 시간 단위 15m. 기록 9일차 — 7일 이상 모여야 후보 판단",
+      "combos": 378,
+      "candidates": 12,
+      "top": [
+        {
+          "key": "okx:XRP:15m:vwap_fade_lim",
+          "net_pct": 6.468,
+          "days": 9,
+          "pos_days": 7,
+          "trades": 24
+        },
+        {
+          "key": "okx:XRP:15m:vwap_fade",
+          "net_pct": 5.484,
+          "days": 9,
+          "pos_days": 7,
+          "trades": 24
+        },
+        {
+          "key": "hyperliquid:XRP:15m:vwap_fade_lim",
+          "net_pct": 4.841,
+          "days": 9,
+          "pos_days": 6,
+          "trades": 21
+        },
+        {
+          "key": "hyperliquid:XRP:15m:vwap_fade",
+          "net_pct": 4.361,
+          "days": 9,
+          "pos_days": 6,
+          "trades": 22
+        },
+        {
+          "key": "okx:ETH:15m:vwap_fade_lim",
+          "net_pct": 4.298,
+          "days": 9,
+          "pos_days": 6,
+          "trades": 21
+        },
+        {
+          "key": "okx:DOGE:15m:vwap_fade_lim",
+          "net_pct": 3.669,
+          "days": 9,
+          "pos_days": 6,
+          "trades": 17
+        },
+        {
+          "key": "okx:ETH:15m:vwap_fade",
+          "net_pct": 3.375,
+          "days": 9,
+          "pos_days": 6,
+          "trades": 21
+        },
+        {
+          "key": "okx:DOGE:15m:vwap_fade",
+          "net_pct": 3.116,
+          "days": 9,
+          "pos_days": 6,
+          "trades": 18
+        },
+        {
+          "key": "hyperliquid:ETH:5m:mr_z20_lim",
+          "net_pct": 1.671,
+          "days": 9,
+          "pos_days": 6,
+          "trades": 93
+        },
+        {
+          "key": "hyperliquid:TRX:15m:vwap_fade_lim",
+          "net_pct": 0.651,
+          "days": 8,
+          "pos_days": 6,
+          "trades": 19
+        }
+      ],
+      "warnings": [
+        "조합 378개를 동시에 시험하므로 후보 일부는 우연이다. 합격 = 소액 체결 시험 후보이지 실력 확정이 아니다"
+      ],
       "status": "PASS",
-      "reason": "견고한 조합 12개 — scalp.py 기준(순수익>0, 양수일 60%, 기준선 초과) 통과"
+      "reason": "누적 9일, 후보 12개 (조합 378개 중) — 누적 순수익>0·플러스 일수 60%·기준선 초과"
     }
   },
   "errors": {},

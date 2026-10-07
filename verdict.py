@@ -176,18 +176,27 @@ def judge_venue_track(data, crit, name):
             "forward_trades_total": total_n, "venues": venues}
 
 
-def judge_scalp(data, crit):
-    s = data.get("summary") or {}
-    days = s.get("history_days") or 0
-    robust = s.get("rows_robust") or 0
-    out = {"history_days": days, "rows_total": s.get("rows_total"), "rows_positive": s.get("rows_positive"),
-           "rows_robust": robust, "scalp_verdict": s.get("verdict")}
+def judge_scalp(history_rows, crit):
+    """scalp_history.jsonl 의 누적 기록에 scalp.py 의 후보 규칙(cumulative_candidates)을 그대로 적용한다.
+    (2026-10-07 수정: 처음엔 scalp.json 의 '어제 하루' 견고 표시를 읽어 근거가 틀렸다. 기준값은 그대로.)"""
+    sys.path.insert(0, HERE)
+    import scalp as S
+    days = len(history_rows)
+    acc = S.accumulate(history_rows)
+    combos = sum(1 for k in acc if S.split_key(k)[3] != S.BASELINE)
+    cands = S.cumulative_candidates(acc) if days >= crit["min_days"] else []
+    out = {"history_days": days, "combos": combos, "candidates": len(cands),
+           "top": [{"key": k, "net_pct": round(a["nt"], 3), "days": a["days"], "pos_days": a["pos"], "trades": a["n"]}
+                   for k, a in cands[:10]],
+           "warnings": []}
     if days < crit["min_days"]:
         out["status"], out["reason"] = NOT_YET, "기록 %d일 — 최소 %d일 전에는 후보를 말하지 않는다" % (days, crit["min_days"])
-    elif robust > 0:
-        out["status"], out["reason"] = PASS, "견고한 조합 %d개 — scalp.py 기준(순수익>0, 양수일 60%%, 기준선 초과) 통과" % robust
+    elif cands:
+        out["status"], out["reason"] = PASS, "누적 %d일, 후보 %d개 (조합 %d개 중) — 누적 순수익>0·플러스 일수 60%%·기준선 초과" % (
+            days, len(cands), combos)
+        out["warnings"].append("조합 %d개를 동시에 시험하므로 후보 일부는 우연이다. 합격 = 소액 체결 시험 후보이지 실력 확정이 아니다" % combos)
     else:
-        out["status"], out["reason"] = FAIL, "기록 %d일에 견고한 조합 0개 — 지금 규칙 중 비용을 이기는 것이 없다" % days
+        out["status"], out["reason"] = FAIL, "누적 %d일, 후보 0개 — 지금 규칙 중 비용을 이기는 것이 없다" % days
     return out
 
 
@@ -299,11 +308,16 @@ def build(crit=None, files=None):
         except Exception as e:
             out["errors"][name] = "%s: %s" % (type(e).__name__, e)
     try:
-        sc = get("scalp.json")
-        if sc:
-            out["tracks"]["scalp"] = judge_scalp(sc, crit["scalp"])
+        if "scalp_history" in files:
+            hist = files["scalp_history"]
         else:
-            out["errors"]["scalp"] = "scalp.json 없음"
+            sys.path.insert(0, HERE)
+            import scalp as S
+            hist = S.load_history(os.path.join(HERE, "scalp_history.jsonl"))
+        if hist:
+            out["tracks"]["scalp"] = judge_scalp(hist, crit["scalp"])
+        else:
+            out["errors"]["scalp"] = "scalp_history.jsonl 없음"
     except Exception as e:
         out["errors"]["scalp"] = "%s: %s" % (type(e).__name__, e)
     try:
@@ -327,7 +341,7 @@ def history_line(out):
             line[name] = {v: {"n": f["trades"], "wins": f["wins"], "pf": f["profit_factor"], "z": (f["luck"] or {}).get("z")}
                           for v, f in t[name]["venues"].items()}
     if "scalp" in t:
-        line["scalp"] = {"days": t["scalp"]["history_days"], "robust": t["scalp"]["rows_robust"]}
+        line["scalp"] = {"days": t["scalp"]["history_days"], "candidates": t["scalp"]["candidates"]}
     return line
 
 
@@ -372,8 +386,11 @@ def print_summary(out):
                     print("          ⚠ " + w)
     if "scalp" in t:
         s = t["scalp"]
-        print("[scalp] %-7s 기록 %d일 조합 %s개 중 양수 %s 견고 %s | %s" % (
-            s["status"], s["history_days"], s["rows_total"], s["rows_positive"], s["rows_robust"], s["reason"]))
+        print("[scalp] %-7s %s" % (s["status"], s["reason"]))
+        for c in s["top"][:5]:
+            print("   %-38s 누적 %+.3f%%  %d일 중 %d일 플러스  매매 %d건" % (c["key"], c["net_pct"], c["days"], c["pos_days"], c["trades"]))
+        for w in s.get("warnings", []):
+            print("   ⚠ " + w)
     rl = out["rules_lock"]
     print("[rules_lock] %s" % ("일치" if rl["ok"] else "불일치 — 사전 등록 없이 규칙이 바뀌었다"))
     for d in rl["diffs"]:
