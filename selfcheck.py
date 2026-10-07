@@ -386,6 +386,55 @@ def check_grid(problems, notes):
     return checked
 
 
+def check_reversal(problems, notes):
+    """추세 전환(4시간봉): 실현 순수익을 매매별 수익률의 복리 곱에서 다시 계산해 대조하고, 손절·진입 규칙을 본다.
+    - 손절 시작값(pattern_low) 은 최종 손절선 이하여야 한다(손절선은 올라가기만 한다)
+    - 눌림 지정가 진입(pullback_limit)은 목선 이하 가격에 체결돼야 한다
+    - 손절 청산(reason=stop)은 pattern_low 이하 가격에 나가야 한다"""
+    d = load_json("reversal.json")
+    if d is None:
+        notes.append("reversal.json 이 없다")
+        return 0
+    checked = 0
+    for v, vd in (d.get("venues") or {}).items():
+        items = [("%s/%s" % (v, m), md) for m, md in (vd.get("markets") or {}).items()]
+        if vd.get("portfolio"):
+            items.append(("%s/포트폴리오" % v, vd["portfolio"]))
+        for vn, e in (vd.get("variants") or {}).items():
+            items += [("%s/%s/%s" % (vn, v, m), md) for m, md in (e.get("markets") or {}).items()]
+            if e.get("portfolio"):
+                items.append(("%s/%s/포트폴리오" % (vn, v), e["portfolio"]))
+        for name, md in items:
+            rets = md.get("returns_pct") or []
+            st = md.get("stats") or {}
+            net = 1.0
+            for r in rets:
+                net *= 1.0 + r / 100.0
+            net = (net - 1.0) * 100.0
+            if st.get("trades") != len(rets):
+                problems.append("추세전환 %s: 매매 수(%s)와 수익률 목록(%d)이 다르다" % (name, st.get("trades"), len(rets)))
+                continue
+            if abs(net - (st.get("realized_net_pct") or 0.0)) > max(0.01, 0.001 * abs(net)):
+                problems.append("추세전환 %s: 실현 순수익 불일치 (저장 %.3f vs 재계산 %.3f)" % (name, st.get("realized_net_pct") or 0.0, net))
+                continue
+            bad = None
+            for t in (md.get("recent_trades") or []) + (md.get("forward_trades") or []):
+                tol = 1e-6 * max(1.0, t["entry"])
+                if t["stop_final"] < t["pattern_low"] - tol:
+                    bad = "손절선이 패턴 저점보다 낮다 (%s)" % t.get("entry_date")
+                elif t.get("entry_how") == "pullback_limit" and t["entry"] > t["neckline"] + tol:
+                    bad = "눌림 지정가 진입이 목선보다 높다 (%s)" % t.get("entry_date")
+                elif t.get("reason") == "stop" and t["exit"] > t["pattern_low"] + tol:
+                    bad = "손절 청산가가 패턴 저점보다 높다 (%s)" % t.get("entry_date")
+                if bad:
+                    break
+            if bad:
+                problems.append("추세전환 %s: %s" % (name, bad))
+                continue
+            checked += 1
+    return checked
+
+
 def main():
     problems, notes = [], []
 
@@ -404,15 +453,16 @@ def main():
     check_jsonl_dates("orderbook_history.jsonl", "호가창", problems, notes)
     basis_checked = check_basis(problems, notes)
     turtle_checked = check_turtle(problems, notes)
+    reversal_checked = check_reversal(problems, notes)
     grid_checked = check_grid(problems, notes)
     for path, label in (("basis_history.jsonl", "베이시스"), ("funding_signal_history.jsonl", "펀딩 신호"),
                         ("kimchi_history.jsonl", "김치프리미엄"), ("momentum_history.jsonl", "듀얼 모멘텀"),
                         ("live_history.jsonl", "실전 캐리"), ("turtle_history.jsonl", "터틀"),
-                        ("grid_history.jsonl", "그리드")):
+                        ("reversal_history.jsonl", "추세 전환"), ("grid_history.jsonl", "그리드")):
         check_jsonl_dates(path, label, problems, notes)
 
     print("=== 검산 ===")
-    print("재계산 대조: 캐리 %d건, 초단타 %d건, 베이시스 %d건, 터틀 %d건, 그리드 %d건 통과" % (checked, scalp_checked, basis_checked, turtle_checked, grid_checked))
+    print("재계산 대조: 캐리 %d건, 초단타 %d건, 베이시스 %d건, 터틀 %d건, 추세전환 %d건, 그리드 %d건 통과" % (checked, scalp_checked, basis_checked, turtle_checked, reversal_checked, grid_checked))
     for m in notes:
         print("  · %s" % m)
 

@@ -1,0 +1,193 @@
+{
+  "_comment": "규칙 잠금. 트랙 코드의 규칙 상수와 criteria.json 지문을 적어 둔다. tests/test_verdict.py 가 매번 대조하므로, 규칙을 바꾸면 반드시 (1) proposals.md 에 근거 (2) 그 트랙의 RULE_FIXED 를 새 날짜로 (3) `python verdict.py --lock` 순서로 간다.",
+  "_locked_at": "2026-10-06T20:41:19Z",
+  "criteria_sha256": "dbcccbcb26492ab5052cf03067a9ad31262af47a68cae60d75386958bf2b5ed3",
+  "kr_breakout": {
+    "rule_fixed": "2026-10-05",
+    "rules": {
+      "cooldown": 10,
+      "equity0": 10000000.0,
+      "exit_low_n": 10,
+      "fee_pct": 0.015,
+      "gap_skip_pct": 8.0,
+      "hold_max": 20,
+      "max_per_group": 2,
+      "max_pos": 5,
+      "max_pos_pct": 20.0,
+      "pattern_rules": {
+        "limit_up_pct": 29.5,
+        "min_value_krw": 10000000000.0,
+        "vol_mult": 1.5
+      },
+      "risk_pct": 1.0,
+      "slip_pct": 0.3,
+      "stop_pct": 7.0,
+      "sync_rules": {
+        "median_change_pct": 2.0,
+        "median_week_pct": 5.0,
+        "min_group": 3,
+        "up_ratio": 0.6
+      },
+      "tax_pct": 0.15,
+      "variants": {
+        "base": {
+          "hold_max": 20,
+          "label": "동조 업종 + 패턴 돌파 (기본)",
+          "max_pos_pct": 20.0,
+          "need_sync": true,
+          "risk_pct": 1.0
+        },
+        "hold_10": {
+          "hold_max": 10,
+          "label": "동조 + 패턴, 보유 10일",
+          "max_pos_pct": 20.0,
+          "need_sync": true,
+          "risk_pct": 1.0
+        },
+        "no_sector": {
+          "hold_max": 20,
+          "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
+          "max_pos_pct": 20.0,
+          "need_sync": false,
+          "risk_pct": 1.0
+        },
+        "risk_2": {
+          "hold_max": 20,
+          "label": "동조 + 패턴, 위험 2% (명목 상한 30%)",
+          "max_pos_pct": 30.0,
+          "need_sync": true,
+          "risk_pct": 2.0
+        }
+      }
+    }
+  },
+  "reversal": {
+    "rule_fixed": "2026-10-05",
+    "rules": {
+      "atr_bars": 20,
+      "bar_minutes": 240,
+      "break_wait_bars": 30,
+      "fees": {
+        "okx": 0.05,
+        "upbit": 0.05
+      },
+      "lookback_bars": 120,
+      "max_notional_pct": 100.0,
+      "min_height_atr": 1.0,
+      "pivot_k": 3,
+      "pullback_wait_bars": 12,
+      "risk_pct_per_trade": 1.0,
+      "slippage_pct": 0.05,
+      "variants": {
+        "break_entry": {
+          "pullback": false,
+          "vol_mult": 2.0
+        },
+        "no_vol": {
+          "pullback": true,
+          "vol_mult": 0.0
+        }
+      },
+      "vol_avg_bars": 20,
+      "vol_mult": 2.0
+    }
+  },
+  "scalp": {
+    "rules": {
+      "baseline": "baseline_hold5",
+      "fees": {
+        "binance": {
+          "maker_pct": 0.02,
+          "taker_pct": 0.05
+        },
+        "hyperliquid": {
+          "maker_pct": 0.015,
+          "taker_pct": 0.045
+        },
+        "okx": {
+          "maker_pct": 0.02,
+          "taker_pct": 0.05
+        },
+        "upbit": {
+          "maker_pct": 0.05,
+          "taker_pct": 0.05
+        }
+      },
+      "limit_ttl": 3,
+      "spread_ticks": 1.0,
+      "strategies": [
+        {
+          "exec": "market",
+          "key": "mr_z20",
+          "max_hold": 30
+        },
+        {
+          "exec": "limit",
+          "key": "mr_z20_lim",
+          "max_hold": 30
+        },
+        {
+          "exec": "market",
+          "key": "brk_20",
+          "max_hold": 60
+        },
+        {
+          "exec": "market",
+          "key": "vol_spike",
+          "max_hold": 5
+        },
+        {
+          "exec": "market",
+          "key": "vwap_fade",
+          "max_hold": 60
+        },
+        {
+          "exec": "limit",
+          "key": "vwap_fade_lim",
+          "max_hold": 60
+        },
+        {
+          "exec": "market",
+          "key": "vb_05",
+          "max_hold": 100000
+        },
+        {
+          "exec": "market",
+          "key": "baseline_hold5",
+          "max_hold": 5
+        }
+      ]
+    }
+  },
+  "turtle": {
+    "rule_fixed": "2026-10-02",
+    "rules": {
+      "atr_days": 20,
+      "entry_breakout_days": 20,
+      "exit_breakout_days": 10,
+      "fees": {
+        "okx": 0.05,
+        "upbit": 0.05
+      },
+      "max_notional_pct": 100.0,
+      "risk_pct_per_trade": 1.0,
+      "slippage_pct": 0.05,
+      "stop_n_mult": 2.0,
+      "variants": {
+        "ch_22_3": {
+          "chandelier": {
+            "atr_n": 22,
+            "mult": 3.0
+          },
+          "entry_n": 20,
+          "exit_n": 10
+        },
+        "s2_55_20": {
+          "chandelier": null,
+          "entry_n": 55,
+          "exit_n": 20
+        }
+      }
+    }
+  }
+}

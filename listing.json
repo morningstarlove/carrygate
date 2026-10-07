@@ -1,16 +1,16 @@
 {
  "schema": "carrygate-listing/1",
- "date": "2026-10-04",
- "generated_at_kst": "2026-10-04 08:47:43",
+ "date": "2026-10-07",
+ "generated_at_kst": "2026-10-07 15:09:25",
  "method": {
   "notice": "업비트 공지(category=trade) 중 제목에 ('신규 거래지원', '거래지원 안내', '디지털 자산 추가', '원화 마켓 추가', '마켓 추가') 가 있고 ('종료', '유의', '해제', '변경', '이벤트', '입출금', '지연') 가 없는 것. 괄호 안 티커 추출",
   "reaction": "공지 시각(분)의 해외 선물 시가 대비 (5, 15, 60, 240)분 뒤 시가 수익률(%), 60분 내 최고가 상승폭"
  },
  "notices_seen": 0,
- "markets_krw": 291,
+ "markets_krw": 292,
  "market_snapshot_existed": true,
- "listings_seen": 0,
- "new_today": 0,
+ "listings_seen": 1,
+ "new_today": 3,
  "events": [
   {
    "id": "mkt:KRW-POD:1790924700",
@@ -43,27 +43,76 @@
    "post60_pct": 83.365,
    "post240_pct": 73.805,
    "maxup60_pct": 107.457
+  },
+  {
+   "id": "mkt:KRW-NMR:1791287400",
+   "title": "업비트 마켓 목록에 새로 등장: KRW-NMR",
+   "time_utc": "2026-10-06T11:50:00Z",
+   "ts": 1791287400,
+   "ticker": "NMR",
+   "venue": "hyperliquid",
+   "listed_abroad": false
+  },
+  {
+   "id": "mkt:KRW-NMR:1791287400",
+   "title": "업비트 마켓 목록에 새로 등장: KRW-NMR",
+   "time_utc": "2026-10-06T11:50:00Z",
+   "ts": 1791287400,
+   "ticker": "NMR",
+   "venue": "okx",
+   "listed_abroad": true,
+   "post5_pct": -0.74,
+   "post15_pct": 0.289,
+   "post60_pct": 3.627,
+   "post240_pct": 6.187,
+   "maxup60_pct": 5.415
+  },
+  {
+   "id": "mkt:KRW-NMR:1791287400",
+   "title": "업비트 마켓 목록에 새로 등장: KRW-NMR",
+   "time_utc": "2026-10-06T11:50:00Z",
+   "ts": 1791287400,
+   "ticker": "NMR",
+   "venue": "upbit",
+   "listed_abroad": true,
+   "post5_pct": -7.709,
+   "post15_pct": -12.74,
+   "post60_pct": -14.043,
+   "post240_pct": -17.409,
+   "maxup60_pct": 10.604
   }
  ],
  "errors": {
   "notices": "fetch failed https://api-manager.upbit.com/api/v1/announcements?os=web&page=1&per_page=20&category=trade : HTTP Error 403: Forbidden"
  },
  "summary": {
-  "notices": 1,
-  "pairs": 3,
-  "with_price": 1,
+  "notices": 2,
+  "pairs": 6,
+  "with_price": 3,
   "by_venue": {
-   "upbit": {
+   "okx": {
     "n": 1,
-    "post5_pct": 87.38,
-    "post5_pos_pct": 100.0,
-    "post15_pct": 82.41,
+    "post5_pct": -0.74,
+    "post5_pos_pct": 0.0,
+    "post15_pct": 0.29,
     "post15_pos_pct": 100.0,
-    "post60_pct": 83.36,
+    "post60_pct": 3.63,
     "post60_pos_pct": 100.0,
-    "post240_pct": 73.81,
+    "post240_pct": 6.19,
     "post240_pos_pct": 100.0,
-    "maxup60_pct": 107.46
+    "maxup60_pct": 5.42
+   },
+   "upbit": {
+    "n": 2,
+    "post5_pct": 39.84,
+    "post5_pos_pct": 50.0,
+    "post15_pct": 34.83,
+    "post15_pos_pct": 50.0,
+    "post60_pct": 34.66,
+    "post60_pos_pct": 50.0,
+    "post240_pct": 28.2,
+    "post240_pos_pct": 50.0,
+    "maxup60_pct": 59.03
    }
   }
  }

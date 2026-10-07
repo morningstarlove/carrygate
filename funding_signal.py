@@ -91,8 +91,10 @@ def okx_funding(coin, start, end):
 
 
 def okx_daily(coin, start, end):
-    """OKX 일봉. candles 엔드포인트는 한 번에 300개(약 10개월)를 준다."""
-    rows = http_json("https://www.okx.com/api/v5/market/candles?instId=%s-USDT-SWAP&bar=1D&limit=300" % coin).get("data") or []
+    """OKX 일봉. candles 엔드포인트는 한 번에 300개(약 10개월)를 준다.
+    bar=1Dutc 로 받아야 00:00 UTC 시작이라 펀딩 일합(UTC 날짜)·하이퍼리퀴드 일봉(UTC)과 같은 날짜가 된다 —
+    그냥 1D 는 홍콩시간(UTC+8) 기준이라 "다음날 시가" 가 실제로는 당일 16:00 UTC 가격이었다(2026-10-05 수정)."""
+    rows = http_json("https://www.okx.com/api/v5/market/candles?instId=%s-USDT-SWAP&bar=1Dutc&limit=300" % coin).get("data") or []
     out = {}
     for r in rows:
         t = int(r[0]) // 1000

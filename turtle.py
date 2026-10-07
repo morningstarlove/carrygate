@@ -487,6 +487,19 @@ def history_line(out):
     return line
 
 
+def write_history(out, path="turtle_history.jsonl"):
+    """하루 한 줄. 같은 날짜가 이미 있으면 덮어쓴다 (수동 실행 뒤 정기 실행이 와도 중복되지 않게)."""
+    try:
+        with open(path, encoding="utf-8") as fh:
+            rows = [l for l in fh.read().splitlines() if l.strip()]
+    except IOError:
+        rows = []
+    rows = [l for l in rows if json.loads(l).get("date") != out["date"]]
+    rows.append(json.dumps(history_line(out), ensure_ascii=False))
+    with open(path, "w", encoding="utf-8") as fh:
+        fh.write("\n".join(rows) + "\n")
+
+
 def print_summary(out):
     print("=== 터틀 규칙 (20일 돌파 / 10일 이탈 / 2N 손절 / 1%÷N) ===")
     for v, vd in out["venues"].items():
@@ -555,24 +568,7 @@ def main(argv=None):
     if not a.dry_run:
         with open("turtle.json", "w", encoding="utf-8") as fh:
             json.dump(out, fh, ensure_ascii=False, indent=1)
-        # 같은 날 두 번 돌면(수동 실행 등) 그날 줄을 바꿔 끼운다 — 날짜 중복이면 검산(selfcheck)이 실패한다
-        line = json.dumps(history_line(out), ensure_ascii=False)
-        try:
-            with open("turtle_history.jsonl", encoding="utf-8") as fh:
-                rows = [l for l in fh.read().splitlines() if l.strip()]
-        except IOError:
-            rows = []
-        keep = []
-        for l in rows:
-            try:
-                if json.loads(l).get("date") == out.get("date"):
-                    continue
-            except ValueError:
-                pass
-            keep.append(l)
-        keep.append(line)
-        with open("turtle_history.jsonl", "w", encoding="utf-8") as fh:
-            fh.write("\n".join(keep) + "\n")
+        write_history(out)
     return 0
 
 

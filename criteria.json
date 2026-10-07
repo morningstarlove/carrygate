@@ -1,0 +1,45 @@
+{
+  "_comment": "사전 등록(pre-registration) 판정 기준. 결과가 나오기 전에 봉인한다. 바꾸려면 proposals.md 에 근거를 적고, sealed 날짜를 새로 잡고, `python verdict.py --lock` 으로 잠금을 다시 만든다. verdict.py 는 이 파일만 읽어 PASS / FAIL / NOT_YET 을 기계로 판정한다.",
+  "sealed": "2026-10-06",
+  "sealed_by": "Claude 세션(설계) — 출처: HANDOVER.md 마일스톤 12-4 기준 4개, docs/REVERSAL_4H_PLAN.md 5절, HANDOVER.md 마일스톤 10 다음 단계, scalp.py 자체 규칙",
+  "status_meaning": {
+    "NOT_YET": "최소 건수 전. 판단하지 않는다",
+    "PASS": "사전 등록 기준을 넘었다. 다음 단계(소액 실전 설계) 후보",
+    "FAIL": "기준 미달. 규칙은 고치지 않고 '이 규칙은 안 된다'로 기록한다"
+  },
+  "kr_breakout": {
+    "source": "HANDOVER.md 마일스톤 12-4: 승률 25~35%, 손절 매매는 전부 −7% 안팎, 20일 보유 매매의 승 비율 90% 안팎, 신호 대부분 '자리 없음'. 승률 15% 아래 또는 20일 보유 매매가 지기 시작하면 생존 편향",
+    "variant": "base",
+    "control_variant": "no_sector",
+    "min_trades": 15,
+    "fail_if_win_rate_below_pct": 15.0,
+    "pass_if_win_rate_at_least_pct": 20.0,
+    "stop_trade_max_loss_pct": -9.5,
+    "stop_trade_tolerance_count": 1,
+    "hold20_min_trades": 5,
+    "hold20_fail_if_win_share_below": 0.6,
+    "backtest_file": "kr_backtest.json",
+    "luck_z_warn_below": -2.0
+  },
+  "reversal": {
+    "source": "docs/REVERSAL_4H_PLAN.md 5절: 순방향 20건 전 판단 금지, 손익비(profit factor) ≥ 1.5 면 소액 실전 후보. 변형 대비는 기록만",
+    "per_venue": true,
+    "min_trades": 20,
+    "pass_if_profit_factor_at_least": 1.5,
+    "fail_if_profit_factor_below": 1.0,
+    "luck_z_warn_below": -2.0
+  },
+  "turtle": {
+    "source": "HANDOVER.md 마일스톤 10 다음 단계: 순방향 20건 전 판단 금지. 합격선은 이 파일에서 처음 봉인(2026-10-06): 손익비 ≥ 1.2(백테스트 1.8) 이고 승률이 백테스트와 운 보정 z ≥ −2 로 어긋나지 않을 것. 손익비 < 1.0 이면 불합격",
+    "per_venue": true,
+    "min_trades": 20,
+    "pass_if_profit_factor_at_least": 1.2,
+    "fail_if_profit_factor_below": 1.0,
+    "fail_if_luck_z_below": -2.0,
+    "luck_z_warn_below": -2.0
+  },
+  "scalp": {
+    "source": "scalp.py 자체 규칙(MIN_DAYS=7, 누적 순수익 > 0, 양수일 60% 이상, 기준선 초과). verdict 는 그 결과를 옮겨 적는다",
+    "min_days": 7
+  }
+}

@@ -1,0 +1,79 @@
+name: "probe (수동 도구 — 접속 시험 · 4시간봉 fixture 저장)"
+
+# 수동 실행 전용 도구 모음. task 로 고른다.
+#  - probe:            미국 서버에서 바이낸스·바이비트 대체 경로가 열리는지 한 번 찍어 본다. 결과는 로그에만.
+#  - reversal_fixture: 추세 전환 매매법(reversal.py)의 오프라인 검증용 4시간봉 3년치를 업비트·OKX 에서 받아
+#                      tests/fixtures/reversal/ 에 CSV 로 저장하고 실행한 브랜치에 커밋한다.
+#                      (클라우드 세션 컨테이너에서는 거래소 접속이 막혀 있어 Actions 에서 받는다.)
+# 새 워크플로 파일은 main 에 있어야 실행 목록에 뜨므로, 브랜치에서 쓸 도구는 이 파일에 task 로 더한다.
+on:
+  workflow_dispatch:
+    inputs:
+      task:
+        description: "할 일"
+        type: choice
+        options: [probe, reversal_fixture]
+        default: probe
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    if: inputs.task == 'probe'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe
+        run: |
+          for u in \
+            "https://fapi.binance.com/fapi/v1/premiumIndex?symbol=BTCUSDT" \
+            "https://www.binance.com/bapi/futures/v1/public/future/common/get-funding-rate-history?symbol=BTCUSDT&page=1&rows=3" \
+            "https://data.binance.vision/?prefix=data/futures/um/daily/" \
+            "https://data-api.binance.vision/api/v3/ping" \
+            "https://eapi.binance.com/eapi/v1/ping" \
+            "https://api.bybit.com/v5/market/tickers?category=linear&symbol=BTCUSDT" \
+            "https://api.bytick.com/v5/market/tickers?category=linear&symbol=BTCUSDT" \
+            "https://api2.bybit.com/v5/market/tickers?category=linear&symbol=BTCUSDT" \
+            "https://api.bybit.nl/v5/market/tickers?category=linear&symbol=BTCUSDT" \
+            "https://api.bybit-tr.com/v5/market/tickers?category=linear&symbol=BTCUSDT" \
+            "https://api.coinalyze.net/v1/exchanges" \
+            "https://open-api.coinglass.com/public/v2/funding?symbol=BTC" \
+            "https://api.coingecko.com/api/v3/derivatives/exchanges/binance_futures?include_tickers=unexpired" \
+            "https://api.coingecko.com/api/v3/derivatives/exchanges/bybit?include_tickers=unexpired" \
+            "https://fapi.binance.com/fapi/v1/fundingRate?symbol=BTCUSDT&limit=3" ; do
+            code=$(curl -sS -m 20 -o /tmp/body -w "%{http_code}" -A "Mozilla/5.0" "$u" 2>/dev/null || echo "ERR")
+            echo "== $code  $u"
+            head -c 300 /tmp/body; echo; echo
+          done
+
+  reversal_fixture:
+    if: inputs.task == 'reversal_fixture'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Fetch 4h bars + backtest (결과 저장 안 함, fixture 만 저장)
+        run: python reversal.py --dry-run --save-fixture tests/fixtures/reversal
+
+      - name: Re-run from fixture (오프라인 경로가 같은 결과를 내는지)
+        run: python reversal.py --fixture tests/fixtures/reversal --dry-run
+
+      - name: Unit tests
+        run: python -m unittest tests.test_reversal
+
+      - name: Commit fixtures
+        run: |
+          git config user.name  "carrygate-bot"
+          git config user.email "carrygate-bot@users.noreply.github.com"
+          git add -A tests/fixtures/reversal
+          if git diff --staged --quiet; then
+            echo "no change"
+          else
+            git commit -m "reversal fixture $(date -u +%Y-%m-%d) (업비트·OKX 4시간봉 실데이터)"
+            git pull --rebase origin "${GITHUB_REF_NAME}" || true
+            git push
+          fi

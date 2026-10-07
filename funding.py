@@ -10,7 +10,7 @@ CARRYGATE — 캐리(펀딩비) 브리지
 
 주문 기능 없음. 읽기 전용 공개 API만 사용한다. API 키 불필요.
 """
-import json, time, sys, urllib.request, urllib.error
+import os, json, time, sys, urllib.request, urllib.error
 from datetime import datetime, timezone, timedelta
 
 COINS = ["BTC", "ETH", "XRP", "TRX", "LINK", "DOGE"]
@@ -51,6 +51,20 @@ VENUE_DOC_FEES = {
     "binance": (0.10, 0.05,  "바이낸스 공식 수수료표 일반 등급 (현물 0.10%, 선물 0.05%)"),
     "bybit":   (0.10, 0.055, "바이비트 공식 수수료표 일반 등급 (현물 0.10%, 선물 0.055%)"),
 }
+
+# --- CoinGecko 대체 경로 ------------------------------------------------------
+# 한국 중계 파일이 없거나 오래됐을 때, 미국 서버에서도 열리는 CoinGecko 파생상품 API 로 바이낸스·바이비트의
+# "현재" 펀딩비를 읽는다(probe 워크플로 2026-10-05 로 확인: 거래소 대체 도메인은 전부 차단, CoinGecko 는 200).
+# 정산 이력은 주지 않으므로 매일 한 번 찍은 값을 data/cg_funding_snapshots.jsonl 에 모아 7일 평균을 만든다.
+# 표본이 CG_MIN_SAMPLES 개 이상 모이기 전에는 단발값으로만 본다(진입 판정에 쓰지 않는다).
+CG_EXCHANGES = {"binance": "binance_futures", "bybit": "bybit"}
+CG_SNAPSHOTS = "data/cg_funding_snapshots.jsonl"
+CG_MIN_SAMPLES = 5
+CG_KEEP_DAYS = 14
+CG_RATE_IS_PERCENT = True          # CoinGecko 의 funding_rate 는 % 단위(0.01 = 0.01%). 첫 실측에서 확인한다
+# CoinGecko 는 정산주기를 주지 않는다. 두 거래소 공식 문서 기준 이 6개 코인은 8시간. 예외는 코인별로 적는다.
+CG_DEFAULT_INTERVAL_H = 8.0
+CG_INTERVAL_HOURS = {"binance": {}, "bybit": {}}
 
 
 def fee_drag(spot_pct, perp_pct):
@@ -380,6 +394,97 @@ def read_relay(path=RELAY_PATH, now=None):
     return info
 
 
+def cg_snapshots_load(path=CG_SNAPSHOTS):
+    rows = []
+    try:
+        with open(path, encoding="utf-8") as fp:
+            for line in fp:
+                line = line.strip()
+                if line:
+                    try:
+                        rows.append(json.loads(line))
+                    except Exception:
+                        pass
+    except IOError:
+        pass
+    return rows
+
+
+def cg_avg7(rows, venue, coin, now_ms=None, days=AVG_DAYS, min_samples=CG_MIN_SAMPLES):
+    """일별 표본에서 최근 N일 평균. (평균 또는 None, 표본 수)"""
+    now_ms = now_ms or time.time() * 1000.0
+    cutoff = now_ms - days * 86400e3
+    vals = [r["rate"] for r in rows if r.get("venue") == venue and r.get("coin") == coin
+            and r.get("rate") is not None and (r.get("t_ms") or 0) >= cutoff]
+    if len(vals) < min_samples:
+        return None, len(vals)
+    return sum(vals) / len(vals), len(vals)
+
+
+def cg_parse(venue, payload, snaps, now_ms):
+    """CoinGecko 파생상품 응답 -> ({코인: 항목}, 새 표본 목록). 무기한(USDT) 만 본다."""
+    rows, new = {}, []
+    for t in (payload.get("tickers") or []):
+        if t.get("contract_type") != "perpetual":
+            continue
+        sym = (t.get("symbol") or "").upper().replace("-", "").replace("_", "").replace("/", "")
+        fr = f(t.get("funding_rate"))
+        for c in COINS:
+            if sym != c + "USDT" or fr is None or c in rows:
+                continue
+            rate = fr / 100.0 if CG_RATE_IS_PERCENT else fr
+            h = CG_INTERVAL_HOURS.get(venue, {}).get(c, CG_DEFAULT_INTERVAL_H)
+            new.append({"t_ms": now_ms, "venue": venue, "coin": c, "rate": rate})
+            avg, n = cg_avg7(snaps + new, venue, c, now_ms)
+            mark, index = f(t.get("last")), f(t.get("index"))
+            rows[c] = {
+                "venue": venue, "interval_hours": h, "interval_assumed": True,
+                "funding_rate_now": rate, "funding_rate_avg7d": avg, "avg_samples": n,
+                "mark_price": mark, "index_price": index,
+                "premium_pct": round((mark / index - 1.0) * 100, 4) if (mark and index) else None,
+                "via": "coingecko 일별 표본",
+            }
+    return rows, new
+
+
+def src_coingecko(venues):
+    """아직 못 받은 거래소를 CoinGecko 로 채운다. ({거래소: {코인: 항목}}, 새 표본)"""
+    snaps = cg_snapshots_load()
+    now_ms = int(time.time() * 1000)
+    out, new = {}, []
+    for v in venues:
+        ex = CG_EXCHANGES.get(v)
+        if not ex:
+            continue
+        d = http_json("https://api.coingecko.com/api/v3/derivatives/exchanges/%s?include_tickers=unexpired" % ex)
+        rows, added = cg_parse(v, d, snaps, now_ms)
+        if rows:
+            out[v] = rows
+            new += added
+        time.sleep(2.0)                    # 무료 등급 분당 호출 제한 여유
+    return out, new
+
+
+def cg_snapshots_save(rows, new, path=CG_SNAPSHOTS, keep_days=CG_KEEP_DAYS, now_ms=None):
+    """표본을 합쳐 저장한다. 같은 날(UTC)·거래소·코인은 마지막 것만 남기고, keep_days 보다 오래된 것은 지운다."""
+    now_ms = now_ms or time.time() * 1000.0
+    cutoff = now_ms - keep_days * 86400e3
+    by_key = {}
+    for r in rows + new:
+        if (r.get("t_ms") or 0) < cutoff:
+            continue
+        day = datetime.fromtimestamp(r["t_ms"] / 1000.0, timezone.utc).strftime("%Y-%m-%d")
+        by_key[(day, r.get("venue"), r.get("coin"))] = r
+    kept = sorted(by_key.values(), key=lambda r: (r["t_ms"], r["venue"], r["coin"]))
+    d = os.path.dirname(path)
+    if d:
+        os.makedirs(d, exist_ok=True)
+    with open(path, "w", encoding="utf-8") as fp:
+        for r in kept:
+            fp.write(json.dumps(r, ensure_ascii=False) + "\n")
+    return len(kept)
+
+
 def venue_fees(venue, coin, hl):
     """(현물 1회 %, 선물 1회 %, 설명) — 거래소·코인별 실제 적용 수수료."""
     if venue in VENUE_DOC_FEES:
@@ -513,6 +618,24 @@ def main():
             failed[name] = failed.pop(name)[:80] + " → 한국 중계 파일 사용"
     relay.pop("venues", None)
 
+    # 그래도 비어 있으면 CoinGecko 로 채운다 (현재값 + 일별 표본 평균)
+    cg = {"used": [], "error": None, "samples": None}
+    missing = [v for v in RELAY_VENUES if v in failed]
+    if missing:
+        try:
+            rows_by, new = src_coingecko(missing)
+            for v, rows in rows_by.items():
+                for c, e in rows.items():
+                    if c in per_coin:
+                        per_coin[c].append(decorate(e, venue_fees(v, c, hl)))
+                ok.append(v)
+                cg["used"].append(v)
+                failed[v] = failed.pop(v)[:80] + " → CoinGecko 대체"
+            if new:
+                cg["samples"] = cg_snapshots_save(cg_snapshots_load(), new)
+        except Exception as e:
+            cg["error"] = str(e)[:200]
+
     coins = {}
     for c in COINS:
         vs = [v for v in per_coin[c] if v.get("decision_apr_pct") is not None]
@@ -589,9 +712,10 @@ def main():
             },
         },
         "sources_ok": ok,
-        "sources_failed": {k: v for k, v in failed.items() if k not in relay["used"]},
-        "sources_relayed": {k: failed[k] for k in relay["used"]},
+        "sources_failed": {k: v for k, v in failed.items() if k not in relay["used"] + cg["used"]},
+        "sources_relayed": {k: failed[k] for k in relay["used"] + cg["used"]},
         "kr_relay": relay,
+        "coingecko": cg,
         "gate_ref": gate,
         "coins": coins,
         "summary": {

@@ -1,0 +1,262 @@
+{
+  "schema": "carrygate-verdict/1",
+  "date": "2026-10-07",
+  "generated_at_utc": "2026-10-07T09:15:01Z",
+  "criteria_sealed": "2026-10-06",
+  "tracks": {
+    "kr_breakout": {
+      "variant": "base",
+      "forward_days": 2,
+      "rule_fixed": "2026-10-05",
+      "trades": 2,
+      "wins": 0,
+      "win_rate_pct": 0.0,
+      "total_return_pct": -2.71,
+      "max_drawdown_pct": 2.71,
+      "signals": 15,
+      "skipped_no_slot": 8,
+      "backtest_win_rate_pct": 28.86,
+      "luck": {
+        "expected_wins": 0.58,
+        "actual_wins": 0,
+        "z": -0.9
+      },
+      "checks": {},
+      "warnings": [],
+      "control": {
+        "variant": "no_sector",
+        "trades": 4,
+        "win_rate_pct": 0.0,
+        "total_return_pct": -4.23,
+        "return_delta_pct": 1.52
+      },
+      "status": "NOT_YET",
+      "reason": "순방향 매매 2건 — 최소 15건 전에는 판단하지 않는다"
+    },
+    "turtle": {
+      "rule_fixed": "2026-10-02",
+      "status": "NOT_YET",
+      "reason": "순방향 합계 0건: upbit=NOT_YET, okx=NOT_YET",
+      "forward_trades_total": 0,
+      "venues": {
+        "upbit": {
+          "trades": 0,
+          "wins": 0,
+          "win_rate_pct": null,
+          "net_pct": null,
+          "profit_factor": null,
+          "avg_r": null,
+          "backtest_win_rate_pct": 37.8378,
+          "backtest_profit_factor": 1.8202,
+          "backtest_trades": 111,
+          "luck": null,
+          "variants": {
+            "s2_55_20": {
+              "trades": 0,
+              "wins": 0,
+              "net_pct": null,
+              "profit_factor": null
+            },
+            "ch_22_3": {
+              "trades": 0,
+              "wins": 0,
+              "net_pct": null,
+              "profit_factor": null
+            }
+          },
+          "warnings": [],
+          "status": "NOT_YET",
+          "reason": "순방향 0건 — 최소 20건 전에는 판단하지 않는다"
+        },
+        "okx": {
+          "trades": 0,
+          "wins": 0,
+          "win_rate_pct": null,
+          "net_pct": null,
+          "profit_factor": null,
+          "avg_r": null,
+          "backtest_win_rate_pct": 34.0426,
+          "backtest_profit_factor": 1.2944,
+          "backtest_trades": 235,
+          "luck": null,
+          "variants": {
+            "s2_55_20": {
+              "trades": 0,
+              "wins": 0,
+              "net_pct": null,
+              "profit_factor": null
+            },
+            "ch_22_3": {
+              "trades": 0,
+              "wins": 0,
+              "net_pct": null,
+              "profit_factor": null
+            }
+          },
+          "warnings": [],
+          "status": "NOT_YET",
+          "reason": "순방향 0건 — 최소 20건 전에는 판단하지 않는다"
+        }
+      }
+    },
+    "reversal": {
+      "rule_fixed": "2026-10-05",
+      "status": "NOT_YET",
+      "reason": "순방향 합계 0건: upbit=NOT_YET, okx=NOT_YET",
+      "forward_trades_total": 0,
+      "venues": {
+        "upbit": {
+          "trades": 0,
+          "wins": 0,
+          "win_rate_pct": null,
+          "net_pct": null,
+          "profit_factor": null,
+          "avg_r": null,
+          "backtest_win_rate_pct": 37.0861,
+          "backtest_profit_factor": 2.8167,
+          "backtest_trades": 151,
+          "luck": null,
+          "variants": {
+            "no_vol": {
+              "trades": 0,
+              "wins": 0,
+              "net_pct": null,
+              "profit_factor": null
+            },
+            "break_entry": {
+              "trades": 0,
+              "wins": 0,
+              "net_pct": null,
+              "profit_factor": null
+            }
+          },
+          "warnings": [],
+          "status": "NOT_YET",
+          "reason": "순방향 0건 — 최소 20건 전에는 판단하지 않는다"
+        },
+        "okx": {
+          "trades": 0,
+          "wins": 0,
+          "win_rate_pct": null,
+          "net_pct": null,
+          "profit_factor": null,
+          "avg_r": null,
+          "backtest_win_rate_pct": 34.4156,
+          "backtest_profit_factor": 1.4425,
+          "backtest_trades": 154,
+          "luck": null,
+          "variants": {
+            "no_vol": {
+              "trades": 0,
+              "wins": 0,
+              "net_pct": null,
+              "profit_factor": null
+            },
+            "break_entry": {
+              "trades": 0,
+              "wins": 0,
+              "net_pct": null,
+              "profit_factor": null
+            }
+          },
+          "warnings": [],
+          "status": "NOT_YET",
+          "reason": "순방향 0건 — 최소 20건 전에는 판단하지 않는다"
+        }
+      }
+    },
+    "scalp": {
+      "history_days": 9,
+      "combos": 378,
+      "candidates": 12,
+      "top": [
+        {
+          "key": "okx:XRP:15m:vwap_fade_lim",
+          "net_pct": 6.468,
+          "days": 9,
+          "pos_days": 7,
+          "trades": 24
+        },
+        {
+          "key": "okx:XRP:15m:vwap_fade",
+          "net_pct": 5.484,
+          "days": 9,
+          "pos_days": 7,
+          "trades": 24
+        },
+        {
+          "key": "hyperliquid:XRP:15m:vwap_fade_lim",
+          "net_pct": 4.841,
+          "days": 9,
+          "pos_days": 6,
+          "trades": 21
+        },
+        {
+          "key": "hyperliquid:XRP:15m:vwap_fade",
+          "net_pct": 4.361,
+          "days": 9,
+          "pos_days": 6,
+          "trades": 22
+        },
+        {
+          "key": "okx:ETH:15m:vwap_fade_lim",
+          "net_pct": 4.298,
+          "days": 9,
+          "pos_days": 6,
+          "trades": 21
+        },
+        {
+          "key": "okx:DOGE:15m:vwap_fade_lim",
+          "net_pct": 3.669,
+          "days": 9,
+          "pos_days": 6,
+          "trades": 17
+        },
+        {
+          "key": "okx:ETH:15m:vwap_fade",
+          "net_pct": 3.375,
+          "days": 9,
+          "pos_days": 6,
+          "trades": 21
+        },
+        {
+          "key": "okx:DOGE:15m:vwap_fade",
+          "net_pct": 3.116,
+          "days": 9,
+          "pos_days": 6,
+          "trades": 18
+        },
+        {
+          "key": "hyperliquid:ETH:5m:mr_z20_lim",
+          "net_pct": 1.671,
+          "days": 9,
+          "pos_days": 6,
+          "trades": 93
+        },
+        {
+          "key": "hyperliquid:TRX:15m:vwap_fade_lim",
+          "net_pct": 0.651,
+          "days": 8,
+          "pos_days": 6,
+          "trades": 19
+        }
+      ],
+      "warnings": [
+        "조합 378개를 동시에 시험하므로 후보 일부는 우연이다. 합격 = 소액 체결 시험 후보이지 실력 확정이 아니다"
+      ],
+      "status": "PASS",
+      "reason": "누적 9일, 후보 12개 (조합 378개 중) — 누적 순수익>0·플러스 일수 60%·기준선 초과"
+    }
+  },
+  "errors": {},
+  "rules_lock": {
+    "ok": true,
+    "diffs": []
+  },
+  "summary": {
+    "kr_breakout": "NOT_YET",
+    "turtle": "NOT_YET",
+    "reversal": "NOT_YET",
+    "scalp": "PASS"
+  }
+}
