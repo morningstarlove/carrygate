@@ -1,6 +1,6 @@
 {
- "date": "2026-10-07",
- "generated_at_utc": "2026-10-07T14:01:05Z",
+ "date": "2026-10-08",
+ "generated_at_utc": "2026-10-08T07:12:55Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -60,15 +60,15 @@
   }
  },
  "forward": {
-  "days": 2,
+  "days": 3,
   "from": "2026-10-05",
-  "to": "2026-10-07",
-  "codes": 143,
+  "to": "2026-10-08",
+  "codes": 158,
   "bar_errors": 0,
   "stale_codes": 0,
   "by_source": {
-   "yahoo+naver_api": 22,
-   "yahoo": 121
+   "yahoo+naver_api": 26,
+   "yahoo": 132
   },
   "skipped_days": [
    "2026-10-05"
@@ -76,201 +76,98 @@
   "note": null
  },
  "signals_today": {
-  "base": [
-   {
-    "code": "278470",
-    "name": "APR Co.,Ltd.",
-    "group": "Household/Personal Care",
-    "pattern": "cup_handle",
-    "patterns": [
-     "cup_handle"
-    ],
-    "signal_close": 379000.0,
-    "pattern_low": 356500.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 409320 이상이면 포기)",
-    "stop_plan": "max(356500, 진입가×0.93)"
-   },
-   {
-    "code": "192820",
-    "name": "COSMAX, Inc.",
-    "group": "Household/Personal Care",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 308500.0,
-    "pattern_low": 230500.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 333180 이상이면 포기)",
-    "stop_plan": "max(230500, 진입가×0.93)"
-   }
-  ],
+  "base": [],
   "no_sector": [
    {
-    "code": "042510",
-    "name": "RaonSecure Co., Ltd.",
-    "group": "Computer Communications",
+    "code": "373220",
+    "name": "LG Energy Solution Ltd.",
+    "group": "Electrical Products",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 401000.0,
+    "pattern_low": 341500.0,
+    "sync_by": null,
+    "entry_plan": "내일 시가 (시가가 433080 이상이면 포기)",
+    "stop_plan": "max(341500, 진입가×0.93)"
+   },
+   {
+    "code": "051910",
+    "name": "LG Chem Ltd.",
+    "group": "Chemicals: Specialty",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 286500.0,
+    "pattern_low": 247000.0,
+    "sync_by": null,
+    "entry_plan": "내일 시가 (시가가 309420 이상이면 포기)",
+    "stop_plan": "max(247000, 진입가×0.93)"
+   },
+   {
+    "code": "131970",
+    "name": "DOOSAN TESNA Inc.",
+    "group": "Miscellaneous Commercial Services",
     "pattern": "flag",
     "patterns": [
      "flag"
     ],
-    "signal_close": 16710.0,
-    "pattern_low": 10590.0,
+    "signal_close": 125300.0,
+    "pattern_low": 89900.0,
     "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 18047 이상이면 포기)",
-    "stop_plan": "max(10590, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 135324 이상이면 포기)",
+    "stop_plan": "max(89900, 진입가×0.93)"
    },
    {
-    "code": "069540",
-    "name": "LIGHTRON FIBER-OPTIC DEVICES INC.",
-    "group": "Semiconductors",
+    "code": "005160",
+    "name": "Dongkuk Industries Co., Ltd.",
+    "group": "Steel",
     "pattern": "flag",
     "patterns": [
      "flag"
     ],
-    "signal_close": 5210.0,
-    "pattern_low": 3850.0,
+    "signal_close": 4710.0,
+    "pattern_low": 3260.0,
     "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 5627 이상이면 포기)",
-    "stop_plan": "max(3850, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 5087 이상이면 포기)",
+    "stop_plan": "max(3260, 진입가×0.93)"
    },
    {
-    "code": "038500",
-    "name": "SAMPYO Cement Co. Ltd.",
-    "group": "Construction Materials",
-    "pattern": "triangle",
+    "code": "033790",
+    "name": "FINO INC.",
+    "group": "Packaged Software",
+    "pattern": "flag",
     "patterns": [
-     "box",
-     "triangle"
+     "flag"
     ],
-    "signal_close": 7820.0,
-    "pattern_low": 6602.7,
+    "signal_close": 11580.0,
+    "pattern_low": 7260.0,
     "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 8446 이상이면 포기)",
-    "stop_plan": "max(6603, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 12506 이상이면 포기)",
+    "stop_plan": "max(7260, 진입가×0.93)"
    },
    {
-    "code": "278470",
-    "name": "APR Co.,Ltd.",
-    "group": "Household/Personal Care",
-    "pattern": "cup_handle",
+    "code": "417840",
+    "name": "Justem Co. Ltd.",
+    "group": "Homebuilding",
+    "pattern": "flag",
     "patterns": [
-     "cup_handle"
+     "flag"
     ],
-    "signal_close": 379000.0,
-    "pattern_low": 356500.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 409320 이상이면 포기)",
-    "stop_plan": "max(356500, 진입가×0.93)"
-   },
-   {
-    "code": "142280",
-    "name": "GC Medical Science Corporation",
-    "group": "Medical Specialties",
-    "pattern": "triangle",
-    "patterns": [
-     "triangle"
-    ],
-    "signal_close": 4200.0,
-    "pattern_low": 3141.67,
+    "signal_close": 20900.0,
+    "pattern_low": 18130.0,
     "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 4536 이상이면 포기)",
-    "stop_plan": "max(3142, 진입가×0.93)"
-   },
-   {
-    "code": "131290",
-    "name": "TSE Co., Ltd",
-    "group": "Semiconductors",
-    "pattern": "cup_handle",
-    "patterns": [
-     "triangle",
-     "cup_handle"
-    ],
-    "signal_close": 316000.0,
-    "pattern_low": 282000.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 341280 이상이면 포기)",
-    "stop_plan": "max(282000, 진입가×0.93)"
-   },
-   {
-    "code": "192820",
-    "name": "COSMAX, Inc.",
-    "group": "Household/Personal Care",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 308500.0,
-    "pattern_low": 230500.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 333180 이상이면 포기)",
-    "stop_plan": "max(230500, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 22572 이상이면 포기)",
+    "stop_plan": "max(18130, 진입가×0.93)"
    }
   ],
-  "hold_10": [
-   {
-    "code": "278470",
-    "name": "APR Co.,Ltd.",
-    "group": "Household/Personal Care",
-    "pattern": "cup_handle",
-    "patterns": [
-     "cup_handle"
-    ],
-    "signal_close": 379000.0,
-    "pattern_low": 356500.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 409320 이상이면 포기)",
-    "stop_plan": "max(356500, 진입가×0.93)"
-   },
-   {
-    "code": "192820",
-    "name": "COSMAX, Inc.",
-    "group": "Household/Personal Care",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 308500.0,
-    "pattern_low": 230500.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 333180 이상이면 포기)",
-    "stop_plan": "max(230500, 진입가×0.93)"
-   }
-  ],
-  "risk_2": [
-   {
-    "code": "278470",
-    "name": "APR Co.,Ltd.",
-    "group": "Household/Personal Care",
-    "pattern": "cup_handle",
-    "patterns": [
-     "cup_handle"
-    ],
-    "signal_close": 379000.0,
-    "pattern_low": 356500.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 409320 이상이면 포기)",
-    "stop_plan": "max(356500, 진입가×0.93)"
-   },
-   {
-    "code": "192820",
-    "name": "COSMAX, Inc.",
-    "group": "Household/Personal Care",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 308500.0,
-    "pattern_low": 230500.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 333180 이상이면 포기)",
-    "stop_plan": "max(230500, 진입가×0.93)"
-   }
-  ]
+  "hold_10": [],
+  "risk_2": []
  },
- "signal_date": "2026-10-07",
- "signals_frozen": true,
+ "signal_date": "2026-10-08",
+ "signals_frozen": false,
  "frozen_dates": [
   "2026-10-06",
   "2026-10-07"
@@ -279,17 +176,17 @@
   "base": {
    "label": "동조 업종 + 패턴 돌파 (기본)",
    "signals": 15,
-   "trades": 2,
+   "trades": 3,
    "wins": 0,
    "win_rate": 0.0,
    "avg_win_pct": null,
    "avg_loss_pct": -7.45,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -2.63,
-   "equity_final": 9736875,
-   "max_drawdown_pct": 2.63,
-   "avg_hold_days": 1,
+   "total_return_pct": -3.15,
+   "equity_final": 9685282,
+   "max_drawdown_pct": 3.15,
+   "avg_hold_days": 1.33,
    "skipped": {
     "gap": 0,
     "limit": 8,
@@ -299,34 +196,34 @@
    },
    "by_pattern": {
     "flag": {
-     "n": 2,
+     "n": 3,
      "wins": 0,
-     "pnl_krw": -201186
+     "pnl_krw": -307325
     }
    },
    "by_sync": {
     "day": {
-     "n": 2,
+     "n": 3,
      "wins": 0,
-     "pnl_krw": -201186
+     "pnl_krw": -307325
     }
    },
    "by_exit": {
     "stop": {
-     "n": 2,
+     "n": 3,
      "wins": 0,
-     "pnl_krw": -201186
+     "pnl_krw": -307325
     }
    },
    "by_year": {
     "2026": {
-     "n": 2,
+     "n": 3,
      "wins": 0,
-     "pnl_krw": -201186
+     "pnl_krw": -307325
     }
    },
    "yearly_return_pct": {
-    "2026": -2.63
+    "2026": -3.15
    },
    "open_positions": [
     {
@@ -338,9 +235,9 @@
      "entry": 572713.0,
      "stop": 532623.09,
      "shares": 2,
-     "bars_held": 1,
-     "last_close": 562000.0,
-     "unrealized_pct": -1.87
+     "bars_held": 2,
+     "last_close": 569000.0,
+     "unrealized_pct": -0.65
     },
     {
      "code": "373220",
@@ -351,51 +248,64 @@
      "entry": 386656.5,
      "stop": 359590.54,
      "shares": 3,
-     "bars_held": 1,
-     "last_close": 391000.0,
-     "unrealized_pct": 1.12
+     "bars_held": 2,
+     "last_close": 401000.0,
+     "unrealized_pct": 3.71
     },
     {
-     "code": "158430",
-     "name": "ATON, Inc.",
-     "group": "Packaged Software",
-     "pattern": "flag",
-     "entry_date": "2026-10-07",
-     "entry": 7021.0,
-     "stop": 6529.53,
-     "shares": 203,
+     "code": "278470",
+     "name": "APR Co.,Ltd.",
+     "group": "Household/Personal Care",
+     "pattern": "cup_handle",
+     "entry_date": "2026-10-08",
+     "entry": 376626.5,
+     "stop": 356500.0,
+     "shares": 4,
      "bars_held": 1,
-     "last_close": 6760.0,
-     "unrealized_pct": -3.72
+     "last_close": 371500.0,
+     "unrealized_pct": -1.36
+    },
+    {
+     "code": "192820",
+     "name": "COSMAX, Inc.",
+     "group": "Household/Personal Care",
+     "pattern": "box",
+     "entry_date": "2026-10-08",
+     "entry": 311933.0,
+     "stop": 290097.69,
+     "shares": 4,
+     "bars_held": 1,
+     "last_close": 306500.0,
+     "unrealized_pct": -1.74
     }
    ]
   },
   "no_sector": {
    "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
-   "signals": 28,
-   "trades": 4,
+   "signals": 34,
+   "trades": 7,
    "wins": 0,
    "win_rate": 0.0,
    "avg_win_pct": null,
    "avg_loss_pct": -7.45,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -4.23,
-   "equity_final": 9577112,
-   "max_drawdown_pct": 4.23,
+   "total_return_pct": -7.36,
+   "equity_final": 9264187,
+   "max_drawdown_pct": 7.36,
    "avg_hold_days": 1,
    "skipped": {
     "gap": 0,
-    "limit": 16,
-    "cooldown": 0,
+    "limit": 19,
+    "cooldown": 6,
     "size": 0,
     "no_bar": 0
    },
    "by_pattern": {
     "flag": {
-     "n": 2,
+     "n": 4,
      "wins": 0,
-     "pnl_krw": -201186
+     "pnl_krw": -405385
     },
     "cup_handle": {
      "n": 1,
@@ -403,9 +313,9 @@
      "pnl_krw": -103749
     },
     "triangle": {
-     "n": 1,
+     "n": 2,
      "wins": 0,
-     "pnl_krw": -96354
+     "pnl_krw": -198349
     }
    },
    "by_sync": {
@@ -415,27 +325,27 @@
      "pnl_krw": -201186
     },
     "none": {
-     "n": 2,
+     "n": 5,
      "wins": 0,
-     "pnl_krw": -200103
+     "pnl_krw": -506297
     }
    },
    "by_exit": {
     "stop": {
-     "n": 4,
+     "n": 7,
      "wins": 0,
-     "pnl_krw": -401289
+     "pnl_krw": -707483
     }
    },
    "by_year": {
     "2026": {
-     "n": 4,
+     "n": 7,
      "wins": 0,
-     "pnl_krw": -401289
+     "pnl_krw": -707483
     }
    },
    "yearly_return_pct": {
-    "2026": -4.23
+    "2026": -7.36
    },
    "open_positions": [
     {
@@ -447,26 +357,39 @@
      "entry": 572713.0,
      "stop": 532623.09,
      "shares": 2,
+     "bars_held": 2,
+     "last_close": 569000.0,
+     "unrealized_pct": -0.65
+    },
+    {
+     "code": "278470",
+     "name": "APR Co.,Ltd.",
+     "group": "Household/Personal Care",
+     "pattern": "cup_handle",
+     "entry_date": "2026-10-08",
+     "entry": 376626.5,
+     "stop": 356500.0,
+     "shares": 4,
      "bars_held": 1,
-     "last_close": 562000.0,
-     "unrealized_pct": -1.87
+     "last_close": 371500.0,
+     "unrealized_pct": -1.36
     }
    ]
   },
   "hold_10": {
    "label": "동조 + 패턴, 보유 10일",
    "signals": 15,
-   "trades": 2,
+   "trades": 3,
    "wins": 0,
    "win_rate": 0.0,
    "avg_win_pct": null,
    "avg_loss_pct": -7.45,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -2.63,
-   "equity_final": 9736875,
-   "max_drawdown_pct": 2.63,
-   "avg_hold_days": 1,
+   "total_return_pct": -3.15,
+   "equity_final": 9685282,
+   "max_drawdown_pct": 3.15,
+   "avg_hold_days": 1.33,
    "skipped": {
     "gap": 0,
     "limit": 8,
@@ -476,34 +399,34 @@
    },
    "by_pattern": {
     "flag": {
-     "n": 2,
+     "n": 3,
      "wins": 0,
-     "pnl_krw": -201186
+     "pnl_krw": -307325
     }
    },
    "by_sync": {
     "day": {
-     "n": 2,
+     "n": 3,
      "wins": 0,
-     "pnl_krw": -201186
+     "pnl_krw": -307325
     }
    },
    "by_exit": {
     "stop": {
-     "n": 2,
+     "n": 3,
      "wins": 0,
-     "pnl_krw": -201186
+     "pnl_krw": -307325
     }
    },
    "by_year": {
     "2026": {
-     "n": 2,
+     "n": 3,
      "wins": 0,
-     "pnl_krw": -201186
+     "pnl_krw": -307325
     }
    },
    "yearly_return_pct": {
-    "2026": -2.63
+    "2026": -3.15
    },
    "open_positions": [
     {
@@ -515,9 +438,9 @@
      "entry": 572713.0,
      "stop": 532623.09,
      "shares": 2,
-     "bars_held": 1,
-     "last_close": 562000.0,
-     "unrealized_pct": -1.87
+     "bars_held": 2,
+     "last_close": 569000.0,
+     "unrealized_pct": -0.65
     },
     {
      "code": "373220",
@@ -528,22 +451,35 @@
      "entry": 386656.5,
      "stop": 359590.54,
      "shares": 3,
-     "bars_held": 1,
-     "last_close": 391000.0,
-     "unrealized_pct": 1.12
+     "bars_held": 2,
+     "last_close": 401000.0,
+     "unrealized_pct": 3.71
     },
     {
-     "code": "158430",
-     "name": "ATON, Inc.",
-     "group": "Packaged Software",
-     "pattern": "flag",
-     "entry_date": "2026-10-07",
-     "entry": 7021.0,
-     "stop": 6529.53,
-     "shares": 203,
+     "code": "278470",
+     "name": "APR Co.,Ltd.",
+     "group": "Household/Personal Care",
+     "pattern": "cup_handle",
+     "entry_date": "2026-10-08",
+     "entry": 376626.5,
+     "stop": 356500.0,
+     "shares": 4,
      "bars_held": 1,
-     "last_close": 6760.0,
-     "unrealized_pct": -3.72
+     "last_close": 371500.0,
+     "unrealized_pct": -1.36
+    },
+    {
+     "code": "192820",
+     "name": "COSMAX, Inc.",
+     "group": "Household/Personal Care",
+     "pattern": "box",
+     "entry_date": "2026-10-08",
+     "entry": 311933.0,
+     "stop": 290097.69,
+     "shares": 4,
+     "bars_held": 1,
+     "last_close": 306500.0,
+     "unrealized_pct": -1.74
     }
    ]
   },
@@ -557,9 +493,9 @@
    "avg_loss_pct": -7.45,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -4.55,
-   "equity_final": 9544639,
-   "max_drawdown_pct": 4.55,
+   "total_return_pct": -5.07,
+   "equity_final": 9492520,
+   "max_drawdown_pct": 5.07,
    "avg_hold_days": 1,
    "skipped": {
     "gap": 0,
@@ -597,7 +533,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -4.55
+    "2026": -5.07
    },
    "open_positions": [
     {
@@ -609,9 +545,35 @@
      "entry": 572713.0,
      "stop": 532623.09,
      "shares": 4,
+     "bars_held": 2,
+     "last_close": 569000.0,
+     "unrealized_pct": -0.65
+    },
+    {
+     "code": "278470",
+     "name": "APR Co.,Ltd.",
+     "group": "Household/Personal Care",
+     "pattern": "cup_handle",
+     "entry_date": "2026-10-08",
+     "entry": 376626.5,
+     "stop": 356500.0,
+     "shares": 7,
      "bars_held": 1,
-     "last_close": 562000.0,
-     "unrealized_pct": -1.87
+     "last_close": 371500.0,
+     "unrealized_pct": -1.36
+    },
+    {
+     "code": "192820",
+     "name": "COSMAX, Inc.",
+     "group": "Household/Personal Care",
+     "pattern": "box",
+     "entry_date": "2026-10-08",
+     "entry": 311933.0,
+     "stop": 290097.69,
+     "shares": 8,
+     "bars_held": 1,
+     "last_close": 306500.0,
+     "unrealized_pct": -1.74
     }
    ]
   }
@@ -660,6 +622,27 @@
     "pnl_krw": -97923,
     "pnl_pct": -7.45,
     "hold_days": 1
+   },
+   {
+    "code": "158430",
+    "name": "ATON, Inc.",
+    "group": "Packaged Software",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-06",
+    "entry_date": "2026-10-07",
+    "entry": 7021.0,
+    "stop": 6529.53,
+    "exit_date": "2026-10-08",
+    "exit": 6509.94,
+    "why": "stop",
+    "shares": 203,
+    "pnl_krw": -106139,
+    "pnl_pct": -7.45,
+    "hold_days": 2
    }
   ],
   "no_sector": [
@@ -750,6 +733,70 @@
     "pnl_krw": -97923,
     "pnl_pct": -7.45,
     "hold_days": 1
+   },
+   {
+    "code": "042510",
+    "name": "RaonSecure Co., Ltd.",
+    "group": "Computer Communications",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": null,
+    "signal_date": "2026-10-07",
+    "entry_date": "2026-10-08",
+    "entry": 16509.38,
+    "stop": 15353.72,
+    "exit_date": "2026-10-08",
+    "exit": 15307.66,
+    "why": "stop",
+    "shares": 83,
+    "pnl_krw": -102045,
+    "pnl_pct": -7.45,
+    "hold_days": 1
+   },
+   {
+    "code": "069540",
+    "name": "LIGHTRON FIBER-OPTIC DEVICES INC.",
+    "group": "Semiconductors",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": null,
+    "signal_date": "2026-10-07",
+    "entry_date": "2026-10-08",
+    "entry": 5235.66,
+    "stop": 4869.16,
+    "exit_date": "2026-10-08",
+    "exit": 4854.56,
+    "why": "stop",
+    "shares": 262,
+    "pnl_krw": -102154,
+    "pnl_pct": -7.45,
+    "hold_days": 1
+   },
+   {
+    "code": "038500",
+    "name": "SAMPYO Cement Co. Ltd.",
+    "group": "Construction Materials",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle"
+    ],
+    "sync_by": null,
+    "signal_date": "2026-10-07",
+    "entry_date": "2026-10-08",
+    "entry": 8104.24,
+    "stop": 7536.94,
+    "exit_date": "2026-10-08",
+    "exit": 7514.33,
+    "why": "stop",
+    "shares": 169,
+    "pnl_krw": -101995,
+    "pnl_pct": -7.45,
+    "hold_days": 1
    }
   ],
   "hold_10": [
@@ -795,6 +842,27 @@
     "pnl_krw": -97923,
     "pnl_pct": -7.45,
     "hold_days": 1
+   },
+   {
+    "code": "158430",
+    "name": "ATON, Inc.",
+    "group": "Packaged Software",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-06",
+    "entry_date": "2026-10-07",
+    "entry": 7021.0,
+    "stop": 6529.53,
+    "exit_date": "2026-10-08",
+    "exit": 6509.94,
+    "why": "stop",
+    "shares": 203,
+    "pnl_krw": -106139,
+    "pnl_pct": -7.45,
+    "hold_days": 2
    }
   ],
   "risk_2": [
