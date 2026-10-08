@@ -1,7 +1,7 @@
 {
   "schema": "carrygate-verdict/1",
-  "date": "2026-10-07",
-  "generated_at_utc": "2026-10-07T14:01:05Z",
+  "date": "2026-10-08",
+  "generated_at_utc": "2026-10-08T06:23:12Z",
   "criteria_sealed": "2026-10-06",
   "tracks": {
     "kr_breakout": {
@@ -46,9 +46,9 @@
           "net_pct": null,
           "profit_factor": null,
           "avg_r": null,
-          "backtest_win_rate_pct": 37.8378,
-          "backtest_profit_factor": 1.8202,
-          "backtest_trades": 111,
+          "backtest_win_rate_pct": 36.8421,
+          "backtest_profit_factor": 1.7109,
+          "backtest_trades": 114,
           "luck": null,
           "variants": {
             "s2_55_20": {
@@ -75,9 +75,9 @@
           "net_pct": null,
           "profit_factor": null,
           "avg_r": null,
-          "backtest_win_rate_pct": 34.0426,
-          "backtest_profit_factor": 1.2944,
-          "backtest_trades": 235,
+          "backtest_win_rate_pct": 34.4538,
+          "backtest_profit_factor": 1.2552,
+          "backtest_trades": 238,
           "luck": null,
           "variants": {
             "s2_55_20": {
@@ -141,9 +141,9 @@
           "net_pct": null,
           "profit_factor": null,
           "avg_r": null,
-          "backtest_win_rate_pct": 34.4156,
-          "backtest_profit_factor": 1.4425,
-          "backtest_trades": 154,
+          "backtest_win_rate_pct": 34.3949,
+          "backtest_profit_factor": 1.2803,
+          "backtest_trades": 157,
           "luck": null,
           "variants": {
             "no_vol": {
@@ -166,86 +166,58 @@
       }
     },
     "scalp": {
-      "history_days": 9,
+      "history_days": 10,
       "combos": 378,
-      "candidates": 12,
+      "candidates": 6,
       "top": [
         {
           "key": "okx:XRP:15m:vwap_fade_lim",
-          "net_pct": 6.468,
-          "days": 9,
+          "net_pct": 4.143,
+          "days": 10,
           "pos_days": 7,
-          "trades": 24
+          "trades": 26
         },
         {
           "key": "okx:XRP:15m:vwap_fade",
-          "net_pct": 5.484,
-          "days": 9,
+          "net_pct": 3.399,
+          "days": 10,
           "pos_days": 7,
-          "trades": 24
-        },
-        {
-          "key": "hyperliquid:XRP:15m:vwap_fade_lim",
-          "net_pct": 4.841,
-          "days": 9,
-          "pos_days": 6,
-          "trades": 21
-        },
-        {
-          "key": "hyperliquid:XRP:15m:vwap_fade",
-          "net_pct": 4.361,
-          "days": 9,
-          "pos_days": 6,
-          "trades": 22
+          "trades": 26
         },
         {
           "key": "okx:ETH:15m:vwap_fade_lim",
-          "net_pct": 4.298,
-          "days": 9,
+          "net_pct": 1.175,
+          "days": 10,
           "pos_days": 6,
-          "trades": 21
+          "trades": 23
+        },
+        {
+          "key": "hyperliquid:LINK:15m:mr_z20",
+          "net_pct": 1.154,
+          "days": 10,
+          "pos_days": 6,
+          "trades": 38
         },
         {
           "key": "okx:DOGE:15m:vwap_fade_lim",
-          "net_pct": 3.669,
-          "days": 9,
-          "pos_days": 6,
-          "trades": 17
-        },
-        {
-          "key": "okx:ETH:15m:vwap_fade",
-          "net_pct": 3.375,
-          "days": 9,
-          "pos_days": 6,
-          "trades": 21
-        },
-        {
-          "key": "okx:DOGE:15m:vwap_fade",
-          "net_pct": 3.116,
-          "days": 9,
+          "net_pct": 0.181,
+          "days": 10,
           "pos_days": 6,
           "trades": 18
         },
         {
-          "key": "hyperliquid:ETH:5m:mr_z20_lim",
-          "net_pct": 1.671,
-          "days": 9,
+          "key": "okx:ETH:15m:vwap_fade",
+          "net_pct": 0.162,
+          "days": 10,
           "pos_days": 6,
-          "trades": 93
-        },
-        {
-          "key": "hyperliquid:TRX:15m:vwap_fade_lim",
-          "net_pct": 0.651,
-          "days": 8,
-          "pos_days": 6,
-          "trades": 19
+          "trades": 23
         }
       ],
       "warnings": [
         "조합 378개를 동시에 시험하므로 후보 일부는 우연이다. 합격 = 소액 체결 시험 후보이지 실력 확정이 아니다"
       ],
       "status": "PASS",
-      "reason": "누적 9일, 후보 12개 (조합 378개 중) — 누적 순수익>0·플러스 일수 60%·기준선 초과"
+      "reason": "누적 10일, 후보 6개 (조합 378개 중) — 누적 순수익>0·플러스 일수 60%·기준선 초과"
     }
   },
   "errors": {},

@@ -1,68 +1,68 @@
 {
- "date": "2026-10-07",
+ "date": "2026-10-08",
  "cost_pct": 0.25,
  "method": "월말(달의 마지막 거래일) 종가로 판단하고 다음 달에 보유. 순위용 수익률은 close[m]/close[m-L]-1 만 사용(미래 자료 없음). GEM: 공격 자산 중 점수 1등이 현금(BIL) 점수보다 높으면 그 자산, 아니면 AGG. DM 4자산: 공격 4개 중 12개월 1등이 현금보다 높으면 그 자산, 아니면 TLT(12개월>0) 또는 현금. 복합 점수는 1·3·6·12개월 수익률 평균. BIL 이 없던 달은 현금 수익률 0. 교체 때마다 COST_PCT 를 포트폴리오에서 차감(첫 매수·벤치마크 제외). 모든 전략과 벤치마크를 같은 기간(모든 전략이 판단 가능한 첫 달 ~ 마지막 달)에서 비교. CAGR/변동성은 무위험 수익률 없이 계산.",
  "window": {
   "start": "2007-11",
-  "end": "2026-09"
+  "end": "2026-10"
  },
  "skipped": [],
  "data_ranges": {
   "AGG": {
    "first_date": "2006-11-13",
-   "last_date": "2026-09-30",
-   "bars": 5000,
+   "last_date": "2026-10-07",
+   "bars": 5005,
    "first_month": "2006-11",
-   "last_month": "2026-09",
-   "months": 239
+   "last_month": "2026-10",
+   "months": 240
   },
   "BIL": {
    "first_date": "2007-05-30",
-   "last_date": "2026-09-30",
-   "bars": 4866,
+   "last_date": "2026-10-07",
+   "bars": 4871,
    "first_month": "2007-05",
-   "last_month": "2026-09",
-   "months": 233
+   "last_month": "2026-10",
+   "months": 234
   },
   "EFA": {
    "first_date": "2006-11-13",
-   "last_date": "2026-09-30",
-   "bars": 5000,
+   "last_date": "2026-10-07",
+   "bars": 5005,
    "first_month": "2006-11",
-   "last_month": "2026-09",
-   "months": 239
+   "last_month": "2026-10",
+   "months": 240
   },
   "GLD": {
    "first_date": "2006-11-13",
-   "last_date": "2026-09-30",
-   "bars": 5000,
+   "last_date": "2026-10-07",
+   "bars": 5005,
    "first_month": "2006-11",
-   "last_month": "2026-09",
-   "months": 239
+   "last_month": "2026-10",
+   "months": 240
   },
   "QQQ": {
    "first_date": "2006-11-13",
-   "last_date": "2026-09-30",
-   "bars": 5000,
+   "last_date": "2026-10-07",
+   "bars": 5005,
    "first_month": "2006-11",
-   "last_month": "2026-09",
-   "months": 239
+   "last_month": "2026-10",
+   "months": 240
   },
   "SPY": {
    "first_date": "2006-11-13",
-   "last_date": "2026-09-30",
-   "bars": 5000,
+   "last_date": "2026-10-07",
+   "bars": 5005,
    "first_month": "2006-11",
-   "last_month": "2026-09",
-   "months": 239
+   "last_month": "2026-10",
+   "months": 240
   },
   "TLT": {
    "first_date": "2006-11-13",
-   "last_date": "2026-09-30",
-   "bars": 5000,
+   "last_date": "2026-10-07",
+   "bars": 5005,
    "first_month": "2006-11",
-   "last_month": "2026-09",
-   "months": 239
+   "last_month": "2026-10",
+   "months": 240
   }
  },
  "results": {
@@ -71,16 +71,16 @@
    "kind": "strategy",
    "metrics": {
     "start": "2007-11",
-    "end": "2026-09",
-    "months": 226,
-    "cagr_pct": 5.2344,
-    "total_return_pct": 161.3991,
+    "end": "2026-10",
+    "months": 227,
+    "cagr_pct": 5.3162,
+    "total_return_pct": 166.4,
     "max_drawdown_pct": -21.5234,
-    "volatility_pct": 12.3677,
-    "cagr_over_vol": 0.4232,
+    "volatility_pct": 12.3446,
+    "cagr_over_vol": 0.4306,
     "worst_12m_pct": -18.4186,
     "switches": 44,
-    "defensive_pct": 21.2389,
+    "defensive_pct": 21.1454,
     "yearly_pct": {
      "2007": -5.3989,
      "2008": -7.4647,
@@ -101,12 +101,11 @@
      "2023": 8.6933,
      "2024": 23.3048,
      "2025": 11.7366,
-     "2026": 11.23
+     "2026": 13.3579
     }
    },
    "last_holdings": [
     "SPY",
-    "SPY",
     "EFA",
     "EFA",
     "EFA",
@@ -116,6 +115,7 @@
     "SPY",
     "SPY",
     "EFA",
+    "SPY",
     "SPY"
    ]
   },
@@ -124,16 +124,16 @@
    "kind": "strategy",
    "metrics": {
     "start": "2007-11",
-    "end": "2026-09",
-    "months": 226,
-    "cagr_pct": 4.4949,
-    "total_return_pct": 128.8878,
+    "end": "2026-10",
+    "months": 227,
+    "cagr_pct": 4.5794,
+    "total_return_pct": 133.2667,
     "max_drawdown_pct": -26.0673,
-    "volatility_pct": 12.0481,
-    "cagr_over_vol": 0.3731,
+    "volatility_pct": 12.0263,
+    "cagr_over_vol": 0.3808,
     "worst_12m_pct": -23.8419,
     "switches": 47,
-    "defensive_pct": 23.4513,
+    "defensive_pct": 23.348,
     "yearly_pct": {
      "2007": -5.3989,
      "2008": 2.7375,
@@ -154,18 +154,18 @@
      "2023": 17.8404,
      "2024": 23.3048,
      "2025": 6.9411,
-     "2026": 5.8901
+     "2026": 7.9159
     }
    },
    "last_holdings": [
     "SPY",
     "SPY",
     "SPY",
+    "EFA",
+    "EFA",
+    "EFA",
+    "EFA",
     "SPY",
-    "EFA",
-    "EFA",
-    "EFA",
-    "EFA",
     "SPY",
     "SPY",
     "SPY",
@@ -177,16 +177,16 @@
    "kind": "strategy",
    "metrics": {
     "start": "2007-11",
-    "end": "2026-09",
-    "months": 226,
-    "cagr_pct": 5.918,
-    "total_return_pct": 195.299,
+    "end": "2026-10",
+    "months": 227,
+    "cagr_pct": 5.9973,
+    "total_return_pct": 200.9484,
     "max_drawdown_pct": -20.1765,
-    "volatility_pct": 11.5656,
-    "cagr_over_vol": 0.5117,
+    "volatility_pct": 11.5444,
+    "cagr_over_vol": 0.5195,
     "worst_12m_pct": -19.3502,
     "switches": 51,
-    "defensive_pct": 18.5841,
+    "defensive_pct": 18.5022,
     "yearly_pct": {
      "2007": -5.3989,
      "2008": 2.7375,
@@ -207,13 +207,12 @@
      "2023": 16.1441,
      "2024": 23.3048,
      "2025": 9.7162,
-     "2026": 10.9519
+     "2026": 13.0745
     }
    },
    "last_holdings": [
     "SPY",
     "SPY",
-    "SPY",
     "EFA",
     "EFA",
     "EFA",
@@ -222,6 +221,7 @@
     "SPY",
     "SPY",
     "EFA",
+    "SPY",
     "SPY"
    ]
   },
@@ -230,16 +230,16 @@
    "kind": "strategy",
    "metrics": {
     "start": "2007-11",
-    "end": "2026-09",
-    "months": 226,
-    "cagr_pct": 13.1044,
-    "total_return_pct": 916.7033,
+    "end": "2026-10",
+    "months": 227,
+    "cagr_pct": 13.1715,
+    "total_return_pct": 938.7832,
     "max_drawdown_pct": -26.4439,
-    "volatility_pct": 17.7415,
-    "cagr_over_vol": 0.7386,
+    "volatility_pct": 17.7038,
+    "cagr_over_vol": 0.744,
     "worst_12m_pct": -19.5036,
-    "switches": 52,
-    "defensive_pct": 5.7522,
+    "switches": 53,
+    "defensive_pct": 5.7269,
     "yearly_pct": {
      "2007": 6.6477,
      "2008": 5.6164,
@@ -260,7 +260,7 @@
      "2023": 6.914,
      "2024": 30.9127,
      "2025": 63.2673,
-     "2026": 12.3363
+     "2026": 14.7759
     }
    },
    "last_holdings": [
@@ -270,12 +270,12 @@
     "GLD",
     "GLD",
     "GLD",
-    "GLD",
     "QQQ",
     "QQQ",
     "QQQ",
     "GLD",
-    "GLD"
+    "GLD",
+    "QQQ"
    ]
   },
   "spy_hold": {
@@ -283,13 +283,13 @@
    "kind": "benchmark",
    "metrics": {
     "start": "2007-11",
-    "end": "2026-09",
-    "months": 226,
-    "cagr_pct": 9.07,
-    "total_return_pct": 413.0028,
+    "end": "2026-10",
+    "months": 227,
+    "cagr_pct": 9.1376,
+    "total_return_pct": 422.8171,
     "max_drawdown_pct": -50.2691,
-    "volatility_pct": 15.6819,
-    "cagr_over_vol": 0.5784,
+    "volatility_pct": 15.6491,
+    "cagr_over_vol": 0.5839,
     "worst_12m_pct": -44.7542,
     "switches": 0,
     "defensive_pct": 0.0,
@@ -313,7 +313,7 @@
      "2023": 24.2868,
      "2024": 23.3048,
      "2025": 16.3527,
-     "2026": 11.8357
+     "2026": 13.9752
     }
    },
    "last_holdings": []
@@ -323,13 +323,13 @@
    "kind": "benchmark",
    "metrics": {
     "start": "2007-11",
-    "end": "2026-09",
-    "months": 226,
-    "cagr_pct": 5.4783,
-    "total_return_pct": 173.0479,
+    "end": "2026-10",
+    "months": 227,
+    "cagr_pct": 5.5118,
+    "total_return_pct": 175.9164,
     "max_drawdown_pct": -33.9709,
-    "volatility_pct": 10.0599,
-    "cagr_over_vol": 0.5446,
+    "volatility_pct": 10.0384,
+    "cagr_over_vol": 0.5491,
     "worst_12m_pct": -29.9934,
     "switches": 0,
     "defensive_pct": 0.0,
@@ -353,7 +353,7 @@
      "2023": 15.1222,
      "2024": 12.4576,
      "2025": 11.0217,
-     "2026": 4.8212
+     "2026": 5.9224
     }
    },
    "last_holdings": []
@@ -361,28 +361,28 @@
  },
  "signals": {
   "gem_12": {
-   "as_of_month": "2026-09",
-   "as_of_date": "2026-09-30",
+   "as_of_month": "2026-10",
+   "as_of_date": "2026-10-07",
    "asset": "SPY",
    "scores": {
-    "SPY": 0.1448,
-    "EFA": 0.1127
+    "SPY": 0.1395,
+    "EFA": 0.0911
    },
-   "cash_score": -0.0012,
+   "cash_score": -0.0033,
    "best_risky": "SPY",
    "tlt_12m": null,
    "returns": {
     "SPY": {
-     "12m": 0.1448
+     "12m": 0.1395
     },
     "EFA": {
-     "12m": 0.1127
+     "12m": 0.0911
     },
     "AGG": {
-     "12m": -0.057
+     "12m": -0.062
     },
     "BIL": {
-     "12m": -0.0012
+     "12m": -0.0033
     }
    },
    "lookbacks": [
@@ -390,32 +390,32 @@
    ]
   },
   "gem_6": {
-   "as_of_month": "2026-09",
-   "as_of_date": "2026-09-30",
+   "as_of_month": "2026-10",
+   "as_of_date": "2026-10-07",
    "asset": "SPY",
    "scores": {
-    "SPY": 0.1727,
-    "EFA": 0.0696
+    "SPY": 0.0815,
+    "EFA": 0.0076
    },
-   "cash_score": 0.0,
+   "cash_score": -0.002,
    "best_risky": "SPY",
    "tlt_12m": null,
    "returns": {
     "SPY": {
-     "6m": 0.1727,
-     "12m": 0.1448
+     "6m": 0.0815,
+     "12m": 0.1395
     },
     "EFA": {
-     "6m": 0.0696,
-     "12m": 0.1127
+     "6m": 0.0076,
+     "12m": 0.0911
     },
     "AGG": {
-     "6m": -0.0476,
-     "12m": -0.057
+     "6m": -0.0483,
+     "12m": -0.062
     },
     "BIL": {
-     "6m": 0.0,
-     "12m": -0.0012
+     "6m": -0.002,
+     "12m": -0.0033
     }
    },
    "lookbacks": [
@@ -423,40 +423,40 @@
    ]
   },
   "gem_comp": {
-   "as_of_month": "2026-09",
-   "as_of_date": "2026-09-30",
+   "as_of_month": "2026-10",
+   "as_of_date": "2026-10-07",
    "asset": "SPY",
    "scores": {
-    "SPY": 0.0832,
-    "EFA": 0.0373
+    "SPY": 0.0701,
+    "EFA": 0.0169
    },
-   "cash_score": -0.0004,
+   "cash_score": -0.0024,
    "best_risky": "SPY",
    "tlt_12m": null,
    "returns": {
     "SPY": {
-     "1m": -0.0058,
-     "3m": 0.0212,
-     "6m": 0.1727,
-     "12m": 0.1448
+     "1m": 0.0191,
+     "3m": 0.0404,
+     "6m": 0.0815,
+     "12m": 0.1395
     },
     "EFA": {
-     "1m": -0.0331,
-     "3m": 0.0001,
-     "6m": 0.0696,
-     "12m": 0.1127
+     "1m": -0.0076,
+     "3m": -0.0235,
+     "6m": 0.0076,
+     "12m": 0.0911
     },
     "AGG": {
-     "1m": -0.0295,
-     "3m": -0.0449,
-     "6m": -0.0476,
-     "12m": -0.057
+     "1m": -0.0024,
+     "3m": -0.0314,
+     "6m": -0.0483,
+     "12m": -0.062
     },
     "BIL": {
-     "1m": -0.0002,
-     "3m": 0.0,
-     "6m": 0.0,
-     "12m": -0.0012
+     "1m": -0.002,
+     "3m": -0.0024,
+     "6m": -0.002,
+     "12m": -0.0033
     }
    },
    "lookbacks": [
@@ -467,36 +467,36 @@
    ]
   },
   "dm_4": {
-   "as_of_month": "2026-09",
-   "as_of_date": "2026-09-30",
+   "as_of_month": "2026-10",
+   "as_of_date": "2026-10-07",
    "asset": "QQQ",
    "scores": {
-    "SPY": 0.1448,
-    "QQQ": 0.2322,
-    "EFA": 0.1127,
-    "GLD": 0.0714
+    "SPY": 0.1395,
+    "QQQ": 0.2045,
+    "EFA": 0.0911,
+    "GLD": 0.0211
    },
-   "cash_score": -0.0012,
+   "cash_score": -0.0033,
    "best_risky": "QQQ",
    "tlt_12m": null,
    "returns": {
     "SPY": {
-     "12m": 0.1448
+     "12m": 0.1395
     },
     "QQQ": {
-     "12m": 0.2322
+     "12m": 0.2045
     },
     "EFA": {
-     "12m": 0.1127
+     "12m": 0.0911
     },
     "GLD": {
-     "12m": 0.0714
+     "12m": 0.0211
     },
     "TLT": {
-     "12m": -0.1297
+     "12m": -0.1455
     },
     "BIL": {
-     "12m": -0.0012
+     "12m": -0.0033
     }
    },
    "lookbacks": [
