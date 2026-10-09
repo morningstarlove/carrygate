@@ -145,7 +145,7 @@ class Engine(unittest.TestCase):
 
     def test_no_flag_variant_skips_flag_signals(self):
         # 깃발형 돌파: base 는 들어가고 no_flag 는 안 들어간다
-        base = flat(60, 100.0, 1_000_000)
+        base = [bar(i, 100.0, 101.0, 99.0, 100.0, 1_000_000) for i in range(60)]
         pole = [bar(60 + i, 100 + 5 * i, 106 + 5 * i, 99 + 5 * i, 105 + 5 * i, 3_000_000) for i in range(5)]
         top = pole[-1]["h"]; low = pole[0]["l"]
         fl = [bar(65 + i, top - 2, top - 1, top - 0.2 * (top - low), top - 2, 300_000) for i in range(6)]
