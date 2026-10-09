@@ -143,6 +143,36 @@ class Engine(unittest.TestCase):
         f = KB.frozen_signals(hp)
         self.assertEqual(f, {"2026-10-06": {"base": [{"code": "X"}]}})
 
+    def test_no_flag_variant_skips_flag_signals(self):
+        # 깃발형 돌파: base 는 들어가고 no_flag 는 안 들어간다
+        base = flat(60, 100.0, 1_000_000)
+        pole = [bar(60 + i, 100 + 5 * i, 106 + 5 * i, 99 + 5 * i, 105 + 5 * i, 3_000_000) for i in range(5)]
+        top = pole[-1]["h"]; low = pole[0]["l"]
+        fl = [bar(65 + i, top - 2, top - 1, top - 0.2 * (top - low), top - 2, 300_000) for i in range(6)]
+        bars = base + pole + fl + [bar(71, top - 1, top + 4, top - 3, top + 3, 2_500_000)] + [bar(72 + k, top + 3, top + 5, top + 1, top + 3) for k in range(3)]
+        sims, _ = run({"A": bars}, {"A": "G"})
+        self.assertIn("A", sims["base"].positions)
+        self.assertNotIn("A", sims["no_flag"].positions)
+        self.assertEqual(sims["no_flag"].skipped["pattern"], 1)
+        # 박스권 돌파는 둘 다 들어간다
+        bars2 = box_then_breakout(after=[(112, 115, 110, 114)] * 3)
+        sims2, _ = run({"B": bars2}, {"B": "G"})
+        self.assertIn("B", sims2["base"].positions); self.assertIn("B", sims2["no_flag"].positions)
+
+    def test_no_flag_derives_from_frozen_base(self):
+        bars = box_then_breakout(after=[(112, 115, 110, 114)] * 3)
+        days = KB.days_from_bars({"A": bars, "B": bars}, {"A": "G", "B": "G"})
+        for day in days:
+            day["sync_groups"] = {"G"}; day["sync_by"] = {"G": "day"}
+        sig_day = d(65)
+        # 고정 신호에 no_flag 는 없고 base 만 있다 (변형이 생기기 전 날짜): A 는 깃발 대표, B 는 박스 대표
+        frz = {sig_day: {"base": [
+            {"code": "A", "group": "G", "pattern": "flag", "patterns": ["flag", "box"], "pattern_low": 100.0, "signal_close": 111.0, "sync_by": "day", "name": None},
+            {"code": "B", "group": "G", "pattern": "box", "patterns": ["box"], "pattern_low": 95.0, "signal_close": 111.0, "sync_by": "day", "name": None}]}}
+        sims = KB.simulate(days, {"A": bars, "B": bars}, frozen=frz)
+        self.assertEqual(set(sims["base"].positions), {"A", "B"})
+        self.assertEqual(set(sims["no_flag"].positions), {"B"})
+
     def test_cooldown_blocks_reentry(self):
         after = [(113, 114, 100, 101)] + [(101, 102, 99, 100)] * 2     # 바로 손절
         bars = box_then_breakout(after=after)
@@ -170,6 +200,29 @@ class FetchMerge(unittest.TestCase):
         self.assertEqual(src2, "yahoo"); self.assertEqual(len(bars2), 2)            # 이미 최신이면 안 메운다
         bars3, src3 = KO.fetch_daily("X", 10, sources=[("yahoo", yahoo), ("naver_api", naver)])
         self.assertEqual(src3, "yahoo")                                              # need_date 없으면 예전 동작
+
+
+class Selfcheck(unittest.TestCase):
+    def test_check_kr_catches_wrong_pnl_and_stop(self):
+        import selfcheck, tempfile, shutil
+        good = {"code": "A", "entry": 100.0, "exit": 110.0, "shares": 10, "stop": 93.0, "why": "hold20", "pnl_pct": 9.7}
+        gross = 110.0 * 10; good["pnl_krw"] = round(gross - gross * (0.015 + 0.15) / 100 - 10 * 100.0 * 1.00015)
+        bad_pnl = dict(good, code="B", pnl_krw=good["pnl_krw"] + 500)
+        bad_stop = dict(good, code="C", stop=80.0)
+        def doc(trades):
+            return {"rules": {"fee_pct": 0.015, "tax_pct": 0.15, "stop_pct": 7.0, "equity0": 1e7}, "forward": {"days": 1, "skipped_days": [], "stale_codes": 0},
+                    "variants": {"base": {"trades": len(trades), "total_return_pct": 0.0, "equity_final": 1e7, "open_positions": []}},
+                    "trades": {"base": trades}}
+        cwd = os.getcwd(); tmp = tempfile.mkdtemp(); self.addCleanup(shutil.rmtree, tmp)
+        try:
+            os.chdir(tmp)
+            for trades, expect in ((([good]), 0), (([bad_pnl]), 1), (([bad_stop]), 1)):
+                json.dump(doc(trades), open("kr_breakout.json", "w"))
+                problems, notes = [], []
+                selfcheck.check_kr(problems, notes)
+                self.assertEqual(len(problems), expect, (trades[0]["code"], problems))
+        finally:
+            os.chdir(cwd)
 
 
 class Inputs(unittest.TestCase):

@@ -435,6 +435,57 @@ def check_reversal(problems, notes):
     return checked
 
 
+def check_kr(problems, notes):
+    """한국 주식 종이매매(kr_breakout.json): 매매별 손익을 진입가·청산가·수량·수수료에서 다시 계산해 대조하고,
+    손절가 규칙(진입가의 93% 이상)·계좌 수익률·고정 신호 기록·순방향 일수를 본다."""
+    d = load_json("kr_breakout.json")
+    if d is None:
+        notes.append("kr_breakout.json 이 없다")
+        return 0
+    rules = d.get("rules") or {}
+    fee, tax, stop_pct, eq0 = rules.get("fee_pct", 0.015), rules.get("tax_pct", 0.15), rules.get("stop_pct", 7.0), rules.get("equity0", 1e7)
+    checked = 0
+    for name, v in (d.get("variants") or {}).items():
+        trades = (d.get("trades") or {}).get(name) or []
+        if v.get("trades", 0) <= 100 and v.get("trades", 0) != len(trades):     # 목록은 최근 100건까지만 저장된다
+            problems.append("한국주식 %s: 매매 수(%s)와 매매 목록(%d)이 다르다" % (name, v.get("trades"), len(trades)))
+            continue
+        bad = False
+        for t in trades:
+            cost_in = t["shares"] * t["entry"] * (1 + fee / 100.0)
+            gross = t["exit"] * t["shares"]
+            pnl = gross - gross * (fee + tax) / 100.0 - cost_in
+            tol = 0.02 * t["shares"] + 1.0                      # 저장값이 소수 둘째 자리라 주당 ±0.01원
+            if abs(pnl - t["pnl_krw"]) > tol:
+                problems.append("한국주식 %s %s: 손익 불일치 (저장 %s vs 재계산 %.0f)" % (name, t["code"], t["pnl_krw"], pnl)); bad = True; break
+            if t["stop"] < t["entry"] * (1 - stop_pct / 100.0) - 0.01 * t["entry"] / 100.0 - 1:
+                problems.append("한국주식 %s %s: 손절가가 진입가의 %.0f%% 보다 낮다" % (name, t["code"], 100 - stop_pct)); bad = True; break
+            if t["why"] == "stop" and t["pnl_pct"] < -(stop_pct + 1.0):
+                problems.append("한국주식 %s %s: 손절 매매 손실이 %.1f%% 로 규칙(−%.0f%%+비용)보다 크다" % (name, t["code"], t["pnl_pct"], stop_pct)); bad = True; break
+        if bad:
+            continue
+        if v.get("equity_final") is not None and abs((v["equity_final"] / eq0 - 1) * 100 - (v.get("total_return_pct") or 0)) > 0.02:
+            problems.append("한국주식 %s: 수익률(%s)이 최종 평가액(%s)과 안 맞다" % (name, v.get("total_return_pct"), v.get("equity_final")))
+            continue
+        for p in v.get("open_positions") or []:
+            if p["stop"] < p["entry"] * (1 - stop_pct / 100.0) - 1:
+                problems.append("한국주식 %s 보유 %s: 손절가가 진입가의 %.0f%% 보다 낮다" % (name, p["code"], 100 - stop_pct)); break
+        checked += 1
+    # 기록 구조: 순방향 일수 = 규칙 고정일 이후 기록 중 휴장·중복이 아닌 날, 신호가 고정된 날은 그 신호가 있어야 한다
+    rows = [r for _, r in load_rows("kr_breakout_history.jsonl") if r]
+    fwd = d.get("forward") or {}
+    if rows:
+        frozen = [r for r in rows if r.get("signal_date")]
+        for r in frozen:
+            if r.get("signals") is None or "base" not in (r.get("signals") or {}):
+                problems.append("한국주식 기록 %s: 신호 고정 날짜인데 신호가 없다" % r["date"])
+        notes.append("한국주식 기록 %d일, 신호 고정 %d일, 순방향 %s일(휴장 %d일 제외), 일봉 지연 %s종목" % (
+            len(rows), len(frozen), fwd.get("days"), len(fwd.get("skipped_days") or []), fwd.get("stale_codes")))
+        if fwd.get("stale_codes"):
+            notes.append("한국주식: 일봉 지연 종목이 있어 그날 신호는 고정되지 않았다 (다음 실행에서 고정)")
+    return checked
+
+
 def main():
     problems, notes = [], []
 
@@ -455,6 +506,9 @@ def main():
     turtle_checked = check_turtle(problems, notes)
     reversal_checked = check_reversal(problems, notes)
     grid_checked = check_grid(problems, notes)
+    kr_checked = check_kr(problems, notes)
+    check_jsonl_dates("kr_sector_history.jsonl", "한국주식 업종", problems, notes)
+    check_jsonl_dates("kr_breakout_history.jsonl", "한국주식 종이매매", problems, notes)
     for path, label in (("basis_history.jsonl", "베이시스"), ("funding_signal_history.jsonl", "펀딩 신호"),
                         ("kimchi_history.jsonl", "김치프리미엄"), ("momentum_history.jsonl", "듀얼 모멘텀"),
                         ("live_history.jsonl", "실전 캐리"), ("turtle_history.jsonl", "터틀"),
@@ -462,7 +516,7 @@ def main():
         check_jsonl_dates(path, label, problems, notes)
 
     print("=== 검산 ===")
-    print("재계산 대조: 캐리 %d건, 초단타 %d건, 베이시스 %d건, 터틀 %d건, 추세전환 %d건, 그리드 %d건 통과" % (checked, scalp_checked, basis_checked, turtle_checked, reversal_checked, grid_checked))
+    print("재계산 대조: 캐리 %d건, 초단타 %d건, 베이시스 %d건, 터틀 %d건, 추세전환 %d건, 그리드 %d건, 한국주식 %d건 통과" % (checked, scalp_checked, basis_checked, turtle_checked, reversal_checked, grid_checked, kr_checked))
     for m in notes:
         print("  · %s" % m)
 
