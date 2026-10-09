@@ -1,7 +1,7 @@
 {
  "schema": "carrygate-funding-signal/1",
- "date": "2026-10-08",
- "generated_at_kst": "2026-10-08 15:14:03",
+ "date": "2026-10-09",
+ "generated_at_kst": "2026-10-09 15:17:16",
  "lookback_days": 180,
  "method": {
   "signal": "최근 3일 평균 일간 펀딩(%)의 과거 대비 백분위. ≥90 과열, ≤10 냉각",
@@ -13,13 +13,13 @@
    "days": 180,
    "buckets": {
     "high": {
-     "n": 33,
-     "fwd1_pct": -0.138,
-     "fwd1_pos_pct": 48.5,
-     "fwd3_pct": -0.7573,
-     "fwd3_pos_pct": 54.5,
-     "fwd7_pct": -1.2661,
-     "fwd7_pos_pct": 42.4
+     "n": 35,
+     "fwd1_pct": -0.1576,
+     "fwd1_pos_pct": 48.6,
+     "fwd3_pct": -0.785,
+     "fwd3_pos_pct": 52.9,
+     "fwd7_pct": -1.2638,
+     "fwd7_pos_pct": 41.2
     },
     "low": {
      "n": 2,
@@ -31,30 +31,30 @@
      "fwd7_pos_pct": 0.0
     },
     "mid": {
-     "n": 114,
-     "fwd1_pct": 0.1163,
+     "n": 112,
+     "fwd1_pct": 0.1236,
      "fwd1_pos_pct": 48.2,
-     "fwd3_pct": 0.536,
-     "fwd3_pos_pct": 49.1,
-     "fwd7_pct": 1.2953,
-     "fwd7_pos_pct": 51.9
+     "fwd3_pct": 0.5211,
+     "fwd3_pos_pct": 49.5,
+     "fwd7_pct": 1.3381,
+     "fwd7_pos_pct": 52.3
     }
    },
    "rule": {
-    "n": 35,
-    "net_sum_pct": 16.1349,
-    "net_avg_pct": 0.461,
-    "gross_avg_pct": 0.4851,
-    "funding_avg_pct": 0.0659,
-    "win_rate_pct": 42.9,
-    "shorts": 33,
+    "n": 36,
+    "net_sum_pct": 17.8199,
+    "net_avg_pct": 0.495,
+    "gross_avg_pct": 0.5189,
+    "funding_avg_pct": 0.0661,
+    "win_rate_pct": 44.4,
+    "shorts": 34,
     "longs": 2
    },
    "signal_today": {
-    "date": "2026-10-07",
-    "funding_3d_avg_pct": 0.03,
-    "percentile": 94.4,
-    "state": "과열"
+    "date": "2026-10-08",
+    "funding_3d_avg_pct": 0.029,
+    "percentile": 81.6,
+    "state": "중립"
    },
    "venue": "hyperliquid",
    "coin": "BTC"
@@ -63,12 +63,12 @@
    "days": 180,
    "buckets": {
     "high": {
-     "n": 56,
-     "fwd1_pct": -0.172,
-     "fwd1_pos_pct": 51.8,
-     "fwd3_pct": -0.6296,
+     "n": 55,
+     "fwd1_pct": -0.1244,
+     "fwd1_pos_pct": 52.7,
+     "fwd3_pct": -0.7461,
      "fwd3_pos_pct": 51.9,
-     "fwd7_pct": -0.8011,
+     "fwd7_pct": -0.7942,
      "fwd7_pos_pct": 56.0
     },
     "low": {
@@ -81,9 +81,9 @@
      "fwd7_pos_pct": 100.0
     },
     "mid": {
-     "n": 89,
-     "fwd1_pct": 0.2494,
-     "fwd1_pos_pct": 51.7,
+     "n": 90,
+     "fwd1_pct": 0.2036,
+     "fwd1_pos_pct": 51.1,
      "fwd3_pct": 1.0625,
      "fwd3_pos_pct": 49.4,
      "fwd7_pct": 1.9217,
@@ -92,18 +92,18 @@
    },
    "rule": {
     "n": 57,
-    "net_sum_pct": 32.5691,
-    "net_avg_pct": 0.5714,
-    "gross_avg_pct": 0.582,
-    "funding_avg_pct": 0.0794,
+    "net_sum_pct": 35.779,
+    "net_avg_pct": 0.6277,
+    "gross_avg_pct": 0.6382,
+    "funding_avg_pct": 0.0795,
     "win_rate_pct": 49.1,
     "shorts": 53,
     "longs": 4
    },
    "signal_today": {
-    "date": "2026-10-07",
-    "funding_3d_avg_pct": 0.0288,
-    "percentile": 68.2,
+    "date": "2026-10-08",
+    "funding_3d_avg_pct": 0.0234,
+    "percentile": 49.7,
     "state": "중립"
    },
    "venue": "hyperliquid",
@@ -113,12 +113,12 @@
    "days": 180,
    "buckets": {
     "high": {
-     "n": 55,
-     "fwd1_pct": -0.0449,
-     "fwd1_pos_pct": 49.1,
-     "fwd3_pct": -0.3586,
-     "fwd3_pos_pct": 37.0,
-     "fwd7_pct": -0.2211,
+     "n": 54,
+     "fwd1_pct": 0.0061,
+     "fwd1_pos_pct": 50.0,
+     "fwd3_pct": -0.3744,
+     "fwd3_pos_pct": 35.8,
+     "fwd7_pct": -0.2566,
      "fwd7_pos_pct": 40.0
     },
     "low": {
@@ -131,29 +131,29 @@
      "fwd7_pos_pct": 53.8
     },
     "mid": {
-     "n": 81,
-     "fwd1_pct": 0.2031,
-     "fwd1_pos_pct": 44.4,
-     "fwd3_pct": 0.6835,
-     "fwd3_pos_pct": 35.0,
+     "n": 82,
+     "fwd1_pct": 0.1656,
+     "fwd1_pos_pct": 43.9,
+     "fwd3_pct": 0.5702,
+     "fwd3_pos_pct": 34.6,
      "fwd7_pct": 1.5713,
      "fwd7_pos_pct": 36.2
     }
    },
    "rule": {
     "n": 66,
-    "net_sum_pct": 12.1395,
-    "net_avg_pct": 0.1839,
-    "gross_avg_pct": 0.2053,
-    "funding_avg_pct": 0.0686,
-    "win_rate_pct": 60.6,
+    "net_sum_pct": 19.2677,
+    "net_avg_pct": 0.2919,
+    "gross_avg_pct": 0.3126,
+    "funding_avg_pct": 0.0693,
+    "win_rate_pct": 62.1,
     "shorts": 53,
     "longs": 13
    },
    "signal_today": {
-    "date": "2026-10-07",
-    "funding_3d_avg_pct": 0.0297,
-    "percentile": 81.6,
+    "date": "2026-10-08",
+    "funding_3d_avg_pct": 0.0263,
+    "percentile": 71.5,
     "state": "중립"
    },
    "venue": "hyperliquid",
@@ -163,13 +163,13 @@
    "days": 180,
    "buckets": {
     "high": {
-     "n": 8,
-     "fwd1_pct": -0.4382,
-     "fwd1_pos_pct": 25.0,
-     "fwd3_pct": -0.6864,
-     "fwd3_pos_pct": 37.5,
-     "fwd7_pct": -0.8581,
-     "fwd7_pos_pct": 37.5
+     "n": 7,
+     "fwd1_pct": -0.419,
+     "fwd1_pos_pct": 28.6,
+     "fwd3_pct": -0.8992,
+     "fwd3_pos_pct": 28.6,
+     "fwd7_pct": -1.1623,
+     "fwd7_pos_pct": 28.6
     },
     "low": {
      "n": 18,
@@ -181,29 +181,29 @@
      "fwd7_pos_pct": 38.9
     },
     "mid": {
-     "n": 123,
-     "fwd1_pct": 0.0213,
-     "fwd1_pos_pct": 58.5,
-     "fwd3_pct": 0.0905,
-     "fwd3_pos_pct": 57.9,
-     "fwd7_pct": 0.0167,
-     "fwd7_pos_pct": 56.4
+     "n": 124,
+     "fwd1_pct": 0.0146,
+     "fwd1_pos_pct": 58.1,
+     "fwd3_pct": 0.0816,
+     "fwd3_pos_pct": 57.4,
+     "fwd7_pct": 0.0118,
+     "fwd7_pos_pct": 55.9
     }
    },
    "rule": {
-    "n": 26,
-    "net_sum_pct": -5.2574,
-    "net_avg_pct": -0.2022,
-    "gross_avg_pct": -0.3665,
-    "funding_avg_pct": 0.2543,
-    "win_rate_pct": 50.0,
-    "shorts": 8,
+    "n": 25,
+    "net_sum_pct": -4.4702,
+    "net_avg_pct": -0.1788,
+    "gross_avg_pct": -0.351,
+    "funding_avg_pct": 0.2622,
+    "win_rate_pct": 52.0,
+    "shorts": 7,
     "longs": 18
    },
    "signal_today": {
-    "date": "2026-10-07",
-    "funding_3d_avg_pct": -0.0538,
-    "percentile": 26.8,
+    "date": "2026-10-08",
+    "funding_3d_avg_pct": -0.0317,
+    "percentile": 38.0,
     "state": "중립"
    },
    "venue": "hyperliquid",
@@ -213,47 +213,47 @@
    "days": 180,
    "buckets": {
     "high": {
-     "n": 44,
-     "fwd1_pct": 0.2079,
-     "fwd1_pos_pct": 47.7,
-     "fwd3_pct": 0.877,
-     "fwd3_pos_pct": 54.5,
-     "fwd7_pct": 0.1121,
-     "fwd7_pos_pct": 38.6
+     "n": 43,
+     "fwd1_pct": 0.2834,
+     "fwd1_pos_pct": 48.8,
+     "fwd3_pct": 0.9239,
+     "fwd3_pos_pct": 55.8,
+     "fwd7_pct": 0.3336,
+     "fwd7_pos_pct": 39.5
     },
     "low": {
-     "n": 25,
-     "fwd1_pct": 0.9584,
-     "fwd1_pos_pct": 56.0,
-     "fwd3_pct": 1.8257,
-     "fwd3_pos_pct": 44.0,
-     "fwd7_pct": 6.2688,
-     "fwd7_pos_pct": 73.9
+     "n": 24,
+     "fwd1_pct": 1.0134,
+     "fwd1_pos_pct": 58.3,
+     "fwd3_pct": 1.9553,
+     "fwd3_pos_pct": 45.8,
+     "fwd7_pct": 6.1087,
+     "fwd7_pos_pct": 72.7
     },
     "mid": {
-     "n": 80,
-     "fwd1_pct": -0.0267,
-     "fwd1_pos_pct": 48.8,
-     "fwd3_pct": 0.3032,
-     "fwd3_pos_pct": 52.6,
-     "fwd7_pct": 1.7932,
+     "n": 82,
+     "fwd1_pct": -0.0877,
+     "fwd1_pos_pct": 47.6,
+     "fwd3_pct": 0.1756,
+     "fwd3_pos_pct": 51.2,
+     "fwd7_pct": 1.7226,
      "fwd7_pos_pct": 47.4
     }
    },
    "rule": {
-    "n": 68,
-    "net_sum_pct": 8.815,
-    "net_avg_pct": 0.1296,
-    "gross_avg_pct": 0.1908,
-    "funding_avg_pct": 0.0288,
-    "win_rate_pct": 45.6,
-    "shorts": 44,
+    "n": 67,
+    "net_sum_pct": 2.3026,
+    "net_avg_pct": 0.0344,
+    "gross_avg_pct": 0.0967,
+    "funding_avg_pct": 0.0277,
+    "win_rate_pct": 44.8,
+    "shorts": 43,
     "longs": 24
    },
    "signal_today": {
-    "date": "2026-10-07",
-    "funding_3d_avg_pct": 0.0281,
-    "percentile": 53.6,
+    "date": "2026-10-08",
+    "funding_3d_avg_pct": 0.0218,
+    "percentile": 26.8,
     "state": "중립"
    },
    "venue": "hyperliquid",
@@ -272,45 +272,45 @@
      "fwd7_pos_pct": 29.0
     },
     "low": {
-     "n": 20,
-     "fwd1_pct": -0.9556,
-     "fwd1_pos_pct": 50.0,
-     "fwd3_pct": -2.2594,
-     "fwd3_pos_pct": 25.0,
-     "fwd7_pct": -2.0293,
-     "fwd7_pos_pct": 45.0
+     "n": 17,
+     "fwd1_pct": -0.6985,
+     "fwd1_pos_pct": 47.1,
+     "fwd3_pct": -0.9649,
+     "fwd3_pos_pct": 29.4,
+     "fwd7_pct": -0.0515,
+     "fwd7_pos_pct": 52.9
     },
     "mid": {
-     "n": 95,
-     "fwd1_pct": -0.2173,
-     "fwd1_pos_pct": 43.2,
-     "fwd3_pct": -0.133,
-     "fwd3_pos_pct": 45.2,
-     "fwd7_pct": 0.0232,
-     "fwd7_pos_pct": 35.9
+     "n": 98,
+     "fwd1_pct": -0.3315,
+     "fwd1_pos_pct": 43.9,
+     "fwd3_pct": -0.5932,
+     "fwd3_pos_pct": 42.7,
+     "fwd7_pct": -0.4496,
+     "fwd7_pos_pct": 34.7
     }
    },
    "rule": {
-    "n": 53,
-    "net_sum_pct": -79.2388,
-    "net_avg_pct": -1.4951,
-    "gross_avg_pct": -1.4772,
-    "funding_avg_pct": 0.0721,
-    "win_rate_pct": 47.2,
-    "shorts": 33,
-    "longs": 20
+    "n": 51,
+    "net_sum_pct": -42.7697,
+    "net_avg_pct": -0.8386,
+    "gross_avg_pct": -0.8274,
+    "funding_avg_pct": 0.0788,
+    "win_rate_pct": 51.0,
+    "shorts": 34,
+    "longs": 17
    },
    "signal_today": {
-    "date": "2026-10-07",
-    "funding_3d_avg_pct": 0.03,
-    "percentile": 85.5,
+    "date": "2026-10-08",
+    "funding_3d_avg_pct": 0.0264,
+    "percentile": 50.8,
     "state": "중립"
    },
    "venue": "hyperliquid",
    "coin": "DOGE"
   },
   "okx:BTC": {
-   "days": 101,
+   "days": 102,
    "buckets": {
     "high": {
      "n": 15,
@@ -331,13 +331,13 @@
      "fwd7_pos_pct": 50.0
     },
     "mid": {
-     "n": 49,
-     "fwd1_pct": 0.4946,
-     "fwd1_pos_pct": 55.1,
-     "fwd3_pct": 1.621,
-     "fwd3_pos_pct": 59.6,
-     "fwd7_pct": 2.9738,
-     "fwd7_pos_pct": 65.1
+     "n": 50,
+     "fwd1_pct": 0.447,
+     "fwd1_pos_pct": 54.0,
+     "fwd3_pct": 1.49,
+     "fwd3_pos_pct": 58.3,
+     "fwd7_pct": 2.8226,
+     "fwd7_pos_pct": 63.6
     }
    },
    "rule": {
@@ -351,16 +351,16 @@
     "longs": 6
    },
    "signal_today": {
-    "date": "2026-10-07",
-    "funding_3d_avg_pct": 0.0106,
-    "percentile": 22.0,
+    "date": "2026-10-08",
+    "funding_3d_avg_pct": 0.0101,
+    "percentile": 20.8,
     "state": "중립"
    },
    "venue": "okx",
    "coin": "BTC"
   },
   "okx:ETH": {
-   "days": 101,
+   "days": 102,
    "buckets": {
     "high": {
      "n": 13,
@@ -381,13 +381,13 @@
      "fwd7_pos_pct": null
     },
     "mid": {
-     "n": 57,
-     "fwd1_pct": 0.5958,
-     "fwd1_pos_pct": 57.9,
-     "fwd3_pct": 1.6774,
-     "fwd3_pos_pct": 61.8,
-     "fwd7_pct": 2.9007,
-     "fwd7_pos_pct": 68.6
+     "n": 58,
+     "fwd1_pct": 0.5191,
+     "fwd1_pos_pct": 56.9,
+     "fwd3_pct": 1.4923,
+     "fwd3_pos_pct": 60.7,
+     "fwd7_pct": 2.6805,
+     "fwd7_pos_pct": 67.3
     }
    },
    "rule": {
@@ -401,16 +401,16 @@
     "longs": 0
    },
    "signal_today": {
-    "date": "2026-10-07",
-    "funding_3d_avg_pct": 0.0155,
-    "percentile": 68.0,
+    "date": "2026-10-08",
+    "funding_3d_avg_pct": 0.0098,
+    "percentile": 40.6,
     "state": "중립"
    },
    "venue": "okx",
    "coin": "ETH"
   },
   "okx:XRP": {
-   "days": 101,
+   "days": 102,
    "buckets": {
     "high": {
      "n": 17,
@@ -431,13 +431,13 @@
      "fwd7_pos_pct": 0.0
     },
     "mid": {
-     "n": 50,
-     "fwd1_pct": 0.4364,
-     "fwd1_pos_pct": 42.0,
-     "fwd3_pct": 2.607,
-     "fwd3_pos_pct": 45.8,
-     "fwd7_pct": 6.2679,
-     "fwd7_pos_pct": 59.1
+     "n": 51,
+     "fwd1_pct": 0.3716,
+     "fwd1_pos_pct": 41.2,
+     "fwd3_pct": 2.3813,
+     "fwd3_pos_pct": 44.9,
+     "fwd7_pct": 5.9591,
+     "fwd7_pos_pct": 57.8
     }
    },
    "rule": {
@@ -451,16 +451,16 @@
     "longs": 3
    },
    "signal_today": {
-    "date": "2026-10-07",
-    "funding_3d_avg_pct": 0.0179,
-    "percentile": 72.0,
+    "date": "2026-10-08",
+    "funding_3d_avg_pct": 0.0063,
+    "percentile": 19.8,
     "state": "중립"
    },
    "venue": "okx",
    "coin": "XRP"
   },
   "okx:TRX": {
-   "days": 101,
+   "days": 102,
    "buckets": {
     "high": {
      "n": 11,
@@ -481,13 +481,13 @@
      "fwd7_pos_pct": 100.0
     },
     "mid": {
-     "n": 52,
-     "fwd1_pct": 0.0451,
-     "fwd1_pos_pct": 57.7,
-     "fwd3_pct": 0.1673,
-     "fwd3_pos_pct": 56.0,
-     "fwd7_pct": 0.0923,
-     "fwd7_pos_pct": 59.6
+     "n": 53,
+     "fwd1_pct": 0.0292,
+     "fwd1_pos_pct": 56.6,
+     "fwd3_pct": 0.1449,
+     "fwd3_pos_pct": 54.9,
+     "fwd7_pct": 0.0785,
+     "fwd7_pos_pct": 58.3
     }
    },
    "rule": {
@@ -501,16 +501,16 @@
     "longs": 7
    },
    "signal_today": {
-    "date": "2026-10-07",
-    "funding_3d_avg_pct": -0.0672,
-    "percentile": 15.0,
+    "date": "2026-10-08",
+    "funding_3d_avg_pct": -0.0518,
+    "percentile": 24.8,
     "state": "중립"
    },
    "venue": "okx",
    "coin": "TRX"
   },
   "okx:LINK": {
-   "days": 101,
+   "days": 102,
    "buckets": {
     "high": {
      "n": 12,
@@ -531,13 +531,13 @@
      "fwd7_pos_pct": 66.7
     },
     "mid": {
-     "n": 49,
-     "fwd1_pct": 0.5991,
-     "fwd1_pos_pct": 51.0,
-     "fwd3_pct": 2.4189,
-     "fwd3_pos_pct": 61.7,
-     "fwd7_pct": 4.6034,
-     "fwd7_pos_pct": 62.8
+     "n": 50,
+     "fwd1_pct": 0.494,
+     "fwd1_pos_pct": 50.0,
+     "fwd3_pct": 2.196,
+     "fwd3_pos_pct": 60.4,
+     "fwd7_pct": 4.2338,
+     "fwd7_pos_pct": 61.4
     }
    },
    "rule": {
@@ -551,16 +551,16 @@
     "longs": 9
    },
    "signal_today": {
-    "date": "2026-10-07",
-    "funding_3d_avg_pct": 0.0209,
-    "percentile": 61.0,
+    "date": "2026-10-08",
+    "funding_3d_avg_pct": 0.0176,
+    "percentile": 42.6,
     "state": "중립"
    },
    "venue": "okx",
    "coin": "LINK"
   },
   "okx:DOGE": {
-   "days": 101,
+   "days": 102,
    "buckets": {
     "high": {
      "n": 18,
@@ -581,13 +581,13 @@
      "fwd7_pos_pct": 0.0
     },
     "mid": {
-     "n": 49,
-     "fwd1_pct": 0.4748,
-     "fwd1_pos_pct": 46.9,
-     "fwd3_pct": 2.4289,
-     "fwd3_pos_pct": 59.6,
-     "fwd7_pct": 5.6957,
-     "fwd7_pos_pct": 60.5
+     "n": 50,
+     "fwd1_pct": 0.3532,
+     "fwd1_pos_pct": 46.0,
+     "fwd3_pct": 2.1299,
+     "fwd3_pos_pct": 58.3,
+     "fwd7_pct": 5.3178,
+     "fwd7_pos_pct": 59.1
     }
    },
    "rule": {
@@ -601,9 +601,9 @@
     "longs": 3
    },
    "signal_today": {
-    "date": "2026-10-07",
-    "funding_3d_avg_pct": 0.0236,
-    "percentile": 71.0,
+    "date": "2026-10-08",
+    "funding_3d_avg_pct": 0.019,
+    "percentile": 40.6,
     "state": "중립"
    },
    "venue": "okx",
@@ -612,109 +612,107 @@
  },
  "pooled": {
   "high": {
-   "n": 316,
-   "fwd1_pct": 0.1442,
-   "fwd3_pct": 0.1479,
-   "fwd7_pct": 0.8241
+   "n": 314,
+   "fwd1_pct": 0.1713,
+   "fwd3_pct": 0.122,
+   "fwd7_pct": 0.8458
   },
   "low": {
-   "n": 110,
-   "fwd1_pct": 0.0187,
-   "fwd3_pct": -0.1807,
-   "fwd7_pct": 1.5591
+   "n": 106,
+   "fwd1_pct": 0.0911,
+   "fwd3_pct": 0.0961,
+   "fwd7_pct": 1.8972
   },
   "mid": {
-   "n": 888,
-   "fwd1_pct": 0.1878,
-   "fwd3_pct": 0.8845,
-   "fwd7_pct": 1.9455
+   "n": 900,
+   "fwd1_pct": 0.1369,
+   "fwd3_pct": 0.7484,
+   "fwd7_pct": 1.814
   },
   "rule": {
-   "n": 419,
-   "net_avg_pct": -0.2182,
-   "net_sum_pct": -91.4132
+   "n": 416,
+   "net_avg_pct": -0.1169,
+   "net_sum_pct": -48.6462
   }
  },
  "signals": {
   "hyperliquid:BTC": {
-   "date": "2026-10-07",
-   "funding_3d_avg_pct": 0.03,
-   "percentile": 94.4,
-   "state": "과열"
-  },
-  "hyperliquid:ETH": {
-   "date": "2026-10-07",
-   "funding_3d_avg_pct": 0.0288,
-   "percentile": 68.2,
-   "state": "중립"
-  },
-  "hyperliquid:XRP": {
-   "date": "2026-10-07",
-   "funding_3d_avg_pct": 0.0297,
+   "date": "2026-10-08",
+   "funding_3d_avg_pct": 0.029,
    "percentile": 81.6,
    "state": "중립"
   },
+  "hyperliquid:ETH": {
+   "date": "2026-10-08",
+   "funding_3d_avg_pct": 0.0234,
+   "percentile": 49.7,
+   "state": "중립"
+  },
+  "hyperliquid:XRP": {
+   "date": "2026-10-08",
+   "funding_3d_avg_pct": 0.0263,
+   "percentile": 71.5,
+   "state": "중립"
+  },
   "hyperliquid:TRX": {
-   "date": "2026-10-07",
-   "funding_3d_avg_pct": -0.0538,
-   "percentile": 26.8,
+   "date": "2026-10-08",
+   "funding_3d_avg_pct": -0.0317,
+   "percentile": 38.0,
    "state": "중립"
   },
   "hyperliquid:LINK": {
-   "date": "2026-10-07",
-   "funding_3d_avg_pct": 0.0281,
-   "percentile": 53.6,
+   "date": "2026-10-08",
+   "funding_3d_avg_pct": 0.0218,
+   "percentile": 26.8,
    "state": "중립"
   },
   "hyperliquid:DOGE": {
-   "date": "2026-10-07",
-   "funding_3d_avg_pct": 0.03,
-   "percentile": 85.5,
+   "date": "2026-10-08",
+   "funding_3d_avg_pct": 0.0264,
+   "percentile": 50.8,
    "state": "중립"
   },
   "okx:BTC": {
-   "date": "2026-10-07",
-   "funding_3d_avg_pct": 0.0106,
-   "percentile": 22.0,
+   "date": "2026-10-08",
+   "funding_3d_avg_pct": 0.0101,
+   "percentile": 20.8,
    "state": "중립"
   },
   "okx:ETH": {
-   "date": "2026-10-07",
-   "funding_3d_avg_pct": 0.0155,
-   "percentile": 68.0,
+   "date": "2026-10-08",
+   "funding_3d_avg_pct": 0.0098,
+   "percentile": 40.6,
    "state": "중립"
   },
   "okx:XRP": {
-   "date": "2026-10-07",
-   "funding_3d_avg_pct": 0.0179,
-   "percentile": 72.0,
+   "date": "2026-10-08",
+   "funding_3d_avg_pct": 0.0063,
+   "percentile": 19.8,
    "state": "중립"
   },
   "okx:TRX": {
-   "date": "2026-10-07",
-   "funding_3d_avg_pct": -0.0672,
-   "percentile": 15.0,
+   "date": "2026-10-08",
+   "funding_3d_avg_pct": -0.0518,
+   "percentile": 24.8,
    "state": "중립"
   },
   "okx:LINK": {
-   "date": "2026-10-07",
-   "funding_3d_avg_pct": 0.0209,
-   "percentile": 61.0,
+   "date": "2026-10-08",
+   "funding_3d_avg_pct": 0.0176,
+   "percentile": 42.6,
    "state": "중립"
   },
   "okx:DOGE": {
-   "date": "2026-10-07",
-   "funding_3d_avg_pct": 0.0236,
-   "percentile": 71.0,
+   "date": "2026-10-08",
+   "funding_3d_avg_pct": 0.019,
+   "percentile": 40.6,
    "state": "중립"
   }
  },
  "errors": {},
  "summary": {
-  "hot": [
-   "hyperliquid:BTC"
-  ],
+  "hot": [],
   "cold": [],
-  "verdict": "과열 뒤 3일 0.1479% (n=316) vs 냉각 뒤 -0.1807% (n=110) vs 중립 0.8845%. 규칙 건당 순 -0.2182% (n=419). 오늘 과열 hyperliquid:BTC / 냉각 없음"
+  "verdict": "과열 뒤 3일 0.122% (n=314) vs 냉각 뒤 0.0961% (n=106) vs 중립 0.7484%. 규칙 건당 순 -0.1169% (n=416). 오늘 과열 없음 / 냉각 없음"
  }
 }
