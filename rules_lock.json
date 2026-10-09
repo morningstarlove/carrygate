@@ -1,6 +1,6 @@
 {
   "_comment": "규칙 잠금. 트랙 코드의 규칙 상수와 criteria.json 지문을 적어 둔다. tests/test_verdict.py 가 매번 대조하므로, 규칙을 바꾸면 반드시 (1) proposals.md 에 근거 (2) 그 트랙의 RULE_FIXED 를 새 날짜로 (3) `python verdict.py --lock` 순서로 간다.",
-  "_locked_at": "2026-10-06T20:41:19Z",
+  "_locked_at": "2026-10-09T05:57:15Z",
   "criteria_sha256": "dbcccbcb26492ab5052cf03067a9ad31262af47a68cae60d75386958bf2b5ed3",
   "kr_breakout": {
     "rule_fixed": "2026-10-05",
@@ -31,6 +31,7 @@
       "tax_pct": 0.15,
       "variants": {
         "base": {
+          "exclude_best": [],
           "hold_max": 20,
           "label": "동조 업종 + 패턴 돌파 (기본)",
           "max_pos_pct": 20.0,
@@ -38,13 +39,25 @@
           "risk_pct": 1.0
         },
         "hold_10": {
+          "exclude_best": [],
           "hold_max": 10,
           "label": "동조 + 패턴, 보유 10일",
           "max_pos_pct": 20.0,
           "need_sync": true,
           "risk_pct": 1.0
         },
+        "no_flag": {
+          "exclude_best": [
+            "flag"
+          ],
+          "hold_max": 20,
+          "label": "동조 + 패턴, 깃발형 제외",
+          "max_pos_pct": 20.0,
+          "need_sync": true,
+          "risk_pct": 1.0
+        },
         "no_sector": {
+          "exclude_best": [],
           "hold_max": 20,
           "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
           "max_pos_pct": 20.0,
@@ -52,6 +65,7 @@
           "risk_pct": 1.0
         },
         "risk_2": {
+          "exclude_best": [],
           "hold_max": 20,
           "label": "동조 + 패턴, 위험 2% (명목 상한 30%)",
           "max_pos_pct": 30.0,
