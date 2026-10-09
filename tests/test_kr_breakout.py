@@ -150,7 +150,11 @@ class Engine(unittest.TestCase):
         top = pole[-1]["h"]; low = pole[0]["l"]
         fl = [bar(65 + i, top - 2, top - 1, top - 0.2 * (top - low), top - 2, 300_000) for i in range(6)]
         bars = base + pole + fl + [bar(71, top - 1, top + 4, top - 3, top + 3, 2_500_000)] + [bar(72 + k, top + 3, top + 5, top + 1, top + 3) for k in range(3)]
-        sims, _ = run({"A": bars}, {"A": "G"})
+        # 깃대 첫 봉이 앞 횡보(박스)도 돌파하므로, 깃발 돌파일(71) 이후만 돌려 깃발 신호만 본다
+        days = [x for x in KB.days_from_bars({"A": bars}, {"A": "G"}) if x["date"] >= d(71)]
+        for day in days:
+            day["sync_groups"] = {"G"}; day["sync_by"] = {"G": "day"}
+        sims = KB.simulate(days, {"A": bars})
         self.assertIn("A", sims["base"].positions)
         self.assertNotIn("A", sims["no_flag"].positions)
         self.assertEqual(sims["no_flag"].skipped["pattern"], 1)
