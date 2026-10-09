@@ -15,7 +15,7 @@ CARRYGATE — 한국 주식 "업종 동조 + 패턴 돌파" 신호·종이매매
   청산   직전 EXIT_LOW_N 일 최저가 아래 종가 → 다음날 시가 / 보유 HOLD_MAX 봉 → 다음날 시가
   수량   계좌×RISK_PCT ÷ (진입가−손절가), 명목가 ≤ 계좌×MAX_POS_PCT. 동시 MAX_POS 종목, 같은 업종 MAX_PER_GROUP
   비용   매수 수수료 FEE_PCT, 매도 수수료 FEE_PCT + 거래세 TAX_PCT, 양쪽 슬리피지 SLIP_PCT
-  변형   base(동조 필요, 20일) / no_sector(동조 없이 패턴만 — 대조군) / hold_10(동조 필요, 10일) / risk_2(위험 2%). 나란히 기록만 한다.
+  변형   base(동조 필요, 20일) / no_sector(동조 없이 패턴만 — 대조군) / hold_10(동조 필요, 10일) / risk_2(위험 2%) / no_flag(깃발형 제외). 나란히 기록만 한다.
 
   python kr_breakout.py                 # 순방향 계산·저장 (kr_breakout.json, kr_breakout_history.jsonl)
   python kr_breakout.py --dry-run
@@ -55,6 +55,10 @@ VARIANTS = {
     "no_sector": {"need_sync": False, "hold_max": HOLD_MAX, "label": "패턴 돌파만 (업종 동조 없음, 대조군)"},
     "hold_10":   {"need_sync": True,  "hold_max": 10,       "label": "동조 + 패턴, 보유 10일"},
     "risk_2":    {"need_sync": True,  "hold_max": HOLD_MAX, "risk_pct": 2.0, "max_pos_pct": 30.0, "label": "동조 + 패턴, 위험 2% (명목 상한 30%)"},
+    #  - no_flag (2026-10-09 추가): base 와 같되 대표 패턴(가장 타이트한 하단)이 깃발형이면 안 들어간다. 백테스트에서 깃발형만 손실이었고
+    #    순방향 첫 손절 3건 중 2건이 깃발형. 과거 날짜의 고정 신호는 base 의 고정 신호에서 같은 규칙으로 파생한다(derive_from).
+    "no_flag":   {"need_sync": True,  "hold_max": HOLD_MAX, "exclude_best": ["flag"], "derive_from": "base",
+                  "label": "동조 + 패턴, 깃발형 제외"},
 }
 BT_UNIVERSE = 300               # 백테스트 유니버스: 지금 거래대금 상위 N
 BT_DAYS = 760                   # 약 3년 일봉
@@ -86,7 +90,7 @@ class Sim:
         self.peak = equity0
         self.max_dd = 0.0
         self.signals = 0
-        self.skipped = {"gap": 0, "limit": 0, "cooldown": 0, "size": 0, "no_bar": 0}
+        self.skipped = {"gap": 0, "limit": 0, "cooldown": 0, "size": 0, "no_bar": 0, "pattern": 0}
         self.day_no = 0
 
     def equity(self, bars_today):
@@ -165,7 +169,11 @@ class Sim:
         self.peak = max(self.peak, eq)
         self.max_dd = max(self.max_dd, (self.peak - eq) / self.peak * 100)
         # 5) 오늘 종가 신호 → 내일 시가 후보
-        frozen = (meta.get("frozen") or {}).get(self.name)
+        frozen_all = meta.get("frozen") or {}
+        frozen = frozen_all.get(self.name)
+        if frozen is None and self.cfg.get("derive_from") in frozen_all:
+            # 이 변형이 생기기 전 날짜: 원본 변형의 고정 신호에서 같은 제외 규칙으로 파생한다
+            frozen = [e for e in frozen_all[self.cfg["derive_from"]] if e.get("pattern") not in self.cfg.get("exclude_best", ())]
         if frozen is not None:
             # 그날 기록해 둔 신호를 그대로 쓴다 (다음 날 다시 받은 일봉으로 과거 신호가 바뀌지 않게 — 2026-10-07 라이트론 사례)
             for e in frozen:
@@ -190,8 +198,10 @@ class Sim:
             r = P.scan(all_bars[code], i)
             if not r["ok"]:
                 continue
-            self.signals += 1
             best = max(r["patterns"], key=lambda q: q["pattern_low"])   # 가장 가까운 하단 = 가장 타이트한 손절
+            if best["pattern"] in self.cfg.get("exclude_best", ()):
+                self.skipped["pattern"] = self.skipped.get("pattern", 0) + 1; continue
+            self.signals += 1
             self.pending_entries.append({"code": code, "group": group, "date": date, "signal_close": bars_today[code]["c"],
                                          "pattern": best["pattern"], "patterns": [q["pattern"] for q in r["patterns"]],
                                          "pattern_low": best["pattern_low"], "sync_by": (meta.get("sync_by") or {}).get(group),
@@ -466,7 +476,8 @@ def rules_dict():
             "stop_pct": STOP_PCT, "gap_skip_pct": GAP_SKIP_PCT, "exit_low_n": EXIT_LOW_N, "hold_max": HOLD_MAX, "cooldown": COOLDOWN,
             "fee_pct": FEE_PCT, "tax_pct": TAX_PCT, "slip_pct": SLIP_PCT,
             "variants": {k: dict(label=v["label"], risk_pct=v.get("risk_pct", RISK_PCT), max_pos_pct=v.get("max_pos_pct", MAX_POS_PCT),
-                                 hold_max=v["hold_max"], need_sync=v["need_sync"]) for k, v in VARIANTS.items()},
+                                 hold_max=v["hold_max"], need_sync=v["need_sync"], exclude_best=list(v.get("exclude_best", ())))
+                         for k, v in VARIANTS.items()},
             "pattern_rules": {"vol_mult": P.VOL_MULT, "min_value_krw": P.MIN_VALUE_KRW, "limit_up_pct": P.LIMIT_UP_PCT},
             "sync_rules": {"min_group": KU.MIN_GROUP, "up_ratio": KU.UP_RATIO, "median_change_pct": KU.MED_CHANGE_PCT, "median_week_pct": KU.MED_WEEK_PCT}}
 
