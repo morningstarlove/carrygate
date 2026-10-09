@@ -1,6 +1,6 @@
 {
- "date": "2026-10-08",
- "generated_at_utc": "2026-10-08T14:06:33Z",
+ "date": "2026-10-09",
+ "generated_at_utc": "2026-10-09T13:52:43Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -23,28 +23,42 @@
     "risk_pct": 1.0,
     "max_pos_pct": 20.0,
     "hold_max": 20,
-    "need_sync": true
+    "need_sync": true,
+    "exclude_best": []
    },
    "no_sector": {
     "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
     "risk_pct": 1.0,
     "max_pos_pct": 20.0,
     "hold_max": 20,
-    "need_sync": false
+    "need_sync": false,
+    "exclude_best": []
    },
    "hold_10": {
     "label": "동조 + 패턴, 보유 10일",
     "risk_pct": 1.0,
     "max_pos_pct": 20.0,
     "hold_max": 10,
-    "need_sync": true
+    "need_sync": true,
+    "exclude_best": []
    },
    "risk_2": {
     "label": "동조 + 패턴, 위험 2% (명목 상한 30%)",
     "risk_pct": 2.0,
     "max_pos_pct": 30.0,
     "hold_max": 20,
-    "need_sync": true
+    "need_sync": true,
+    "exclude_best": []
+   },
+   "no_flag": {
+    "label": "동조 + 패턴, 깃발형 제외",
+    "risk_pct": 1.0,
+    "max_pos_pct": 20.0,
+    "hold_max": 20,
+    "need_sync": true,
+    "exclude_best": [
+     "flag"
+    ]
    }
   },
   "pattern_rules": {
@@ -67,8 +81,7 @@
   "bar_errors": 0,
   "stale_codes": 0,
   "by_source": {
-   "yahoo+naver_api": 26,
-   "yahoo": 132
+   "yahoo": 158
   },
   "skipped_days": [
    "2026-10-05"
@@ -164,7 +177,8 @@
    }
   ],
   "hold_10": [],
-  "risk_2": []
+  "risk_2": [],
+  "no_flag": []
  },
  "signal_date": "2026-10-08",
  "signals_frozen": true,
@@ -193,7 +207,8 @@
     "limit": 8,
     "cooldown": 0,
     "size": 0,
-    "no_bar": 0
+    "no_bar": 0,
+    "pattern": 0
    },
    "by_pattern": {
     "flag": {
@@ -300,7 +315,8 @@
     "limit": 19,
     "cooldown": 0,
     "size": 0,
-    "no_bar": 0
+    "no_bar": 0,
+    "pattern": 0
    },
    "by_pattern": {
     "flag": {
@@ -396,7 +412,8 @@
     "limit": 8,
     "cooldown": 0,
     "size": 0,
-    "no_bar": 0
+    "no_bar": 0,
+    "pattern": 0
    },
    "by_pattern": {
     "flag": {
@@ -503,7 +520,8 @@
     "limit": 0,
     "cooldown": 0,
     "size": 10,
-    "no_bar": 0
+    "no_bar": 0,
+    "pattern": 0
    },
    "by_pattern": {
     "flag": {
@@ -572,6 +590,103 @@
      "entry": 311933.0,
      "stop": 290097.69,
      "shares": 8,
+     "bars_held": 1,
+     "last_close": 306500.0,
+     "unrealized_pct": -1.74
+    }
+   ]
+  },
+  "no_flag": {
+   "label": "동조 + 패턴, 깃발형 제외",
+   "signals": 6,
+   "trades": 0,
+   "wins": 0,
+   "win_rate": null,
+   "avg_win_pct": null,
+   "avg_loss_pct": null,
+   "payoff": null,
+   "profit_factor": null,
+   "total_return_pct": 0.47,
+   "equity_final": 10047370,
+   "max_drawdown_pct": 0.0,
+   "avg_hold_days": null,
+   "skipped": {
+    "gap": 0,
+    "limit": 1,
+    "cooldown": 0,
+    "size": 0,
+    "no_bar": 0,
+    "pattern": 0
+   },
+   "by_pattern": {},
+   "by_sync": {},
+   "by_exit": {},
+   "by_year": {},
+   "yearly_return_pct": {
+    "2026": 0.47
+   },
+   "open_positions": [
+    {
+     "code": "006400",
+     "name": "Samsung SDI Co., Ltd",
+     "group": "Electrical Products",
+     "pattern": "box",
+     "entry_date": "2026-10-07",
+     "entry": 572713.0,
+     "stop": 532623.09,
+     "shares": 2,
+     "bars_held": 2,
+     "last_close": 569000.0,
+     "unrealized_pct": -0.65
+    },
+    {
+     "code": "373220",
+     "name": "LG Energy Solution Ltd.",
+     "group": "Electrical Products",
+     "pattern": "triangle",
+     "entry_date": "2026-10-07",
+     "entry": 386656.5,
+     "stop": 359590.54,
+     "shares": 3,
+     "bars_held": 2,
+     "last_close": 401000.0,
+     "unrealized_pct": 3.71
+    },
+    {
+     "code": "098460",
+     "name": "Koh Young Technology Inc.",
+     "group": "Semiconductors",
+     "pattern": "box",
+     "entry_date": "2026-10-07",
+     "entry": 35957.55,
+     "stop": 33440.52,
+     "shares": 39,
+     "bars_held": 2,
+     "last_close": 37500.0,
+     "unrealized_pct": 4.29
+    },
+    {
+     "code": "278470",
+     "name": "APR Co.,Ltd.",
+     "group": "Household/Personal Care",
+     "pattern": "cup_handle",
+     "entry_date": "2026-10-08",
+     "entry": 376626.5,
+     "stop": 356500.0,
+     "shares": 5,
+     "bars_held": 1,
+     "last_close": 371500.0,
+     "unrealized_pct": -1.36
+    },
+    {
+     "code": "192820",
+     "name": "COSMAX, Inc.",
+     "group": "Household/Personal Care",
+     "pattern": "box",
+     "entry_date": "2026-10-08",
+     "entry": 311933.0,
+     "stop": 290097.69,
+     "shares": 4,
      "bars_held": 1,
      "last_close": 306500.0,
      "unrealized_pct": -1.74
@@ -910,7 +1025,8 @@
     "pnl_pct": -7.45,
     "hold_days": 1
    }
-  ]
+  ],
+  "no_flag": []
  },
  "errors": {},
  "stale": []
