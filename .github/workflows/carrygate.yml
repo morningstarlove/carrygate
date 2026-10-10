@@ -144,7 +144,7 @@ jobs:
 
       - name: Unit tests (계산 로직)
         if: always()
-        run: python -m unittest tests.test_scalp tests.test_research tests.test_midterm tests.test_momentum tests.test_live tests.test_turtle tests.test_reversal tests.test_relay tests.test_verdict tests.test_grid
+        run: python -m unittest tests.test_scalp tests.test_research tests.test_midterm tests.test_momentum tests.test_live tests.test_turtle tests.test_reversal tests.test_relay tests.test_verdict tests.test_grid tests.test_selfcheck
 
       - name: Commit results
         if: always() && inputs.dry_run != true

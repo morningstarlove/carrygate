@@ -106,7 +106,7 @@ jobs:
 
       - name: Unit tests (계산 로직, 저장된 실데이터)
         if: always()
-        run: python -m unittest tests.test_kr_universe tests.test_patterns tests.test_kr_breakout tests.test_verdict
+        run: python -m unittest tests.test_kr_universe tests.test_patterns tests.test_kr_breakout tests.test_verdict tests.test_selfcheck
 
       - name: Commit results
         if: always() && inputs.dry_run != true && github.event_name != 'push'

@@ -34,7 +34,7 @@
 
 ## 시험 (인터넷 불필요, 수정 뒤 반드시)
 ```
-python -m unittest tests.test_scalp tests.test_research tests.test_midterm tests.test_momentum tests.test_live tests.test_turtle tests.test_reversal tests.test_relay tests.test_verdict tests.test_grid
+python -m unittest tests.test_scalp tests.test_research tests.test_midterm tests.test_momentum tests.test_live tests.test_turtle tests.test_reversal tests.test_relay tests.test_verdict tests.test_grid tests.test_selfcheck
 python -m unittest tests.test_kr_universe tests.test_patterns tests.test_kr_breakout
 python selfcheck.py
 ```
