@@ -2,7 +2,7 @@
 
 > 이 문서만 읽으면 누구든(혹은 다른 AI 세션이든) 이어서 작업할 수 있게 쓴다.
 
-**최종 갱신:** 2026-10-07 (마일스톤 15 종사종팔 그리드 v4/v5 검증 `grid.py` main 병합; 현황판 데이터 main 최신으로 갱신·화면 코드 백업 `dashboard/index.html`, 캐리 바이낸스·바이비트 10/7 실측; 0절 "지금 상태 한눈에" 추가, 작업 기록 `docs/sessions/2026-10-07_phil_verdict.md`; 현황판 결과 파일 내장·매일 자동 갱신; 초단타 첫 합격·채점기 수정 P9, 한국 주식 첫 체결; 그 전 2026-10-06 마일스톤 14 판정 규율 — Phil 방식 이식: `verdict.py`·`criteria.json`·`rules_lock.json`·`proposals.md`; 그 전: 마일스톤 13 추세 전환 매매법 4시간봉 PR #32 병합, 현황판 카드 연결; 그 전: 터틀 기록 중복 수정 PR #22·#23, AI 보조 도구 PR #19)
+**최종 갱신:** 2026-10-10 (AI 프레임워크 5종 검토 `docs/AI_FRAMEWORKS_REVIEW.md` — 모두 불채택, 방법 4개 이식; 루트 `CLAUDE.md` 신설; 제안함 P14; 그 전 10/10 초단타 소액 시험 설계서 P13; 그 전 2026-10-07 마일스톤 15 종사종팔 그리드 v4/v5 검증 `grid.py` main 병합; 현황판 데이터 main 최신으로 갱신·화면 코드 백업 `dashboard/index.html`, 캐리 바이낸스·바이비트 10/7 실측; 0절 "지금 상태 한눈에" 추가, 작업 기록 `docs/sessions/2026-10-07_phil_verdict.md`; 현황판 결과 파일 내장·매일 자동 갱신; 초단타 첫 합격·채점기 수정 P9, 한국 주식 첫 체결; 그 전 2026-10-06 마일스톤 14 판정 규율 — Phil 방식 이식: `verdict.py`·`criteria.json`·`rules_lock.json`·`proposals.md`; 그 전: 마일스톤 13 추세 전환 매매법 4시간봉 PR #32 병합, 현황판 카드 연결; 그 전: 터틀 기록 중복 수정 PR #22·#23, AI 보조 도구 PR #19)
 **작업 브랜치:** 모두 `main` 에 병합됨. 최근 작업 브랜치(참고용): `claude/grid-jongsa-backtest`(마일스톤 15 종사종팔), `claude/phil-analysis`·`claude/verdict-scalp-cumulative`·`claude/decisions-1007`(마일스톤 14, PR #38~#44), `claude/turtle-history-dedupe`(터틀 기록 중복), `claude/chandelier-exit-variant`(Chandelier 변형), `claude/new-session-as7gis`(터틀), 한국 주식 트랙 PR #17·#18
 **저장소:** `morningstarlove/carrygate` (2026-09-17 `signalgate-bridge` 에서 이름 변경)
 **프로젝트명:** CARRYGATE — 게이트(신호등) + 캐리(이자) 두 축에서 따왔다.
@@ -42,6 +42,8 @@
 **사용자 결정 대기:** 없음. 다음 결정은 10/21(초단타 소액 시험 여부)과 첫 판정이 뜨는 날.
 
 **규칙을 바꾸고 싶을 때:** `proposals.md` 에 근거 → 그 트랙 `RULE_FIXED` 새 날짜 → `python verdict.py --lock`. 이 순서 없이 바꾸면 CI 가 막는다(원칙 5).
+
+**세션 입구:** 루트 `CLAUDE.md`(2026-10-10 부터, 세션 시작마다 자동으로 읽힘 — 읽는 순서·절대 규칙·역할 분담·AI 도구 정책). 이 문서가 원본이고 `CLAUDE.md` 는 요약이다.
 
 **절 지도:** 1절 만든 것(마일스톤별) · 2절 실제로 확인된 사실(실행 로그 근거) · 3절 아직 안 한 것 · 4절 이어서 작업하는 방법 · 5절 원칙 · 작업 기록 `docs/sessions/` · 제안함 `proposals.md`
 
@@ -1128,6 +1130,10 @@ GitHub 저장소 → Actions 탭 → `CARRYGATE daily` → Run workflow
 | Agency Agents (msitarzewski/agency-agents) | 18개 부서 282명 전문가 페르소나(엔지니어링 65·마케팅 37·보안 12·금융 5 등) | `~/.claude/agents/*.md` (전역, 세션마다 재설치). 사용: "금융 분석가 에이전트로 ~ 해줘" |
 | Codebase Memory MCP (DeusData/codebase-memory-mcp) | 코드 지식 그래프 MCP 서버. 수정 시 엉뚱한 코드 건드림 방지 | `~/.local/bin/codebase-memory-mcp` v0.11.0 (전역). Claude Code 에 MCP·훅·에이전트 3개 자동 등록. carrygate 인덱스 1,849 노드 (세션마다 재설치) |
 | OpenMontage (calesthio/OpenMontage) | 주제 → 대본·이미지·내레이션·자막·편집까지 자동 영상 제작 | `~/tools/OpenMontage` (전역). `make setup` 으로 venv·Remotion·Piper 설치. 사용은 그 폴더에서 Claude Code 를 열고 주제를 말하면 됨 |
+
+**AI 에이전트 프레임워크 5종 검토 (2026-10-10):** LangGraph·CrewAI·PydanticAI·Agno·Mastra 는 **설치하지 않는다**(AI 가 매 단계 판단하는 앱용 도구 — 우리는 매매 판단에 AI 를 쓰지 않고, 에이전트 역할은 세션·Routine 이 이미 함, 외부 패키지 0개 유지).
+대신 방법 4개를 가져온다: ① 주문기 상태 기계+재시작 복구 ② 세션 역할 분담(설계는 최상위 모델, 반복 작업은 하위 에이전트) ③ 결과 파일 형식 검산(P14)·거래소 응답 검사 ④ 루트 `CLAUDE.md`(세션 시작마다 자동으로 읽힘, 읽는 순서·절대 규칙·도구 정책).
+근거와 재검토 조건: `docs/AI_FRAMEWORKS_REVIEW.md`.
 
 **주의:** 자동(Auto) 모드에서는 외부 설치 스크립트 실행이 안전장치에 막힌다. 재설치할 때는 모드를 "Accept edits" 로 바꾸고 승인 버튼을 누른다.
 
