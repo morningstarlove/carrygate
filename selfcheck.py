@@ -8,6 +8,8 @@
   2) 기록 검산: funding_history.jsonl 의 날짜 중복·누락·순서와 수집 품질을 본다.
   3) 초단타 검산: scalp.json 의 순수익을 총수익·매매 건수·왕복 비용에서 다시 계산해
      대조하고, scalp_history.jsonl 의 날짜 중복·순서를 본다.
+  4) 형식 검산(P14): 통합 현황판이 읽는 결과 파일 19개의 키·타입이 SHAPES 대로인지 본다.
+     값이 아니라 모양을 본다 — 키가 빠지면 현황판 카드가 빈칸이 되기 때문이다.
 
 문제를 찾으면 화면에 남기고 1번으로 끝낸다(워크플로가 빨간불로 알려준다).
 아무것도 고치지 않고 아무것도 저장하지 않는다.
@@ -18,6 +20,106 @@ from datetime import datetime, timedelta
 TOL = 0.01          # 재계산과 저장값의 허용 오차 (연 %)
 HOLD_DAYS = 30.0    # funding.py 와 같은 보유기간 가정
 MAX_GAP_DAYS = 2    # 기록이 이 일수 넘게 끊기면 알린다
+
+# 형식 검산(제안함 P14) — 통합 현황판이 읽는 결과 파일마다 "반드시 있어야 하는 키와 타입".
+# 값은 check_math 등이 보고, 여기서는 모양만 본다. 키가 빠지거나 타입이 다르면 현황판 카드가 빈칸이 된다.
+# 표기: "a.b" 는 a 안의 b. 타입은 str / int / num(int 또는 float) / bool / dict / list / any(있기만 하면 됨).
+# 앞에 "?" 가 붙으면 null 허용. 목록은 dashboard/index.html 의 r* 함수가 실제로 읽는 필드에서 뽑았다(2026-10-10).
+SHAPES = {
+    "status.json": {"date": "str", "coins": "dict", "summary": "dict", "summary.btc_gate": "str", "summary.btc_sma200_gap_pct": "num",
+                    "summary.breadth_open": "int", "summary.breadth_total": "int", "summary.verdict": "str"},
+    "funding.json": {"date": "str", "coins": "dict", "summary": "dict", "summary.state": "str", "summary.verdict": "str",
+                     "summary.best_coin": "str", "summary.best_venue": "str", "summary.best_apr_pct": "num",
+                     "coingecko": "dict", "coingecko.used": "list", "coingecko.samples": "int",
+                     "kr_relay": "dict", "kr_relay.present": "bool", "kr_relay.fresh": "bool", "kr_relay.age_hours": "?num", "kr_relay.used": "list"},
+    "basis.json": {"date": "str", "coins": "dict", "summary": "dict", "summary.state": "str", "summary.verdict": "str",
+                   "summary.best_coin": "str", "summary.best_inst": "str", "summary.best_net_apr_pct": "num"},
+    "turtle.json": {"date": "str", "rules": "dict", "venues": "dict", "summary": "dict", "summary.markets": "int"},
+    "reversal.json": {"date": "str", "rules": "dict", "rules.rule_fixed": "str", "venues": "dict", "venues.upbit": "dict", "venues.okx": "dict",
+                      "summary": "dict", "summary.markets": "int"},
+    "live.json": {"date": "str", "status": "dict", "status.coin": "str", "status.days": "num", "status.warnings": "list"},
+    "scalp.json": {"date": "str", "eval_day_utc": "str", "method": "dict", "method.strategies": "list", "summary": "dict",
+                   "summary.rows_total": "int", "summary.rows_positive": "int", "summary.rows_robust": "int",
+                   "summary.by_tf_strategy": "dict", "summary.top": "list", "summary.history_days": "int", "summary.verdict": "str"},
+    "research.json": {"date": "str", "summary": "dict", "funding_summary": "dict", "hourly_by_venue": "dict", "leadlag_by_pair": "dict"},
+    "orderbook.json": {"date": "str", "samples": "int", "summary": "dict", "verdict": "str"},
+    "funding_signal.json": {"date": "str", "lookback_days": "int", "pooled": "dict", "pooled.high": "dict", "pooled.low": "dict",
+                            "pooled.mid": "dict", "pooled.rule": "dict", "signals": "dict", "summary": "dict"},
+    "kimchi.json": {"date": "str", "fx_usdkrw": "num", "coins": "dict", "summary": "dict"},
+    "macro.json": {"date": "str", "calendar_stale": "bool", "events": "list", "upcoming": "list", "summary": "dict", "summary.all": "dict"},
+    "listing.json": {"date": "str", "markets_krw": "int", "errors": "dict", "summary": "dict", "summary.notices": "int",
+                     "summary.with_price": "int", "summary.by_venue": "dict"},
+    "momentum.json": {"date": "str", "cost_pct": "num", "results": "dict", "signals": "dict", "window": "dict", "window.start": "str", "window.end": "str"},
+    "grid.json": {"date": "str", "rules": "dict", "rules.capital_usd": "num", "rules.fee_pct_one_way": "num", "rules.rule_fixed": "str",
+                  "rules.versions": "dict", "symbols": "dict", "comparison": "dict"},
+    "kr_sector.json": {"date": "str", "duplicate_of_previous": "bool", "groups": "dict", "universe": "list", "summary": "dict",
+                       "summary.group_n": "int", "summary.sync_groups": "list", "summary.value_traded_total_krw": "num"},
+    "kr_breakout.json": {"date": "str", "rule_fixed": "str", "forward": "dict", "forward.days": "int", "forward.from": "?str", "forward.to": "?str",
+                         "forward.stale_codes": "int", "signals_today": "dict", "trades": "dict", "variants": "dict", "variants.base": "dict"},
+    "kr_backtest.json": {"date": "str", "caveat": "str", "period": "dict", "benchmark": "dict", "variants": "dict", "variants.base": "dict",
+                         "variants.no_sector": "dict", "pass": "dict", "pass.all": "bool", "pass.trades_ok": "bool",
+                         "pass.return_ok": "bool", "pass.dd_ok": "bool"},
+    "verdict.json": {"date": "str", "criteria_sealed": "str", "errors": "dict", "tracks": "dict", "tracks.kr_breakout": "dict",
+                     "tracks.scalp": "dict", "rules_lock": "dict", "rules_lock.ok": "bool", "rules_lock.diffs": "list", "summary": "dict"},
+}
+OPTIONAL_FILES = ("live.json",)   # 실전 지갑 미설정이면 없다 — 없어도 문제 아님
+
+_TYPES = {"str": (str,), "int": (int,), "num": (int, float), "bool": (bool,), "dict": (dict,), "list": (list,)}
+
+
+def _type_ok(value, spec):
+    if spec == "any":
+        return True
+    if spec.startswith("?"):
+        if value is None:
+            return True
+        spec = spec[1:]
+    kinds = _TYPES[spec]
+    if isinstance(value, bool) and bool not in kinds:   # bool 은 int 의 하위 타입이라 따로 막는다
+        return False
+    return isinstance(value, kinds)
+
+
+def shape_errors(data, shape):
+    """shape(경로 → 타입) 대로 data 의 모양을 본다. 어긋난 항목을 '경로: 이유' 문자열 목록으로 돌려준다."""
+    out = []
+    if not isinstance(data, dict):
+        return ["맨 바깥이 dict 가 아니다 (%s)" % type(data).__name__]
+    for path in sorted(shape):
+        spec = shape[path]
+        cur, missing = data, False
+        for part in path.split("."):
+            if isinstance(cur, dict) and part in cur:
+                cur = cur[part]
+            else:
+                missing = True
+                break
+        if missing:
+            out.append("%s: 없음" % path)
+        elif not _type_ok(cur, spec):
+            out.append("%s: %s 이어야 하는데 %s" % (path, spec, "null" if cur is None else type(cur).__name__))
+    return out
+
+
+def check_shapes(problems, notes, shapes=None, loader=None):
+    """현황판이 읽는 결과 파일의 모양 검산. 파일이 없으면 알림만(아직 안 돈 것), 있는데 모양이 다르면 문제."""
+    shapes = SHAPES if shapes is None else shapes
+    loader = load_json if loader is None else loader
+    checked, absent = 0, []
+    for path in sorted(shapes):
+        d = loader(path)
+        if d is None:
+            if path not in OPTIONAL_FILES:
+                absent.append(path)
+            continue
+        errs = shape_errors(d, shapes[path])
+        if errs:
+            problems.append("형식: %s — %s" % (path, "; ".join(errs)))
+        else:
+            checked += 1
+    if absent:
+        notes.append("형식 검산 건너뜀(파일 없음): %s" % ", ".join(absent))
+    return checked
 
 
 def load_json(path):
@@ -507,6 +609,7 @@ def main():
     reversal_checked = check_reversal(problems, notes)
     grid_checked = check_grid(problems, notes)
     kr_checked = check_kr(problems, notes)
+    shape_checked = check_shapes(problems, notes)
     check_jsonl_dates("kr_sector_history.jsonl", "한국주식 업종", problems, notes)
     check_jsonl_dates("kr_breakout_history.jsonl", "한국주식 종이매매", problems, notes)
     for path, label in (("basis_history.jsonl", "베이시스"), ("funding_signal_history.jsonl", "펀딩 신호"),
@@ -517,6 +620,7 @@ def main():
 
     print("=== 검산 ===")
     print("재계산 대조: 캐리 %d건, 초단타 %d건, 베이시스 %d건, 터틀 %d건, 추세전환 %d건, 그리드 %d건, 한국주식 %d건 통과" % (checked, scalp_checked, basis_checked, turtle_checked, reversal_checked, grid_checked, kr_checked))
+    print("형식 대조: 현황판 결과 파일 %d개 통과 (키·타입)" % shape_checked)
     for m in notes:
         print("  · %s" % m)
 

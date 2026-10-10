@@ -1087,6 +1087,7 @@ GitHub 저장소 → Actions 탭 → `CARRYGATE daily` → Run workflow
 | `funding.py` 상단 `HL_DOC_*` | 하이퍼리퀴드 API 실패 시에만 쓰는 대체 수수료 |
 | `criteria.json` | 순방향 합격선 (바꾸면 `proposals.md` 기록 + `python verdict.py --lock`) |
 | `selfcheck.py` 상단 `TOL` / `MAX_GAP_DAYS` | 검산 허용 오차 / 기록 공백 경고 기준 |
+| `selfcheck.py` 상단 `SHAPES` / `OPTIONAL_FILES` | 현황판이 읽는 결과 파일의 필수 키·타입(형식 검산, P14). **현황판 카드에 새 필드를 쓰면 여기에도 넣는다.** 없어도 되는 파일 목록 |
 | `scalp.py` 상단 `VENUES` | 초단타 거래소별 수수료(시장가·지정가)·숏 가능 여부 |
 | `scalp.py` 상단 `SPREAD_TICKS` | 시장가 체결 시 잃는 호가 폭(틱). 기본 1틱 |
 | `scalp.py` `STRATEGIES` | 초단타 규칙 추가/제거 (**규칙을 바꾸면 그날부터 기록을 새로 세어야 한다**) |
@@ -1132,7 +1133,7 @@ GitHub 저장소 → Actions 탭 → `CARRYGATE daily` → Run workflow
 | OpenMontage (calesthio/OpenMontage) | 주제 → 대본·이미지·내레이션·자막·편집까지 자동 영상 제작 | `~/tools/OpenMontage` (전역). `make setup` 으로 venv·Remotion·Piper 설치. 사용은 그 폴더에서 Claude Code 를 열고 주제를 말하면 됨 |
 
 **AI 에이전트 프레임워크 5종 검토 (2026-10-10):** LangGraph·CrewAI·PydanticAI·Agno·Mastra 는 **설치하지 않는다**(AI 가 매 단계 판단하는 앱용 도구 — 우리는 매매 판단에 AI 를 쓰지 않고, 에이전트 역할은 세션·Routine 이 이미 함, 외부 패키지 0개 유지).
-대신 방법 4개를 가져온다: ① 주문기 상태 기계+재시작 복구 ② 세션 역할 분담(설계는 최상위 모델, 반복 작업은 하위 에이전트) ③ 결과 파일 형식 검산(P14)·거래소 응답 검사 ④ 루트 `CLAUDE.md`(세션 시작마다 자동으로 읽힘, 읽는 순서·절대 규칙·도구 정책).
+대신 방법 4개를 가져온다: ① 주문기 상태 기계+재시작 복구 ② 세션 역할 분담(설계는 최상위 모델, 반복 작업은 하위 에이전트) ③ 결과 파일 형식 검산(P14, **2026-10-10 반영**: `selfcheck.py` `SHAPES`+`check_shapes`, `tests/test_selfcheck.py`)·거래소 응답 검사 ④ 루트 `CLAUDE.md`(세션 시작마다 자동으로 읽힘, 읽는 순서·절대 규칙·도구 정책).
 근거와 재검토 조건: `docs/AI_FRAMEWORKS_REVIEW.md`.
 
 **주의:** 자동(Auto) 모드에서는 외부 설치 스크립트 실행이 안전장치에 막힌다. 재설치할 때는 모드를 "Accept edits" 로 바꾸고 승인 버튼을 누른다.
@@ -1142,6 +1143,7 @@ GitHub 저장소 → Actions 탭 → `CARRYGATE daily` → Run workflow
 급락 중단, 역펀딩 처리), 실제 데이터 확인은 위 `dry_run` 실행으로 한다.
 
 초단타는 두 가지로 시험한다.
+- `python3 -m unittest tests.test_selfcheck` — 형식 검산(P14): 키 누락·타입·null·파일 없음 + 실제 결과 파일·현황판 `FILES` 대조 (11건, 인터넷 불필요)
 - `python3 -m unittest tests.test_scalp` — 가짜 데이터로 계산 로직 (20건, 인터넷 불필요)
 - `python3 scalp.py --fixture tests/fixtures --dry-run` — 저장된 실데이터 CSV 로 전체 흐름 (인터넷 불필요)
 - `python3 -m unittest tests.test_research` — 보조 연구·호가창 계산 로직 (14건)
