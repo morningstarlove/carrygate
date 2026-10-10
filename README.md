@@ -262,6 +262,7 @@ GitHub Actions가 **매일 한국시간 오전 9시 18분**에 자동 실행한�
 | `kr_relay.py` / `kr_relay.bat` | **한국 PC 에서** 바이낸스·바이비트 펀딩비를 읽어 `data/kr_funding.json` 으로 올리는 중계기 (설정: `docs/KR_RELAY_SETUP.md`) |
 | `live_monitor.py` | 실전 캐리 감시 — 하이퍼리퀴드 지갑 **주소만으로** 포지션·펀딩 수취·수수료 기록 (키 없음) |
 | `docs/LIVE_CARRY_PLAN.md` | 캐리 소액 실전 설계서 (준비·진입·운영·청산·판정표) |
+| `docs/SCALP_LIVE_TEST_PLAN.md` | 초단타 소액 체결 시험 설계서 (OKX XRP 15분봉 VWAP 되돌림 지정가, 규칙 옮기기·주문기·안전장치·판정표·일정) |
 | `data/etf/` / `data/macro_calendar.json` | ETF 20년 일봉 (SOXL·TQQQ 포함) / 매크로 발표 달력 |
 | `report.py` | 며칠치 추이를 표로 출력 |
 | `selfcheck.py` | **검산** — 저장값을 다시 계산해 대조하고 기록 누락을 잡는다 |
