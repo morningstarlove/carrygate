@@ -32,12 +32,12 @@
 | 호가창 표본 | 매일 22:00 | GitHub Actions `orderbook.yml` |
 | 한국 주식 돌파 + 판정 | 평일 15:50 (예약이 자주 안 뜸) | GitHub Actions `kr_breakout.yml` |
 | 한국 주식 대신 실행 (그날 안 돌았으면) | 평일 16:10 | Routine trig_01XXMiN7QmGH5EgE9SiYrxZt → 세션 session_01WP7a8oLwaHMUj5MimZSF6k |
-| 현황판 결과 파일 갱신 | 매일 17:37 | Routine trig_01NtBpUqqUuZxogBQxRWurDj (새 세션) |
+| 현황판 결과 파일 갱신 | 매일 17:37 | Routine trig_015SCRNNwatvAhHFdJF8F9Z9 → 세션 session_01UBXi3SEnxJwqCj4dY5q4J5 (10/10 부터. 이전 새-세션 루틴 trig_01NtBpUqqUuZxogBQxRWurDj 는 꺼 둠) |
 | 매일 점검·이상 보고 (10/7부터 판정 변화·규칙 잠금 불일치·운 보정 경고도 보고, 보고 끝에 판정 한 줄) | 매일 10:00 | Routine trig_01T529xQcka6vj6YYZFAnuyL (새 세션) |
 | 매크로 달력 갱신 | 매주 월 11:10 | Routine trig_01CBFoNkLZyBHafCjmsAK5Jp |
 | 초단타 2주 재확인 | 2026-10-21 16:30, 1회 | Routine trig_01WWuHJTvmZxK7GWpuvdSZca → 세션 session_01WP7a8oLwaHMUj5MimZSF6k |
 
-세션 session_01WP7a8oLwaHMUj5MimZSF6k 를 보관(archive)하면 그 세션으로 배달되는 Routine 2개가 멈춘다.
+세션 session_01WP7a8oLwaHMUj5MimZSF6k 를 보관(archive)하면 그 세션으로 배달되는 Routine 2개가 멈춘다. 세션 session_01UBXi3SEnxJwqCj4dY5q4J5(마일스톤 15 작업 세션)를 보관하면 현황판 갱신 루틴이 멈춘다.
 
 **사용자 결정 대기:** 없음. 다음 결정은 10/21(초단타 소액 시험 여부)과 첫 판정이 뜨는 날.
 
@@ -809,6 +809,7 @@ TRX 바이낸스 −0.052% / OKX −0.046%. 크기가 같은 범위다. 첫날 �
   고친 것: 결과 파일 18개를 아티팩트에 함께 실어(`data/*.json` + `data/_meta.json`) 열자마자 그린다. 커넥터는 머리말의 **"최신으로"** 버튼을 누를 때만 쓴다.
   기준일이 2일 이상 묵으면 머리말 아래 경고가 뜬다.
 - **매일 자동 갱신:** 루틴 "현황판 결과 파일 매일 갱신"(trig_01NtBpUqqUuZxogBQxRWurDj, 매일 17:37 KST, 새 세션)이 공개 저장소를 받아 라이브 HTML 은 그대로 두고 data 파일만 main 최신으로 갈아 끼운다.
+  **2026-10-10 변경:** 새 세션 방식은 자동 모드 권한 분류기가 publish 를 "공유 중인 라이브 Artifact 변경"으로 거부하는 날이 있었다(10/8 거부·10/7·10/9 성공 — 매번은 아님). 10/8 거부 때 현황판은 10/7 데이터에 머물렀고 그리드 카드가 비어 있었다. 사용자 결정(선택 1)으로 루틴을 **이미 publish 권한이 통하는 세션에 고정**했다: 새 루틴 trig_015SCRNNwatvAhHFdJF8F9Z9 (매일 17:37 KST) → session_01UBXi3SEnxJwqCj4dY5q4J5. 이전 루틴 trig_01NtBpUqqUuZxogBQxRWurDj 는 비활성(기록 보존). 그 세션을 보관하면 갱신이 멈추므로, 멈추면 같은 프롬프트로 다른 세션에 다시 묶는다. 막힌 날 수동 복구는 Claude 세션에 "현황판 갱신"이라고 하면 된다.
   현황판에 새 결과 파일 카드를 추가하면 페이지의 `FILES` 와 이 루틴 프롬프트의 파일 목록 **둘 다** 고쳐야 한다(루틴 프롬프트는 update_trigger 로 수정).
   불러오기 부분(`loadSnapshot` / `loadLive`)을 예전의 "열 때 커넥터로 자동 읽기"로 되돌리지 않는다.
 
