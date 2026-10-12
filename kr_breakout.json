@@ -1,6 +1,6 @@
 {
- "date": "2026-10-09",
- "generated_at_utc": "2026-10-09T13:52:43Z",
+ "date": "2026-10-12",
+ "generated_at_utc": "2026-10-12T07:13:17Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -74,14 +74,15 @@
   }
  },
  "forward": {
-  "days": 3,
+  "days": 4,
   "from": "2026-10-05",
-  "to": "2026-10-08",
-  "codes": 158,
+  "to": "2026-10-12",
+  "codes": 169,
   "bar_errors": 0,
   "stale_codes": 0,
   "by_source": {
-   "yahoo": 158
+   "yahoo+naver_api": 28,
+   "yahoo": 141
   },
   "skipped_days": [
    "2026-10-05"
@@ -92,96 +93,72 @@
   "base": [],
   "no_sector": [
    {
-    "code": "373220",
-    "name": "LG Energy Solution Ltd.",
-    "group": "Electrical Products",
-    "pattern": "box",
+    "code": "319660",
+    "name": "PSK INC",
+    "group": "Industrial Machinery",
+    "pattern": "triangle",
     "patterns": [
-     "box"
+     "triangle"
     ],
-    "signal_close": 401000.0,
-    "pattern_low": 341500.0,
+    "signal_close": 140000.0,
+    "pattern_low": 127010.98,
     "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 433080 이상이면 포기)",
-    "stop_plan": "max(341500, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 151200 이상이면 포기)",
+    "stop_plan": "max(127011, 진입가×0.93)"
    },
    {
-    "code": "051910",
-    "name": "LG Chem Ltd.",
-    "group": "Chemicals: Specialty",
-    "pattern": "box",
+    "code": "011200",
+    "name": "HMM CO.,LTD",
+    "group": "Marine Shipping",
+    "pattern": "cup_handle",
     "patterns": [
-     "box"
+     "triangle",
+     "cup_handle"
     ],
-    "signal_close": 286500.0,
-    "pattern_low": 247000.0,
+    "signal_close": 21800.0,
+    "pattern_low": 20800.0,
     "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 309420 이상이면 포기)",
-    "stop_plan": "max(247000, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 23544 이상이면 포기)",
+    "stop_plan": "max(20800, 진입가×0.93)"
    },
    {
-    "code": "131970",
-    "name": "DOOSAN TESNA Inc.",
-    "group": "Miscellaneous Commercial Services",
-    "pattern": "flag",
+    "code": "028670",
+    "name": "Pan Ocean Co., Ltd.",
+    "group": "Marine Shipping",
+    "pattern": "triangle",
     "patterns": [
-     "flag"
+     "box",
+     "triangle",
+     "cup_handle"
     ],
-    "signal_close": 125300.0,
-    "pattern_low": 89900.0,
+    "signal_close": 6450.0,
+    "pattern_low": 5853.09,
     "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 135324 이상이면 포기)",
-    "stop_plan": "max(89900, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 6966 이상이면 포기)",
+    "stop_plan": "max(5853, 진입가×0.93)"
    },
    {
-    "code": "005160",
-    "name": "Dongkuk Industries Co., Ltd.",
-    "group": "Steel",
-    "pattern": "flag",
+    "code": "302550",
+    "name": "REMED Co., Ltd.",
+    "group": "Medical Specialties",
+    "pattern": "triangle",
     "patterns": [
-     "flag"
+     "box",
+     "triangle"
     ],
-    "signal_close": 4710.0,
-    "pattern_low": 3260.0,
+    "signal_close": 3160.0,
+    "pattern_low": 2655.13,
     "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 5087 이상이면 포기)",
-    "stop_plan": "max(3260, 진입가×0.93)"
-   },
-   {
-    "code": "033790",
-    "name": "FINO INC.",
-    "group": "Packaged Software",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 11580.0,
-    "pattern_low": 7260.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 12506 이상이면 포기)",
-    "stop_plan": "max(7260, 진입가×0.93)"
-   },
-   {
-    "code": "417840",
-    "name": "Justem Co. Ltd.",
-    "group": "Homebuilding",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 20900.0,
-    "pattern_low": 18130.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 22572 이상이면 포기)",
-    "stop_plan": "max(18130, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 3413 이상이면 포기)",
+    "stop_plan": "max(2655, 진입가×0.93)"
    }
   ],
   "hold_10": [],
   "risk_2": [],
   "no_flag": []
  },
- "signal_date": "2026-10-08",
- "signals_frozen": true,
+ "signal_date": "2026-10-12",
+ "signals_frozen": false,
  "frozen_dates": [
   "2026-10-06",
   "2026-10-07",
@@ -191,17 +168,17 @@
   "base": {
    "label": "동조 업종 + 패턴 돌파 (기본)",
    "signals": 15,
-   "trades": 3,
+   "trades": 4,
    "wins": 0,
    "win_rate": 0.0,
    "avg_win_pct": null,
-   "avg_loss_pct": -7.45,
+   "avg_loss_pct": -7.04,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -3.15,
-   "equity_final": 9685282,
-   "max_drawdown_pct": 3.15,
-   "avg_hold_days": 1.33,
+   "total_return_pct": -4.5,
+   "equity_final": 9549658,
+   "max_drawdown_pct": 4.5,
+   "avg_hold_days": 1.5,
    "skipped": {
     "gap": 0,
     "limit": 8,
@@ -215,31 +192,36 @@
      "n": 3,
      "wins": 0,
      "pnl_krw": -307325
+    },
+    "cup_handle": {
+     "n": 1,
+     "wins": 0,
+     "pnl_krw": -87356
     }
    },
    "by_sync": {
     "day": {
-     "n": 3,
+     "n": 4,
      "wins": 0,
-     "pnl_krw": -307325
+     "pnl_krw": -394681
     }
    },
    "by_exit": {
     "stop": {
-     "n": 3,
+     "n": 4,
      "wins": 0,
-     "pnl_krw": -307325
+     "pnl_krw": -394681
     }
    },
    "by_year": {
     "2026": {
-     "n": 3,
+     "n": 4,
      "wins": 0,
-     "pnl_krw": -307325
+     "pnl_krw": -394681
     }
    },
    "yearly_return_pct": {
-    "2026": -3.15
+    "2026": -4.5
    },
    "open_positions": [
     {
@@ -251,9 +233,9 @@
      "entry": 572713.0,
      "stop": 532623.09,
      "shares": 2,
-     "bars_held": 2,
-     "last_close": 569000.0,
-     "unrealized_pct": -0.65
+     "bars_held": 3,
+     "last_close": 561000.0,
+     "unrealized_pct": -2.05
     },
     {
      "code": "373220",
@@ -264,22 +246,9 @@
      "entry": 386656.5,
      "stop": 359590.54,
      "shares": 3,
-     "bars_held": 2,
-     "last_close": 401000.0,
-     "unrealized_pct": 3.71
-    },
-    {
-     "code": "278470",
-     "name": "APR Co.,Ltd.",
-     "group": "Household/Personal Care",
-     "pattern": "cup_handle",
-     "entry_date": "2026-10-08",
-     "entry": 376626.5,
-     "stop": 356500.0,
-     "shares": 4,
-     "bars_held": 1,
-     "last_close": 371500.0,
-     "unrealized_pct": -1.36
+     "bars_held": 3,
+     "last_close": 398000.0,
+     "unrealized_pct": 2.93
     },
     {
      "code": "192820",
@@ -290,30 +259,30 @@
      "entry": 311933.0,
      "stop": 290097.69,
      "shares": 4,
-     "bars_held": 1,
-     "last_close": 306500.0,
-     "unrealized_pct": -1.74
+     "bars_held": 2,
+     "last_close": 295500.0,
+     "unrealized_pct": -5.27
     }
    ]
   },
   "no_sector": {
    "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
-   "signals": 34,
-   "trades": 7,
+   "signals": 38,
+   "trades": 9,
    "wins": 0,
    "win_rate": 0.0,
    "avg_win_pct": null,
-   "avg_loss_pct": -7.45,
+   "avg_loss_pct": -7.27,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -7.36,
-   "equity_final": 9264187,
-   "max_drawdown_pct": 7.36,
-   "avg_hold_days": 1,
+   "total_return_pct": -9.52,
+   "equity_final": 9047921,
+   "max_drawdown_pct": 9.52,
+   "avg_hold_days": 1.11,
    "skipped": {
     "gap": 0,
-    "limit": 19,
-    "cooldown": 0,
+    "limit": 22,
+    "cooldown": 8,
     "size": 0,
     "no_bar": 0,
     "pattern": 0
@@ -325,44 +294,49 @@
      "pnl_krw": -405385
     },
     "cup_handle": {
-     "n": 1,
+     "n": 2,
      "wins": 0,
-     "pnl_krw": -103749
+     "pnl_krw": -191105
     },
     "triangle": {
      "n": 2,
      "wins": 0,
      "pnl_krw": -198349
+    },
+    "box": {
+     "n": 1,
+     "wins": 0,
+     "pnl_krw": -84852
     }
    },
    "by_sync": {
     "day": {
-     "n": 2,
+     "n": 3,
      "wins": 0,
-     "pnl_krw": -201186
+     "pnl_krw": -288542
     },
     "none": {
-     "n": 5,
+     "n": 6,
      "wins": 0,
-     "pnl_krw": -506297
+     "pnl_krw": -591149
     }
    },
    "by_exit": {
     "stop": {
-     "n": 7,
+     "n": 9,
      "wins": 0,
-     "pnl_krw": -707483
+     "pnl_krw": -879691
     }
    },
    "by_year": {
     "2026": {
-     "n": 7,
+     "n": 9,
      "wins": 0,
-     "pnl_krw": -707483
+     "pnl_krw": -879691
     }
    },
    "yearly_return_pct": {
-    "2026": -7.36
+    "2026": -9.52
    },
    "open_positions": [
     {
@@ -374,39 +348,52 @@
      "entry": 572713.0,
      "stop": 532623.09,
      "shares": 2,
-     "bars_held": 2,
-     "last_close": 569000.0,
-     "unrealized_pct": -0.65
+     "bars_held": 3,
+     "last_close": 561000.0,
+     "unrealized_pct": -2.05
     },
     {
-     "code": "278470",
-     "name": "APR Co.,Ltd.",
-     "group": "Household/Personal Care",
-     "pattern": "cup_handle",
-     "entry_date": "2026-10-08",
-     "entry": 376626.5,
-     "stop": 356500.0,
-     "shares": 4,
+     "code": "373220",
+     "name": "LG Energy Solution Ltd.",
+     "group": "Electrical Products",
+     "pattern": "box",
+     "entry_date": "2026-10-12",
+     "entry": 411230.0,
+     "stop": 382443.9,
+     "shares": 3,
      "bars_held": 1,
-     "last_close": 371500.0,
-     "unrealized_pct": -1.36
+     "last_close": 398000.0,
+     "unrealized_pct": -3.22
+    },
+    {
+     "code": "131970",
+     "name": "DOOSAN TESNA Inc.",
+     "group": "Miscellaneous Commercial Services",
+     "pattern": "flag",
+     "entry_date": "2026-10-12",
+     "entry": 124672.9,
+     "stop": 115945.8,
+     "shares": 10,
+     "bars_held": 1,
+     "last_close": 123800.0,
+     "unrealized_pct": -0.7
     }
    ]
   },
   "hold_10": {
    "label": "동조 + 패턴, 보유 10일",
    "signals": 15,
-   "trades": 3,
+   "trades": 4,
    "wins": 0,
    "win_rate": 0.0,
    "avg_win_pct": null,
-   "avg_loss_pct": -7.45,
+   "avg_loss_pct": -7.04,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -3.15,
-   "equity_final": 9685282,
-   "max_drawdown_pct": 3.15,
-   "avg_hold_days": 1.33,
+   "total_return_pct": -4.5,
+   "equity_final": 9549658,
+   "max_drawdown_pct": 4.5,
+   "avg_hold_days": 1.5,
    "skipped": {
     "gap": 0,
     "limit": 8,
@@ -420,31 +407,36 @@
      "n": 3,
      "wins": 0,
      "pnl_krw": -307325
+    },
+    "cup_handle": {
+     "n": 1,
+     "wins": 0,
+     "pnl_krw": -87356
     }
    },
    "by_sync": {
     "day": {
-     "n": 3,
+     "n": 4,
      "wins": 0,
-     "pnl_krw": -307325
+     "pnl_krw": -394681
     }
    },
    "by_exit": {
     "stop": {
-     "n": 3,
+     "n": 4,
      "wins": 0,
-     "pnl_krw": -307325
+     "pnl_krw": -394681
     }
    },
    "by_year": {
     "2026": {
-     "n": 3,
+     "n": 4,
      "wins": 0,
-     "pnl_krw": -307325
+     "pnl_krw": -394681
     }
    },
    "yearly_return_pct": {
-    "2026": -3.15
+    "2026": -4.5
    },
    "open_positions": [
     {
@@ -456,9 +448,9 @@
      "entry": 572713.0,
      "stop": 532623.09,
      "shares": 2,
-     "bars_held": 2,
-     "last_close": 569000.0,
-     "unrealized_pct": -0.65
+     "bars_held": 3,
+     "last_close": 561000.0,
+     "unrealized_pct": -2.05
     },
     {
      "code": "373220",
@@ -469,22 +461,9 @@
      "entry": 386656.5,
      "stop": 359590.54,
      "shares": 3,
-     "bars_held": 2,
-     "last_close": 401000.0,
-     "unrealized_pct": 3.71
-    },
-    {
-     "code": "278470",
-     "name": "APR Co.,Ltd.",
-     "group": "Household/Personal Care",
-     "pattern": "cup_handle",
-     "entry_date": "2026-10-08",
-     "entry": 376626.5,
-     "stop": 356500.0,
-     "shares": 4,
-     "bars_held": 1,
-     "last_close": 371500.0,
-     "unrealized_pct": -1.36
+     "bars_held": 3,
+     "last_close": 398000.0,
+     "unrealized_pct": 2.93
     },
     {
      "code": "192820",
@@ -495,26 +474,26 @@
      "entry": 311933.0,
      "stop": 290097.69,
      "shares": 4,
-     "bars_held": 1,
-     "last_close": 306500.0,
-     "unrealized_pct": -1.74
+     "bars_held": 2,
+     "last_close": 295500.0,
+     "unrealized_pct": -5.27
     }
    ]
   },
   "risk_2": {
    "label": "동조 + 패턴, 위험 2% (명목 상한 30%)",
    "signals": 15,
-   "trades": 2,
+   "trades": 3,
    "wins": 0,
    "win_rate": 0.0,
    "avg_win_pct": null,
-   "avg_loss_pct": -7.45,
+   "avg_loss_pct": -6.9,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -5.07,
-   "equity_final": 9492520,
-   "max_drawdown_pct": 5.07,
-   "avg_hold_days": 1,
+   "total_return_pct": -7.44,
+   "equity_final": 9255928,
+   "max_drawdown_pct": 7.44,
+   "avg_hold_days": 1.33,
    "skipped": {
     "gap": 0,
     "limit": 0,
@@ -528,31 +507,36 @@
      "n": 2,
      "wins": 0,
      "pnl_krw": -412165
+    },
+    "cup_handle": {
+     "n": 1,
+     "wins": 0,
+     "pnl_krw": -152873
     }
    },
    "by_sync": {
     "day": {
-     "n": 2,
+     "n": 3,
      "wins": 0,
-     "pnl_krw": -412165
+     "pnl_krw": -565038
     }
    },
    "by_exit": {
     "stop": {
-     "n": 2,
+     "n": 3,
      "wins": 0,
-     "pnl_krw": -412165
+     "pnl_krw": -565038
     }
    },
    "by_year": {
     "2026": {
-     "n": 2,
+     "n": 3,
      "wins": 0,
-     "pnl_krw": -412165
+     "pnl_krw": -565038
     }
    },
    "yearly_return_pct": {
-    "2026": -5.07
+    "2026": -7.44
    },
    "open_positions": [
     {
@@ -564,22 +548,9 @@
      "entry": 572713.0,
      "stop": 532623.09,
      "shares": 4,
-     "bars_held": 2,
-     "last_close": 569000.0,
-     "unrealized_pct": -0.65
-    },
-    {
-     "code": "278470",
-     "name": "APR Co.,Ltd.",
-     "group": "Household/Personal Care",
-     "pattern": "cup_handle",
-     "entry_date": "2026-10-08",
-     "entry": 376626.5,
-     "stop": 356500.0,
-     "shares": 7,
-     "bars_held": 1,
-     "last_close": 371500.0,
-     "unrealized_pct": -1.36
+     "bars_held": 3,
+     "last_close": 561000.0,
+     "unrealized_pct": -2.05
     },
     {
      "code": "192820",
@@ -590,26 +561,26 @@
      "entry": 311933.0,
      "stop": 290097.69,
      "shares": 8,
-     "bars_held": 1,
-     "last_close": 306500.0,
-     "unrealized_pct": -1.74
+     "bars_held": 2,
+     "last_close": 295500.0,
+     "unrealized_pct": -5.27
     }
    ]
   },
   "no_flag": {
    "label": "동조 + 패턴, 깃발형 제외",
    "signals": 6,
-   "trades": 0,
+   "trades": 1,
    "wins": 0,
-   "win_rate": null,
+   "win_rate": 0.0,
    "avg_win_pct": null,
-   "avg_loss_pct": null,
+   "avg_loss_pct": -5.8,
    "payoff": null,
-   "profit_factor": null,
-   "total_return_pct": 0.47,
-   "equity_final": 10047370,
-   "max_drawdown_pct": 0.0,
-   "avg_hold_days": null,
+   "profit_factor": 0.0,
+   "total_return_pct": -1.38,
+   "equity_final": 9861940,
+   "max_drawdown_pct": 1.85,
+   "avg_hold_days": 2,
    "skipped": {
     "gap": 0,
     "limit": 1,
@@ -618,12 +589,36 @@
     "no_bar": 0,
     "pattern": 0
    },
-   "by_pattern": {},
-   "by_sync": {},
-   "by_exit": {},
-   "by_year": {},
+   "by_pattern": {
+    "cup_handle": {
+     "n": 1,
+     "wins": 0,
+     "pnl_krw": -109195
+    }
+   },
+   "by_sync": {
+    "day": {
+     "n": 1,
+     "wins": 0,
+     "pnl_krw": -109195
+    }
+   },
+   "by_exit": {
+    "stop": {
+     "n": 1,
+     "wins": 0,
+     "pnl_krw": -109195
+    }
+   },
+   "by_year": {
+    "2026": {
+     "n": 1,
+     "wins": 0,
+     "pnl_krw": -109195
+    }
+   },
    "yearly_return_pct": {
-    "2026": 0.47
+    "2026": -1.38
    },
    "open_positions": [
     {
@@ -635,9 +630,9 @@
      "entry": 572713.0,
      "stop": 532623.09,
      "shares": 2,
-     "bars_held": 2,
-     "last_close": 569000.0,
-     "unrealized_pct": -0.65
+     "bars_held": 3,
+     "last_close": 561000.0,
+     "unrealized_pct": -2.05
     },
     {
      "code": "373220",
@@ -648,9 +643,9 @@
      "entry": 386656.5,
      "stop": 359590.54,
      "shares": 3,
-     "bars_held": 2,
-     "last_close": 401000.0,
-     "unrealized_pct": 3.71
+     "bars_held": 3,
+     "last_close": 398000.0,
+     "unrealized_pct": 2.93
     },
     {
      "code": "098460",
@@ -661,22 +656,9 @@
      "entry": 35957.55,
      "stop": 33440.52,
      "shares": 39,
-     "bars_held": 2,
-     "last_close": 37500.0,
-     "unrealized_pct": 4.29
-    },
-    {
-     "code": "278470",
-     "name": "APR Co.,Ltd.",
-     "group": "Household/Personal Care",
-     "pattern": "cup_handle",
-     "entry_date": "2026-10-08",
-     "entry": 376626.5,
-     "stop": 356500.0,
-     "shares": 5,
-     "bars_held": 1,
-     "last_close": 371500.0,
-     "unrealized_pct": -1.36
+     "bars_held": 3,
+     "last_close": 36650.0,
+     "unrealized_pct": 1.93
     },
     {
      "code": "192820",
@@ -687,9 +669,9 @@
      "entry": 311933.0,
      "stop": 290097.69,
      "shares": 4,
-     "bars_held": 1,
-     "last_close": 306500.0,
-     "unrealized_pct": -1.74
+     "bars_held": 2,
+     "last_close": 295500.0,
+     "unrealized_pct": -5.27
     }
    ]
   }
@@ -758,6 +740,27 @@
     "shares": 203,
     "pnl_krw": -106139,
     "pnl_pct": -7.45,
+    "hold_days": 2
+   },
+   {
+    "code": "278470",
+    "name": "APR Co.,Ltd.",
+    "group": "Household/Personal Care",
+    "pattern": "cup_handle",
+    "patterns": [
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-07",
+    "entry_date": "2026-10-08",
+    "entry": 376626.5,
+    "stop": 356500.0,
+    "exit_date": "2026-10-12",
+    "exit": 355430.5,
+    "why": "stop",
+    "shares": 4,
+    "pnl_krw": -87356,
+    "pnl_pct": -5.8,
     "hold_days": 2
    }
   ],
@@ -913,6 +916,48 @@
     "pnl_krw": -101995,
     "pnl_pct": -7.45,
     "hold_days": 1
+   },
+   {
+    "code": "278470",
+    "name": "APR Co.,Ltd.",
+    "group": "Household/Personal Care",
+    "pattern": "cup_handle",
+    "patterns": [
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-07",
+    "entry_date": "2026-10-08",
+    "entry": 376626.5,
+    "stop": 356500.0,
+    "exit_date": "2026-10-12",
+    "exit": 355430.5,
+    "why": "stop",
+    "shares": 4,
+    "pnl_krw": -87356,
+    "pnl_pct": -5.8,
+    "hold_days": 2
+   },
+   {
+    "code": "051910",
+    "name": "LG Chem Ltd.",
+    "group": "Chemicals: Specialty",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": null,
+    "signal_date": "2026-10-08",
+    "entry_date": "2026-10-12",
+    "entry": 284852.0,
+    "stop": 264912.36,
+    "exit_date": "2026-10-12",
+    "exit": 264117.62,
+    "why": "stop",
+    "shares": 4,
+    "pnl_krw": -84852,
+    "pnl_pct": -7.45,
+    "hold_days": 1
    }
   ],
   "hold_10": [
@@ -979,6 +1024,27 @@
     "pnl_krw": -106139,
     "pnl_pct": -7.45,
     "hold_days": 2
+   },
+   {
+    "code": "278470",
+    "name": "APR Co.,Ltd.",
+    "group": "Household/Personal Care",
+    "pattern": "cup_handle",
+    "patterns": [
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-07",
+    "entry_date": "2026-10-08",
+    "entry": 376626.5,
+    "stop": 356500.0,
+    "exit_date": "2026-10-12",
+    "exit": 355430.5,
+    "why": "stop",
+    "shares": 4,
+    "pnl_krw": -87356,
+    "pnl_pct": -5.8,
+    "hold_days": 2
    }
   ],
   "risk_2": [
@@ -1024,9 +1090,52 @@
     "pnl_krw": -205638,
     "pnl_pct": -7.45,
     "hold_days": 1
+   },
+   {
+    "code": "278470",
+    "name": "APR Co.,Ltd.",
+    "group": "Household/Personal Care",
+    "pattern": "cup_handle",
+    "patterns": [
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-07",
+    "entry_date": "2026-10-08",
+    "entry": 376626.5,
+    "stop": 356500.0,
+    "exit_date": "2026-10-12",
+    "exit": 355430.5,
+    "why": "stop",
+    "shares": 7,
+    "pnl_krw": -152873,
+    "pnl_pct": -5.8,
+    "hold_days": 2
    }
   ],
-  "no_flag": []
+  "no_flag": [
+   {
+    "code": "278470",
+    "name": "APR Co.,Ltd.",
+    "group": "Household/Personal Care",
+    "pattern": "cup_handle",
+    "patterns": [
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-07",
+    "entry_date": "2026-10-08",
+    "entry": 376626.5,
+    "stop": 356500.0,
+    "exit_date": "2026-10-12",
+    "exit": 355430.5,
+    "why": "stop",
+    "shares": 5,
+    "pnl_krw": -109195,
+    "pnl_pct": -5.8,
+    "hold_days": 2
+   }
+  ]
  },
  "errors": {},
  "stale": []
