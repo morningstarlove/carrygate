@@ -191,7 +191,7 @@ def lead_lag(lead_bars, follow_bars, eval_t0):
 
 
 def follow_rule(lead_bars, follow_bars, eval_t0, fees, short_ok):
-    """C. 따라가기 지정가 규칙(종이매매, 2026-10-13 추가, 제안함 P14).
+    """C. 따라가기 지정가 규칙(종이매매, 2026-10-13 추가, 제안함 P16).
 
     선행 거래소 1분 수익률이 |r| > BIG_SIGMA·σ 이면 그 분 종가에 후행 거래소에 같은 방향 지정가.
     다음 FOLLOW_TTL 봉 안에 가격이 주문가를 지나쳐야 체결(scalp.limit_filled 와 같은 가정), 못 하면 취소.
