@@ -1,7 +1,7 @@
 {
   "schema": "carrygate-verdict/1",
   "date": "2026-10-13",
-  "generated_at_utc": "2026-10-12T16:14:13Z",
+  "generated_at_utc": "2026-10-13T07:03:27Z",
   "criteria_sealed": "2026-10-06",
   "tracks": {
     "kr_breakout": {
@@ -47,7 +47,7 @@
           "profit_factor": null,
           "avg_r": null,
           "backtest_win_rate_pct": 36.9748,
-          "backtest_profit_factor": 1.6453,
+          "backtest_profit_factor": 1.6427,
           "backtest_trades": 119,
           "luck": null,
           "variants": {
@@ -76,7 +76,7 @@
           "profit_factor": null,
           "avg_r": null,
           "backtest_win_rate_pct": 34.8548,
-          "backtest_profit_factor": 1.2319,
+          "backtest_profit_factor": 1.2334,
           "backtest_trades": 241,
           "luck": null,
           "variants": {
@@ -102,8 +102,8 @@
     "reversal": {
       "rule_fixed": "2026-10-05",
       "status": "NOT_YET",
-      "reason": "순방향 합계 0건: upbit=NOT_YET, okx=NOT_YET",
-      "forward_trades_total": 0,
+      "reason": "순방향 합계 1건: upbit=NOT_YET, okx=NOT_YET",
+      "forward_trades_total": 1,
       "venues": {
         "upbit": {
           "trades": 0,
@@ -118,10 +118,10 @@
           "luck": null,
           "variants": {
             "no_vol": {
-              "trades": 0,
+              "trades": 2,
               "wins": 0,
-              "net_pct": null,
-              "profit_factor": null
+              "net_pct": -2.0144,
+              "profit_factor": 0.0
             },
             "break_entry": {
               "trades": 0,
@@ -135,61 +135,48 @@
           "reason": "순방향 0건 — 최소 20건 전에는 판단하지 않는다"
         },
         "okx": {
-          "trades": 0,
+          "trades": 1,
           "wins": 0,
-          "win_rate_pct": null,
-          "net_pct": null,
-          "profit_factor": null,
-          "avg_r": null,
-          "backtest_win_rate_pct": 34.1935,
-          "backtest_profit_factor": 1.2868,
-          "backtest_trades": 155,
-          "luck": null,
+          "win_rate_pct": 0.0,
+          "net_pct": -1.0781,
+          "profit_factor": 0.0,
+          "avg_r": -1.08,
+          "backtest_win_rate_pct": 33.5443,
+          "backtest_profit_factor": 1.2502,
+          "backtest_trades": 158,
+          "luck": {
+            "expected_wins": 0.34,
+            "actual_wins": 0,
+            "z": -0.71
+          },
           "variants": {
             "no_vol": {
-              "trades": 0,
+              "trades": 4,
               "wins": 0,
-              "net_pct": null,
-              "profit_factor": null
+              "net_pct": -2.3211,
+              "profit_factor": 0.0
             },
             "break_entry": {
-              "trades": 0,
+              "trades": 1,
               "wins": 0,
-              "net_pct": null,
-              "profit_factor": null
+              "net_pct": -1.041,
+              "profit_factor": 0.0
             }
           },
           "warnings": [],
           "status": "NOT_YET",
-          "reason": "순방향 0건 — 최소 20건 전에는 판단하지 않는다"
+          "reason": "순방향 1건 — 최소 20건 전에는 판단하지 않는다"
         }
       }
     },
     "scalp": {
-      "history_days": 14,
+      "history_days": 15,
       "combos": 378,
-      "candidates": 2,
-      "top": [
-        {
-          "key": "hyperliquid:TRX:15m:vwap_fade_lim",
-          "net_pct": 0.443,
-          "days": 13,
-          "pos_days": 8,
-          "trades": 34
-        },
-        {
-          "key": "okx:TRX:15m:vwap_fade_lim",
-          "net_pct": 0.215,
-          "days": 14,
-          "pos_days": 9,
-          "trades": 40
-        }
-      ],
-      "warnings": [
-        "조합 378개를 동시에 시험하므로 후보 일부는 우연이다. 합격 = 소액 체결 시험 후보이지 실력 확정이 아니다"
-      ],
-      "status": "PASS",
-      "reason": "누적 14일, 후보 2개 (조합 378개 중) — 누적 순수익>0·플러스 일수 60%·기준선 초과"
+      "candidates": 0,
+      "top": [],
+      "warnings": [],
+      "status": "FAIL",
+      "reason": "누적 15일, 후보 0개 — 지금 규칙 중 비용을 이기는 것이 없다"
     }
   },
   "errors": {},
@@ -201,6 +188,6 @@
     "kr_breakout": "NOT_YET",
     "turtle": "NOT_YET",
     "reversal": "NOT_YET",
-    "scalp": "PASS"
+    "scalp": "FAIL"
   }
 }
