@@ -12,7 +12,7 @@ CARRYGATE — 한국 주식 "업종 동조 + 패턴 돌파" 신호·종이매매
   신호   동조 업종 안의 종목이 patterns.scan 으로 돌파 확인(종가>저항, 거래량 1.5배, 20일선 위, 거래대금 100억+, 상한가 제외)
   진입   다음날 시가. 시가가 신호일 종가의 +GAP_SKIP_PCT 이상이면 포기. 슬리피지 SLIP_PCT
   손절   max(패턴 하단, 진입가×(1−STOP_PCT)). 당일 저가가 손절가 이하이면 손절가에 체결. 시가가 손절가 아래면 시가(갭, gap=true) —
-         그래서 손실이 7% 를 넘을 수 있다 (2026-10-13 에이피알: 손절가보다 8.8% 아래 시가, −14.1%)
+         그래서 손실이 7% 를 넘을 수 있다 (10/13 에 예로 든 에이피알 −14.1% 는 일봉 누락 탓이었다 — P15, 실제는 10/12 −5.8%)
   청산   직전 EXIT_LOW_N 일 최저가 아래 종가 → 다음날 시가 / 보유 HOLD_MAX 봉 → 다음날 시가
   수량   계좌×RISK_PCT ÷ (진입가−손절가), 명목가 ≤ 계좌×MAX_POS_PCT. 동시 MAX_POS 종목, 같은 업종 MAX_PER_GROUP
   비용   매수 수수료 FEE_PCT, 매도 수수료 FEE_PCT + 거래세 TAX_PCT, 양쪽 슬리피지 SLIP_PCT
@@ -445,7 +445,7 @@ def run_forward(fixture=None, dry_run=False):
     last_date = days[-1]["date"] if days else None
     # 마지막 기록일의 봉이 야후에 아직 없으면(코스닥은 하루 늦다) 그날만 네이버로 메운다
     all_bars, sources, errors = load_bars(codes, FWD_BARS, fixture, need_date=last_date) if codes else ({}, {}, {})
-    # 중간에 빠진 거래일 메우기 (2026-10-13 에이피알 10/12 누락 사고). 다른 종목 절반 이상이 가진 날 = 거래일.
+    # 중간에 빠진 거래일 메우기 (2026-10-13 야후 10/12 대량 누락 사고, P15). 거래일 = 기록된 순방향 거래일 중 한 종목이라도 봉이 있는 날.
     # 빠진 종목만 네이버에서 그 날 봉을 받아 끼운다. 규칙은 그대로, 자료만 바로잡는다.
     gap_filled, gap_missing = {}, {}
     if all_bars and not fixture and days:
