@@ -1,6 +1,6 @@
 {
  "date": "2026-10-13",
- "generated_at_utc": "2026-10-12T16:14:13Z",
+ "generated_at_utc": "2026-10-13T07:13:37Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -74,14 +74,15 @@
   }
  },
  "forward": {
-  "days": 4,
+  "days": 5,
   "from": "2026-10-05",
-  "to": "2026-10-12",
-  "codes": 169,
+  "to": "2026-10-13",
+  "codes": 178,
   "bar_errors": 0,
   "stale_codes": 0,
   "by_source": {
-   "yahoo+naver_api": 169
+   "yahoo+naver_api": 31,
+   "yahoo": 147
   },
   "skipped_days": [
    "2026-10-05"
@@ -92,35 +93,6 @@
   "base": [],
   "no_sector": [
    {
-    "code": "319660",
-    "name": "PSK INC",
-    "group": "Industrial Machinery",
-    "pattern": "triangle",
-    "patterns": [
-     "triangle"
-    ],
-    "signal_close": 140000.0,
-    "pattern_low": 127010.98,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 151200 이상이면 포기)",
-    "stop_plan": "max(127011, 진입가×0.93)"
-   },
-   {
-    "code": "011200",
-    "name": "HMM CO.,LTD",
-    "group": "Marine Shipping",
-    "pattern": "cup_handle",
-    "patterns": [
-     "triangle",
-     "cup_handle"
-    ],
-    "signal_close": 21800.0,
-    "pattern_low": 20800.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 23544 이상이면 포기)",
-    "stop_plan": "max(20800, 진입가×0.93)"
-   },
-   {
     "code": "028670",
     "name": "Pan Ocean Co., Ltd.",
     "group": "Marine Shipping",
@@ -130,34 +102,19 @@
      "triangle",
      "cup_handle"
     ],
-    "signal_close": 6450.0,
+    "signal_close": 6550.0,
     "pattern_low": 5853.09,
     "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 6966 이상이면 포기)",
+    "entry_plan": "내일 시가 (시가가 7074 이상이면 포기)",
     "stop_plan": "max(5853, 진입가×0.93)"
-   },
-   {
-    "code": "302550",
-    "name": "REMED Co., Ltd.",
-    "group": "Medical Specialties",
-    "pattern": "triangle",
-    "patterns": [
-     "box",
-     "triangle"
-    ],
-    "signal_close": 3160.0,
-    "pattern_low": 2655.13,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 3413 이상이면 포기)",
-    "stop_plan": "max(2655, 진입가×0.93)"
    }
   ],
   "hold_10": [],
   "risk_2": [],
   "no_flag": []
  },
- "signal_date": "2026-10-12",
- "signals_frozen": true,
+ "signal_date": "2026-10-13",
+ "signals_frozen": false,
  "frozen_dates": [
   "2026-10-06",
   "2026-10-07",
@@ -168,17 +125,17 @@
   "base": {
    "label": "동조 업종 + 패턴 돌파 (기본)",
    "signals": 15,
-   "trades": 4,
+   "trades": 6,
    "wins": 0,
    "win_rate": 0.0,
    "avg_win_pct": null,
-   "avg_loss_pct": -7.04,
+   "avg_loss_pct": -8.56,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -4.61,
-   "equity_final": 9539158,
-   "max_drawdown_pct": 4.61,
-   "avg_hold_days": 1.5,
+   "total_return_pct": -6.28,
+   "equity_final": 9371542,
+   "max_drawdown_pct": 6.28,
+   "avg_hold_days": 1.83,
    "skipped": {
     "gap": 0,
     "limit": 8,
@@ -193,50 +150,42 @@
      "wins": 0,
      "pnl_krw": -307325
     },
+    "box": {
+     "n": 2,
+     "wins": 0,
+     "pnl_krw": -178218
+    },
     "cup_handle": {
      "n": 1,
      "wins": 0,
-     "pnl_krw": -87356
+     "pnl_krw": -212771
     }
    },
    "by_sync": {
     "day": {
-     "n": 4,
+     "n": 6,
      "wins": 0,
-     "pnl_krw": -394681
+     "pnl_krw": -698314
     }
    },
    "by_exit": {
     "stop": {
-     "n": 4,
+     "n": 6,
      "wins": 0,
-     "pnl_krw": -394681
+     "pnl_krw": -698314
     }
    },
    "by_year": {
     "2026": {
-     "n": 4,
+     "n": 6,
      "wins": 0,
-     "pnl_krw": -394681
+     "pnl_krw": -698314
     }
    },
    "yearly_return_pct": {
-    "2026": -4.61
+    "2026": -6.28
    },
    "open_positions": [
-    {
-     "code": "006400",
-     "name": "Samsung SDI Co., Ltd",
-     "group": "Electrical Products",
-     "pattern": "box",
-     "entry_date": "2026-10-07",
-     "entry": 572713.0,
-     "stop": 532623.09,
-     "shares": 2,
-     "bars_held": 3,
-     "last_close": 561000.0,
-     "unrealized_pct": -2.05
-    },
     {
      "code": "373220",
      "name": "LG Energy Solution Ltd.",
@@ -247,56 +196,43 @@
      "stop": 359590.54,
      "shares": 3,
      "bars_held": 3,
-     "last_close": 396500.0,
-     "unrealized_pct": 2.55
-    },
-    {
-     "code": "192820",
-     "name": "COSMAX, Inc.",
-     "group": "Household/Personal Care",
-     "pattern": "box",
-     "entry_date": "2026-10-08",
-     "entry": 311933.0,
-     "stop": 290097.69,
-     "shares": 4,
-     "bars_held": 2,
-     "last_close": 294000.0,
-     "unrealized_pct": -5.75
+     "last_close": 410000.0,
+     "unrealized_pct": 6.04
     }
    ]
   },
   "no_sector": {
    "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
-   "signals": 38,
-   "trades": 9,
+   "signals": 39,
+   "trades": 10,
    "wins": 0,
    "win_rate": 0.0,
    "avg_win_pct": null,
-   "avg_loss_pct": -7.27,
+   "avg_loss_pct": -8.2,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -9.58,
-   "equity_final": 9042421,
-   "max_drawdown_pct": 9.58,
-   "avg_hold_days": 1.11,
+   "total_return_pct": -9.47,
+   "equity_final": 9052568,
+   "max_drawdown_pct": 9.47,
+   "avg_hold_days": 1.4,
    "skipped": {
     "gap": 0,
-    "limit": 22,
-    "cooldown": 0,
+    "limit": 21,
+    "cooldown": 8,
     "size": 0,
-    "no_bar": 0,
+    "no_bar": 5,
     "pattern": 0
    },
    "by_pattern": {
     "flag": {
-     "n": 4,
+     "n": 5,
      "wins": 0,
-     "pnl_krw": -405385
+     "pnl_krw": -514377
     },
     "cup_handle": {
      "n": 2,
      "wins": 0,
-     "pnl_krw": -191105
+     "pnl_krw": -316520
     },
     "triangle": {
      "n": 2,
@@ -306,94 +242,81 @@
     "box": {
      "n": 1,
      "wins": 0,
-     "pnl_krw": -84852
+     "pnl_krw": -85300
     }
    },
    "by_sync": {
     "day": {
-     "n": 3,
+     "n": 4,
      "wins": 0,
-     "pnl_krw": -288542
+     "pnl_krw": -499257
     },
     "none": {
      "n": 6,
      "wins": 0,
-     "pnl_krw": -591149
+     "pnl_krw": -615289
     }
    },
    "by_exit": {
     "stop": {
-     "n": 9,
+     "n": 10,
      "wins": 0,
-     "pnl_krw": -879691
+     "pnl_krw": -1114546
     }
    },
    "by_year": {
     "2026": {
-     "n": 9,
+     "n": 10,
      "wins": 0,
-     "pnl_krw": -879691
+     "pnl_krw": -1114546
     }
    },
    "yearly_return_pct": {
-    "2026": -9.58
+    "2026": -9.47
    },
    "open_positions": [
     {
-     "code": "006400",
-     "name": "Samsung SDI Co., Ltd",
-     "group": "Electrical Products",
-     "pattern": "box",
-     "entry_date": "2026-10-07",
-     "entry": 572713.0,
-     "stop": 532623.09,
-     "shares": 2,
-     "bars_held": 3,
-     "last_close": 561000.0,
-     "unrealized_pct": -2.05
+     "code": "319660",
+     "name": "PSK INC",
+     "group": "Industrial Machinery",
+     "pattern": "triangle",
+     "entry_date": "2026-10-13",
+     "entry": 136809.2,
+     "stop": 127232.56,
+     "shares": 9,
+     "bars_held": 1,
+     "last_close": 149100.0,
+     "unrealized_pct": 8.98
     },
     {
-     "code": "373220",
-     "name": "LG Energy Solution Ltd.",
-     "group": "Electrical Products",
-     "pattern": "box",
-     "entry_date": "2026-10-12",
-     "entry": 411230.0,
-     "stop": 382443.9,
-     "shares": 3,
+     "code": "011200",
+     "name": "HMM CO.,LTD",
+     "group": "Marine Shipping",
+     "pattern": "cup_handle",
+     "entry_date": "2026-10-13",
+     "entry": 21363.9,
+     "stop": 20800.0,
+     "shares": 83,
      "bars_held": 1,
-     "last_close": 396500.0,
-     "unrealized_pct": -3.58
-    },
-    {
-     "code": "131970",
-     "name": "DOOSAN TESNA Inc.",
-     "group": "Miscellaneous Commercial Services",
-     "pattern": "flag",
-     "entry_date": "2026-10-12",
-     "entry": 124672.9,
-     "stop": 115945.8,
-     "shares": 10,
-     "bars_held": 1,
-     "last_close": 123700.0,
-     "unrealized_pct": -0.78
+     "last_close": 22050.0,
+     "unrealized_pct": 3.21
     }
    ]
   },
   "hold_10": {
    "label": "동조 + 패턴, 보유 10일",
    "signals": 15,
-   "trades": 4,
+   "trades": 6,
    "wins": 0,
    "win_rate": 0.0,
    "avg_win_pct": null,
-   "avg_loss_pct": -7.04,
+   "avg_loss_pct": -8.56,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -4.61,
-   "equity_final": 9539158,
-   "max_drawdown_pct": 4.61,
-   "avg_hold_days": 1.5,
+   "total_return_pct": -6.28,
+   "equity_final": 9371542,
+   "max_drawdown_pct": 6.28,
+   "avg_hold_days": 1.83,
    "skipped": {
     "gap": 0,
     "limit": 8,
@@ -408,50 +331,42 @@
      "wins": 0,
      "pnl_krw": -307325
     },
+    "box": {
+     "n": 2,
+     "wins": 0,
+     "pnl_krw": -178218
+    },
     "cup_handle": {
      "n": 1,
      "wins": 0,
-     "pnl_krw": -87356
+     "pnl_krw": -212771
     }
    },
    "by_sync": {
     "day": {
-     "n": 4,
+     "n": 6,
      "wins": 0,
-     "pnl_krw": -394681
+     "pnl_krw": -698314
     }
    },
    "by_exit": {
     "stop": {
-     "n": 4,
+     "n": 6,
      "wins": 0,
-     "pnl_krw": -394681
+     "pnl_krw": -698314
     }
    },
    "by_year": {
     "2026": {
-     "n": 4,
+     "n": 6,
      "wins": 0,
-     "pnl_krw": -394681
+     "pnl_krw": -698314
     }
    },
    "yearly_return_pct": {
-    "2026": -4.61
+    "2026": -6.28
    },
    "open_positions": [
-    {
-     "code": "006400",
-     "name": "Samsung SDI Co., Ltd",
-     "group": "Electrical Products",
-     "pattern": "box",
-     "entry_date": "2026-10-07",
-     "entry": 572713.0,
-     "stop": 532623.09,
-     "shares": 2,
-     "bars_held": 3,
-     "last_close": 561000.0,
-     "unrealized_pct": -2.05
-    },
     {
      "code": "373220",
      "name": "LG Energy Solution Ltd.",
@@ -462,38 +377,25 @@
      "stop": 359590.54,
      "shares": 3,
      "bars_held": 3,
-     "last_close": 396500.0,
-     "unrealized_pct": 2.55
-    },
-    {
-     "code": "192820",
-     "name": "COSMAX, Inc.",
-     "group": "Household/Personal Care",
-     "pattern": "box",
-     "entry_date": "2026-10-08",
-     "entry": 311933.0,
-     "stop": 290097.69,
-     "shares": 4,
-     "bars_held": 2,
-     "last_close": 294000.0,
-     "unrealized_pct": -5.75
+     "last_close": 410000.0,
+     "unrealized_pct": 6.04
     }
    ]
   },
   "risk_2": {
    "label": "동조 + 패턴, 위험 2% (명목 상한 30%)",
    "signals": 15,
-   "trades": 3,
+   "trades": 5,
    "wins": 0,
    "win_rate": 0.0,
    "avg_win_pct": null,
-   "avg_loss_pct": -6.9,
+   "avg_loss_pct": -8.78,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -7.56,
-   "equity_final": 9243928,
-   "max_drawdown_pct": 7.56,
-   "avg_hold_days": 1.33,
+   "total_return_pct": -11.41,
+   "equity_final": 8859050,
+   "max_drawdown_pct": 11.41,
+   "avg_hold_days": 1.8,
    "skipped": {
     "gap": 0,
     "limit": 0,
@@ -508,79 +410,57 @@
      "wins": 0,
      "pnl_krw": -412165
     },
+    "box": {
+     "n": 2,
+     "wins": 0,
+     "pnl_krw": -356437
+    },
     "cup_handle": {
      "n": 1,
      "wins": 0,
-     "pnl_krw": -152873
+     "pnl_krw": -372348
     }
    },
    "by_sync": {
     "day": {
-     "n": 3,
+     "n": 5,
      "wins": 0,
-     "pnl_krw": -565038
+     "pnl_krw": -1140950
     }
    },
    "by_exit": {
     "stop": {
-     "n": 3,
+     "n": 5,
      "wins": 0,
-     "pnl_krw": -565038
+     "pnl_krw": -1140950
     }
    },
    "by_year": {
     "2026": {
-     "n": 3,
+     "n": 5,
      "wins": 0,
-     "pnl_krw": -565038
+     "pnl_krw": -1140950
     }
    },
    "yearly_return_pct": {
-    "2026": -7.56
+    "2026": -11.41
    },
-   "open_positions": [
-    {
-     "code": "006400",
-     "name": "Samsung SDI Co., Ltd",
-     "group": "Electrical Products",
-     "pattern": "box",
-     "entry_date": "2026-10-07",
-     "entry": 572713.0,
-     "stop": 532623.09,
-     "shares": 4,
-     "bars_held": 3,
-     "last_close": 561000.0,
-     "unrealized_pct": -2.05
-    },
-    {
-     "code": "192820",
-     "name": "COSMAX, Inc.",
-     "group": "Household/Personal Care",
-     "pattern": "box",
-     "entry_date": "2026-10-08",
-     "entry": 311933.0,
-     "stop": 290097.69,
-     "shares": 8,
-     "bars_held": 2,
-     "last_close": 294000.0,
-     "unrealized_pct": -5.75
-    }
-   ]
+   "open_positions": []
   },
   "no_flag": {
    "label": "동조 + 패턴, 깃발형 제외",
    "signals": 6,
-   "trades": 1,
+   "trades": 3,
    "wins": 0,
    "win_rate": 0.0,
    "avg_win_pct": null,
-   "avg_loss_pct": -5.8,
+   "avg_loss_pct": -9.67,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -1.74,
-   "equity_final": 9826090,
-   "max_drawdown_pct": 2.2,
-   "avg_hold_days": 2,
+   "total_return_pct": -3.28,
+   "equity_final": 9671970,
+   "max_drawdown_pct": 3.74,
+   "avg_hold_days": 2.33,
    "skipped": {
     "gap": 0,
     "limit": 1,
@@ -590,50 +470,42 @@
     "pattern": 0
    },
    "by_pattern": {
+    "box": {
+     "n": 2,
+     "wins": 0,
+     "pnl_krw": -178218
+    },
     "cup_handle": {
      "n": 1,
      "wins": 0,
-     "pnl_krw": -109195
+     "pnl_krw": -265963
     }
    },
    "by_sync": {
     "day": {
-     "n": 1,
+     "n": 3,
      "wins": 0,
-     "pnl_krw": -109195
+     "pnl_krw": -444181
     }
    },
    "by_exit": {
     "stop": {
-     "n": 1,
+     "n": 3,
      "wins": 0,
-     "pnl_krw": -109195
+     "pnl_krw": -444181
     }
    },
    "by_year": {
     "2026": {
-     "n": 1,
+     "n": 3,
      "wins": 0,
-     "pnl_krw": -109195
+     "pnl_krw": -444181
     }
    },
    "yearly_return_pct": {
-    "2026": -1.74
+    "2026": -3.28
    },
    "open_positions": [
-    {
-     "code": "006400",
-     "name": "Samsung SDI Co., Ltd",
-     "group": "Electrical Products",
-     "pattern": "box",
-     "entry_date": "2026-10-07",
-     "entry": 572713.0,
-     "stop": 532623.09,
-     "shares": 2,
-     "bars_held": 3,
-     "last_close": 561000.0,
-     "unrealized_pct": -2.05
-    },
     {
      "code": "373220",
      "name": "LG Energy Solution Ltd.",
@@ -644,8 +516,8 @@
      "stop": 359590.54,
      "shares": 3,
      "bars_held": 3,
-     "last_close": 396500.0,
-     "unrealized_pct": 2.55
+     "last_close": 410000.0,
+     "unrealized_pct": 6.04
     },
     {
      "code": "098460",
@@ -657,21 +529,8 @@
      "stop": 33440.52,
      "shares": 39,
      "bars_held": 3,
-     "last_close": 36000.0,
-     "unrealized_pct": 0.12
-    },
-    {
-     "code": "192820",
-     "name": "COSMAX, Inc.",
-     "group": "Household/Personal Care",
-     "pattern": "box",
-     "entry_date": "2026-10-08",
-     "entry": 311933.0,
-     "stop": 290097.69,
-     "shares": 4,
-     "bars_held": 2,
-     "last_close": 294000.0,
-     "unrealized_pct": -5.75
+     "last_close": 37150.0,
+     "unrealized_pct": 3.32
     }
    ]
   }
@@ -743,6 +602,27 @@
     "hold_days": 2
    },
    {
+    "code": "006400",
+    "name": "Samsung SDI Co., Ltd",
+    "group": "Electrical Products",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-06",
+    "entry_date": "2026-10-07",
+    "entry": 572713.0,
+    "stop": 532623.09,
+    "exit_date": "2026-10-13",
+    "exit": 531025.22,
+    "why": "stop",
+    "shares": 2,
+    "pnl_krw": -85300,
+    "pnl_pct": -7.45,
+    "hold_days": 3
+   },
+   {
     "code": "278470",
     "name": "APR Co.,Ltd.",
     "group": "Household/Personal Care",
@@ -755,12 +635,33 @@
     "entry_date": "2026-10-08",
     "entry": 376626.5,
     "stop": 356500.0,
-    "exit_date": "2026-10-12",
-    "exit": 355430.5,
+    "exit_date": "2026-10-13",
+    "exit": 324025.0,
     "why": "stop",
     "shares": 4,
-    "pnl_krw": -87356,
-    "pnl_pct": -5.8,
+    "pnl_krw": -212771,
+    "pnl_pct": -14.12,
+    "hold_days": 2
+   },
+   {
+    "code": "192820",
+    "name": "COSMAX, Inc.",
+    "group": "Household/Personal Care",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-07",
+    "entry_date": "2026-10-08",
+    "entry": 311933.0,
+    "stop": 290097.69,
+    "exit_date": "2026-10-13",
+    "exit": 289227.4,
+    "why": "stop",
+    "shares": 4,
+    "pnl_krw": -92918,
+    "pnl_pct": -7.45,
     "hold_days": 2
    }
   ],
@@ -918,6 +819,27 @@
     "hold_days": 1
    },
    {
+    "code": "006400",
+    "name": "Samsung SDI Co., Ltd",
+    "group": "Electrical Products",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-06",
+    "entry_date": "2026-10-07",
+    "entry": 572713.0,
+    "stop": 532623.09,
+    "exit_date": "2026-10-13",
+    "exit": 531025.22,
+    "why": "stop",
+    "shares": 2,
+    "pnl_krw": -85300,
+    "pnl_pct": -7.45,
+    "hold_days": 3
+   },
+   {
     "code": "278470",
     "name": "APR Co.,Ltd.",
     "group": "Household/Personal Care",
@@ -930,34 +852,34 @@
     "entry_date": "2026-10-08",
     "entry": 376626.5,
     "stop": 356500.0,
-    "exit_date": "2026-10-12",
-    "exit": 355430.5,
+    "exit_date": "2026-10-13",
+    "exit": 324025.0,
     "why": "stop",
     "shares": 4,
-    "pnl_krw": -87356,
-    "pnl_pct": -5.8,
+    "pnl_krw": -212771,
+    "pnl_pct": -14.12,
     "hold_days": 2
    },
    {
-    "code": "051910",
-    "name": "LG Chem Ltd.",
-    "group": "Chemicals: Specialty",
-    "pattern": "box",
+    "code": "417840",
+    "name": "Justem Co. Ltd.",
+    "group": "Homebuilding",
+    "pattern": "flag",
     "patterns": [
-     "box"
+     "flag"
     ],
     "sync_by": null,
     "signal_date": "2026-10-08",
     "entry_date": "2026-10-12",
-    "entry": 284852.0,
-    "stop": 264912.36,
-    "exit_date": "2026-10-12",
-    "exit": 264117.62,
+    "entry": 20611.65,
+    "stop": 19168.83,
+    "exit_date": "2026-10-13",
+    "exit": 18943.0,
     "why": "stop",
-    "shares": 4,
-    "pnl_krw": -84852,
-    "pnl_pct": -7.45,
-    "hold_days": 1
+    "shares": 64,
+    "pnl_krw": -108992,
+    "pnl_pct": -8.26,
+    "hold_days": 2
    }
   ],
   "hold_10": [
@@ -1026,6 +948,27 @@
     "hold_days": 2
    },
    {
+    "code": "006400",
+    "name": "Samsung SDI Co., Ltd",
+    "group": "Electrical Products",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-06",
+    "entry_date": "2026-10-07",
+    "entry": 572713.0,
+    "stop": 532623.09,
+    "exit_date": "2026-10-13",
+    "exit": 531025.22,
+    "why": "stop",
+    "shares": 2,
+    "pnl_krw": -85300,
+    "pnl_pct": -7.45,
+    "hold_days": 3
+   },
+   {
     "code": "278470",
     "name": "APR Co.,Ltd.",
     "group": "Household/Personal Care",
@@ -1038,12 +981,33 @@
     "entry_date": "2026-10-08",
     "entry": 376626.5,
     "stop": 356500.0,
-    "exit_date": "2026-10-12",
-    "exit": 355430.5,
+    "exit_date": "2026-10-13",
+    "exit": 324025.0,
     "why": "stop",
     "shares": 4,
-    "pnl_krw": -87356,
-    "pnl_pct": -5.8,
+    "pnl_krw": -212771,
+    "pnl_pct": -14.12,
+    "hold_days": 2
+   },
+   {
+    "code": "192820",
+    "name": "COSMAX, Inc.",
+    "group": "Household/Personal Care",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-07",
+    "entry_date": "2026-10-08",
+    "entry": 311933.0,
+    "stop": 290097.69,
+    "exit_date": "2026-10-13",
+    "exit": 289227.4,
+    "why": "stop",
+    "shares": 4,
+    "pnl_krw": -92918,
+    "pnl_pct": -7.45,
     "hold_days": 2
    }
   ],
@@ -1092,28 +1056,26 @@
     "hold_days": 1
    },
    {
-    "code": "278470",
-    "name": "APR Co.,Ltd.",
-    "group": "Household/Personal Care",
-    "pattern": "cup_handle",
+    "code": "006400",
+    "name": "Samsung SDI Co., Ltd",
+    "group": "Electrical Products",
+    "pattern": "box",
     "patterns": [
-     "cup_handle"
+     "box"
     ],
     "sync_by": "day",
-    "signal_date": "2026-10-07",
-    "entry_date": "2026-10-08",
-    "entry": 376626.5,
-    "stop": 356500.0,
-    "exit_date": "2026-10-12",
-    "exit": 355430.5,
+    "signal_date": "2026-10-06",
+    "entry_date": "2026-10-07",
+    "entry": 572713.0,
+    "stop": 532623.09,
+    "exit_date": "2026-10-13",
+    "exit": 531025.22,
     "why": "stop",
-    "shares": 7,
-    "pnl_krw": -152873,
-    "pnl_pct": -5.8,
-    "hold_days": 2
-   }
-  ],
-  "no_flag": [
+    "shares": 4,
+    "pnl_krw": -170600,
+    "pnl_pct": -7.45,
+    "hold_days": 3
+   },
    {
     "code": "278470",
     "name": "APR Co.,Ltd.",
@@ -1127,12 +1089,98 @@
     "entry_date": "2026-10-08",
     "entry": 376626.5,
     "stop": 356500.0,
-    "exit_date": "2026-10-12",
-    "exit": 355430.5,
+    "exit_date": "2026-10-13",
+    "exit": 324025.0,
+    "why": "stop",
+    "shares": 7,
+    "pnl_krw": -372348,
+    "pnl_pct": -14.12,
+    "hold_days": 2
+   },
+   {
+    "code": "192820",
+    "name": "COSMAX, Inc.",
+    "group": "Household/Personal Care",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-07",
+    "entry_date": "2026-10-08",
+    "entry": 311933.0,
+    "stop": 290097.69,
+    "exit_date": "2026-10-13",
+    "exit": 289227.4,
+    "why": "stop",
+    "shares": 8,
+    "pnl_krw": -185837,
+    "pnl_pct": -7.45,
+    "hold_days": 2
+   }
+  ],
+  "no_flag": [
+   {
+    "code": "006400",
+    "name": "Samsung SDI Co., Ltd",
+    "group": "Electrical Products",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-06",
+    "entry_date": "2026-10-07",
+    "entry": 572713.0,
+    "stop": 532623.09,
+    "exit_date": "2026-10-13",
+    "exit": 531025.22,
+    "why": "stop",
+    "shares": 2,
+    "pnl_krw": -85300,
+    "pnl_pct": -7.45,
+    "hold_days": 3
+   },
+   {
+    "code": "278470",
+    "name": "APR Co.,Ltd.",
+    "group": "Household/Personal Care",
+    "pattern": "cup_handle",
+    "patterns": [
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-07",
+    "entry_date": "2026-10-08",
+    "entry": 376626.5,
+    "stop": 356500.0,
+    "exit_date": "2026-10-13",
+    "exit": 324025.0,
     "why": "stop",
     "shares": 5,
-    "pnl_krw": -109195,
-    "pnl_pct": -5.8,
+    "pnl_krw": -265963,
+    "pnl_pct": -14.12,
+    "hold_days": 2
+   },
+   {
+    "code": "192820",
+    "name": "COSMAX, Inc.",
+    "group": "Household/Personal Care",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-07",
+    "entry_date": "2026-10-08",
+    "entry": 311933.0,
+    "stop": 290097.69,
+    "exit_date": "2026-10-13",
+    "exit": 289227.4,
+    "why": "stop",
+    "shares": 4,
+    "pnl_krw": -92918,
+    "pnl_pct": -7.45,
     "hold_days": 2
    }
   ]
