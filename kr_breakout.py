@@ -11,7 +11,8 @@ CARRYGATE — 한국 주식 "업종 동조 + 패턴 돌파" 신호·종이매매
 매매 규칙(고정, 사후 조정 금지)
   신호   동조 업종 안의 종목이 patterns.scan 으로 돌파 확인(종가>저항, 거래량 1.5배, 20일선 위, 거래대금 100억+, 상한가 제외)
   진입   다음날 시가. 시가가 신호일 종가의 +GAP_SKIP_PCT 이상이면 포기. 슬리피지 SLIP_PCT
-  손절   max(패턴 하단, 진입가×(1−STOP_PCT)). 당일 저가가 손절가 이하이면 손절가(갭이면 시가)에 체결
+  손절   max(패턴 하단, 진입가×(1−STOP_PCT)). 당일 저가가 손절가 이하이면 손절가에 체결. 시가가 손절가 아래면 시가(갭, gap=true) —
+         그래서 손실이 7% 를 넘을 수 있다 (10/13 에 예로 든 에이피알 −14.1% 는 일봉 누락 탓이었다 — P15, 실제는 10/12 −5.8%)
   청산   직전 EXIT_LOW_N 일 최저가 아래 종가 → 다음날 시가 / 보유 HOLD_MAX 봉 → 다음날 시가
   수량   계좌×RISK_PCT ÷ (진입가−손절가), 명목가 ≤ 계좌×MAX_POS_PCT. 동시 MAX_POS 종목, 같은 업종 MAX_PER_GROUP
   비용   매수 수수료 FEE_PCT, 매도 수수료 FEE_PCT + 거래세 TAX_PCT, 양쪽 슬리피지 SLIP_PCT
@@ -112,7 +113,7 @@ class Sim:
                             "sync_by": p["sync_by"], "signal_date": p["signal_date"], "entry_date": p["entry_date"], "entry": r2(p["entry"]),
                             "stop": r2(p["stop"]), "exit_date": date, "exit": r2(price * (1 - SLIP_PCT / 100)), "why": why,
                             "shares": p["shares"], "pnl_krw": round(pnl), "pnl_pct": r2(pnl / p["cost_in"] * 100),
-                            "hold_days": p["bars_held"]})
+                            "hold_days": p["bars_held"], "gap": bool(p.get("gap", False))})
         del self.positions[code]
         self.cooldown[code] = self.day_no + COOLDOWN
 
@@ -156,6 +157,7 @@ class Sim:
                 continue
             p["bars_held"] += 1; p["last_close"] = b["c"]
             if b["l"] <= p["stop"]:
+                p["gap"] = b["o"] < p["stop"]          # 시가가 손절가 아래로 떠서 손절가보다 싸게 팔린 경우 (−7% 보다 더 잃는다)
                 self._sell(code, min(b["o"], p["stop"]), date, "stop", p); continue
             i = idx_today[code]; hist = all_bars[code]
             low_n = min(x["l"] for x in hist[max(0, i - EXIT_LOW_N):i]) if i > 0 else None
@@ -443,6 +445,25 @@ def run_forward(fixture=None, dry_run=False):
     last_date = days[-1]["date"] if days else None
     # 마지막 기록일의 봉이 야후에 아직 없으면(코스닥은 하루 늦다) 그날만 네이버로 메운다
     all_bars, sources, errors = load_bars(codes, FWD_BARS, fixture, need_date=last_date) if codes else ({}, {}, {})
+    # 중간에 빠진 거래일 메우기 (2026-10-13 야후 10/12 대량 누락 사고, P15). 거래일 = 기록된 순방향 거래일 중 한 종목이라도 봉이 있는 날.
+    # 빠진 종목만 네이버에서 그 날 봉을 받아 끼운다. 규칙은 그대로, 자료만 바로잡는다.
+    gap_filled, gap_missing = {}, {}
+    if all_bars and not fixture and days:
+        cnt_before = KO.date_counts(all_bars, days[0]["date"], last_date)
+        print("거래일별 봉 있는 종목 수(메우기 전, 전체 %d): %s" % (len(all_bars), json.dumps(dict(sorted(cnt_before.items())), ensure_ascii=False)))
+        cal = KO.market_calendar(all_bars, days[0]["date"], last_date, allowed={d["date"] for d in days})
+        for code in sorted(all_bars):
+            nb, filled, why = KO.fill_gaps(code, all_bars[code], cal)
+            if filled:
+                all_bars[code] = nb
+                sources[code] = sources.get(code, "") + "+gapfill"
+                gap_filled[code] = filled
+            elif why:
+                gap_missing[code] = why
+        if gap_filled:
+            print("일봉 중간 빠진 날 메움 %d종목: %s" % (len(gap_filled), json.dumps(dict(list(gap_filled.items())[:20]), ensure_ascii=False)))
+        if gap_missing:
+            print("일봉 중간 빈 날 못 메움 %d종목(거래정지일 수 있음): %s" % (len(gap_missing), json.dumps(dict(list(gap_missing.items())[:10]), ensure_ascii=False)))
     # 그래도 오늘 봉이 빠진 종목(자료 지연)은 표시한다 — 그날 신호가 하루 늦게 잡힌다
     stale = [c for c, bars in all_bars.items() if last_date and (not bars or bars[-1]["date"] < last_date)]
     frozen = frozen_signals()
@@ -455,6 +476,8 @@ def run_forward(fixture=None, dry_run=False):
                        "codes": len(all_bars), "bar_errors": len(errors), "stale_codes": len(stale),
                        "by_source": {k: sum(1 for v in sources.values() if v == k) for k in set(sources.values())},
                        "skipped_days": sims["base"].skipped_days,
+                       "gap_filled": len(gap_filled), "gap_filled_codes": dict(list(gap_filled.items())[:20]),
+                       "gap_unfilled": len(gap_missing),
                        "note": ("마지막 기록일(%s)의 봉이 없다 — 휴장일이거나 자료가 아직 안 왔다. 매매일로 세지 않았다" % last_date)
                                if last_date in sims["base"].skipped_days else None},
            "signals_today": {k: [{"code": e["code"], "name": e.get("name"), "group": e["group"], "pattern": e["pattern"], "patterns": e["patterns"],
