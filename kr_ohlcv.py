@@ -172,6 +172,49 @@ def fetch_daily(code, days=160, sources=None, need_date=None):
     raise RuntimeError("일봉 실패 %s: %s" % (code, json.dumps(errors, ensure_ascii=False)))
 
 
+def market_calendar(all_bars, since, until=None, min_share=0.5):
+    """여러 종목의 봉 날짜 중 since~until 사이에서 종목의 min_share 이상이 가진 날짜 = 거래일.
+    한두 종목에만 빠진 날(자료 누락)과 모두에게 없는 날(휴장)을 구별하려고 쓴다."""
+    if not all_bars:
+        return []
+    cnt = {}
+    for bars in all_bars.values():
+        for b in bars:
+            d = b["date"]
+            if d >= since and (until is None or d <= until):
+                cnt[d] = cnt.get(d, 0) + 1
+    need = max(1, int(len(all_bars) * min_share))
+    return sorted(d for d, n in cnt.items() if n >= need)
+
+
+GAP_SOURCES = [("naver_api", naver_api), ("naver_fchart", naver_fchart)]
+
+
+def fill_gaps(code, bars, dates, sources=None, window=40):
+    """bars 에 없는 거래일(dates)을 예비 경로에서 받아 그 날만 끼운다. 반환 (봉 목록, 메운 날짜, 사유).
+
+    2026-10-13 확인: 야후가 에이피알(278470) 10/12 봉을 빼고 10/13 봉만 줬다. 중간이 빈 채로 종이매매를 돌려
+    10/12 손절(저가 350,500 < 손절 356,500, TradingView 대조)을 못 보고 10/13 갭하락 시가에 판 것으로 기록됐다
+    (−5.8% 가 −14.1% 로 바뀜). fetch_daily 는 마지막 봉 뒤만 메워서 중간 구멍을 못 잡았다."""
+    have = {b["date"] for b in bars}
+    first = bars[0]["date"] if bars else None
+    missing = {d for d in dates if d not in have and (first is None or d >= first)}
+    if not missing:
+        return bars, [], None
+    why = None
+    for name, fn in (sources or GAP_SOURCES):
+        try:
+            add = [b for b in fn(code, window) if b["date"] in missing]
+        except Exception as e:
+            why = "%s: %s" % (name, str(e)[:120])
+            continue
+        if add:
+            merged = sorted(bars + add, key=lambda b: b["date"])
+            return merged, sorted(b["date"] for b in add), None
+        why = "%s: 빠진 날 봉 없음" % name
+    return bars, [], why
+
+
 # ----------------------------------------------------------------- CSV
 FIELDS = ["date", "o", "h", "l", "c", "v", "value"]
 

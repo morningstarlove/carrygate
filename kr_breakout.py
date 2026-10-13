@@ -443,6 +443,23 @@ def run_forward(fixture=None, dry_run=False):
     last_date = days[-1]["date"] if days else None
     # 마지막 기록일의 봉이 야후에 아직 없으면(코스닥은 하루 늦다) 그날만 네이버로 메운다
     all_bars, sources, errors = load_bars(codes, FWD_BARS, fixture, need_date=last_date) if codes else ({}, {}, {})
+    # 중간에 빠진 거래일 메우기 (2026-10-13 에이피알 10/12 누락 사고). 다른 종목 절반 이상이 가진 날 = 거래일.
+    # 빠진 종목만 네이버에서 그 날 봉을 받아 끼운다. 규칙은 그대로, 자료만 바로잡는다.
+    gap_filled, gap_missing = {}, {}
+    if all_bars and not fixture and days:
+        cal = KO.market_calendar(all_bars, days[0]["date"], last_date)
+        for code in sorted(all_bars):
+            nb, filled, why = KO.fill_gaps(code, all_bars[code], cal)
+            if filled:
+                all_bars[code] = nb
+                sources[code] = sources.get(code, "") + "+gapfill"
+                gap_filled[code] = filled
+            elif why:
+                gap_missing[code] = why
+        if gap_filled:
+            print("일봉 중간 빠진 날 메움 %d종목: %s" % (len(gap_filled), json.dumps(dict(list(gap_filled.items())[:20]), ensure_ascii=False)))
+        if gap_missing:
+            print("일봉 중간 빈 날 못 메움 %d종목(거래정지일 수 있음): %s" % (len(gap_missing), json.dumps(dict(list(gap_missing.items())[:10]), ensure_ascii=False)))
     # 그래도 오늘 봉이 빠진 종목(자료 지연)은 표시한다 — 그날 신호가 하루 늦게 잡힌다
     stale = [c for c, bars in all_bars.items() if last_date and (not bars or bars[-1]["date"] < last_date)]
     frozen = frozen_signals()
@@ -455,6 +472,8 @@ def run_forward(fixture=None, dry_run=False):
                        "codes": len(all_bars), "bar_errors": len(errors), "stale_codes": len(stale),
                        "by_source": {k: sum(1 for v in sources.values() if v == k) for k in set(sources.values())},
                        "skipped_days": sims["base"].skipped_days,
+                       "gap_filled": len(gap_filled), "gap_filled_codes": dict(list(gap_filled.items())[:20]),
+                       "gap_unfilled": len(gap_missing),
                        "note": ("마지막 기록일(%s)의 봉이 없다 — 휴장일이거나 자료가 아직 안 왔다. 매매일로 세지 않았다" % last_date)
                                if last_date in sims["base"].skipped_days else None},
            "signals_today": {k: [{"code": e["code"], "name": e.get("name"), "group": e["group"], "pattern": e["pattern"], "patterns": e["patterns"],
