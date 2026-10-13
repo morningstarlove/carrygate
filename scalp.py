@@ -31,9 +31,11 @@ UA = {"User-Agent": "Mozilla/5.0 (compatible; carrygate/1.0)",
       "Accept": "application/json"}
 
 EVAL_BARS = 1440      # 평가 구간: 하루 = 1분봉 1440개
-WARMUP_MIN = 1440     # 지표 계산용 준비 구간(분) = 하루. 변동성 돌파가 전날(UTC) 고저 폭을 쓴다
+WARMUP_MIN = 3600     # 지표 계산용 준비 구간(분) = 60시간. 60분봉 VWAP(60봉) 때문. 2026-10-13 전에는 1440(하루)이었고,
+                      # 1·5·15분봉 지표는 하루 준비로 이미 다 차 있어 결과가 바뀌지 않는다
 VB_K = 0.5            # 변동성 돌파 계수: 당일 시가 + 전날 폭 × K 를 넘으면 진입
-TIMEFRAMES = [1, 5, 15]   # 같은 규칙을 적용해 보는 봉 길이(분)
+TIMEFRAMES = [1, 5, 15, 30, 60]   # 같은 규칙을 적용해 보는 봉 길이(분). 30·60 은 2026-10-13 추가(15일 탈락 뒤 대안, 제안함 P16)
+NIGHT_KST = (21, 22, 23, 0, 1, 2)   # '밤' 필터: 보조 연구 A1 에서 15분 본전 승률이 100% 아래였던 유일한 시간대(미국 장)
 SPREAD_TICKS = 1.0    # 시장가 체결 시 왕복으로 잃는 호가 폭 (틱 단위). 1틱 = 매수호가·매도호가 차이가 최소일 때
 LIMIT_TTL = 3         # 지정가 주문을 기다리는 최대 봉 수. 넘으면 진입은 취소, 청산은 시장가
 
@@ -119,12 +121,20 @@ def src_upbit(coin, start, end):
 
 
 def src_hyperliquid(coin, start, end):
-    rows = http_json("https://api.hyperliquid.xyz/info",
-                     data={"type": "candleSnapshot",
-                           "req": {"coin": coin, "interval": "1m",
-                                   "startTime": start * 1000, "endTime": end * 1000}})
-    out = [bar(int(r["t"]) // 1000, f(r["o"]), f(r["h"]), f(r["l"]), f(r["c"]), f(r["v"]))
-           for r in rows]
+    """하이퍼리퀴드 1분봉. 한 번에 최대 5000봉이라(준비 60시간 + 평가 하루 = 5040봉) 끝까지 못 받으면 이어서 받는다."""
+    out, frm = [], start
+    for _ in range(4):
+        rows = http_json("https://api.hyperliquid.xyz/info",
+                         data={"type": "candleSnapshot",
+                               "req": {"coin": coin, "interval": "1m",
+                                       "startTime": frm * 1000, "endTime": end * 1000}})
+        got = [bar(int(r["t"]) // 1000, f(r["o"]), f(r["h"]), f(r["l"]), f(r["c"]), f(r["v"]))
+               for r in rows]
+        out.extend(got)
+        if not got or len(got) < 4000 or got[-1]["t"] >= end - 120:
+            break
+        frm = got[-1]["t"] + 60
+        time.sleep(0.12)
     return finish(out, start, end)
 
 
@@ -343,6 +353,23 @@ def x_vwap(ctx, i, pos):
     return z is not None and (z >= 0 if pos["side"] == 1 else z <= 0)
 
 
+def kst_hour_of(t):
+    return datetime.fromtimestamp(t, KST).hour
+
+
+def e_vwap_night(ctx, i):
+    """VWAP 되돌림과 같은 신호를 한국시간 21~02시(미국 장)에만 받는다. 청산은 시간 제한 없음."""
+    if kst_hour_of(ctx.t[i]) not in NIGHT_KST:
+        return None
+    return e_vwap(ctx, i)
+
+
+def e_mr_night(ctx, i):
+    if kst_hour_of(ctx.t[i]) not in NIGHT_KST:
+        return None
+    return e_mr(ctx, i)
+
+
 def e_vb(ctx, i):
     """변동성 돌파: 당일 시가 + 전날 폭 × K 를 종가로 넘으면 롱, 시가 − 폭 × K 아래면 숏. 하루 마지막 봉엔 진입 안 함."""
     r = ctx.prev_range[i]
@@ -383,6 +410,10 @@ STRATEGIES = [
      "desc": "60봉 거래량가중평균가에서 1.5σ 넘게 벗어나면 반대로 진입, 평균가 복귀 시 청산, 최대 60봉"},
     {"key": "vwap_fade_lim", "name": "VWAP 되돌림 지정가", "entry": e_vwap, "exit": x_vwap, "max_hold": 60, "exec": "limit",
      "desc": "VWAP 되돌림과 같은 신호를 지정가로. 신호 봉 종가에 주문, 가격이 지나쳐야 체결, 3봉 미체결 시 취소"},
+    {"key": "vwap_fade_lim_n", "name": "VWAP 되돌림 지정가·밤", "entry": e_vwap_night, "exit": x_vwap, "max_hold": 60, "exec": "limit",
+     "desc": "VWAP 되돌림 지정가와 같되 진입 신호를 한국시간 21~02시에만 받음. 2026-10-13 추가(제안함 P16)"},
+    {"key": "mr_z20_lim_n", "name": "평균회귀 지정가·밤", "entry": e_mr_night, "exit": x_mr, "max_hold": 30, "exec": "limit",
+     "desc": "평균회귀 지정가와 같되 진입 신호를 한국시간 21~02시에만 받음. 2026-10-13 추가(제안함 P16)"},
     {"key": "vb_05", "name": "변동성 돌파(전날 폭 0.5)", "entry": e_vb, "exit": x_dayend, "max_hold": 100000, "exec": "market",
      "desc": "당일(UTC) 시가에서 전날 고저 폭의 절반만큼 오르면 추세 확정으로 보고 진입, 그날 끝(다음 날 첫 봉 시가)에 청산. 하루 1회 성격"},
     {"key": BASELINE, "name": "기준선(무작위 5봉 보유)", "entry": e_base, "exit": x_never, "max_hold": 5, "exec": "market",

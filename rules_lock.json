@@ -1,6 +1,6 @@
 {
   "_comment": "규칙 잠금. 트랙 코드의 규칙 상수와 criteria.json 지문을 적어 둔다. tests/test_verdict.py 가 매번 대조하므로, 규칙을 바꾸면 반드시 (1) proposals.md 에 근거 (2) 그 트랙의 RULE_FIXED 를 새 날짜로 (3) `python verdict.py --lock` 순서로 간다.",
-  "_locked_at": "2026-10-09T05:57:15Z",
+  "_locked_at": "2026-10-13T13:14:31Z",
   "criteria_sha256": "dbcccbcb26492ab5052cf03067a9ad31262af47a68cae60d75386958bf2b5ed3",
   "kr_breakout": {
     "rule_fixed": "2026-10-05",
@@ -159,6 +159,16 @@
           "exec": "limit",
           "key": "vwap_fade_lim",
           "max_hold": 60
+        },
+        {
+          "exec": "limit",
+          "key": "vwap_fade_lim_n",
+          "max_hold": 60
+        },
+        {
+          "exec": "limit",
+          "key": "mr_z20_lim_n",
+          "max_hold": 30
         },
         {
           "exec": "market",

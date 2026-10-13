@@ -170,5 +170,53 @@ class ResearchHistory(unittest.TestCase):
             self.assertEqual(rows[0]["x"], 2)
 
 
+class FollowRule(unittest.TestCase):
+    """C. 따라가기 지정가 규칙: 선행 급등 뒤 후행이 한 번 눌렸다가(체결) 올라오면 지정가 청산으로 플러스."""
+
+    def _bars(self, lead_jump_at, follow_dip):
+        n = 120
+        lead = [100.0] * n
+        for i in range(lead_jump_at, n):
+            lead[i] = 101.0                       # 1% 점프 — 나머지 0 수익률이므로 σ 기준 '큰 움직임'
+        follow = [50.0] * n
+        t = lead_jump_at
+        if follow_dip:
+            follow[t + 1] = 49.9                  # 다음 봉 저가가 주문가(50.0) 아래로 → 체결
+        for i in range(t + 2, n):
+            follow[i] = 50.2                      # 5봉 뒤 종가 50.2 에 매도 지정가, 그다음 봉 고가 50.3 → 체결
+        fb = bars_from(follow)
+        if follow_dip:
+            fb[t + 1]["l"] = 49.9
+        for b in fb[t + 7:]:
+            b["h"] = 50.3
+        return bars_from(lead), fb
+
+    def test_filled_and_profitable(self):
+        lead, fol = self._bars(60, True)
+        fees = {"maker_pct": 0.05, "taker_pct": 0.05}
+        r = sr.follow_rule(lead, fol, 0, fees, short_ok=False)
+        self.assertEqual(r["signals"], 1)
+        self.assertEqual(r["filled"], 1)
+        self.assertEqual(r["trades"], 1)
+        self.assertEqual(r["exit_maker"], 1)
+        # 매수 50.0 → 매도 50.2 = +0.4%, 지정가 수수료 0.05% × 2
+        self.assertAlmostEqual(r["gross_pct_sum"], 0.4, places=3)
+        self.assertAlmostEqual(r["net_pct_sum"], 0.3, places=3)
+
+    def test_unfilled_when_price_runs_away(self):
+        lead, fol = self._bars(60, False)
+        r = sr.follow_rule(lead, fol, 0, {"maker_pct": 0.05, "taker_pct": 0.05}, short_ok=False)
+        self.assertEqual(r["signals"], 1)
+        self.assertEqual(r["filled"], 0)
+        self.assertEqual(r["trades"], 0)
+
+    def test_short_skipped_on_spot(self):
+        lead, fol = self._bars(60, True)
+        for b in lead[60:]:
+            b["c"] = 99.0                          # 급락 → 숏 신호
+        r = sr.follow_rule(lead, fol, 0, {"maker_pct": 0.05, "taker_pct": 0.05}, short_ok=False)
+        self.assertEqual(r["signals"], 0)
+
+
 if __name__ == "__main__":
     unittest.main()
