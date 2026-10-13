@@ -39,6 +39,8 @@
 
 세션 session_01WP7a8oLwaHMUj5MimZSF6k 를 보관(archive)하면 그 세션으로 배달되는 Routine 2개가 멈춘다. 세션 session_01UBXi3SEnxJwqCj4dY5q4J5(마일스톤 15 작업 세션)를 보관하면 현황판 갱신 루틴이 멈춘다.
 
+**2026-10-13 자료 사고와 수정 (제안함 P15):** 야후가 10/12 일봉을 한국 주식 178종목 중 147종목에서 뺐다. 순방향 종이매매가 그날을 건너뛰어 에이피알 손절을 하루 늦게, 갭하락 시가(−14.1%)로 계산했고 검산이 빨간불이 됐다. `kr_ohlcv.fill_gaps` 가 기록된 거래일 중 빠진 날만 네이버로 메운다. 메운 종목 수는 `kr_breakout.json` 의 `forward.gap_filled` 에 남는다. 규칙 변경 없음. 작업 기록 `docs/sessions/2026-10-13_kr_gap_fill.md`.
+
 **사용자 결정 대기:** 없음. 다음 결정은 10/21(초단타 소액 시험 여부)과 첫 판정이 뜨는 날.
 
 **규칙을 바꾸고 싶을 때:** `proposals.md` 에 근거 → 그 트랙 `RULE_FIXED` 새 날짜 → `python verdict.py --lock`. 이 순서 없이 바꾸면 CI 가 막는다(원칙 5).
