@@ -447,7 +447,9 @@ def run_forward(fixture=None, dry_run=False):
     # 빠진 종목만 네이버에서 그 날 봉을 받아 끼운다. 규칙은 그대로, 자료만 바로잡는다.
     gap_filled, gap_missing = {}, {}
     if all_bars and not fixture and days:
-        cal = KO.market_calendar(all_bars, days[0]["date"], last_date)
+        cnt_before = KO.date_counts(all_bars, days[0]["date"], last_date)
+        print("거래일별 봉 있는 종목 수(메우기 전, 전체 %d): %s" % (len(all_bars), json.dumps(dict(sorted(cnt_before.items())), ensure_ascii=False)))
+        cal = KO.market_calendar(all_bars, days[0]["date"], last_date, allowed={d["date"] for d in days})
         for code in sorted(all_bars):
             nb, filled, why = KO.fill_gaps(code, all_bars[code], cal)
             if filled:

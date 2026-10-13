@@ -220,6 +220,17 @@ class GapFill(unittest.TestCase):
         cal = KO.market_calendar({"A": full, "B": full, "C": holey}, "2026-10-05", "2026-10-13")
         self.assertEqual(cal, ["2026-10-07", "2026-10-08", "2026-10-12", "2026-10-13"])   # 10/9 휴장은 아무도 없어 안 들어간다
 
+    def test_calendar_from_recorded_days_survives_mass_gap(self):
+        """10/13 실제 상황: 야후가 10/12 를 대부분 종목에서 뺐다. 기록된 거래일 기준이면 한 종목만 가져도 거래일이다."""
+        import kr_ohlcv as KO
+        full = [self.b(d) for d in ("2026-10-08", "2026-10-12", "2026-10-13")]
+        holey = [self.b(d) for d in ("2026-10-08", "2026-10-13")]
+        bars = {"A": full, "B": holey, "C": holey, "D": holey}
+        self.assertNotIn("2026-10-12", KO.market_calendar(bars, "2026-10-05", "2026-10-13"))           # 절반 기준이면 놓친다
+        recorded = {"2026-10-05", "2026-10-08", "2026-10-12", "2026-10-13"}                               # 10/5 는 휴장(기록은 있음)
+        cal = KO.market_calendar(bars, "2026-10-05", "2026-10-13", allowed=recorded)
+        self.assertEqual(cal, ["2026-10-08", "2026-10-12", "2026-10-13"])                               # 휴장 10/5 는 빠진다
+
     def test_fill_gaps_inserts_only_missing_day(self):
         import kr_ohlcv as KO
         yahoo = [self.b(d) for d in ("2026-10-07", "2026-10-08", "2026-10-13")]

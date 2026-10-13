@@ -172,17 +172,26 @@ def fetch_daily(code, days=160, sources=None, need_date=None):
     raise RuntimeError("일봉 실패 %s: %s" % (code, json.dumps(errors, ensure_ascii=False)))
 
 
-def market_calendar(all_bars, since, until=None, min_share=0.5):
-    """여러 종목의 봉 날짜 중 since~until 사이에서 종목의 min_share 이상이 가진 날짜 = 거래일.
-    한두 종목에만 빠진 날(자료 누락)과 모두에게 없는 날(휴장)을 구별하려고 쓴다."""
-    if not all_bars:
-        return []
+def date_counts(all_bars, since, until=None):
+    """since~until 사이 날짜별로 봉을 가진 종목 수."""
     cnt = {}
     for bars in all_bars.values():
         for b in bars:
             d = b["date"]
             if d >= since and (until is None or d <= until):
                 cnt[d] = cnt.get(d, 0) + 1
+    return cnt
+
+
+def market_calendar(all_bars, since, until=None, min_share=0.5, allowed=None):
+    """거래일 목록. allowed(기록된 거래일)를 주면 그중 한 종목이라도 봉이 있는 날 = 거래일 — 휴장일은 아무도 봉이 없어 빠진다.
+    allowed 가 없으면 종목의 min_share 이상이 가진 날을 거래일로 본다.
+    2026-10-13 확인: 야후가 10/12 봉을 여러 종목에서 한꺼번에 빼서 "절반 이상" 기준으로는 그날이 거래일로 안 잡혔다."""
+    if not all_bars:
+        return []
+    cnt = date_counts(all_bars, since, until)
+    if allowed is not None:
+        return sorted(d for d in allowed if cnt.get(d, 0) >= 1 and d >= since and (until is None or d <= until))
     need = max(1, int(len(all_bars) * min_share))
     return sorted(d for d, n in cnt.items() if n >= need)
 
