@@ -217,6 +217,76 @@ class FetchMerge(unittest.TestCase):
         self.assertEqual(src3, "yahoo")                                              # need_date 없으면 예전 동작
 
 
+class GapFill(unittest.TestCase):
+    """2026-10-13 사고: 야후가 중간 하루(10/12)를 빼고 줬다. 그날 손절을 못 보고 다음 날 갭하락 시가에 팔았다."""
+
+    @staticmethod
+    def b(date, o=100.0, h=101.0, l=99.0, c=100.0):
+        return {"date": date, "o": o, "h": h, "l": l, "c": c, "v": 1000.0, "value": None}
+
+    def test_market_calendar_separates_holiday_from_gap(self):
+        import kr_ohlcv as KO
+        full = [self.b(d) for d in ("2026-10-07", "2026-10-08", "2026-10-12", "2026-10-13")]
+        holey = [self.b(d) for d in ("2026-10-07", "2026-10-08", "2026-10-13")]
+        cal = KO.market_calendar({"A": full, "B": full, "C": holey}, "2026-10-05", "2026-10-13")
+        self.assertEqual(cal, ["2026-10-07", "2026-10-08", "2026-10-12", "2026-10-13"])   # 10/9 휴장은 아무도 없어 안 들어간다
+
+    def test_calendar_from_recorded_days_survives_mass_gap(self):
+        """10/13 실제 상황: 야후가 10/12 를 대부분 종목에서 뺐다. 기록된 거래일 기준이면 한 종목만 가져도 거래일이다."""
+        import kr_ohlcv as KO
+        full = [self.b(d) for d in ("2026-10-08", "2026-10-12", "2026-10-13")]
+        holey = [self.b(d) for d in ("2026-10-08", "2026-10-13")]
+        bars = {"A": full, "B": holey, "C": holey, "D": holey}
+        self.assertNotIn("2026-10-12", KO.market_calendar(bars, "2026-10-05", "2026-10-13"))           # 절반 기준이면 놓친다
+        recorded = {"2026-10-05", "2026-10-08", "2026-10-12", "2026-10-13"}                               # 10/5 는 휴장(기록은 있음)
+        cal = KO.market_calendar(bars, "2026-10-05", "2026-10-13", allowed=recorded)
+        self.assertEqual(cal, ["2026-10-08", "2026-10-12", "2026-10-13"])                               # 휴장 10/5 는 빠진다
+
+    def test_fill_gaps_inserts_only_missing_day(self):
+        import kr_ohlcv as KO
+        yahoo = [self.b(d) for d in ("2026-10-07", "2026-10-08", "2026-10-13")]
+        def naver(code, days):
+            return [self.b("2026-10-08", c=999.0), self.b("2026-10-12", l=350.0), self.b("2026-10-13", c=999.0)]
+        cal = ["2026-10-07", "2026-10-08", "2026-10-12", "2026-10-13"]
+        bars, filled, why = KO.fill_gaps("X", yahoo, cal, sources=[("naver_api", naver)])
+        self.assertEqual(filled, ["2026-10-12"]); self.assertIsNone(why)
+        self.assertEqual([x["date"] for x in bars], cal)
+        self.assertEqual(bars[1]["c"], 100.0); self.assertEqual(bars[3]["c"], 100.0)        # 겹치는 날은 야후 값 유지
+        self.assertEqual(bars[2]["l"], 350.0)
+
+    def test_fill_gaps_noop_and_unfillable(self):
+        import kr_ohlcv as KO
+        bars = [self.b("2026-10-07"), self.b("2026-10-08")]
+        calls = []
+        def naver(code, days):
+            calls.append(code); return [self.b("2026-10-07")]
+        same, filled, why = KO.fill_gaps("X", bars, ["2026-10-07", "2026-10-08"], sources=[("naver_api", naver)])
+        self.assertEqual((filled, why, calls), ([], None, []))                              # 빠진 날 없으면 부르지도 않는다
+        same, filled, why = KO.fill_gaps("X", bars, ["2026-10-07", "2026-10-08", "2026-10-12"], sources=[("naver_api", naver)])
+        self.assertEqual(filled, []); self.assertIn("빠진 날 봉 없음", why)                   # 거래정지 등으로 예비 경로에도 없음
+        _, filled, _ = KO.fill_gaps("X", bars, ["2026-10-01"], sources=[("naver_api", naver)])
+        self.assertEqual(filled, [])                                                          # 상장 전 날짜는 빠진 날이 아니다
+
+    def test_missing_middle_bar_changes_exit_and_fill_restores_it(self):
+        """손절선 356.5. 10/12 저가 350.5 로 손절이 맞다. 10/12 봉이 빠지면 10/13 시가 325 에 팔린다."""
+        days = [{"date": d, "universe": [("A", "G")], "sync_groups": set(), "sync_by": {}}
+                for d in ("2026-10-08", "2026-10-12", "2026-10-13")]
+        full = [self.b("2026-10-08", 376.0, 380.0, 370.0, 375.0), self.b("2026-10-12", 380.0, 383.5, 350.5, 352.0),
+                self.b("2026-10-13", 325.0, 331.5, 279.0, 283.0)]
+        # 엔진 진입 경로를 쓰지 않고 보유 상태를 직접 만든다: 10/8 진입, 손절 356.5
+        for bars, want_date in ((full, "2026-10-12"), ([full[0], full[2]], "2026-10-13")):
+            s = KB.Sim("base", KB.VARIANTS["base"])
+            s.positions = {"A": {"code": "A", "name": "A", "group": "G", "pattern": "cup_handle", "patterns": ["cup_handle"],
+                                 "sync_by": "day", "signal_date": "2026-10-07", "entry_date": "2026-10-08", "entry": 376.6265,
+                                 "stop": 356.5, "shares": 4, "cost_in": 376.6265 * 4 * 1.00015, "bars_held": 1, "last_close": 375.0}}
+            index = {x["date"]: i for i, x in enumerate(bars)}
+            for d in days[1:]:
+                if d["date"] in index:
+                    s.step(d["date"], {"A": bars[index[d["date"]]]}, {"A": index[d["date"]]}, {"A": bars}, d["universe"], set(), {"sync_by": {}, "names": {}})
+            self.assertEqual(len(s.trades), 1)
+            self.assertEqual(s.trades[0]["exit_date"], want_date)
+
+
 class Selfcheck(unittest.TestCase):
     def test_check_kr_catches_wrong_pnl_and_stop(self):
         import selfcheck, tempfile, shutil
