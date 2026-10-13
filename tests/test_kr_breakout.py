@@ -50,6 +50,17 @@ def run(all_bars, groups, sync=True):
 
 
 class Engine(unittest.TestCase):
+    def test_gap_below_stop_sells_at_open_and_marks_gap(self):
+        # 둘째 날 시가 95 < 손절가 ≈104.5 → 시가에 팔리고 gap=True, 손실 > 7%
+        bars = box_then_breakout(after=[(112, 115, 110, 114), (95, 96, 90, 92), (92, 93, 90, 91)])
+        sims, _ = run({"A": bars}, {"A": "G"})
+        t = sims["base"].trades[0]
+        self.assertEqual(t["why"], "stop"); self.assertTrue(t["gap"])
+        self.assertAlmostEqual(t["exit"], 95 * (1 - KB.SLIP_PCT / 100), places=1)
+        self.assertLess(t["pnl_pct"], -10)
+        t2 = run({"A": box_then_breakout(after=[(112, 115, 110, 114), (113, 114, 100, 101), (101, 103, 99, 102)])}, {"A": "G"})[0]["base"].trades[0]
+        self.assertFalse(t2["gap"])
+
     def test_entry_next_open_then_stop(self):
         # 신호 다음날 시가 112 진입, 손절 = max(박스 하단 95, 112×1.003×0.93≈104.5) → 둘째 날 저가 100 이면 손절
         bars = box_then_breakout(after=[(112, 115, 110, 114), (113, 114, 100, 101), (101, 103, 99, 102)])
@@ -212,6 +223,9 @@ class Selfcheck(unittest.TestCase):
         good = {"code": "A", "entry": 100.0, "exit": 110.0, "shares": 10, "stop": 93.0, "why": "hold20", "pnl_pct": 9.7}
         gross = 110.0 * 10; good["pnl_krw"] = round(gross - gross * (0.015 + 0.15) / 100 - 10 * 100.0 * 1.00015)
         bad_pnl = dict(good, code="B", pnl_krw=good["pnl_krw"] + 500)
+        gap_ok = {"code": "D", "entry": 100.0, "exit": 85.0 * (1 - 0.003), "shares": 10, "stop": 93.0, "why": "stop", "pnl_pct": -15.3, "gap": True}
+        g = gap_ok["exit"] * 10; gap_ok["pnl_krw"] = round(g - g * (0.015 + 0.15) / 100 - 10 * 100.0 * 1.00015)
+        gap_missing = dict(gap_ok, code="E", gap=False)                      # 갭 표시 없이 −15% 손절 → 문제
         bad_stop = dict(good, code="C", stop=80.0)
         def doc(trades):
             return {"rules": {"fee_pct": 0.015, "tax_pct": 0.15, "stop_pct": 7.0, "equity0": 1e7}, "forward": {"days": 1, "skipped_days": [], "stale_codes": 0},
@@ -220,7 +234,7 @@ class Selfcheck(unittest.TestCase):
         cwd = os.getcwd(); tmp = tempfile.mkdtemp(); self.addCleanup(shutil.rmtree, tmp)
         try:
             os.chdir(tmp)
-            for trades, expect in ((([good]), 0), (([bad_pnl]), 1), (([bad_stop]), 1)):
+            for trades, expect in ((([good]), 0), (([bad_pnl]), 1), (([bad_stop]), 1), (([gap_ok]), 0), (([gap_missing]), 1)):
                 json.dump(doc(trades), open("kr_breakout.json", "w"))
                 problems, notes = [], []
                 selfcheck.check_kr(problems, notes)
