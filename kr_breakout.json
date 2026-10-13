@@ -1,6 +1,6 @@
 {
  "date": "2026-10-13",
- "generated_at_utc": "2026-10-13T07:13:37Z",
+ "generated_at_utc": "2026-10-13T13:22:46Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -81,12 +81,76 @@
   "bar_errors": 0,
   "stale_codes": 0,
   "by_source": {
-   "yahoo+naver_api": 31,
-   "yahoo": 147
+   "yahoo+gapfill": 147,
+   "yahoo+naver_api": 31
   },
   "skipped_days": [
    "2026-10-05"
   ],
+  "gap_filled": 147,
+  "gap_filled_codes": {
+   "000150": [
+    "2026-10-12"
+   ],
+   "000250": [
+    "2026-10-12"
+   ],
+   "000270": [
+    "2026-10-12"
+   ],
+   "000500": [
+    "2026-10-12"
+   ],
+   "000650": [
+    "2026-10-12"
+   ],
+   "000660": [
+    "2026-10-12"
+   ],
+   "000720": [
+    "2026-10-12"
+   ],
+   "000810": [
+    "2026-10-12"
+   ],
+   "000990": [
+    "2026-10-12"
+   ],
+   "001210": [
+    "2026-10-12"
+   ],
+   "001440": [
+    "2026-10-12"
+   ],
+   "001820": [
+    "2026-10-12"
+   ],
+   "002720": [
+    "2026-10-12"
+   ],
+   "002990": [
+    "2026-10-12"
+   ],
+   "003160": [
+    "2026-10-12"
+   ],
+   "003230": [
+    "2026-10-12"
+   ],
+   "003350": [
+    "2026-10-12"
+   ],
+   "003490": [
+    "2026-10-12"
+   ],
+   "0035S0": [
+    "2026-10-12"
+   ],
+   "003670": [
+    "2026-10-12"
+   ]
+  },
+  "gap_unfilled": 0,
   "note": null
  },
  "signals_today": {
@@ -114,12 +178,13 @@
   "no_flag": []
  },
  "signal_date": "2026-10-13",
- "signals_frozen": false,
+ "signals_frozen": true,
  "frozen_dates": [
   "2026-10-06",
   "2026-10-07",
   "2026-10-08",
-  "2026-10-12"
+  "2026-10-12",
+  "2026-10-13"
  ],
  "variants": {
   "base": {
@@ -129,13 +194,13 @@
    "wins": 0,
    "win_rate": 0.0,
    "avg_win_pct": null,
-   "avg_loss_pct": -8.56,
+   "avg_loss_pct": -7.17,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -6.28,
-   "equity_final": 9371542,
-   "max_drawdown_pct": 6.28,
-   "avg_hold_days": 1.83,
+   "total_return_pct": -5.03,
+   "equity_final": 9496957,
+   "max_drawdown_pct": 5.03,
+   "avg_hold_days": 2.17,
    "skipped": {
     "gap": 0,
     "limit": 8,
@@ -150,40 +215,40 @@
      "wins": 0,
      "pnl_krw": -307325
     },
+    "cup_handle": {
+     "n": 1,
+     "wins": 0,
+     "pnl_krw": -87356
+    },
     "box": {
      "n": 2,
      "wins": 0,
      "pnl_krw": -178218
-    },
-    "cup_handle": {
-     "n": 1,
-     "wins": 0,
-     "pnl_krw": -212771
     }
    },
    "by_sync": {
     "day": {
      "n": 6,
      "wins": 0,
-     "pnl_krw": -698314
+     "pnl_krw": -572899
     }
    },
    "by_exit": {
     "stop": {
      "n": 6,
      "wins": 0,
-     "pnl_krw": -698314
+     "pnl_krw": -572899
     }
    },
    "by_year": {
     "2026": {
      "n": 6,
      "wins": 0,
-     "pnl_krw": -698314
+     "pnl_krw": -572899
     }
    },
    "yearly_return_pct": {
-    "2026": -6.28
+    "2026": -5.03
    },
    "open_positions": [
     {
@@ -195,7 +260,7 @@
      "entry": 386656.5,
      "stop": 359590.54,
      "shares": 3,
-     "bars_held": 3,
+     "bars_held": 4,
      "last_close": 410000.0,
      "unrealized_pct": 6.04
     }
@@ -204,35 +269,35 @@
   "no_sector": {
    "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
    "signals": 39,
-   "trades": 10,
+   "trades": 11,
    "wins": 0,
    "win_rate": 0.0,
    "avg_win_pct": null,
-   "avg_loss_pct": -8.2,
+   "avg_loss_pct": -7.3,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -9.47,
-   "equity_final": 9052568,
-   "max_drawdown_pct": 9.47,
-   "avg_hold_days": 1.4,
+   "total_return_pct": -8.07,
+   "equity_final": 9193334,
+   "max_drawdown_pct": 9.58,
+   "avg_hold_days": 1.45,
    "skipped": {
     "gap": 0,
-    "limit": 21,
-    "cooldown": 8,
+    "limit": 24,
+    "cooldown": 0,
     "size": 0,
-    "no_bar": 5,
+    "no_bar": 0,
     "pattern": 0
    },
    "by_pattern": {
     "flag": {
-     "n": 5,
+     "n": 4,
      "wins": 0,
-     "pnl_krw": -514377
+     "pnl_krw": -405385
     },
     "cup_handle": {
      "n": 2,
      "wins": 0,
-     "pnl_krw": -316520
+     "pnl_krw": -191105
     },
     "triangle": {
      "n": 2,
@@ -240,41 +305,54 @@
      "pnl_krw": -198349
     },
     "box": {
-     "n": 1,
+     "n": 3,
      "wins": 0,
-     "pnl_krw": -85300
+     "pnl_krw": -262025
     }
    },
    "by_sync": {
     "day": {
      "n": 4,
      "wins": 0,
-     "pnl_krw": -499257
+     "pnl_krw": -373842
     },
     "none": {
-     "n": 6,
+     "n": 7,
      "wins": 0,
-     "pnl_krw": -615289
+     "pnl_krw": -683022
     }
    },
    "by_exit": {
     "stop": {
-     "n": 10,
+     "n": 11,
      "wins": 0,
-     "pnl_krw": -1114546
+     "pnl_krw": -1056864
     }
    },
    "by_year": {
     "2026": {
-     "n": 10,
+     "n": 11,
      "wins": 0,
-     "pnl_krw": -1114546
+     "pnl_krw": -1056864
     }
    },
    "yearly_return_pct": {
-    "2026": -9.47
+    "2026": -8.07
    },
    "open_positions": [
+    {
+     "code": "131970",
+     "name": "DOOSAN TESNA Inc.",
+     "group": "Miscellaneous Commercial Services",
+     "pattern": "flag",
+     "entry_date": "2026-10-12",
+     "entry": 124672.9,
+     "stop": 115945.8,
+     "shares": 10,
+     "bars_held": 2,
+     "last_close": 133000.0,
+     "unrealized_pct": 6.68
+    },
     {
      "code": "319660",
      "name": "PSK INC",
@@ -310,13 +388,13 @@
    "wins": 0,
    "win_rate": 0.0,
    "avg_win_pct": null,
-   "avg_loss_pct": -8.56,
+   "avg_loss_pct": -7.17,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -6.28,
-   "equity_final": 9371542,
-   "max_drawdown_pct": 6.28,
-   "avg_hold_days": 1.83,
+   "total_return_pct": -5.03,
+   "equity_final": 9496957,
+   "max_drawdown_pct": 5.03,
+   "avg_hold_days": 2.17,
    "skipped": {
     "gap": 0,
     "limit": 8,
@@ -331,40 +409,40 @@
      "wins": 0,
      "pnl_krw": -307325
     },
+    "cup_handle": {
+     "n": 1,
+     "wins": 0,
+     "pnl_krw": -87356
+    },
     "box": {
      "n": 2,
      "wins": 0,
      "pnl_krw": -178218
-    },
-    "cup_handle": {
-     "n": 1,
-     "wins": 0,
-     "pnl_krw": -212771
     }
    },
    "by_sync": {
     "day": {
      "n": 6,
      "wins": 0,
-     "pnl_krw": -698314
+     "pnl_krw": -572899
     }
    },
    "by_exit": {
     "stop": {
      "n": 6,
      "wins": 0,
-     "pnl_krw": -698314
+     "pnl_krw": -572899
     }
    },
    "by_year": {
     "2026": {
      "n": 6,
      "wins": 0,
-     "pnl_krw": -698314
+     "pnl_krw": -572899
     }
    },
    "yearly_return_pct": {
-    "2026": -6.28
+    "2026": -5.03
    },
    "open_positions": [
     {
@@ -376,7 +454,7 @@
      "entry": 386656.5,
      "stop": 359590.54,
      "shares": 3,
-     "bars_held": 3,
+     "bars_held": 4,
      "last_close": 410000.0,
      "unrealized_pct": 6.04
     }
@@ -389,13 +467,13 @@
    "wins": 0,
    "win_rate": 0.0,
    "avg_win_pct": null,
-   "avg_loss_pct": -8.78,
+   "avg_loss_pct": -7.12,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -11.41,
-   "equity_final": 8859050,
-   "max_drawdown_pct": 11.41,
-   "avg_hold_days": 1.8,
+   "total_return_pct": -9.21,
+   "equity_final": 9078526,
+   "max_drawdown_pct": 9.21,
+   "avg_hold_days": 2.2,
    "skipped": {
     "gap": 0,
     "limit": 0,
@@ -410,40 +488,40 @@
      "wins": 0,
      "pnl_krw": -412165
     },
+    "cup_handle": {
+     "n": 1,
+     "wins": 0,
+     "pnl_krw": -152873
+    },
     "box": {
      "n": 2,
      "wins": 0,
      "pnl_krw": -356437
-    },
-    "cup_handle": {
-     "n": 1,
-     "wins": 0,
-     "pnl_krw": -372348
     }
    },
    "by_sync": {
     "day": {
      "n": 5,
      "wins": 0,
-     "pnl_krw": -1140950
+     "pnl_krw": -921475
     }
    },
    "by_exit": {
     "stop": {
      "n": 5,
      "wins": 0,
-     "pnl_krw": -1140950
+     "pnl_krw": -921475
     }
    },
    "by_year": {
     "2026": {
      "n": 5,
      "wins": 0,
-     "pnl_krw": -1140950
+     "pnl_krw": -921475
     }
    },
    "yearly_return_pct": {
-    "2026": -11.41
+    "2026": -9.21
    },
    "open_positions": []
   },
@@ -454,13 +532,13 @@
    "wins": 0,
    "win_rate": 0.0,
    "avg_win_pct": null,
-   "avg_loss_pct": -9.67,
+   "avg_loss_pct": -6.9,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -3.28,
-   "equity_final": 9671970,
-   "max_drawdown_pct": 3.74,
-   "avg_hold_days": 2.33,
+   "total_return_pct": -1.71,
+   "equity_final": 9828739,
+   "max_drawdown_pct": 2.2,
+   "avg_hold_days": 3,
    "skipped": {
     "gap": 0,
     "limit": 1,
@@ -470,40 +548,40 @@
     "pattern": 0
    },
    "by_pattern": {
+    "cup_handle": {
+     "n": 1,
+     "wins": 0,
+     "pnl_krw": -109195
+    },
     "box": {
      "n": 2,
      "wins": 0,
      "pnl_krw": -178218
-    },
-    "cup_handle": {
-     "n": 1,
-     "wins": 0,
-     "pnl_krw": -265963
     }
    },
    "by_sync": {
     "day": {
      "n": 3,
      "wins": 0,
-     "pnl_krw": -444181
+     "pnl_krw": -287413
     }
    },
    "by_exit": {
     "stop": {
      "n": 3,
      "wins": 0,
-     "pnl_krw": -444181
+     "pnl_krw": -287413
     }
    },
    "by_year": {
     "2026": {
      "n": 3,
      "wins": 0,
-     "pnl_krw": -444181
+     "pnl_krw": -287413
     }
    },
    "yearly_return_pct": {
-    "2026": -3.28
+    "2026": -1.71
    },
    "open_positions": [
     {
@@ -515,7 +593,7 @@
      "entry": 386656.5,
      "stop": 359590.54,
      "shares": 3,
-     "bars_held": 3,
+     "bars_held": 4,
      "last_close": 410000.0,
      "unrealized_pct": 6.04
     },
@@ -528,7 +606,7 @@
      "entry": 35957.55,
      "stop": 33440.52,
      "shares": 39,
-     "bars_held": 3,
+     "bars_held": 4,
      "last_close": 37150.0,
      "unrealized_pct": 3.32
     }
@@ -556,7 +634,8 @@
     "shares": 5,
     "pnl_krw": -103263,
     "pnl_pct": -7.45,
-    "hold_days": 1
+    "hold_days": 1,
+    "gap": false
    },
    {
     "code": "007660",
@@ -578,7 +657,8 @@
     "shares": 10,
     "pnl_krw": -97923,
     "pnl_pct": -7.45,
-    "hold_days": 1
+    "hold_days": 1,
+    "gap": false
    },
    {
     "code": "158430",
@@ -599,7 +679,30 @@
     "shares": 203,
     "pnl_krw": -106139,
     "pnl_pct": -7.45,
-    "hold_days": 2
+    "hold_days": 2,
+    "gap": false
+   },
+   {
+    "code": "278470",
+    "name": "APR Co.,Ltd.",
+    "group": "Household/Personal Care",
+    "pattern": "cup_handle",
+    "patterns": [
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-07",
+    "entry_date": "2026-10-08",
+    "entry": 376626.5,
+    "stop": 356500.0,
+    "exit_date": "2026-10-12",
+    "exit": 355430.5,
+    "why": "stop",
+    "shares": 4,
+    "pnl_krw": -87356,
+    "pnl_pct": -5.8,
+    "hold_days": 2,
+    "gap": false
    },
    {
     "code": "006400",
@@ -620,28 +723,8 @@
     "shares": 2,
     "pnl_krw": -85300,
     "pnl_pct": -7.45,
-    "hold_days": 3
-   },
-   {
-    "code": "278470",
-    "name": "APR Co.,Ltd.",
-    "group": "Household/Personal Care",
-    "pattern": "cup_handle",
-    "patterns": [
-     "cup_handle"
-    ],
-    "sync_by": "day",
-    "signal_date": "2026-10-07",
-    "entry_date": "2026-10-08",
-    "entry": 376626.5,
-    "stop": 356500.0,
-    "exit_date": "2026-10-13",
-    "exit": 324025.0,
-    "why": "stop",
-    "shares": 4,
-    "pnl_krw": -212771,
-    "pnl_pct": -14.12,
-    "hold_days": 2
+    "hold_days": 4,
+    "gap": false
    },
    {
     "code": "192820",
@@ -662,7 +745,8 @@
     "shares": 4,
     "pnl_krw": -92918,
     "pnl_pct": -7.45,
-    "hold_days": 2
+    "hold_days": 3,
+    "gap": false
    }
   ],
   "no_sector": [
@@ -685,7 +769,8 @@
     "shares": 5,
     "pnl_krw": -103263,
     "pnl_pct": -7.45,
-    "hold_days": 1
+    "hold_days": 1,
+    "gap": false
    },
    {
     "code": "066570",
@@ -708,7 +793,8 @@
     "shares": 6,
     "pnl_krw": -103749,
     "pnl_pct": -7.45,
-    "hold_days": 1
+    "hold_days": 1,
+    "gap": false
    },
    {
     "code": "011070",
@@ -730,7 +816,8 @@
     "shares": 2,
     "pnl_krw": -96354,
     "pnl_pct": -7.45,
-    "hold_days": 1
+    "hold_days": 1,
+    "gap": false
    },
    {
     "code": "007660",
@@ -752,7 +839,8 @@
     "shares": 10,
     "pnl_krw": -97923,
     "pnl_pct": -7.45,
-    "hold_days": 1
+    "hold_days": 1,
+    "gap": false
    },
    {
     "code": "042510",
@@ -773,7 +861,8 @@
     "shares": 83,
     "pnl_krw": -102045,
     "pnl_pct": -7.45,
-    "hold_days": 1
+    "hold_days": 1,
+    "gap": false
    },
    {
     "code": "069540",
@@ -794,7 +883,8 @@
     "shares": 262,
     "pnl_krw": -102154,
     "pnl_pct": -7.45,
-    "hold_days": 1
+    "hold_days": 1,
+    "gap": false
    },
    {
     "code": "038500",
@@ -816,7 +906,52 @@
     "shares": 169,
     "pnl_krw": -101995,
     "pnl_pct": -7.45,
-    "hold_days": 1
+    "hold_days": 1,
+    "gap": false
+   },
+   {
+    "code": "278470",
+    "name": "APR Co.,Ltd.",
+    "group": "Household/Personal Care",
+    "pattern": "cup_handle",
+    "patterns": [
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-07",
+    "entry_date": "2026-10-08",
+    "entry": 376626.5,
+    "stop": 356500.0,
+    "exit_date": "2026-10-12",
+    "exit": 355430.5,
+    "why": "stop",
+    "shares": 4,
+    "pnl_krw": -87356,
+    "pnl_pct": -5.8,
+    "hold_days": 2,
+    "gap": false
+   },
+   {
+    "code": "051910",
+    "name": "LG Chem Ltd.",
+    "group": "Chemicals: Specialty",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": null,
+    "signal_date": "2026-10-08",
+    "entry_date": "2026-10-12",
+    "entry": 284852.0,
+    "stop": 264912.36,
+    "exit_date": "2026-10-12",
+    "exit": 264117.62,
+    "why": "stop",
+    "shares": 4,
+    "pnl_krw": -84852,
+    "pnl_pct": -7.45,
+    "hold_days": 1,
+    "gap": false
    },
    {
     "code": "006400",
@@ -837,49 +972,30 @@
     "shares": 2,
     "pnl_krw": -85300,
     "pnl_pct": -7.45,
-    "hold_days": 3
+    "hold_days": 4,
+    "gap": false
    },
    {
-    "code": "278470",
-    "name": "APR Co.,Ltd.",
-    "group": "Household/Personal Care",
-    "pattern": "cup_handle",
+    "code": "373220",
+    "name": "LG Energy Solution Ltd.",
+    "group": "Electrical Products",
+    "pattern": "box",
     "patterns": [
-     "cup_handle"
-    ],
-    "sync_by": "day",
-    "signal_date": "2026-10-07",
-    "entry_date": "2026-10-08",
-    "entry": 376626.5,
-    "stop": 356500.0,
-    "exit_date": "2026-10-13",
-    "exit": 324025.0,
-    "why": "stop",
-    "shares": 4,
-    "pnl_krw": -212771,
-    "pnl_pct": -14.12,
-    "hold_days": 2
-   },
-   {
-    "code": "417840",
-    "name": "Justem Co. Ltd.",
-    "group": "Homebuilding",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
+     "box"
     ],
     "sync_by": null,
     "signal_date": "2026-10-08",
     "entry_date": "2026-10-12",
-    "entry": 20611.65,
-    "stop": 19168.83,
+    "entry": 411230.0,
+    "stop": 382443.9,
     "exit_date": "2026-10-13",
-    "exit": 18943.0,
+    "exit": 381296.57,
     "why": "stop",
-    "shares": 64,
-    "pnl_krw": -108992,
-    "pnl_pct": -8.26,
-    "hold_days": 2
+    "shares": 3,
+    "pnl_krw": -91873,
+    "pnl_pct": -7.45,
+    "hold_days": 2,
+    "gap": false
    }
   ],
   "hold_10": [
@@ -902,7 +1018,8 @@
     "shares": 5,
     "pnl_krw": -103263,
     "pnl_pct": -7.45,
-    "hold_days": 1
+    "hold_days": 1,
+    "gap": false
    },
    {
     "code": "007660",
@@ -924,7 +1041,8 @@
     "shares": 10,
     "pnl_krw": -97923,
     "pnl_pct": -7.45,
-    "hold_days": 1
+    "hold_days": 1,
+    "gap": false
    },
    {
     "code": "158430",
@@ -945,7 +1063,30 @@
     "shares": 203,
     "pnl_krw": -106139,
     "pnl_pct": -7.45,
-    "hold_days": 2
+    "hold_days": 2,
+    "gap": false
+   },
+   {
+    "code": "278470",
+    "name": "APR Co.,Ltd.",
+    "group": "Household/Personal Care",
+    "pattern": "cup_handle",
+    "patterns": [
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-07",
+    "entry_date": "2026-10-08",
+    "entry": 376626.5,
+    "stop": 356500.0,
+    "exit_date": "2026-10-12",
+    "exit": 355430.5,
+    "why": "stop",
+    "shares": 4,
+    "pnl_krw": -87356,
+    "pnl_pct": -5.8,
+    "hold_days": 2,
+    "gap": false
    },
    {
     "code": "006400",
@@ -966,28 +1107,8 @@
     "shares": 2,
     "pnl_krw": -85300,
     "pnl_pct": -7.45,
-    "hold_days": 3
-   },
-   {
-    "code": "278470",
-    "name": "APR Co.,Ltd.",
-    "group": "Household/Personal Care",
-    "pattern": "cup_handle",
-    "patterns": [
-     "cup_handle"
-    ],
-    "sync_by": "day",
-    "signal_date": "2026-10-07",
-    "entry_date": "2026-10-08",
-    "entry": 376626.5,
-    "stop": 356500.0,
-    "exit_date": "2026-10-13",
-    "exit": 324025.0,
-    "why": "stop",
-    "shares": 4,
-    "pnl_krw": -212771,
-    "pnl_pct": -14.12,
-    "hold_days": 2
+    "hold_days": 4,
+    "gap": false
    },
    {
     "code": "192820",
@@ -1008,7 +1129,8 @@
     "shares": 4,
     "pnl_krw": -92918,
     "pnl_pct": -7.45,
-    "hold_days": 2
+    "hold_days": 3,
+    "gap": false
    }
   ],
   "risk_2": [
@@ -1031,7 +1153,8 @@
     "shares": 10,
     "pnl_krw": -206527,
     "pnl_pct": -7.45,
-    "hold_days": 1
+    "hold_days": 1,
+    "gap": false
    },
    {
     "code": "007660",
@@ -1053,7 +1176,30 @@
     "shares": 21,
     "pnl_krw": -205638,
     "pnl_pct": -7.45,
-    "hold_days": 1
+    "hold_days": 1,
+    "gap": false
+   },
+   {
+    "code": "278470",
+    "name": "APR Co.,Ltd.",
+    "group": "Household/Personal Care",
+    "pattern": "cup_handle",
+    "patterns": [
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-07",
+    "entry_date": "2026-10-08",
+    "entry": 376626.5,
+    "stop": 356500.0,
+    "exit_date": "2026-10-12",
+    "exit": 355430.5,
+    "why": "stop",
+    "shares": 7,
+    "pnl_krw": -152873,
+    "pnl_pct": -5.8,
+    "hold_days": 2,
+    "gap": false
    },
    {
     "code": "006400",
@@ -1074,28 +1220,8 @@
     "shares": 4,
     "pnl_krw": -170600,
     "pnl_pct": -7.45,
-    "hold_days": 3
-   },
-   {
-    "code": "278470",
-    "name": "APR Co.,Ltd.",
-    "group": "Household/Personal Care",
-    "pattern": "cup_handle",
-    "patterns": [
-     "cup_handle"
-    ],
-    "sync_by": "day",
-    "signal_date": "2026-10-07",
-    "entry_date": "2026-10-08",
-    "entry": 376626.5,
-    "stop": 356500.0,
-    "exit_date": "2026-10-13",
-    "exit": 324025.0,
-    "why": "stop",
-    "shares": 7,
-    "pnl_krw": -372348,
-    "pnl_pct": -14.12,
-    "hold_days": 2
+    "hold_days": 4,
+    "gap": false
    },
    {
     "code": "192820",
@@ -1116,10 +1242,33 @@
     "shares": 8,
     "pnl_krw": -185837,
     "pnl_pct": -7.45,
-    "hold_days": 2
+    "hold_days": 3,
+    "gap": false
    }
   ],
   "no_flag": [
+   {
+    "code": "278470",
+    "name": "APR Co.,Ltd.",
+    "group": "Household/Personal Care",
+    "pattern": "cup_handle",
+    "patterns": [
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-07",
+    "entry_date": "2026-10-08",
+    "entry": 376626.5,
+    "stop": 356500.0,
+    "exit_date": "2026-10-12",
+    "exit": 355430.5,
+    "why": "stop",
+    "shares": 5,
+    "pnl_krw": -109195,
+    "pnl_pct": -5.8,
+    "hold_days": 2,
+    "gap": false
+   },
    {
     "code": "006400",
     "name": "Samsung SDI Co., Ltd",
@@ -1139,28 +1288,8 @@
     "shares": 2,
     "pnl_krw": -85300,
     "pnl_pct": -7.45,
-    "hold_days": 3
-   },
-   {
-    "code": "278470",
-    "name": "APR Co.,Ltd.",
-    "group": "Household/Personal Care",
-    "pattern": "cup_handle",
-    "patterns": [
-     "cup_handle"
-    ],
-    "sync_by": "day",
-    "signal_date": "2026-10-07",
-    "entry_date": "2026-10-08",
-    "entry": 376626.5,
-    "stop": 356500.0,
-    "exit_date": "2026-10-13",
-    "exit": 324025.0,
-    "why": "stop",
-    "shares": 5,
-    "pnl_krw": -265963,
-    "pnl_pct": -14.12,
-    "hold_days": 2
+    "hold_days": 4,
+    "gap": false
    },
    {
     "code": "192820",
@@ -1181,7 +1310,8 @@
     "shares": 4,
     "pnl_krw": -92918,
     "pnl_pct": -7.45,
-    "hold_days": 2
+    "hold_days": 3,
+    "gap": false
    }
   ]
  },
