@@ -26,6 +26,8 @@ LEAD_PAIRS = [("okx", "upbit"), ("hyperliquid", "upbit"), ("hyperliquid", "okx")
               ("okx", "hyperliquid"), ("upbit", "okx"), ("upbit", "hyperliquid"),
               ("binance", "upbit"), ("upbit", "binance")]   # binance 는 오프라인 CSV 검증용
 BIG_SIGMA = 2.0          # "큰 움직임" 기준: 선행 거래소 1분 수익률의 표준편차 × 2
+FOLLOW_TTL = 3           # 따라가기 지정가 규칙: 주문을 기다리는 최대 1분봉 수 (scalp.LIMIT_TTL 과 같음)
+FOLLOW_HOLD = 5          # 따라가기 지정가 규칙: 체결 뒤 보유 1분봉 수 (B 연구의 '큰움직임 5분' 과 같음)
 EVENT_WINDOW_MIN = 15    # 펀딩 정산 전후로 보는 분
 MIN_DAYS = 5             # 누적 판단 최소 일수
 
@@ -188,6 +190,82 @@ def lead_lag(lead_bars, follow_bars, eval_t0):
             "follow_big_hit_rate_pct": round(100.0 * sum(1 for x in follow_big1 if x > 0) / len(follow_big1), 1) if follow_big1 else None}
 
 
+def follow_rule(lead_bars, follow_bars, eval_t0, fees, short_ok):
+    """C. 따라가기 지정가 규칙(종이매매, 2026-10-13 추가, 제안함 P14).
+
+    선행 거래소 1분 수익률이 |r| > BIG_SIGMA·σ 이면 그 분 종가에 후행 거래소에 같은 방향 지정가.
+    다음 FOLLOW_TTL 봉 안에 가격이 주문가를 지나쳐야 체결(scalp.limit_filled 와 같은 가정), 못 하면 취소.
+    체결 뒤 FOLLOW_HOLD 봉 보유 → 그 봉 종가에 지정가 청산, FOLLOW_TTL 봉 안에 안 되면 다음 봉 시가 시장가.
+    비용: 지정가 체결 = 메이커 수수료, 시장가 = 테이커 수수료 + 호가 1틱의 절반. 포지션은 한 번에 하나."""
+    L = {b["t"]: b["c"] for b in lead_bars}
+    F = {b["t"]: b for b in follow_bars}
+    ts = sorted(t for t in L if t >= eval_t0 and t - 60 in L and t in F)
+    if len(ts) < 30:
+        return {"signals": 0, "n": len(ts)}
+    rl = {t: L[t] / L[t - 60] - 1.0 for t in ts}
+    sd = std(list(rl.values())) or 0.0
+    tick = scalp.tick_estimate(follow_bars)
+    mid = F[ts[0]]["c"]
+    spread_pct = (scalp.SPREAD_TICKS * tick / mid * 100.0) if (tick and mid) else 0.0
+    signals = filled = exit_maker = 0
+    nets, grosses = [], []
+    busy_until = -1
+    for t in ts:
+        if t < busy_until or abs(rl[t]) <= BIG_SIGMA * sd or rl[t] == 0:
+            continue
+        side = 1 if rl[t] > 0 else -1
+        if side == -1 and not short_ok:
+            continue
+        signals += 1
+        px = F[t]["c"]
+        te = None
+        for k in range(1, FOLLOW_TTL + 1):
+            b = F.get(t + 60 * k)
+            if b is None:
+                break
+            if (b["l"] < px) if side == 1 else (b["h"] > px):
+                te = t + 60 * k
+                break
+        if te is None:
+            busy_until = t + 60 * FOLLOW_TTL
+            continue
+        filled += 1
+        tx0 = te + 60 * FOLLOW_HOLD
+        if tx0 not in F:
+            busy_until = tx0
+            continue
+        px_x = F[tx0]["c"]
+        exit_px, maker = None, False
+        for k in range(1, FOLLOW_TTL + 1):
+            b = F.get(tx0 + 60 * k)
+            if b is None:
+                break
+            if (b["h"] > px_x) if side == 1 else (b["l"] < px_x):
+                exit_px, maker = px_x, True
+                busy_until = tx0 + 60 * k
+                break
+        if exit_px is None:
+            b = F.get(tx0 + 60 * (FOLLOW_TTL + 1))
+            if b is None:
+                busy_until = tx0 + 60 * (FOLLOW_TTL + 1)
+                continue
+            exit_px, maker = b["o"], False
+            busy_until = tx0 + 60 * (FOLLOW_TTL + 1)
+        gross = side * (exit_px / px - 1.0) * 100.0
+        cost = fees["maker_pct"] + (fees["maker_pct"] if maker else fees["taker_pct"] + spread_pct / 2.0)
+        exit_maker += 1 if maker else 0
+        grosses.append(gross)
+        nets.append(gross - cost)
+    n = len(nets)
+    return {"n": len(ts), "signals": signals, "filled": filled,
+            "fill_rate_pct": round(100.0 * filled / signals, 1) if signals else None,
+            "trades": n, "exit_maker": exit_maker,
+            "gross_pct_sum": r4(sum(grosses)), "net_pct_sum": r4(sum(nets)),
+            "net_bp_avg": r4(mean(nets) * 100.0) if n else None,
+            "hit_rate_pct": round(100.0 * sum(1 for x in nets if x > 0) / n, 1) if n else None,
+            "spread_pct_est": r4(spread_pct)}
+
+
 # ----------------------------------------------------------------- 저장·보고
 
 def append_history(rec, path):
@@ -232,6 +310,19 @@ def print_day(out):
                  "%+.1f" % s["follow_big_next1_bp"] if s.get("follow_big_next1_bp") is not None else "-",
                  "%+.1f" % s["follow_big_next5_bp"] if s.get("follow_big_next5_bp") is not None else "-",
                  "%.0f" % s["follow_big_hit_rate_pct"] if s.get("follow_big_hit_rate_pct") is not None else "-"))
+    fb = out.get("follow_by_pair") or {}
+    if fb:
+        print()
+        print("--- C. 따라가기 지정가 규칙 (종이: 큰움직임 뒤 후행 거래소 지정가, %d봉 보유) ---" % FOLLOW_HOLD)
+        print("%-24s %6s %6s %8s %6s %10s %10s %8s" % ("선행->후행", "신호", "체결", "체결률%", "매매", "순수익%합", "건당bp", "적중%"))
+        for pair, s in fb.items():
+            print("%-24s %6d %6d %8s %6d %10s %10s %8s"
+                  % (pair, s.get("signals", 0), s.get("filled", 0),
+                     "%.0f" % s["fill_rate_pct"] if s.get("fill_rate_pct") is not None else "-",
+                     s.get("trades", 0),
+                     "%+.3f" % s["net_pct_sum"] if s.get("net_pct_sum") is not None else "-",
+                     "%+.1f" % s["net_bp_avg"] if s.get("net_bp_avg") is not None else "-",
+                     "%.0f" % s["hit_rate_pct"] if s.get("hit_rate_pct") is not None else "-"))
     print()
     print("판정:", out["summary"]["verdict"])
 
@@ -312,6 +403,21 @@ def report(path="research_history.jsonl"):
                  "%+.1f" % wmean([(s.get("follow_big_next5_bp"), s.get("n_big")) for s in ss]) if wmean([(s.get("follow_big_next5_bp"), s.get("n_big")) for s in ss]) is not None else "-",
                  sum(1 for s in ss if (s.get("follow_big_next1_bp") or 0) > 0), len(ss)))
     print()
+    fpairs = sorted(set(p for r in rows for p in (r.get("follow_by_pair") or {})))
+    if fpairs:
+        print("--- C. 따라가기 지정가 규칙 누적 (종이, 2026-10-13 시작) ---")
+        print("%-24s %5s %6s %6s %8s %10s %10s %8s" % ("선행->후행", "일수", "신호", "체결", "체결률%", "순수익%합", "건당bp", "플러스일"))
+        for p in fpairs:
+            ss = [r["follow_by_pair"][p] for r in rows if (r.get("follow_by_pair") or {}).get(p, {}).get("signals")]
+            if not ss:
+                continue
+            sig = sum(s["signals"] for s in ss); fil = sum(s.get("filled", 0) for s in ss)
+            tr = sum(s.get("trades", 0) for s in ss); net = sum(s.get("net_pct_sum") or 0 for s in ss)
+            print("%-24s %5d %6d %6d %8s %+10.3f %10s %5d/%d"
+                  % (p, len(ss), sig, fil, "%.0f" % (100.0 * fil / sig) if sig else "-", net,
+                     "%+.1f" % (net / tr * 100.0) if tr else "-",
+                     sum(1 for s in ss if (s.get("net_pct_sum") or 0) > 0), len(ss)))
+        print()
     if days < MIN_DAYS:
         print("아직 %d일치. %d일 이상 모여야 방향을 말할 수 있다." % (days, MIN_DAYS))
     return 0
@@ -440,6 +546,29 @@ def main(argv=None):
                 agg[k] = r4(wmean([(r.get(k), r.get("n_big")) for r in per]))
             by_pair["%s->%s" % (lead, follow)] = agg
 
+    # C. 따라가기 지정가 규칙 (종이)
+    follow, follow_by_pair = {}, {}
+    for lead, fol in LEAD_PAIRS:
+        if lead not in data or fol not in data or fol not in fees:
+            continue
+        per = []
+        for coin in scalp.COINS:
+            if coin in data[lead] and coin in data[fol]:
+                r = follow_rule(data[lead][coin], data[fol][coin], eval_t0, fees[fol], scalp.VENUES[fol]["short_ok"])
+                follow["%s->%s:%s" % (lead, fol, coin)] = r
+                if r.get("signals"):
+                    per.append(r)
+        if per:
+            sig = sum(r["signals"] for r in per); fil = sum(r["filled"] for r in per); tr = sum(r["trades"] for r in per)
+            net = sum(r["net_pct_sum"] or 0 for r in per)
+            follow_by_pair["%s->%s" % (lead, fol)] = {
+                "coins": len(per), "signals": sig, "filled": fil,
+                "fill_rate_pct": round(100.0 * fil / sig, 1) if sig else None, "trades": tr,
+                "exit_maker": sum(r["exit_maker"] for r in per),
+                "gross_pct_sum": r4(sum(r["gross_pct_sum"] or 0 for r in per)), "net_pct_sum": r4(net),
+                "net_bp_avg": r4(net / tr * 100.0) if tr else None,
+                "hit_rate_pct": r4(wmean([(r.get("hit_rate_pct"), r.get("trades")) for r in per]))}
+
     # 판정 문장
     best_pair = max(by_pair.items(), key=lambda kv: kv[1].get("corr_lead_next1") or -9) if by_pair else None
     parts = ["시간대: 15분 본전 승률 100%% 아래 (거래소,시) %d개" % len(hours_under_100)]
@@ -459,7 +588,10 @@ def main(argv=None):
            "costs": costs, "hourly": hourly, "hourly_by_venue": hourly_by_venue,
            "funding_events": events, "funding_summary": funding_summary, "funding_errors": funding_errors,
            "leadlag": leadlag, "leadlag_by_pair": by_pair,
+           "follow": follow, "follow_by_pair": follow_by_pair,
            "summary": {"hours_under_100": hours_under_100, "verdict": verdict}}
+    out["method"]["C"] = ("따라가기 지정가(종이): 선행 |r|>%.0fσ 이면 그 분 종가에 후행 거래소 같은 방향 지정가, %d봉 안에 지나쳐야 체결, "
+                          "%d봉 보유 뒤 종가 지정가 청산(%d봉 안에 안 되면 시장가). 현물(업비트)은 롱만" % (BIG_SIGMA, FOLLOW_TTL, FOLLOW_HOLD, FOLLOW_TTL))
     print_day(out)
     if a.dry_run:
         print("\n(dry-run: 저장하지 않음)")
@@ -468,6 +600,7 @@ def main(argv=None):
         json.dump(out, fp, ensure_ascii=False, indent=1)
     append_history({"date": out["date"], "eval_day_utc": eval_day, "hourly_by_venue": hourly_by_venue,
                     "funding_summary": funding_summary, "leadlag_by_pair": by_pair,
+                    "follow_by_pair": follow_by_pair,
                     "summary": out["summary"]}, a.history)
     return 0
 

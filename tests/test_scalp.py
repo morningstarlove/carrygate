@@ -151,7 +151,7 @@ class Behaviour(unittest.TestCase):
         rows, cost, hz = scalp.evaluate("okx", "BTC", mk(px), 240, FEE)
         # 1200봉 = 1분봉 1200 / 5분봉 240 / 15분봉 80 -> 세 시간 단위 모두 평가된다
         self.assertEqual(len(rows), len(scalp.STRATEGIES) * len(scalp.TIMEFRAMES))
-        self.assertEqual(sorted(set(r["tf"] for r in rows)), ["15m", "1m", "5m"])
+        self.assertEqual(sorted(set(r["tf"] for r in rows)), sorted("%dm" % tf for tf in scalp.TIMEFRAMES))
         self.assertAlmostEqual(cost["round_trip_maker_pct"], 0.04)
         self.assertGreaterEqual(cost["round_trip_taker_pct"], 0.10)
         self.assertIn("h5", hz)
@@ -276,6 +276,34 @@ class BackfillDay(unittest.TestCase):
         out = buf.getvalue()
         self.assertIn("(2026-10-04, 평가일 2026-10-03 UTC)", out)   # 기록 날짜 = 평가일 다음 날
         self.assertIn("데이터 없음", out)
+
+
+class NightFilter(unittest.TestCase):
+    """밤(한국시간 21~02시) 필터 규칙: 같은 신호라도 낮에는 None, 밤에는 원래 신호."""
+
+    def _ctx_with_signal(self, t_utc):
+        # 60봉 뒤 종가가 VWAP 에서 -1.5σ 넘게 벗어나도록: 평평하다가 마지막에 급락
+        closes = [100.0] * 70 + [100.0 + 0.3 * math.sin(i) for i in range(30)] + [90.0]
+        bars = [scalp.bar(t_utc - (len(closes) - 1 - i) * 900, c, c + 0.1, c - 0.1, c, 1.0) for i, c in enumerate(closes)]
+        return scalp.Ctx(bars, 0)
+
+    def test_day_signal_blocked_night_signal_passes(self):
+        from datetime import datetime, timezone
+        night = int(datetime(2026, 10, 13, 13, 0, tzinfo=timezone.utc).timestamp())   # 22:00 KST
+        day = int(datetime(2026, 10, 13, 3, 0, tzinfo=timezone.utc).timestamp())      # 12:00 KST
+        for t, expect_signal in ((night, True), (day, False)):
+            ctx = self._ctx_with_signal(t)
+            i = len(ctx.c) - 1
+            self.assertEqual(scalp.e_vwap(ctx, i), 1)          # 원래 규칙은 롱 신호
+            self.assertEqual(scalp.e_vwap_night(ctx, i), 1 if expect_signal else None)
+            self.assertEqual(scalp.kst_hour_of(t) in scalp.NIGHT_KST, expect_signal)
+
+    def test_new_strategies_registered_and_timeframes(self):
+        keys = [s["key"] for s in scalp.STRATEGIES]
+        self.assertIn("vwap_fade_lim_n", keys)
+        self.assertIn("mr_z20_lim_n", keys)
+        self.assertEqual(scalp.TIMEFRAMES, [1, 5, 15, 30, 60])
+        self.assertGreaterEqual(scalp.WARMUP_MIN, 60 * 60)   # 60분봉 VWAP 60봉이 평가 시작 전에 차야 한다
 
 
 if __name__ == "__main__":
