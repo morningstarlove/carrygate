@@ -1,7 +1,7 @@
 {
   "schema": "carrygate-verdict/1",
-  "date": "2026-10-13",
-  "generated_at_utc": "2026-10-13T14:40:42Z",
+  "date": "2026-10-14",
+  "generated_at_utc": "2026-10-14T05:13:25Z",
   "criteria_sealed": "2026-10-06",
   "tracks": {
     "kr_breakout": {
@@ -47,7 +47,7 @@
           "profit_factor": null,
           "avg_r": null,
           "backtest_win_rate_pct": 36.9748,
-          "backtest_profit_factor": 1.6427,
+          "backtest_profit_factor": 1.6417,
           "backtest_trades": 119,
           "luck": null,
           "variants": {
@@ -76,7 +76,7 @@
           "profit_factor": null,
           "avg_r": null,
           "backtest_win_rate_pct": 34.8548,
-          "backtest_profit_factor": 1.2334,
+          "backtest_profit_factor": 1.2298,
           "backtest_trades": 241,
           "luck": null,
           "variants": {
@@ -112,9 +112,9 @@
           "net_pct": null,
           "profit_factor": null,
           "avg_r": null,
-          "backtest_win_rate_pct": 37.0861,
-          "backtest_profit_factor": 2.8167,
-          "backtest_trades": 151,
+          "backtest_win_rate_pct": 37.415,
+          "backtest_profit_factor": 2.8183,
+          "backtest_trades": 147,
           "luck": null,
           "variants": {
             "no_vol": {
@@ -141,9 +141,9 @@
           "net_pct": -1.0781,
           "profit_factor": 0.0,
           "avg_r": -1.08,
-          "backtest_win_rate_pct": 33.5443,
-          "backtest_profit_factor": 1.2502,
-          "backtest_trades": 158,
+          "backtest_win_rate_pct": 33.758,
+          "backtest_profit_factor": 1.341,
+          "backtest_trades": 157,
           "luck": {
             "expected_wins": 0.34,
             "actual_wins": 0,
@@ -170,13 +170,30 @@
       }
     },
     "scalp": {
-      "history_days": 15,
-      "combos": 378,
-      "candidates": 0,
-      "top": [],
-      "warnings": [],
-      "status": "FAIL",
-      "reason": "누적 15일, 후보 0개 — 지금 규칙 중 비용을 이기는 것이 없다"
+      "history_days": 16,
+      "combos": 810,
+      "candidates": 2,
+      "top": [
+        {
+          "key": "hyperliquid:TRX:15m:vwap_fade_lim",
+          "net_pct": 0.441,
+          "days": 15,
+          "pos_days": 9,
+          "trades": 38
+        },
+        {
+          "key": "okx:TRX:15m:vwap_fade_lim",
+          "net_pct": 0.111,
+          "days": 16,
+          "pos_days": 10,
+          "trades": 45
+        }
+      ],
+      "warnings": [
+        "조합 810개를 동시에 시험하므로 후보 일부는 우연이다. 합격 = 소액 체결 시험 후보이지 실력 확정이 아니다"
+      ],
+      "status": "PASS",
+      "reason": "누적 16일, 후보 2개 (조합 810개 중) — 누적 순수익>0·플러스 일수 60%·기준선 초과"
     }
   },
   "errors": {},
@@ -188,6 +205,6 @@
     "kr_breakout": "NOT_YET",
     "turtle": "NOT_YET",
     "reversal": "NOT_YET",
-    "scalp": "FAIL"
+    "scalp": "PASS"
   }
 }
