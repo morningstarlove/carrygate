@@ -1,7 +1,7 @@
 {
  "schema": "carrygate-macro/1",
- "date": "2026-10-14",
- "generated_at_kst": "2026-10-14 14:04:34",
+ "date": "2026-10-15",
+ "generated_at_kst": "2026-10-15 13:51:15",
  "method": {
   "window": "발표 분의 시가를 기준가로, 직전 30분과 직후 (5, 15, 30, 60)분 수익률(bp), 60분 내 최대 상승·하락",
   "baseline": "전날 같은 시각의 30분 변동폭 = 평소 기준",
@@ -2070,17 +2070,52 @@
    "previous": 162,
    "surprise": -61,
    "surprise_dir": 1
-  }
- ],
- "new_today": 0,
- "errors": {},
- "skipped": {},
- "upcoming": [
+  },
   {
    "type": "cpi",
    "title": "Inflation Rate YoY",
-   "time_utc": "2026-10-14T12:30:00Z"
+   "time_utc": "2026-10-14T12:30:00Z",
+   "ts": 1791981000,
+   "coin": "BTC",
+   "source": "hyperliquid",
+   "forward": true,
+   "pre30_bp": 46.26,
+   "post5_bp": -116.9,
+   "post15_bp": -121.91,
+   "post30_bp": -134.44,
+   "post60_bp": -142.31,
+   "maxup60_bp": 4.06,
+   "maxdown60_bp": -178.58,
+   "base_abs_post30_bp": 6.12,
+   "actual": null,
+   "forecast": 3.7,
+   "previous": 3.4
   },
+  {
+   "type": "cpi",
+   "title": "Inflation Rate YoY",
+   "time_utc": "2026-10-14T12:30:00Z",
+   "ts": 1791981000,
+   "coin": "ETH",
+   "source": "hyperliquid",
+   "forward": true,
+   "pre30_bp": 48.73,
+   "post5_bp": -128.38,
+   "post15_bp": -137.12,
+   "post30_bp": -163.35,
+   "post60_bp": -180.84,
+   "maxup60_bp": 11.13,
+   "maxdown60_bp": -238.47,
+   "base_abs_post30_bp": 8.79,
+   "actual": null,
+   "forecast": 3.7,
+   "previous": 3.4
+  }
+ ],
+ "new_today": 2,
+ "errors": {},
+ "skipped": {},
+ "upcoming": [
   {
    "type": "fomc",
    "title": "Fed Interest Rate Decision",
@@ -2109,14 +2144,14 @@
  ],
  "summary": {
   "cpi": {
-   "n": 22,
+   "n": 24,
    "n_surprise": 10,
-   "abs_post30_bp": 71.378,
-   "base_abs_post30_bp": 35.026,
-   "ratio_vs_base": 2.038,
-   "abs_post5_bp": 42.864,
-   "maxup60_bp": 126.844,
-   "maxdown60_bp": -38.973,
+   "abs_post30_bp": 77.838,
+   "base_abs_post30_bp": 32.728,
+   "ratio_vs_base": 2.378,
+   "abs_post5_bp": 49.512,
+   "maxup60_bp": 116.906,
+   "maxdown60_bp": -53.102,
    "signed_post30_bp": 93.598,
    "signed_post60_bp": 107.344,
    "hit_rate_pct": 80.0
@@ -2174,13 +2209,26 @@
    "hit_rate_pct": 100.0
   },
   "all": {
-   "n": 94,
-   "abs_post30_bp": 61.963,
-   "base_abs_post30_bp": 27.674,
-   "ratio_vs_base": 2.239
+   "n": 96,
+   "abs_post30_bp": 63.774,
+   "base_abs_post30_bp": 27.253,
+   "ratio_vs_base": 2.34
   }
  },
  "forward_summary": {
+  "cpi": {
+   "n": 2,
+   "n_surprise": 0,
+   "abs_post30_bp": 148.895,
+   "base_abs_post30_bp": 7.455,
+   "ratio_vs_base": 19.973,
+   "abs_post5_bp": 122.64,
+   "maxup60_bp": 7.595,
+   "maxdown60_bp": -208.525,
+   "signed_post30_bp": null,
+   "signed_post60_bp": null,
+   "hit_rate_pct": null
+  },
   "nfp": {
    "n": 2,
    "n_surprise": 2,
@@ -2195,12 +2243,12 @@
    "hit_rate_pct": 100.0
   },
   "all": {
-   "n": 2,
-   "abs_post30_bp": 20.37,
-   "base_abs_post30_bp": 34.335,
-   "ratio_vs_base": 0.593
+   "n": 4,
+   "abs_post30_bp": 84.632,
+   "base_abs_post30_bp": 20.895,
+   "ratio_vs_base": 4.05
   }
  },
- "forward_events": 2,
- "forward_pending_surprise": 0
+ "forward_events": 4,
+ "forward_pending_surprise": 2
 }
