@@ -1,6 +1,6 @@
 {
- "date": "2026-10-14",
- "generated_at_utc": "2026-10-14T12:31:16Z",
+ "date": "2026-10-15",
+ "generated_at_utc": "2026-10-15T07:13:11Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -74,15 +74,15 @@
   }
  },
  "forward": {
-  "days": 6,
+  "days": 7,
   "from": "2026-10-05",
-  "to": "2026-10-14",
-  "codes": 181,
+  "to": "2026-10-15",
+  "codes": 187,
   "bar_errors": 0,
   "stale_codes": 0,
   "by_source": {
-   "yahoo+naver_api": 33,
-   "yahoo": 148
+   "yahoo": 153,
+   "yahoo+naver_api": 34
   },
   "skipped_days": [
    "2026-10-05"
@@ -96,35 +96,6 @@
   "base": [],
   "no_sector": [
    {
-    "code": "452280",
-    "name": "HanSun Engineering Co., Ltd.",
-    "group": "Industrial Machinery",
-    "pattern": "box",
-    "patterns": [
-     "box",
-     "flag"
-    ],
-    "signal_close": 16030.0,
-    "pattern_low": 12160.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 17312 이상이면 포기)",
-    "stop_plan": "max(12160, 진입가×0.93)"
-   },
-   {
-    "code": "457190",
-    "name": "ISU SPECIALTY CHEMICAL Co., Ltd.",
-    "group": "Chemicals: Major Diversified",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 91300.0,
-    "pattern_low": 76300.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 98604 이상이면 포기)",
-    "stop_plan": "max(76300, 진입가×0.93)"
-   },
-   {
     "code": "396300",
     "name": "HT ROBOTICS Co. Ltd",
     "group": "Computer Communications",
@@ -132,10 +103,10 @@
     "patterns": [
      "flag"
     ],
-    "signal_close": 7030.0,
+    "signal_close": 7320.0,
     "pattern_low": 5670.0,
     "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 7592 이상이면 포기)",
+    "entry_plan": "내일 시가 (시가가 7906 이상이면 포기)",
     "stop_plan": "max(5670, 진입가×0.93)"
    },
    {
@@ -146,10 +117,10 @@
     "patterns": [
      "box"
     ],
-    "signal_close": 181800.0,
+    "signal_close": 189000.0,
     "pattern_low": 167200.0,
     "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 196344 이상이면 포기)",
+    "entry_plan": "내일 시가 (시가가 204120 이상이면 포기)",
     "stop_plan": "max(167200, 진입가×0.93)"
    }
   ],
@@ -157,8 +128,8 @@
   "risk_2": [],
   "no_flag": []
  },
- "signal_date": "2026-10-14",
- "signals_frozen": true,
+ "signal_date": "2026-10-15",
+ "signals_frozen": false,
  "frozen_dates": [
   "2026-10-06",
   "2026-10-07",
@@ -178,9 +149,9 @@
    "avg_loss_pct": -7.17,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -4.67,
-   "equity_final": 9532957,
-   "max_drawdown_pct": 5.03,
+   "total_return_pct": -5.26,
+   "equity_final": 9474457,
+   "max_drawdown_pct": 5.26,
    "avg_hold_days": 2.17,
    "skipped": {
     "gap": 0,
@@ -229,7 +200,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -4.67
+    "2026": -5.26
    },
    "open_positions": [
     {
@@ -241,39 +212,39 @@
      "entry": 386656.5,
      "stop": 359590.54,
      "shares": 3,
-     "bars_held": 5,
-     "last_close": 422000.0,
-     "unrealized_pct": 9.14
+     "bars_held": 6,
+     "last_close": 402500.0,
+     "unrealized_pct": 4.1
     }
    ]
   },
   "no_sector": {
    "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
-   "signals": 43,
-   "trades": 11,
+   "signals": 45,
+   "trades": 13,
    "wins": 0,
    "win_rate": 0.0,
    "avg_win_pct": null,
-   "avg_loss_pct": -7.3,
+   "avg_loss_pct": -7.41,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -7.22,
-   "equity_final": 9278437,
-   "max_drawdown_pct": 9.52,
-   "avg_hold_days": 1.45,
+   "total_return_pct": -11.5,
+   "equity_final": 8849946,
+   "max_drawdown_pct": 11.5,
+   "avg_hold_days": 1.77,
    "skipped": {
     "gap": 0,
-    "limit": 24,
-    "cooldown": 0,
+    "limit": 27,
+    "cooldown": 11,
     "size": 0,
     "no_bar": 0,
     "pattern": 0
    },
    "by_pattern": {
     "flag": {
-     "n": 4,
+     "n": 5,
      "wins": 0,
-     "pnl_krw": -405385
+     "pnl_krw": -498229
     },
     "cup_handle": {
      "n": 2,
@@ -281,9 +252,9 @@
      "pnl_krw": -191105
     },
     "triangle": {
-     "n": 2,
+     "n": 3,
      "wins": 0,
-     "pnl_krw": -198349
+     "pnl_krw": -303771
     },
     "box": {
      "n": 3,
@@ -298,55 +269,29 @@
      "pnl_krw": -373842
     },
     "none": {
-     "n": 7,
+     "n": 9,
      "wins": 0,
-     "pnl_krw": -683022
+     "pnl_krw": -881288
     }
    },
    "by_exit": {
     "stop": {
-     "n": 11,
+     "n": 13,
      "wins": 0,
-     "pnl_krw": -1056864
+     "pnl_krw": -1255130
     }
    },
    "by_year": {
     "2026": {
-     "n": 11,
+     "n": 13,
      "wins": 0,
-     "pnl_krw": -1056864
+     "pnl_krw": -1255130
     }
    },
    "yearly_return_pct": {
-    "2026": -7.22
+    "2026": -11.5
    },
    "open_positions": [
-    {
-     "code": "131970",
-     "name": "DOOSAN TESNA Inc.",
-     "group": "Miscellaneous Commercial Services",
-     "pattern": "flag",
-     "entry_date": "2026-10-12",
-     "entry": 124672.9,
-     "stop": 115945.8,
-     "shares": 10,
-     "bars_held": 3,
-     "last_close": 126200.0,
-     "unrealized_pct": 1.22
-    },
-    {
-     "code": "319660",
-     "name": "PSK INC",
-     "group": "Industrial Machinery",
-     "pattern": "triangle",
-     "entry_date": "2026-10-13",
-     "entry": 136809.2,
-     "stop": 127232.56,
-     "shares": 9,
-     "bars_held": 2,
-     "last_close": 140500.0,
-     "unrealized_pct": 2.7
-    },
     {
      "code": "011200",
      "name": "HMM CO.,LTD",
@@ -356,9 +301,9 @@
      "entry": 21363.9,
      "stop": 20800.0,
      "shares": 83,
-     "bars_held": 2,
-     "last_close": 23350.0,
-     "unrealized_pct": 9.3
+     "bars_held": 3,
+     "last_close": 23200.0,
+     "unrealized_pct": 8.59
     },
     {
      "code": "028670",
@@ -369,9 +314,22 @@
      "entry": 6619.8,
      "stop": 6156.41,
      "shares": 198,
+     "bars_held": 2,
+     "last_close": 6680.0,
+     "unrealized_pct": 0.91
+    },
+    {
+     "code": "452280",
+     "name": "HanSun Engineering Co., Ltd.",
+     "group": "Industrial Machinery",
+     "pattern": "box",
+     "entry_date": "2026-10-15",
+     "entry": 15335.87,
+     "stop": 14262.36,
+     "shares": 83,
      "bars_held": 1,
-     "last_close": 7240.0,
-     "unrealized_pct": 9.37
+     "last_close": 14630.0,
+     "unrealized_pct": -4.6
     }
    ]
   },
@@ -385,9 +343,9 @@
    "avg_loss_pct": -7.17,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -4.67,
-   "equity_final": 9532957,
-   "max_drawdown_pct": 5.03,
+   "total_return_pct": -5.26,
+   "equity_final": 9474457,
+   "max_drawdown_pct": 5.26,
    "avg_hold_days": 2.17,
    "skipped": {
     "gap": 0,
@@ -436,7 +394,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -4.67
+    "2026": -5.26
    },
    "open_positions": [
     {
@@ -448,9 +406,9 @@
      "entry": 386656.5,
      "stop": 359590.54,
      "shares": 3,
-     "bars_held": 5,
-     "last_close": 422000.0,
-     "unrealized_pct": 9.14
+     "bars_held": 6,
+     "last_close": 402500.0,
+     "unrealized_pct": 4.1
     }
    ]
   },
@@ -522,17 +480,17 @@
   "no_flag": {
    "label": "동조 + 패턴, 깃발형 제외",
    "signals": 6,
-   "trades": 3,
+   "trades": 4,
    "wins": 0,
    "win_rate": 0.0,
    "avg_win_pct": null,
-   "avg_loss_pct": -6.9,
+   "avg_loss_pct": -7.04,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -1.74,
-   "equity_final": 9825739,
-   "max_drawdown_pct": 2.21,
-   "avg_hold_days": 3,
+   "total_return_pct": -3.44,
+   "equity_final": 9655511,
+   "max_drawdown_pct": 3.9,
+   "avg_hold_days": 3.75,
    "skipped": {
     "gap": 0,
     "limit": 1,
@@ -548,34 +506,34 @@
      "pnl_krw": -109195
     },
     "box": {
-     "n": 2,
+     "n": 3,
      "wins": 0,
-     "pnl_krw": -178218
+     "pnl_krw": -282650
     }
    },
    "by_sync": {
     "day": {
-     "n": 3,
+     "n": 4,
      "wins": 0,
-     "pnl_krw": -287413
+     "pnl_krw": -391845
     }
    },
    "by_exit": {
     "stop": {
-     "n": 3,
+     "n": 4,
      "wins": 0,
-     "pnl_krw": -287413
+     "pnl_krw": -391845
     }
    },
    "by_year": {
     "2026": {
-     "n": 3,
+     "n": 4,
      "wins": 0,
-     "pnl_krw": -287413
+     "pnl_krw": -391845
     }
    },
    "yearly_return_pct": {
-    "2026": -1.74
+    "2026": -3.44
    },
    "open_positions": [
     {
@@ -587,22 +545,9 @@
      "entry": 386656.5,
      "stop": 359590.54,
      "shares": 3,
-     "bars_held": 5,
-     "last_close": 422000.0,
-     "unrealized_pct": 9.14
-    },
-    {
-     "code": "098460",
-     "name": "Koh Young Technology Inc.",
-     "group": "Semiconductors",
-     "pattern": "box",
-     "entry_date": "2026-10-07",
-     "entry": 35957.55,
-     "stop": 33440.52,
-     "shares": 39,
-     "bars_held": 5,
-     "last_close": 36150.0,
-     "unrealized_pct": 0.54
+     "bars_held": 6,
+     "last_close": 402500.0,
+     "unrealized_pct": 4.1
     }
    ]
   }
@@ -990,6 +935,50 @@
     "pnl_pct": -7.45,
     "hold_days": 2,
     "gap": false
+   },
+   {
+    "code": "131970",
+    "name": "DOOSAN TESNA Inc.",
+    "group": "Miscellaneous Commercial Services",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": null,
+    "signal_date": "2026-10-08",
+    "entry_date": "2026-10-12",
+    "entry": 124672.9,
+    "stop": 115945.8,
+    "exit_date": "2026-10-15",
+    "exit": 115597.96,
+    "why": "stop",
+    "shares": 10,
+    "pnl_krw": -92844,
+    "pnl_pct": -7.45,
+    "hold_days": 4,
+    "gap": false
+   },
+   {
+    "code": "319660",
+    "name": "PSK INC",
+    "group": "Industrial Machinery",
+    "pattern": "triangle",
+    "patterns": [
+     "triangle"
+    ],
+    "sync_by": null,
+    "signal_date": "2026-10-12",
+    "entry_date": "2026-10-13",
+    "entry": 136809.2,
+    "stop": 127232.56,
+    "exit_date": "2026-10-15",
+    "exit": 125322.9,
+    "why": "stop",
+    "shares": 9,
+    "pnl_krw": -105422,
+    "pnl_pct": -8.56,
+    "hold_days": 3,
+    "gap": true
    }
   ],
   "hold_10": [
@@ -1305,6 +1294,28 @@
     "pnl_krw": -92918,
     "pnl_pct": -7.45,
     "hold_days": 3,
+    "gap": false
+   },
+   {
+    "code": "098460",
+    "name": "Koh Young Technology Inc.",
+    "group": "Semiconductors",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-06",
+    "entry_date": "2026-10-07",
+    "entry": 35957.55,
+    "stop": 33440.52,
+    "exit_date": "2026-10-15",
+    "exit": 33340.2,
+    "why": "stop",
+    "shares": 39,
+    "pnl_krw": -104432,
+    "pnl_pct": -7.45,
+    "hold_days": 6,
     "gap": false
    }
   ]
