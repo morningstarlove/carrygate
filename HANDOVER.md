@@ -2,7 +2,7 @@
 
 > 이 문서만 읽으면 누구든(혹은 다른 AI 세션이든) 이어서 작업할 수 있게 쓴다.
 
-**최종 갱신:** 2026-10-15 (백테스트 과적합 논문 검토 `docs/BACKTEST_OVERFITTING_REVIEW.md`, `scripts/overfit_check.py`, 제안함 P17·P18 대기; 그 전 2026-10-10 AI 프레임워크 5종 검토 `docs/AI_FRAMEWORKS_REVIEW.md` — 모두 불채택, 방법 4개 이식; 루트 `CLAUDE.md` 신설; 제안함 P14; 그 전 10/10 초단타 소액 시험 설계서 P13; 그 전 2026-10-07 마일스톤 15 종사종팔 그리드 v4/v5 검증 `grid.py` main 병합; 현황판 데이터 main 최신으로 갱신·화면 코드 백업 `dashboard/index.html`, 캐리 바이낸스·바이비트 10/7 실측; 0절 "지금 상태 한눈에" 추가, 작업 기록 `docs/sessions/2026-10-07_phil_verdict.md`; 현황판 결과 파일 내장·매일 자동 갱신; 초단타 첫 합격·채점기 수정 P9, 한국 주식 첫 체결; 그 전 2026-10-06 마일스톤 14 판정 규율 — Phil 방식 이식: `verdict.py`·`criteria.json`·`rules_lock.json`·`proposals.md`; 그 전: 마일스톤 13 추세 전환 매매법 4시간봉 PR #32 병합, 현황판 카드 연결; 그 전: 터틀 기록 중복 수정 PR #22·#23, AI 보조 도구 PR #19)
+**최종 갱신:** 2026-10-15 (백테스트 과적합 논문 검토 `docs/BACKTEST_OVERFITTING_REVIEW.md`, `scripts/overfit_check.py`, 제안함 P17·P18 **반영** — 초단타 잡음 바닥 기준·합격선 해석 필드, criteria sealed 2026-10-15; 그 전 2026-10-10 AI 프레임워크 5종 검토 `docs/AI_FRAMEWORKS_REVIEW.md` — 모두 불채택, 방법 4개 이식; 루트 `CLAUDE.md` 신설; 제안함 P14; 그 전 10/10 초단타 소액 시험 설계서 P13; 그 전 2026-10-07 마일스톤 15 종사종팔 그리드 v4/v5 검증 `grid.py` main 병합; 현황판 데이터 main 최신으로 갱신·화면 코드 백업 `dashboard/index.html`, 캐리 바이낸스·바이비트 10/7 실측; 0절 "지금 상태 한눈에" 추가, 작업 기록 `docs/sessions/2026-10-07_phil_verdict.md`; 현황판 결과 파일 내장·매일 자동 갱신; 초단타 첫 합격·채점기 수정 P9, 한국 주식 첫 체결; 그 전 2026-10-06 마일스톤 14 판정 규율 — Phil 방식 이식: `verdict.py`·`criteria.json`·`rules_lock.json`·`proposals.md`; 그 전: 마일스톤 13 추세 전환 매매법 4시간봉 PR #32 병합, 현황판 카드 연결; 그 전: 터틀 기록 중복 수정 PR #22·#23, AI 보조 도구 PR #19)
 **작업 브랜치:** 모두 `main` 에 병합됨. 최근 작업 브랜치(참고용): `claude/grid-jongsa-backtest`(마일스톤 15 종사종팔), `claude/phil-analysis`·`claude/verdict-scalp-cumulative`·`claude/decisions-1007`(마일스톤 14, PR #38~#44), `claude/turtle-history-dedupe`(터틀 기록 중복), `claude/chandelier-exit-variant`(Chandelier 변형), `claude/new-session-as7gis`(터틀), 한국 주식 트랙 PR #17·#18
 **저장소:** `morningstarlove/carrygate` (2026-09-17 `signalgate-bridge` 에서 이름 변경)
 **프로젝트명:** CARRYGATE — 게이트(신호등) + 캐리(이자) 두 축에서 따왔다.
@@ -41,7 +41,9 @@
 
 **2026-10-13 자료 사고와 수정 (제안함 P15):** 야후가 10/12 일봉을 한국 주식 178종목 중 147종목에서 뺐다. 순방향 종이매매가 그날을 건너뛰어 에이피알 손절을 하루 늦게, 갭하락 시가(−14.1%)로 계산했고 검산이 빨간불이 됐다. `kr_ohlcv.fill_gaps` 가 기록된 거래일 중 빠진 날만 네이버로 메운다. 메운 종목 수는 `kr_breakout.json` 의 `forward.gap_filled` 에 남는다. 규칙 변경 없음. 작업 기록 `docs/sessions/2026-10-13_kr_gap_fill.md`.
 
-**사용자 결정 대기:** 제안함 **P17·P18**(2026-10-15, 백테스트 과적합 논문 검토 `docs/BACKTEST_OVERFITTING_REVIEW.md`). 요지: 초단타 10/7 PASS 는 운만으로 나올 후보 수의 1/4 이었고, 터틀·추세전환 20건 합격선은 실력 0 도 19~40% 확률로 PASS 한다. P17(초단타 잡음 바닥 기준, 사전 등록)·P18(판정 파일에 가짜 PASS 확률·MinTRL 표시) 채택 여부. 추천 둘 다 채택, 10/21 전. 그다음 결정은 10/21(초단타 소액 시험 여부)과 첫 판정이 뜨는 날.
+**사용자 결정 대기:** 없음. 다음 결정은 10/21(초단타 소액 시험 여부)과 첫 판정이 뜨는 날.
+
+**2026-10-15 백테스트 과적합 논문 검토 → 판정기 보강 (제안함 P17·P18 반영):** 댓글 권고로 Bailey·López de Prado·Harvey·Hansen 등 17편을 읽고 공식을 실데이터에 대입(`docs/BACKTEST_OVERFITTING_REVIEW.md`, `scripts/overfit_check.py`). 발견: 초단타 10/7 PASS(후보 12개)는 실력 0 이어도 뜨는 후보 수(378개 중 42~53개)의 1/4 이었고, 터틀·추세전환 20건 합격선은 실력 0 도 19~40% 확률로 PASS 한다. 반영: ① `criteria.json scalp.noise_floor` — 부호 뒤집기 500회의 후보 수 중앙값보다 실제 후보가 많아야 PASS, 같거나 적으면 NOT_YET(잡음 이하). ② 판정 파일 각 거래소에 `interpretation`(실력 0 PASS 확률·놓칠 확률·필요 건수 MinTRL·t>3). 합격선 숫자·매매 규칙 변경 없음, criteria sealed 2026-10-15, 잠금 재생성. 현황판 카드에는 아직 안 올렸다(판정 파일에만). 작업 기록 `docs/sessions/2026-10-15_backtest_overfitting.md`.
 
 **규칙을 바꾸고 싶을 때:** `proposals.md` 에 근거 → 그 트랙 `RULE_FIXED` 새 날짜 → `python verdict.py --lock`. 이 순서 없이 바꾸면 CI 가 막는다(원칙 5).
 

@@ -12,9 +12,15 @@
 - 터틀·추세전환 합격선(20건): 실력 0 인 규칙이 PASS 할 확률 19~40%. 95% 확신 건수: 터틀 업비트 55·OKX 299, 추세전환 업비트 16·OKX 268.
 - 오늘 바뀌는 판정 없음(순방향 터틀 0·추세전환 1·돌파 6건).
 
-## 사용자 결정 대기
-- P17 초단타 잡음 바닥 기준 추가(사전 등록 필요) — 추천 채택, 10/21 재확인 전.
-- P18 판정 파일에 가짜 PASS 확률·MinTRL 표시(규칙 아님) — 추천 채택.
+## 사용자 결정
+- 2026-10-15 "구현해" → P17·P18 둘 다 반영.
+
+## 구현 (같은 날, 두 번째 커밋)
+- `criteria.json`: `scalp.noise_floor {sims 500, seed 7, pass_only_if_candidates_above_median}`, sealed 2026-10-15(+sealed_history). 다른 트랙 합격선 숫자 변경 없음.
+- `verdict.py`: `noise_floor()`(부호 뒤집기, scalp.py 의 같은 후보 규칙 적용), `judge_scalp` — 후보 ≤ 중앙값이면 NOT_YET(잡음 이하), FAIL 에도 잡음 바닥 기록. `interpret_pf_rule()`(이항분포 정확 계산 — 3절 모의 26/40/27/19% 와 일치)·`interpret_win_rate_rule()`, 각 거래소·돌파에 `interpretation`. 출력·이력 줄(`noise_median`)에 표시. 실행 시간 +1.3초.
+- `rules_lock.json` 재생성(criteria 지문). `tests/test_verdict.py` 9건 추가(총 28건).
+- 10/15 실행: 초단타 FAIL 그대로(후보 0, 잡음 바닥 중앙값 33·95% 43). 다른 트랙 NOT_YET 그대로.
+- 현황판 카드에는 아직 안 올렸다(판정 파일·실행 출력에만). 올리려면 현황판 라이브 버전 위에서 `tracks.*.venues.*.interpretation`·`tracks.scalp.noise_floor` 를 읽게 고친다.
 
 ## 검증 한계
 - 논문 PDF 가 이 세션 망에서 열리지 않아 서지는 확인, 본문 숫자는 저자 슬라이드·2차 자료 대조. 검토서에 "미확인" 표시.

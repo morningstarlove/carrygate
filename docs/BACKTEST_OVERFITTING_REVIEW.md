@@ -95,7 +95,7 @@
 | **P18** 합격선 해석 | 판정 파일 각 트랙에 `false_pass_pct`·`min_trades_95` 를 적는다. 합격선 숫자는 그대로. PASS = "소액 시험 후보", 실전 규모 결정은 MinTRL 이후 | 표시 추가만. 규칙·합격선·잠금 변경 없음 |
 | 하지 않을 것 | 합격선 문턱 올리기, 조합 더 늘리기, CSCV/PBO 도입(외부 패키지·복잡도 대비 얻는 게 적다 — 순방향이 이미 그 역할) | — |
 
-사용자 결정 항목: P17(규칙 추가라 사전 등록 필요)·P18(표시만) 채택 여부. 추천: **둘 다 채택.** 10/21 초단타 재확인 전에 P17 이 들어가면 그날 판정이 잡음 바닥 기준으로 나온다.
+**2026-10-15 사용자 결정 "구현해" → 둘 다 반영.** P17: `criteria.json scalp.noise_floor`(부호 뒤집기 500회, seed 7), `verdict.py noise_floor`·`judge_scalp`. P18: `verdict.py interpret_pf_rule`(이항분포 정확 계산, 3절 모의와 일치)·`interpret_win_rate_rule`, 판정 파일 `interpretation`. criteria sealed 2026-10-15, 잠금 재생성, 시험 `tests/test_verdict.py` 9건 추가. 10/21 재확인은 잡음 바닥 기준으로 나온다.
 
 ## 6. 다시 계산하는 법
 

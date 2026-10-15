@@ -5,6 +5,9 @@ Phil(bennyjo/phil) 에서 가져온 방법 세 가지:
   1. 사전 등록: 합격선은 결과가 나오기 전에 criteria.json 에 봉인한다. 이 파일은 기준을 만들지 않고 읽기만 한다.
   2. 운 보정 z: 백테스트 승률대로면 몇 승이 기대되는지와 실제 승수를 비교한다. z 가 −2 아래면 불운이 아니라
      백테스트가 부풀려진 것(생존 편향·과최적화)으로 본다.
+  4. (2026-10-15, 제안함 P17·P18) 잡음 바닥: 초단타는 조합 수백 개를 동시에 시험하므로 실력 0 이어도 후보가 뜬다. 부호 뒤집기로
+     그 수를 재서 실제 후보가 그 중앙값 이하면 PASS 를 주지 않는다. 합격선 해석: 손익비 합격선마다 "실력 0 이어도 PASS 할 확률"과
+     필요 건수(MinTRL)를 같이 적는다. 근거 docs/BACKTEST_OVERFITTING_REVIEW.md.
   3. 규칙 잠금: 세 트랙의 규칙 상수와 criteria.json 의 지문을 rules_lock.json 에 적어 두고, 단위시험이 매번 대조한다.
      규칙을 바꾸려면 proposals.md 에 근거 → RULE_FIXED 새 날짜 → `python verdict.py --lock`. 이 순서 없이 바꾸면 CI 가 빨간불.
 
@@ -44,6 +47,76 @@ def luck_z(n, wins, p):
     return {"expected_wins": round(exp, 2), "actual_wins": wins, "z": round((wins - exp) / sd, 2)}
 
 
+def binom_tail(n, p, k):
+    """P(X ≥ k), X ~ Binom(n, p). 표준 라이브러리만."""
+    if k <= 0:
+        return 1.0
+    if k > n:
+        return 0.0
+    return sum(math.comb(n, i) * p ** i * (1 - p) ** (n - i) for i in range(k, n + 1))
+
+
+def interpret_pf_rule(n, p_bt, pf_bt, pf_pass, z_fail=None):
+    """제안함 P18 — 손익비 합격선(PF ≥ pf_pass @ n건)을 '실력 0 이어도 PASS 할 확률'과 '필요 건수'로 번역한다.
+    백테스트의 승률 p_bt·손익비 pf_bt 에서 평균승/평균패 비율(WL)을 얻고, 승률만 기대손익 0 이 되게 낮춘 귀무가설로 계산.
+    Bailey·López de Prado(2012) MinTRL(정규 근사, 95%), Harvey·Liu·Zhu(2016) t>3. 합격선 숫자는 바꾸지 않는다 — 읽는 법만."""
+    if not n or not p_bt or not pf_bt or p_bt <= 0 or p_bt >= 1 or pf_bt <= 0:
+        return None
+    WL = pf_bt * (1 - p_bt) / p_bt            # 평균 승 ÷ 평균 패
+    p0 = 1.0 / (1.0 + WL)                     # 기대손익 0 인 승률
+    # PASS 조건: PF = w·WL / (n−w) ≥ pf_pass  ⇔  w ≥ n·pf_pass / (WL + pf_pass)
+    w_pf = math.ceil(n * pf_pass / (WL + pf_pass) - 1e-12)
+    # 운 보정 z ≥ z_fail  ⇔  w ≥ n·p_bt + z_fail·sqrt(n·p_bt·(1−p_bt))
+    w_z = math.ceil(n * p_bt + z_fail * math.sqrt(n * p_bt * (1 - p_bt)) - 1e-12) if z_fail is not None else 0
+    w_min = max(w_pf, w_z)
+    mean = p_bt * WL - (1 - p_bt)
+    var = p_bt * WL ** 2 + (1 - p_bt) - mean ** 2
+    sr = mean / math.sqrt(var) if var > 0 else None
+    return {
+        "false_pass_pct": r2(100.0 * binom_tail(n, p0, w_min)),      # 실력 0 인데 PASS (1종 오류)
+        "miss_pct": r2(100.0 * (1 - binom_tail(n, p_bt, w_min))),    # 백테스트만큼 실력인데 PASS 못 함 (2종 오류)
+        "wins_needed": w_min, "per_trade_sharpe": r2(sr) if sr else None,
+        "min_trades_95": math.ceil((1.645 / sr) ** 2) if sr and sr > 0 else None,
+        "min_trades_t3": math.ceil((3.0 / sr) ** 2) if sr and sr > 0 else None,
+        "note": "false_pass = 실력 0 규칙이 이 합격선을 넘을 확률, miss = 백테스트만큼 실력이어도 못 넘을 확률, "
+                "min_trades_95 = 샤프>0 을 95% 확신하는 데 필요한 건수(MinTRL), min_trades_t3 = t>3 기준 건수. PASS = 소액 시험 후보",
+    }
+
+
+def interpret_win_rate_rule(n, p_bt, min_wins):
+    """kr_breakout 의 PASS(승률 ≥ x% @ n건)는 수익 검정이 아니라 '백테스트 모양 유지' 검정이다. 그 뜻을 숫자로 적는다."""
+    if not n or not p_bt or p_bt <= 0 or p_bt >= 1:
+        return None
+    return {"pass_pct_if_backtest_true": r2(100.0 * binom_tail(n, p_bt, min_wins)),
+            "pass_pct_if_win_rate_halved": r2(100.0 * binom_tail(n, p_bt / 2.0, min_wins)),
+            "note": "이 합격선은 수익이 아니라 백테스트 모양(승률)이 유지되는지를 본다. 승률이 반토막이어도 PASS 가 나올 수 있다"}
+
+
+def noise_floor(history_rows, sims=500, seed=7):
+    """제안함 P17 — 초단타 후보 규칙의 잡음 바닥. 조합별 일별 순수익의 부호를 무작위로 뒤집어(실력 0·비용 0 인 세상)
+    scalp.py 의 같은 후보 규칙(cumulative_candidates)을 sims 회 적용, 후보 수의 중앙값·95% 를 돌려준다.
+    White(2000) Reality Check 의 가장 단순한 형태. 실제 후보 수가 중앙값 이하면 운으로 설명된다."""
+    import random
+    sys.path.insert(0, HERE)
+    import scalp as S
+    rng = random.Random(seed)
+    series, trades = {}, {}
+    for r in history_rows:
+        for k, v in r.get("rows", {}).items():
+            series.setdefault(k, []).append(v["nt"])
+            trades[k] = trades.get(k, 0) + v.get("n", 0)
+    counts = []
+    for _ in range(sims):
+        acc = {}
+        for k, s in series.items():
+            f = [x if rng.random() < 0.5 else -x for x in s]
+            acc[k] = {"days": len(f), "pos": sum(1 for x in f if x > 0), "nt": sum(f), "n": trades[k], "rb": 0}
+        counts.append(len(S.cumulative_candidates(acc)))
+    counts.sort()
+    return {"sims": sims, "seed": seed, "median": counts[len(counts) // 2], "p95": counts[min(len(counts) - 1, int(len(counts) * 0.95))],
+            "max": counts[-1], "note": "부호 뒤집기(실력 0) 기록에 같은 후보 규칙을 적용했을 때 뜨는 후보 수. 실제 후보 수가 median 이하면 운으로 설명된다"}
+
+
 def profit_factor(pnls):
     """손익비 = 이익 합 ÷ 손실 합(절댓값). 손실이 없으면 None(무한대 대신)."""
     g = sum(x for x in pnls if x > 0)
@@ -71,6 +144,7 @@ def judge_kr_breakout(fwd, backtest, crit):
         "backtest_win_rate_pct": bt.get("win_rate") if bt else None,
         "luck": luck_z(n, wins, p),
         "checks": {}, "warnings": [],
+        "interpretation": interpret_win_rate_rule(crit["min_trades"], p, math.ceil(crit["min_trades"] * crit["pass_if_win_rate_at_least_pct"] / 100.0 - 1e-12)),
     }
     # 대조군(업종 동조 없음)과의 차이 — 기록만, 합격선에는 안 쓴다
     cv = crit.get("control_variant")
@@ -148,6 +222,9 @@ def judge_venue_track(data, crit, name):
                 f["luck"]["z"], f["luck"]["expected_wins"], f["wins"]))
         n = f["trades"]
         total_n += n
+        f["interpretation"] = interpret_pf_rule(crit["min_trades"], (f["backtest_win_rate_pct"] or 0) / 100.0,
+                                                f["backtest_profit_factor"], crit["pass_if_profit_factor_at_least"],
+                                                crit.get("fail_if_luck_z_below"))
         if n < crit["min_trades"]:
             f["status"], f["reason"] = NOT_YET, "순방향 %d건 — 최소 %d건 전에는 판단하지 않는다" % (n, crit["min_trades"])
         else:
@@ -191,12 +268,26 @@ def judge_scalp(history_rows, crit):
            "warnings": []}
     if days < crit["min_days"]:
         out["status"], out["reason"] = NOT_YET, "기록 %d일 — 최소 %d일 전에는 후보를 말하지 않는다" % (days, crit["min_days"])
+    else:
+        nf = crit.get("noise_floor")
+        if nf:
+            out["noise_floor"] = noise_floor(history_rows, nf.get("sims", 500), nf.get("seed", 7))
+    if days < crit["min_days"]:
+        pass
     elif cands:
-        out["status"], out["reason"] = PASS, "누적 %d일, 후보 %d개 (조합 %d개 중) — 누적 순수익>0·플러스 일수 60%%·기준선 초과" % (
-            days, len(cands), combos)
-        out["warnings"].append("조합 %d개를 동시에 시험하므로 후보 일부는 우연이다. 합격 = 소액 체결 시험 후보이지 실력 확정이 아니다" % combos)
+        if nf and nf.get("pass_only_if_candidates_above_median") and len(cands) <= out["noise_floor"]["median"]:
+            out["status"], out["reason"] = NOT_YET, "누적 %d일, 후보 %d개 ≤ 잡음 바닥 중앙값 %d개 (실력 0 이어도 조합 %d개 중 이만큼 뜬다) — 운으로 설명된다, 판단 보류" % (
+                days, len(cands), out["noise_floor"]["median"], combos)
+        else:
+            out["status"], out["reason"] = PASS, "누적 %d일, 후보 %d개 (조합 %d개 중) — 누적 순수익>0·플러스 일수 60%%·기준선 초과" % (
+                days, len(cands), combos)
+            if nf:
+                out["reason"] += ", 잡음 바닥 중앙값 %d개 초과" % out["noise_floor"]["median"]
+            out["warnings"].append("조합 %d개를 동시에 시험하므로 후보 일부는 우연이다. 합격 = 소액 체결 시험 후보이지 실력 확정이 아니다" % combos)
     else:
         out["status"], out["reason"] = FAIL, "누적 %d일, 후보 0개 — 지금 규칙 중 비용을 이기는 것이 없다" % days
+        if out.get("noise_floor"):
+            out["reason"] += " (실력 0 이어도 후보 %d개는 뜬다 — 비용이 그만큼 먹는다)" % out["noise_floor"]["median"]
     return out
 
 
@@ -341,7 +432,8 @@ def history_line(out):
             line[name] = {v: {"n": f["trades"], "wins": f["wins"], "pf": f["profit_factor"], "z": (f["luck"] or {}).get("z")}
                           for v, f in t[name]["venues"].items()}
     if "scalp" in t:
-        line["scalp"] = {"days": t["scalp"]["history_days"], "candidates": t["scalp"]["candidates"]}
+        line["scalp"] = {"days": t["scalp"]["history_days"], "candidates": t["scalp"]["candidates"],
+                         "noise_median": (t["scalp"].get("noise_floor") or {}).get("median")}
     return line
 
 
@@ -370,6 +462,9 @@ def print_summary(out):
             c = k["control"]
             print("              대조군 %s: 매매 %d건 승률 %s%% 수익 %s%% (기본−대조 %s%%p)" % (
                 c["variant"], c["trades"], c["win_rate_pct"] or "-", c["total_return_pct"], c["return_delta_pct"]))
+        if k.get("interpretation"):
+            print("              해석: 백테스트대로면 PASS %s%%, 승률 반토막이어도 PASS %s%% — 수익이 아니라 모양 검정" % (
+                k["interpretation"]["pass_pct_if_backtest_true"], k["interpretation"]["pass_pct_if_win_rate_halved"]))
         for w in k.get("warnings", []):
             print("              ⚠ " + w)
     for name in ("turtle", "reversal"):
@@ -382,11 +477,17 @@ def print_summary(out):
                     v, f["status"], f["trades"], f["wins"], f["profit_factor"] if f["profit_factor"] is not None else "-",
                     f["net_pct"] if f["net_pct"] is not None else "-", z if z is not None else "-",
                     f["backtest_win_rate_pct"], f["backtest_profit_factor"]))
+                ip = f.get("interpretation")
+                if ip:
+                    print("          해석: 실력 0 이어도 PASS %s%%, 백테스트만큼이어도 놓침 %s%%, 95%% 확신 %s건, t>3 %s건" % (
+                        ip["false_pass_pct"], ip["miss_pct"], ip["min_trades_95"] or "-", ip["min_trades_t3"] or "-"))
                 for w in f.get("warnings", []):
                     print("          ⚠ " + w)
     if "scalp" in t:
         s = t["scalp"]
         print("[scalp] %-7s %s" % (s["status"], s["reason"]))
+        if s.get("noise_floor"):
+            print("   잡음 바닥(부호 뒤집기 %d회): 후보 중앙값 %d개, 95%% %d개" % (s["noise_floor"]["sims"], s["noise_floor"]["median"], s["noise_floor"]["p95"]))
         for c in s["top"][:5]:
             print("   %-38s 누적 %+.3f%%  %d일 중 %d일 플러스  매매 %d건" % (c["key"], c["net_pct"], c["days"], c["pos_days"], c["trades"]))
         for w in s.get("warnings", []):

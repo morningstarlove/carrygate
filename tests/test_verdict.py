@@ -156,6 +156,79 @@ class Scalp(unittest.TestCase):
         self.assertEqual(V.judge_scalp(rows, self.c)["status"], V.FAIL)
 
 
+class NoiseFloor(unittest.TestCase):
+    """제안함 P17 — 후보 수가 '실력 0 이어도 뜨는 후보 수(중앙값)' 이하면 PASS 를 주지 않는다."""
+    c = CRIT["scalp"]
+
+    @staticmethod
+    def many(n_cand, n_total=40, days=7):
+        rows = [{"date": "2026-10-%02d" % (i + 1), "rows": {}} for i in range(days)]
+        for j in range(n_total):
+            key = "okx:C%02d:15m:vwap_fade" % j
+            base = "okx:C%02d:15m:baseline_hold5" % j
+            # 후보: 7일 중 5일 +0.1, 2일 −0.1 (누적 +0.3, 71% 플러스). 비후보: 전부 −0.1
+            nts = [0.1, 0.1, -0.1, 0.1, 0.1, -0.1, 0.1] if j < n_cand else [-0.1] * days
+            for i in range(days):
+                rows[i]["rows"][key] = {"n": 3, "g": 0, "f": 0, "nt": nts[i], "rb": False}
+                rows[i]["rows"][base] = {"n": 10, "g": 0, "f": 0, "nt": -1.0, "rb": False}
+        return rows
+
+    def test_noise_floor_is_computed_and_deterministic(self):
+        nf1 = V.noise_floor(self.many(3), sims=200, seed=7)
+        nf2 = V.noise_floor(self.many(3), sims=200, seed=7)
+        self.assertEqual(nf1["median"], nf2["median"])
+        # 실력 0 이면 조합 40개 중 대략 20~25% 가 후보로 뜬다 (7일 중 5일 이상 플러스 확률 29/128)
+        self.assertTrue(4 <= nf1["median"] <= 15, nf1)
+
+    def test_candidates_below_noise_floor_is_not_pass(self):
+        out = V.judge_scalp(self.many(3), self.c)
+        self.assertEqual(out["candidates"], 3)
+        self.assertLessEqual(out["candidates"], out["noise_floor"]["median"])
+        self.assertEqual(out["status"], V.NOT_YET)
+        self.assertIn("잡음 바닥", out["reason"])
+
+    def test_candidates_above_noise_floor_pass(self):
+        out = V.judge_scalp(self.many(40), self.c)
+        self.assertEqual(out["candidates"], 40)
+        self.assertGreater(out["candidates"], out["noise_floor"]["median"])
+        self.assertEqual(out["status"], V.PASS)
+
+    def test_fail_still_reports_noise_floor(self):
+        out = V.judge_scalp(self.many(0), self.c)
+        self.assertEqual(out["status"], V.FAIL)
+        self.assertIn("noise_floor", out)
+
+
+class Interpretation(unittest.TestCase):
+    """제안함 P18 — 합격선을 '실력 0 이어도 PASS 할 확률'과 '필요 건수'로 번역. 합격선 숫자는 건드리지 않는다."""
+
+    def test_turtle_upbit_numbers(self):
+        # 백테스트 승률 37.3%, 손익비 1.65 → 합격선 PF≥1.2 @20건, z≥−2 (docs/BACKTEST_OVERFITTING_REVIEW.md 3절)
+        ip = V.interpret_pf_rule(20, 0.372881, 1.6455, 1.2, -2.0)
+        self.assertTrue(20 <= ip["false_pass_pct"] <= 32, ip)
+        self.assertEqual(ip["min_trades_95"], 55)
+        self.assertTrue(ip["min_trades_t3"] > ip["min_trades_95"])
+
+    def test_binom_tail_edges(self):
+        self.assertEqual(V.binom_tail(10, 0.3, 0), 1.0)
+        self.assertEqual(V.binom_tail(10, 0.3, 11), 0.0)
+        self.assertAlmostEqual(V.binom_tail(1, 0.3, 1), 0.3)
+
+    def test_kr_breakout_shape_test(self):
+        ip = V.interpret_win_rate_rule(15, 0.2935, 3)
+        self.assertTrue(80 <= ip["pass_pct_if_backtest_true"] <= 92, ip)
+        self.assertTrue(30 <= ip["pass_pct_if_win_rate_halved"] <= 45, ip)
+
+    def test_none_without_backtest(self):
+        self.assertIsNone(V.interpret_pf_rule(20, None, None, 1.2))
+
+    def test_venue_track_carries_interpretation(self):
+        data = {"rules": {"rule_fixed": "2026-10-02"},
+                "venues": {"okx": {"portfolio": {"forward_trades": [], "stats": {"win_rate_pct": 34.85, "profit_factor": 1.23, "trades": 241}}}}}
+        out = V.judge_venue_track(data, CRIT["turtle"], "turtle")
+        self.assertIn("false_pass_pct", out["venues"]["okx"]["interpretation"])
+
+
 class RulesLock(unittest.TestCase):
     def test_lock_matches_source(self):
         """규칙 상수나 criteria.json 이 잠금과 다르면 실패한다. 고치는 길은 하나: proposals.md → RULE_FIXED → `python verdict.py --lock`."""
