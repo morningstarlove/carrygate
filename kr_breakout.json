@@ -1,6 +1,6 @@
 {
  "date": "2026-10-16",
- "generated_at_utc": "2026-10-16T07:13:59Z",
+ "generated_at_utc": "2026-10-16T11:58:27Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -81,8 +81,8 @@
   "bar_errors": 0,
   "stale_codes": 0,
   "by_source": {
-   "yahoo+naver_api": 35,
-   "yahoo": 157
+   "yahoo+naver_api": 36,
+   "yahoo": 156
   },
   "skipped_days": [
    "2026-10-05"
@@ -310,7 +310,7 @@
   ]
  },
  "signal_date": "2026-10-16",
- "signals_frozen": false,
+ "signals_frozen": true,
  "frozen_dates": [
   "2026-10-06",
   "2026-10-07",
@@ -318,7 +318,8 @@
   "2026-10-12",
   "2026-10-13",
   "2026-10-14",
-  "2026-10-15"
+  "2026-10-15",
+  "2026-10-16"
  ],
  "variants": {
   "base": {
@@ -338,7 +339,7 @@
    "skipped": {
     "gap": 0,
     "limit": 8,
-    "cooldown": 1,
+    "cooldown": 0,
     "size": 0,
     "no_bar": 0,
     "pattern": 0
@@ -410,14 +411,14 @@
    "avg_loss_pct": -7.41,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -6.64,
-   "equity_final": 9336208,
+   "total_return_pct": -7.01,
+   "equity_final": 9299048,
    "max_drawdown_pct": 11.47,
    "avg_hold_days": 1.77,
    "skipped": {
     "gap": 0,
     "limit": 27,
-    "cooldown": 10,
+    "cooldown": 0,
     "size": 0,
     "no_bar": 0,
     "pattern": 0
@@ -471,7 +472,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -6.64
+    "2026": -7.01
    },
    "open_positions": [
     {
@@ -510,8 +511,8 @@
      "stop": 14262.36,
      "shares": 83,
      "bars_held": 2,
-     "last_close": 16750.0,
-     "unrealized_pct": 9.22
+     "last_close": 16630.0,
+     "unrealized_pct": 8.44
     },
     {
      "code": "396300",
@@ -523,8 +524,8 @@
      "stop": 6930.63,
      "shares": 170,
      "bars_held": 1,
-     "last_close": 8990.0,
-     "unrealized_pct": 20.63
+     "last_close": 8830.0,
+     "unrealized_pct": 18.49
     },
     {
      "code": "033780",
@@ -558,7 +559,7 @@
    "skipped": {
     "gap": 0,
     "limit": 8,
-    "cooldown": 1,
+    "cooldown": 0,
     "size": 0,
     "no_bar": 0,
     "pattern": 0
@@ -637,7 +638,7 @@
    "skipped": {
     "gap": 0,
     "limit": 0,
-    "cooldown": 1,
+    "cooldown": 0,
     "size": 10,
     "no_bar": 0,
     "pattern": 0
@@ -702,10 +703,10 @@
    "skipped": {
     "gap": 0,
     "limit": 1,
-    "cooldown": 1,
+    "cooldown": 0,
     "size": 0,
     "no_bar": 0,
-    "pattern": 1
+    "pattern": 0
    },
    "by_pattern": {
     "cup_handle": {
