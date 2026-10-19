@@ -1,6 +1,6 @@
 {
- "date": "2026-10-16",
- "generated_at_utc": "2026-10-16T11:58:27Z",
+ "date": "2026-10-19",
+ "generated_at_utc": "2026-10-19T07:13:16Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -74,15 +74,15 @@
   }
  },
  "forward": {
-  "days": 8,
+  "days": 9,
   "from": "2026-10-05",
-  "to": "2026-10-16",
-  "codes": 192,
+  "to": "2026-10-19",
+  "codes": 197,
   "bar_errors": 0,
   "stale_codes": 0,
   "by_source": {
-   "yahoo+naver_api": 36,
-   "yahoo": 156
+   "yahoo": 161,
+   "yahoo+naver_api": 36
   },
   "skipped_days": [
    "2026-10-05"
@@ -95,52 +95,50 @@
  "signals_today": {
   "base": [
    {
-    "code": "396300",
-    "name": "HT ROBOTICS Co. Ltd",
-    "group": "Computer Communications",
+    "code": "419050",
+    "name": "SAMKEE ENERGY SOLUTIONS CO. LTD",
+    "group": "Electrical Products",
     "pattern": "flag",
     "patterns": [
      "flag"
     ],
-    "signal_close": 8990.0,
-    "pattern_low": 5670.0,
+    "signal_close": 2670.0,
+    "pattern_low": 1762.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 9709 이상이면 포기)",
-    "stop_plan": "max(5670, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 2884 이상이면 포기)",
+    "stop_plan": "max(1762, 진입가×0.93)"
    },
    {
-    "code": "068270",
-    "name": "Celltrion, Inc.",
-    "group": "Biotechnology",
-    "pattern": "triangle",
+    "code": "020150",
+    "name": "LOTTE ENERGY MATERIALS CORPORATION",
+    "group": "Electrical Products",
+    "pattern": "flag",
     "patterns": [
-     "box",
-     "triangle"
-    ],
-    "signal_close": 194000.0,
-    "pattern_low": 177956.1,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 209520 이상이면 포기)",
-    "stop_plan": "max(177956, 진입가×0.93)"
-   },
-   {
-    "code": "452280",
-    "name": "HanSun Engineering Co., Ltd.",
-    "group": "Industrial Machinery",
-    "pattern": "box",
-    "patterns": [
-     "box",
      "flag"
     ],
-    "signal_close": 16750.0,
-    "pattern_low": 12160.0,
+    "signal_close": 58500.0,
+    "pattern_low": 48250.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 18090 이상이면 포기)",
-    "stop_plan": "max(12160, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 63180 이상이면 포기)",
+    "stop_plan": "max(48250, 진입가×0.93)"
    }
   ],
   "no_sector": [
    {
+    "code": "419050",
+    "name": "SAMKEE ENERGY SOLUTIONS CO. LTD",
+    "group": "Electrical Products",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 2670.0,
+    "pattern_low": 1762.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 2884 이상이면 포기)",
+    "stop_plan": "max(1762, 진입가×0.93)"
+   },
+   {
     "code": "068270",
     "name": "Celltrion, Inc.",
     "group": "Biotechnology",
@@ -149,11 +147,11 @@
      "box",
      "triangle"
     ],
-    "signal_close": 194000.0,
-    "pattern_low": 177956.1,
+    "signal_close": 198200.0,
+    "pattern_low": 177981.33,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 209520 이상이면 포기)",
-    "stop_plan": "max(177956, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 214056 이상이면 포기)",
+    "stop_plan": "max(177981, 진입가×0.93)"
    },
    {
     "code": "352820",
@@ -163,154 +161,134 @@
     "patterns": [
      "box"
     ],
-    "signal_close": 176800.0,
+    "signal_close": 188500.0,
     "pattern_low": 153000.0,
     "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 190944 이상이면 포기)",
+    "entry_plan": "내일 시가 (시가가 203580 이상이면 포기)",
     "stop_plan": "max(153000, 진입가×0.93)"
    },
    {
-    "code": "138040",
-    "name": "Meritz Financial Group Inc.",
-    "group": "Investment Banks/Brokers",
-    "pattern": "triangle",
+    "code": "000100",
+    "name": "Yuhan Corporation",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "box",
     "patterns": [
-     "triangle"
+     "box"
     ],
-    "signal_close": 129800.0,
-    "pattern_low": 129185.15,
+    "signal_close": 87400.0,
+    "pattern_low": 69000.0,
     "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 140184 이상이면 포기)",
-    "stop_plan": "max(129185, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 94392 이상이면 포기)",
+    "stop_plan": "max(69000, 진입가×0.93)"
+   },
+   {
+    "code": "020150",
+    "name": "LOTTE ENERGY MATERIALS CORPORATION",
+    "group": "Electrical Products",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 58500.0,
+    "pattern_low": 48250.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 63180 이상이면 포기)",
+    "stop_plan": "max(48250, 진입가×0.93)"
+   },
+   {
+    "code": "009900",
+    "name": "Myoung Shin Industry Co., Ltd.",
+    "group": "Auto Parts: OEM",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 9720.0,
+    "pattern_low": 7750.0,
+    "sync_by": null,
+    "entry_plan": "내일 시가 (시가가 10498 이상이면 포기)",
+    "stop_plan": "max(7750, 진입가×0.93)"
    }
   ],
   "hold_10": [
    {
-    "code": "396300",
-    "name": "HT ROBOTICS Co. Ltd",
-    "group": "Computer Communications",
+    "code": "419050",
+    "name": "SAMKEE ENERGY SOLUTIONS CO. LTD",
+    "group": "Electrical Products",
     "pattern": "flag",
     "patterns": [
      "flag"
     ],
-    "signal_close": 8990.0,
-    "pattern_low": 5670.0,
+    "signal_close": 2670.0,
+    "pattern_low": 1762.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 9709 이상이면 포기)",
-    "stop_plan": "max(5670, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 2884 이상이면 포기)",
+    "stop_plan": "max(1762, 진입가×0.93)"
    },
    {
-    "code": "068270",
-    "name": "Celltrion, Inc.",
-    "group": "Biotechnology",
-    "pattern": "triangle",
+    "code": "020150",
+    "name": "LOTTE ENERGY MATERIALS CORPORATION",
+    "group": "Electrical Products",
+    "pattern": "flag",
     "patterns": [
-     "box",
-     "triangle"
-    ],
-    "signal_close": 194000.0,
-    "pattern_low": 177956.1,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 209520 이상이면 포기)",
-    "stop_plan": "max(177956, 진입가×0.93)"
-   },
-   {
-    "code": "452280",
-    "name": "HanSun Engineering Co., Ltd.",
-    "group": "Industrial Machinery",
-    "pattern": "box",
-    "patterns": [
-     "box",
      "flag"
     ],
-    "signal_close": 16750.0,
-    "pattern_low": 12160.0,
+    "signal_close": 58500.0,
+    "pattern_low": 48250.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 18090 이상이면 포기)",
-    "stop_plan": "max(12160, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 63180 이상이면 포기)",
+    "stop_plan": "max(48250, 진입가×0.93)"
    }
   ],
   "risk_2": [
    {
-    "code": "396300",
-    "name": "HT ROBOTICS Co. Ltd",
-    "group": "Computer Communications",
+    "code": "373220",
+    "name": "LG Energy Solution Ltd.",
+    "group": "Electrical Products",
+    "pattern": "cup_handle",
+    "patterns": [
+     "box",
+     "cup_handle"
+    ],
+    "signal_close": 432000.0,
+    "pattern_low": 377000.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 466560 이상이면 포기)",
+    "stop_plan": "max(377000, 진입가×0.93)"
+   },
+   {
+    "code": "419050",
+    "name": "SAMKEE ENERGY SOLUTIONS CO. LTD",
+    "group": "Electrical Products",
     "pattern": "flag",
     "patterns": [
      "flag"
     ],
-    "signal_close": 8990.0,
-    "pattern_low": 5670.0,
+    "signal_close": 2670.0,
+    "pattern_low": 1762.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 9709 이상이면 포기)",
-    "stop_plan": "max(5670, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 2884 이상이면 포기)",
+    "stop_plan": "max(1762, 진입가×0.93)"
    },
    {
-    "code": "068270",
-    "name": "Celltrion, Inc.",
-    "group": "Biotechnology",
-    "pattern": "triangle",
+    "code": "020150",
+    "name": "LOTTE ENERGY MATERIALS CORPORATION",
+    "group": "Electrical Products",
+    "pattern": "flag",
     "patterns": [
-     "box",
-     "triangle"
-    ],
-    "signal_close": 194000.0,
-    "pattern_low": 177956.1,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 209520 이상이면 포기)",
-    "stop_plan": "max(177956, 진입가×0.93)"
-   },
-   {
-    "code": "452280",
-    "name": "HanSun Engineering Co., Ltd.",
-    "group": "Industrial Machinery",
-    "pattern": "box",
-    "patterns": [
-     "box",
      "flag"
     ],
-    "signal_close": 16750.0,
-    "pattern_low": 12160.0,
+    "signal_close": 58500.0,
+    "pattern_low": 48250.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 18090 이상이면 포기)",
-    "stop_plan": "max(12160, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 63180 이상이면 포기)",
+    "stop_plan": "max(48250, 진입가×0.93)"
    }
   ],
-  "no_flag": [
-   {
-    "code": "068270",
-    "name": "Celltrion, Inc.",
-    "group": "Biotechnology",
-    "pattern": "triangle",
-    "patterns": [
-     "box",
-     "triangle"
-    ],
-    "signal_close": 194000.0,
-    "pattern_low": 177956.1,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 209520 이상이면 포기)",
-    "stop_plan": "max(177956, 진입가×0.93)"
-   },
-   {
-    "code": "452280",
-    "name": "HanSun Engineering Co., Ltd.",
-    "group": "Industrial Machinery",
-    "pattern": "box",
-    "patterns": [
-     "box",
-     "flag"
-    ],
-    "signal_close": 16750.0,
-    "pattern_low": 12160.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 18090 이상이면 포기)",
-    "stop_plan": "max(12160, 진입가×0.93)"
-   }
-  ]
+  "no_flag": []
  },
- "signal_date": "2026-10-16",
- "signals_frozen": true,
+ "signal_date": "2026-10-19",
+ "signals_frozen": false,
  "frozen_dates": [
   "2026-10-06",
   "2026-10-07",
@@ -324,7 +302,7 @@
  "variants": {
   "base": {
    "label": "동조 업종 + 패턴 돌파 (기본)",
-   "signals": 18,
+   "signals": 20,
    "trades": 6,
    "wins": 0,
    "win_rate": 0.0,
@@ -332,14 +310,14 @@
    "avg_loss_pct": -7.17,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -5.24,
-   "equity_final": 9475957,
+   "total_return_pct": -3.67,
+   "equity_final": 9633229,
    "max_drawdown_pct": 5.26,
    "avg_hold_days": 2.17,
    "skipped": {
     "gap": 0,
     "limit": 8,
-    "cooldown": 0,
+    "cooldown": 1,
     "size": 0,
     "no_bar": 0,
     "pattern": 0
@@ -383,7 +361,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -5.24
+    "2026": -3.67
    },
    "open_positions": [
     {
@@ -395,15 +373,54 @@
      "entry": 386656.5,
      "stop": 359590.54,
      "shares": 3,
-     "bars_held": 7,
-     "last_close": 403000.0,
-     "unrealized_pct": 4.23
+     "bars_held": 8,
+     "last_close": 432000.0,
+     "unrealized_pct": 11.73
+    },
+    {
+     "code": "396300",
+     "name": "HT ROBOTICS Co. Ltd",
+     "group": "Computer Communications",
+     "pattern": "flag",
+     "entry_date": "2026-10-19",
+     "entry": 8836.43,
+     "stop": 8217.88,
+     "shares": 152,
+     "bars_held": 1,
+     "last_close": 9040.0,
+     "unrealized_pct": 2.3
+    },
+    {
+     "code": "068270",
+     "name": "Celltrion, Inc.",
+     "group": "Biotechnology",
+     "pattern": "triangle",
+     "entry_date": "2026-10-19",
+     "entry": 194481.7,
+     "stop": 180867.98,
+     "shares": 6,
+     "bars_held": 1,
+     "last_close": 198200.0,
+     "unrealized_pct": 1.91
+    },
+    {
+     "code": "452280",
+     "name": "HanSun Engineering Co., Ltd.",
+     "group": "Industrial Machinery",
+     "pattern": "box",
+     "entry_date": "2026-10-19",
+     "entry": 16730.04,
+     "stop": 15558.94,
+     "shares": 80,
+     "bars_held": 1,
+     "last_close": 16950.0,
+     "unrealized_pct": 1.31
     }
    ]
   },
   "no_sector": {
    "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
-   "signals": 48,
+   "signals": 54,
    "trades": 13,
    "wins": 0,
    "win_rate": 0.0,
@@ -411,16 +428,16 @@
    "avg_loss_pct": -7.41,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -7.01,
-   "equity_final": 9299048,
+   "total_return_pct": -5.68,
+   "equity_final": 9432268,
    "max_drawdown_pct": 11.47,
    "avg_hold_days": 1.77,
    "skipped": {
     "gap": 0,
-    "limit": 27,
-    "cooldown": 0,
+    "limit": 29,
+    "cooldown": 9,
     "size": 0,
-    "no_bar": 0,
+    "no_bar": 1,
     "pattern": 0
    },
    "by_pattern": {
@@ -472,7 +489,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -7.01
+    "2026": -5.68
    },
    "open_positions": [
     {
@@ -484,9 +501,9 @@
      "entry": 21363.9,
      "stop": 20800.0,
      "shares": 83,
-     "bars_held": 4,
-     "last_close": 23500.0,
-     "unrealized_pct": 10.0
+     "bars_held": 5,
+     "last_close": 24000.0,
+     "unrealized_pct": 12.34
     },
     {
      "code": "028670",
@@ -497,9 +514,9 @@
      "entry": 6619.8,
      "stop": 6156.41,
      "shares": 198,
-     "bars_held": 3,
-     "last_close": 6720.0,
-     "unrealized_pct": 1.51
+     "bars_held": 4,
+     "last_close": 6790.0,
+     "unrealized_pct": 2.57
     },
     {
      "code": "452280",
@@ -510,9 +527,9 @@
      "entry": 15335.87,
      "stop": 14262.36,
      "shares": 83,
-     "bars_held": 2,
-     "last_close": 16630.0,
-     "unrealized_pct": 8.44
+     "bars_held": 3,
+     "last_close": 16950.0,
+     "unrealized_pct": 10.53
     },
     {
      "code": "396300",
@@ -523,9 +540,9 @@
      "entry": 7452.29,
      "stop": 6930.63,
      "shares": 170,
-     "bars_held": 1,
-     "last_close": 8830.0,
-     "unrealized_pct": 18.49
+     "bars_held": 2,
+     "last_close": 9040.0,
+     "unrealized_pct": 21.3
     },
     {
      "code": "033780",
@@ -536,15 +553,15 @@
      "entry": 187761.6,
      "stop": 174618.29,
      "shares": 6,
-     "bars_held": 1,
-     "last_close": 190500.0,
-     "unrealized_pct": 1.46
+     "bars_held": 2,
+     "last_close": 193100.0,
+     "unrealized_pct": 2.84
     }
    ]
   },
   "hold_10": {
    "label": "동조 + 패턴, 보유 10일",
-   "signals": 18,
+   "signals": 20,
    "trades": 6,
    "wins": 0,
    "win_rate": 0.0,
@@ -552,14 +569,14 @@
    "avg_loss_pct": -7.17,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -5.24,
-   "equity_final": 9475957,
+   "total_return_pct": -3.67,
+   "equity_final": 9633229,
    "max_drawdown_pct": 5.26,
    "avg_hold_days": 2.17,
    "skipped": {
     "gap": 0,
     "limit": 8,
-    "cooldown": 0,
+    "cooldown": 1,
     "size": 0,
     "no_bar": 0,
     "pattern": 0
@@ -603,7 +620,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -5.24
+    "2026": -3.67
    },
    "open_positions": [
     {
@@ -615,15 +632,54 @@
      "entry": 386656.5,
      "stop": 359590.54,
      "shares": 3,
-     "bars_held": 7,
-     "last_close": 403000.0,
-     "unrealized_pct": 4.23
+     "bars_held": 8,
+     "last_close": 432000.0,
+     "unrealized_pct": 11.73
+    },
+    {
+     "code": "396300",
+     "name": "HT ROBOTICS Co. Ltd",
+     "group": "Computer Communications",
+     "pattern": "flag",
+     "entry_date": "2026-10-19",
+     "entry": 8836.43,
+     "stop": 8217.88,
+     "shares": 152,
+     "bars_held": 1,
+     "last_close": 9040.0,
+     "unrealized_pct": 2.3
+    },
+    {
+     "code": "068270",
+     "name": "Celltrion, Inc.",
+     "group": "Biotechnology",
+     "pattern": "triangle",
+     "entry_date": "2026-10-19",
+     "entry": 194481.7,
+     "stop": 180867.98,
+     "shares": 6,
+     "bars_held": 1,
+     "last_close": 198200.0,
+     "unrealized_pct": 1.91
+    },
+    {
+     "code": "452280",
+     "name": "HanSun Engineering Co., Ltd.",
+     "group": "Industrial Machinery",
+     "pattern": "box",
+     "entry_date": "2026-10-19",
+     "entry": 16730.04,
+     "stop": 15558.94,
+     "shares": 80,
+     "bars_held": 1,
+     "last_close": 16950.0,
+     "unrealized_pct": 1.31
     }
    ]
   },
   "risk_2": {
    "label": "동조 + 패턴, 위험 2% (명목 상한 30%)",
-   "signals": 18,
+   "signals": 21,
    "trades": 5,
    "wins": 0,
    "win_rate": 0.0,
@@ -631,14 +687,14 @@
    "avg_loss_pct": -7.12,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -9.21,
-   "equity_final": 9078526,
+   "total_return_pct": -7.81,
+   "equity_final": 9219447,
    "max_drawdown_pct": 9.21,
    "avg_hold_days": 2.2,
    "skipped": {
     "gap": 0,
     "limit": 0,
-    "cooldown": 0,
+    "cooldown": 1,
     "size": 10,
     "no_bar": 0,
     "pattern": 0
@@ -682,9 +738,49 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -9.21
+    "2026": -7.81
    },
-   "open_positions": []
+   "open_positions": [
+    {
+     "code": "396300",
+     "name": "HT ROBOTICS Co. Ltd",
+     "group": "Computer Communications",
+     "pattern": "flag",
+     "entry_date": "2026-10-19",
+     "entry": 8836.43,
+     "stop": 8217.88,
+     "shares": 293,
+     "bars_held": 1,
+     "last_close": 9040.0,
+     "unrealized_pct": 2.3
+    },
+    {
+     "code": "068270",
+     "name": "Celltrion, Inc.",
+     "group": "Biotechnology",
+     "pattern": "triangle",
+     "entry_date": "2026-10-19",
+     "entry": 194481.7,
+     "stop": 180867.98,
+     "shares": 13,
+     "bars_held": 1,
+     "last_close": 198200.0,
+     "unrealized_pct": 1.91
+    },
+    {
+     "code": "452280",
+     "name": "HanSun Engineering Co., Ltd.",
+     "group": "Industrial Machinery",
+     "pattern": "box",
+     "entry_date": "2026-10-19",
+     "entry": 16730.04,
+     "stop": 15558.94,
+     "shares": 155,
+     "bars_held": 1,
+     "last_close": 16950.0,
+     "unrealized_pct": 1.31
+    }
+   ]
   },
   "no_flag": {
    "label": "동조 + 패턴, 깃발형 제외",
@@ -696,17 +792,17 @@
    "avg_loss_pct": -7.04,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -3.43,
-   "equity_final": 9657011,
+   "total_return_pct": -2.12,
+   "equity_final": 9787666,
    "max_drawdown_pct": 3.9,
    "avg_hold_days": 3.75,
    "skipped": {
     "gap": 0,
     "limit": 1,
-    "cooldown": 0,
+    "cooldown": 1,
     "size": 0,
     "no_bar": 0,
-    "pattern": 0
+    "pattern": 2
    },
    "by_pattern": {
     "cup_handle": {
@@ -742,7 +838,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -3.43
+    "2026": -2.12
    },
    "open_positions": [
     {
@@ -754,9 +850,35 @@
      "entry": 386656.5,
      "stop": 359590.54,
      "shares": 3,
-     "bars_held": 7,
-     "last_close": 403000.0,
-     "unrealized_pct": 4.23
+     "bars_held": 8,
+     "last_close": 432000.0,
+     "unrealized_pct": 11.73
+    },
+    {
+     "code": "068270",
+     "name": "Celltrion, Inc.",
+     "group": "Biotechnology",
+     "pattern": "triangle",
+     "entry_date": "2026-10-19",
+     "entry": 194481.7,
+     "stop": 180867.98,
+     "shares": 7,
+     "bars_held": 1,
+     "last_close": 198200.0,
+     "unrealized_pct": 1.91
+    },
+    {
+     "code": "452280",
+     "name": "HanSun Engineering Co., Ltd.",
+     "group": "Industrial Machinery",
+     "pattern": "box",
+     "entry_date": "2026-10-19",
+     "entry": 16730.04,
+     "stop": 15558.94,
+     "shares": 82,
+     "bars_held": 1,
+     "last_close": 16950.0,
+     "unrealized_pct": 1.31
     }
    ]
   }
