@@ -1,7 +1,7 @@
 {
  "schema": "carrygate-listing/1",
- "date": "2026-10-19",
- "generated_at_kst": "2026-10-19 13:52:28",
+ "date": "2026-10-20",
+ "generated_at_kst": "2026-10-20 14:01:02",
  "method": {
   "notice": "업비트 공지(category=trade) 중 제목에 ('신규 거래지원', '거래지원 안내', '디지털 자산 추가', '원화 마켓 추가', '마켓 추가') 가 있고 ('종료', '유의', '해제', '변경', '이벤트', '입출금', '지연') 가 없는 것. 괄호 안 티커 추출",
   "reaction": "공지 시각(분)의 해외 선물 시가 대비 (5, 15, 60, 240)분 뒤 시가 수익률(%), 60분 내 최고가 상승폭"
@@ -9,8 +9,8 @@
  "notices_seen": 0,
  "markets_krw": 296,
  "market_snapshot_existed": true,
- "listings_seen": 0,
- "new_today": 0,
+ "listings_seen": 1,
+ "new_today": 3,
  "events": [
   {
    "id": "mkt:KRW-POD:1790924700",
@@ -144,39 +144,76 @@
    "post60_pct": 94.737,
    "post240_pct": 82.895,
    "maxup60_pct": 116.667
+  },
+  {
+   "id": "mkt:KRW-CT:1792400700",
+   "title": "업비트 마켓 목록에 새로 등장: KRW-CT",
+   "time_utc": "2026-10-19T09:05:00Z",
+   "ts": 1792400700,
+   "ticker": "CT",
+   "venue": "hyperliquid",
+   "listed_abroad": false
+  },
+  {
+   "id": "mkt:KRW-CT:1792400700",
+   "title": "업비트 마켓 목록에 새로 등장: KRW-CT",
+   "time_utc": "2026-10-19T09:05:00Z",
+   "ts": 1792400700,
+   "ticker": "CT",
+   "venue": "okx",
+   "listed_abroad": true,
+   "post5_pct": 0.972,
+   "post15_pct": -0.257,
+   "post60_pct": 7.092,
+   "post240_pct": -5.405,
+   "maxup60_pct": 8.178
+  },
+  {
+   "id": "mkt:KRW-CT:1792400700",
+   "title": "업비트 마켓 목록에 새로 등장: KRW-CT",
+   "time_utc": "2026-10-19T09:05:00Z",
+   "ts": 1792400700,
+   "ticker": "CT",
+   "venue": "upbit",
+   "listed_abroad": true,
+   "post5_pct": 5.372,
+   "post15_pct": 1.446,
+   "post60_pct": 9.091,
+   "post240_pct": -7.438,
+   "maxup60_pct": 10.95
   }
  ],
  "errors": {
   "notices": "fetch failed https://api-manager.upbit.com/api/v1/announcements?os=web&page=1&per_page=20&category=trade : HTTP Error 403: Forbidden"
  },
  "summary": {
-  "notices": 4,
-  "pairs": 12,
-  "with_price": 5,
+  "notices": 5,
+  "pairs": 15,
+  "with_price": 7,
   "by_venue": {
    "okx": {
-    "n": 1,
-    "post5_pct": -0.74,
-    "post5_pos_pct": 0.0,
-    "post15_pct": 0.29,
-    "post15_pos_pct": 100.0,
-    "post60_pct": 3.63,
+    "n": 2,
+    "post5_pct": 0.12,
+    "post5_pos_pct": 50.0,
+    "post15_pct": 0.02,
+    "post15_pos_pct": 50.0,
+    "post60_pct": 5.36,
     "post60_pos_pct": 100.0,
-    "post240_pct": 6.19,
-    "post240_pos_pct": 100.0,
-    "maxup60_pct": 5.42
+    "post240_pct": 0.39,
+    "post240_pos_pct": 50.0,
+    "maxup60_pct": 6.8
    },
    "upbit": {
-    "n": 4,
-    "post5_pct": 45.56,
-    "post5_pos_pct": 75.0,
-    "post15_pct": 40.02,
-    "post15_pos_pct": 75.0,
-    "post60_pct": 48.48,
-    "post60_pos_pct": 75.0,
-    "post240_pct": 38.11,
-    "post240_pos_pct": 75.0,
-    "maxup60_pct": 68.12
+    "n": 5,
+    "post5_pct": 37.52,
+    "post5_pos_pct": 80.0,
+    "post15_pct": 32.3,
+    "post15_pos_pct": 80.0,
+    "post60_pct": 40.6,
+    "post60_pos_pct": 80.0,
+    "post240_pct": 29.0,
+    "post240_pos_pct": 60.0,
+    "maxup60_pct": 56.69
    }
   }
  }

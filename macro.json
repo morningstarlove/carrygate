@@ -1,7 +1,7 @@
 {
  "schema": "carrygate-macro/1",
- "date": "2026-10-19",
- "generated_at_kst": "2026-10-19 13:52:15",
+ "date": "2026-10-20",
+ "generated_at_kst": "2026-10-20 14:00:31",
  "method": {
   "window": "발표 분의 시가를 기준가로, 직전 30분과 직후 (5, 15, 30, 60)분 수익률(bp), 60분 내 최대 상승·하락",
   "baseline": "전날 같은 시각의 30분 변동폭 = 평소 기준",
@@ -2087,9 +2087,11 @@
    "maxup60_bp": 4.06,
    "maxdown60_bp": -178.58,
    "base_abs_post30_bp": 6.12,
-   "actual": null,
+   "actual": 3.7,
    "forecast": 3.7,
-   "previous": 3.4
+   "previous": 3.4,
+   "surprise": 0.0,
+   "surprise_dir": 0
   },
   {
    "type": "cpi",
@@ -2107,9 +2109,11 @@
    "maxup60_bp": 11.13,
    "maxdown60_bp": -238.47,
    "base_abs_post30_bp": 8.79,
-   "actual": null,
+   "actual": 3.7,
    "forecast": 3.7,
-   "previous": 3.4
+   "previous": 3.4,
+   "surprise": 0.0,
+   "surprise_dir": 0
   }
  ],
  "new_today": 0,
@@ -2250,5 +2254,5 @@
   }
  },
  "forward_events": 4,
- "forward_pending_surprise": 2
+ "forward_pending_surprise": 0
 }
