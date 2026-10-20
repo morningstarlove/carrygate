@@ -1,6 +1,6 @@
 {
- "date": "2026-10-19",
- "generated_at_utc": "2026-10-19T14:05:15Z",
+ "date": "2026-10-20",
+ "generated_at_utc": "2026-10-20T07:14:17Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -74,15 +74,15 @@
   }
  },
  "forward": {
-  "days": 9,
+  "days": 10,
   "from": "2026-10-05",
-  "to": "2026-10-19",
-  "codes": 197,
+  "to": "2026-10-20",
+  "codes": 205,
   "bar_errors": 0,
   "stale_codes": 0,
   "by_source": {
-   "yahoo": 161,
-   "yahoo+naver_api": 36
+   "yahoo": 167,
+   "yahoo+naver_api": 38
   },
   "skipped_days": [
    "2026-10-05"
@@ -93,202 +93,14 @@
   "note": null
  },
  "signals_today": {
-  "base": [
-   {
-    "code": "419050",
-    "name": "SAMKEE ENERGY SOLUTIONS CO. LTD",
-    "group": "Electrical Products",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 2670.0,
-    "pattern_low": 1762.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 2884 이상이면 포기)",
-    "stop_plan": "max(1762, 진입가×0.93)"
-   },
-   {
-    "code": "020150",
-    "name": "LOTTE ENERGY MATERIALS CORPORATION",
-    "group": "Electrical Products",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 58500.0,
-    "pattern_low": 48250.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 63180 이상이면 포기)",
-    "stop_plan": "max(48250, 진입가×0.93)"
-   }
-  ],
-  "no_sector": [
-   {
-    "code": "419050",
-    "name": "SAMKEE ENERGY SOLUTIONS CO. LTD",
-    "group": "Electrical Products",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 2670.0,
-    "pattern_low": 1762.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 2884 이상이면 포기)",
-    "stop_plan": "max(1762, 진입가×0.93)"
-   },
-   {
-    "code": "068270",
-    "name": "Celltrion, Inc.",
-    "group": "Biotechnology",
-    "pattern": "triangle",
-    "patterns": [
-     "box",
-     "triangle"
-    ],
-    "signal_close": 198200.0,
-    "pattern_low": 177981.33,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 214056 이상이면 포기)",
-    "stop_plan": "max(177981, 진입가×0.93)"
-   },
-   {
-    "code": "352820",
-    "name": "HYBE Co., Ltd.",
-    "group": "Miscellaneous Commercial Services",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 188500.0,
-    "pattern_low": 153000.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 203580 이상이면 포기)",
-    "stop_plan": "max(153000, 진입가×0.93)"
-   },
-   {
-    "code": "000100",
-    "name": "Yuhan Corporation",
-    "group": "Pharmaceuticals: Major",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 87400.0,
-    "pattern_low": 69000.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 94392 이상이면 포기)",
-    "stop_plan": "max(69000, 진입가×0.93)"
-   },
-   {
-    "code": "020150",
-    "name": "LOTTE ENERGY MATERIALS CORPORATION",
-    "group": "Electrical Products",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 58500.0,
-    "pattern_low": 48250.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 63180 이상이면 포기)",
-    "stop_plan": "max(48250, 진입가×0.93)"
-   },
-   {
-    "code": "009900",
-    "name": "Myoung Shin Industry Co., Ltd.",
-    "group": "Auto Parts: OEM",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 9720.0,
-    "pattern_low": 7750.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 10498 이상이면 포기)",
-    "stop_plan": "max(7750, 진입가×0.93)"
-   }
-  ],
-  "hold_10": [
-   {
-    "code": "419050",
-    "name": "SAMKEE ENERGY SOLUTIONS CO. LTD",
-    "group": "Electrical Products",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 2670.0,
-    "pattern_low": 1762.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 2884 이상이면 포기)",
-    "stop_plan": "max(1762, 진입가×0.93)"
-   },
-   {
-    "code": "020150",
-    "name": "LOTTE ENERGY MATERIALS CORPORATION",
-    "group": "Electrical Products",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 58500.0,
-    "pattern_low": 48250.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 63180 이상이면 포기)",
-    "stop_plan": "max(48250, 진입가×0.93)"
-   }
-  ],
-  "risk_2": [
-   {
-    "code": "373220",
-    "name": "LG Energy Solution Ltd.",
-    "group": "Electrical Products",
-    "pattern": "cup_handle",
-    "patterns": [
-     "box",
-     "cup_handle"
-    ],
-    "signal_close": 432000.0,
-    "pattern_low": 377000.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 466560 이상이면 포기)",
-    "stop_plan": "max(377000, 진입가×0.93)"
-   },
-   {
-    "code": "419050",
-    "name": "SAMKEE ENERGY SOLUTIONS CO. LTD",
-    "group": "Electrical Products",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 2670.0,
-    "pattern_low": 1762.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 2884 이상이면 포기)",
-    "stop_plan": "max(1762, 진입가×0.93)"
-   },
-   {
-    "code": "020150",
-    "name": "LOTTE ENERGY MATERIALS CORPORATION",
-    "group": "Electrical Products",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 58500.0,
-    "pattern_low": 48250.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 63180 이상이면 포기)",
-    "stop_plan": "max(48250, 진입가×0.93)"
-   }
-  ],
+  "base": [],
+  "no_sector": [],
+  "hold_10": [],
+  "risk_2": [],
   "no_flag": []
  },
- "signal_date": "2026-10-19",
- "signals_frozen": true,
+ "signal_date": "2026-10-20",
+ "signals_frozen": false,
  "frozen_dates": [
   "2026-10-06",
   "2026-10-07",
@@ -311,13 +123,13 @@
    "avg_loss_pct": -7.17,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -3.36,
-   "equity_final": 9663629,
+   "total_return_pct": -3.5,
+   "equity_final": 9649667,
    "max_drawdown_pct": 5.26,
    "avg_hold_days": 2.17,
    "skipped": {
     "gap": 0,
-    "limit": 8,
+    "limit": 9,
     "cooldown": 0,
     "size": 0,
     "no_bar": 0,
@@ -362,7 +174,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -3.36
+    "2026": -3.5
    },
    "open_positions": [
     {
@@ -374,9 +186,9 @@
      "entry": 386656.5,
      "stop": 359590.54,
      "shares": 3,
-     "bars_held": 8,
-     "last_close": 432000.0,
-     "unrealized_pct": 11.73
+     "bars_held": 9,
+     "last_close": 414000.0,
+     "unrealized_pct": 7.07
     },
     {
      "code": "396300",
@@ -387,9 +199,9 @@
      "entry": 8836.43,
      "stop": 8217.88,
      "shares": 152,
-     "bars_held": 1,
-     "last_close": 9140.0,
-     "unrealized_pct": 3.44
+     "bars_held": 2,
+     "last_close": 10280.0,
+     "unrealized_pct": 16.34
     },
     {
      "code": "068270",
@@ -400,9 +212,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 6,
-     "bars_held": 1,
-     "last_close": 198200.0,
-     "unrealized_pct": 1.91
+     "bars_held": 2,
+     "last_close": 197400.0,
+     "unrealized_pct": 1.5
     },
     {
      "code": "452280",
@@ -413,9 +225,22 @@
      "entry": 16730.04,
      "stop": 15558.94,
      "shares": 80,
+     "bars_held": 2,
+     "last_close": 16240.0,
+     "unrealized_pct": -2.93
+    },
+    {
+     "code": "419050",
+     "name": "SAMKEE ENERGY SOLUTIONS CO. LTD",
+     "group": "Electrical Products",
+     "pattern": "flag",
+     "entry_date": "2026-10-20",
+     "entry": 2652.93,
+     "stop": 2467.23,
+     "shares": 521,
      "bars_held": 1,
-     "last_close": 17140.0,
-     "unrealized_pct": 2.45
+     "last_close": 2545.0,
+     "unrealized_pct": -4.07
     }
    ]
   },
@@ -429,14 +254,14 @@
    "avg_loss_pct": -7.41,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -5.35,
-   "equity_final": 9465038,
+   "total_return_pct": -5.23,
+   "equity_final": 9476568,
    "max_drawdown_pct": 11.47,
    "avg_hold_days": 1.77,
    "skipped": {
     "gap": 0,
-    "limit": 29,
-    "cooldown": 0,
+    "limit": 35,
+    "cooldown": 10,
     "size": 0,
     "no_bar": 1,
     "pattern": 0
@@ -490,7 +315,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -5.35
+    "2026": -5.23
    },
    "open_positions": [
     {
@@ -502,9 +327,9 @@
      "entry": 21363.9,
      "stop": 20800.0,
      "shares": 83,
-     "bars_held": 5,
-     "last_close": 24000.0,
-     "unrealized_pct": 12.34
+     "bars_held": 6,
+     "last_close": 23450.0,
+     "unrealized_pct": 9.76
     },
     {
      "code": "028670",
@@ -515,9 +340,9 @@
      "entry": 6619.8,
      "stop": 6156.41,
      "shares": 198,
-     "bars_held": 4,
-     "last_close": 6790.0,
-     "unrealized_pct": 2.57
+     "bars_held": 5,
+     "last_close": 6450.0,
+     "unrealized_pct": -2.57
     },
     {
      "code": "452280",
@@ -528,9 +353,9 @@
      "entry": 15335.87,
      "stop": 14262.36,
      "shares": 83,
-     "bars_held": 3,
-     "last_close": 17140.0,
-     "unrealized_pct": 11.76
+     "bars_held": 4,
+     "last_close": 16240.0,
+     "unrealized_pct": 5.9
     },
     {
      "code": "396300",
@@ -541,9 +366,9 @@
      "entry": 7452.29,
      "stop": 6930.63,
      "shares": 170,
-     "bars_held": 2,
-     "last_close": 9140.0,
-     "unrealized_pct": 22.65
+     "bars_held": 3,
+     "last_close": 10280.0,
+     "unrealized_pct": 37.94
     },
     {
      "code": "033780",
@@ -554,9 +379,9 @@
      "entry": 187761.6,
      "stop": 174618.29,
      "shares": 6,
-     "bars_held": 2,
-     "last_close": 193100.0,
-     "unrealized_pct": 2.84
+     "bars_held": 3,
+     "last_close": 194000.0,
+     "unrealized_pct": 3.32
     }
    ]
   },
@@ -570,13 +395,13 @@
    "avg_loss_pct": -7.17,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -3.36,
-   "equity_final": 9663629,
+   "total_return_pct": -3.5,
+   "equity_final": 9649667,
    "max_drawdown_pct": 5.26,
    "avg_hold_days": 2.17,
    "skipped": {
     "gap": 0,
-    "limit": 8,
+    "limit": 9,
     "cooldown": 0,
     "size": 0,
     "no_bar": 0,
@@ -621,7 +446,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -3.36
+    "2026": -3.5
    },
    "open_positions": [
     {
@@ -633,9 +458,9 @@
      "entry": 386656.5,
      "stop": 359590.54,
      "shares": 3,
-     "bars_held": 8,
-     "last_close": 432000.0,
-     "unrealized_pct": 11.73
+     "bars_held": 9,
+     "last_close": 414000.0,
+     "unrealized_pct": 7.07
     },
     {
      "code": "396300",
@@ -646,9 +471,9 @@
      "entry": 8836.43,
      "stop": 8217.88,
      "shares": 152,
-     "bars_held": 1,
-     "last_close": 9140.0,
-     "unrealized_pct": 3.44
+     "bars_held": 2,
+     "last_close": 10280.0,
+     "unrealized_pct": 16.34
     },
     {
      "code": "068270",
@@ -659,9 +484,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 6,
-     "bars_held": 1,
-     "last_close": 198200.0,
-     "unrealized_pct": 1.91
+     "bars_held": 2,
+     "last_close": 197400.0,
+     "unrealized_pct": 1.5
     },
     {
      "code": "452280",
@@ -672,9 +497,22 @@
      "entry": 16730.04,
      "stop": 15558.94,
      "shares": 80,
+     "bars_held": 2,
+     "last_close": 16240.0,
+     "unrealized_pct": -2.93
+    },
+    {
+     "code": "419050",
+     "name": "SAMKEE ENERGY SOLUTIONS CO. LTD",
+     "group": "Electrical Products",
+     "pattern": "flag",
+     "entry_date": "2026-10-20",
+     "entry": 2652.93,
+     "stop": 2467.23,
+     "shares": 521,
      "bars_held": 1,
-     "last_close": 17140.0,
-     "unrealized_pct": 2.45
+     "last_close": 2545.0,
+     "unrealized_pct": -4.07
     }
    ]
   },
@@ -688,15 +526,15 @@
    "avg_loss_pct": -7.12,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -7.22,
-   "equity_final": 9278197,
+   "total_return_pct": -5.38,
+   "equity_final": 9462317,
    "max_drawdown_pct": 9.21,
    "avg_hold_days": 2.2,
    "skipped": {
     "gap": 0,
     "limit": 0,
     "cooldown": 0,
-    "size": 10,
+    "size": 13,
     "no_bar": 0,
     "pattern": 0
    },
@@ -739,7 +577,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -7.22
+    "2026": -5.38
    },
    "open_positions": [
     {
@@ -751,9 +589,9 @@
      "entry": 8836.43,
      "stop": 8217.88,
      "shares": 293,
-     "bars_held": 1,
-     "last_close": 9140.0,
-     "unrealized_pct": 3.44
+     "bars_held": 2,
+     "last_close": 10280.0,
+     "unrealized_pct": 16.34
     },
     {
      "code": "068270",
@@ -764,9 +602,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 13,
-     "bars_held": 1,
-     "last_close": 198200.0,
-     "unrealized_pct": 1.91
+     "bars_held": 2,
+     "last_close": 197400.0,
+     "unrealized_pct": 1.5
     },
     {
      "code": "452280",
@@ -777,9 +615,9 @@
      "entry": 16730.04,
      "stop": 15558.94,
      "shares": 155,
-     "bars_held": 1,
-     "last_close": 17140.0,
-     "unrealized_pct": 2.45
+     "bars_held": 2,
+     "last_close": 16240.0,
+     "unrealized_pct": -2.93
     }
    ]
   },
@@ -793,8 +631,8 @@
    "avg_loss_pct": -7.04,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -1.97,
-   "equity_final": 9803246,
+   "total_return_pct": -3.3,
+   "equity_final": 9669846,
    "max_drawdown_pct": 3.9,
    "avg_hold_days": 3.75,
    "skipped": {
@@ -839,7 +677,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -1.97
+    "2026": -3.3
    },
    "open_positions": [
     {
@@ -851,9 +689,9 @@
      "entry": 386656.5,
      "stop": 359590.54,
      "shares": 3,
-     "bars_held": 8,
-     "last_close": 432000.0,
-     "unrealized_pct": 11.73
+     "bars_held": 9,
+     "last_close": 414000.0,
+     "unrealized_pct": 7.07
     },
     {
      "code": "068270",
@@ -864,9 +702,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 7,
-     "bars_held": 1,
-     "last_close": 198200.0,
-     "unrealized_pct": 1.91
+     "bars_held": 2,
+     "last_close": 197400.0,
+     "unrealized_pct": 1.5
     },
     {
      "code": "452280",
@@ -877,9 +715,9 @@
      "entry": 16730.04,
      "stop": 15558.94,
      "shares": 82,
-     "bars_held": 1,
-     "last_close": 17140.0,
-     "unrealized_pct": 2.45
+     "bars_held": 2,
+     "last_close": 16240.0,
+     "unrealized_pct": -2.93
     }
    ]
   }
