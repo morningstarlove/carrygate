@@ -1,6 +1,6 @@
 {
  "date": "2026-10-20",
- "generated_at_utc": "2026-10-20T07:14:17Z",
+ "generated_at_utc": "2026-10-20T12:20:59Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -77,12 +77,12 @@
   "days": 10,
   "from": "2026-10-05",
   "to": "2026-10-20",
-  "codes": 205,
+  "codes": 206,
   "bar_errors": 0,
   "stale_codes": 0,
   "by_source": {
-   "yahoo": 167,
-   "yahoo+naver_api": 38
+   "yahoo+naver_api": 38,
+   "yahoo": 168
   },
   "skipped_days": [
    "2026-10-05"
@@ -100,7 +100,7 @@
   "no_flag": []
  },
  "signal_date": "2026-10-20",
- "signals_frozen": false,
+ "signals_frozen": true,
  "frozen_dates": [
   "2026-10-06",
   "2026-10-07",
@@ -110,23 +110,24 @@
   "2026-10-14",
   "2026-10-15",
   "2026-10-16",
-  "2026-10-19"
+  "2026-10-19",
+  "2026-10-20"
  ],
  "variants": {
   "base": {
    "label": "동조 업종 + 패턴 돌파 (기본)",
    "signals": 20,
-   "trades": 6,
+   "trades": 7,
    "wins": 0,
    "win_rate": 0.0,
    "avg_win_pct": null,
-   "avg_loss_pct": -7.17,
+   "avg_loss_pct": -7.21,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -3.5,
-   "equity_final": 9649667,
+   "total_return_pct": -4.92,
+   "equity_final": 9508058,
    "max_drawdown_pct": 5.26,
-   "avg_hold_days": 2.17,
+   "avg_hold_days": 2,
    "skipped": {
     "gap": 0,
     "limit": 9,
@@ -137,9 +138,9 @@
    },
    "by_pattern": {
     "flag": {
-     "n": 3,
+     "n": 4,
      "wins": 0,
-     "pnl_krw": -307325
+     "pnl_krw": -410256
     },
     "cup_handle": {
      "n": 1,
@@ -154,27 +155,27 @@
    },
    "by_sync": {
     "day": {
-     "n": 6,
+     "n": 7,
      "wins": 0,
-     "pnl_krw": -572899
+     "pnl_krw": -675830
     }
    },
    "by_exit": {
     "stop": {
-     "n": 6,
+     "n": 7,
      "wins": 0,
-     "pnl_krw": -572899
+     "pnl_krw": -675830
     }
    },
    "by_year": {
     "2026": {
-     "n": 6,
+     "n": 7,
      "wins": 0,
-     "pnl_krw": -572899
+     "pnl_krw": -675830
     }
    },
    "yearly_return_pct": {
-    "2026": -3.5
+    "2026": -4.92
    },
    "open_positions": [
     {
@@ -200,8 +201,8 @@
      "stop": 8217.88,
      "shares": 152,
      "bars_held": 2,
-     "last_close": 10280.0,
-     "unrealized_pct": 16.34
+     "last_close": 9970.0,
+     "unrealized_pct": 12.83
     },
     {
      "code": "068270",
@@ -226,21 +227,8 @@
      "stop": 15558.94,
      "shares": 80,
      "bars_held": 2,
-     "last_close": 16240.0,
-     "unrealized_pct": -2.93
-    },
-    {
-     "code": "419050",
-     "name": "SAMKEE ENERGY SOLUTIONS CO. LTD",
-     "group": "Electrical Products",
-     "pattern": "flag",
-     "entry_date": "2026-10-20",
-     "entry": 2652.93,
-     "stop": 2467.23,
-     "shares": 521,
-     "bars_held": 1,
-     "last_close": 2545.0,
-     "unrealized_pct": -4.07
+     "last_close": 15640.0,
+     "unrealized_pct": -6.52
     }
    ]
   },
@@ -254,14 +242,14 @@
    "avg_loss_pct": -7.41,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -5.23,
-   "equity_final": 9476568,
+   "total_return_pct": -6.26,
+   "equity_final": 9374068,
    "max_drawdown_pct": 11.47,
    "avg_hold_days": 1.77,
    "skipped": {
     "gap": 0,
     "limit": 35,
-    "cooldown": 10,
+    "cooldown": 0,
     "size": 0,
     "no_bar": 1,
     "pattern": 0
@@ -315,7 +303,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -5.23
+    "2026": -6.26
    },
    "open_positions": [
     {
@@ -354,8 +342,8 @@
      "stop": 14262.36,
      "shares": 83,
      "bars_held": 4,
-     "last_close": 16240.0,
-     "unrealized_pct": 5.9
+     "last_close": 15640.0,
+     "unrealized_pct": 1.98
     },
     {
      "code": "396300",
@@ -367,8 +355,8 @@
      "stop": 6930.63,
      "shares": 170,
      "bars_held": 3,
-     "last_close": 10280.0,
-     "unrealized_pct": 37.94
+     "last_close": 9970.0,
+     "unrealized_pct": 33.78
     },
     {
      "code": "033780",
@@ -388,17 +376,17 @@
   "hold_10": {
    "label": "동조 + 패턴, 보유 10일",
    "signals": 20,
-   "trades": 6,
+   "trades": 7,
    "wins": 0,
    "win_rate": 0.0,
    "avg_win_pct": null,
-   "avg_loss_pct": -7.17,
+   "avg_loss_pct": -7.21,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -3.5,
-   "equity_final": 9649667,
+   "total_return_pct": -4.92,
+   "equity_final": 9508058,
    "max_drawdown_pct": 5.26,
-   "avg_hold_days": 2.17,
+   "avg_hold_days": 2,
    "skipped": {
     "gap": 0,
     "limit": 9,
@@ -409,9 +397,9 @@
    },
    "by_pattern": {
     "flag": {
-     "n": 3,
+     "n": 4,
      "wins": 0,
-     "pnl_krw": -307325
+     "pnl_krw": -410256
     },
     "cup_handle": {
      "n": 1,
@@ -426,27 +414,27 @@
    },
    "by_sync": {
     "day": {
-     "n": 6,
+     "n": 7,
      "wins": 0,
-     "pnl_krw": -572899
+     "pnl_krw": -675830
     }
    },
    "by_exit": {
     "stop": {
-     "n": 6,
+     "n": 7,
      "wins": 0,
-     "pnl_krw": -572899
+     "pnl_krw": -675830
     }
    },
    "by_year": {
     "2026": {
-     "n": 6,
+     "n": 7,
      "wins": 0,
-     "pnl_krw": -572899
+     "pnl_krw": -675830
     }
    },
    "yearly_return_pct": {
-    "2026": -3.5
+    "2026": -4.92
    },
    "open_positions": [
     {
@@ -472,8 +460,8 @@
      "stop": 8217.88,
      "shares": 152,
      "bars_held": 2,
-     "last_close": 10280.0,
-     "unrealized_pct": 16.34
+     "last_close": 9970.0,
+     "unrealized_pct": 12.83
     },
     {
      "code": "068270",
@@ -498,21 +486,8 @@
      "stop": 15558.94,
      "shares": 80,
      "bars_held": 2,
-     "last_close": 16240.0,
-     "unrealized_pct": -2.93
-    },
-    {
-     "code": "419050",
-     "name": "SAMKEE ENERGY SOLUTIONS CO. LTD",
-     "group": "Electrical Products",
-     "pattern": "flag",
-     "entry_date": "2026-10-20",
-     "entry": 2652.93,
-     "stop": 2467.23,
-     "shares": 521,
-     "bars_held": 1,
-     "last_close": 2545.0,
-     "unrealized_pct": -4.07
+     "last_close": 15640.0,
+     "unrealized_pct": -6.52
     }
    ]
   },
@@ -526,8 +501,8 @@
    "avg_loss_pct": -7.12,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -5.38,
-   "equity_final": 9462317,
+   "total_return_pct": -7.22,
+   "equity_final": 9278487,
    "max_drawdown_pct": 9.21,
    "avg_hold_days": 2.2,
    "skipped": {
@@ -577,7 +552,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -5.38
+    "2026": -7.22
    },
    "open_positions": [
     {
@@ -590,8 +565,8 @@
      "stop": 8217.88,
      "shares": 293,
      "bars_held": 2,
-     "last_close": 10280.0,
-     "unrealized_pct": 16.34
+     "last_close": 9970.0,
+     "unrealized_pct": 12.83
     },
     {
      "code": "068270",
@@ -616,8 +591,8 @@
      "stop": 15558.94,
      "shares": 155,
      "bars_held": 2,
-     "last_close": 16240.0,
-     "unrealized_pct": -2.93
+     "last_close": 15640.0,
+     "unrealized_pct": -6.52
     }
    ]
   },
@@ -631,9 +606,9 @@
    "avg_loss_pct": -7.04,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -3.3,
-   "equity_final": 9669846,
-   "max_drawdown_pct": 3.9,
+   "total_return_pct": -3.79,
+   "equity_final": 9620646,
+   "max_drawdown_pct": 4.25,
    "avg_hold_days": 3.75,
    "skipped": {
     "gap": 0,
@@ -677,7 +652,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -3.3
+    "2026": -3.79
    },
    "open_positions": [
     {
@@ -716,8 +691,8 @@
      "stop": 15558.94,
      "shares": 82,
      "bars_held": 2,
-     "last_close": 16240.0,
-     "unrealized_pct": -2.93
+     "last_close": 15640.0,
+     "unrealized_pct": -6.52
     }
    ]
   }
@@ -855,6 +830,28 @@
     "pnl_krw": -92918,
     "pnl_pct": -7.45,
     "hold_days": 3,
+    "gap": false
+   },
+   {
+    "code": "419050",
+    "name": "SAMKEE ENERGY SOLUTIONS CO. LTD",
+    "group": "Electrical Products",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-19",
+    "entry_date": "2026-10-20",
+    "entry": 2652.93,
+    "stop": 2467.23,
+    "exit_date": "2026-10-20",
+    "exit": 2459.83,
+    "why": "stop",
+    "shares": 521,
+    "pnl_krw": -102931,
+    "pnl_pct": -7.45,
+    "hold_days": 1,
     "gap": false
    }
   ],
@@ -1283,6 +1280,28 @@
     "pnl_krw": -92918,
     "pnl_pct": -7.45,
     "hold_days": 3,
+    "gap": false
+   },
+   {
+    "code": "419050",
+    "name": "SAMKEE ENERGY SOLUTIONS CO. LTD",
+    "group": "Electrical Products",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-19",
+    "entry_date": "2026-10-20",
+    "entry": 2652.93,
+    "stop": 2467.23,
+    "exit_date": "2026-10-20",
+    "exit": 2459.83,
+    "why": "stop",
+    "shares": 521,
+    "pnl_krw": -102931,
+    "pnl_pct": -7.45,
+    "hold_days": 1,
     "gap": false
    }
   ],
