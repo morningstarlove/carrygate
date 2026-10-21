@@ -1,0 +1,349 @@
+{
+ "freezes": [
+  {
+   "date": "2026-10-21",
+   "tfs": [
+    "30m",
+    "60m"
+   ],
+   "rule_sub": "vwap",
+   "primary": "okx:XRP:30m:vwap_fade_lim",
+   "rule": {
+    "min_oos_days": 10,
+    "primary_min_pos_ratio": 0.6,
+    "breadth_min_share": 0.5
+   },
+   "keys": [
+    {
+     "key": "hyperliquid:ETH:30m:vwap_fade_lim",
+     "nt": 10.7889,
+     "pos": 7,
+     "days": 8,
+     "n": 13
+    },
+    {
+     "key": "okx:XRP:30m:vwap_fade_lim",
+     "nt": 10.592,
+     "pos": 8,
+     "days": 8,
+     "n": 14
+    },
+    {
+     "key": "okx:ETH:30m:vwap_fade_lim",
+     "nt": 10.5003,
+     "pos": 7,
+     "days": 8,
+     "n": 12
+    },
+    {
+     "key": "hyperliquid:ETH:30m:vwap_fade",
+     "nt": 10.225,
+     "pos": 7,
+     "days": 8,
+     "n": 13
+    },
+    {
+     "key": "okx:ETH:30m:vwap_fade",
+     "nt": 9.899,
+     "pos": 7,
+     "days": 8,
+     "n": 12
+    },
+    {
+     "key": "okx:XRP:30m:vwap_fade",
+     "nt": 9.8772,
+     "pos": 8,
+     "days": 8,
+     "n": 14
+    },
+    {
+     "key": "hyperliquid:LINK:60m:vwap_fade",
+     "nt": 9.7126,
+     "pos": 6,
+     "days": 8,
+     "n": 6
+    },
+    {
+     "key": "hyperliquid:XRP:30m:vwap_fade_lim",
+     "nt": 9.1374,
+     "pos": 7,
+     "days": 8,
+     "n": 14
+    },
+    {
+     "key": "hyperliquid:DOGE:30m:vwap_fade",
+     "nt": 8.8942,
+     "pos": 5,
+     "days": 8,
+     "n": 12
+    },
+    {
+     "key": "hyperliquid:LINK:60m:vwap_fade_lim",
+     "nt": 8.771,
+     "pos": 5,
+     "days": 8,
+     "n": 6
+    },
+    {
+     "key": "hyperliquid:DOGE:30m:vwap_fade_lim",
+     "nt": 8.6924,
+     "pos": 5,
+     "days": 8,
+     "n": 11
+    },
+    {
+     "key": "hyperliquid:XRP:30m:vwap_fade",
+     "nt": 8.5826,
+     "pos": 6,
+     "days": 8,
+     "n": 14
+    },
+    {
+     "key": "okx:DOGE:30m:vwap_fade_lim",
+     "nt": 8.2402,
+     "pos": 6,
+     "days": 8,
+     "n": 12
+    },
+    {
+     "key": "hyperliquid:BTC:30m:vwap_fade_lim",
+     "nt": 7.9707,
+     "pos": 8,
+     "days": 8,
+     "n": 16
+    },
+    {
+     "key": "okx:DOGE:30m:vwap_fade",
+     "nt": 7.6278,
+     "pos": 6,
+     "days": 8,
+     "n": 12
+    },
+    {
+     "key": "hyperliquid:BTC:30m:vwap_fade",
+     "nt": 7.1785,
+     "pos": 8,
+     "days": 8,
+     "n": 16
+    },
+    {
+     "key": "hyperliquid:LINK:30m:vwap_fade_lim",
+     "nt": 6.8237,
+     "pos": 6,
+     "days": 8,
+     "n": 11
+    },
+    {
+     "key": "hyperliquid:LINK:30m:vwap_fade",
+     "nt": 6.0984,
+     "pos": 6,
+     "days": 8,
+     "n": 11
+    },
+    {
+     "key": "okx:LINK:60m:vwap_fade_lim",
+     "nt": 6.0746,
+     "pos": 5,
+     "days": 8,
+     "n": 6
+    },
+    {
+     "key": "hyperliquid:XRP:60m:vwap_fade_lim",
+     "nt": 6.0473,
+     "pos": 6,
+     "days": 8,
+     "n": 6
+    },
+    {
+     "key": "okx:ETH:60m:vwap_fade_lim",
+     "nt": 5.9177,
+     "pos": 6,
+     "days": 8,
+     "n": 7
+    },
+    {
+     "key": "okx:BTC:30m:vwap_fade",
+     "nt": 5.8949,
+     "pos": 8,
+     "days": 8,
+     "n": 15
+    },
+    {
+     "key": "okx:LINK:30m:vwap_fade_lim",
+     "nt": 5.8477,
+     "pos": 6,
+     "days": 8,
+     "n": 9
+    },
+    {
+     "key": "upbit:XRP:60m:vwap_fade_lim",
+     "nt": 5.8107,
+     "pos": 5,
+     "days": 8,
+     "n": 6
+    },
+    {
+     "key": "okx:LINK:30m:vwap_fade",
+     "nt": 5.8091,
+     "pos": 6,
+     "days": 8,
+     "n": 10
+    },
+    {
+     "key": "okx:BTC:30m:vwap_fade_lim",
+     "nt": 5.7996,
+     "pos": 8,
+     "days": 8,
+     "n": 14
+    },
+    {
+     "key": "okx:LINK:60m:vwap_fade",
+     "nt": 5.7788,
+     "pos": 5,
+     "days": 8,
+     "n": 6
+    },
+    {
+     "key": "hyperliquid:XRP:60m:vwap_fade",
+     "nt": 5.7454,
+     "pos": 6,
+     "days": 8,
+     "n": 6
+    },
+    {
+     "key": "okx:XRP:60m:vwap_fade_lim",
+     "nt": 5.6684,
+     "pos": 6,
+     "days": 8,
+     "n": 7
+    },
+    {
+     "key": "upbit:ETH:30m:vwap_fade_lim",
+     "nt": 5.64,
+     "pos": 6,
+     "days": 8,
+     "n": 9
+    },
+    {
+     "key": "okx:ETH:60m:vwap_fade",
+     "nt": 5.6143,
+     "pos": 6,
+     "days": 8,
+     "n": 7
+    },
+    {
+     "key": "upbit:XRP:60m:vwap_fade",
+     "nt": 5.5042,
+     "pos": 5,
+     "days": 8,
+     "n": 6
+    },
+    {
+     "key": "upbit:ETH:30m:vwap_fade",
+     "nt": 5.4959,
+     "pos": 6,
+     "days": 8,
+     "n": 9
+    },
+    {
+     "key": "okx:XRP:60m:vwap_fade",
+     "nt": 5.3716,
+     "pos": 6,
+     "days": 8,
+     "n": 7
+    },
+    {
+     "key": "upbit:ETH:60m:vwap_fade",
+     "nt": 4.5567,
+     "pos": 5,
+     "days": 8,
+     "n": 6
+    },
+    {
+     "key": "upbit:LINK:60m:vwap_fade_lim",
+     "nt": 4.306,
+     "pos": 5,
+     "days": 8,
+     "n": 6
+    },
+    {
+     "key": "upbit:ETH:60m:vwap_fade_lim",
+     "nt": 3.8047,
+     "pos": 5,
+     "days": 8,
+     "n": 6
+    },
+    {
+     "key": "okx:BTC:60m:vwap_fade_lim",
+     "nt": 3.4663,
+     "pos": 5,
+     "days": 8,
+     "n": 6
+    },
+    {
+     "key": "upbit:XRP:30m:vwap_fade_lim",
+     "nt": 3.2998,
+     "pos": 6,
+     "days": 8,
+     "n": 7
+    },
+    {
+     "key": "okx:BTC:60m:vwap_fade",
+     "nt": 3.1663,
+     "pos": 5,
+     "days": 8,
+     "n": 6
+    },
+    {
+     "key": "upbit:XRP:30m:vwap_fade",
+     "nt": 3.166,
+     "pos": 6,
+     "days": 8,
+     "n": 7
+    },
+    {
+     "key": "okx:TRX:30m:vwap_fade_lim_n",
+     "nt": 2.181,
+     "pos": 6,
+     "days": 8,
+     "n": 7
+    },
+    {
+     "key": "upbit:LINK:30m:vwap_fade",
+     "nt": 2.0457,
+     "pos": 6,
+     "days": 8,
+     "n": 8
+    },
+    {
+     "key": "upbit:BTC:30m:vwap_fade",
+     "nt": 1.7824,
+     "pos": 5,
+     "days": 8,
+     "n": 7
+    },
+    {
+     "key": "upbit:BTC:30m:vwap_fade_lim",
+     "nt": 1.7654,
+     "pos": 5,
+     "days": 8,
+     "n": 7
+    },
+    {
+     "key": "upbit:LINK:30m:vwap_fade_lim",
+     "nt": 1.6417,
+     "pos": 5,
+     "days": 8,
+     "n": 7
+    },
+    {
+     "key": "hyperliquid:TRX:30m:vwap_fade_lim_n",
+     "nt": 1.4639,
+     "pos": 6,
+     "days": 8,
+     "n": 8
+    }
+   ]
+  }
+ ]
+}

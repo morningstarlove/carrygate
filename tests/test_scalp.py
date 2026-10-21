@@ -306,5 +306,44 @@ class NightFilter(unittest.TestCase):
         self.assertGreaterEqual(scalp.WARMUP_MIN, 60 * 60)   # 60분봉 VWAP 60봉이 평가 시작 전에 차야 한다
 
 
+class OutOfSample(unittest.TestCase):
+    """scripts/scalp_oos_check.py — 얼린 후보를 고른 날 뒤 이력만으로 다시 센다 (제안함 P19)."""
+
+    def setUp(self):
+        sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "scripts"))
+        import scalp_oos_check
+        self.m = scalp_oos_check
+        base = "okx:XRP:30m:" + scalp.BASELINE
+
+        def day(d, a, b):
+            return {"date": "2026-10-%02d" % d, "rows": {
+                "okx:XRP:30m:vwap_fade_lim": {"nt": a, "n": 2},
+                "okx:ETH:30m:vwap_fade_lim": {"nt": b, "n": 2},
+                base: {"nt": -1.0, "n": 5}}}
+        self.ins = [day(d, 1.0, 0.5) for d in range(1, 9)]          # 8일 모두 플러스 → 둘 다 후보
+        self.day = day
+
+    def test_freeze_only_uses_rows_up_to_date(self):
+        fz = self.m.freeze(self.ins + [self.day(9, -50.0, -50.0)], "2026-10-08", ["30m"], "vwap", "okx:XRP:30m:vwap_fade_lim")
+        self.assertEqual(len(fz["keys"]), 2)
+        self.assertEqual(fz["keys"][0]["nt"], 8.0)
+
+    def test_wait_go_no(self):
+        fz = self.m.freeze(self.ins, "2026-10-08", ["30m"], "vwap", "okx:XRP:30m:vwap_fade_lim")
+        self.assertEqual(self.m.check(self.ins, fz)["verdict"], "WAIT")       # 표본 밖 0일
+        good = [self.day(d, 0.3, 0.2) for d in range(9, 19)]                  # 10일
+        self.assertEqual(self.m.check(self.ins + good, fz)["verdict"], "GO")
+        bad = [self.day(d, -0.3, 0.2) for d in range(9, 19)]                  # 주 후보만 손해
+        r = self.m.check(self.ins + bad, fz)
+        self.assertEqual(r["verdict"], "NO")
+        self.assertFalse(r["primary_ok"])
+        self.assertEqual(r["plus"], 1)
+
+    def test_until_cuts_window(self):
+        fz = self.m.freeze(self.ins, "2026-10-08", ["30m"], "vwap", None)
+        rows = self.ins + [self.day(d, 0.3, 0.2) for d in range(9, 19)] + [self.day(25, -99.0, -99.0)]
+        self.assertEqual(self.m.check(rows, fz, until="2026-10-18")["verdict"], "GO")
+
+
 if __name__ == "__main__":
     unittest.main()
