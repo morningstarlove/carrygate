@@ -69,3 +69,11 @@ python scripts/scalp_oos_check.py     # 11/4 에 이것만 돌린다
 - 한국 주식 돌파: 정기 예약 미발동 → 07:15 UTC Routine 이 대신 실행. 순방향 11일 7건 0승 −3.0%, z −1.71. 한선엔지니어링 손절 −7.45%. 보유 4종목. 빈 날 메움 1종목, 이상 없음.
 - Routine: trig_01WWuHJTvmZxK7GWpuvdSZca 는 1회용이라 스스로 꺼졌다.
 - 알림 Routine: trig_01Lzq3K3xahcKnRc4mbmauQV (1회용).
+
+## 6. 바이낸스 추가 (제안함 P20, 사용자 결정 "A")
+
+- 질문: "꼭 OKX? 바이낸스 안 됨?" → 바이낸스 API 는 미국 서버(Actions)에서 451 차단이라 초단타 기록에 없었다. 수수료는 OKX 와 같다.
+- 한 일: `scalp.src_binance` — data.binance.vision 의 선물 1분봉 일별 zip(평가일 + 준비 60시간 = 하루 4파일)을 받는다. `--venues binance` 로 돌리면 결과가 없을 때 저장하지 않는다. `--missing-days 4` 가 빈 평가일을 알려 주고 워크플로 단계 "Scalp Binance futures" 가 채운다.
+- 기록: `scalp_binance.json`, `scalp_binance_history.jsonl`. 기본 `scalp_history.jsonl`·판정과 섞지 않는다.
+- 얼림: `scalp_oos_frozen.json` 에 `2026-10-21-binance`(19개, 주 후보 binance:XRP:30m:vwap_fade_lim). `python scripts/scalp_oos_check.py` 한 번에 둘 다 나온다.
+- 시험: `tests.test_scalp` BinanceSource 3건 + OutOfSample 1건 추가. 이 세션 서버에서는 data.binance.vision 접속이 막혀 실데이터 확인은 Actions 에서 한다.

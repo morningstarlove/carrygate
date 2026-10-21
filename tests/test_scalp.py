@@ -278,6 +278,62 @@ class BackfillDay(unittest.TestCase):
         self.assertIn("데이터 없음", out)
 
 
+class BinanceSource(unittest.TestCase):
+    """바이낸스 공개 일별 파일(zip 속 CSV) → 1분봉, --venues 로 따로 쌓기 (제안함 P20)."""
+
+    def _zip(self, rows, header=True):
+        import io as _io, zipfile
+        lines = (["open_time,open,high,low,close,volume,close_time"] if header else []) + \
+                [",".join(str(x) for x in r) for r in rows]
+        buf = _io.BytesIO()
+        with zipfile.ZipFile(buf, "w") as z:
+            z.writestr("X-1m.csv", "\n".join(lines))
+        return buf.getvalue()
+
+    def test_parse_days_ms_and_us_and_header(self):
+        d0 = 1760918400                                     # 2025-10-20 00:00 UTC
+        files = {"2025-10-20": self._zip([(d0 * 1000, 1, 2, 0.5, 1.5, 10), ((d0 + 60) * 1000, 1.5, 2, 1, 1.8, 5)]),
+                 "2025-10-21": self._zip([((d0 + 86400) * 1000000, 2, 3, 1, 2.5, 7)], header=False)}
+        seen = []
+
+        def fake(url, tries=3):
+            seen.append(url)
+            return files[url.rsplit("-1m-", 1)[1][:-4]]
+        saved = scalp.http_bytes
+        scalp.http_bytes = fake
+        try:
+            bars = scalp.src_binance("XRP", d0, d0 + 86400 + 120)
+        finally:
+            scalp.http_bytes = saved
+        self.assertEqual([b["t"] for b in bars], [d0, d0 + 60, d0 + 86400])
+        self.assertEqual(bars[2]["c"], 2.5)
+        self.assertIn("futures/um/daily/klines/XRPUSDT/1m/XRPUSDT-1m-2025-10-20.zip", seen[0])
+
+    def test_missing_days(self):
+        from datetime import datetime, timezone
+        today = datetime(2026, 10, 23, tzinfo=timezone.utc)
+        rows = [{"eval_day_utc": "2026-10-21", "summary": {"markets": 6}},
+                {"eval_day_utc": "2026-10-22", "summary": {"markets": 4}}]
+        self.assertEqual(scalp.missing_days(rows, 3, today), ["2026-10-20", "2026-10-22"])
+
+    def test_venues_no_result_does_not_save(self):
+        import io as _io, contextlib
+        saved = (scalp.EXTRA_SOURCES, scalp.hl_live_fees)
+        scalp.EXTRA_SOURCES = [("binance", lambda c, s, e: (_ for _ in ()).throw(RuntimeError("404")))]
+        scalp.hl_live_fees = lambda: None
+        with tempfile.TemporaryDirectory() as d:
+            hist, out = os.path.join(d, "h.jsonl"), os.path.join(d, "o.json")
+            try:
+                with contextlib.redirect_stdout(_io.StringIO()):
+                    rc = scalp.main(["--venues", "binance", "--day", "2026-10-20", "--save-bars", "",
+                                     "--history", hist, "--out", out])
+            finally:
+                scalp.EXTRA_SOURCES, scalp.hl_live_fees = saved
+            self.assertEqual(rc, 1)
+            self.assertFalse(os.path.exists(hist))
+            self.assertFalse(os.path.exists(out))
+
+
 class NightFilter(unittest.TestCase):
     """밤(한국시간 21~02시) 필터 규칙: 같은 신호라도 낮에는 None, 밤에는 원래 신호."""
 
@@ -338,6 +394,19 @@ class OutOfSample(unittest.TestCase):
         self.assertEqual(r["verdict"], "NO")
         self.assertFalse(r["primary_ok"])
         self.assertEqual(r["plus"], 1)
+
+    def test_map_venue_dedupes_and_checks_own_rows(self):
+        fz = self.m.freeze(self.ins, "2026-10-08", ["30m"], "vwap", None)
+        fz["keys"].append({"key": "upbit:XRP:30m:vwap_fade_lim", "nt": 1.0})       # 같은 코인·봉·규칙 → 하나로
+        bz = self.m.map_venue(fz, "binance", "binance:XRP:30m:vwap_fade_lim")
+        self.assertEqual(sorted(x["key"] for x in bz["keys"]),
+                         ["binance:ETH:30m:vwap_fade_lim", "binance:XRP:30m:vwap_fade_lim"])
+        self.assertEqual(bz["history"], "scalp_binance_history.jsonl")
+        rows = [{"date": "2026-10-%02d" % d, "rows": {"binance:XRP:30m:vwap_fade_lim": {"nt": 0.2, "n": 1},
+                                                      "binance:ETH:30m:vwap_fade_lim": {"nt": -0.1, "n": 1}}}
+                for d in range(9, 19)]
+        r = self.m.check(rows, bz)
+        self.assertEqual((r["plus"], r["verdict"]), (1, "GO"))                    # 절반(1/2) + 주 후보 통과
 
     def test_until_cuts_window(self):
         fz = self.m.freeze(self.ins, "2026-10-08", ["30m"], "vwap", None)

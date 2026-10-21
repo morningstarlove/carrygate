@@ -45,6 +45,8 @@
 
 **사용자 결정 2026-10-21 "A":** 초단타 30·60분봉 후보는 2주 더 관찰. 10/21 후보 47개를 `scalp_oos_frozen.json` 에 얼렸고, 11/4 에 `python scripts/scalp_oos_check.py` 로 10/22 이후 성적만 본다(통과 조건 P19).
 
+**사용자 결정 2026-10-21 "A" (제안함 P20): 바이낸스 선물도 기록.** 바이낸스 API 는 미국 서버에서 막혀 공개 일별 파일(data.binance.vision)로 1분봉을 받는다. 매일 워크플로가 최근 4일 중 빈 날을 채워 `scalp_binance_history.jsonl` 에 따로 쌓는다(기본 판정과 섞지 않음). 47개를 바이낸스로 옮긴 19개도 얼렸고 11/4 에 OKX 와 나란히 본다. 첫 실데이터 확인은 10/22 아침 실행 로그 "Scalp Binance futures" 단계.
+
 **사용자 결정 대기:** 없음. 다음은 11/4 초단타 재확인과 첫 판정이 뜨는 날.
 
 **2026-10-15 백테스트 과적합 논문 검토 → 판정기 보강 (제안함 P17·P18 반영):** 댓글 권고로 Bailey·López de Prado·Harvey·Hansen 등 17편을 읽고 공식을 실데이터에 대입(`docs/BACKTEST_OVERFITTING_REVIEW.md`, `scripts/overfit_check.py`). 발견: 초단타 10/7 PASS(후보 12개)는 실력 0 이어도 뜨는 후보 수(378개 중 42~53개)의 1/4 이었고, 터틀·추세전환 20건 합격선은 실력 0 도 19~40% 확률로 PASS 한다. 반영: ① `criteria.json scalp.noise_floor` — 부호 뒤집기 500회의 후보 수 중앙값보다 실제 후보가 많아야 PASS, 같거나 적으면 NOT_YET(잡음 이하). ② 판정 파일 각 거래소에 `interpretation`(실력 0 PASS 확률·놓칠 확률·필요 건수 MinTRL·t>3). 합격선 숫자·매매 규칙 변경 없음, criteria sealed 2026-10-15, 잠금 재생성. 현황판 카드에는 아직 안 올렸다(판정 파일에만). 작업 기록 `docs/sessions/2026-10-15_backtest_overfitting.md`.

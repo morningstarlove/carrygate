@@ -44,6 +44,19 @@ jobs:
         continue-on-error: true
         run: python scalp.py ${{ inputs.day != '' && format('--day {0}', inputs.day) || '' }}
 
+      # 바이낸스 선물은 API 가 미국 서버에서 막혀 공개 일별 파일로 받는다. 파일이 하루 늦게 올라올 수 있어
+      # 최근 4일 중 빈 날을 채운다. 기본 기록과 섞지 않는다(판정 불변). 제안함 P20
+      - name: Scalp Binance futures (초단타 바이낸스, 별도 기록)
+        if: inputs.day == ''
+        continue-on-error: true
+        run: |
+          for d in $(python scalp.py --missing-days 4 --history scalp_binance_history.jsonl); do
+            echo "== 바이낸스 평가일 $d =="
+            python scalp.py --venues binance --day "$d" --out scalp_binance.json \
+              --history scalp_binance_history.jsonl --save-bars "" ${{ inputs.dry_run == true && '--dry-run' || '' }} || echo "바이낸스 $d 실패 — 다음 실행에서 다시"
+          done
+          python scalp.py --report --history scalp_binance_history.jsonl || true
+
       - name: Scalp side research (시간대·펀딩·선행후행)
         id: research
         continue-on-error: true
@@ -153,7 +166,7 @@ jobs:
           git config user.email "carrygate-bot@users.noreply.github.com"
           # 없는 파일(예: 실전 지갑 미설정 때의 live.json)이 하나라도 섞이면 git add 전체가 실패해
           # 아무것도 저장되지 않는다(2026-10-02~04 결과 유실). 있는 경로만 하나씩 추가한다.
-          for p in status.json history.jsonl funding.json funding_history.jsonl scalp.json scalp_history.jsonl research.json research_history.jsonl \
+          for p in status.json history.jsonl funding.json funding_history.jsonl scalp.json scalp_history.jsonl scalp_binance.json scalp_binance_history.jsonl research.json research_history.jsonl \
                    basis.json basis_history.jsonl funding_signal.json funding_signal_history.jsonl kimchi.json kimchi_history.jsonl \
                    macro.json listing.json momentum.json momentum_history.jsonl live.json live_history.jsonl turtle.json turtle_history.jsonl reversal.json reversal_history.jsonl verdict.json verdict_history.jsonl \
                    grid.json grid_history.jsonl \

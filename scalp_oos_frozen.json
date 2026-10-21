@@ -1,7 +1,9 @@
 {
  "freezes": [
   {
+   "name": "2026-10-21",
    "date": "2026-10-21",
+   "history": "scalp_history.jsonl",
    "tfs": [
     "30m",
     "60m"
@@ -342,6 +344,177 @@
      "pos": 6,
      "days": 8,
      "n": 8
+    }
+   ]
+  },
+  {
+   "name": "2026-10-21-binance",
+   "date": "2026-10-21",
+   "history": "scalp_binance_history.jsonl",
+   "derived_from": "2026-10-21",
+   "tfs": [
+    "30m",
+    "60m"
+   ],
+   "rule_sub": "vwap",
+   "primary": "binance:XRP:30m:vwap_fade_lim",
+   "rule": {
+    "min_oos_days": 10,
+    "primary_min_pos_ratio": 0.6,
+    "breadth_min_share": 0.5
+   },
+   "keys": [
+    {
+     "key": "binance:ETH:30m:vwap_fade_lim",
+     "nt": null,
+     "pos": null,
+     "days": null,
+     "n": null,
+     "from": "hyperliquid:ETH:30m:vwap_fade_lim"
+    },
+    {
+     "key": "binance:XRP:30m:vwap_fade_lim",
+     "nt": null,
+     "pos": null,
+     "days": null,
+     "n": null,
+     "from": "okx:XRP:30m:vwap_fade_lim"
+    },
+    {
+     "key": "binance:ETH:30m:vwap_fade",
+     "nt": null,
+     "pos": null,
+     "days": null,
+     "n": null,
+     "from": "hyperliquid:ETH:30m:vwap_fade"
+    },
+    {
+     "key": "binance:XRP:30m:vwap_fade",
+     "nt": null,
+     "pos": null,
+     "days": null,
+     "n": null,
+     "from": "okx:XRP:30m:vwap_fade"
+    },
+    {
+     "key": "binance:LINK:60m:vwap_fade",
+     "nt": null,
+     "pos": null,
+     "days": null,
+     "n": null,
+     "from": "hyperliquid:LINK:60m:vwap_fade"
+    },
+    {
+     "key": "binance:DOGE:30m:vwap_fade",
+     "nt": null,
+     "pos": null,
+     "days": null,
+     "n": null,
+     "from": "hyperliquid:DOGE:30m:vwap_fade"
+    },
+    {
+     "key": "binance:LINK:60m:vwap_fade_lim",
+     "nt": null,
+     "pos": null,
+     "days": null,
+     "n": null,
+     "from": "hyperliquid:LINK:60m:vwap_fade_lim"
+    },
+    {
+     "key": "binance:DOGE:30m:vwap_fade_lim",
+     "nt": null,
+     "pos": null,
+     "days": null,
+     "n": null,
+     "from": "hyperliquid:DOGE:30m:vwap_fade_lim"
+    },
+    {
+     "key": "binance:BTC:30m:vwap_fade_lim",
+     "nt": null,
+     "pos": null,
+     "days": null,
+     "n": null,
+     "from": "hyperliquid:BTC:30m:vwap_fade_lim"
+    },
+    {
+     "key": "binance:BTC:30m:vwap_fade",
+     "nt": null,
+     "pos": null,
+     "days": null,
+     "n": null,
+     "from": "hyperliquid:BTC:30m:vwap_fade"
+    },
+    {
+     "key": "binance:LINK:30m:vwap_fade_lim",
+     "nt": null,
+     "pos": null,
+     "days": null,
+     "n": null,
+     "from": "hyperliquid:LINK:30m:vwap_fade_lim"
+    },
+    {
+     "key": "binance:LINK:30m:vwap_fade",
+     "nt": null,
+     "pos": null,
+     "days": null,
+     "n": null,
+     "from": "hyperliquid:LINK:30m:vwap_fade"
+    },
+    {
+     "key": "binance:XRP:60m:vwap_fade_lim",
+     "nt": null,
+     "pos": null,
+     "days": null,
+     "n": null,
+     "from": "hyperliquid:XRP:60m:vwap_fade_lim"
+    },
+    {
+     "key": "binance:ETH:60m:vwap_fade_lim",
+     "nt": null,
+     "pos": null,
+     "days": null,
+     "n": null,
+     "from": "okx:ETH:60m:vwap_fade_lim"
+    },
+    {
+     "key": "binance:XRP:60m:vwap_fade",
+     "nt": null,
+     "pos": null,
+     "days": null,
+     "n": null,
+     "from": "hyperliquid:XRP:60m:vwap_fade"
+    },
+    {
+     "key": "binance:ETH:60m:vwap_fade",
+     "nt": null,
+     "pos": null,
+     "days": null,
+     "n": null,
+     "from": "okx:ETH:60m:vwap_fade"
+    },
+    {
+     "key": "binance:BTC:60m:vwap_fade_lim",
+     "nt": null,
+     "pos": null,
+     "days": null,
+     "n": null,
+     "from": "okx:BTC:60m:vwap_fade_lim"
+    },
+    {
+     "key": "binance:BTC:60m:vwap_fade",
+     "nt": null,
+     "pos": null,
+     "days": null,
+     "n": null,
+     "from": "okx:BTC:60m:vwap_fade"
+    },
+    {
+     "key": "binance:TRX:30m:vwap_fade_lim_n",
+     "nt": null,
+     "pos": null,
+     "days": null,
+     "n": null,
+     "from": "okx:TRX:30m:vwap_fade_lim_n"
     }
    ]
   }
