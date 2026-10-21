@@ -45,6 +45,8 @@
 
 **2026-10-15 백테스트 과적합 논문 검토 → 판정기 보강 (제안함 P17·P18 반영):** 댓글 권고로 Bailey·López de Prado·Harvey·Hansen 등 17편을 읽고 공식을 실데이터에 대입(`docs/BACKTEST_OVERFITTING_REVIEW.md`, `scripts/overfit_check.py`). 발견: 초단타 10/7 PASS(후보 12개)는 실력 0 이어도 뜨는 후보 수(378개 중 42~53개)의 1/4 이었고, 터틀·추세전환 20건 합격선은 실력 0 도 19~40% 확률로 PASS 한다. 반영: ① `criteria.json scalp.noise_floor` — 부호 뒤집기 500회의 후보 수 중앙값보다 실제 후보가 많아야 PASS, 같거나 적으면 NOT_YET(잡음 이하). ② 판정 파일 각 거래소에 `interpretation`(실력 0 PASS 확률·놓칠 확률·필요 건수 MinTRL·t>3). 합격선 숫자·매매 규칙 변경 없음, criteria sealed 2026-10-15, 잠금 재생성. 현황판 카드에는 아직 안 올렸다(판정 파일에만). 작업 기록 `docs/sessions/2026-10-15_backtest_overfitting.md`.
 
+**2026-10-21 외부 저장소 검토 (anthropics/financial-services):** SNS 게시물 계기로 직접 받아 확인. 애널리스트 보고서 초안 도구(유료 MCP 12개, 한국 시장 0건, 매매 코드 없음)라 **설치 안 함**. 다른 세션 40개 중 실적 시즌과 관련된 것은 알파카 미국 주식 트랙 하나뿐. 실적 달력은 이미 있는 트레이딩뷰 MCP 로 무료 확인 가능(TSLA 10/21·MSFT 10/28·AAPL 11/2 실호출). 규칙·코드 변경 없음. 기록 `docs/sessions/2026-10-21_financial_services_review.md`, `docs/AI_FRAMEWORKS_REVIEW.md` 1절 행 추가.
+
 **규칙을 바꾸고 싶을 때:** `proposals.md` 에 근거 → 그 트랙 `RULE_FIXED` 새 날짜 → `python verdict.py --lock`. 이 순서 없이 바꾸면 CI 가 막는다(원칙 5).
 
 **세션 입구:** 루트 `CLAUDE.md`(2026-10-10 부터, 세션 시작마다 자동으로 읽힘 — 읽는 순서·절대 규칙·역할 분담·AI 도구 정책). 이 문서가 원본이고 `CLAUDE.md` 는 요약이다.
