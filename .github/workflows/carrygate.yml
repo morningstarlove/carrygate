@@ -44,7 +44,7 @@ jobs:
         continue-on-error: true
         run: python scalp.py ${{ inputs.day != '' && format('--day {0}', inputs.day) || '' }}
 
-      # 바이낸스 선물은 API 가 미국 서버에서 막혀 공개 일별 파일로 받는다. 파일이 하루 늦게 올라올 수 있어
+      # 바이낸스 선물은 API 가 미국 서버에서 막혀 가상서버 중계 파일(data/binance_1m) 또는 공개 일별 파일로 받는다. 파일이 하루 늦게 올라올 수 있어
       # 최근 4일 중 빈 날을 채운다. 기본 기록과 섞지 않는다(판정 불변). 제안함 P20
       - name: Scalp Binance futures (초단타 바이낸스, 별도 기록)
         if: inputs.day == ''
@@ -170,7 +170,7 @@ jobs:
                    basis.json basis_history.jsonl funding_signal.json funding_signal_history.jsonl kimchi.json kimchi_history.jsonl \
                    macro.json listing.json momentum.json momentum_history.jsonl live.json live_history.jsonl turtle.json turtle_history.jsonl reversal.json reversal_history.jsonl verdict.json verdict_history.jsonl \
                    grid.json grid_history.jsonl \
-                   data/kr_funding.json data/cg_funding_snapshots.jsonl data/etf data/upbit_markets.json; do
+                   data/kr_funding.json data/binance_1m data/cg_funding_snapshots.jsonl data/etf data/upbit_markets.json; do
             if [ -e "$p" ]; then git add -A "$p"; else echo "없음(건너뜀): $p"; fi
           done
           if git diff --staged --quiet; then

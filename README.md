@@ -259,6 +259,7 @@ GitHub Actions가 **매일 한국시간 오전 9시 18분**에 자동 실행한�
 | `reversal.py` | 중기 추세 전환 매매법(4시간봉) — 3년 백테스트·오늘 단계·순방향 집계. 변형(`no_vol`, `break_entry`) 나란히 기록. `--report` 로 단계 변화. 설계서 `docs/REVERSAL_4H_PLAN.md` |
 | `kr_universe.py` / `patterns.py` / `kr_breakout.py` / `kr_ohlcv.py` | 한국 주식 트랙 (6절). 각각 유니버스·동조 / 패턴 판정 / 신호·종이매매·백테스트(`--backtest`, `--report`) / 일봉 수집(`--probe`) |
 | `grid.py` | 중기 그리드(종사종팔 v4/v5) — SOXL·TQQQ 16년 백테스트, 수수료 민감도, 블로그 주장 대비, 순방향 가상 계좌. `--report` 로 계좌 추이 |
+| `vps_relay.py` | **가상서버(미국 밖)에서** 바이낸스 선물 1분봉 4일치를 `data/binance_1m/` 로 올리는 중계기 (설정: `docs/VPS_SETUP.md`) |
 | `kr_relay.py` / `kr_relay.bat` | **한국 PC 에서** 바이낸스·바이비트 펀딩비를 읽어 `data/kr_funding.json` 으로 올리는 중계기 (설정: `docs/KR_RELAY_SETUP.md`) |
 | `live_monitor.py` | 실전 캐리 감시 — 하이퍼리퀴드 지갑 **주소만으로** 포지션·펀딩 수취·수수료 기록 (키 없음) |
 | `docs/LIVE_CARRY_PLAN.md` | 캐리 소액 실전 설계서 (준비·진입·운영·청산·판정표) |

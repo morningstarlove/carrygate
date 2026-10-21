@@ -309,6 +309,50 @@ class BinanceSource(unittest.TestCase):
         self.assertEqual(bars[2]["c"], 2.5)
         self.assertIn("futures/um/daily/klines/XRPUSDT/1m/XRPUSDT-1m-2025-10-20.zip", seen[0])
 
+    def test_relay_file_preferred_then_zip_fallback(self):
+        from datetime import datetime, timezone
+        d0 = 1760918400
+        start, end = d0, d0 + 7200
+        now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+        with tempfile.TemporaryDirectory() as d:
+            bars = [[d0 + 60 * i, 1, 2, 0.5, 1.5, 10] for i in range(120)]
+            with open(os.path.join(d, "XRP.json"), "w") as fp:
+                json.dump({"generated_at_utc": now, "bars": bars}, fp)
+            with open(os.path.join(d, "ETH.json"), "w") as fp:                       # 오래된 파일
+                json.dump({"generated_at_utc": "2020-01-01T00:00:00Z", "bars": bars}, fp)
+            with open(os.path.join(d, "BTC.json"), "w") as fp:                       # 끝이 비어 있는 파일
+                json.dump({"generated_at_utc": now, "bars": bars[:30]}, fp)
+            got = scalp.src_binance_relay("XRP", start, end, relay_dir=d)
+            self.assertEqual(len(got), 120)
+            self.assertIsNone(scalp.src_binance_relay("ETH", start, end, relay_dir=d))
+            self.assertIsNone(scalp.src_binance_relay("BTC", start, end, relay_dir=d))
+            self.assertIsNone(scalp.src_binance_relay("DOGE", start, end, relay_dir=d))
+            saved = (scalp.RELAY_DIR, scalp.http_bytes)
+            calls = []
+            scalp.RELAY_DIR, scalp.http_bytes = d, lambda url, tries=3: calls.append(url) or self._zip([(d0 * 1000, 1, 2, 0.5, 1.5, 1)])
+            try:
+                self.assertEqual(len(scalp.src_binance("XRP", start, end)), 120)   # 중계 파일 → 다운로드 없음
+                self.assertEqual(calls, [])
+                scalp.src_binance("DOGE", start, end)                                # 파일 없음 → 일별 zip
+                self.assertEqual(len(calls), 1)
+            finally:
+                scalp.RELAY_DIR, scalp.http_bytes = saved
+
+    def test_vps_relay_fetch_and_dedupe(self):
+        import vps_relay
+        d0 = 1760918400
+        pages = [[[(d0 + 60 * i) * 1000, "1", "2", "0.5", "1.5", "9"] for i in range(1500)],
+                 [[(d0 + 60 * i) * 1000, "1", "2", "0.5", "1.5", "9"] for i in range(1499, 1600)]]   # 겹치는 봉 하나
+        saved = vps_relay.http_json
+        vps_relay.http_json = lambda url, **kw: pages.pop(0) if pages else []
+        try:
+            bars = vps_relay.fetch_coin("XRP", d0, d0 + 1600 * 60)
+        finally:
+            vps_relay.http_json = saved
+        self.assertEqual(len(bars), 1600)
+        self.assertEqual(bars[0], [d0, 1.0, 2.0, 0.5, 1.5, 9.0])
+        self.assertEqual(bars[-1][0], d0 + 1599 * 60)
+
     def test_missing_days(self):
         from datetime import datetime, timezone
         today = datetime(2026, 10, 23, tzinfo=timezone.utc)

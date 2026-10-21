@@ -45,7 +45,7 @@
 
 **사용자 결정 2026-10-21 "A":** 초단타 30·60분봉 후보는 2주 더 관찰. 10/21 후보 47개를 `scalp_oos_frozen.json` 에 얼렸고, 11/4 에 `python scripts/scalp_oos_check.py` 로 10/22 이후 성적만 본다(통과 조건 P19).
 
-**사용자 결정 2026-10-21 "A" (제안함 P20): 바이낸스 선물도 기록.** 바이낸스 API 는 미국 서버에서 막혀 공개 일별 파일(data.binance.vision)로 1분봉을 받는다. 매일 워크플로가 최근 4일 중 빈 날을 채워 `scalp_binance_history.jsonl` 에 따로 쌓는다(기본 판정과 섞지 않음). 47개를 바이낸스로 옮긴 19개도 얼렸고 11/4 에 OKX 와 나란히 본다. 첫 실데이터 확인은 10/22 아침 실행 로그 "Scalp Binance futures" 단계.
+**사용자 결정 2026-10-21 "A" (제안함 P20): 바이낸스 선물도 기록.** 바이낸스 API 는 미국 서버에서 막혀 공개 일별 파일(data.binance.vision)로 1분봉을 받는다. 매일 워크플로가 최근 4일 중 빈 날을 채워 `scalp_binance_history.jsonl` 에 따로 쌓는다(기본 판정과 섞지 않음). 47개를 바이낸스로 옮긴 19개도 얼렸고 11/4 에 OKX 와 나란히 본다. 첫 실데이터 확인은 10/22 아침 실행 로그 "Scalp Binance futures" 단계. **같은 날 사용자 "내 가상서버에서" → `vps_relay.py` + `docs/VPS_SETUP.md`(제안함 P21):** 미국 밖 가상서버가 매일 09:05 바이낸스 1분봉 4일치를 `data/binance_1m/` 에 올리면 Actions 가 그것을 먼저 쓴다. 없으면 공개 파일. **사용자가 서버에서 설정 절차를 따라야 켜진다**(아직 안 켜짐).
 
 **사용자 결정 대기:** 없음. 다음은 11/4 초단타 재확인과 첫 판정이 뜨는 날.
 
@@ -1138,6 +1138,7 @@ GitHub 저장소 → Actions 탭 → `CARRYGATE daily` → Run workflow
 | `funding.py` 상단 `RELAY_MAX_AGE_H` / `VENUE_DOC_FEES` | 한국 중계 파일 허용 나이(36h) / 바이낸스·바이비트 공식 수수료 |
 | `grid.py` 상단 `VERSIONS` / `HOLD_DAYS` / `FEE_PCT` / `SYMBOLS` | 종사종팔 규칙(익절률·분할·재투자율) / 만기 / 수수료 / 종목 (**규칙을 고치면 `RULE_FIXED` 를 그날로 바꾼다**) |
 | `etf_update.py` 상단 `TICKERS` | 매일 갱신할 ETF 목록 (없는 티커는 전체 이력을 새로 받아 파일을 만든다) |
+| `vps_relay.py` (가상서버) | 바이낸스 1분봉 중계 수집기(P21). 단일 파일, 설정 `docs/VPS_SETUP.md` |
 | `kr_relay.py` (한국 PC) | 중계 수집기. 저장소 파일에 의존하지 않으므로 고치면 PC 의 파일도 다시 받아야 한다 |
 | `scalp.py` 상단 `MIN_DAYS` / `MIN_POS_RATIO` | 후보 조건 (최소 일수 / 플러스 일수 비율) |
 | `kr_universe.py` 상단 `MIN_GROUP` / `UP_RATIO` / `MED_CHANGE_PCT` / `MED_WEEK_PCT` | 업종 동조 규칙 (**고치면 `RULE_FIXED` 를 그날로 바꾼다**) |

@@ -77,3 +77,12 @@ python scripts/scalp_oos_check.py     # 11/4 에 이것만 돌린다
 - 기록: `scalp_binance.json`, `scalp_binance_history.jsonl`. 기본 `scalp_history.jsonl`·판정과 섞지 않는다.
 - 얼림: `scalp_oos_frozen.json` 에 `2026-10-21-binance`(19개, 주 후보 binance:XRP:30m:vwap_fade_lim). `python scripts/scalp_oos_check.py` 한 번에 둘 다 나온다.
 - 시험: `tests.test_scalp` BinanceSource 3건 + OutOfSample 1건 추가. 이 세션 서버에서는 data.binance.vision 접속이 막혀 실데이터 확인은 Actions 에서 한다.
+
+## 7. 가상서버 중계기 (제안함 P21, 사용자 "깃허브 말고 내 가상서버")
+
+- `vps_relay.py`(단일 파일, 표준 라이브러리): 바이낸스 선물 공개 API 로 6코인 1분봉 최근 4일(5,760봉) → `data/binance_1m/<코인>.json` 업로드(GitHub 토큰만). `--no-upload` 로 시험.
+- `scalp.src_binance_relay`: 중계 파일이 36시간 안이고 준비 구간 앞·평가 구간 끝을 덮으면 그것을 쓰고, 아니면 공개 일별 파일로.
+- 워크플로 커밋 목록에 `data/binance_1m` 추가. `.gitignore` 에 `vps_relay_config.json`.
+- 시험: BinanceSource 5건(중계 우선·오래된 파일·구간 부족·zip 되돌아가기, 1,500봉 이어받기·중복 제거).
+- **사용자가 할 일:** `docs/VPS_SETUP.md` 1~5단계(20~30분). 1단계에서 451 이면 서버가 미국이라 불가.
+- 이 세션 서버에서는 바이낸스·GitHub raw 모두 막혀 실데이터 확인은 사용자 서버에서 처음 한다.
