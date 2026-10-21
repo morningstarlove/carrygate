@@ -45,7 +45,7 @@
 
 **사용자 결정 2026-10-21 "A":** 초단타 30·60분봉 후보는 2주 더 관찰. 10/21 후보 47개를 `scalp_oos_frozen.json` 에 얼렸고, 11/4 에 `python scripts/scalp_oos_check.py` 로 10/22 이후 성적만 본다(통과 조건 P19).
 
-**사용자 결정 2026-10-21 "A" (제안함 P20): 바이낸스 선물도 기록.** 바이낸스 API 는 미국 서버에서 막혀 공개 일별 파일(data.binance.vision)로 1분봉을 받는다. 매일 워크플로가 최근 4일 중 빈 날을 채워 `scalp_binance_history.jsonl` 에 따로 쌓는다(기본 판정과 섞지 않음). 47개를 바이낸스로 옮긴 19개도 얼렸고 11/4 에 OKX 와 나란히 본다. 첫 실데이터 확인은 10/22 아침 실행 로그 "Scalp Binance futures" 단계. **같은 날 사용자 "내 가상서버에서" → `vps_relay.py` + `docs/VPS_SETUP.md`(제안함 P21):** 미국 밖 가상서버가 매일 09:05 바이낸스 1분봉 4일치를 `data/binance_1m/` 에 올리면 Actions 가 그것을 먼저 쓴다. 없으면 공개 파일. **사용자가 서버에서 설정 절차를 따라야 켜진다**(아직 안 켜짐).
+**사용자 결정 2026-10-21 "A" (제안함 P20): 바이낸스 선물도 기록.** 바이낸스 API 는 미국 서버에서 막혀 공개 일별 파일(data.binance.vision)로 1분봉을 받는다. 매일 워크플로가 최근 4일 중 빈 날을 채워 `scalp_binance_history.jsonl` 에 따로 쌓는다(기본 판정과 섞지 않음). 47개를 바이낸스로 옮긴 19개도 얼렸고 11/4 에 OKX 와 나란히 본다. 첫 실데이터 확인은 10/22 아침 실행 로그 "Scalp Binance futures" 단계. **같은 날 사용자 "내 가상서버에서" → `vps_relay.py` + `docs/VPS_SETUP.md`(제안함 P21):** 미국 밖 가상서버가 매일 09:05 바이낸스 1분봉 4일치를 `data/binance_1m/` 에 올리면 Actions 가 그것을 먼저 쓴다. 없으면 공개 파일. **사용자가 서버에서 설정 절차를 따라야 켜진다**(아직 안 켜짐). 사용자 서버는 다른 세션 기록으로 확인: **Vultr 우분투, root SSH, 서버 시계 KST, 메모리 1GB, 다른 봇들이 cron·systemd 로 돌고 있음** — 설치는 `scripts/vps_relay_install.sh` 한 줄(토큰만 묻는다), 폴더 `/root/carrygate-relay`, cron 09:05 KST.
 
 **사용자 결정 대기:** 없음. 다음은 11/4 초단타 재확인과 첫 판정이 뜨는 날.
 
