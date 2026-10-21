@@ -8,7 +8,9 @@
 
   python scripts/scalp_oos_check.py                     # 얼린 목록 전부 확인
   python scripts/scalp_oos_check.py --freeze 2026-10-21 --tf 30m,60m --rule vwap \
-      --primary okx:XRP:30m:vwap_fade_lim               # 새로 얼리기 (같은 날짜는 덮어쓰지 않음)
+      --primary okx:XRP:30m:vwap_fade_lim               # 새로 얼리기 (같은 이름은 덮어쓰지 않음)
+  python scripts/scalp_oos_check.py --map 2026-10-21 --venue binance \
+      --primary binance:XRP:30m:vwap_fade_lim           # 얼린 목록의 (코인·봉·규칙)을 다른 거래소로 옮겨 얼림 (P20)
 
 표준 라이브러리만 쓴다. 매매 규칙·criteria.json·잠금과 무관(읽기만).
 """
@@ -25,6 +27,10 @@ DEFAULT_RULE = {"min_oos_days": 10, "primary_min_pos_ratio": 0.6, "breadth_min_s
 
 
 def load_rows(path=HISTORY):
+    if not os.path.isabs(path):
+        path = os.path.join(ROOT, path)
+    if not os.path.exists(path):
+        return []
     with open(path, encoding="utf-8") as fh:
         return [json.loads(l) for l in fh if l.strip()]
 
@@ -42,8 +48,26 @@ def freeze(rows, date, tfs=None, rule_sub=None, primary=None):
         keys.append({"key": k, "nt": round(a["nt"], 4), "pos": a["pos"], "days": a["days"], "n": a["n"]})
     if primary and primary not in [x["key"] for x in keys]:
         raise SystemExit("primary %s 가 %s 후보에 없다" % (primary, date))
-    return {"date": date, "tfs": tfs, "rule_sub": rule_sub, "primary": primary,
-            "rule": dict(DEFAULT_RULE), "keys": keys}
+    return {"name": date, "date": date, "history": "scalp_history.jsonl", "tfs": tfs, "rule_sub": rule_sub,
+            "primary": primary, "rule": dict(DEFAULT_RULE), "keys": keys}
+
+
+def map_venue(fz, venue, primary=None, history=None):
+    """얼린 목록의 (코인·봉·규칙)을 다른 거래소로 옮긴다. 그 거래소 기록은 고르는 데 안 썼으므로
+    얼린 날 뒤 성적은 그대로 표본 밖이다. 같은 조합이 여러 거래소에서 뽑혔으면 하나로 합친다."""
+    keys, seen = [], set()
+    for x in fz["keys"]:
+        _, coin, tf, st = scalp.split_key(x["key"])
+        k = "%s:%s:%s:%s" % (venue, coin, tf, st)
+        if k not in seen:
+            seen.add(k)
+            keys.append({"key": k, "nt": None, "pos": None, "days": None, "n": None, "from": x["key"]})
+    if primary and primary not in seen:
+        raise SystemExit("primary %s 가 옮긴 목록에 없다" % primary)
+    return {"name": "%s-%s" % (fz["name"], venue), "date": fz["date"],
+            "history": history or "scalp_%s_history.jsonl" % venue, "derived_from": fz["name"],
+            "tfs": fz.get("tfs"), "rule_sub": fz.get("rule_sub"), "primary": primary,
+            "rule": dict(fz["rule"]), "keys": keys}
 
 
 def check(rows, fz, until=None):
@@ -69,7 +93,7 @@ def check(rows, fz, until=None):
         verdict = "GO"
     else:
         verdict = "NO"
-    return {"date": fz["date"], "oos_days": days, "plus": plus, "total": len(out),
+    return {"name": fz.get("name", fz["date"]), "date": fz["date"], "oos_days": days, "plus": plus, "total": len(out),
             "share": round(share, 3), "primary": prim, "primary_ok": prim_ok, "verdict": verdict, "rows": out}
 
 
@@ -80,30 +104,38 @@ def main():
     ap.add_argument("--rule", help="규칙 이름에 들어갈 글자, 예: vwap")
     ap.add_argument("--primary")
     ap.add_argument("--until")
+    ap.add_argument("--map", help="이미 얼린 목록 이름 → --venue 거래소로 옮겨 얼림")
+    ap.add_argument("--venue")
     a = ap.parse_args()
-    rows = load_rows()
     data = json.load(open(FROZEN, encoding="utf-8")) if os.path.exists(FROZEN) else {"freezes": []}
-    if a.freeze:
-        if any(f["date"] == a.freeze for f in data["freezes"]):
-            raise SystemExit("%s 는 이미 얼려 있다 — 덮어쓰지 않는다" % a.freeze)
-        tfs = a.tf.split(",") if a.tf else None
-        data["freezes"].append(freeze(rows, a.freeze, tfs, a.rule, a.primary))
+    names = [f.get("name", f["date"]) for f in data["freezes"]]
+    if a.freeze or a.map:
+        if a.freeze:
+            new = freeze(load_rows(), a.freeze, a.tf.split(",") if a.tf else None, a.rule, a.primary)
+        else:
+            src = next((f for f in data["freezes"] if f.get("name", f["date"]) == a.map), None)
+            if src is None or not a.venue:
+                raise SystemExit("--map 은 얼린 목록 이름과 --venue 가 필요하다")
+            new = map_venue(src, a.venue, a.primary)
+        if new["name"] in names:
+            raise SystemExit("%s 는 이미 얼려 있다 — 덮어쓰지 않는다" % new["name"])
+        data["freezes"].append(new)
         with open(FROZEN, "w", encoding="utf-8") as fh:
             json.dump(data, fh, ensure_ascii=False, indent=1)
-        print("얼림 %s: %d개" % (a.freeze, len(data["freezes"][-1]["keys"])))
+        print("얼림 %s: %d개" % (new["name"], len(new["keys"])))
         return
     for fz in data["freezes"]:
-        r = check(rows, fz, a.until)
-        print("=== 얼린 날 %s — 표본 밖 %d일, 플러스 %d/%d (%.0f%%), 판정 %s ===" % (
-            r["date"], r["oos_days"], r["plus"], r["total"], 100 * r["share"], r["verdict"]))
+        r = check(load_rows(fz.get("history", HISTORY)), fz, a.until)
+        print("=== %s (얼린 날 %s) — 표본 밖 %d일, 플러스 %d/%d (%.0f%%), 판정 %s ===" % (
+            r["name"], r["date"], r["oos_days"], r["plus"], r["total"], 100 * r["share"], r["verdict"]))
         if r["primary"]:
             p = r["primary"]
             print("  주 후보 %s: 표본 밖 %+.3f%% (%d/%d일 플러스, %d건) → %s" % (
                 p["key"], p["oos_nt"], p["oos_pos"], p["oos_days"], p["oos_n"],
                 "대기" if r["verdict"] == "WAIT" else ("통과" if r["primary_ok"] else "미달")))
         for o in sorted(r["rows"], key=lambda o: o["oos_nt"], reverse=True):
-            print("  %-36s 고른 날까지 %+8.3f%% | 표본 밖 %+8.3f%% (%d/%d일, %d건)" % (
-                o["key"], o["in_nt"], o["oos_nt"], o["oos_pos"], o["oos_days"], o["oos_n"]))
+            print("  %-36s 고른 날까지 %8s | 표본 밖 %+8.3f%% (%d/%d일, %d건)" % (
+                o["key"], "-" if o["in_nt"] is None else "%+.3f%%" % o["in_nt"], o["oos_nt"], o["oos_pos"], o["oos_days"], o["oos_n"]))
 
 
 if __name__ == "__main__":
