@@ -175,9 +175,36 @@ def src_okx(coin, start, end):
 BINANCE_ZIP = "https://data.binance.vision/data/futures/um/daily/klines/{c}USDT/1m/{c}USDT-1m-{d}.zip"
 
 
+RELAY_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "binance_1m")
+RELAY_MAX_AGE_H = 36      # 가상서버 중계 파일이 이보다 오래됐으면 안 쓴다
+
+
+def src_binance_relay(coin, start, end, relay_dir=None):
+    """가상서버 중계기(vps_relay.py)가 올린 data/binance_1m/<코인>.json. 없거나 오래됐거나 구간을 덜 덮으면 None."""
+    path = os.path.join(relay_dir or RELAY_DIR, coin + ".json")
+    if not os.path.exists(path):
+        return None
+    with open(path, encoding="utf-8") as fp:
+        d = json.load(fp)
+    try:
+        gen = datetime.strptime(d.get("generated_at_utc", ""), "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
+    except ValueError:
+        return None
+    if (datetime.now(timezone.utc) - gen).total_seconds() > RELAY_MAX_AGE_H * 3600:
+        return None
+    bars = [bar(b[0], b[1], b[2], b[3], b[4], b[5]) for b in d.get("bars", []) if start <= b[0] < end]
+    if not bars or bars[0]["t"] > start + 3600 or bars[-1]["t"] < end - 3600:
+        return None                          # 준비 구간 앞이나 평가 구간 끝이 비어 있다
+    return finish(bars, start, end)
+
+
 def src_binance(coin, start, end):
-    """바이낸스 USDT 무기한 1분봉. API(fapi)는 미국 서버에서 451 로 막혀 공개 일별 파일(data.binance.vision)을 받는다.
-    하루 파일은 그날이 끝난 뒤 올라온다. 파일 하나라도 없으면 실패로 둔다(다음 실행에서 다시 채운다). 제안함 P20"""
+    """바이낸스 USDT 무기한 1분봉. API(fapi)는 미국 서버에서 451 로 막혀 있다.
+    ① 가상서버 중계 파일(data/binance_1m, vps_relay.py) ② 공개 일별 파일(data.binance.vision) 순서로 받는다.
+    일별 파일은 그날이 끝난 뒤 올라온다. 파일 하나라도 없으면 실패로 둔다(다음 실행에서 다시 채운다). 제안함 P20"""
+    got = src_binance_relay(coin, start, end)
+    if got:
+        return got
     out = []
     day = start - start % 86400
     while day < end:
