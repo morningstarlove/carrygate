@@ -84,5 +84,6 @@ python scripts/scalp_oos_check.py     # 11/4 에 이것만 돌린다
 - `scalp.src_binance_relay`: 중계 파일이 36시간 안이고 준비 구간 앞·평가 구간 끝을 덮으면 그것을 쓰고, 아니면 공개 일별 파일로.
 - 워크플로 커밋 목록에 `data/binance_1m` 추가. `.gitignore` 에 `vps_relay_config.json`.
 - 시험: BinanceSource 5건(중계 우선·오래된 파일·구간 부족·zip 되돌아가기, 1,500봉 이어받기·중복 제거).
-- **사용자가 할 일:** `docs/VPS_SETUP.md` 1~5단계(20~30분). 1단계에서 451 이면 서버가 미국이라 불가.
+- 사용자 "다른 세션에 내 가상서버 내용 있잖아" → 하위 에이전트가 세션 9개를 훑음: **Vultr 우분투 서버**(root SSH, KST, 1GB, 하이퍼리퀴드·RSIX·스윙·TRIDENT 등 봇이 cron·systemd 로 가동, 관제탑 웹 포함). 지역은 기록에 없음(451 이면 그때 안다). 설치 스크립트 `scripts/vps_relay_install.sh` 로 절차를 **한 줄**로 줄였다.
+- **사용자가 할 일:** `docs/VPS_SETUP.md` — 토큰 준비 후 서버에서 한 줄 실행(5분).
 - 이 세션 서버에서는 바이낸스·GitHub raw 모두 막혀 실데이터 확인은 사용자 서버에서 처음 한다.
