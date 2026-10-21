@@ -14,6 +14,9 @@ GitHub Actions(미국 서버)는 바이낸스 API 가 막혀 있다(451). 이 �
 
 vps_relay_config.json (이 파일과 같은 폴더):
   {"token": "github_pat_...", "repo": "morningstarlove/carrygate", "branch": "main"}
+또는 같은 폴더 .env (서버의 다른 봇과 같은 방식, chmod 600):
+  GITHUB_TOKEN=github_pat_...   GITHUB_REPO=morningstarlove/carrygate   GITHUB_BRANCH=main
+  TELEGRAM_BOT_TOKEN=... TELEGRAM_CHAT_ID=...   (있으면 실패할 때만 텔레그램으로 알린다. 선택)
 
 토큰은 GitHub 의 Fine-grained personal access token 으로, **이 저장소 하나에만 Contents: Read and write** 권한.
 거래소 API 키는 쓰지 않는다 — 바이낸스에는 누구나 볼 수 있는 공개 시세만 읽는다. 주문 기능 없음.
@@ -107,16 +110,54 @@ def build(days=DAYS, coins=COINS):
     return files, errors
 
 
+ENV_PATH = os.path.join(HERE, ".env")
+
+
+def load_env(path=None):
+    """KEY=VALUE 줄 → dict. 없으면 빈 dict. 따옴표·주석 허용."""
+    out, path = {}, path or ENV_PATH
+    if not os.path.exists(path):
+        return out
+    with open(path, encoding="utf-8") as fp:
+        for line in fp:
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            k, v = line.split("=", 1)
+            out[k.strip()] = v.strip().strip('"').strip("'")
+    return out
+
+
 def load_config():
-    if not os.path.exists(CONFIG_PATH):
-        raise RuntimeError("설정 파일이 없다: %s  (docs/VPS_SETUP.md 3단계)" % CONFIG_PATH)
-    with open(CONFIG_PATH, encoding="utf-8") as fp:
-        cfg = json.load(fp)
+    """vps_relay_config.json → .env(GITHUB_TOKEN …) → 환경 변수 순서."""
+    if os.path.exists(CONFIG_PATH):
+        with open(CONFIG_PATH, encoding="utf-8") as fp:
+            cfg = json.load(fp)
+    else:
+        env = dict(os.environ); env.update(load_env())
+        cfg = {"token": env.get("GITHUB_TOKEN"), "repo": env.get("GITHUB_REPO", "morningstarlove/carrygate"),
+               "branch": env.get("GITHUB_BRANCH", "main")}
+        if not cfg["token"]:
+            raise RuntimeError("설정이 없다: %s 또는 .env 의 GITHUB_TOKEN  (docs/VPS_SETUP.md)" % CONFIG_PATH)
     for k in ("token", "repo"):
         if not cfg.get(k):
-            raise RuntimeError("설정 파일에 %s 가 비어 있다" % k)
+            raise RuntimeError("설정에 %s 가 비어 있다" % k)
     cfg.setdefault("branch", "main")
     return cfg
+
+
+def telegram_alert(text):
+    """.env 에 TELEGRAM_BOT_TOKEN·TELEGRAM_CHAT_ID 가 있을 때만 보낸다. 실패해도 조용히 넘어간다."""
+    env = dict(os.environ); env.update(load_env())
+    tok, chat = env.get("TELEGRAM_BOT_TOKEN"), env.get("TELEGRAM_CHAT_ID")
+    if not tok or not chat:
+        return False
+    try:
+        http_json("https://api.telegram.org/bot%s/sendMessage" % tok, tries=1,
+                  data={"chat_id": chat, "text": "[carrygate-relay] " + text})
+        return True
+    except Exception:
+        return False
 
 
 def upload(cfg, coin, payload):
@@ -163,7 +204,12 @@ def main(argv=None):
 
 if __name__ == "__main__":
     try:
-        sys.exit(main())
+        rc = main()
     except Exception as e:
         print("[실패] %s" % e, file=sys.stderr)
-        sys.exit(1)
+        telegram_alert("실패: %s" % str(e)[:300])
+        rc = 1
+    else:
+        if rc != 0:
+            telegram_alert("일부 실패 (코드 %d) — relay.log 확인" % rc)
+    sys.exit(rc)
