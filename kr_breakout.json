@@ -1,6 +1,6 @@
 {
- "date": "2026-10-20",
- "generated_at_utc": "2026-10-20T12:20:59Z",
+ "date": "2026-10-21",
+ "generated_at_utc": "2026-10-21T07:17:47Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -74,33 +74,54 @@
   }
  },
  "forward": {
-  "days": 10,
+  "days": 11,
   "from": "2026-10-05",
-  "to": "2026-10-20",
-  "codes": 206,
+  "to": "2026-10-21",
+  "codes": 212,
   "bar_errors": 0,
   "stale_codes": 0,
   "by_source": {
-   "yahoo+naver_api": 38,
-   "yahoo": 168
+   "yahoo": 171,
+   "yahoo+gapfill": 1,
+   "yahoo+naver_api": 40
   },
   "skipped_days": [
    "2026-10-05"
   ],
-  "gap_filled": 0,
-  "gap_filled_codes": {},
+  "gap_filled": 1,
+  "gap_filled_codes": {
+   "179880": [
+    "2026-10-19",
+    "2026-10-20"
+   ]
+  },
   "gap_unfilled": 0,
   "note": null
  },
  "signals_today": {
   "base": [],
-  "no_sector": [],
+  "no_sector": [
+   {
+    "code": "009900",
+    "name": "Myoung Shin Industry Co., Ltd.",
+    "group": "Auto Parts: OEM",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 10190.0,
+    "pattern_low": 7590.0,
+    "sync_by": null,
+    "entry_plan": "내일 시가 (시가가 11005 이상이면 포기)",
+    "stop_plan": "max(7590, 진입가×0.93)"
+   }
+  ],
   "hold_10": [],
   "risk_2": [],
   "no_flag": []
  },
- "signal_date": "2026-10-20",
- "signals_frozen": true,
+ "signal_date": "2026-10-21",
+ "signals_frozen": false,
  "frozen_dates": [
   "2026-10-06",
   "2026-10-07",
@@ -124,23 +145,23 @@
    "avg_loss_pct": -7.21,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -4.92,
-   "equity_final": 9508058,
+   "total_return_pct": -3.0,
+   "equity_final": 9700361,
    "max_drawdown_pct": 5.26,
-   "avg_hold_days": 2,
+   "avg_hold_days": 2.29,
    "skipped": {
     "gap": 0,
     "limit": 9,
-    "cooldown": 0,
+    "cooldown": 2,
     "size": 0,
     "no_bar": 0,
     "pattern": 0
    },
    "by_pattern": {
     "flag": {
-     "n": 4,
+     "n": 3,
      "wins": 0,
-     "pnl_krw": -410256
+     "pnl_krw": -307325
     },
     "cup_handle": {
      "n": 1,
@@ -148,34 +169,34 @@
      "pnl_krw": -87356
     },
     "box": {
-     "n": 2,
+     "n": 3,
      "wins": 0,
-     "pnl_krw": -178218
+     "pnl_krw": -277889
     }
    },
    "by_sync": {
     "day": {
      "n": 7,
      "wins": 0,
-     "pnl_krw": -675830
+     "pnl_krw": -672570
     }
    },
    "by_exit": {
     "stop": {
      "n": 7,
      "wins": 0,
-     "pnl_krw": -675830
+     "pnl_krw": -672570
     }
    },
    "by_year": {
     "2026": {
      "n": 7,
      "wins": 0,
-     "pnl_krw": -675830
+     "pnl_krw": -672570
     }
    },
    "yearly_return_pct": {
-    "2026": -4.92
+    "2026": -3.0
    },
    "open_positions": [
     {
@@ -187,9 +208,9 @@
      "entry": 386656.5,
      "stop": 359590.54,
      "shares": 3,
-     "bars_held": 9,
-     "last_close": 414000.0,
-     "unrealized_pct": 7.07
+     "bars_held": 10,
+     "last_close": 411500.0,
+     "unrealized_pct": 6.43
     },
     {
      "code": "396300",
@@ -200,9 +221,9 @@
      "entry": 8836.43,
      "stop": 8217.88,
      "shares": 152,
-     "bars_held": 2,
-     "last_close": 9970.0,
-     "unrealized_pct": 12.83
+     "bars_held": 3,
+     "last_close": 11120.0,
+     "unrealized_pct": 25.84
     },
     {
      "code": "068270",
@@ -213,28 +234,28 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 6,
-     "bars_held": 2,
-     "last_close": 197400.0,
-     "unrealized_pct": 1.5
+     "bars_held": 3,
+     "last_close": 197600.0,
+     "unrealized_pct": 1.6
     },
     {
-     "code": "452280",
-     "name": "HanSun Engineering Co., Ltd.",
-     "group": "Industrial Machinery",
-     "pattern": "box",
-     "entry_date": "2026-10-19",
-     "entry": 16730.04,
-     "stop": 15558.94,
-     "shares": 80,
+     "code": "419050",
+     "name": "SAMKEE ENERGY SOLUTIONS CO. LTD",
+     "group": "Electrical Products",
+     "pattern": "flag",
+     "entry_date": "2026-10-20",
+     "entry": 2652.93,
+     "stop": 2467.23,
+     "shares": 521,
      "bars_held": 2,
-     "last_close": 15640.0,
-     "unrealized_pct": -6.52
+     "last_close": 2525.0,
+     "unrealized_pct": -4.82
     }
    ]
   },
   "no_sector": {
    "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
-   "signals": 54,
+   "signals": 55,
    "trades": 13,
    "wins": 0,
    "win_rate": 0.0,
@@ -242,14 +263,14 @@
    "avg_loss_pct": -7.41,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -6.26,
-   "equity_final": 9374068,
+   "total_return_pct": -4.27,
+   "equity_final": 9572958,
    "max_drawdown_pct": 11.47,
    "avg_hold_days": 1.77,
    "skipped": {
     "gap": 0,
     "limit": 35,
-    "cooldown": 0,
+    "cooldown": 11,
     "size": 0,
     "no_bar": 1,
     "pattern": 0
@@ -303,7 +324,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -6.26
+    "2026": -4.27
    },
    "open_positions": [
     {
@@ -315,9 +336,9 @@
      "entry": 21363.9,
      "stop": 20800.0,
      "shares": 83,
-     "bars_held": 6,
-     "last_close": 23450.0,
-     "unrealized_pct": 9.76
+     "bars_held": 7,
+     "last_close": 23400.0,
+     "unrealized_pct": 9.53
     },
     {
      "code": "028670",
@@ -328,9 +349,9 @@
      "entry": 6619.8,
      "stop": 6156.41,
      "shares": 198,
-     "bars_held": 5,
-     "last_close": 6450.0,
-     "unrealized_pct": -2.57
+     "bars_held": 6,
+     "last_close": 6530.0,
+     "unrealized_pct": -1.36
     },
     {
      "code": "452280",
@@ -341,9 +362,9 @@
      "entry": 15335.87,
      "stop": 14262.36,
      "shares": 83,
-     "bars_held": 4,
-     "last_close": 15640.0,
-     "unrealized_pct": 1.98
+     "bars_held": 5,
+     "last_close": 15540.0,
+     "unrealized_pct": 1.33
     },
     {
      "code": "396300",
@@ -354,9 +375,9 @@
      "entry": 7452.29,
      "stop": 6930.63,
      "shares": 170,
-     "bars_held": 3,
-     "last_close": 9970.0,
-     "unrealized_pct": 33.78
+     "bars_held": 4,
+     "last_close": 11120.0,
+     "unrealized_pct": 49.22
     },
     {
      "code": "033780",
@@ -367,7 +388,7 @@
      "entry": 187761.6,
      "stop": 174618.29,
      "shares": 6,
-     "bars_held": 3,
+     "bars_held": 4,
      "last_close": 194000.0,
      "unrealized_pct": 3.32
     }
@@ -383,23 +404,23 @@
    "avg_loss_pct": -7.21,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -4.92,
-   "equity_final": 9508058,
+   "total_return_pct": -3.0,
+   "equity_final": 9700361,
    "max_drawdown_pct": 5.26,
-   "avg_hold_days": 2,
+   "avg_hold_days": 2.29,
    "skipped": {
     "gap": 0,
     "limit": 9,
-    "cooldown": 0,
+    "cooldown": 2,
     "size": 0,
     "no_bar": 0,
     "pattern": 0
    },
    "by_pattern": {
     "flag": {
-     "n": 4,
+     "n": 3,
      "wins": 0,
-     "pnl_krw": -410256
+     "pnl_krw": -307325
     },
     "cup_handle": {
      "n": 1,
@@ -407,34 +428,34 @@
      "pnl_krw": -87356
     },
     "box": {
-     "n": 2,
+     "n": 3,
      "wins": 0,
-     "pnl_krw": -178218
+     "pnl_krw": -277889
     }
    },
    "by_sync": {
     "day": {
      "n": 7,
      "wins": 0,
-     "pnl_krw": -675830
+     "pnl_krw": -672570
     }
    },
    "by_exit": {
     "stop": {
      "n": 7,
      "wins": 0,
-     "pnl_krw": -675830
+     "pnl_krw": -672570
     }
    },
    "by_year": {
     "2026": {
      "n": 7,
      "wins": 0,
-     "pnl_krw": -675830
+     "pnl_krw": -672570
     }
    },
    "yearly_return_pct": {
-    "2026": -4.92
+    "2026": -3.0
    },
    "open_positions": [
     {
@@ -446,9 +467,9 @@
      "entry": 386656.5,
      "stop": 359590.54,
      "shares": 3,
-     "bars_held": 9,
-     "last_close": 414000.0,
-     "unrealized_pct": 7.07
+     "bars_held": 10,
+     "last_close": 411500.0,
+     "unrealized_pct": 6.43
     },
     {
      "code": "396300",
@@ -459,9 +480,9 @@
      "entry": 8836.43,
      "stop": 8217.88,
      "shares": 152,
-     "bars_held": 2,
-     "last_close": 9970.0,
-     "unrealized_pct": 12.83
+     "bars_held": 3,
+     "last_close": 11120.0,
+     "unrealized_pct": 25.84
     },
     {
      "code": "068270",
@@ -472,43 +493,43 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 6,
-     "bars_held": 2,
-     "last_close": 197400.0,
-     "unrealized_pct": 1.5
+     "bars_held": 3,
+     "last_close": 197600.0,
+     "unrealized_pct": 1.6
     },
     {
-     "code": "452280",
-     "name": "HanSun Engineering Co., Ltd.",
-     "group": "Industrial Machinery",
-     "pattern": "box",
-     "entry_date": "2026-10-19",
-     "entry": 16730.04,
-     "stop": 15558.94,
-     "shares": 80,
+     "code": "419050",
+     "name": "SAMKEE ENERGY SOLUTIONS CO. LTD",
+     "group": "Electrical Products",
+     "pattern": "flag",
+     "entry_date": "2026-10-20",
+     "entry": 2652.93,
+     "stop": 2467.23,
+     "shares": 521,
      "bars_held": 2,
-     "last_close": 15640.0,
-     "unrealized_pct": -6.52
+     "last_close": 2525.0,
+     "unrealized_pct": -4.82
     }
    ]
   },
   "risk_2": {
    "label": "동조 + 패턴, 위험 2% (명목 상한 30%)",
    "signals": 21,
-   "trades": 5,
+   "trades": 6,
    "wins": 0,
    "win_rate": 0.0,
    "avg_win_pct": null,
-   "avg_loss_pct": -7.12,
+   "avg_loss_pct": -7.17,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -7.22,
-   "equity_final": 9278487,
+   "total_return_pct": -4.06,
+   "equity_final": 9594270,
    "max_drawdown_pct": 9.21,
-   "avg_hold_days": 2.2,
+   "avg_hold_days": 2.33,
    "skipped": {
     "gap": 0,
     "limit": 0,
-    "cooldown": 0,
+    "cooldown": 2,
     "size": 13,
     "no_bar": 0,
     "pattern": 0
@@ -525,34 +546,34 @@
      "pnl_krw": -152873
     },
     "box": {
-     "n": 2,
+     "n": 3,
      "wins": 0,
-     "pnl_krw": -356437
+     "pnl_krw": -549549
     }
    },
    "by_sync": {
     "day": {
-     "n": 5,
+     "n": 6,
      "wins": 0,
-     "pnl_krw": -921475
+     "pnl_krw": -1114587
     }
    },
    "by_exit": {
     "stop": {
-     "n": 5,
+     "n": 6,
      "wins": 0,
-     "pnl_krw": -921475
+     "pnl_krw": -1114587
     }
    },
    "by_year": {
     "2026": {
-     "n": 5,
+     "n": 6,
      "wins": 0,
-     "pnl_krw": -921475
+     "pnl_krw": -1114587
     }
    },
    "yearly_return_pct": {
-    "2026": -7.22
+    "2026": -4.06
    },
    "open_positions": [
     {
@@ -564,9 +585,9 @@
      "entry": 8836.43,
      "stop": 8217.88,
      "shares": 293,
-     "bars_held": 2,
-     "last_close": 9970.0,
-     "unrealized_pct": 12.83
+     "bars_held": 3,
+     "last_close": 11120.0,
+     "unrealized_pct": 25.84
     },
     {
      "code": "068270",
@@ -577,43 +598,30 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 13,
-     "bars_held": 2,
-     "last_close": 197400.0,
-     "unrealized_pct": 1.5
-    },
-    {
-     "code": "452280",
-     "name": "HanSun Engineering Co., Ltd.",
-     "group": "Industrial Machinery",
-     "pattern": "box",
-     "entry_date": "2026-10-19",
-     "entry": 16730.04,
-     "stop": 15558.94,
-     "shares": 155,
-     "bars_held": 2,
-     "last_close": 15640.0,
-     "unrealized_pct": -6.52
+     "bars_held": 3,
+     "last_close": 197600.0,
+     "unrealized_pct": 1.6
     }
    ]
   },
   "no_flag": {
    "label": "동조 + 패턴, 깃발형 제외",
    "signals": 8,
-   "trades": 4,
+   "trades": 5,
    "wins": 0,
    "win_rate": 0.0,
    "avg_win_pct": null,
-   "avg_loss_pct": -7.04,
+   "avg_loss_pct": -7.12,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -3.79,
-   "equity_final": 9620646,
-   "max_drawdown_pct": 4.25,
-   "avg_hold_days": 3.75,
+   "total_return_pct": -3.98,
+   "equity_final": 9601972,
+   "max_drawdown_pct": 4.43,
+   "avg_hold_days": 3.6,
    "skipped": {
     "gap": 0,
     "limit": 1,
-    "cooldown": 0,
+    "cooldown": 1,
     "size": 0,
     "no_bar": 0,
     "pattern": 0
@@ -625,34 +633,34 @@
      "pnl_krw": -109195
     },
     "box": {
-     "n": 3,
+     "n": 4,
      "wins": 0,
-     "pnl_krw": -282650
+     "pnl_krw": -384813
     }
    },
    "by_sync": {
     "day": {
-     "n": 4,
+     "n": 5,
      "wins": 0,
-     "pnl_krw": -391845
+     "pnl_krw": -494008
     }
    },
    "by_exit": {
     "stop": {
-     "n": 4,
+     "n": 5,
      "wins": 0,
-     "pnl_krw": -391845
+     "pnl_krw": -494008
     }
    },
    "by_year": {
     "2026": {
-     "n": 4,
+     "n": 5,
      "wins": 0,
-     "pnl_krw": -391845
+     "pnl_krw": -494008
     }
    },
    "yearly_return_pct": {
-    "2026": -3.79
+    "2026": -3.98
    },
    "open_positions": [
     {
@@ -664,9 +672,9 @@
      "entry": 386656.5,
      "stop": 359590.54,
      "shares": 3,
-     "bars_held": 9,
-     "last_close": 414000.0,
-     "unrealized_pct": 7.07
+     "bars_held": 10,
+     "last_close": 411500.0,
+     "unrealized_pct": 6.43
     },
     {
      "code": "068270",
@@ -677,22 +685,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 7,
-     "bars_held": 2,
-     "last_close": 197400.0,
-     "unrealized_pct": 1.5
-    },
-    {
-     "code": "452280",
-     "name": "HanSun Engineering Co., Ltd.",
-     "group": "Industrial Machinery",
-     "pattern": "box",
-     "entry_date": "2026-10-19",
-     "entry": 16730.04,
-     "stop": 15558.94,
-     "shares": 82,
-     "bars_held": 2,
-     "last_close": 15640.0,
-     "unrealized_pct": -6.52
+     "bars_held": 3,
+     "last_close": 197600.0,
+     "unrealized_pct": 1.6
     }
    ]
   }
@@ -833,25 +828,26 @@
     "gap": false
    },
    {
-    "code": "419050",
-    "name": "SAMKEE ENERGY SOLUTIONS CO. LTD",
-    "group": "Electrical Products",
-    "pattern": "flag",
+    "code": "452280",
+    "name": "HanSun Engineering Co., Ltd.",
+    "group": "Industrial Machinery",
+    "pattern": "box",
     "patterns": [
+     "box",
      "flag"
     ],
     "sync_by": "day",
-    "signal_date": "2026-10-19",
-    "entry_date": "2026-10-20",
-    "entry": 2652.93,
-    "stop": 2467.23,
-    "exit_date": "2026-10-20",
-    "exit": 2459.83,
+    "signal_date": "2026-10-16",
+    "entry_date": "2026-10-19",
+    "entry": 16730.04,
+    "stop": 15558.94,
+    "exit_date": "2026-10-21",
+    "exit": 15512.26,
     "why": "stop",
-    "shares": 521,
-    "pnl_krw": -102931,
+    "shares": 80,
+    "pnl_krw": -99671,
     "pnl_pct": -7.45,
-    "hold_days": 1,
+    "hold_days": 3,
     "gap": false
    }
   ],
@@ -1283,25 +1279,26 @@
     "gap": false
    },
    {
-    "code": "419050",
-    "name": "SAMKEE ENERGY SOLUTIONS CO. LTD",
-    "group": "Electrical Products",
-    "pattern": "flag",
+    "code": "452280",
+    "name": "HanSun Engineering Co., Ltd.",
+    "group": "Industrial Machinery",
+    "pattern": "box",
     "patterns": [
+     "box",
      "flag"
     ],
     "sync_by": "day",
-    "signal_date": "2026-10-19",
-    "entry_date": "2026-10-20",
-    "entry": 2652.93,
-    "stop": 2467.23,
-    "exit_date": "2026-10-20",
-    "exit": 2459.83,
+    "signal_date": "2026-10-16",
+    "entry_date": "2026-10-19",
+    "entry": 16730.04,
+    "stop": 15558.94,
+    "exit_date": "2026-10-21",
+    "exit": 15512.26,
     "why": "stop",
-    "shares": 521,
-    "pnl_krw": -102931,
+    "shares": 80,
+    "pnl_krw": -99671,
     "pnl_pct": -7.45,
-    "hold_days": 1,
+    "hold_days": 3,
     "gap": false
    }
   ],
@@ -1416,6 +1413,29 @@
     "pnl_pct": -7.45,
     "hold_days": 3,
     "gap": false
+   },
+   {
+    "code": "452280",
+    "name": "HanSun Engineering Co., Ltd.",
+    "group": "Industrial Machinery",
+    "pattern": "box",
+    "patterns": [
+     "box",
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-16",
+    "entry_date": "2026-10-19",
+    "entry": 16730.04,
+    "stop": 15558.94,
+    "exit_date": "2026-10-21",
+    "exit": 15512.26,
+    "why": "stop",
+    "shares": 155,
+    "pnl_krw": -193112,
+    "pnl_pct": -7.45,
+    "hold_days": 3,
+    "gap": false
    }
   ],
   "no_flag": [
@@ -1505,6 +1525,29 @@
     "pnl_krw": -104432,
     "pnl_pct": -7.45,
     "hold_days": 6,
+    "gap": false
+   },
+   {
+    "code": "452280",
+    "name": "HanSun Engineering Co., Ltd.",
+    "group": "Industrial Machinery",
+    "pattern": "box",
+    "patterns": [
+     "box",
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-16",
+    "entry_date": "2026-10-19",
+    "entry": 16730.04,
+    "stop": 15558.94,
+    "exit_date": "2026-10-21",
+    "exit": 15512.26,
+    "why": "stop",
+    "shares": 82,
+    "pnl_krw": -102163,
+    "pnl_pct": -7.45,
+    "hold_days": 3,
     "gap": false
    }
   ]
