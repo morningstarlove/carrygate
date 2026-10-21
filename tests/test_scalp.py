@@ -327,16 +327,60 @@ class BinanceSource(unittest.TestCase):
             self.assertIsNone(scalp.src_binance_relay("ETH", start, end, relay_dir=d))
             self.assertIsNone(scalp.src_binance_relay("BTC", start, end, relay_dir=d))
             self.assertIsNone(scalp.src_binance_relay("DOGE", start, end, relay_dir=d))
-            saved = (scalp.RELAY_DIR, scalp.http_bytes)
+            saved = (scalp.RELAY_DIR, scalp.http_bytes, scalp.RELAY_URL)
             calls = []
             scalp.RELAY_DIR, scalp.http_bytes = d, lambda url, tries=3: calls.append(url) or self._zip([(d0 * 1000, 1, 2, 0.5, 1.5, 1)])
+            scalp.RELAY_URL = ""                                                     # 서버 주소는 건너뛴다(오프라인 시험)
             try:
                 self.assertEqual(len(scalp.src_binance("XRP", start, end)), 120)   # 중계 파일 → 다운로드 없음
                 self.assertEqual(calls, [])
                 scalp.src_binance("DOGE", start, end)                                # 파일 없음 → 일별 zip
                 self.assertEqual(len(calls), 1)
             finally:
-                scalp.RELAY_DIR, scalp.http_bytes = saved
+                scalp.RELAY_DIR, scalp.http_bytes, scalp.RELAY_URL = saved
+
+    def test_relay_http_first_then_repo_file(self):
+        from datetime import datetime, timezone
+        d0 = 1760918400
+        start, end = d0, d0 + 7200
+        now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+        payload = {"generated_at_utc": now, "bars": [[d0 + 60 * i, 1, 2, 0.5, 1.5, 10] for i in range(120)]}
+        urls = []
+
+        def fake_http(url, tries=3, data=None):
+            urls.append(url)
+            if "XRP" in url:
+                return payload
+            raise RuntimeError("503")
+        saved = (scalp.http_json, scalp.RELAY_URL, scalp.RELAY_DIR, scalp.http_bytes)
+        with tempfile.TemporaryDirectory() as d:
+            with open(os.path.join(d, "ETH.json"), "w") as fp:
+                json.dump(payload, fp)
+            scalp.http_json, scalp.RELAY_URL, scalp.RELAY_DIR = fake_http, "http://x/relay/", d
+            scalp.http_bytes = lambda url, tries=3: (_ for _ in ()).throw(RuntimeError("no zip"))
+            try:
+                self.assertEqual(len(scalp.src_binance("XRP", start, end)), 120)     # ① 서버 주소
+                self.assertEqual(urls, ["http://x/relay/XRP.json"])
+                self.assertEqual(len(scalp.src_binance("ETH", start, end)), 120)     # ② 서버 실패 → 저장소 파일
+                with self.assertRaises(RuntimeError):
+                    scalp.src_binance("DOGE", start, end)                            # ③ 둘 다 없음 → zip
+                scalp.RELAY_URL = ""
+                self.assertIsNone(scalp.src_binance_relay_http("XRP", start, end))   # 비우면 건너뜀
+            finally:
+                scalp.http_json, scalp.RELAY_URL, scalp.RELAY_DIR, scalp.http_bytes = saved
+
+    def test_vps_relay_out_dir_atomic_write(self):
+        import io as _io, contextlib, vps_relay
+        saved = vps_relay.build
+        vps_relay.build = lambda days=4, coins=None: ({"XRP": {"to_utc": "2026-10-21 00:00", "from_utc": "x", "bars": [[1, 1, 1, 1, 1, 1]]}}, {})
+        with tempfile.TemporaryDirectory() as d:
+            try:
+                with contextlib.redirect_stdout(_io.StringIO()):
+                    rc = vps_relay.main(["--no-upload", "--out-dir", os.path.join(d, "w")])
+            finally:
+                vps_relay.build = saved
+            self.assertEqual(rc, 0)
+            self.assertEqual(sorted(os.listdir(os.path.join(d, "w"))), ["XRP.json"])
 
     def test_vps_relay_fetch_and_dedupe(self):
         import vps_relay
