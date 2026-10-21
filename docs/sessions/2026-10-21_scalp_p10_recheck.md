@@ -89,3 +89,4 @@ python scripts/scalp_oos_check.py     # 11/4 에 이것만 돌린다
 - 이 세션 서버에서는 바이낸스·GitHub raw 모두 막혀 실데이터 확인은 사용자 서버에서 처음 한다.
 - 사용자가 서버 정보를 직접 줌(Vultr 서울·Ubuntu 24.04·포트/경로 맵·봇 공통 구조·보안 원칙). 그에 맞춰 설정을 `.env`(600) 로, 실패 시 텔레그램(선택) 추가, 포트 없음 확인. 대조표 `docs/VPS_SETUP.md`. 키·토큰은 문서에 적지 않았다.
 - GitHub 공개 파일 방식 실데이터: dry_run #65 에서 10/17·18·19 바이낸스 6시장 270조합 계산, 10/20 은 파일 미게시로 실패(예상대로, 다음 실행에 채움). 저장 실행 #66 성공 → `scalp_binance_history.jsonl` 시작.
+- 사용자 "니가 해" → 이 세션은 서버 접근 불가(ssh 없음, 네트워크 403, 키 없음). 토큰 없이 되는 **끌어오기 방식** 추가: `vps_relay.py --out-dir`, `scalp.src_binance_relay_http`(RELAY_URL ① → 저장소 파일 ② → zip ③), `scripts/vps_relay_install_pull.sh`(Caddy import 삽입·검증·원복), `docs/VPS_MAC_PROMPT.md`(맥 세션용 지시문). 시험 2건 추가(34건).

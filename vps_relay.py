@@ -11,6 +11,9 @@ GitHub Actions(미국 서버)는 바이낸스 API 가 막혀 있다(451). 이 �
   python vps_relay.py              # 수집 + 저장소 업로드 (옆에 vps_relay_config.json 필요)
   python vps_relay.py --no-upload  # 수집만 하고 옆 폴더 data/binance_1m/ 에 저장 (시험용)
   python vps_relay.py --days 2     # 최근 2일만 (기본 4일: 평가 하루 + 지표 준비 60시간)
+  python vps_relay.py --no-upload --out-dir /var/www/carrygate/binance_1m
+                                   # 토큰 없이: 파일을 웹 폴더에 두고 Caddy 가 /carrygate/binance_1m/ 로 내보낸다.
+                                   # Actions 의 scalp.py 가 그 주소를 먼저 읽는다 (docs/VPS_SETUP.md 의 "끌어오기 방식")
 
 vps_relay_config.json (이 파일과 같은 폴더):
   {"token": "github_pat_...", "repo": "morningstarlove/carrygate", "branch": "main"}
@@ -178,21 +181,24 @@ def main(argv=None):
     argv = sys.argv[1:] if argv is None else argv
     no_upload = "--no-upload" in argv
     days = int(argv[argv.index("--days") + 1]) if "--days" in argv else DAYS
+    out_dir = argv[argv.index("--out-dir") + 1] if "--out-dir" in argv else LOCAL_DIR
     files, errors = build(days)
     print("=== 가상서버 중계 수집 %s KST ===" % datetime.now(KST).strftime("%Y-%m-%d %H:%M"))
     for c, p in files.items():
         print("  binance %-5s 1분봉 %5d개  %s ~ %s UTC" % (c, len(p["bars"]), p["from_utc"], p["to_utc"]))
     for c, e in errors.items():
         print("  binance %-5s 실패: %s" % (c, e))
-    os.makedirs(LOCAL_DIR, exist_ok=True)
+    os.makedirs(out_dir, exist_ok=True)
     for c, p in files.items():
-        with open(os.path.join(LOCAL_DIR, c + ".json"), "w", encoding="utf-8") as fp:
+        tmp = os.path.join(out_dir, c + ".json.tmp")
+        with open(tmp, "w", encoding="utf-8") as fp:
             json.dump(p, fp, separators=(",", ":"))
+        os.replace(tmp, os.path.join(out_dir, c + ".json"))     # 읽는 쪽이 반쯤 쓰인 파일을 보지 않게
     if not files:
         print("모든 코인 실패 — 업로드하지 않는다", file=sys.stderr)
         return 1
     if no_upload:
-        print("업로드 생략 (--no-upload). 결과: %s" % LOCAL_DIR)
+        print("업로드 생략 (--no-upload). 결과: %s" % out_dir)
         return 0
     cfg = load_config()
     for c, p in files.items():

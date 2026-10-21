@@ -177,15 +177,12 @@ BINANCE_ZIP = "https://data.binance.vision/data/futures/um/daily/klines/{c}USDT/
 
 RELAY_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "binance_1m")
 RELAY_MAX_AGE_H = 36      # 가상서버 중계 파일이 이보다 오래됐으면 안 쓴다
+# 사용자 가상서버(Vultr 서울)가 Caddy 로 내보내는 중계 파일 주소. 비우면(환경 변수 CARRYGATE_RELAY_URL="") 건너뛴다
+RELAY_URL = os.environ.get("CARRYGATE_RELAY_URL", "http://158.247.206.213/carrygate/binance_1m/")
 
 
-def src_binance_relay(coin, start, end, relay_dir=None):
-    """가상서버 중계기(vps_relay.py)가 올린 data/binance_1m/<코인>.json. 없거나 오래됐거나 구간을 덜 덮으면 None."""
-    path = os.path.join(relay_dir or RELAY_DIR, coin + ".json")
-    if not os.path.exists(path):
-        return None
-    with open(path, encoding="utf-8") as fp:
-        d = json.load(fp)
+def relay_bars(d, start, end):
+    """중계 파일(dict) → [start,end) 봉 목록. 오래됐거나 준비 구간 앞·평가 구간 끝이 비면 None."""
     try:
         gen = datetime.strptime(d.get("generated_at_utc", ""), "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
     except ValueError:
@@ -194,15 +191,36 @@ def src_binance_relay(coin, start, end, relay_dir=None):
         return None
     bars = [bar(b[0], b[1], b[2], b[3], b[4], b[5]) for b in d.get("bars", []) if start <= b[0] < end]
     if not bars or bars[0]["t"] > start + 3600 or bars[-1]["t"] < end - 3600:
-        return None                          # 준비 구간 앞이나 평가 구간 끝이 비어 있다
+        return None
     return finish(bars, start, end)
+
+
+def src_binance_relay(coin, start, end, relay_dir=None):
+    """저장소 안 중계 파일 data/binance_1m/<코인>.json (vps_relay.py 가 토큰으로 올린 것). 못 쓰면 None."""
+    path = os.path.join(relay_dir or RELAY_DIR, coin + ".json")
+    if not os.path.exists(path):
+        return None
+    with open(path, encoding="utf-8") as fp:
+        return relay_bars(json.load(fp), start, end)
+
+
+def src_binance_relay_http(coin, start, end, url=None):
+    """가상서버가 Caddy 로 내보내는 중계 파일 (토큰 불필요). 서버가 꺼져 있거나 못 쓰면 None."""
+    base = RELAY_URL if url is None else url
+    if not base:
+        return None
+    try:
+        d = http_json(base.rstrip("/") + "/" + coin + ".json", tries=2)
+    except Exception:
+        return None
+    return relay_bars(d, start, end) if isinstance(d, dict) else None
 
 
 def src_binance(coin, start, end):
     """바이낸스 USDT 무기한 1분봉. API(fapi)는 미국 서버에서 451 로 막혀 있다.
-    ① 가상서버 중계 파일(data/binance_1m, vps_relay.py) ② 공개 일별 파일(data.binance.vision) 순서로 받는다.
-    일별 파일은 그날이 끝난 뒤 올라온다. 파일 하나라도 없으면 실패로 둔다(다음 실행에서 다시 채운다). 제안함 P20"""
-    got = src_binance_relay(coin, start, end)
+    ① 가상서버 Caddy 주소(RELAY_URL) ② 저장소 안 중계 파일(data/binance_1m) ③ 공개 일별 파일(data.binance.vision) 순서.
+    일별 파일은 그날이 끝난 뒤 올라온다. 파일 하나라도 없으면 실패로 둔다(다음 실행에서 다시 채운다). 제안함 P20·P21"""
+    got = src_binance_relay_http(coin, start, end) or src_binance_relay(coin, start, end)
     if got:
         return got
     out = []

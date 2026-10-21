@@ -14,6 +14,24 @@
 - 필요한 것은 GitHub 토큰 하나(이 저장소에 파일을 올리는 권한만).
 - 다른 봇의 파일·cron 줄은 건드리지 않는다. 폴더 `/root/carrygate-relay` 하나만 새로 만든다.
 
+## 추천: 끌어오기 방식 (토큰 불필요, 맥의 Claude 세션이 대신 해 줄 수 있다)
+
+서버가 올리지 않고, **Actions 가 서버에서 읽어 간다.** 서버는 1분봉 파일을 `/var/www/carrygate/binance_1m/` 에 두고 이미 있는 Caddy(:80)가
+`http://158.247.206.213/carrygate/binance_1m/<코인>.json` 으로 내보낸다. `scalp.py` 는 이 주소를 ① 로 먼저 읽는다(36시간 안·구간 덮음 확인). 서버에 GitHub 토큰도 거래소 키도 두지 않는다.
+
+서버에서 한 줄:
+```
+curl -sS https://raw.githubusercontent.com/morningstarlove/carrygate/main/scripts/vps_relay_install_pull.sh | bash
+```
+하는 일: 수집기 받기 → 4일치 수집 → `/etc/caddy/carrygate.caddy`(handle_path /carrygate/*) 만들고 `Caddyfile` 의 :80 블록에 `import` 한 줄(백업 자동, `caddy validate` 실패 시 원복) → reload → 127.0.0.1 확인 → cron 09:05.
+**맥의 Claude Code 세션에 시키려면 `docs/VPS_MAC_PROMPT.md` 의 상자를 붙여 넣는다.** 클라우드 세션은 서버에 못 들어간다.
+
+밖에서 확인: `curl -s http://158.247.206.213/carrygate/binance_1m/XRP.json | head -c 200`.
+
+---
+
+## 대안: 올리기 방식 (GitHub 토큰 필요)
+
 ## 1단계. GitHub 토큰 (3분) — 이미 있으면 건너뛴다
 
 한국 PC 중계기(`kr_relay_config.json`)용 토큰을 만든 적이 있으면 **그 토큰을 그대로 쓴다**(같은 권한). 없으면:
