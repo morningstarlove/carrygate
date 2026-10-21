@@ -1,7 +1,7 @@
 {
   "schema": "carrygate-verdict/1",
   "date": "2026-10-21",
-  "generated_at_utc": "2026-10-21T07:17:47Z",
+  "generated_at_utc": "2026-10-21T08:23:32Z",
   "criteria_sealed": "2026-10-15",
   "tracks": {
     "kr_breakout": {
@@ -177,13 +177,13 @@
           "net_pct": -1.0781,
           "profit_factor": 0.0,
           "avg_r": -1.08,
-          "backtest_win_rate_pct": 32.8859,
-          "backtest_profit_factor": 1.228,
-          "backtest_trades": 149,
+          "backtest_win_rate_pct": 32.4324,
+          "backtest_profit_factor": 1.2041,
+          "backtest_trades": 148,
           "luck": {
-            "expected_wins": 0.33,
+            "expected_wins": 0.32,
             "actual_wins": 0,
-            "z": -0.7
+            "z": -0.69
           },
           "variants": {
             "no_vol": {
@@ -201,12 +201,12 @@
           },
           "warnings": [],
           "interpretation": {
-            "false_pass_pct": 18.48,
-            "miss_pct": 67.73,
+            "false_pass_pct": 18.42,
+            "miss_pct": 69.3,
             "wins_needed": 8,
-            "per_trade_sharpe": 0.09,
-            "min_trades_95": 314,
-            "min_trades_t3": 1043,
+            "per_trade_sharpe": 0.08,
+            "min_trades_95": 384,
+            "min_trades_t3": 1277,
             "note": "false_pass = 실력 0 규칙이 이 합격선을 넘을 확률, miss = 백테스트만큼 실력이어도 못 넘을 확률, min_trades_95 = 샤프>0 을 95% 확신하는 데 필요한 건수(MinTRL), min_trades_t3 = t>3 기준 건수. PASS = 소액 시험 후보"
           },
           "status": "NOT_YET",
