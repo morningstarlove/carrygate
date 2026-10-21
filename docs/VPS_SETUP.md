@@ -1,6 +1,6 @@
 # 가상서버(VPS) 중계 수집기 설정 — 바이낸스 선물 1분봉
 
-> 2026-10-21, 제안함 P21. 사용자 서버 = **Vultr 우분투 서버**(다른 세션 기록: root 로 SSH, 서버 시계 한국시간, 메모리 1GB, 이미 봇 여러 개가 cron·systemd 로 돈다). 이 수집기는 하루 한 번 2~3분, 메모리 수십 MB 라 그 서버에 부담이 없다.
+> 2026-10-21, 제안함 P21. 사용자 서버 = **Vultr 서울, Ubuntu 24.04** (`ssh root@158.247.206.213`, 맥북에 SSH 키 등록됨, 서버 시계 한국시간, 메모리 1GB, 바이낸스 봇 여러 개가 systemd·cron 으로 돈다). 이 수집기는 하루 한 번 2~3분, 메모리 수십 MB, **포트를 열지 않는다**(Caddy 분기·`portwatch` 와 무관).
 > 코딩 지식 없이 따라 할 수 있게 썼다. **명령 두 개**면 끝난다(5분).
 
 ## 왜 필요한가
@@ -23,11 +23,11 @@
 
 ## 2단계. 서버에서 설치 명령 (2분)
 
-맥 터미널에서 평소처럼 서버에 들어간다(`ssh root@서버주소`). 그다음 **이 한 줄**을 붙여 넣는다:
+맥 터미널에서 `ssh root@158.247.206.213` 로 들어간다. 그다음 **이 한 줄**을 붙여 넣는다:
 ```
 curl -sS https://raw.githubusercontent.com/morningstarlove/carrygate/main/scripts/vps_relay_install.sh | bash
 ```
-스크립트가 차례로 한다: 파이썬 확인 → 수집기 받기 → 바이낸스 수집 시험 → **토큰을 물어보면 붙여 넣고 Enter** → 업로드 시험 → 매일 09:05 cron 등록.
+스크립트가 차례로 한다: 파이썬 확인 → 수집기 받기 → 바이낸스 수집 시험 → **토큰을 물어보면 붙여 넣고 Enter**(`/root/carrygate-relay/.env` 에 chmod 600 으로 저장 — 다른 봇과 같은 방식) → 업로드 시험 → 매일 09:05 cron 등록.
 
 마지막에 이렇게 나오면 끝:
 ```
@@ -48,7 +48,18 @@ curl -sS https://raw.githubusercontent.com/morningstarlove/carrygate/main/script
 | `451` | 서버 위치를 바이낸스가 막음 | 그대로 보고. Vultr 다른 지역으로 옮기거나 공개 파일 방식(지금 기본)으로 둔다 |
 | `HTTP 401` / `403` (api.github.com) | 토큰 권한·만료 | 1단계 다시. Contents: Read and write, 저장소 `carrygate` |
 | `봉 N개뿐` | 바이낸스 응답 일부만 | 잠시 뒤 `cd /root/carrygate-relay && python3 vps_relay.py` 다시. 반복되면 보고 |
-| 다시 설치하고 싶다 | | 2단계 한 줄을 다시 붙여 넣으면 된다(기존 설정 파일이 있으면 토큰을 다시 묻지 않는다) |
+| 다시 설치하고 싶다 | | 2단계 한 줄을 다시 붙여 넣으면 된다(기존 `.env` 가 있으면 토큰을 다시 묻지 않는다) |
+| 실패를 텔레그램으로 받고 싶다 | 선택 | `/root/carrygate-relay/.env` 의 `TELEGRAM_BOT_TOKEN`·`TELEGRAM_CHAT_ID` 줄 앞 `#` 을 지우고 값을 넣는다. 성공할 때는 보내지 않는다 |
+
+## 이 서버의 규칙과 이 수집기 (사용자 기록 2026-10-21)
+
+| 서버 규칙 | 이 수집기 |
+|---|---|
+| 봇마다 `/root/<이름>/` + `.py` + `.env`(600) + `watch.py` | `/root/carrygate-relay/` + `vps_relay.py` + `.env`(600). watch 불필요(하루 한 번 cron, 상주 안 함) |
+| 새 서비스는 `ss -tlnp \| grep 88` 로 빈 포트 확인(8880 충돌 2회) | 포트 없음 |
+| systemd 재시작 + 텔레그램 + cron 일일 리포트 | cron 09:05, 실패 시에만 텔레그램(선택) |
+| API 키·토큰은 서버 `.env` 에만, 문서·채팅 기록 금지 | GitHub 토큰만 `.env`. 거래소 키 없음 |
+| 신규 크립토 주문봇은 donchian 복제(CCXT) | 소액 체결 시험 주문기(별도 저장소 `carrygate-exec`)를 만들 때 따른다 |
 
 ## 손으로 돌리기 / 끄기
 
