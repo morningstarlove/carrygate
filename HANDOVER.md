@@ -49,7 +49,7 @@
 
 **사용자 결정 2026-10-21 "A" (제안함 P20): 바이낸스 선물도 기록.** 바이낸스 API 는 미국 서버에서 막혀 공개 일별 파일(data.binance.vision)로 1분봉을 받는다. 매일 워크플로가 최근 4일 중 빈 날을 채워 `scalp_binance_history.jsonl` 에 따로 쌓는다(기본 판정과 섞지 않음). 47개를 바이낸스로 옮긴 19개도 얼렸고 11/4 에 OKX 와 나란히 본다. 첫 실데이터 확인은 10/22 아침 실행 로그 "Scalp Binance futures" 단계. **같은 날 사용자 "내 가상서버에서" → `vps_relay.py` + `docs/VPS_SETUP.md`(제안함 P21):** 미국 밖 가상서버가 매일 09:05 바이낸스 1분봉 4일치를 `data/binance_1m/` 에 올리면 Actions 가 그것을 먼저 쓴다. 없으면 공개 파일. **사용자가 서버에서 설정 절차를 따라야 켜진다**(아직 안 켜짐). 사용자 서버(사용자 기록 2026-10-21): **Vultr 서울, Ubuntu 24.04, `ssh root@158.247.206.213`**, 바이낸스 봇 여러 개(대부분 데모, bbv2·donchian 실계좌)가 systemd·cron 으로 가동, Caddy :80 분기, 봇마다 `/root/<이름>/`+`.env`(600)+`watch.py`, 신규 크립토 봇은 donchian 복제(CCXT), 키는 서버 `.env` 에만·문서 기록 금지, 한국 IP(맥)는 바이낸스 차단 → 바이낸스 작업은 반드시 서버에서. 설치는 `scripts/vps_relay_install.sh` 한 줄(토큰만 묻고 `.env` 에 저장), 폴더 `/root/carrygate-relay`, 포트 없음, cron 09:05 KST, 실패 시 텔레그램(선택). 규칙 대조표는 `docs/VPS_SETUP.md`. **이 클라우드 세션은 그 서버에 SSH 로 못 들어간다**(ssh 없음·네트워크 403·키 없음, 10/21 확인). 사용자 "니가 해" → **끌어오기 방식**으로 바꿈: 서버는 `/var/www/carrygate/binance_1m/` 에 쓰고 Caddy 가 `/carrygate/*` 로 내보내며 `scalp.RELAY_URL`(http://158.247.206.213/carrygate/binance_1m/)이 ① 순서로 읽는다 → 토큰 불필요. 설치는 `scripts/vps_relay_install_pull.sh` 한 줄, **맥의 Claude Code 세션에 `docs/VPS_MAC_PROMPT.md` 상자를 붙여 넣으면 그 세션이 대신 한다.** **켜짐(맥 세션 보고 2026-10-22):** 10/21 18:17 KST 설치 성공(Caddyfile 2행 import, 백업 `.bak.carrygate.20261021181752`), 10/22 09:05 첫 cron 실행 6코인×5,760봉, 공개 URL 200. Actions #67(13:53 KST)이 바이낸스 10/20·21 을 32초에 채움 — 중계 파일 생성 00:05 UTC·실행 04:59 UTC 로 ① 조건 충족. 로그 문구 확정은 10/23 실행(PR #74).
 
-**사용자 결정 대기:** 없음. 다음은 11/4 초단타 재확인과 첫 판정이 뜨는 날. **10/22 신설 급상승 패턴 트랙**은 첫 실행 뒤 실데이터 백테스트 표 기록과 현황판 카드 연결(라이브 버전 `rVerdict` 목록에 `retest` 추가 + 카드 신설)이 남아 있다.
+**사용자 결정 대기:** 없음. 다음은 11/4 초단타 재확인과 첫 판정이 뜨는 날. **10/22 신설 급상승 패턴 트랙**: 백테스트 표 기록·현황판 카드(타일·카드·판정 줄, 라이브 버전 + 갱신 Routine 파일 목록에 `retest.json`)까지 끝. 남은 것은 Actions 에서 오프라인 고정 봉 저장(`--save-fixture`)뿐.
 
 **2026-10-15 백테스트 과적합 논문 검토 → 판정기 보강 (제안함 P17·P18 반영):** 댓글 권고로 Bailey·López de Prado·Harvey·Hansen 등 17편을 읽고 공식을 실데이터에 대입(`docs/BACKTEST_OVERFITTING_REVIEW.md`, `scripts/overfit_check.py`). 발견: 초단타 10/7 PASS(후보 12개)는 실력 0 이어도 뜨는 후보 수(378개 중 42~53개)의 1/4 이었고, 터틀·추세전환 20건 합격선은 실력 0 도 19~40% 확률로 PASS 한다. 반영: ① `criteria.json scalp.noise_floor` — 부호 뒤집기 500회의 후보 수 중앙값보다 실제 후보가 많아야 PASS, 같거나 적으면 NOT_YET(잡음 이하). ② 판정 파일 각 거래소에 `interpretation`(실력 0 PASS 확률·놓칠 확률·필요 건수 MinTRL·t>3). 합격선 숫자·매매 규칙 변경 없음, criteria sealed 2026-10-15, 잠금 재생성. 현황판 카드에는 아직 안 올렸다(판정 파일에만). 작업 기록 `docs/sessions/2026-10-15_backtest_overfitting.md`.
 
@@ -144,7 +144,7 @@
 - 해석: 백테스트는 약한 근거(원칙). 업비트 손익비 0.31 은 "이 규칙은 현물 롱에서 안 된다"의 첫 신호지만 판정은 순방향 20건 뒤에만. 규칙은 고치지 않는다. 진입·청산 위치를 눈으로 보는 차트는 세션 기록 참조.
 - 남은 일: Actions 에서 `python retest.py --save-fixture tests/fixtures/retest` 로 오프라인 고정 봉 저장, 현황판 카드.
 
-**"진입 할 수 있게"의 경계:** 이 저장소는 판단(지지 구간·손절·확인 봉·수량)만 적는다. 자동 주문은 순방향 20건 PASS 뒤 별도 저장소 `carrygate-exec` 에서 1시간 주기로(설계서 5절). 현황판 카드·`rVerdict` 목록 추가는 라이브 버전에서 다음 세션.
+**"진입 할 수 있게"의 경계:** 이 저장소는 판단(지지 구간·손절·확인 봉·수량)만 적는다. 자동 주문은 순방향 20건 PASS 뒤 별도 저장소 `carrygate-exec` 에서 1시간 주기로(설계서 5절). **현황판(10/22 저녁):** 타일 "급상승 패턴 1H"·카드(한 계좌 1년 성적 + 변형, 시장별 오늘 단계·지지 구간·손절·남은 봉)·판정 카드 줄을 라이브 버전에 추가, 백업 `dashboard/index.html` 동일, 갱신 Routine trig_015SCRNNwatvAhHFdJF8F9Z9 파일 목록에 `retest.json`. 첫 공식 `retest.json` 은 10/23 09:18 실행 → 17:37 Routine 이 실음(그 전엔 "첫 실행 전").
 
 ## 2. 실제로 확인된 사실 (추측 아님)
 
