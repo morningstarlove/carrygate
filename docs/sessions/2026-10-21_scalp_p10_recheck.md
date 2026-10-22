@@ -97,3 +97,4 @@ python scripts/scalp_oos_check.py     # 11/4 에 이것만 돌린다
 - 사용자가 맥의 새 Claude 세션에서 `docs/VPS_MAC_PROMPT.md` 로 서버 설치 진행 중(결과 미보고).
 - 한국 주식: 정기 예약 또 안 뜸 → Routine 이 16:16 KST 대신 실행. 12일 8건 0승 −6.21% z −1.82. 삼기에너지솔루션 손절 −7.45%. 보유 3. 이상 없음.
 - 남은 일: 11/4 초단타 표본 밖 재확인(OKX 47개·바이낸스 19개, trig_01Lzq3K3xahcKnRc4mbmauQV). 맥 세션 결과 받으면 Actions 로그 "가상서버 중계 파일" 줄로 확정.
+- **맥 세션 보고(10/22):** 설치 10/21 18:17 KST 성공, 수동 처리 없음. Caddyfile 2행 import(백업 있음), validate·reload 통과, cron 1줄. 첫 자동 실행 10/22 09:05: 6코인 각 5,760봉, XRP.json 공개 URL 200(generated 00:05 UTC). Actions #67 바이낸스 6시장 failed 없음. 경로 ① 사용은 조건(생성 00:05 UTC, 실행 04:59 UTC, 구간 덮음)으로 보아 확실하고 로그 문구는 10/23 확정. 알림 예약 10/23 14:40 KST.
