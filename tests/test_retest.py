@@ -156,6 +156,23 @@ class Backtest(unittest.TestCase):
         self.assertAlmostEqual(s["pnl"], l["pnl"], places=6)
         self.assertAlmostEqual(s["mfe_pct"] * s["entry"], l["mfe_pct"] * l["entry"], places=3)
 
+    def test_short_slippage_is_adverse(self):
+        """숏도 슬리피지는 불리한 쪽: 진입은 확인 봉 종가보다 낮게 팔고, 손절 청산은 손절선보다 높게 산다 (10/22 dry_run 검산이 잡은 버그)."""
+        bars = self._full()
+        flipped = [dict(b, o=200 - b["o"], h=200 - b["l"], l=200 - b["h"], c=200 - b["c"]) for b in bars]
+        p = card_path(); rise2_and_pullback(p); confirm(p); p.leg(120, 4)
+        flipped_stop = [dict(b, o=200 - b["o"], h=200 - b["l"], l=200 - b["h"], c=200 - b["c"]) for b in p.bars]
+        for data, reason in ((flipped, "trail"), (flipped_stop, "stop")):
+            sr = retest.run({"X": {"bars": data, "dir": "short"}}, 0.0, 10_000.0, slip_pct=0.1)
+            self.assertEqual(len(sr["trades"]), 1)
+            t = sr["trades"][0]
+            self.assertEqual(t["reason"], reason)
+            self.assertLess(t["entry"], 200 - 129.5)                    # 확인 봉 종가(70.5)보다 낮게 체결
+            self.assertAlmostEqual(t["entry"], 70.5 * (1 - 0.001))
+            self.assertGreaterEqual(t["exit"], t["stop_final"])          # 손절 청산가는 손절선 이상(불리)
+            lr = retest.run({"X": bars if reason == "trail" else p.bars}, 0.0, 10_000.0, slip_pct=0.1)
+            self.assertAlmostEqual(lr["trades"][0]["exit"] + t["exit"], 200.0, places=6)   # 롱·숏 대칭
+
     def test_no_confirm_bar_no_entry_then_expire(self):
         p = card_path()
         rise2_and_pullback(p)

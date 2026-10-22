@@ -398,7 +398,7 @@ def run(markets, fee_pct, equity0, slip_pct=SLIPPAGE_PCT, max_notional_pct=MAX_N
                     pv = mean_vol(bars, su["c"] + 1, i)
                     ok = pv is not None and su["rise2_vol"] and pv <= PULL_VOL_RATIO_MAX * su["rise2_vol"]
                 if ok:
-                    fill = b["c"] * (1 + slip)
+                    fill = b["c"] + abs(b["c"]) * slip                       # 불리한 쪽으로 (뒤집은 숏 가격은 음수라 |가격| 기준)
                     ok = enter(m, bars, i, fill, su, "confirm_close")
                     s["phase"], s["setup"] = ("long" if ok else "scan"), None
                     return ok
@@ -410,7 +410,8 @@ def run(markets, fee_pct, equity0, slip_pct=SLIPPAGE_PCT, max_notional_pct=MAX_N
         p = st[m]["pos"]
         b = bars[y]
         if b["l"] < p["stop"]:
-            close_pos(m, bars, y, min(b["o"], p["stop"]) * (1 - slip), "stop" if p["stop"] == p["stop0"] else "trail")
+            fill = min(b["o"], p["stop"])
+            close_pos(m, bars, y, fill - abs(fill) * slip, "stop" if p["stop"] == p["stop0"] else "trail")   # 불리한 쪽으로 |가격|×slip
             return True
         if p["target"] is not None and b["h"] >= p["target"]:
             close_pos(m, bars, y, max(b["o"], p["target"]), "target")
