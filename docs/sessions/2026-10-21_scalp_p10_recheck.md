@@ -90,3 +90,10 @@ python scripts/scalp_oos_check.py     # 11/4 에 이것만 돌린다
 - 사용자가 서버 정보를 직접 줌(Vultr 서울·Ubuntu 24.04·포트/경로 맵·봇 공통 구조·보안 원칙). 그에 맞춰 설정을 `.env`(600) 로, 실패 시 텔레그램(선택) 추가, 포트 없음 확인. 대조표 `docs/VPS_SETUP.md`. 키·토큰은 문서에 적지 않았다.
 - GitHub 공개 파일 방식 실데이터: dry_run #65 에서 10/17·18·19 바이낸스 6시장 270조합 계산, 10/20 은 파일 미게시로 실패(예상대로, 다음 실행에 채움). 저장 실행 #66 성공 → `scalp_binance_history.jsonl` 시작.
 - 사용자 "니가 해" → 이 세션은 서버 접근 불가(ssh 없음, 네트워크 403, 키 없음). 토큰 없이 되는 **끌어오기 방식** 추가: `vps_relay.py --out-dir`, `scalp.src_binance_relay_http`(RELAY_URL ① → 저장소 파일 ② → zip ③), `scripts/vps_relay_install_pull.sh`(Caddy import 삽입·검증·원복), `docs/VPS_MAC_PROMPT.md`(맥 세션용 지시문). 시험 2건 추가(34건).
+
+## 8. 10/22 상태 (이어서)
+
+- 정기 실행 #67(13:53 KST, 4.5시간 지연): 바이낸스 10/20·10/21 6시장 32초 만에 채움 → 서버 중계 파일을 읽은 것으로 보임(확정은 PR #74 로그 줄부터). `scalp_binance_history.jsonl` 10/17~21 5일치.
+- 사용자가 맥의 새 Claude 세션에서 `docs/VPS_MAC_PROMPT.md` 로 서버 설치 진행 중(결과 미보고).
+- 한국 주식: 정기 예약 또 안 뜸 → Routine 이 16:16 KST 대신 실행. 12일 8건 0승 −6.21% z −1.82. 삼기에너지솔루션 손절 −7.45%. 보유 3. 이상 없음.
+- 남은 일: 11/4 초단타 표본 밖 재확인(OKX 47개·바이낸스 19개, trig_01Lzq3K3xahcKnRc4mbmauQV). 맥 세션 결과 받으면 Actions 로그 "가상서버 중계 파일" 줄로 확정.
