@@ -1,25 +1,25 @@
 {
   "schema": "carrygate-verdict/1",
   "date": "2026-10-22",
-  "generated_at_utc": "2026-10-22T05:10:00Z",
+  "generated_at_utc": "2026-10-22T07:18:17Z",
   "criteria_sealed": "2026-10-15",
   "tracks": {
     "kr_breakout": {
       "variant": "base",
-      "forward_days": 11,
+      "forward_days": 12,
       "rule_fixed": "2026-10-05",
-      "trades": 7,
+      "trades": 8,
       "wins": 0,
       "win_rate_pct": 0.0,
-      "total_return_pct": -2.35,
-      "max_drawdown_pct": 5.26,
+      "total_return_pct": -6.21,
+      "max_drawdown_pct": 6.21,
       "signals": 20,
       "skipped_no_slot": 9,
       "backtest_win_rate_pct": 29.35,
       "luck": {
-        "expected_wins": 2.05,
+        "expected_wins": 2.35,
         "actual_wins": 0,
-        "z": -1.71
+        "z": -1.82
       },
       "checks": {},
       "warnings": [],
@@ -32,11 +32,11 @@
         "variant": "no_sector",
         "trades": 13,
         "win_rate_pct": 0.0,
-        "total_return_pct": -3.66,
-        "return_delta_pct": 1.31
+        "total_return_pct": -7.28,
+        "return_delta_pct": 1.07
       },
       "status": "NOT_YET",
-      "reason": "순방향 매매 7건 — 최소 15건 전에는 판단하지 않는다"
+      "reason": "순방향 매매 8건 — 최소 15건 전에는 판단하지 않는다"
     },
     "turtle": {
       "rule_fixed": "2026-10-02",
