@@ -220,9 +220,15 @@ def src_binance(coin, start, end):
     """바이낸스 USDT 무기한 1분봉. API(fapi)는 미국 서버에서 451 로 막혀 있다.
     ① 가상서버 Caddy 주소(RELAY_URL) ② 저장소 안 중계 파일(data/binance_1m) ③ 공개 일별 파일(data.binance.vision) 순서.
     일별 파일은 그날이 끝난 뒤 올라온다. 파일 하나라도 없으면 실패로 둔다(다음 실행에서 다시 채운다). 제안함 P20·P21"""
-    got = src_binance_relay_http(coin, start, end) or src_binance_relay(coin, start, end)
+    got = src_binance_relay_http(coin, start, end)
     if got:
+        print("  binance/%s: 가상서버 중계 파일 (%s)" % (coin, RELAY_URL))
         return got
+    got = src_binance_relay(coin, start, end)
+    if got:
+        print("  binance/%s: 저장소 중계 파일 (data/binance_1m)" % coin)
+        return got
+    print("  binance/%s: 공개 일별 파일 (data.binance.vision)" % coin)
     out = []
     day = start - start % 86400
     while day < end:
