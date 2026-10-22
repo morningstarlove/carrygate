@@ -1,16 +1,16 @@
 {
  "schema": "carrygate-listing/1",
- "date": "2026-10-21",
- "generated_at_kst": "2026-10-21 17:14:49",
+ "date": "2026-10-22",
+ "generated_at_kst": "2026-10-22 14:01:23",
  "method": {
   "notice": "업비트 공지(category=trade) 중 제목에 ('신규 거래지원', '거래지원 안내', '디지털 자산 추가', '원화 마켓 추가', '마켓 추가') 가 있고 ('종료', '유의', '해제', '변경', '이벤트', '입출금', '지연') 가 없는 것. 괄호 안 티커 추출",
   "reaction": "공지 시각(분)의 해외 선물 시가 대비 (5, 15, 60, 240)분 뒤 시가 수익률(%), 60분 내 최고가 상승폭"
  },
  "notices_seen": 0,
- "markets_krw": 297,
+ "markets_krw": 298,
  "market_snapshot_existed": true,
- "listings_seen": 0,
- "new_today": 0,
+ "listings_seen": 1,
+ "new_today": 3,
  "events": [
   {
    "id": "mkt:KRW-POD:1790924700",
@@ -213,15 +213,47 @@
    "post60_pct": 8.216,
    "post240_pct": 3.206,
    "maxup60_pct": 43.287
+  },
+  {
+   "id": "mkt:KRW-AXIS:1792587900",
+   "title": "업비트 마켓 목록에 새로 등장: KRW-AXIS",
+   "time_utc": "2026-10-21T13:05:00Z",
+   "ts": 1792587900,
+   "ticker": "AXIS",
+   "venue": "hyperliquid",
+   "listed_abroad": false
+  },
+  {
+   "id": "mkt:KRW-AXIS:1792587900",
+   "title": "업비트 마켓 목록에 새로 등장: KRW-AXIS",
+   "time_utc": "2026-10-21T13:05:00Z",
+   "ts": 1792587900,
+   "ticker": "AXIS",
+   "venue": "okx",
+   "listed_abroad": false
+  },
+  {
+   "id": "mkt:KRW-AXIS:1792587900",
+   "title": "업비트 마켓 목록에 새로 등장: KRW-AXIS",
+   "time_utc": "2026-10-21T13:05:00Z",
+   "ts": 1792587900,
+   "ticker": "AXIS",
+   "venue": "upbit",
+   "listed_abroad": true,
+   "post5_pct": 18.378,
+   "post15_pct": 21.892,
+   "post60_pct": 4.054,
+   "post240_pct": -10.27,
+   "maxup60_pct": 30.0
   }
  ],
  "errors": {
   "notices": "fetch failed https://api-manager.upbit.com/api/v1/announcements?os=web&page=1&per_page=20&category=trade : HTTP Error 403: Forbidden"
  },
  "summary": {
-  "notices": 6,
-  "pairs": 18,
-  "with_price": 8,
+  "notices": 7,
+  "pairs": 21,
+  "with_price": 9,
   "by_venue": {
    "okx": {
     "n": 2,
@@ -236,16 +268,16 @@
     "maxup60_pct": 6.8
    },
    "upbit": {
-    "n": 6,
-    "post5_pct": 36.15,
-    "post5_pos_pct": 83.3,
-    "post15_pct": 29.62,
-    "post15_pos_pct": 83.3,
-    "post60_pct": 35.2,
-    "post60_pos_pct": 83.3,
-    "post240_pct": 24.7,
-    "post240_pos_pct": 66.7,
-    "maxup60_pct": 54.45
+    "n": 7,
+    "post5_pct": 33.61,
+    "post5_pos_pct": 85.7,
+    "post15_pct": 28.52,
+    "post15_pos_pct": 85.7,
+    "post60_pct": 30.75,
+    "post60_pos_pct": 85.7,
+    "post240_pct": 19.7,
+    "post240_pos_pct": 57.1,
+    "maxup60_pct": 50.96
    }
   }
  }
