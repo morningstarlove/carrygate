@@ -2,7 +2,7 @@
 
 > 이 문서만 읽으면 누구든(혹은 다른 AI 세션이든) 이어서 작업할 수 있게 쓴다.
 
-**최종 갱신:** 2026-10-21 (초단타 2주 재확인 P10 종결 — 10/7 후보 12개 표본 밖 전부 마이너스, 우연; `docs/sessions/2026-10-21_scalp_p10_recheck.md`; 그 전 2026-10-15 백테스트 과적합 논문 검토 `docs/BACKTEST_OVERFITTING_REVIEW.md`, `scripts/overfit_check.py`, 제안함 P17·P18 **반영** — 초단타 잡음 바닥 기준·합격선 해석 필드, criteria sealed 2026-10-15; 그 전 2026-10-10 AI 프레임워크 5종 검토 `docs/AI_FRAMEWORKS_REVIEW.md` — 모두 불채택, 방법 4개 이식; 루트 `CLAUDE.md` 신설; 제안함 P14; 그 전 10/10 초단타 소액 시험 설계서 P13; 그 전 2026-10-07 마일스톤 15 종사종팔 그리드 v4/v5 검증 `grid.py` main 병합; 현황판 데이터 main 최신으로 갱신·화면 코드 백업 `dashboard/index.html`, 캐리 바이낸스·바이비트 10/7 실측; 0절 "지금 상태 한눈에" 추가, 작업 기록 `docs/sessions/2026-10-07_phil_verdict.md`; 현황판 결과 파일 내장·매일 자동 갱신; 초단타 첫 합격·채점기 수정 P9, 한국 주식 첫 체결; 그 전 2026-10-06 마일스톤 14 판정 규율 — Phil 방식 이식: `verdict.py`·`criteria.json`·`rules_lock.json`·`proposals.md`; 그 전: 마일스톤 13 추세 전환 매매법 4시간봉 PR #32 병합, 현황판 카드 연결; 그 전: 터틀 기록 중복 수정 PR #22·#23, AI 보조 도구 PR #19)
+**최종 갱신:** 2026-10-22 (마일스톤 16 급상승·급하락 패턴 트랙 `retest.py` 신설 — SNS 카드 "부자들은 여기서 진입" 1시간봉 규칙 고정, 판정 다섯 번째 트랙, 제안함 P22, 설계서 `docs/RETEST_PLAN.md`, 기록 `docs/sessions/2026-10-22_retest_pattern.md`; 실데이터 백테스트는 첫 Actions 실행 뒤; 그 전 2026-10-21 초단타 2주 재확인 P10 종결 — 10/7 후보 12개 표본 밖 전부 마이너스, 우연; `docs/sessions/2026-10-21_scalp_p10_recheck.md`; 그 전 2026-10-15 백테스트 과적합 논문 검토 `docs/BACKTEST_OVERFITTING_REVIEW.md`, `scripts/overfit_check.py`, 제안함 P17·P18 **반영** — 초단타 잡음 바닥 기준·합격선 해석 필드, criteria sealed 2026-10-15; 그 전 2026-10-10 AI 프레임워크 5종 검토 `docs/AI_FRAMEWORKS_REVIEW.md` — 모두 불채택, 방법 4개 이식; 루트 `CLAUDE.md` 신설; 제안함 P14; 그 전 10/10 초단타 소액 시험 설계서 P13; 그 전 2026-10-07 마일스톤 15 종사종팔 그리드 v4/v5 검증 `grid.py` main 병합; 현황판 데이터 main 최신으로 갱신·화면 코드 백업 `dashboard/index.html`, 캐리 바이낸스·바이비트 10/7 실측; 0절 "지금 상태 한눈에" 추가, 작업 기록 `docs/sessions/2026-10-07_phil_verdict.md`; 현황판 결과 파일 내장·매일 자동 갱신; 초단타 첫 합격·채점기 수정 P9, 한국 주식 첫 체결; 그 전 2026-10-06 마일스톤 14 판정 규율 — Phil 방식 이식: `verdict.py`·`criteria.json`·`rules_lock.json`·`proposals.md`; 그 전: 마일스톤 13 추세 전환 매매법 4시간봉 PR #32 병합, 현황판 카드 연결; 그 전: 터틀 기록 중복 수정 PR #22·#23, AI 보조 도구 PR #19)
 **작업 브랜치:** 모두 `main` 에 병합됨. 최근 작업 브랜치(참고용): `claude/grid-jongsa-backtest`(마일스톤 15 종사종팔), `claude/phil-analysis`·`claude/verdict-scalp-cumulative`·`claude/decisions-1007`(마일스톤 14, PR #38~#44), `claude/turtle-history-dedupe`(터틀 기록 중복), `claude/chandelier-exit-variant`(Chandelier 변형), `claude/new-session-as7gis`(터틀), 한국 주식 트랙 PR #17·#18
 **저장소:** `morningstarlove/carrygate` (2026-09-17 `signalgate-bridge` 에서 이름 변경)
 **프로젝트명:** CARRYGATE — 게이트(신호등) + 캐리(이자) 두 축에서 따왔다.
@@ -21,6 +21,7 @@
 | 터틀 | 판단 전 (0건) | 거래소별 20건 (2~3개월) |
 | 추세 전환 4H | 판단 전 (0건) | 거래소별 20건 (2~3개월) |
 | 초단타 | **PASS(잡음 수준)** (누적 23일, 후보 92개 / 잡음 바닥 중앙값 89·95% 104 — 10/21) | 10/7 후보 12개는 표본 밖 14일 전부 마이너스 → **우연이었다**(P10 종결). 새 후보는 30·60분봉 VWAP 되돌림(8일치). 사용자 결정 10/21 "A": 47개 얼림, **11/4 표본 밖 재확인**(P19) |
+| 급상승·급하락 패턴 1H (10/22 신설) | 판단 전 (0건 — 첫 실행 전, 실데이터 백테스트 없음) | 거래소별 20건. 첫 Actions 실행 로그 "Retest pattern rules" 확인 → 백테스트 표를 마일스톤 16 에 옮김 |
 
 **캐리 (바이낸스·바이비트, 마일스톤 11):** 10/9 첫 7일 평균(표본 5개) 붙음 — 전 코인 문턱 미달, LINK 만 플러스(바이비트 +2.8% / 바이낸스 +1.4%), 나머지 −1.4~−4.7%, TRX −28~−42%. 같은 날 하이퍼리퀴드도 XRP 7.6% 로 내려와 캐리 전체가 17일 만에 "대기"로 바뀜. 현황판 "캐리 이자율" 카드에 코인 × 거래소 표로 보인다. 손댈 것 없음 — 펀딩이 돌아서면 매일 점검 루틴이 알린다.
 
@@ -28,7 +29,7 @@
 
 | 무엇 | 언제 (KST) | 어디 |
 |---|---|---|
-| CARRYGATE daily (신호등·캐리·초단타·연구·터틀·추세전환·그리드·판정) | 매일 09:18 | GitHub Actions `carrygate.yml` |
+| CARRYGATE daily (신호등·캐리·초단타·연구·터틀·추세전환·급상승패턴·그리드·판정) | 매일 09:18 | GitHub Actions `carrygate.yml` |
 | 호가창 표본 | 매일 22:00 | GitHub Actions `orderbook.yml` |
 | 한국 주식 돌파 + 판정 | 평일 15:50 (예약이 자주 안 뜸) | GitHub Actions `kr_breakout.yml` |
 | 한국 주식 대신 실행 (그날 안 돌았으면) | 평일 16:10 | Routine trig_01XXMiN7QmGH5EgE9SiYrxZt → 세션 session_01WP7a8oLwaHMUj5MimZSF6k |
@@ -47,7 +48,7 @@
 
 **사용자 결정 2026-10-21 "A" (제안함 P20): 바이낸스 선물도 기록.** 바이낸스 API 는 미국 서버에서 막혀 공개 일별 파일(data.binance.vision)로 1분봉을 받는다. 매일 워크플로가 최근 4일 중 빈 날을 채워 `scalp_binance_history.jsonl` 에 따로 쌓는다(기본 판정과 섞지 않음). 47개를 바이낸스로 옮긴 19개도 얼렸고 11/4 에 OKX 와 나란히 본다. 첫 실데이터 확인은 10/22 아침 실행 로그 "Scalp Binance futures" 단계. **같은 날 사용자 "내 가상서버에서" → `vps_relay.py` + `docs/VPS_SETUP.md`(제안함 P21):** 미국 밖 가상서버가 매일 09:05 바이낸스 1분봉 4일치를 `data/binance_1m/` 에 올리면 Actions 가 그것을 먼저 쓴다. 없으면 공개 파일. **사용자가 서버에서 설정 절차를 따라야 켜진다**(아직 안 켜짐). 사용자 서버(사용자 기록 2026-10-21): **Vultr 서울, Ubuntu 24.04, `ssh root@158.247.206.213`**, 바이낸스 봇 여러 개(대부분 데모, bbv2·donchian 실계좌)가 systemd·cron 으로 가동, Caddy :80 분기, 봇마다 `/root/<이름>/`+`.env`(600)+`watch.py`, 신규 크립토 봇은 donchian 복제(CCXT), 키는 서버 `.env` 에만·문서 기록 금지, 한국 IP(맥)는 바이낸스 차단 → 바이낸스 작업은 반드시 서버에서. 설치는 `scripts/vps_relay_install.sh` 한 줄(토큰만 묻고 `.env` 에 저장), 폴더 `/root/carrygate-relay`, 포트 없음, cron 09:05 KST, 실패 시 텔레그램(선택). 규칙 대조표는 `docs/VPS_SETUP.md`. **이 클라우드 세션은 그 서버에 SSH 로 못 들어간다**(ssh 없음·네트워크 403·키 없음, 10/21 확인). 사용자 "니가 해" → **끌어오기 방식**으로 바꿈: 서버는 `/var/www/carrygate/binance_1m/` 에 쓰고 Caddy 가 `/carrygate/*` 로 내보내며 `scalp.RELAY_URL`(http://158.247.206.213/carrygate/binance_1m/)이 ① 순서로 읽는다 → 토큰 불필요. 설치는 `scripts/vps_relay_install_pull.sh` 한 줄, **맥의 Claude Code 세션에 `docs/VPS_MAC_PROMPT.md` 상자를 붙여 넣으면 그 세션이 대신 한다.** 아직 안 켜짐 — 켜지면 Actions 로그 "Scalp Binance futures" 에서 수집 실패 0 으로 확인.
 
-**사용자 결정 대기:** 없음. 다음은 11/4 초단타 재확인과 첫 판정이 뜨는 날.
+**사용자 결정 대기:** 없음. 다음은 11/4 초단타 재확인과 첫 판정이 뜨는 날. **10/22 신설 급상승 패턴 트랙**은 첫 실행 뒤 실데이터 백테스트 표 기록과 현황판 카드 연결(라이브 버전 `rVerdict` 목록에 `retest` 추가 + 카드 신설)이 남아 있다.
 
 **2026-10-15 백테스트 과적합 논문 검토 → 판정기 보강 (제안함 P17·P18 반영):** 댓글 권고로 Bailey·López de Prado·Harvey·Hansen 등 17편을 읽고 공식을 실데이터에 대입(`docs/BACKTEST_OVERFITTING_REVIEW.md`, `scripts/overfit_check.py`). 발견: 초단타 10/7 PASS(후보 12개)는 실력 0 이어도 뜨는 후보 수(378개 중 42~53개)의 1/4 이었고, 터틀·추세전환 20건 합격선은 실력 0 도 19~40% 확률로 PASS 한다. 반영: ① `criteria.json scalp.noise_floor` — 부호 뒤집기 500회의 후보 수 중앙값보다 실제 후보가 많아야 PASS, 같거나 적으면 NOT_YET(잡음 이하). ② 판정 파일 각 거래소에 `interpretation`(실력 0 PASS 확률·놓칠 확률·필요 건수 MinTRL·t>3). 합격선 숫자·매매 규칙 변경 없음, criteria sealed 2026-10-15, 잠금 재생성. 현황판 카드에는 아직 안 올렸다(판정 파일에만). 작업 기록 `docs/sessions/2026-10-15_backtest_overfitting.md`.
 
@@ -113,6 +114,24 @@
 - **한국 주식 06:50 UTC 예약 실행이 또 안 떴다.** 09:07 UTC 수동 실행으로 채움(성공). 첫 종이 체결: 5종목 매수, 깃발형 2건(주성엔지니어링·이수페타시스)이 첫날 −7.45% 손절, 3건 보유(삼성SDI 박스, LG에너지솔루션 삼각, 빛과전자 깃발). 백테스트에서 유일하게 손실이던 깃발형이 첫날부터 손절 — 제안함 P2(깃발 제외 변형) 근거가 하나 늘었다.
 - 예약 실행 불발이 이틀째다 → **사용자 결정(2026-10-07): 클라우드 Routine "KR 돌파 예약 실행 대신 걸기 (평일 07:10 UTC)" 가 평일마다 오늘 실행 여부를 보고, 없으면 `workflow_dispatch` 로 대신 실행한다**(실패 시 1회 재실행). 이 Routine 은 저장소가 연결된 Claude 세션(session_01WP7a8oLwaHMUj5MimZSF6k)으로 배달된다 — 새 세션으로 띄우면 GitHub 도구가 붙지 않아 실패하는 것을 10/7 시험 실행으로 확인했다. GitHub 정기 예약(06:50)은 그대로 두며, 그게 뜬 날은 Routine 이 건너뛴다. claude.ai 의 Routines 화면에서 끄거나 지울 수 있다. 제안함 P11.
 - **초단타 다음 단계: 사용자 결정(2026-10-07) "2주 더 쌓은 뒤 본다".** 재확인일 **2026-10-21** (같은 세션에 07:30 UTC 알림 예약됨). 그날 `python verdict.py` 와 `python scalp.py --report` 로 15분봉 VWAP 되돌림 후보가 남았는지 본다. 남으면 별도 저장소 소액 체결 시험 설계(원칙 1). 제안함 P10.
+
+### 마일스톤 16 — 급상승·급하락 패턴 (1시간봉, SNS 카드 "부자들은 여기서 진입") (코드 완료 2026-10-22, 실데이터 대기)
+
+사용자가 공유한 카드 4장(계정 bullcoin_: 급상승·급하락 패턴 그림, 캔들 용어, 블룸에너지 15분봉·팔란티어 30분봉 실전 예시)의 "1차 상승 → 횡보 → 2차 상승 → 하락 조정(거래량 감소) → 지지 구간 상승 캔들 → 매수" 를 숫자 규칙으로 고정했다. 설계서 `docs/RETEST_PLAN.md`, 제안함 P22, 기록 `docs/sessions/2026-10-22_retest_pattern.md`.
+
+| 파일 | 역할 |
+|---|---|
+| `retest.py` | 업비트 현물 6(롱) + OKX 선물 6(롱+숏, 숏은 가격을 뒤집어 같은 규칙) 1시간봉 1년 백테스트 → `retest.json`, `retest_history.jsonl`. 오늘 단계(`scan`/`box` 횡보/`rise2` 돌파/`pullback` 조정 중·확인 봉 대기/`long`·`short` 보유)와 진입 계획(지지 구간·손절·수량) 기록. 변형 `no_vol`·`zone_limit`·`target_2r` 나란히. `RULE_FIXED = 2026-10-22` |
+| `tests/test_retest.py` | 19건 — 카드 모양을 가짜 봉으로 만들어 진입·손절·래칫·거울 대칭·변형을 확인 |
+| `criteria.json` `retest` + `verdict.py` | 다섯 번째 판정 트랙. 거래소별 순방향 20건, 손익비 ≥ 1.5 PASS / < 1.0 FAIL (추세전환과 같은 틀). sealed 2026-10-22, 잠금 재생성. **기존 네 트랙 숫자 변경 없음** |
+| `selfcheck.py check_retest` | 실현 순수익 재계산, 손절선 방향(롱 ↑만/숏 ↓만), 손절 체결가, 진입가가 지지 구간 안인지 |
+| `carrygate.yml` | 추세 전환 다음 단계. 커밋·시험·추이 출력 연결 |
+
+**규칙 숫자(결과 보기 전 고정):** 1차 상승 36봉 안 ATR×3·거래량 1.5배 → 횡보 4~60봉(되돌림 ≤ 50%, 폭 ≤ H/2, 거래량 ≤ 0.8배) → 종가 돌파 → 2차 고점 지지 상단 + ATR×1.5(36봉 안) → 48봉 안 조정(거래량 ≤ 0.8배) → 지지 구간에 닿은 양봉(윗절반 마감) 종가 진입(슬리피지 0.05%) → 손절 지지 하단, 확정 피벗 저점마다 래칫. 계좌 1%/건, 명목 ≤ 100%.
+
+**실데이터 결과: 아직 없음.** 이 세션은 거래소 API 가 막혀(403) 가짜 봉으로만 돌렸다(기본 연 0~1건, `no_vol` 164~347건 — 거래량 조건이 거의 다 거른다). 첫 `CARRYGATE daily` 실행 뒤 `retest.json` 의 1년 백테스트 표를 여기 옮기고, Actions 에서 `python retest.py --save-fixture tests/fixtures/retest` 로 오프라인 고정 봉을 저장한다.
+
+**"진입 할 수 있게"의 경계:** 이 저장소는 판단(지지 구간·손절·확인 봉·수량)만 적는다. 자동 주문은 순방향 20건 PASS 뒤 별도 저장소 `carrygate-exec` 에서 1시간 주기로(설계서 5절). 현황판 카드·`rVerdict` 목록 추가는 라이브 버전에서 다음 세션.
 
 ## 2. 실제로 확인된 사실 (추측 아님)
 
@@ -1181,6 +1200,8 @@ GitHub 저장소 → Actions 탭 → `CARRYGATE daily` → Run workflow
 - `python3 -m unittest tests.test_turtle` — 터틀 계산 로직 (12건, Chandelier 변형 2건 포함)
 - `python3 turtle.py --fixture tests/fixtures/turtle --dry-run` — 터틀 3년 백테스트를 저장된 일봉 CSV 로 (인터넷 불필요)
 - `python3 -m unittest tests.test_reversal` — 추세 전환 계산 로직 (13건)
+- `python3 -m unittest tests.test_retest` — 급상승·급하락 패턴 계산 로직 (19건)
+- `python3 retest.py --fixture tests/fixtures/retest --dry-run` — 저장된 1시간봉으로 전체 실행 (고정 봉은 첫 Actions 실행 뒤 저장)
 - `python3 reversal.py --fixture tests/fixtures/reversal --dry-run` — 추세 전환 3년 백테스트를 저장된 4시간봉 CSV 로 (인터넷 불필요, 3초)
 - `python3 -m unittest tests.test_relay` — 한국 중계 처리 (7건)
 - `python kr_relay.py --no-upload` — (한국 PC 에서) 바이낸스·바이비트 수집만 시험

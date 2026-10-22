@@ -98,7 +98,12 @@ jobs:
         continue-on-error: true
         run: python reversal.py
 
-      - name: Verdict (판정 규율 — 네 트랙 순방향 채점, 사전 등록 기준)
+      - name: Retest pattern rules (급상승·급하락 패턴 1시간봉, 단기)
+        if: inputs.day == ''
+        continue-on-error: true
+        run: python retest.py
+
+      - name: Verdict (판정 규율 — 다섯 트랙 순방향 채점, 사전 등록 기준)
         if: inputs.day == ''
         continue-on-error: true
         run: python verdict.py
@@ -147,6 +152,10 @@ jobs:
         if: always()
         run: python reversal.py --report || echo "추세 전환 기록 없음"
 
+      - name: Show retest trend (급상승 패턴 신호 추이)
+        if: always()
+        run: python retest.py --report || echo "급상승 패턴 기록 없음"
+
       - name: Show grid trend (그리드 순방향 계좌)
         if: always()
         run: python grid.py --report || echo "그리드 기록 없음"
@@ -157,7 +166,7 @@ jobs:
 
       - name: Unit tests (계산 로직)
         if: always()
-        run: python -m unittest tests.test_scalp tests.test_research tests.test_midterm tests.test_momentum tests.test_live tests.test_turtle tests.test_reversal tests.test_relay tests.test_verdict tests.test_grid tests.test_selfcheck
+        run: python -m unittest tests.test_scalp tests.test_research tests.test_midterm tests.test_momentum tests.test_live tests.test_turtle tests.test_reversal tests.test_retest tests.test_relay tests.test_verdict tests.test_grid tests.test_selfcheck
 
       - name: Commit results
         if: always() && inputs.dry_run != true
@@ -168,7 +177,7 @@ jobs:
           # 아무것도 저장되지 않는다(2026-10-02~04 결과 유실). 있는 경로만 하나씩 추가한다.
           for p in status.json history.jsonl funding.json funding_history.jsonl scalp.json scalp_history.jsonl scalp_binance.json scalp_binance_history.jsonl research.json research_history.jsonl \
                    basis.json basis_history.jsonl funding_signal.json funding_signal_history.jsonl kimchi.json kimchi_history.jsonl \
-                   macro.json listing.json momentum.json momentum_history.jsonl live.json live_history.jsonl turtle.json turtle_history.jsonl reversal.json reversal_history.jsonl verdict.json verdict_history.jsonl \
+                   macro.json listing.json momentum.json momentum_history.jsonl live.json live_history.jsonl turtle.json turtle_history.jsonl reversal.json reversal_history.jsonl retest.json retest_history.jsonl verdict.json verdict_history.jsonl \
                    grid.json grid_history.jsonl \
                    data/kr_funding.json data/binance_1m data/cg_funding_snapshots.jsonl data/etf data/upbit_markets.json; do
             if [ -e "$p" ]; then git add -A "$p"; else echo "없음(건너뜀): $p"; fi
