@@ -50,4 +50,4 @@ python selfcheck.py                                       # 문제 없음
 - 업비트 −10.3%(25건, PF 0.31) / OKX +3.5%(82건, PF 1.10, BTC·ETH 롱 두 시장이 전부). 변형 `no_vol` 은 둘 다 훨씬 나쁨.
 - 진입·청산 위치 차트(TradingView 1시간봉 2026-01-01~10-22, 세션 보조 자료, 저장소 밖): https://claude.ai/artifact/KbMKnJDps1wq1mD2AMaKS1 — 매매마다 ①1차 상승·B·③돌파·C·진입·손절선·청산 표식.
 - 사용자 결정 2026-10-22: "검산 통과 시 PR 합쳐" → main 병합. 내일 09:18 KST 부터 `retest.json`·`retest_history.jsonl` 매일 기록.
-- 사용자 요청 "현황판에 급상승 패턴 추가해" → 라이브 현황판에 타일·카드·판정 줄 추가(판정 줄은 verdict.json 에 retest 가 생기는 10/23 부터 보임), `dashboard/index.html` 백업 동일, 갱신 Routine 파일 목록에 `retest.json`. 가짜 데이터로 카드 렌더링 확인(시험용, 게시 안 함).
+- 사용자 요청 "현황판에 급상승 패턴 추가해" → 라이브 현황판에 타일·카드·판정 줄 추가(판정 줄은 verdict.json 에 retest 가 생기는 10/23 부터 보임), `dashboard/index.html` 백업 동일. 갱신 Routine 프롬프트는 그 루틴 세션에서만 바꿀 수 있어 session_01UBXi3SEnxJwqCj4dY5q4J5 에 요청 메시지를 보냄(10/23 확인 필요). 가짜 데이터로 카드 렌더링 확인(시험용, 게시 안 함).
