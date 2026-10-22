@@ -170,8 +170,8 @@ class Backtest(unittest.TestCase):
             self.assertLess(t["entry"], 200 - 129.5)                    # 확인 봉 종가(70.5)보다 낮게 체결
             self.assertAlmostEqual(t["entry"], 70.5 * (1 - 0.001))
             self.assertGreaterEqual(t["exit"], t["stop_final"])          # 손절 청산가는 손절선 이상(불리)
-            lr = retest.run({"X": bars if reason == "trail" else p.bars}, 0.0, 10_000.0, slip_pct=0.1)
-            self.assertAlmostEqual(lr["trades"][0]["exit"] + t["exit"], 200.0, places=6)   # 롱·숏 대칭
+            raw = retest.run({"X": bars if reason == "trail" else p.bars}, 0.0, 10_000.0, slip_pct=0.0)["trades"][0]["exit"]
+            self.assertAlmostEqual(t["exit"], (200 - raw) * (1 + 0.001), places=6)          # 슬리피지 없는 롱 청산가를 뒤집은 값보다 0.1% 높게
 
     def test_no_confirm_bar_no_entry_then_expire(self):
         p = card_path()
