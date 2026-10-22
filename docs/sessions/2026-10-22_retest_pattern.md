@@ -42,3 +42,11 @@ python selfcheck.py                                       # 문제 없음
 ## 5. Routine
 
 변경 없음. `CARRYGATE daily`(매일 09:18 KST) 안에 단계가 들어갔다. 첫 실행 뒤 할 일: 실행 로그 "Retest pattern rules" 단계에서 수집 실패 0 확인 → `retest.json` 백테스트 표를 `HANDOVER.md` 마일스톤 16 에 옮김 → `python retest.py --save-fixture tests/fixtures/retest` 를 Actions 에서 한 번 돌려 오프라인 고정 봉을 저장(추세 전환과 같은 방식).
+
+## 6. 사후 기록 (같은 날, PR #76 dry_run 2회)
+
+- 1차 실행 #39780971648: 급상승 패턴 단계 성공(수집 실패 0, 9분), **검산 실패 11건** — 숏 손절 청산가가 지지 경계 안쪽. 원인: 뒤집은(음수) 가격에 ×(1±slip) 을 곱해 숏 체결이 유리하게 밀림. `fill ± |fill|×slip` 로 수정(6e83ef6), 회귀 시험 `test_short_slippage_is_adverse` 추가. 규칙 상수·잠금 변경 없음.
+- 2차 실행 #39786216774: 전 단계 성공, 검산 통과(급상승패턴 80건 대조). 1년 백테스트 표는 `HANDOVER.md` 마일스톤 16.
+- 업비트 −10.3%(25건, PF 0.31) / OKX +3.5%(82건, PF 1.10, BTC·ETH 롱 두 시장이 전부). 변형 `no_vol` 은 둘 다 훨씬 나쁨.
+- 진입·청산 위치 차트(TradingView 1시간봉 2026-01-01~10-22, 세션 보조 자료, 저장소 밖): https://claude.ai/artifact/KbMKnJDps1wq1mD2AMaKS1 — 매매마다 ①1차 상승·B·③돌파·C·진입·손절선·청산 표식.
+- 사용자 결정 2026-10-22: "검산 통과 시 PR 합쳐" → main 병합. 내일 09:18 KST 부터 `retest.json`·`retest_history.jsonl` 매일 기록.
