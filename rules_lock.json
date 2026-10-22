@@ -1,7 +1,7 @@
 {
   "_comment": "규칙 잠금. 트랙 코드의 규칙 상수와 criteria.json 지문을 적어 둔다. tests/test_verdict.py 가 매번 대조하므로, 규칙을 바꾸면 반드시 (1) proposals.md 에 근거 (2) 그 트랙의 RULE_FIXED 를 새 날짜로 (3) `python verdict.py --lock` 순서로 간다.",
-  "_locked_at": "2026-10-15T20:43:24Z",
-  "criteria_sha256": "a227165fc4785a52274ae83a11a6e29e92de1e6a454005169d19694c0cec181b",
+  "_locked_at": "2026-10-22T08:14:50Z",
+  "criteria_sha256": "bee09d40aacab3d5b7e7a7c17296d1af0acd6e09b4d9e6ed510a3d234f5d1e6c",
   "kr_breakout": {
     "rule_fixed": "2026-10-05",
     "rules": {
@@ -73,6 +73,62 @@
           "risk_pct": 2.0
         }
       }
+    }
+  },
+  "retest": {
+    "rule_fixed": "2026-10-22",
+    "rules": {
+      "atr_bars": 20,
+      "bar_minutes": 60,
+      "box_height_frac_max": 0.5,
+      "box_len": [
+        4,
+        60
+      ],
+      "box_retrace_max": 0.5,
+      "box_vol_ratio_max": 0.8,
+      "dirs": {
+        "okx": [
+          "long",
+          "short"
+        ],
+        "upbit": [
+          "long"
+        ]
+      },
+      "fees": {
+        "okx": 0.05,
+        "upbit": 0.05
+      },
+      "max_notional_pct": 100.0,
+      "pivot_k": 3,
+      "pole_max_bars": 36,
+      "pole_min_atr": 3.0,
+      "pole_vol_mult": 1.5,
+      "pull_vol_ratio_max": 0.8,
+      "pullback_wait_bars": 48,
+      "rise2_min_atr": 1.5,
+      "rise2_wait_bars": 36,
+      "risk_pct_per_trade": 1.0,
+      "slippage_pct": 0.05,
+      "variants": {
+        "no_vol": {
+          "entry": "confirm",
+          "target_r": null,
+          "vol": false
+        },
+        "target_2r": {
+          "entry": "confirm",
+          "target_r": 2.0,
+          "vol": true
+        },
+        "zone_limit": {
+          "entry": "limit",
+          "target_r": null,
+          "vol": true
+        }
+      },
+      "vol_avg_bars": 20
     }
   },
   "reversal": {

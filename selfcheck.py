@@ -37,6 +37,7 @@ SHAPES = {
     "turtle.json": {"date": "str", "rules": "dict", "venues": "dict", "summary": "dict", "summary.markets": "int"},
     "reversal.json": {"date": "str", "rules": "dict", "rules.rule_fixed": "str", "venues": "dict", "venues.upbit": "dict", "venues.okx": "dict",
                       "summary": "dict", "summary.markets": "int"},
+    "retest.json": {"date": "str", "rules": "dict", "rules.rule_fixed": "str", "venues": "dict", "summary": "dict", "summary.markets": "int"},
     "live.json": {"date": "str", "status": "dict", "status.coin": "str", "status.days": "num", "status.warnings": "list"},
     "scalp.json": {"date": "str", "eval_day_utc": "str", "method": "dict", "method.strategies": "list", "summary": "dict",
                    "summary.rows_total": "int", "summary.rows_positive": "int", "summary.rows_robust": "int",
@@ -537,6 +538,58 @@ def check_reversal(problems, notes):
     return checked
 
 
+def check_retest(problems, notes):
+    """급상승·급하락 패턴(1시간봉): 실현 순수익을 매매별 수익률의 복리 곱에서 다시 계산해 대조하고, 손절·진입 규칙을 본다.
+    - 롱: 최종 손절선 ≥ 시작 손절선(지지 하단), 손절 청산가 ≤ 시작 손절선, 확인 봉 진입가 ≥ 지지 하단
+    - 숏: 부호 반대 (최종 손절선 ≤ 시작, 손절 청산가 ≥ 시작, 진입가 ≤ 지지 상단)
+    - 지정가 변형(zone_limit): 롱 진입가 ≤ 지지 상단, 숏 진입가 ≥ 지지 하단"""
+    d = load_json("retest.json")
+    if d is None:
+        notes.append("retest.json 이 없다")
+        return 0
+    checked = 0
+    for v, vd in (d.get("venues") or {}).items():
+        items = [("%s/%s" % (v, m), md) for m, md in (vd.get("markets") or {}).items()]
+        if vd.get("portfolio"):
+            items.append(("%s/포트폴리오" % v, vd["portfolio"]))
+        for vn, e in (vd.get("variants") or {}).items():
+            items += [("%s/%s/%s" % (vn, v, m), md) for m, md in (e.get("markets") or {}).items()]
+            if e.get("portfolio"):
+                items.append(("%s/%s/포트폴리오" % (vn, v), e["portfolio"]))
+        for name, md in items:
+            rets = md.get("returns_pct") or []
+            st = md.get("stats") or {}
+            net = 1.0
+            for r in rets:
+                net *= 1.0 + r / 100.0
+            net = (net - 1.0) * 100.0
+            if st.get("trades") != len(rets):
+                problems.append("급상승패턴 %s: 매매 수(%s)와 수익률 목록(%d)이 다르다" % (name, st.get("trades"), len(rets)))
+                continue
+            if abs(net - (st.get("realized_net_pct") or 0.0)) > max(0.01, 0.001 * abs(net)):
+                problems.append("급상승패턴 %s: 실현 순수익 불일치 (저장 %.3f vs 재계산 %.3f)" % (name, st.get("realized_net_pct") or 0.0, net))
+                continue
+            bad = None
+            for t in (md.get("recent_trades") or []) + (md.get("forward_trades") or []):
+                tol = 1e-6 * max(1.0, abs(t["entry"]))
+                sg = 1.0 if t.get("dir") == "long" else -1.0
+                if sg * (t["stop_final"] - t["stop0"]) < -tol:
+                    bad = "손절선이 시작값(지지 경계)보다 불리하게 움직였다 (%s %s)" % (t.get("dir"), t.get("entry_date"))
+                elif t.get("reason") == "stop" and sg * (t["exit"] - t["stop0"]) > tol:
+                    bad = "손절 청산가가 지지 경계 안쪽이다 (%s %s)" % (t.get("dir"), t.get("entry_date"))
+                elif t.get("entry_how") == "confirm_close" and (t["entry"] < t["zone_lo"] - tol if sg > 0 else t["entry"] > t["zone_hi"] + tol):
+                    bad = "확인 봉 진입가가 지지 구간 바깥(손절 쪽)이다 (%s %s)" % (t.get("dir"), t.get("entry_date"))
+                elif t.get("entry_how") == "zone_limit" and (t["entry"] > t["zone_hi"] + tol if sg > 0 else t["entry"] < t["zone_lo"] - tol):
+                    bad = "지정가 진입이 지지 구간 바깥이다 (%s %s)" % (t.get("dir"), t.get("entry_date"))
+                if bad:
+                    break
+            if bad:
+                problems.append("급상승패턴 %s: %s" % (name, bad))
+                continue
+            checked += 1
+    return checked
+
+
 def check_kr(problems, notes):
     """한국 주식 종이매매(kr_breakout.json): 매매별 손익을 진입가·청산가·수량·수수료에서 다시 계산해 대조하고,
     손절가 규칙(진입가의 93% 이상)·계좌 수익률·고정 신호 기록·순방향 일수를 본다."""
@@ -610,6 +663,7 @@ def main():
     basis_checked = check_basis(problems, notes)
     turtle_checked = check_turtle(problems, notes)
     reversal_checked = check_reversal(problems, notes)
+    retest_checked = check_retest(problems, notes)
     grid_checked = check_grid(problems, notes)
     kr_checked = check_kr(problems, notes)
     shape_checked = check_shapes(problems, notes)
@@ -618,11 +672,11 @@ def main():
     for path, label in (("basis_history.jsonl", "베이시스"), ("funding_signal_history.jsonl", "펀딩 신호"),
                         ("kimchi_history.jsonl", "김치프리미엄"), ("momentum_history.jsonl", "듀얼 모멘텀"),
                         ("live_history.jsonl", "실전 캐리"), ("turtle_history.jsonl", "터틀"),
-                        ("reversal_history.jsonl", "추세 전환"), ("grid_history.jsonl", "그리드")):
+                        ("reversal_history.jsonl", "추세 전환"), ("retest_history.jsonl", "급상승 패턴"), ("grid_history.jsonl", "그리드")):
         check_jsonl_dates(path, label, problems, notes)
 
     print("=== 검산 ===")
-    print("재계산 대조: 캐리 %d건, 초단타 %d건, 베이시스 %d건, 터틀 %d건, 추세전환 %d건, 그리드 %d건, 한국주식 %d건 통과" % (checked, scalp_checked, basis_checked, turtle_checked, reversal_checked, grid_checked, kr_checked))
+    print("재계산 대조: 캐리 %d건, 초단타 %d건, 베이시스 %d건, 터틀 %d건, 추세전환 %d건, 급상승패턴 %d건, 그리드 %d건, 한국주식 %d건 통과" % (checked, scalp_checked, basis_checked, turtle_checked, reversal_checked, retest_checked, grid_checked, kr_checked))
     print("형식 대조: 현황판 결과 파일 %d개 통과 (키·타입)" % shape_checked)
     for m in notes:
         print("  · %s" % m)
