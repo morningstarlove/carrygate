@@ -1,8 +1,8 @@
 {
   "schema": "carrygate-verdict/1",
-  "date": "2026-10-22",
-  "generated_at_utc": "2026-10-22T12:33:50Z",
-  "criteria_sealed": "2026-10-15",
+  "date": "2026-10-23",
+  "generated_at_utc": "2026-10-23T05:19:44Z",
+  "criteria_sealed": "2026-10-22",
   "tracks": {
     "kr_breakout": {
       "variant": "base",
@@ -90,7 +90,7 @@
           "profit_factor": 0.0,
           "avg_r": -1.25,
           "backtest_win_rate_pct": 33.8843,
-          "backtest_profit_factor": 1.2164,
+          "backtest_profit_factor": 1.2157,
           "backtest_trades": 242,
           "luck": {
             "expected_wins": 0.34,
@@ -113,12 +113,12 @@
           },
           "warnings": [],
           "interpretation": {
-            "false_pass_pct": 37.83,
+            "false_pass_pct": 37.88,
             "miss_pct": 45.84,
             "wins_needed": 7,
             "per_trade_sharpe": 0.09,
-            "min_trades_95": 338,
-            "min_trades_t3": 1121,
+            "min_trades_95": 339,
+            "min_trades_t3": 1128,
             "note": "false_pass = 실력 0 규칙이 이 합격선을 넘을 확률, miss = 백테스트만큼 실력이어도 못 넘을 확률, min_trades_95 = 샤프>0 을 95% 확신하는 데 필요한 건수(MinTRL), min_trades_t3 = t>3 기준 건수. PASS = 소액 시험 후보"
           },
           "status": "NOT_YET",
@@ -129,84 +129,192 @@
     "reversal": {
       "rule_fixed": "2026-10-05",
       "status": "NOT_YET",
-      "reason": "순방향 합계 1건: upbit=NOT_YET, okx=NOT_YET",
-      "forward_trades_total": 1,
+      "reason": "순방향 합계 4건: upbit=NOT_YET, okx=NOT_YET",
+      "forward_trades_total": 4,
       "venues": {
         "upbit": {
-          "trades": 0,
-          "wins": 0,
-          "win_rate_pct": null,
-          "net_pct": null,
-          "profit_factor": null,
-          "avg_r": null,
-          "backtest_win_rate_pct": 37.2414,
-          "backtest_profit_factor": 2.8218,
-          "backtest_trades": 145,
-          "luck": null,
-          "variants": {
-            "no_vol": {
-              "trades": 2,
-              "wins": 0,
-              "net_pct": -2.0144,
-              "profit_factor": 0.0
-            },
-            "break_entry": {
-              "trades": 0,
-              "wins": 0,
-              "net_pct": null,
-              "profit_factor": null
-            }
-          },
-          "warnings": [],
-          "interpretation": {
-            "false_pass_pct": 25.93,
-            "miss_pct": 8.25,
-            "wins_needed": 5,
-            "per_trade_sharpe": 0.41,
-            "min_trades_95": 17,
-            "min_trades_t3": 54,
-            "note": "false_pass = 실력 0 규칙이 이 합격선을 넘을 확률, miss = 백테스트만큼 실력이어도 못 넘을 확률, min_trades_95 = 샤프>0 을 95% 확신하는 데 필요한 건수(MinTRL), min_trades_t3 = t>3 기준 건수. PASS = 소액 시험 후보"
-          },
-          "status": "NOT_YET",
-          "reason": "순방향 0건 — 최소 20건 전에는 판단하지 않는다"
-        },
-        "okx": {
           "trades": 1,
           "wins": 0,
           "win_rate_pct": 0.0,
-          "net_pct": -1.0781,
+          "net_pct": -1.056,
           "profit_factor": 0.0,
-          "avg_r": -1.08,
-          "backtest_win_rate_pct": 32.4324,
-          "backtest_profit_factor": 1.2041,
-          "backtest_trades": 148,
+          "avg_r": -1.06,
+          "backtest_win_rate_pct": 36.8056,
+          "backtest_profit_factor": 2.7145,
+          "backtest_trades": 144,
           "luck": {
-            "expected_wins": 0.32,
+            "expected_wins": 0.37,
             "actual_wins": 0,
-            "z": -0.69
+            "z": -0.76
           },
           "variants": {
             "no_vol": {
-              "trades": 5,
+              "trades": 3,
               "wins": 0,
-              "net_pct": -3.3234,
+              "net_pct": -3.0491,
               "profit_factor": 0.0
             },
             "break_entry": {
               "trades": 1,
               "wins": 0,
-              "net_pct": -1.041,
+              "net_pct": -1.0429,
               "profit_factor": 0.0
             }
           },
           "warnings": [],
           "interpretation": {
-            "false_pass_pct": 18.42,
-            "miss_pct": 69.3,
+            "false_pass_pct": 27.11,
+            "miss_pct": 8.87,
+            "wins_needed": 5,
+            "per_trade_sharpe": 0.4,
+            "min_trades_95": 18,
+            "min_trades_t3": 58,
+            "note": "false_pass = 실력 0 규칙이 이 합격선을 넘을 확률, miss = 백테스트만큼 실력이어도 못 넘을 확률, min_trades_95 = 샤프>0 을 95% 확신하는 데 필요한 건수(MinTRL), min_trades_t3 = t>3 기준 건수. PASS = 소액 시험 후보"
+          },
+          "status": "NOT_YET",
+          "reason": "순방향 1건 — 최소 20건 전에는 판단하지 않는다"
+        },
+        "okx": {
+          "trades": 3,
+          "wins": 0,
+          "win_rate_pct": 0.0,
+          "net_pct": -1.4782,
+          "profit_factor": 0.0,
+          "avg_r": -0.49,
+          "backtest_win_rate_pct": 32.0,
+          "backtest_profit_factor": 1.1955,
+          "backtest_trades": 150,
+          "luck": {
+            "expected_wins": 0.96,
+            "actual_wins": 0,
+            "z": -1.19
+          },
+          "variants": {
+            "no_vol": {
+              "trades": 7,
+              "wins": 0,
+              "net_pct": -4.2396,
+              "profit_factor": 0.0
+            },
+            "break_entry": {
+              "trades": 3,
+              "wins": 0,
+              "net_pct": -2.0848,
+              "profit_factor": 0.0
+            }
+          },
+          "warnings": [],
+          "interpretation": {
+            "false_pass_pct": 17.73,
+            "miss_pct": 70.78,
             "wins_needed": 8,
             "per_trade_sharpe": 0.08,
-            "min_trades_95": 384,
-            "min_trades_t3": 1277,
+            "min_trades_95": 418,
+            "min_trades_t3": 1390,
+            "note": "false_pass = 실력 0 규칙이 이 합격선을 넘을 확률, miss = 백테스트만큼 실력이어도 못 넘을 확률, min_trades_95 = 샤프>0 을 95% 확신하는 데 필요한 건수(MinTRL), min_trades_t3 = t>3 기준 건수. PASS = 소액 시험 후보"
+          },
+          "status": "NOT_YET",
+          "reason": "순방향 3건 — 최소 20건 전에는 판단하지 않는다"
+        }
+      }
+    },
+    "retest": {
+      "rule_fixed": "2026-10-22",
+      "status": "NOT_YET",
+      "reason": "순방향 합계 2건: upbit=NOT_YET, okx=NOT_YET",
+      "forward_trades_total": 2,
+      "venues": {
+        "upbit": {
+          "trades": 1,
+          "wins": 0,
+          "win_rate_pct": 0.0,
+          "net_pct": -0.4809,
+          "profit_factor": 0.0,
+          "avg_r": -0.48,
+          "backtest_win_rate_pct": 12.0,
+          "backtest_profit_factor": 0.3135,
+          "backtest_trades": 25,
+          "luck": {
+            "expected_wins": 0.12,
+            "actual_wins": 0,
+            "z": -0.37
+          },
+          "variants": {
+            "no_vol": {
+              "trades": 1,
+              "wins": 0,
+              "net_pct": -0.4809,
+              "profit_factor": 0.0
+            },
+            "zone_limit": {
+              "trades": 1,
+              "wins": 0,
+              "net_pct": -1.0439,
+              "profit_factor": 0.0
+            },
+            "target_2r": {
+              "trades": 1,
+              "wins": 0,
+              "net_pct": -0.4809,
+              "profit_factor": 0.0
+            }
+          },
+          "warnings": [],
+          "interpretation": {
+            "false_pass_pct": 23.73,
+            "miss_pct": 99.86,
+            "wins_needed": 8,
+            "per_trade_sharpe": -0.56,
+            "min_trades_95": null,
+            "min_trades_t3": null,
+            "note": "false_pass = 실력 0 규칙이 이 합격선을 넘을 확률, miss = 백테스트만큼 실력이어도 못 넘을 확률, min_trades_95 = 샤프>0 을 95% 확신하는 데 필요한 건수(MinTRL), min_trades_t3 = t>3 기준 건수. PASS = 소액 시험 후보"
+          },
+          "status": "NOT_YET",
+          "reason": "순방향 1건 — 최소 20건 전에는 판단하지 않는다"
+        },
+        "okx": {
+          "trades": 1,
+          "wins": 0,
+          "win_rate_pct": 0.0,
+          "net_pct": -1.144,
+          "profit_factor": 0.0,
+          "avg_r": -1.14,
+          "backtest_win_rate_pct": 31.3253,
+          "backtest_profit_factor": 1.0604,
+          "backtest_trades": 83,
+          "luck": {
+            "expected_wins": 0.31,
+            "actual_wins": 0,
+            "z": -0.68
+          },
+          "variants": {
+            "no_vol": {
+              "trades": 3,
+              "wins": 0,
+              "net_pct": -2.2866,
+              "profit_factor": 0.0
+            },
+            "zone_limit": {
+              "trades": 0,
+              "wins": 0,
+              "net_pct": null,
+              "profit_factor": null
+            },
+            "target_2r": {
+              "trades": 1,
+              "wins": 0,
+              "net_pct": -1.144,
+              "profit_factor": 0.0
+            }
+          },
+          "warnings": [],
+          "interpretation": {
+            "false_pass_pct": 23.01,
+            "miss_pct": 73.03,
+            "wins_needed": 8,
+            "per_trade_sharpe": 0.03,
+            "min_trades_95": 3740,
+            "min_trades_t3": 12439,
             "note": "false_pass = 실력 0 규칙이 이 합격선을 넘을 확률, miss = 백테스트만큼 실력이어도 못 넘을 확률, min_trades_95 = 샤프>0 을 95% 확신하는 데 필요한 건수(MinTRL), min_trades_t3 = t>3 기준 건수. PASS = 소액 시험 후보"
           },
           "status": "NOT_YET",
@@ -215,92 +323,92 @@
       }
     },
     "scalp": {
-      "history_days": 24,
+      "history_days": 25,
       "combos": 810,
-      "candidates": 58,
+      "candidates": 66,
       "top": [
         {
           "key": "hyperliquid:ETH:30m:vwap_fade_lim",
-          "net_pct": 11.64,
-          "days": 9,
+          "net_pct": 9.559,
+          "days": 10,
           "pos_days": 8,
-          "trades": 14
+          "trades": 15
         },
         {
           "key": "okx:ETH:30m:vwap_fade_lim",
-          "net_pct": 11.326,
-          "days": 9,
-          "pos_days": 8,
-          "trades": 13
-        },
-        {
-          "key": "hyperliquid:ETH:30m:vwap_fade",
-          "net_pct": 11.024,
-          "days": 9,
+          "net_pct": 9.262,
+          "days": 10,
           "pos_days": 8,
           "trades": 14
         },
         {
-          "key": "okx:ETH:30m:vwap_fade",
-          "net_pct": 10.664,
-          "days": 9,
+          "key": "hyperliquid:ETH:30m:vwap_fade",
+          "net_pct": 8.919,
+          "days": 10,
           "pos_days": 8,
-          "trades": 13
-        },
-        {
-          "key": "hyperliquid:DOGE:30m:vwap_fade",
-          "net_pct": 10.51,
-          "days": 9,
-          "pos_days": 6,
-          "trades": 13
+          "trades": 15
         },
         {
           "key": "okx:XRP:30m:vwap_fade_lim",
-          "net_pct": 10.401,
-          "days": 9,
+          "net_pct": 8.652,
+          "days": 10,
           "pos_days": 8,
-          "trades": 15
-        },
-        {
-          "key": "hyperliquid:DOGE:30m:vwap_fade_lim",
-          "net_pct": 10.256,
-          "days": 9,
-          "pos_days": 6,
-          "trades": 12
-        },
-        {
-          "key": "okx:XRP:30m:vwap_fade",
-          "net_pct": 9.645,
-          "days": 9,
-          "pos_days": 8,
-          "trades": 15
-        },
-        {
-          "key": "okx:DOGE:30m:vwap_fade_lim",
-          "net_pct": 9.271,
-          "days": 9,
-          "pos_days": 7,
-          "trades": 13
+          "trades": 16
         },
         {
           "key": "hyperliquid:LINK:60m:vwap_fade",
-          "net_pct": 9.002,
-          "days": 9,
+          "net_pct": 8.613,
+          "days": 10,
           "pos_days": 6,
-          "trades": 7
+          "trades": 8
+        },
+        {
+          "key": "okx:ETH:30m:vwap_fade",
+          "net_pct": 8.57,
+          "days": 10,
+          "pos_days": 8,
+          "trades": 14
+        },
+        {
+          "key": "okx:XRP:30m:vwap_fade",
+          "net_pct": 7.862,
+          "days": 10,
+          "pos_days": 8,
+          "trades": 16
+        },
+        {
+          "key": "hyperliquid:DOGE:30m:vwap_fade",
+          "net_pct": 7.536,
+          "days": 10,
+          "pos_days": 6,
+          "trades": 14
+        },
+        {
+          "key": "hyperliquid:DOGE:30m:vwap_fade_lim",
+          "net_pct": 7.24,
+          "days": 10,
+          "pos_days": 6,
+          "trades": 13
+        },
+        {
+          "key": "hyperliquid:XRP:30m:vwap_fade_lim",
+          "net_pct": 7.217,
+          "days": 10,
+          "pos_days": 7,
+          "trades": 16
         }
       ],
       "warnings": [],
       "noise_floor": {
         "sims": 500,
         "seed": 7,
-        "median": 64,
-        "p95": 79,
-        "max": 97,
+        "median": 89,
+        "p95": 105,
+        "max": 123,
         "note": "부호 뒤집기(실력 0) 기록에 같은 후보 규칙을 적용했을 때 뜨는 후보 수. 실제 후보 수가 median 이하면 운으로 설명된다"
       },
       "status": "NOT_YET",
-      "reason": "누적 24일, 후보 58개 ≤ 잡음 바닥 중앙값 64개 (실력 0 이어도 조합 810개 중 이만큼 뜬다) — 운으로 설명된다, 판단 보류"
+      "reason": "누적 25일, 후보 66개 ≤ 잡음 바닥 중앙값 89개 (실력 0 이어도 조합 810개 중 이만큼 뜬다) — 운으로 설명된다, 판단 보류"
     }
   },
   "errors": {},
@@ -312,6 +420,7 @@
     "kr_breakout": "NOT_YET",
     "turtle": "NOT_YET",
     "reversal": "NOT_YET",
+    "retest": "NOT_YET",
     "scalp": "NOT_YET"
   }
 }
