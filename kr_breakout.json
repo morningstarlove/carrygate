@@ -1,6 +1,6 @@
 {
- "date": "2026-10-22",
- "generated_at_utc": "2026-10-22T12:33:50Z",
+ "date": "2026-10-23",
+ "generated_at_utc": "2026-10-23T07:17:24Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -74,84 +74,125 @@
   }
  },
  "forward": {
-  "days": 12,
+  "days": 13,
   "from": "2026-10-05",
-  "to": "2026-10-22",
-  "codes": 220,
+  "to": "2026-10-23",
+  "codes": 227,
   "bar_errors": 0,
   "stale_codes": 0,
   "by_source": {
-   "yahoo": 176,
-   "yahoo+naver_api": 43,
-   "yahoo+gapfill": 1
+   "yahoo+naver_api": 47,
+   "yahoo": 180
   },
   "skipped_days": [
    "2026-10-05"
   ],
-  "gap_filled": 1,
-  "gap_filled_codes": {
-   "179880": [
-    "2026-10-19",
-    "2026-10-20",
-    "2026-10-21"
-   ]
-  },
+  "gap_filled": 0,
+  "gap_filled_codes": {},
   "gap_unfilled": 0,
   "note": null
  },
  "signals_today": {
-  "base": [],
-  "no_sector": [
+  "base": [
    {
-    "code": "028050",
-    "name": "SAMSUNG E&A CO. LTD.",
-    "group": "Engineering & Construction",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 55400.0,
-    "pattern_low": 41650.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 59832 이상이면 포기)",
-    "stop_plan": "max(41650, 진입가×0.93)"
-   },
-   {
-    "code": "077500",
-    "name": "Uniquest Corporation",
-    "group": "Electronics Distributors",
+    "code": "207940",
+    "name": "SAMSUNG BIOLOGICS Co., Ltd.",
+    "group": "Biotechnology",
     "pattern": "flag",
     "patterns": [
      "box",
      "flag"
     ],
-    "signal_close": 11790.0,
-    "pattern_low": 8900.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 12733 이상이면 포기)",
-    "stop_plan": "max(8900, 진입가×0.93)"
+    "signal_close": 1466000.0,
+    "pattern_low": 1355000.0,
+    "sync_by": "week",
+    "entry_plan": "내일 시가 (시가가 1583280 이상이면 포기)",
+    "stop_plan": "max(1355000, 진입가×0.93)"
+   }
+  ],
+  "no_sector": [
+   {
+    "code": "207940",
+    "name": "SAMSUNG BIOLOGICS Co., Ltd.",
+    "group": "Biotechnology",
+    "pattern": "flag",
+    "patterns": [
+     "box",
+     "flag"
+    ],
+    "signal_close": 1466000.0,
+    "pattern_low": 1355000.0,
+    "sync_by": "week",
+    "entry_plan": "내일 시가 (시가가 1583280 이상이면 포기)",
+    "stop_plan": "max(1355000, 진입가×0.93)"
    },
    {
-    "code": "317850",
-    "name": "DAEMO Engineering Co., Ltd",
-    "group": "Industrial Machinery",
+    "code": "441270",
+    "name": "Fine M-Tec Co.,Ltd.",
+    "group": "Building Products",
     "pattern": "box",
     "patterns": [
      "box"
     ],
-    "signal_close": 6410.0,
-    "pattern_low": 5460.0,
+    "signal_close": 11170.0,
+    "pattern_low": 7750.0,
     "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 6923 이상이면 포기)",
-    "stop_plan": "max(5460, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 12064 이상이면 포기)",
+    "stop_plan": "max(7750, 진입가×0.93)"
+   },
+   {
+    "code": "100250",
+    "name": "Chinyang Holdings Corporation",
+    "group": "Investment Managers",
+    "pattern": "triangle",
+    "patterns": [
+     "triangle"
+    ],
+    "signal_close": 3130.0,
+    "pattern_low": 2989.21,
+    "sync_by": null,
+    "entry_plan": "내일 시가 (시가가 3380 이상이면 포기)",
+    "stop_plan": "max(2989, 진입가×0.93)"
    }
   ],
-  "hold_10": [],
-  "risk_2": [],
+  "hold_10": [
+   {
+    "code": "207940",
+    "name": "SAMSUNG BIOLOGICS Co., Ltd.",
+    "group": "Biotechnology",
+    "pattern": "flag",
+    "patterns": [
+     "box",
+     "flag"
+    ],
+    "signal_close": 1466000.0,
+    "pattern_low": 1355000.0,
+    "sync_by": "week",
+    "entry_plan": "내일 시가 (시가가 1583280 이상이면 포기)",
+    "stop_plan": "max(1355000, 진입가×0.93)"
+   }
+  ],
+  "risk_2": [
+   {
+    "code": "207940",
+    "name": "SAMSUNG BIOLOGICS Co., Ltd.",
+    "group": "Biotechnology",
+    "pattern": "flag",
+    "patterns": [
+     "box",
+     "flag"
+    ],
+    "signal_close": 1466000.0,
+    "pattern_low": 1355000.0,
+    "sync_by": "week",
+    "entry_plan": "내일 시가 (시가가 1583280 이상이면 포기)",
+    "stop_plan": "max(1355000, 진입가×0.93)"
+   }
+  ],
   "no_flag": []
  },
- "signal_date": "2026-10-22",
- "signals_frozen": true,
+ "signal_date": "2026-10-23",
+ "signals_frozen": false,
  "frozen_dates": [
   "2026-10-06",
   "2026-10-07",
@@ -169,7 +210,7 @@
  "variants": {
   "base": {
    "label": "동조 업종 + 패턴 돌파 (기본)",
-   "signals": 20,
+   "signals": 21,
    "trades": 8,
    "wins": 0,
    "win_rate": 0.0,
@@ -177,9 +218,9 @@
    "avg_loss_pct": -7.24,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -6.01,
-   "equity_final": 9399111,
-   "max_drawdown_pct": 6.01,
+   "total_return_pct": -7.12,
+   "equity_final": 9287511,
+   "max_drawdown_pct": 7.12,
    "avg_hold_days": 2.38,
    "skipped": {
     "gap": 0,
@@ -228,7 +269,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -6.01
+    "2026": -7.12
    },
    "open_positions": [
     {
@@ -240,9 +281,9 @@
      "entry": 386656.5,
      "stop": 359590.54,
      "shares": 3,
-     "bars_held": 11,
-     "last_close": 390000.0,
-     "unrealized_pct": 0.86
+     "bars_held": 12,
+     "last_close": 383000.0,
+     "unrealized_pct": -0.95
     },
     {
      "code": "396300",
@@ -253,9 +294,9 @@
      "entry": 8836.43,
      "stop": 8217.88,
      "shares": 152,
-     "bars_held": 4,
-     "last_close": 9930.0,
-     "unrealized_pct": 12.38
+     "bars_held": 5,
+     "last_close": 9330.0,
+     "unrealized_pct": 5.59
     },
     {
      "code": "068270",
@@ -266,30 +307,30 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 6,
-     "bars_held": 4,
-     "last_close": 194300.0,
-     "unrealized_pct": -0.09
+     "bars_held": 5,
+     "last_close": 194400.0,
+     "unrealized_pct": -0.04
     }
    ]
   },
   "no_sector": {
    "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
-   "signals": 58,
-   "trades": 13,
+   "signals": 61,
+   "trades": 14,
    "wins": 0,
    "win_rate": 0.0,
    "avg_win_pct": null,
    "avg_loss_pct": -7.41,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -7.05,
-   "equity_final": 9294678,
+   "total_return_pct": -9.49,
+   "equity_final": 9051036,
    "max_drawdown_pct": 11.47,
-   "avg_hold_days": 1.77,
+   "avg_hold_days": 2.21,
    "skipped": {
     "gap": 0,
-    "limit": 36,
-    "cooldown": 0,
+    "limit": 39,
+    "cooldown": 5,
     "size": 0,
     "no_bar": 1,
     "pattern": 0
@@ -306,9 +347,9 @@
      "pnl_krw": -191105
     },
     "triangle": {
-     "n": 3,
+     "n": 4,
      "wins": 0,
-     "pnl_krw": -303771
+     "pnl_krw": -401380
     },
     "box": {
      "n": 3,
@@ -323,27 +364,27 @@
      "pnl_krw": -373842
     },
     "none": {
-     "n": 9,
+     "n": 10,
      "wins": 0,
-     "pnl_krw": -881288
+     "pnl_krw": -978897
     }
    },
    "by_exit": {
     "stop": {
-     "n": 13,
+     "n": 14,
      "wins": 0,
-     "pnl_krw": -1255130
+     "pnl_krw": -1352739
     }
    },
    "by_year": {
     "2026": {
-     "n": 13,
+     "n": 14,
      "wins": 0,
-     "pnl_krw": -1255130
+     "pnl_krw": -1352739
     }
    },
    "yearly_return_pct": {
-    "2026": -7.05
+    "2026": -9.49
    },
    "open_positions": [
     {
@@ -355,22 +396,9 @@
      "entry": 21363.9,
      "stop": 20800.0,
      "shares": 83,
-     "bars_held": 8,
+     "bars_held": 9,
      "last_close": 22650.0,
      "unrealized_pct": 6.02
-    },
-    {
-     "code": "028670",
-     "name": "Pan Ocean Co., Ltd.",
-     "group": "Marine Shipping",
-     "pattern": "triangle",
-     "entry_date": "2026-10-14",
-     "entry": 6619.8,
-     "stop": 6156.41,
-     "shares": 198,
-     "bars_held": 7,
-     "last_close": 6320.0,
-     "unrealized_pct": -4.53
     },
     {
      "code": "452280",
@@ -381,9 +409,9 @@
      "entry": 15335.87,
      "stop": 14262.36,
      "shares": 83,
-     "bars_held": 6,
-     "last_close": 15890.0,
-     "unrealized_pct": 3.61
+     "bars_held": 7,
+     "last_close": 14960.0,
+     "unrealized_pct": -2.45
     },
     {
      "code": "396300",
@@ -394,9 +422,9 @@
      "entry": 7452.29,
      "stop": 6930.63,
      "shares": 170,
-     "bars_held": 5,
-     "last_close": 9930.0,
-     "unrealized_pct": 33.25
+     "bars_held": 6,
+     "last_close": 9330.0,
+     "unrealized_pct": 25.2
     },
     {
      "code": "033780",
@@ -407,15 +435,15 @@
      "entry": 187761.6,
      "stop": 174618.29,
      "shares": 6,
-     "bars_held": 5,
-     "last_close": 193800.0,
-     "unrealized_pct": 3.22
+     "bars_held": 6,
+     "last_close": 189400.0,
+     "unrealized_pct": 0.87
     }
    ]
   },
   "hold_10": {
    "label": "동조 + 패턴, 보유 10일",
-   "signals": 20,
+   "signals": 21,
    "trades": 9,
    "wins": 1,
    "win_rate": 11.11,
@@ -423,9 +451,9 @@
    "avg_loss_pct": -7.24,
    "payoff": 0.58,
    "profit_factor": 0.07,
-   "total_return_pct": -5.54,
-   "equity_final": 9445933,
-   "max_drawdown_pct": 5.54,
+   "total_return_pct": -6.45,
+   "equity_final": 9355333,
+   "max_drawdown_pct": 6.45,
    "avg_hold_days": 3.22,
    "skipped": {
     "gap": 0,
@@ -484,7 +512,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -5.54
+    "2026": -6.45
    },
    "open_positions": [
     {
@@ -496,9 +524,9 @@
      "entry": 8836.43,
      "stop": 8217.88,
      "shares": 152,
-     "bars_held": 4,
-     "last_close": 9930.0,
-     "unrealized_pct": 12.38
+     "bars_held": 5,
+     "last_close": 9330.0,
+     "unrealized_pct": 5.59
     },
     {
      "code": "068270",
@@ -509,15 +537,15 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 6,
-     "bars_held": 4,
-     "last_close": 194300.0,
-     "unrealized_pct": -0.09
+     "bars_held": 5,
+     "last_close": 194400.0,
+     "unrealized_pct": -0.04
     }
    ]
   },
   "risk_2": {
    "label": "동조 + 패턴, 위험 2% (명목 상한 30%)",
-   "signals": 21,
+   "signals": 22,
    "trades": 6,
    "wins": 0,
    "win_rate": 0.0,
@@ -525,9 +553,9 @@
    "avg_loss_pct": -7.17,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -7.97,
-   "equity_final": 9202700,
-   "max_drawdown_pct": 9.21,
+   "total_return_pct": -9.72,
+   "equity_final": 9028200,
+   "max_drawdown_pct": 9.72,
    "avg_hold_days": 2.33,
    "skipped": {
     "gap": 0,
@@ -576,7 +604,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -7.97
+    "2026": -9.72
    },
    "open_positions": [
     {
@@ -588,9 +616,9 @@
      "entry": 8836.43,
      "stop": 8217.88,
      "shares": 293,
-     "bars_held": 4,
-     "last_close": 9930.0,
-     "unrealized_pct": 12.38
+     "bars_held": 5,
+     "last_close": 9330.0,
+     "unrealized_pct": 5.59
     },
     {
      "code": "068270",
@@ -601,9 +629,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 13,
-     "bars_held": 4,
-     "last_close": 194300.0,
-     "unrealized_pct": -0.09
+     "bars_held": 5,
+     "last_close": 194400.0,
+     "unrealized_pct": -0.04
     }
    ]
   },
@@ -617,9 +645,9 @@
    "avg_loss_pct": -7.12,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -4.86,
-   "equity_final": 9514372,
-   "max_drawdown_pct": 5.3,
+   "total_return_pct": -5.06,
+   "equity_final": 9494072,
+   "max_drawdown_pct": 5.51,
    "avg_hold_days": 3.6,
    "skipped": {
     "gap": 0,
@@ -627,7 +655,7 @@
     "cooldown": 0,
     "size": 0,
     "no_bar": 0,
-    "pattern": 0
+    "pattern": 1
    },
    "by_pattern": {
     "cup_handle": {
@@ -663,7 +691,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -4.86
+    "2026": -5.06
    },
    "open_positions": [
     {
@@ -675,9 +703,9 @@
      "entry": 386656.5,
      "stop": 359590.54,
      "shares": 3,
-     "bars_held": 11,
-     "last_close": 390000.0,
-     "unrealized_pct": 0.86
+     "bars_held": 12,
+     "last_close": 383000.0,
+     "unrealized_pct": -0.95
     },
     {
      "code": "068270",
@@ -688,9 +716,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 7,
-     "bars_held": 4,
-     "last_close": 194300.0,
-     "unrealized_pct": -0.09
+     "bars_held": 5,
+     "last_close": 194400.0,
+     "unrealized_pct": -0.04
     }
    ]
   }
@@ -1167,6 +1195,30 @@
     "pnl_pct": -8.56,
     "hold_days": 3,
     "gap": true
+   },
+   {
+    "code": "028670",
+    "name": "Pan Ocean Co., Ltd.",
+    "group": "Marine Shipping",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle",
+     "cup_handle"
+    ],
+    "sync_by": null,
+    "signal_date": "2026-10-13",
+    "entry_date": "2026-10-14",
+    "entry": 6619.8,
+    "stop": 6156.41,
+    "exit_date": "2026-10-23",
+    "exit": 6137.94,
+    "why": "stop",
+    "shares": 198,
+    "pnl_krw": -97609,
+    "pnl_pct": -7.45,
+    "hold_days": 8,
+    "gap": false
    }
   ],
   "hold_10": [
