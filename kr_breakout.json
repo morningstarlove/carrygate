@@ -1,6 +1,6 @@
 {
- "date": "2026-10-23",
- "generated_at_utc": "2026-10-23T12:14:33Z",
+ "date": "2026-10-26",
+ "generated_at_utc": "2026-10-26T07:15:18Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -74,15 +74,15 @@
   }
  },
  "forward": {
-  "days": 13,
+  "days": 14,
   "from": "2026-10-05",
-  "to": "2026-10-23",
-  "codes": 227,
+  "to": "2026-10-26",
+  "codes": 238,
   "bar_errors": 0,
   "stale_codes": 0,
   "by_source": {
-   "yahoo": 180,
-   "yahoo+naver_api": 47
+   "yahoo+naver_api": 52,
+   "yahoo": 186
   },
   "skipped_days": [
    "2026-10-05"
@@ -93,106 +93,14 @@
   "note": null
  },
  "signals_today": {
-  "base": [
-   {
-    "code": "207940",
-    "name": "SAMSUNG BIOLOGICS Co., Ltd.",
-    "group": "Biotechnology",
-    "pattern": "flag",
-    "patterns": [
-     "box",
-     "flag"
-    ],
-    "signal_close": 1466000.0,
-    "pattern_low": 1355000.0,
-    "sync_by": "week",
-    "entry_plan": "내일 시가 (시가가 1583280 이상이면 포기)",
-    "stop_plan": "max(1355000, 진입가×0.93)"
-   }
-  ],
-  "no_sector": [
-   {
-    "code": "207940",
-    "name": "SAMSUNG BIOLOGICS Co., Ltd.",
-    "group": "Biotechnology",
-    "pattern": "flag",
-    "patterns": [
-     "box",
-     "flag"
-    ],
-    "signal_close": 1466000.0,
-    "pattern_low": 1355000.0,
-    "sync_by": "week",
-    "entry_plan": "내일 시가 (시가가 1583280 이상이면 포기)",
-    "stop_plan": "max(1355000, 진입가×0.93)"
-   },
-   {
-    "code": "441270",
-    "name": "Fine M-Tec Co.,Ltd.",
-    "group": "Building Products",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 11170.0,
-    "pattern_low": 7750.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 12064 이상이면 포기)",
-    "stop_plan": "max(7750, 진입가×0.93)"
-   },
-   {
-    "code": "100250",
-    "name": "Chinyang Holdings Corporation",
-    "group": "Investment Managers",
-    "pattern": "triangle",
-    "patterns": [
-     "triangle"
-    ],
-    "signal_close": 3130.0,
-    "pattern_low": 2989.21,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 3380 이상이면 포기)",
-    "stop_plan": "max(2989, 진입가×0.93)"
-   }
-  ],
-  "hold_10": [
-   {
-    "code": "207940",
-    "name": "SAMSUNG BIOLOGICS Co., Ltd.",
-    "group": "Biotechnology",
-    "pattern": "flag",
-    "patterns": [
-     "box",
-     "flag"
-    ],
-    "signal_close": 1466000.0,
-    "pattern_low": 1355000.0,
-    "sync_by": "week",
-    "entry_plan": "내일 시가 (시가가 1583280 이상이면 포기)",
-    "stop_plan": "max(1355000, 진입가×0.93)"
-   }
-  ],
-  "risk_2": [
-   {
-    "code": "207940",
-    "name": "SAMSUNG BIOLOGICS Co., Ltd.",
-    "group": "Biotechnology",
-    "pattern": "flag",
-    "patterns": [
-     "box",
-     "flag"
-    ],
-    "signal_close": 1466000.0,
-    "pattern_low": 1355000.0,
-    "sync_by": "week",
-    "entry_plan": "내일 시가 (시가가 1583280 이상이면 포기)",
-    "stop_plan": "max(1355000, 진입가×0.93)"
-   }
-  ],
+  "base": [],
+  "no_sector": [],
+  "hold_10": [],
+  "risk_2": [],
   "no_flag": []
  },
- "signal_date": "2026-10-23",
- "signals_frozen": true,
+ "signal_date": "2026-10-26",
+ "signals_frozen": false,
  "frozen_dates": [
   "2026-10-06",
   "2026-10-07",
@@ -219,15 +127,15 @@
    "avg_loss_pct": -7.24,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -7.09,
-   "equity_final": 9290551,
-   "max_drawdown_pct": 7.09,
+   "total_return_pct": -7.55,
+   "equity_final": 9244711,
+   "max_drawdown_pct": 7.55,
    "avg_hold_days": 2.38,
    "skipped": {
     "gap": 0,
     "limit": 9,
     "cooldown": 0,
-    "size": 0,
+    "size": 1,
     "no_bar": 0,
     "pattern": 0
    },
@@ -270,7 +178,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -7.09
+    "2026": -7.55
    },
    "open_positions": [
     {
@@ -282,9 +190,9 @@
      "entry": 386656.5,
      "stop": 359590.54,
      "shares": 3,
-     "bars_held": 12,
-     "last_close": 383000.0,
-     "unrealized_pct": -0.95
+     "bars_held": 13,
+     "last_close": 375000.0,
+     "unrealized_pct": -3.01
     },
     {
      "code": "396300",
@@ -295,9 +203,9 @@
      "entry": 8836.43,
      "stop": 8217.88,
      "shares": 152,
-     "bars_held": 5,
-     "last_close": 9350.0,
-     "unrealized_pct": 5.81
+     "bars_held": 6,
+     "last_close": 9380.0,
+     "unrealized_pct": 6.15
     },
     {
      "code": "068270",
@@ -308,31 +216,31 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 6,
-     "bars_held": 5,
-     "last_close": 194400.0,
-     "unrealized_pct": -0.04
+     "bars_held": 6,
+     "last_close": 190000.0,
+     "unrealized_pct": -2.3
     }
    ]
   },
   "no_sector": {
    "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
    "signals": 61,
-   "trades": 14,
+   "trades": 16,
    "wins": 0,
    "win_rate": 0.0,
    "avg_win_pct": null,
-   "avg_loss_pct": -7.41,
+   "avg_loss_pct": -7.42,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -9.59,
-   "equity_final": 9041156,
+   "total_return_pct": -11.11,
+   "equity_final": 8889424,
    "max_drawdown_pct": 11.47,
-   "avg_hold_days": 2.21,
+   "avg_hold_days": 2.5,
    "skipped": {
     "gap": 0,
-    "limit": 39,
-    "cooldown": 0,
-    "size": 0,
+    "limit": 40,
+    "cooldown": 2,
+    "size": 1,
     "no_bar": 1,
     "pattern": 0
    },
@@ -353,9 +261,9 @@
      "pnl_krw": -401380
     },
     "box": {
-     "n": 3,
+     "n": 5,
      "wins": 0,
-     "pnl_krw": -262025
+     "pnl_krw": -452225
     }
    },
    "by_sync": {
@@ -365,27 +273,27 @@
      "pnl_krw": -373842
     },
     "none": {
-     "n": 10,
+     "n": 12,
      "wins": 0,
-     "pnl_krw": -978897
+     "pnl_krw": -1169097
     }
    },
    "by_exit": {
     "stop": {
-     "n": 14,
+     "n": 16,
      "wins": 0,
-     "pnl_krw": -1352739
+     "pnl_krw": -1542939
     }
    },
    "by_year": {
     "2026": {
-     "n": 14,
+     "n": 16,
      "wins": 0,
-     "pnl_krw": -1352739
+     "pnl_krw": -1542939
     }
    },
    "yearly_return_pct": {
-    "2026": -9.59
+    "2026": -11.11
    },
    "open_positions": [
     {
@@ -397,22 +305,9 @@
      "entry": 21363.9,
      "stop": 20800.0,
      "shares": 83,
-     "bars_held": 9,
-     "last_close": 22650.0,
-     "unrealized_pct": 6.02
-    },
-    {
-     "code": "452280",
-     "name": "HanSun Engineering Co., Ltd.",
-     "group": "Industrial Machinery",
-     "pattern": "box",
-     "entry_date": "2026-10-15",
-     "entry": 15335.87,
-     "stop": 14262.36,
-     "shares": 83,
-     "bars_held": 7,
-     "last_close": 14800.0,
-     "unrealized_pct": -3.49
+     "bars_held": 10,
+     "last_close": 22550.0,
+     "unrealized_pct": 5.55
     },
     {
      "code": "396300",
@@ -423,9 +318,9 @@
      "entry": 7452.29,
      "stop": 6930.63,
      "shares": 170,
-     "bars_held": 6,
-     "last_close": 9350.0,
-     "unrealized_pct": 25.46
+     "bars_held": 7,
+     "last_close": 9380.0,
+     "unrealized_pct": 25.87
     },
     {
      "code": "033780",
@@ -436,9 +331,9 @@
      "entry": 187761.6,
      "stop": 174618.29,
      "shares": 6,
-     "bars_held": 6,
-     "last_close": 189400.0,
-     "unrealized_pct": 0.87
+     "bars_held": 7,
+     "last_close": 188900.0,
+     "unrealized_pct": 0.61
     }
    ]
   },
@@ -452,15 +347,15 @@
    "avg_loss_pct": -7.24,
    "payoff": 0.58,
    "profit_factor": 0.07,
-   "total_return_pct": -6.42,
-   "equity_final": 9358373,
-   "max_drawdown_pct": 6.42,
+   "total_return_pct": -6.63,
+   "equity_final": 9336533,
+   "max_drawdown_pct": 6.63,
    "avg_hold_days": 3.22,
    "skipped": {
     "gap": 0,
     "limit": 9,
     "cooldown": 0,
-    "size": 0,
+    "size": 1,
     "no_bar": 0,
     "pattern": 0
    },
@@ -513,7 +408,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -6.42
+    "2026": -6.63
    },
    "open_positions": [
     {
@@ -525,9 +420,9 @@
      "entry": 8836.43,
      "stop": 8217.88,
      "shares": 152,
-     "bars_held": 5,
-     "last_close": 9350.0,
-     "unrealized_pct": 5.81
+     "bars_held": 6,
+     "last_close": 9380.0,
+     "unrealized_pct": 6.15
     },
     {
      "code": "068270",
@@ -538,9 +433,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 6,
-     "bars_held": 5,
-     "last_close": 194400.0,
-     "unrealized_pct": -0.04
+     "bars_held": 6,
+     "last_close": 190000.0,
+     "unrealized_pct": -2.3
     }
    ]
   },
@@ -554,9 +449,9 @@
    "avg_loss_pct": -7.17,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -9.66,
-   "equity_final": 9034060,
-   "max_drawdown_pct": 9.66,
+   "total_return_pct": -10.13,
+   "equity_final": 8987094,
+   "max_drawdown_pct": 10.13,
    "avg_hold_days": 2.33,
    "skipped": {
     "gap": 0,
@@ -605,7 +500,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -9.66
+    "2026": -10.13
    },
    "open_positions": [
     {
@@ -617,9 +512,9 @@
      "entry": 8836.43,
      "stop": 8217.88,
      "shares": 293,
-     "bars_held": 5,
-     "last_close": 9350.0,
-     "unrealized_pct": 5.81
+     "bars_held": 6,
+     "last_close": 9380.0,
+     "unrealized_pct": 6.15
     },
     {
      "code": "068270",
@@ -630,9 +525,22 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 13,
-     "bars_held": 5,
-     "last_close": 194400.0,
-     "unrealized_pct": -0.04
+     "bars_held": 6,
+     "last_close": 190000.0,
+     "unrealized_pct": -2.3
+    },
+    {
+     "code": "207940",
+     "name": "SAMSUNG BIOLOGICS Co., Ltd.",
+     "group": "Biotechnology",
+     "pattern": "flag",
+     "entry_date": "2026-10-26",
+     "entry": 1450338.0,
+     "stop": 1355000.0,
+     "shares": 1,
+     "bars_held": 1,
+     "last_close": 1452000.0,
+     "unrealized_pct": 0.11
     }
    ]
   },
@@ -646,9 +554,9 @@
    "avg_loss_pct": -7.12,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -5.06,
-   "equity_final": 9494072,
-   "max_drawdown_pct": 5.51,
+   "total_return_pct": -5.61,
+   "equity_final": 9439272,
+   "max_drawdown_pct": 6.05,
    "avg_hold_days": 3.6,
    "skipped": {
     "gap": 0,
@@ -692,7 +600,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -5.06
+    "2026": -5.61
    },
    "open_positions": [
     {
@@ -704,9 +612,9 @@
      "entry": 386656.5,
      "stop": 359590.54,
      "shares": 3,
-     "bars_held": 12,
-     "last_close": 383000.0,
-     "unrealized_pct": -0.95
+     "bars_held": 13,
+     "last_close": 375000.0,
+     "unrealized_pct": -3.01
     },
     {
      "code": "068270",
@@ -717,9 +625,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 7,
-     "bars_held": 5,
-     "last_close": 194400.0,
-     "unrealized_pct": -0.04
+     "bars_held": 6,
+     "last_close": 190000.0,
+     "unrealized_pct": -2.3
     }
    ]
   }
@@ -1219,6 +1127,51 @@
     "pnl_krw": -97609,
     "pnl_pct": -7.45,
     "hold_days": 8,
+    "gap": false
+   },
+   {
+    "code": "452280",
+    "name": "HanSun Engineering Co., Ltd.",
+    "group": "Industrial Machinery",
+    "pattern": "box",
+    "patterns": [
+     "box",
+     "flag"
+    ],
+    "sync_by": null,
+    "signal_date": "2026-10-14",
+    "entry_date": "2026-10-15",
+    "entry": 15335.87,
+    "stop": 14262.36,
+    "exit_date": "2026-10-26",
+    "exit": 14219.57,
+    "why": "stop",
+    "shares": 83,
+    "pnl_krw": -94791,
+    "pnl_pct": -7.45,
+    "hold_days": 8,
+    "gap": false
+   },
+   {
+    "code": "441270",
+    "name": "Fine M-Tec Co.,Ltd.",
+    "group": "Building Products",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": null,
+    "signal_date": "2026-10-23",
+    "entry_date": "2026-10-26",
+    "entry": 10501.41,
+    "stop": 9766.31,
+    "exit_date": "2026-10-26",
+    "exit": 9737.01,
+    "why": "stop",
+    "shares": 122,
+    "pnl_krw": -95409,
+    "pnl_pct": -7.45,
+    "hold_days": 1,
     "gap": false
    }
   ],
