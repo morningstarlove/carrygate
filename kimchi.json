@@ -1,8 +1,8 @@
 {
  "schema": "carrygate-kimchi/1",
- "date": "2026-10-26",
- "generated_at_kst": "2026-10-26 13:57:35",
- "fx_usdkrw": 1324.45,
+ "date": "2026-10-27",
+ "generated_at_kst": "2026-10-27 14:16:57",
+ "fx_usdkrw": 1325.28,
  "fx_source": "frankfurter(ECB)",
  "method": {
   "premium": "업비트 종가 ÷ (OKX 현물 종가 × USDKRW) − 1. 일봉은 둘 다 00:00 UTC 마감이라 같은 시각",
@@ -11,13 +11,13 @@
  },
  "coins": {
   "BTC": {
-   "date_utc": "2026-10-26",
-   "premium_pct": 0.7992,
-   "upbit_close": 106884000.0,
-   "okx_close": 80060.8,
-   "percentile": 79.9,
+   "date_utc": "2026-10-27",
+   "premium_pct": 0.5666,
+   "upbit_close": 106370000.0,
+   "okx_close": 79810.1,
+   "percentile": 72.9,
    "hist_days": 200,
-   "hist_mean_pct": -0.3138,
+   "hist_mean_pct": -0.3109,
    "hist_min_pct": -3.341,
    "hist_max_pct": 2.293,
    "event_study": {
@@ -27,51 +27,47 @@
      "rel_vs_okx_fwd1_pct": -0.1687,
      "premium_change_fwd1_pp": -0.1668,
      "upbit_fwd1_pos_pct": 51.9,
-     "upbit_fwd3_pct": -0.6586,
-     "rel_vs_okx_fwd3_pct": -0.4215,
-     "premium_change_fwd3_pp": -0.3437,
-     "upbit_fwd3_pos_pct": 34.6,
-     "upbit_fwd7_pct": -0.7358,
-     "rel_vs_okx_fwd7_pct": -0.5019,
-     "premium_change_fwd7_pp": -0.6033,
+     "upbit_fwd3_pct": -0.7065,
+     "rel_vs_okx_fwd3_pct": -0.4331,
+     "premium_change_fwd3_pp": -0.3635,
+     "upbit_fwd3_pos_pct": 33.3,
+     "upbit_fwd7_pct": -0.7348,
+     "rel_vs_okx_fwd7_pct": -0.5051,
+     "premium_change_fwd7_pp": -0.609,
      "upbit_fwd7_pos_pct": 32.0
     },
     "low": {
-     "n": 30,
-     "upbit_fwd1_pct": -0.9399,
-     "rel_vs_okx_fwd1_pct": 0.1431,
-     "premium_change_fwd1_pp": 0.1049,
-     "upbit_fwd1_pos_pct": 33.3,
-     "upbit_fwd3_pct": -2.1838,
-     "rel_vs_okx_fwd3_pct": 0.2183,
-     "premium_change_fwd3_pp": 0.0352,
-     "upbit_fwd3_pos_pct": 20.0,
-     "upbit_fwd7_pct": -4.8749,
-     "rel_vs_okx_fwd7_pct": 0.2269,
-     "premium_change_fwd7_pp": -0.0338,
-     "upbit_fwd7_pos_pct": 20.0
+     "n": 29,
+     "upbit_fwd1_pct": -0.9626,
+     "rel_vs_okx_fwd1_pct": 0.1379,
+     "premium_change_fwd1_pp": 0.1127,
+     "upbit_fwd1_pos_pct": 34.5,
+     "upbit_fwd3_pct": -2.1853,
+     "rel_vs_okx_fwd3_pct": 0.1783,
+     "premium_change_fwd3_pp": 0.0384,
+     "upbit_fwd3_pos_pct": 20.7,
+     "upbit_fwd7_pct": -4.9016,
+     "rel_vs_okx_fwd7_pct": 0.1766,
+     "premium_change_fwd7_pp": -0.0199,
+     "upbit_fwd7_pos_pct": 20.7
     },
     "mid": {
-     "n": 112,
-     "upbit_fwd1_pct": 0.1783,
-     "rel_vs_okx_fwd1_pct": -0.0875,
-     "premium_change_fwd1_pp": 0.0204,
-     "upbit_fwd1_pos_pct": 51.8,
+     "n": 113,
+     "upbit_fwd1_pct": 0.1725,
+     "rel_vs_okx_fwd1_pct": -0.0882,
+     "premium_change_fwd1_pp": 0.0182,
+     "upbit_fwd1_pos_pct": 51.3,
      "upbit_fwd3_pct": 0.5321,
      "rel_vs_okx_fwd3_pct": -0.2395,
      "premium_change_fwd3_pp": 0.107,
      "upbit_fwd3_pos_pct": 48.6,
-     "upbit_fwd7_pct": 1.2118,
-     "rel_vs_okx_fwd7_pct": -0.6619,
-     "premium_change_fwd7_pp": 0.2328,
-     "upbit_fwd7_pos_pct": 48.1
+     "upbit_fwd7_pct": 1.1674,
+     "rel_vs_okx_fwd7_pct": -0.6535,
+     "premium_change_fwd7_pp": 0.2348,
+     "upbit_fwd7_pos_pct": 47.7
     }
    },
    "series_tail": [
-    [
-     "2026-09-27",
-     -0.02
-    ],
     [
      "2026-09-28",
      0.097
@@ -186,27 +182,31 @@
     ],
     [
      "2026-10-26",
-     0.799
+     0.654
+    ],
+    [
+     "2026-10-27",
+     0.567
     ]
    ],
    "intraday": {
     "n": 1440,
-    "mean_pct": 1.2859,
-    "std_pp": 0.1106,
-    "min_pct": 1.0195,
-    "max_pct": 1.6695,
-    "range_pp": 0.6499,
-    "reversion_corr_15m": -0.2851
+    "mean_pct": 0.715,
+    "std_pp": 0.1134,
+    "min_pct": 0.4378,
+    "max_pct": 1.0788,
+    "range_pp": 0.641,
+    "reversion_corr_15m": -0.3366
    }
   },
   "ETH": {
-   "date_utc": "2026-10-26",
-   "premium_pct": 0.8127,
-   "upbit_close": 3096000.0,
-   "okx_close": 2318.73,
-   "percentile": 79.9,
+   "date_utc": "2026-10-27",
+   "premium_pct": 0.5225,
+   "upbit_close": 3083000.0,
+   "okx_close": 2314.21,
+   "percentile": 72.9,
    "hist_days": 200,
-   "hist_mean_pct": -0.3134,
+   "hist_mean_pct": -0.311,
    "hist_min_pct": -3.3092,
    "hist_max_pct": 2.3476,
    "event_study": {
@@ -216,51 +216,47 @@
      "rel_vs_okx_fwd1_pct": -0.1375,
      "premium_change_fwd1_pp": -0.1377,
      "upbit_fwd1_pos_pct": 50.0,
-     "upbit_fwd3_pct": -0.724,
-     "rel_vs_okx_fwd3_pct": -0.4609,
-     "premium_change_fwd3_pp": -0.4156,
-     "upbit_fwd3_pos_pct": 44.0,
+     "upbit_fwd3_pct": -0.7933,
+     "rel_vs_okx_fwd3_pct": -0.4773,
+     "premium_change_fwd3_pp": -0.4398,
+     "upbit_fwd3_pos_pct": 42.3,
      "upbit_fwd7_pct": -1.0137,
      "rel_vs_okx_fwd7_pct": -0.5216,
      "premium_change_fwd7_pp": -0.6441,
      "upbit_fwd7_pos_pct": 37.5
     },
     "low": {
-     "n": 32,
-     "upbit_fwd1_pct": -1.0214,
-     "rel_vs_okx_fwd1_pct": 0.1053,
-     "premium_change_fwd1_pp": 0.0496,
-     "upbit_fwd1_pos_pct": 28.1,
-     "upbit_fwd3_pct": -2.6573,
-     "rel_vs_okx_fwd3_pct": 0.199,
-     "premium_change_fwd3_pp": -0.0204,
-     "upbit_fwd3_pos_pct": 21.9,
-     "upbit_fwd7_pct": -6.0019,
-     "rel_vs_okx_fwd7_pct": 0.2569,
-     "premium_change_fwd7_pp": -0.1136,
-     "upbit_fwd7_pos_pct": 12.5
+     "n": 31,
+     "upbit_fwd1_pct": -1.0218,
+     "rel_vs_okx_fwd1_pct": 0.0983,
+     "premium_change_fwd1_pp": 0.0541,
+     "upbit_fwd1_pos_pct": 29.0,
+     "upbit_fwd3_pct": -2.6325,
+     "rel_vs_okx_fwd3_pct": 0.1627,
+     "premium_change_fwd3_pp": -0.018,
+     "upbit_fwd3_pos_pct": 22.6,
+     "upbit_fwd7_pct": -5.9207,
+     "rel_vs_okx_fwd7_pct": 0.2127,
+     "premium_change_fwd7_pp": -0.1038,
+     "upbit_fwd7_pos_pct": 12.9
     },
     "mid": {
-     "n": 111,
-     "upbit_fwd1_pct": 0.2565,
-     "rel_vs_okx_fwd1_pct": -0.094,
-     "premium_change_fwd1_pp": 0.0264,
-     "upbit_fwd1_pos_pct": 49.5,
+     "n": 112,
+     "upbit_fwd1_pct": 0.2504,
+     "rel_vs_okx_fwd1_pct": -0.0952,
+     "premium_change_fwd1_pp": 0.0236,
+     "upbit_fwd1_pos_pct": 49.1,
      "upbit_fwd3_pct": 0.8444,
      "rel_vs_okx_fwd3_pct": -0.2518,
      "premium_change_fwd3_pp": 0.137,
      "upbit_fwd3_pos_pct": 49.1,
-     "upbit_fwd7_pct": 2.099,
-     "rel_vs_okx_fwd7_pct": -0.7085,
-     "premium_change_fwd7_pp": 0.2651,
-     "upbit_fwd7_pos_pct": 51.4
+     "upbit_fwd7_pct": 2.0307,
+     "rel_vs_okx_fwd7_pct": -0.7021,
+     "premium_change_fwd7_pp": 0.2638,
+     "upbit_fwd7_pos_pct": 50.9
     }
    },
    "series_tail": [
-    [
-     "2026-09-27",
-     -0.095
-    ],
     [
      "2026-09-28",
      0.018
@@ -375,27 +371,31 @@
     ],
     [
      "2026-10-26",
-     0.813
+     0.626
+    ],
+    [
+     "2026-10-27",
+     0.522
     ]
    ],
    "intraday": {
-    "n": 1432,
-    "mean_pct": 1.2926,
-    "std_pp": 0.1168,
-    "min_pct": 0.9842,
-    "max_pct": 1.6951,
-    "range_pp": 0.711,
-    "reversion_corr_15m": -0.2998
+    "n": 1433,
+    "mean_pct": 0.7247,
+    "std_pp": 0.1137,
+    "min_pct": 0.4306,
+    "max_pct": 1.1048,
+    "range_pp": 0.6742,
+    "reversion_corr_15m": -0.3654
    }
   },
   "XRP": {
-   "date_utc": "2026-10-26",
-   "premium_pct": 0.7606,
-   "upbit_close": 1719.0,
-   "okx_close": 1.2881,
-   "percentile": 78.4,
+   "date_utc": "2026-10-27",
+   "premium_pct": 0.534,
+   "upbit_close": 1729.0,
+   "okx_close": 1.2977,
+   "percentile": 73.4,
    "hist_days": 200,
-   "hist_mean_pct": -0.3219,
+   "hist_mean_pct": -0.3193,
    "hist_min_pct": -3.3218,
    "hist_max_pct": 2.2911,
    "event_study": {
@@ -405,51 +405,47 @@
      "rel_vs_okx_fwd1_pct": -0.1742,
      "premium_change_fwd1_pp": -0.1883,
      "upbit_fwd1_pos_pct": 62.5,
-     "upbit_fwd3_pct": -1.5844,
-     "rel_vs_okx_fwd3_pct": -0.3935,
-     "premium_change_fwd3_pp": -0.3976,
-     "upbit_fwd3_pos_pct": 17.4,
+     "upbit_fwd3_pct": -1.4918,
+     "rel_vs_okx_fwd3_pct": -0.4114,
+     "premium_change_fwd3_pp": -0.4207,
+     "upbit_fwd3_pos_pct": 20.8,
      "upbit_fwd7_pct": -2.1862,
      "rel_vs_okx_fwd7_pct": -0.5897,
      "premium_change_fwd7_pp": -0.8011,
      "upbit_fwd7_pos_pct": 31.8
     },
     "low": {
-     "n": 30,
-     "upbit_fwd1_pct": -0.8717,
-     "rel_vs_okx_fwd1_pct": 0.1594,
-     "premium_change_fwd1_pp": 0.0663,
-     "upbit_fwd1_pos_pct": 30.0,
-     "upbit_fwd3_pct": -2.009,
-     "rel_vs_okx_fwd3_pct": 0.2451,
-     "premium_change_fwd3_pp": 0.0258,
-     "upbit_fwd3_pos_pct": 30.0,
-     "upbit_fwd7_pct": -4.7782,
-     "rel_vs_okx_fwd7_pct": 0.3062,
-     "premium_change_fwd7_pp": -0.0596,
-     "upbit_fwd7_pos_pct": 10.0
+     "n": 29,
+     "upbit_fwd1_pct": -0.9193,
+     "rel_vs_okx_fwd1_pct": 0.1569,
+     "premium_change_fwd1_pp": 0.075,
+     "upbit_fwd1_pos_pct": 27.6,
+     "upbit_fwd3_pct": -2.0191,
+     "rel_vs_okx_fwd3_pct": 0.2051,
+     "premium_change_fwd3_pp": 0.0278,
+     "upbit_fwd3_pos_pct": 31.0,
+     "upbit_fwd7_pct": -4.8359,
+     "rel_vs_okx_fwd7_pct": 0.2558,
+     "premium_change_fwd7_pp": -0.0488,
+     "upbit_fwd7_pos_pct": 10.3
     },
     "mid": {
-     "n": 115,
-     "upbit_fwd1_pct": 0.0597,
-     "rel_vs_okx_fwd1_pct": -0.0985,
-     "premium_change_fwd1_pp": 0.0299,
-     "upbit_fwd1_pos_pct": 43.5,
+     "n": 116,
+     "upbit_fwd1_pct": 0.0642,
+     "rel_vs_okx_fwd1_pct": -0.0991,
+     "premium_change_fwd1_pp": 0.0277,
+     "upbit_fwd1_pos_pct": 44.0,
      "upbit_fwd3_pct": 0.5174,
      "rel_vs_okx_fwd3_pct": -0.273,
      "premium_change_fwd3_pp": 0.1084,
      "upbit_fwd3_pos_pct": 39.5,
-     "upbit_fwd7_pct": 1.1061,
-     "rel_vs_okx_fwd7_pct": -0.691,
-     "premium_change_fwd7_pp": 0.2566,
-     "upbit_fwd7_pos_pct": 35.1
+     "upbit_fwd7_pct": 1.0863,
+     "rel_vs_okx_fwd7_pct": -0.6835,
+     "premium_change_fwd7_pp": 0.257,
+     "upbit_fwd7_pos_pct": 34.8
     }
    },
    "series_tail": [
-    [
-     "2026-09-27",
-     -0.072
-    ],
     [
      "2026-09-28",
      -0.063
@@ -564,81 +560,81 @@
     ],
     [
      "2026-10-26",
-     0.761
+     0.596
+    ],
+    [
+     "2026-10-27",
+     0.534
     ]
    ],
    "intraday": {
     "n": 1440,
-    "mean_pct": 1.2836,
-    "std_pp": 0.1196,
-    "min_pct": 0.9728,
-    "max_pct": 1.6968,
-    "range_pp": 0.724,
-    "reversion_corr_15m": -0.3401
+    "mean_pct": 0.7143,
+    "std_pp": 0.1174,
+    "min_pct": 0.4362,
+    "max_pct": 1.1088,
+    "range_pp": 0.6727,
+    "reversion_corr_15m": -0.3852
    }
   },
   "TRX": {
-   "date_utc": "2026-10-26",
-   "premium_pct": 0.5397,
-   "upbit_close": 440.0,
-   "okx_close": 0.33043,
-   "percentile": 73.4,
+   "date_utc": "2026-10-27",
+   "premium_pct": 0.5434,
+   "upbit_close": 438.0,
+   "okx_close": 0.32871,
+   "percentile": 72.9,
    "hist_days": 200,
-   "hist_mean_pct": -0.2956,
+   "hist_mean_pct": -0.2933,
    "hist_min_pct": -3.1844,
    "hist_max_pct": 2.471,
    "event_study": {
     "high": {
-     "n": 30,
-     "upbit_fwd1_pct": -0.2952,
-     "rel_vs_okx_fwd1_pct": -0.1967,
-     "premium_change_fwd1_pp": -0.2042,
-     "upbit_fwd1_pos_pct": 33.3,
-     "upbit_fwd3_pct": -0.7016,
-     "rel_vs_okx_fwd3_pct": -0.4274,
-     "premium_change_fwd3_pp": -0.2974,
-     "upbit_fwd3_pos_pct": 41.4,
-     "upbit_fwd7_pct": -1.0055,
-     "rel_vs_okx_fwd7_pct": -0.7194,
-     "premium_change_fwd7_pp": -0.6896,
-     "upbit_fwd7_pos_pct": 28.6
+     "n": 29,
+     "upbit_fwd1_pct": -0.3357,
+     "rel_vs_okx_fwd1_pct": -0.1904,
+     "premium_change_fwd1_pp": -0.2143,
+     "upbit_fwd1_pos_pct": 31.0,
+     "upbit_fwd3_pct": -0.8162,
+     "rel_vs_okx_fwd3_pct": -0.47,
+     "premium_change_fwd3_pp": -0.3552,
+     "upbit_fwd3_pos_pct": 37.9,
+     "upbit_fwd7_pct": -1.0591,
+     "rel_vs_okx_fwd7_pct": -0.7133,
+     "premium_change_fwd7_pp": -0.6893,
+     "upbit_fwd7_pos_pct": 25.9
     },
     "low": {
-     "n": 28,
-     "upbit_fwd1_pct": -0.1793,
-     "rel_vs_okx_fwd1_pct": 0.2131,
-     "premium_change_fwd1_pp": 0.1253,
-     "upbit_fwd1_pos_pct": 60.7,
-     "upbit_fwd3_pct": -0.3919,
-     "rel_vs_okx_fwd3_pct": 0.2717,
-     "premium_change_fwd3_pp": 0.1395,
-     "upbit_fwd3_pos_pct": 46.4,
-     "upbit_fwd7_pct": -1.6212,
-     "rel_vs_okx_fwd7_pct": 0.2785,
-     "premium_change_fwd7_pp": 0.0676,
-     "upbit_fwd7_pos_pct": 39.3
+     "n": 27,
+     "upbit_fwd1_pct": -0.1931,
+     "rel_vs_okx_fwd1_pct": 0.2203,
+     "premium_change_fwd1_pp": 0.1446,
+     "upbit_fwd1_pos_pct": 59.3,
+     "upbit_fwd3_pct": -0.4425,
+     "rel_vs_okx_fwd3_pct": 0.2347,
+     "premium_change_fwd3_pp": 0.1525,
+     "upbit_fwd3_pos_pct": 44.4,
+     "upbit_fwd7_pct": -1.8038,
+     "rel_vs_okx_fwd7_pct": 0.2146,
+     "premium_change_fwd7_pp": 0.0795,
+     "upbit_fwd7_pos_pct": 37.0
     },
     "mid": {
-     "n": 111,
-     "upbit_fwd1_pct": -0.0073,
-     "rel_vs_okx_fwd1_pct": -0.087,
-     "premium_change_fwd1_pp": 0.0291,
-     "upbit_fwd1_pos_pct": 45.0,
-     "upbit_fwd3_pct": -0.1096,
-     "rel_vs_okx_fwd3_pct": -0.2141,
-     "premium_change_fwd3_pp": 0.0812,
-     "upbit_fwd3_pos_pct": 47.3,
-     "upbit_fwd7_pct": -0.3346,
-     "rel_vs_okx_fwd7_pct": -0.553,
-     "premium_change_fwd7_pp": 0.2486,
-     "upbit_fwd7_pos_pct": 45.8
+     "n": 113,
+     "upbit_fwd1_pct": -0.0034,
+     "rel_vs_okx_fwd1_pct": -0.0882,
+     "premium_change_fwd1_pp": 0.0294,
+     "upbit_fwd1_pos_pct": 45.1,
+     "upbit_fwd3_pct": -0.0869,
+     "rel_vs_okx_fwd3_pct": -0.2051,
+     "premium_change_fwd3_pp": 0.0903,
+     "upbit_fwd3_pos_pct": 47.7,
+     "upbit_fwd7_pct": -0.3286,
+     "rel_vs_okx_fwd7_pct": -0.5448,
+     "premium_change_fwd7_pp": 0.2451,
+     "upbit_fwd7_pos_pct": 45.9
     }
    },
    "series_tail": [
-    [
-     "2026-09-27",
-     -0.186
-    ],
     [
      "2026-09-28",
      -0.14
@@ -753,27 +749,31 @@
     ],
     [
      "2026-10-26",
-     0.54
+     0.766
+    ],
+    [
+     "2026-10-27",
+     0.543
     ]
    ],
    "intraday": {
-    "n": 985,
-    "mean_pct": 1.3819,
-    "std_pp": 0.1949,
-    "min_pct": 0.9198,
-    "max_pct": 1.9009,
-    "range_pp": 0.9811,
-    "reversion_corr_15m": -0.5332
+    "n": 1026,
+    "mean_pct": 0.7394,
+    "std_pp": 0.1748,
+    "min_pct": 0.2332,
+    "max_pct": 1.2875,
+    "range_pp": 1.0543,
+    "reversion_corr_15m": -0.5168
    }
   },
   "LINK": {
-   "date_utc": "2026-10-26",
-   "premium_pct": 0.8691,
-   "upbit_close": 15250.0,
-   "okx_close": 11.415,
-   "percentile": 80.9,
+   "date_utc": "2026-10-27",
+   "premium_pct": 0.4616,
+   "upbit_close": 15130.0,
+   "okx_close": 11.364,
+   "percentile": 69.3,
    "hist_days": 200,
-   "hist_mean_pct": -0.3038,
+   "hist_mean_pct": -0.3003,
    "hist_min_pct": -3.2583,
    "hist_max_pct": 2.2605,
    "event_study": {
@@ -783,51 +783,47 @@
      "rel_vs_okx_fwd1_pct": -0.1822,
      "premium_change_fwd1_pp": -0.1952,
      "upbit_fwd1_pos_pct": 52.0,
-     "upbit_fwd3_pct": -1.5139,
-     "rel_vs_okx_fwd3_pct": -0.4193,
-     "premium_change_fwd3_pp": -0.4035,
-     "upbit_fwd3_pos_pct": 20.8,
+     "upbit_fwd3_pct": -1.5814,
+     "rel_vs_okx_fwd3_pct": -0.4384,
+     "premium_change_fwd3_pp": -0.4297,
+     "upbit_fwd3_pos_pct": 20.0,
      "upbit_fwd7_pct": -1.574,
      "rel_vs_okx_fwd7_pct": -0.5539,
      "premium_change_fwd7_pp": -0.7218,
      "upbit_fwd7_pos_pct": 34.8
     },
     "low": {
-     "n": 29,
-     "upbit_fwd1_pct": -0.9964,
-     "rel_vs_okx_fwd1_pct": 0.1319,
-     "premium_change_fwd1_pp": 0.0911,
-     "upbit_fwd1_pos_pct": 34.5,
-     "upbit_fwd3_pct": -2.3962,
-     "rel_vs_okx_fwd3_pct": 0.1691,
-     "premium_change_fwd3_pp": 0.015,
-     "upbit_fwd3_pos_pct": 31.0,
-     "upbit_fwd7_pct": -5.5811,
-     "rel_vs_okx_fwd7_pct": 0.231,
-     "premium_change_fwd7_pp": -0.0488,
-     "upbit_fwd7_pos_pct": 10.3
+     "n": 28,
+     "upbit_fwd1_pct": -0.9617,
+     "rel_vs_okx_fwd1_pct": 0.1184,
+     "premium_change_fwd1_pp": 0.0922,
+     "upbit_fwd1_pos_pct": 35.7,
+     "upbit_fwd3_pct": -2.6479,
+     "rel_vs_okx_fwd3_pct": 0.1866,
+     "premium_change_fwd3_pp": 0.0377,
+     "upbit_fwd3_pos_pct": 28.6,
+     "upbit_fwd7_pct": -6.0584,
+     "rel_vs_okx_fwd7_pct": 0.2704,
+     "premium_change_fwd7_pp": -0.0512,
+     "upbit_fwd7_pos_pct": 7.1
     },
     "mid": {
-     "n": 115,
-     "upbit_fwd1_pct": 0.2946,
-     "rel_vs_okx_fwd1_pct": -0.0878,
-     "premium_change_fwd1_pp": 0.0272,
-     "upbit_fwd1_pos_pct": 49.6,
-     "upbit_fwd3_pct": 1.1033,
-     "rel_vs_okx_fwd3_pct": -0.2382,
-     "premium_change_fwd3_pp": 0.1157,
-     "upbit_fwd3_pos_pct": 50.9,
-     "upbit_fwd7_pct": 2.5577,
-     "rel_vs_okx_fwd7_pct": -0.6601,
-     "premium_change_fwd7_pp": 0.2438,
-     "upbit_fwd7_pos_pct": 51.4
+     "n": 116,
+     "upbit_fwd1_pct": 0.2755,
+     "rel_vs_okx_fwd1_pct": -0.0882,
+     "premium_change_fwd1_pp": 0.0249,
+     "upbit_fwd1_pos_pct": 49.1,
+     "upbit_fwd3_pct": 1.1737,
+     "rel_vs_okx_fwd3_pct": -0.2527,
+     "premium_change_fwd3_pp": 0.111,
+     "upbit_fwd3_pos_pct": 51.8,
+     "upbit_fwd7_pct": 2.6165,
+     "rel_vs_okx_fwd7_pct": -0.6753,
+     "premium_change_fwd7_pp": 0.248,
+     "upbit_fwd7_pos_pct": 51.8
     }
    },
    "series_tail": [
-    [
-     "2026-09-27",
-     -0.01
-    ],
     [
      "2026-09-28",
      -0.124
@@ -942,27 +938,31 @@
     ],
     [
      "2026-10-26",
-     0.869
+     0.736
+    ],
+    [
+     "2026-10-27",
+     0.462
     ]
    ],
    "intraday": {
-    "n": 954,
-    "mean_pct": 1.3226,
-    "std_pp": 0.1363,
-    "min_pct": 0.9199,
-    "max_pct": 1.785,
-    "range_pp": 0.8651,
-    "reversion_corr_15m": -0.4273
+    "n": 974,
+    "mean_pct": 0.7316,
+    "std_pp": 0.1334,
+    "min_pct": 0.2993,
+    "max_pct": 1.1373,
+    "range_pp": 0.8379,
+    "reversion_corr_15m": -0.5093
    }
   },
   "DOGE": {
-   "date_utc": "2026-10-26",
-   "premium_pct": 0.082,
-   "upbit_close": 102.0,
-   "okx_close": 0.07695,
-   "percentile": 59.8,
+   "date_utc": "2026-10-27",
+   "premium_pct": 0.2185,
+   "upbit_close": 103.0,
+   "okx_close": 0.07755,
+   "percentile": 62.3,
    "hist_days": 200,
-   "hist_mean_pct": -0.1985,
+   "hist_mean_pct": -0.2025,
    "hist_min_pct": -3.6119,
    "hist_max_pct": 2.7296,
    "event_study": {
@@ -972,51 +972,47 @@
      "rel_vs_okx_fwd1_pct": -0.4429,
      "premium_change_fwd1_pp": -0.419,
      "upbit_fwd1_pos_pct": 34.5,
-     "upbit_fwd3_pct": -1.8625,
-     "rel_vs_okx_fwd3_pct": -0.5714,
-     "premium_change_fwd3_pp": -0.3995,
-     "upbit_fwd3_pos_pct": 25.0,
+     "upbit_fwd3_pct": -1.8314,
+     "rel_vs_okx_fwd3_pct": -0.6146,
+     "premium_change_fwd3_pp": -0.4538,
+     "upbit_fwd3_pos_pct": 24.1,
      "upbit_fwd7_pct": -3.4164,
      "rel_vs_okx_fwd7_pct": -0.9384,
      "premium_change_fwd7_pp": -0.6944,
      "upbit_fwd7_pos_pct": 22.2
     },
     "low": {
-     "n": 31,
-     "upbit_fwd1_pct": 0.075,
-     "rel_vs_okx_fwd1_pct": 0.4138,
-     "premium_change_fwd1_pp": 0.4754,
-     "upbit_fwd1_pos_pct": 38.7,
-     "upbit_fwd3_pct": -0.9976,
-     "rel_vs_okx_fwd3_pct": 0.4913,
-     "premium_change_fwd3_pp": 0.3923,
-     "upbit_fwd3_pos_pct": 32.3,
-     "upbit_fwd7_pct": -3.8177,
-     "rel_vs_okx_fwd7_pct": 0.3397,
-     "premium_change_fwd7_pp": 0.3619,
-     "upbit_fwd7_pos_pct": 12.9
+     "n": 30,
+     "upbit_fwd1_pct": 0.0978,
+     "rel_vs_okx_fwd1_pct": 0.4136,
+     "premium_change_fwd1_pp": 0.491,
+     "upbit_fwd1_pos_pct": 40.0,
+     "upbit_fwd3_pct": -1.1121,
+     "rel_vs_okx_fwd3_pct": 0.432,
+     "premium_change_fwd3_pp": 0.3799,
+     "upbit_fwd3_pos_pct": 30.0,
+     "upbit_fwd7_pct": -3.9246,
+     "rel_vs_okx_fwd7_pct": 0.2691,
+     "premium_change_fwd7_pp": 0.3643,
+     "upbit_fwd7_pos_pct": 13.3
     },
     "mid": {
-     "n": 109,
-     "upbit_fwd1_pct": -0.2832,
-     "rel_vs_okx_fwd1_pct": -0.1009,
-     "premium_change_fwd1_pp": -0.0177,
-     "upbit_fwd1_pos_pct": 32.1,
+     "n": 110,
+     "upbit_fwd1_pct": -0.2718,
+     "rel_vs_okx_fwd1_pct": -0.0983,
+     "premium_change_fwd1_pp": -0.0163,
+     "upbit_fwd1_pos_pct": 31.8,
      "upbit_fwd3_pct": -0.3063,
      "rel_vs_okx_fwd3_pct": -0.2859,
      "premium_change_fwd3_pp": 0.0371,
      "upbit_fwd3_pos_pct": 29.6,
-     "upbit_fwd7_pct": -0.4797,
-     "rel_vs_okx_fwd7_pct": -0.5854,
-     "premium_change_fwd7_pp": 0.1869,
-     "upbit_fwd7_pos_pct": 31.4
+     "upbit_fwd7_pct": -0.5183,
+     "rel_vs_okx_fwd7_pct": -0.5828,
+     "premium_change_fwd7_pp": 0.1834,
+     "upbit_fwd7_pos_pct": 31.1
     }
    },
    "series_tail": [
-    [
-     "2026-09-27",
-     -0.211
-    ],
     [
      "2026-09-28",
      -0.463
@@ -1131,17 +1127,21 @@
     ],
     [
      "2026-10-26",
-     0.082
+     -0.039
+    ],
+    [
+     "2026-10-27",
+     0.218
     ]
    ],
    "intraday": {
-    "n": 1210,
-    "mean_pct": 1.4164,
-    "std_pp": 0.4894,
-    "min_pct": 0.1908,
-    "max_pct": 2.4208,
-    "range_pp": 2.23,
-    "reversion_corr_15m": -0.6979
+    "n": 1206,
+    "mean_pct": 0.7543,
+    "std_pp": 0.5621,
+    "min_pct": -0.3949,
+    "max_pct": 1.954,
+    "range_pp": 2.3489,
+    "reversion_corr_15m": -0.6339
    }
   }
  },
@@ -1149,6 +1149,6 @@
  "summary": {
   "hot": [],
   "cold": [],
-  "verdict": "프리미엄 BTC +0.80%(80), ETH +0.81%(80), XRP +0.76%(78), TRX +0.54%(73), LINK +0.87%(81), DOGE +0.08%(60) / 과열(상위10%) 없음 / 냉각(하위10%) 없음"
+  "verdict": "프리미엄 BTC +0.57%(73), ETH +0.52%(73), XRP +0.53%(73), TRX +0.54%(73), LINK +0.46%(69), DOGE +0.22%(62) / 과열(상위10%) 없음 / 냉각(하위10%) 없음"
  }
 }
