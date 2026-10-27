@@ -1,6 +1,6 @@
 {
- "date": "2026-10-26",
- "generated_at_utc": "2026-10-26T13:39:44Z",
+ "date": "2026-10-27",
+ "generated_at_utc": "2026-10-27T07:16:26Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -74,30 +74,21 @@
   }
  },
  "forward": {
-  "days": 14,
+  "days": 15,
   "from": "2026-10-05",
-  "to": "2026-10-26",
-  "codes": 237,
+  "to": "2026-10-27",
+  "codes": 242,
   "bar_errors": 0,
   "stale_codes": 0,
   "by_source": {
-   "yahoo+gapfill": 1,
-   "yahoo": 184,
-   "yahoo+naver_api": 52
+   "yahoo+naver_api": 55,
+   "yahoo": 187
   },
   "skipped_days": [
    "2026-10-05"
   ],
-  "gap_filled": 1,
-  "gap_filled_codes": {
-   "179880": [
-    "2026-10-19",
-    "2026-10-20",
-    "2026-10-21",
-    "2026-10-22",
-    "2026-10-23"
-   ]
-  },
+  "gap_filled": 0,
+  "gap_filled_codes": {},
   "gap_unfilled": 0,
   "note": null
  },
@@ -108,8 +99,8 @@
   "risk_2": [],
   "no_flag": []
  },
- "signal_date": "2026-10-26",
- "signals_frozen": true,
+ "signal_date": "2026-10-27",
+ "signals_frozen": false,
  "frozen_dates": [
   "2026-10-06",
   "2026-10-07",
@@ -137,9 +128,9 @@
    "avg_loss_pct": -7.24,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -7.39,
-   "equity_final": 9261431,
-   "max_drawdown_pct": 7.39,
+   "total_return_pct": -7.29,
+   "equity_final": 9270971,
+   "max_drawdown_pct": 7.58,
    "avg_hold_days": 2.38,
    "skipped": {
     "gap": 0,
@@ -188,7 +179,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -7.39
+    "2026": -7.29
    },
    "open_positions": [
     {
@@ -200,9 +191,9 @@
      "entry": 386656.5,
      "stop": 359590.54,
      "shares": 3,
-     "bars_held": 13,
-     "last_close": 375000.0,
-     "unrealized_pct": -3.01
+     "bars_held": 14,
+     "last_close": 382500.0,
+     "unrealized_pct": -1.07
     },
     {
      "code": "396300",
@@ -213,9 +204,9 @@
      "entry": 8836.43,
      "stop": 8217.88,
      "shares": 152,
-     "bars_held": 6,
-     "last_close": 9490.0,
-     "unrealized_pct": 7.4
+     "bars_held": 7,
+     "last_close": 9460.0,
+     "unrealized_pct": 7.06
     },
     {
      "code": "068270",
@@ -226,9 +217,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 6,
-     "bars_held": 6,
-     "last_close": 190000.0,
-     "unrealized_pct": -2.3
+     "bars_held": 7,
+     "last_close": 188600.0,
+     "unrealized_pct": -3.02
     }
    ]
   },
@@ -242,14 +233,14 @@
    "avg_loss_pct": -7.42,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -10.92,
-   "equity_final": 8908124,
+   "total_return_pct": -11.23,
+   "equity_final": 8877374,
    "max_drawdown_pct": 11.47,
    "avg_hold_days": 2.5,
    "skipped": {
     "gap": 0,
     "limit": 40,
-    "cooldown": 0,
+    "cooldown": 1,
     "size": 1,
     "no_bar": 1,
     "pattern": 0
@@ -303,7 +294,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -10.92
+    "2026": -11.23
    },
    "open_positions": [
     {
@@ -315,9 +306,9 @@
      "entry": 21363.9,
      "stop": 20800.0,
      "shares": 83,
-     "bars_held": 10,
-     "last_close": 22550.0,
-     "unrealized_pct": 5.55
+     "bars_held": 11,
+     "last_close": 22400.0,
+     "unrealized_pct": 4.85
     },
     {
      "code": "396300",
@@ -328,9 +319,9 @@
      "entry": 7452.29,
      "stop": 6930.63,
      "shares": 170,
-     "bars_held": 7,
-     "last_close": 9490.0,
-     "unrealized_pct": 27.34
+     "bars_held": 8,
+     "last_close": 9460.0,
+     "unrealized_pct": 26.94
     },
     {
      "code": "033780",
@@ -341,9 +332,9 @@
      "entry": 187761.6,
      "stop": 174618.29,
      "shares": 6,
-     "bars_held": 7,
-     "last_close": 188900.0,
-     "unrealized_pct": 0.61
+     "bars_held": 8,
+     "last_close": 186700.0,
+     "unrealized_pct": -0.57
     }
    ]
   },
@@ -357,14 +348,14 @@
    "avg_loss_pct": -7.24,
    "payoff": 0.58,
    "profit_factor": 0.07,
-   "total_return_pct": -6.47,
-   "equity_final": 9353253,
-   "max_drawdown_pct": 6.63,
+   "total_return_pct": -6.6,
+   "equity_final": 9340293,
+   "max_drawdown_pct": 6.67,
    "avg_hold_days": 3.22,
    "skipped": {
     "gap": 0,
     "limit": 9,
-    "cooldown": 0,
+    "cooldown": 1,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -418,7 +409,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -6.47
+    "2026": -6.6
    },
    "open_positions": [
     {
@@ -430,9 +421,9 @@
      "entry": 8836.43,
      "stop": 8217.88,
      "shares": 152,
-     "bars_held": 6,
-     "last_close": 9490.0,
-     "unrealized_pct": 7.4
+     "bars_held": 7,
+     "last_close": 9460.0,
+     "unrealized_pct": 7.06
     },
     {
      "code": "068270",
@@ -443,26 +434,26 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 6,
-     "bars_held": 6,
-     "last_close": 190000.0,
-     "unrealized_pct": -2.3
+     "bars_held": 7,
+     "last_close": 188600.0,
+     "unrealized_pct": -3.02
     }
    ]
   },
   "risk_2": {
    "label": "동조 + 패턴, 위험 2% (명목 상한 30%)",
    "signals": 22,
-   "trades": 6,
+   "trades": 7,
    "wins": 0,
    "win_rate": 0.0,
    "avg_win_pct": null,
-   "avg_loss_pct": -7.17,
+   "avg_loss_pct": -7.15,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -9.81,
-   "equity_final": 9019324,
-   "max_drawdown_pct": 10.07,
-   "avg_hold_days": 2.33,
+   "total_return_pct": -11.11,
+   "equity_final": 8889040,
+   "max_drawdown_pct": 11.11,
+   "avg_hold_days": 2.29,
    "skipped": {
     "gap": 0,
     "limit": 0,
@@ -473,9 +464,9 @@
    },
    "by_pattern": {
     "flag": {
-     "n": 2,
+     "n": 3,
      "wins": 0,
-     "pnl_krw": -412165
+     "pnl_krw": -514015
     },
     "cup_handle": {
      "n": 1,
@@ -493,24 +484,29 @@
      "n": 6,
      "wins": 0,
      "pnl_krw": -1114587
+    },
+    "week": {
+     "n": 1,
+     "wins": 0,
+     "pnl_krw": -101850
     }
    },
    "by_exit": {
     "stop": {
-     "n": 6,
+     "n": 7,
      "wins": 0,
-     "pnl_krw": -1114587
+     "pnl_krw": -1216437
     }
    },
    "by_year": {
     "2026": {
-     "n": 6,
+     "n": 7,
      "wins": 0,
-     "pnl_krw": -1114587
+     "pnl_krw": -1216437
     }
    },
    "yearly_return_pct": {
-    "2026": -9.81
+    "2026": -11.11
    },
    "open_positions": [
     {
@@ -522,9 +518,9 @@
      "entry": 8836.43,
      "stop": 8217.88,
      "shares": 293,
-     "bars_held": 6,
-     "last_close": 9490.0,
-     "unrealized_pct": 7.4
+     "bars_held": 7,
+     "last_close": 9460.0,
+     "unrealized_pct": 7.06
     },
     {
      "code": "068270",
@@ -535,22 +531,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 13,
-     "bars_held": 6,
-     "last_close": 190000.0,
-     "unrealized_pct": -2.3
-    },
-    {
-     "code": "207940",
-     "name": "SAMSUNG BIOLOGICS Co., Ltd.",
-     "group": "Biotechnology",
-     "pattern": "flag",
-     "entry_date": "2026-10-26",
-     "entry": 1450338.0,
-     "stop": 1355000.0,
-     "shares": 1,
-     "bars_held": 1,
-     "last_close": 1452000.0,
-     "unrealized_pct": 0.11
+     "bars_held": 7,
+     "last_close": 188600.0,
+     "unrealized_pct": -3.02
     }
    ]
   },
@@ -564,14 +547,14 @@
    "avg_loss_pct": -7.12,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -5.61,
-   "equity_final": 9439272,
+   "total_return_pct": -5.48,
+   "equity_final": 9451972,
    "max_drawdown_pct": 6.05,
    "avg_hold_days": 3.6,
    "skipped": {
     "gap": 0,
     "limit": 1,
-    "cooldown": 0,
+    "cooldown": 1,
     "size": 0,
     "no_bar": 0,
     "pattern": 0
@@ -610,7 +593,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -5.61
+    "2026": -5.48
    },
    "open_positions": [
     {
@@ -622,9 +605,9 @@
      "entry": 386656.5,
      "stop": 359590.54,
      "shares": 3,
-     "bars_held": 13,
-     "last_close": 375000.0,
-     "unrealized_pct": -3.01
+     "bars_held": 14,
+     "last_close": 382500.0,
+     "unrealized_pct": -1.07
     },
     {
      "code": "068270",
@@ -635,9 +618,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 7,
-     "bars_held": 6,
-     "last_close": 190000.0,
-     "unrealized_pct": -2.3
+     "bars_held": 7,
+     "last_close": 188600.0,
+     "unrealized_pct": -3.02
     }
    ]
   }
@@ -1522,6 +1505,29 @@
     "pnl_krw": -193112,
     "pnl_pct": -7.45,
     "hold_days": 3,
+    "gap": false
+   },
+   {
+    "code": "207940",
+    "name": "SAMSUNG BIOLOGICS Co., Ltd.",
+    "group": "Biotechnology",
+    "pattern": "flag",
+    "patterns": [
+     "box",
+     "flag"
+    ],
+    "sync_by": "week",
+    "signal_date": "2026-10-23",
+    "entry_date": "2026-10-26",
+    "entry": 1450338.0,
+    "stop": 1355000.0,
+    "exit_date": "2026-10-27",
+    "exit": 1350935.0,
+    "why": "stop",
+    "shares": 1,
+    "pnl_krw": -101850,
+    "pnl_pct": -7.02,
+    "hold_days": 2,
     "gap": false
    }
   ],
