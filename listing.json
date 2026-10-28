@@ -1,16 +1,16 @@
 {
  "schema": "carrygate-listing/1",
- "date": "2026-10-27",
- "generated_at_kst": "2026-10-27 14:17:09",
+ "date": "2026-10-28",
+ "generated_at_kst": "2026-10-28 14:52:53",
  "method": {
   "notice": "업비트 공지(category=trade) 중 제목에 ('신규 거래지원', '거래지원 안내', '디지털 자산 추가', '원화 마켓 추가', '마켓 추가') 가 있고 ('종료', '유의', '해제', '변경', '이벤트', '입출금', '지연') 가 없는 것. 괄호 안 티커 추출",
   "reaction": "공지 시각(분)의 해외 선물 시가 대비 (5, 15, 60, 240)분 뒤 시가 수익률(%), 60분 내 최고가 상승폭"
  },
  "notices_seen": 0,
- "markets_krw": 298,
+ "markets_krw": 299,
  "market_snapshot_existed": true,
- "listings_seen": 0,
- "new_today": 0,
+ "listings_seen": 1,
+ "new_today": 3,
  "events": [
   {
    "id": "mkt:KRW-POD:1790924700",
@@ -245,16 +245,65 @@
    "post60_pct": 4.054,
    "post240_pct": -10.27,
    "maxup60_pct": 30.0
+  },
+  {
+   "id": "mkt:KRW-NIL:1793087100",
+   "title": "업비트 마켓 목록에 새로 등장: KRW-NIL",
+   "time_utc": "2026-10-27T07:45:00Z",
+   "ts": 1793087100,
+   "ticker": "NIL",
+   "venue": "hyperliquid",
+   "listed_abroad": true,
+   "post5_pct": -2.043,
+   "post15_pct": -6.81,
+   "post60_pct": -11.301,
+   "post240_pct": -14.012,
+   "maxup60_pct": 1.707
+  },
+  {
+   "id": "mkt:KRW-NIL:1793087100",
+   "title": "업비트 마켓 목록에 새로 등장: KRW-NIL",
+   "time_utc": "2026-10-27T07:45:00Z",
+   "ts": 1793087100,
+   "ticker": "NIL",
+   "venue": "okx",
+   "listed_abroad": false
+  },
+  {
+   "id": "mkt:KRW-NIL:1793087100",
+   "title": "업비트 마켓 목록에 새로 등장: KRW-NIL",
+   "time_utc": "2026-10-27T07:45:00Z",
+   "ts": 1793087100,
+   "ticker": "NIL",
+   "venue": "upbit",
+   "listed_abroad": true,
+   "post5_pct": -4.403,
+   "post15_pct": -12.579,
+   "post60_pct": -17.61,
+   "post240_pct": -20.126,
+   "maxup60_pct": 6.918
   }
  ],
  "errors": {
   "notices": "fetch failed https://api-manager.upbit.com/api/v1/announcements?os=web&page=1&per_page=20&category=trade : HTTP Error 403: Forbidden"
  },
  "summary": {
-  "notices": 7,
-  "pairs": 21,
-  "with_price": 9,
+  "notices": 8,
+  "pairs": 24,
+  "with_price": 11,
   "by_venue": {
+   "hyperliquid": {
+    "n": 1,
+    "post5_pct": -2.04,
+    "post5_pos_pct": 0.0,
+    "post15_pct": -6.81,
+    "post15_pos_pct": 0.0,
+    "post60_pct": -11.3,
+    "post60_pos_pct": 0.0,
+    "post240_pct": -14.01,
+    "post240_pos_pct": 0.0,
+    "maxup60_pct": 1.71
+   },
    "okx": {
     "n": 2,
     "post5_pct": 0.12,
@@ -268,16 +317,16 @@
     "maxup60_pct": 6.8
    },
    "upbit": {
-    "n": 7,
-    "post5_pct": 33.61,
-    "post5_pos_pct": 85.7,
-    "post15_pct": 28.52,
-    "post15_pos_pct": 85.7,
-    "post60_pct": 30.75,
-    "post60_pos_pct": 85.7,
-    "post240_pct": 19.7,
-    "post240_pos_pct": 57.1,
-    "maxup60_pct": 50.96
+    "n": 8,
+    "post5_pct": 28.86,
+    "post5_pos_pct": 75.0,
+    "post15_pct": 23.38,
+    "post15_pos_pct": 75.0,
+    "post60_pct": 24.71,
+    "post60_pos_pct": 75.0,
+    "post240_pct": 14.72,
+    "post240_pos_pct": 50.0,
+    "maxup60_pct": 45.46
    }
   }
  }
