@@ -16,6 +16,7 @@
 """
 import json, sys
 from datetime import datetime, timedelta
+from common import load_json
 
 TOL = 0.01          # 재계산과 저장값의 허용 오차 (연 %)
 HOLD_DAYS = 30.0    # funding.py 와 같은 보유기간 가정
@@ -121,14 +122,6 @@ def check_shapes(problems, notes, shapes=None, loader=None):
     if absent:
         notes.append("형식 검산 건너뜀(파일 없음): %s" % ", ".join(absent))
     return checked
-
-
-def load_json(path):
-    try:
-        with open(path, encoding="utf-8") as fp:
-            return json.load(fp)
-    except (IOError, ValueError):
-        return None
 
 
 def load_rows(path="funding_history.jsonl"):

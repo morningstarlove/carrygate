@@ -20,7 +20,7 @@ CARRYGATE — 매크로 발표 전후 반응 연구 (⑤)
 import json, sys, time, math, argparse
 from datetime import datetime, timezone
 
-from scalp import http_json, f, KST
+from common import http_json, f, KST, mean, load_json
 
 CAL_PATH = "data/macro_calendar.json"
 OUT_PATH = "macro.json"
@@ -36,20 +36,8 @@ RULE_FIXED_TS = 1790812800
 SURPRISE_SIGN = {"cpi": -1, "nfp": -1, "fomc": -1, "pce": -1, "gdp": -1}
 
 
-def mean(xs):
-    return sum(xs) / len(xs) if xs else None
-
-
 def r3(x):
     return None if x is None else round(x, 3)
-
-
-def load_json(path, default):
-    try:
-        with open(path, encoding="utf-8") as fp:
-            return json.load(fp)
-    except (IOError, ValueError):
-        return default
 
 
 def hl_1m(coin, start, end):

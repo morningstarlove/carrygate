@@ -53,6 +53,8 @@
 
 **2026-10-15 백테스트 과적합 논문 검토 → 판정기 보강 (제안함 P17·P18 반영):** 댓글 권고로 Bailey·López de Prado·Harvey·Hansen 등 17편을 읽고 공식을 실데이터에 대입(`docs/BACKTEST_OVERFITTING_REVIEW.md`, `scripts/overfit_check.py`). 발견: 초단타 10/7 PASS(후보 12개)는 실력 0 이어도 뜨는 후보 수(378개 중 42~53개)의 1/4 이었고, 터틀·추세전환 20건 합격선은 실력 0 도 19~40% 확률로 PASS 한다. 반영: ① `criteria.json scalp.noise_floor` — 부호 뒤집기 500회의 후보 수 중앙값보다 실제 후보가 많아야 PASS, 같거나 적으면 NOT_YET(잡음 이하). ② 판정 파일 각 거래소에 `interpretation`(실력 0 PASS 확률·놓칠 확률·필요 건수 MinTRL·t>3). 합격선 숫자·매매 규칙 변경 없음, criteria sealed 2026-10-15, 잠금 재생성. 현황판 카드에는 아직 안 올렸다(판정 파일에만). 작업 기록 `docs/sessions/2026-10-15_backtest_overfitting.md`.
 
+**2026-10-28 헬퍼 중복 정리 (규칙 변경 없음):** 19개 모듈이 각자 복사해 두던 작은 헬퍼(`http_json`·`f`·`r2`·`r4`·`mean`·`std`·`corr`·`load_json`·`append_history`·`load_history`·`KST`·`UA`)를 `common.py` 한 곳으로 모았다(359줄 삭제). 전에는 `scalp.py` 가 사실상 공용 모듈 노릇을 해서 8개 모듈이 초단타 파일에서 헬퍼를 가져다 썼다 — 이제 `scalp.py` 에서 가져오는 것은 `COINS` 뿐. 일부러 다르게 둔 복사본(호가창의 재시도 없는 요청, 한국 주식의 NaN 처리·25초, 판정기의 저장소 기준 경로, PC·서버 단독 실행 중계 스크립트)은 그대로이며 이유는 `common.py` 머리말에 있다. 단위시험 258건·selfcheck·오프라인 dry-run 8종 통과. 작업 기록 `docs/sessions/2026-10-28_helper_dedup.md`.
+
 **규칙을 바꾸고 싶을 때:** `proposals.md` 에 근거 → 그 트랙 `RULE_FIXED` 새 날짜 → `python verdict.py --lock`. 이 순서 없이 바꾸면 CI 가 막는다(원칙 5).
 
 **세션 입구:** 루트 `CLAUDE.md`(2026-10-10 부터, 세션 시작마다 자동으로 읽힘 — 읽는 순서·절대 규칙·역할 분담·AI 도구 정책). 이 문서가 원본이고 `CLAUDE.md` 는 요약이다.
@@ -1146,6 +1148,7 @@ GitHub 저장소 → Actions 탭 → `CARRYGATE daily` → Run workflow
 | `criteria.json` | 순방향 합격선 (바꾸면 `proposals.md` 기록 + `python verdict.py --lock`) |
 | `selfcheck.py` 상단 `TOL` / `MAX_GAP_DAYS` | 검산 허용 오차 / 기록 공백 경고 기준 |
 | `selfcheck.py` 상단 `SHAPES` / `OPTIONAL_FILES` | 현황판이 읽는 결과 파일의 필수 키·타입(형식 검산, P14). **현황판 카드에 새 필드를 쓰면 여기에도 넣는다.** 없어도 되는 파일 목록 |
+| `common.py` | 모든 모듈이 같이 쓰는 헬퍼(HTTP 요청·float 변환·반올림·평균·상관·JSON/jsonl 읽기 쓰기). 규칙 상수 없음. 고치면 전 모듈에 적용 (2026-10-28) |
 | `scalp.py` 상단 `VENUES` | 초단타 거래소별 수수료(시장가·지정가)·숏 가능 여부 |
 | `scalp.py` 상단 `SPREAD_TICKS` | 시장가 체결 시 잃는 호가 폭(틱). 기본 1틱 |
 | `scalp.py` `STRATEGIES` | 초단타 규칙 추가/제거 (**규칙을 바꾸면 그날부터 기록을 새로 세어야 한다**) |
@@ -1204,6 +1207,7 @@ GitHub 저장소 → Actions 탭 → `CARRYGATE daily` → Run workflow
 초단타는 두 가지로 시험한다.
 - `python3 -m unittest tests.test_selfcheck` — 형식 검산(P14): 키 누락·타입·null·파일 없음 + 실제 결과 파일·현황판 `FILES` 대조 (11건, 인터넷 불필요)
 - `python3 -m unittest tests.test_scalp` — 가짜 데이터로 계산 로직 (20건, 인터넷 불필요)
+- `python3 -m unittest tests.test_common` — 공용 헬퍼 8건 (HTTP 재시도·반올림·상관·기록 파일 덮어쓰기, 인터넷 불필요)
 - `python3 scalp.py --fixture tests/fixtures --dry-run` — 저장된 실데이터 CSV 로 전체 흐름 (인터넷 불필요)
 - `python3 -m unittest tests.test_research` — 보조 연구·호가창 계산 로직 (14건)
 - `python3 scalp_research.py --fixture tests/fixtures --dry-run` — A1·B 를 실데이터 CSV 로 (펀딩은 생략됨)

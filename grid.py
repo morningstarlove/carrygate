@@ -35,8 +35,8 @@ import json, sys, os, argparse
 from datetime import datetime, timezone, timedelta
 
 from momentum import load_ticker, max_drawdown, round_floats
+from common import KST
 
-KST = timezone(timedelta(hours=9))
 
 DATA_DIR = "data/etf"
 SYMBOLS = ["SOXL", "TQQQ"]          # SOXL 이 원문 기준. TQQQ 는 같은 규칙이 다른 종목에서도 서는지 보려고 나란히 둔다

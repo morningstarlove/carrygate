@@ -32,7 +32,8 @@ CARRYGATE — 급상승·급하락 패턴 (1시간봉, "1차 상승 → 횡보(�
 import os, sys, json, math, csv, time, argparse
 from datetime import datetime, timezone
 
-from scalp import http_json, f, KST, COINS
+from scalp import COINS
+from common import http_json, f, KST, r4
 
 # ----------------------------------------------------------------- 고정 규칙 (사후 조정 금지)
 BAR_MIN = 60                # 1시간봉 (카드는 15·30분봉 미국 주식. 코인 15분봉은 초단타 트랙에서 잡음으로 확인돼 1시간봉으로 고정)
@@ -70,10 +71,6 @@ VENUES = {
     "okx":   {"kind": "perp", "quote": "USDT", "fee_pct": 0.05, "equity": 10_000.0, "dirs": ("long", "short"),
               "fee_source": "OKX 선물 테이커 0.05% 일반 등급 (지정가도 보수적으로 같은 값)"},
 }
-
-
-def r4(x):
-    return None if x is None else round(x, 4)
 
 
 def rp(x):
