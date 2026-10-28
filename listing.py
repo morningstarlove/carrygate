@@ -19,7 +19,7 @@ CARRYGATE — 업비트 상장 공지 반응 연구 (⑥)
 import json, sys, time, re, os, argparse
 from datetime import datetime, timezone
 
-from scalp import http_json, f, KST
+from common import http_json, f, KST, mean, r2, load_json
 
 OUT_PATH = "listing.json"
 MARKETS_SNAPSHOT = "data/upbit_markets.json"   # 어제의 마켓 목록. 오늘 목록과 비교해 새 마켓 = 상장
@@ -28,22 +28,6 @@ POST = (5, 15, 60, 240)
 KEYWORDS = ("신규 거래지원", "거래지원 안내", "디지털 자산 추가", "원화 마켓 추가", "마켓 추가")
 EXCLUDE = ("종료", "유의", "해제", "변경", "이벤트", "입출금", "지연")
 TICKER_RE = re.compile(r"\(([A-Z0-9]{2,10}(?:\s*,\s*[A-Z0-9]{2,10})*)\)")
-
-
-def mean(xs):
-    return sum(xs) / len(xs) if xs else None
-
-
-def r2(x):
-    return None if x is None else round(x, 2)
-
-
-def load_json(path, default):
-    try:
-        with open(path, encoding="utf-8") as fp:
-            return json.load(fp)
-    except (IOError, ValueError):
-        return default
 
 
 # ----------------------------------------------------------------- 공지

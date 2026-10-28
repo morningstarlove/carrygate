@@ -17,7 +17,8 @@ CARRYGATE — 분기 선물 베이시스 캐리 (②)
 import json, sys, time, argparse
 from datetime import datetime, timezone
 
-from scalp import http_json, f, KST, COINS
+from scalp import COINS
+from common import http_json, f, KST, append_history
 
 # 수수료 가정 (1회 체결 %, 보수적). 포지션 수명 동안 현물 매수·매도 2회, 선물 진입 1회, 만기 정산 1회.
 SPOT_TAKER_PCT = 0.10
@@ -128,18 +129,6 @@ def read_funding_best():
         return {c: v["best"]["decision_apr_pct"] for c, v in (d.get("coins") or {}).items()}
     except Exception:
         return {}
-
-
-def append_history(rec, path):
-    try:
-        with open(path, encoding="utf-8") as fp:
-            rows = [l for l in fp.read().splitlines() if l.strip()]
-    except IOError:
-        rows = []
-    rows = [l for l in rows if json.loads(l).get("date") != rec["date"]]
-    rows.append(json.dumps(rec, ensure_ascii=False))
-    with open(path, "w", encoding="utf-8") as fp:
-        fp.write("\n".join(rows) + "\n")
 
 
 def report(path="basis_history.jsonl"):

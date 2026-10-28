@@ -21,9 +21,9 @@ Phil(bennyjo/phil) 에서 가져온 방법 세 가지:
 """
 import os, sys, json, math, hashlib, argparse
 from datetime import datetime, timezone, timedelta
+from common import KST, r2
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-KST = timezone(timedelta(hours=9))
 CRITERIA_PATH = os.path.join(HERE, "criteria.json")
 LOCK_PATH = os.path.join(HERE, "rules_lock.json")
 OUT_PATH = os.path.join(HERE, "verdict.json")
@@ -33,9 +33,6 @@ NOT_YET, PASS, FAIL = "NOT_YET", "PASS", "FAIL"
 
 
 # ----------------------------------------------------------------- 순수 계산
-
-def r2(x):
-    return None if x is None else round(x, 2)
 
 
 def luck_z(n, wins, p):

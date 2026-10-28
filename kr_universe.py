@@ -24,9 +24,8 @@ CARRYGATE — 한국 주식 유니버스 + 업종 동조 (설계서 docs/KR_SECT
 """
 import os, re, sys, json, time, argparse, statistics, urllib.request
 from datetime import datetime, timezone, timedelta
+from common import KST, UA, r2
 
-KST = timezone(timedelta(hours=9))
-UA = {"User-Agent": "Mozilla/5.0 (compatible; carrygate/1.0)", "Accept": "application/json"}
 
 # ----------------------------------------------------------------- 고정 규칙 (사후 조정 금지)
 TOP_N = 100                 # 거래대금 상위 몇 종목
@@ -57,10 +56,6 @@ def f(x):
         return v if v == v else None
     except (TypeError, ValueError):
         return None
-
-
-def r2(x):
-    return None if x is None else round(x, 2)
 
 
 def http_json(url, data=None, tries=3):

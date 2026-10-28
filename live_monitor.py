@@ -23,19 +23,11 @@ CARRYGATE — 실전 캐리 감시 (A)
 import json, sys, time, argparse, os
 from datetime import datetime, timezone
 
-from scalp import http_json, f, KST
+from common import http_json, f, KST, load_json, append_history
 
 WALLET_PATH = "data/live_wallet.json"
 HL = "https://api.hyperliquid.xyz/info"
 EXIT_APR = 2.0          # funding.py 와 같은 청산 문턱 (7일 평균 순 연 %)
-
-
-def load_json(path, default=None):
-    try:
-        with open(path, encoding="utf-8") as fp:
-            return json.load(fp)
-    except (IOError, ValueError):
-        return default
 
 
 def hl(payload):
@@ -155,18 +147,6 @@ def predicted_from_funding_json(coin):
                 return v.get("decision_apr_pct")
     except (KeyError, TypeError):
         return None
-
-
-def append_history(rec, path):
-    try:
-        with open(path, encoding="utf-8") as fp:
-            rows = [l for l in fp.read().splitlines() if l.strip()]
-    except IOError:
-        rows = []
-    rows = [l for l in rows if json.loads(l).get("date") != rec["date"]]
-    rows.append(json.dumps(rec, ensure_ascii=False))
-    with open(path, "w", encoding="utf-8") as fp:
-        fp.write("\n".join(rows) + "\n")
 
 
 def report(path="live_history.jsonl"):

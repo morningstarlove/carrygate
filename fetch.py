@@ -6,23 +6,9 @@ CARRYGATE — 신호등(게이트) 브리지
 """
 import json, time, sys, urllib.request, urllib.error
 from datetime import datetime, timezone, timedelta
+from common import KST, UA, http_json
 
 MARKETS = ["KRW-BTC", "KRW-ETH", "KRW-XRP", "KRW-TRX", "KRW-LINK", "KRW-DOGE"]
-KST = timezone(timedelta(hours=9))
-UA = {"User-Agent": "Mozilla/5.0 (compatible; carrygate/1.0)", "Accept": "application/json"}
-
-
-def http_json(url, tries=3):
-    last = None
-    for i in range(tries):
-        try:
-            req = urllib.request.Request(url, headers=UA)
-            with urllib.request.urlopen(req, timeout=20) as r:
-                return json.loads(r.read().decode("utf-8"))
-        except Exception as e:          # 네트워크·레이트리밋 모두 여기로
-            last = e
-            time.sleep(2 + i * 3)
-    raise RuntimeError("fetch failed %s : %s" % (url, last))
 
 
 def sma(vals, n):

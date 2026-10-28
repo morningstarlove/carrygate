@@ -24,11 +24,9 @@ CARRYGATE — 초단타(스캘핑) 연구 브리지
 """
 import json, sys, time, csv, os, io, math, argparse, zipfile, urllib.request
 from datetime import datetime, timezone, timedelta
+from common import KST, UA, http_json, f, load_history
 
 COINS = ["BTC", "ETH", "XRP", "TRX", "LINK", "DOGE"]
-KST = timezone(timedelta(hours=9))
-UA = {"User-Agent": "Mozilla/5.0 (compatible; carrygate/1.0)",
-      "Accept": "application/json"}
 
 EVAL_BARS = 1440      # 평가 구간: 하루 = 1분봉 1440개
 WARMUP_MIN = 3600     # 지표 계산용 준비 구간(분) = 60시간. 60분봉 VWAP(60봉) 때문. 2026-10-13 전에는 1440(하루)이었고,
@@ -56,23 +54,6 @@ VENUES = {
 HL_ZERO_ADDR = "0x" + "0" * 40
 
 
-def http_json(url, tries=3, data=None):
-    last = None
-    for i in range(tries):
-        try:
-            body = json.dumps(data).encode("utf-8") if data is not None else None
-            hdr = dict(UA)
-            if body is not None:
-                hdr["Content-Type"] = "application/json"
-            req = urllib.request.Request(url, headers=hdr, data=body)
-            with urllib.request.urlopen(req, timeout=20) as r:
-                return json.loads(r.read().decode("utf-8"))
-        except Exception as e:
-            last = e
-            time.sleep(1.5 + i * 2)
-    raise RuntimeError("fetch failed %s : %s" % (url, last))
-
-
 def http_bytes(url, tries=3):
     last = None
     for i in range(tries):
@@ -84,13 +65,6 @@ def http_bytes(url, tries=3):
             last = e
             time.sleep(1.5 + i * 2)
     raise RuntimeError("fetch failed %s : %s" % (url, last))
-
-
-def f(x):
-    try:
-        return float(x)
-    except (TypeError, ValueError):
-        return None
 
 
 # ----------------------------------------------------------------- 수집
@@ -778,23 +752,6 @@ def missing_days(rows, n, today):
         if have.get(d, 0) < len(COINS):
             out.append(d)
     return out
-
-
-def load_history(path):
-    rows = []
-    try:
-        with open(path, encoding="utf-8") as fp:
-            for l in fp:
-                l = l.strip()
-                if l:
-                    try:
-                        rows.append(json.loads(l))
-                    except ValueError:
-                        pass
-    except IOError:
-        pass
-    rows.sort(key=lambda r: r.get("date", ""))
-    return rows
 
 
 MIN_DAYS = 7       # 이 일수 미만이면 후보를 뽑지 않는다
