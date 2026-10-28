@@ -1,6 +1,6 @@
 {
- "date": "2026-10-27",
- "generated_at_utc": "2026-10-27T12:47:36Z",
+ "date": "2026-10-28",
+ "generated_at_utc": "2026-10-28T07:13:56Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -74,15 +74,15 @@
   }
  },
  "forward": {
-  "days": 15,
+  "days": 16,
   "from": "2026-10-05",
-  "to": "2026-10-27",
-  "codes": 242,
+  "to": "2026-10-28",
+  "codes": 246,
   "bar_errors": 0,
   "stale_codes": 0,
   "by_source": {
-   "yahoo": 187,
-   "yahoo+naver_api": 55
+   "yahoo": 188,
+   "yahoo+naver_api": 58
   },
   "skipped_days": [
    "2026-10-05"
@@ -93,14 +93,117 @@
   "note": null
  },
  "signals_today": {
-  "base": [],
-  "no_sector": [],
-  "hold_10": [],
-  "risk_2": [],
-  "no_flag": []
+  "base": [
+   {
+    "code": "053800",
+    "name": "AhnLab, Inc.",
+    "group": "Packaged Software",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 110900.0,
+    "pattern_low": 71300.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 119772 이상이면 포기)",
+    "stop_plan": "max(71300, 진입가×0.93)"
+   }
+  ],
+  "no_sector": [
+   {
+    "code": "053800",
+    "name": "AhnLab, Inc.",
+    "group": "Packaged Software",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 110900.0,
+    "pattern_low": 71300.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 119772 이상이면 포기)",
+    "stop_plan": "max(71300, 진입가×0.93)"
+   },
+   {
+    "code": "064400",
+    "name": "LG CNS Co., Ltd.",
+    "group": "Information Technology Services",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 79000.0,
+    "pattern_low": 61300.0,
+    "sync_by": null,
+    "entry_plan": "내일 시가 (시가가 85320 이상이면 포기)",
+    "stop_plan": "max(61300, 진입가×0.93)"
+   },
+   {
+    "code": "190510",
+    "name": "Namuga Co., Ltd.",
+    "group": "Electronic Production Equipment",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 18320.0,
+    "pattern_low": 13100.0,
+    "sync_by": null,
+    "entry_plan": "내일 시가 (시가가 19786 이상이면 포기)",
+    "stop_plan": "max(13100, 진입가×0.93)"
+   }
+  ],
+  "hold_10": [
+   {
+    "code": "053800",
+    "name": "AhnLab, Inc.",
+    "group": "Packaged Software",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 110900.0,
+    "pattern_low": 71300.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 119772 이상이면 포기)",
+    "stop_plan": "max(71300, 진입가×0.93)"
+   }
+  ],
+  "risk_2": [
+   {
+    "code": "053800",
+    "name": "AhnLab, Inc.",
+    "group": "Packaged Software",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 110900.0,
+    "pattern_low": 71300.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 119772 이상이면 포기)",
+    "stop_plan": "max(71300, 진입가×0.93)"
+   }
+  ],
+  "no_flag": [
+   {
+    "code": "053800",
+    "name": "AhnLab, Inc.",
+    "group": "Packaged Software",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 110900.0,
+    "pattern_low": 71300.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 119772 이상이면 포기)",
+    "stop_plan": "max(71300, 진입가×0.93)"
+   }
+  ]
  },
- "signal_date": "2026-10-27",
- "signals_frozen": true,
+ "signal_date": "2026-10-28",
+ "signals_frozen": false,
  "frozen_dates": [
   "2026-10-06",
   "2026-10-07",
@@ -121,7 +224,7 @@
  "variants": {
   "base": {
    "label": "동조 업종 + 패턴 돌파 (기본)",
-   "signals": 21,
+   "signals": 22,
    "trades": 8,
    "wins": 0,
    "win_rate": 0.0,
@@ -129,14 +232,14 @@
    "avg_loss_pct": -7.24,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -7.2,
-   "equity_final": 9280091,
-   "max_drawdown_pct": 7.58,
+   "total_return_pct": -7.65,
+   "equity_final": 9235331,
+   "max_drawdown_pct": 7.65,
    "avg_hold_days": 2.38,
    "skipped": {
     "gap": 0,
     "limit": 9,
-    "cooldown": 0,
+    "cooldown": 1,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -180,7 +283,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -7.2
+    "2026": -7.65
    },
    "open_positions": [
     {
@@ -192,9 +295,9 @@
      "entry": 386656.5,
      "stop": 359590.54,
      "shares": 3,
-     "bars_held": 14,
-     "last_close": 382500.0,
-     "unrealized_pct": -1.07
+     "bars_held": 15,
+     "last_close": 389500.0,
+     "unrealized_pct": 0.74
     },
     {
      "code": "396300",
@@ -205,9 +308,9 @@
      "entry": 8836.43,
      "stop": 8217.88,
      "shares": 152,
-     "bars_held": 7,
-     "last_close": 9520.0,
-     "unrealized_pct": 7.74
+     "bars_held": 8,
+     "last_close": 9040.0,
+     "unrealized_pct": 2.3
     },
     {
      "code": "068270",
@@ -218,15 +321,15 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 6,
-     "bars_held": 7,
-     "last_close": 188600.0,
-     "unrealized_pct": -3.02
+     "bars_held": 8,
+     "last_close": 189800.0,
+     "unrealized_pct": -2.41
     }
    ]
   },
   "no_sector": {
    "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
-   "signals": 61,
+   "signals": 64,
    "trades": 16,
    "wins": 0,
    "win_rate": 0.0,
@@ -234,14 +337,14 @@
    "avg_loss_pct": -7.42,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -11.12,
-   "equity_final": 8887574,
-   "max_drawdown_pct": 11.47,
+   "total_return_pct": -12.06,
+   "equity_final": 8793624,
+   "max_drawdown_pct": 12.06,
    "avg_hold_days": 2.5,
    "skipped": {
     "gap": 0,
     "limit": 40,
-    "cooldown": 0,
+    "cooldown": 3,
     "size": 1,
     "no_bar": 1,
     "pattern": 0
@@ -295,7 +398,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -11.12
+    "2026": -12.06
    },
    "open_positions": [
     {
@@ -307,9 +410,9 @@
      "entry": 21363.9,
      "stop": 20800.0,
      "shares": 83,
-     "bars_held": 11,
-     "last_close": 22400.0,
-     "unrealized_pct": 4.85
+     "bars_held": 12,
+     "last_close": 22150.0,
+     "unrealized_pct": 3.68
     },
     {
      "code": "396300",
@@ -320,9 +423,9 @@
      "entry": 7452.29,
      "stop": 6930.63,
      "shares": 170,
-     "bars_held": 8,
-     "last_close": 9520.0,
-     "unrealized_pct": 27.75
+     "bars_held": 9,
+     "last_close": 9040.0,
+     "unrealized_pct": 21.3
     },
     {
      "code": "033780",
@@ -333,15 +436,15 @@
      "entry": 187761.6,
      "stop": 174618.29,
      "shares": 6,
-     "bars_held": 8,
-     "last_close": 186700.0,
-     "unrealized_pct": -0.57
+     "bars_held": 9,
+     "last_close": 188100.0,
+     "unrealized_pct": 0.18
     }
    ]
   },
   "hold_10": {
    "label": "동조 + 패턴, 보유 10일",
-   "signals": 21,
+   "signals": 22,
    "trades": 9,
    "wins": 1,
    "win_rate": 11.11,
@@ -349,14 +452,14 @@
    "avg_loss_pct": -7.24,
    "payoff": 0.58,
    "profit_factor": 0.07,
-   "total_return_pct": -6.51,
-   "equity_final": 9349413,
-   "max_drawdown_pct": 6.67,
+   "total_return_pct": -7.16,
+   "equity_final": 9283653,
+   "max_drawdown_pct": 7.16,
    "avg_hold_days": 3.22,
    "skipped": {
     "gap": 0,
     "limit": 9,
-    "cooldown": 0,
+    "cooldown": 2,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -410,7 +513,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -6.51
+    "2026": -7.16
    },
    "open_positions": [
     {
@@ -422,9 +525,9 @@
      "entry": 8836.43,
      "stop": 8217.88,
      "shares": 152,
-     "bars_held": 7,
-     "last_close": 9520.0,
-     "unrealized_pct": 7.74
+     "bars_held": 8,
+     "last_close": 9040.0,
+     "unrealized_pct": 2.3
     },
     {
      "code": "068270",
@@ -435,15 +538,15 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 6,
-     "bars_held": 7,
-     "last_close": 188600.0,
-     "unrealized_pct": -3.02
+     "bars_held": 8,
+     "last_close": 189800.0,
+     "unrealized_pct": -2.41
     }
    ]
   },
   "risk_2": {
    "label": "동조 + 패턴, 위험 2% (명목 상한 30%)",
-   "signals": 22,
+   "signals": 23,
    "trades": 7,
    "wins": 0,
    "win_rate": 0.0,
@@ -451,9 +554,9 @@
    "avg_loss_pct": -7.15,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -10.93,
-   "equity_final": 8906620,
-   "max_drawdown_pct": 10.93,
+   "total_return_pct": -12.18,
+   "equity_final": 8781580,
+   "max_drawdown_pct": 12.18,
    "avg_hold_days": 2.29,
    "skipped": {
     "gap": 0,
@@ -507,7 +610,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -10.93
+    "2026": -12.18
    },
    "open_positions": [
     {
@@ -519,9 +622,9 @@
      "entry": 8836.43,
      "stop": 8217.88,
      "shares": 293,
-     "bars_held": 7,
-     "last_close": 9520.0,
-     "unrealized_pct": 7.74
+     "bars_held": 8,
+     "last_close": 9040.0,
+     "unrealized_pct": 2.3
     },
     {
      "code": "068270",
@@ -532,15 +635,15 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 13,
-     "bars_held": 7,
-     "last_close": 188600.0,
-     "unrealized_pct": -3.02
+     "bars_held": 8,
+     "last_close": 189800.0,
+     "unrealized_pct": -2.41
     }
    ]
   },
   "no_flag": {
    "label": "동조 + 패턴, 깃발형 제외",
-   "signals": 8,
+   "signals": 9,
    "trades": 5,
    "wins": 0,
    "win_rate": 0.0,
@@ -548,8 +651,8 @@
    "avg_loss_pct": -7.12,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -5.48,
-   "equity_final": 9451972,
+   "total_return_pct": -5.19,
+   "equity_final": 9481372,
    "max_drawdown_pct": 6.05,
    "avg_hold_days": 3.6,
    "skipped": {
@@ -594,7 +697,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -5.48
+    "2026": -5.19
    },
    "open_positions": [
     {
@@ -606,9 +709,9 @@
      "entry": 386656.5,
      "stop": 359590.54,
      "shares": 3,
-     "bars_held": 14,
-     "last_close": 382500.0,
-     "unrealized_pct": -1.07
+     "bars_held": 15,
+     "last_close": 389500.0,
+     "unrealized_pct": 0.74
     },
     {
      "code": "068270",
@@ -619,9 +722,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 7,
-     "bars_held": 7,
-     "last_close": 188600.0,
-     "unrealized_pct": -3.02
+     "bars_held": 8,
+     "last_close": 189800.0,
+     "unrealized_pct": -2.41
     }
    ]
   }
