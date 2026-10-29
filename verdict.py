@@ -150,6 +150,10 @@ def judge_kr_breakout(fwd, backtest, crit):
         out["control"] = {"variant": cv, "trades": c["trades"], "win_rate_pct": c.get("win_rate"),
                           "total_return_pct": c.get("total_return_pct"),
                           "return_delta_pct": r2((st.get("total_return_pct") or 0) - (c.get("total_return_pct") or 0))}
+    # 운 보정 경고는 합격선이 아니라 표시다 — 최소 건수 전에도 붙인다 (2026-10-29 사용자 결정 "A", z −2.04 가 안 보였던 틈)
+    if out["luck"] and out["luck"]["z"] < crit["luck_z_warn_below"]:
+        out["warnings"].append("운 보정 z %.2f — 백테스트 승률(%.1f%%)대로면 %.1f승 기대, 실제 %d승. 생존 편향 의심" % (
+            out["luck"]["z"], bt["win_rate"], out["luck"]["expected_wins"], wins))
     if n < crit["min_trades"]:
         out["status"] = NOT_YET
         out["reason"] = "순방향 매매 %d건 — 최소 %d건 전에는 판단하지 않는다" % (n, crit["min_trades"])
@@ -171,9 +175,6 @@ def judge_kr_breakout(fwd, backtest, crit):
                                          "fail_below": crit["hold20_fail_if_win_share_below"],
                                          "applies": len(h20) >= crit["hold20_min_trades"],
                                          "fail": len(h20) >= crit["hold20_min_trades"] and share < crit["hold20_fail_if_win_share_below"]}
-    if out["luck"] and out["luck"]["z"] < crit["luck_z_warn_below"]:
-        out["warnings"].append("운 보정 z %.2f — 백테스트 승률(%.1f%%)대로면 %.1f승 기대, 실제 %d승. 생존 편향 의심" % (
-            out["luck"]["z"], bt["win_rate"], out["luck"]["expected_wins"], wins))
     if out["checks"]["win_rate"]["fail"]:
         out["status"], out["reason"] = FAIL, "승률 %.1f%% < %.0f%% — 사전 등록 기준 미달" % (wr, crit["fail_if_win_rate_below_pct"])
     elif out["checks"]["hold20_win_share"]["fail"]:
