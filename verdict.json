@@ -1,7 +1,7 @@
 {
   "schema": "carrygate-verdict/1",
   "date": "2026-10-29",
-  "generated_at_utc": "2026-10-29T07:16:34Z",
+  "generated_at_utc": "2026-10-29T13:48:39Z",
   "criteria_sealed": "2026-10-22",
   "tracks": {
     "kr_breakout": {
@@ -11,8 +11,8 @@
       "trades": 10,
       "wins": 0,
       "win_rate_pct": 0.0,
-      "total_return_pct": -9.69,
-      "max_drawdown_pct": 9.69,
+      "total_return_pct": -9.83,
+      "max_drawdown_pct": 9.83,
       "signals": 22,
       "skipped_no_slot": 9,
       "backtest_win_rate_pct": 29.35,
@@ -22,7 +22,9 @@
         "z": -2.04
       },
       "checks": {},
-      "warnings": [],
+      "warnings": [
+        "운 보정 z -2.04 — 백테스트 승률(29.4%)대로면 2.9승 기대, 실제 0승. 생존 편향 의심"
+      ],
       "interpretation": {
         "pass_pct_if_backtest_true": 86.17,
         "pass_pct_if_win_rate_halved": 38.16,
@@ -32,8 +34,8 @@
         "variant": "no_sector",
         "trades": 17,
         "win_rate_pct": 0.0,
-        "total_return_pct": -13.05,
-        "return_delta_pct": 3.36
+        "total_return_pct": -13.2,
+        "return_delta_pct": 3.37
       },
       "status": "NOT_YET",
       "reason": "순방향 매매 10건 — 최소 15건 전에는 판단하지 않는다"
