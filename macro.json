@@ -1,7 +1,7 @@
 {
  "schema": "carrygate-macro/1",
- "date": "2026-10-29",
- "generated_at_kst": "2026-10-29 14:58:52",
+ "date": "2026-10-30",
+ "generated_at_kst": "2026-10-30 14:59:49",
  "method": {
   "window": "발표 분의 시가를 기준가로, 직전 30분과 직후 (5, 15, 30, 60)분 수익률(bp), 60분 내 최대 상승·하락",
   "baseline": "전날 같은 시각의 30분 변동폭 = 평소 기준",
@@ -2154,22 +2154,92 @@
    "actual": null,
    "forecast": 4.0,
    "previous": 4
-  }
- ],
- "new_today": 2,
- "errors": {},
- "skipped": {},
- "upcoming": [
+  },
   {
    "type": "gdp",
    "title": "GDP Growth Rate QoQ Adv",
-   "time_utc": "2026-10-29T12:30:00Z"
+   "time_utc": "2026-10-29T12:30:00Z",
+   "ts": 1793277000,
+   "coin": "BTC",
+   "source": "hyperliquid",
+   "forward": true,
+   "pre30_bp": -5.24,
+   "post5_bp": -6.87,
+   "post15_bp": 1.0,
+   "post30_bp": -8.24,
+   "post60_bp": 17.1,
+   "maxup60_bp": 23.1,
+   "maxdown60_bp": -12.86,
+   "base_abs_post30_bp": 27.92,
+   "actual": null,
+   "forecast": 3.2,
+   "previous": 2.2
   },
   {
    "type": "pce",
    "title": "Core PCE Price Index MoM",
-   "time_utc": "2026-10-29T12:30:00Z"
+   "time_utc": "2026-10-29T12:30:00Z",
+   "ts": 1793277000,
+   "coin": "BTC",
+   "source": "hyperliquid",
+   "forward": true,
+   "pre30_bp": -5.24,
+   "post5_bp": -6.87,
+   "post15_bp": 1.0,
+   "post30_bp": -8.24,
+   "post60_bp": 17.1,
+   "maxup60_bp": 23.1,
+   "maxdown60_bp": -12.86,
+   "base_abs_post30_bp": 27.92,
+   "actual": null,
+   "forecast": 0.3,
+   "previous": 0.2
   },
+  {
+   "type": "gdp",
+   "title": "GDP Growth Rate QoQ Adv",
+   "time_utc": "2026-10-29T12:30:00Z",
+   "ts": 1793277000,
+   "coin": "ETH",
+   "source": "hyperliquid",
+   "forward": true,
+   "pre30_bp": -5.59,
+   "post5_bp": -15.5,
+   "post15_bp": -3.87,
+   "post30_bp": -5.17,
+   "post60_bp": 21.52,
+   "maxup60_bp": 32.71,
+   "maxdown60_bp": -26.69,
+   "base_abs_post30_bp": 38.33,
+   "actual": null,
+   "forecast": 3.2,
+   "previous": 2.2
+  },
+  {
+   "type": "pce",
+   "title": "Core PCE Price Index MoM",
+   "time_utc": "2026-10-29T12:30:00Z",
+   "ts": 1793277000,
+   "coin": "ETH",
+   "source": "hyperliquid",
+   "forward": true,
+   "pre30_bp": -5.59,
+   "post5_bp": -15.5,
+   "post15_bp": -3.87,
+   "post30_bp": -5.17,
+   "post60_bp": 21.52,
+   "maxup60_bp": 32.71,
+   "maxdown60_bp": -26.69,
+   "base_abs_post30_bp": 38.33,
+   "actual": null,
+   "forecast": 0.3,
+   "previous": 0.2
+  }
+ ],
+ "new_today": 4,
+ "errors": {},
+ "skipped": {},
+ "upcoming": [
   {
    "type": "nfp",
    "title": "Non Farm Payrolls",
@@ -2214,14 +2284,14 @@
    "hit_rate_pct": null
   },
   "gdp": {
-   "n": 10,
+   "n": 12,
    "n_surprise": 10,
-   "abs_post30_bp": 37.987,
-   "base_abs_post30_bp": 20.002,
-   "ratio_vs_base": 1.899,
-   "abs_post5_bp": 15.304,
-   "maxup60_bp": 12.192,
-   "maxdown60_bp": -70.597,
+   "abs_post30_bp": 32.773,
+   "base_abs_post30_bp": 22.189,
+   "ratio_vs_base": 1.477,
+   "abs_post5_bp": 14.617,
+   "maxup60_bp": 14.811,
+   "maxdown60_bp": -62.127,
    "signed_post30_bp": 10.951,
    "signed_post60_bp": 8.216,
    "hit_rate_pct": 60.0
@@ -2240,23 +2310,23 @@
    "hit_rate_pct": 63.6
   },
   "pce": {
-   "n": 22,
+   "n": 24,
    "n_surprise": 8,
-   "abs_post30_bp": 52.245,
-   "base_abs_post30_bp": 27.822,
-   "ratio_vs_base": 1.878,
-   "abs_post5_bp": 35.37,
-   "maxup60_bp": 75.898,
-   "maxdown60_bp": -45.718,
+   "abs_post30_bp": 48.45,
+   "base_abs_post30_bp": 28.264,
+   "ratio_vs_base": 1.714,
+   "abs_post5_bp": 33.354,
+   "maxup60_bp": 71.898,
+   "maxdown60_bp": -43.556,
    "signed_post30_bp": 56.556,
    "signed_post60_bp": 32.355,
    "hit_rate_pct": 100.0
   },
   "all": {
-   "n": 98,
-   "abs_post30_bp": 62.741,
-   "base_abs_post30_bp": 26.846,
-   "ratio_vs_base": 2.337
+   "n": 102,
+   "abs_post30_bp": 60.544,
+   "base_abs_post30_bp": 27.092,
+   "ratio_vs_base": 2.235
   }
  },
  "forward_summary": {
@@ -2286,6 +2356,19 @@
    "signed_post60_bp": null,
    "hit_rate_pct": null
   },
+  "gdp": {
+   "n": 2,
+   "n_surprise": 0,
+   "abs_post30_bp": 6.705,
+   "base_abs_post30_bp": 33.125,
+   "ratio_vs_base": 0.202,
+   "abs_post5_bp": 11.185,
+   "maxup60_bp": 27.905,
+   "maxdown60_bp": -19.775,
+   "signed_post30_bp": null,
+   "signed_post60_bp": null,
+   "hit_rate_pct": null
+  },
   "nfp": {
    "n": 2,
    "n_surprise": 2,
@@ -2299,13 +2382,26 @@
    "signed_post60_bp": -0.515,
    "hit_rate_pct": 100.0
   },
+  "pce": {
+   "n": 2,
+   "n_surprise": 0,
+   "abs_post30_bp": 6.705,
+   "base_abs_post30_bp": 33.125,
+   "ratio_vs_base": 0.202,
+   "abs_post5_bp": 11.185,
+   "maxup60_bp": 27.905,
+   "maxdown60_bp": -19.775,
+   "signed_post30_bp": null,
+   "signed_post60_bp": null,
+   "hit_rate_pct": null
+  },
   "all": {
-   "n": 6,
-   "abs_post30_bp": 60.82,
-   "base_abs_post30_bp": 16.362,
-   "ratio_vs_base": 3.717
+   "n": 10,
+   "abs_post30_bp": 39.174,
+   "base_abs_post30_bp": 23.067,
+   "ratio_vs_base": 1.698
   }
  },
- "forward_events": 6,
- "forward_pending_surprise": 2
+ "forward_events": 10,
+ "forward_pending_surprise": 6
 }
