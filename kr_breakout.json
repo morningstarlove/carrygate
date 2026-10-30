@@ -1,6 +1,6 @@
 {
- "date": "2026-10-29",
- "generated_at_utc": "2026-10-29T13:48:39Z",
+ "date": "2026-10-30",
+ "generated_at_utc": "2026-10-30T07:17:45Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -74,15 +74,15 @@
   }
  },
  "forward": {
-  "days": 17,
+  "days": 18,
   "from": "2026-10-05",
-  "to": "2026-10-29",
-  "codes": 252,
+  "to": "2026-10-30",
+  "codes": 263,
   "bar_errors": 0,
   "stale_codes": 0,
   "by_source": {
-   "yahoo": 193,
-   "yahoo+naver_api": 59
+   "yahoo+naver_api": 60,
+   "yahoo": 203
   },
   "skipped_days": [
    "2026-10-05"
@@ -99,8 +99,8 @@
   "risk_2": [],
   "no_flag": []
  },
- "signal_date": "2026-10-29",
- "signals_frozen": true,
+ "signal_date": "2026-10-30",
+ "signals_frozen": false,
  "frozen_dates": [
   "2026-10-06",
   "2026-10-07",
@@ -124,17 +124,17 @@
   "base": {
    "label": "동조 업종 + 패턴 돌파 (기본)",
    "signals": 22,
-   "trades": 10,
+   "trades": 11,
    "wins": 0,
    "win_rate": 0.0,
    "avg_win_pct": null,
-   "avg_loss_pct": -7.29,
+   "avg_loss_pct": -7.3,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -9.83,
-   "equity_final": 9017470,
-   "max_drawdown_pct": 9.83,
-   "avg_hold_days": 3.6,
+   "total_return_pct": -10.69,
+   "equity_final": 8930906,
+   "max_drawdown_pct": 10.69,
+   "avg_hold_days": 4.18,
    "skipped": {
     "gap": 0,
     "limit": 9,
@@ -145,9 +145,9 @@
    },
    "by_pattern": {
     "flag": {
-     "n": 4,
+     "n": 5,
      "wins": 0,
-     "pnl_krw": -410256
+     "pnl_krw": -510279
     },
     "cup_handle": {
      "n": 1,
@@ -167,42 +167,29 @@
    },
    "by_sync": {
     "day": {
-     "n": 10,
+     "n": 11,
      "wins": 0,
-     "pnl_krw": -951606
+     "pnl_krw": -1051629
     }
    },
    "by_exit": {
     "stop": {
-     "n": 10,
+     "n": 11,
      "wins": 0,
-     "pnl_krw": -951606
+     "pnl_krw": -1051629
     }
    },
    "by_year": {
     "2026": {
-     "n": 10,
+     "n": 11,
      "wins": 0,
-     "pnl_krw": -951606
+     "pnl_krw": -1051629
     }
    },
    "yearly_return_pct": {
-    "2026": -9.83
+    "2026": -10.69
    },
    "open_positions": [
-    {
-     "code": "396300",
-     "name": "HT ROBOTICS Co. Ltd",
-     "group": "Computer Communications",
-     "pattern": "flag",
-     "entry_date": "2026-10-19",
-     "entry": 8836.43,
-     "stop": 8217.88,
-     "shares": 152,
-     "bars_held": 9,
-     "last_close": 8840.0,
-     "unrealized_pct": 0.04
-    },
     {
      "code": "068270",
      "name": "Celltrion, Inc.",
@@ -212,32 +199,32 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 6,
-     "bars_held": 9,
-     "last_close": 189300.0,
-     "unrealized_pct": -2.66
+     "bars_held": 10,
+     "last_close": 191600.0,
+     "unrealized_pct": -1.48
     }
    ]
   },
   "no_sector": {
    "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
    "signals": 64,
-   "trades": 17,
+   "trades": 18,
    "wins": 0,
    "win_rate": 0.0,
    "avg_win_pct": null,
    "avg_loss_pct": -7.42,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -13.2,
-   "equity_final": 8680115,
-   "max_drawdown_pct": 13.2,
-   "avg_hold_days": 2.41,
+   "total_return_pct": -13.47,
+   "equity_final": 8652979,
+   "max_drawdown_pct": 13.47,
+   "avg_hold_days": 2.39,
    "skipped": {
     "gap": 0,
-    "limit": 41,
-    "cooldown": 0,
+    "limit": 42,
+    "cooldown": 2,
     "size": 1,
-    "no_bar": 1,
+    "no_bar": 0,
     "pattern": 0
    },
    "by_pattern": {
@@ -257,9 +244,9 @@
      "pnl_krw": -401380
     },
     "box": {
-     "n": 6,
+     "n": 7,
      "wins": 0,
-     "pnl_krw": -541947
+     "pnl_krw": -630571
     }
    },
    "by_sync": {
@@ -269,27 +256,27 @@
      "pnl_krw": -463564
     },
     "none": {
-     "n": 12,
+     "n": 13,
      "wins": 0,
-     "pnl_krw": -1169097
+     "pnl_krw": -1257721
     }
    },
    "by_exit": {
     "stop": {
-     "n": 17,
+     "n": 18,
      "wins": 0,
-     "pnl_krw": -1632661
+     "pnl_krw": -1721285
     }
    },
    "by_year": {
     "2026": {
-     "n": 17,
+     "n": 18,
      "wins": 0,
-     "pnl_krw": -1632661
+     "pnl_krw": -1721285
     }
    },
    "yearly_return_pct": {
-    "2026": -13.2
+    "2026": -13.47
    },
    "open_positions": [
     {
@@ -301,9 +288,9 @@
      "entry": 21363.9,
      "stop": 20800.0,
      "shares": 83,
-     "bars_held": 13,
-     "last_close": 22300.0,
-     "unrealized_pct": 4.38
+     "bars_held": 14,
+     "last_close": 23350.0,
+     "unrealized_pct": 9.3
     },
     {
      "code": "396300",
@@ -314,9 +301,9 @@
      "entry": 7452.29,
      "stop": 6930.63,
      "shares": 170,
-     "bars_held": 10,
-     "last_close": 8840.0,
-     "unrealized_pct": 18.62
+     "bars_held": 11,
+     "last_close": 8390.0,
+     "unrealized_pct": 12.58
     },
     {
      "code": "033780",
@@ -327,39 +314,26 @@
      "entry": 187761.6,
      "stop": 174618.29,
      "shares": 6,
-     "bars_held": 10,
-     "last_close": 193100.0,
-     "unrealized_pct": 2.84
-    },
-    {
-     "code": "064400",
-     "name": "LG CNS Co., Ltd.",
-     "group": "Information Technology Services",
-     "pattern": "box",
-     "entry_date": "2026-10-29",
-     "entry": 79337.3,
-     "stop": 73783.69,
-     "shares": 15,
-     "bars_held": 1,
-     "last_close": 77200.0,
-     "unrealized_pct": -2.69
+     "bars_held": 11,
+     "last_close": 196200.0,
+     "unrealized_pct": 4.49
     }
    ]
   },
   "hold_10": {
    "label": "동조 + 패턴, 보유 10일",
    "signals": 22,
-   "trades": 10,
+   "trades": 11,
    "wins": 1,
-   "win_rate": 10.0,
+   "win_rate": 9.09,
    "avg_win_pct": 4.89,
-   "avg_loss_pct": -7.27,
+   "avg_loss_pct": -7.29,
    "payoff": 0.58,
    "profit_factor": 0.06,
-   "total_return_pct": -8.48,
-   "equity_final": 9152375,
-   "max_drawdown_pct": 8.48,
-   "avg_hold_days": 3,
+   "total_return_pct": -9.34,
+   "equity_final": 9065810,
+   "max_drawdown_pct": 9.34,
+   "avg_hold_days": 3.64,
    "skipped": {
     "gap": 0,
     "limit": 9,
@@ -370,9 +344,9 @@
    },
    "by_pattern": {
     "flag": {
-     "n": 4,
+     "n": 5,
      "wins": 0,
-     "pnl_krw": -410256
+     "pnl_krw": -510279
     },
     "cup_handle": {
      "n": 1,
@@ -392,16 +366,16 @@
    },
    "by_sync": {
     "day": {
-     "n": 10,
+     "n": 11,
      "wins": 1,
-     "pnl_krw": -816701
+     "pnl_krw": -916724
     }
    },
    "by_exit": {
     "stop": {
-     "n": 9,
+     "n": 10,
      "wins": 0,
-     "pnl_krw": -873379
+     "pnl_krw": -973402
     },
     "hold10": {
      "n": 1,
@@ -411,28 +385,15 @@
    },
    "by_year": {
     "2026": {
-     "n": 10,
+     "n": 11,
      "wins": 1,
-     "pnl_krw": -816701
+     "pnl_krw": -916724
     }
    },
    "yearly_return_pct": {
-    "2026": -8.48
+    "2026": -9.34
    },
    "open_positions": [
-    {
-     "code": "396300",
-     "name": "HT ROBOTICS Co. Ltd",
-     "group": "Computer Communications",
-     "pattern": "flag",
-     "entry_date": "2026-10-19",
-     "entry": 8836.43,
-     "stop": 8217.88,
-     "shares": 152,
-     "bars_held": 9,
-     "last_close": 8840.0,
-     "unrealized_pct": 0.04
-    },
     {
      "code": "068270",
      "name": "Celltrion, Inc.",
@@ -442,26 +403,26 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 6,
-     "bars_held": 9,
-     "last_close": 189300.0,
-     "unrealized_pct": -2.66
+     "bars_held": 10,
+     "last_close": 191600.0,
+     "unrealized_pct": -1.48
     }
    ]
   },
   "risk_2": {
    "label": "동조 + 패턴, 위험 2% (명목 상한 30%)",
    "signals": 23,
-   "trades": 8,
+   "trades": 9,
    "wins": 0,
    "win_rate": 0.0,
    "avg_win_pct": null,
-   "avg_loss_pct": -7.19,
+   "avg_loss_pct": -7.22,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -14.63,
-   "equity_final": 8537037,
-   "max_drawdown_pct": 14.63,
-   "avg_hold_days": 2.12,
+   "total_return_pct": -16.27,
+   "equity_final": 8373471,
+   "max_drawdown_pct": 16.27,
+   "avg_hold_days": 3,
    "skipped": {
     "gap": 0,
     "limit": 0,
@@ -472,9 +433,9 @@
    },
    "by_pattern": {
     "flag": {
-     "n": 3,
+     "n": 4,
      "wins": 0,
-     "pnl_krw": -514015
+     "pnl_krw": -706823
     },
     "cup_handle": {
      "n": 1,
@@ -489,9 +450,9 @@
    },
    "by_sync": {
     "day": {
-     "n": 7,
+     "n": 8,
      "wins": 0,
-     "pnl_krw": -1294030
+     "pnl_krw": -1486838
     },
     "week": {
      "n": 1,
@@ -501,35 +462,22 @@
    },
    "by_exit": {
     "stop": {
-     "n": 8,
+     "n": 9,
      "wins": 0,
-     "pnl_krw": -1395880
+     "pnl_krw": -1588688
     }
    },
    "by_year": {
     "2026": {
-     "n": 8,
+     "n": 9,
      "wins": 0,
-     "pnl_krw": -1395880
+     "pnl_krw": -1588688
     }
    },
    "yearly_return_pct": {
-    "2026": -14.63
+    "2026": -16.27
    },
    "open_positions": [
-    {
-     "code": "396300",
-     "name": "HT ROBOTICS Co. Ltd",
-     "group": "Computer Communications",
-     "pattern": "flag",
-     "entry_date": "2026-10-19",
-     "entry": 8836.43,
-     "stop": 8217.88,
-     "shares": 293,
-     "bars_held": 9,
-     "last_close": 8840.0,
-     "unrealized_pct": 0.04
-    },
     {
      "code": "068270",
      "name": "Celltrion, Inc.",
@@ -539,9 +487,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 13,
-     "bars_held": 9,
-     "last_close": 189300.0,
-     "unrealized_pct": -2.66
+     "bars_held": 10,
+     "last_close": 191600.0,
+     "unrealized_pct": -1.48
     }
    ]
   },
@@ -555,8 +503,8 @@
    "avg_loss_pct": -7.21,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -7.15,
-   "equity_final": 9285255,
+   "total_return_pct": -6.99,
+   "equity_final": 9301355,
    "max_drawdown_pct": 7.59,
    "avg_hold_days": 5,
    "skipped": {
@@ -606,7 +554,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -7.15
+    "2026": -6.99
    },
    "open_positions": [
     {
@@ -618,9 +566,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 7,
-     "bars_held": 9,
-     "last_close": 189300.0,
-     "unrealized_pct": -2.66
+     "bars_held": 10,
+     "last_close": 191600.0,
+     "unrealized_pct": -1.48
     }
    ]
   }
@@ -849,6 +797,28 @@
     "pnl_krw": -89722,
     "pnl_pct": -7.45,
     "hold_days": 1,
+    "gap": false
+   },
+   {
+    "code": "396300",
+    "name": "HT ROBOTICS Co. Ltd",
+    "group": "Computer Communications",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-16",
+    "entry_date": "2026-10-19",
+    "entry": 8836.43,
+    "stop": 8217.88,
+    "exit_date": "2026-10-30",
+    "exit": 8193.23,
+    "why": "stop",
+    "shares": 152,
+    "pnl_krw": -100023,
+    "pnl_pct": -7.45,
+    "hold_days": 10,
     "gap": false
    }
   ],
@@ -1234,6 +1204,28 @@
     "pnl_pct": -7.45,
     "hold_days": 1,
     "gap": false
+   },
+   {
+    "code": "064400",
+    "name": "LG CNS Co., Ltd.",
+    "group": "Information Technology Services",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": null,
+    "signal_date": "2026-10-28",
+    "entry_date": "2026-10-29",
+    "entry": 79337.3,
+    "stop": 73783.69,
+    "exit_date": "2026-10-30",
+    "exit": 73562.34,
+    "why": "stop",
+    "shares": 15,
+    "pnl_krw": -88624,
+    "pnl_pct": -7.45,
+    "hold_days": 2,
+    "gap": false
    }
   ],
   "hold_10": [
@@ -1460,6 +1452,28 @@
     "pnl_pct": -7.45,
     "hold_days": 1,
     "gap": false
+   },
+   {
+    "code": "396300",
+    "name": "HT ROBOTICS Co. Ltd",
+    "group": "Computer Communications",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-16",
+    "entry_date": "2026-10-19",
+    "entry": 8836.43,
+    "stop": 8217.88,
+    "exit_date": "2026-10-30",
+    "exit": 8193.23,
+    "why": "stop",
+    "shares": 152,
+    "pnl_krw": -100023,
+    "pnl_pct": -7.45,
+    "hold_days": 10,
+    "gap": false
    }
   ],
   "risk_2": [
@@ -1640,6 +1654,28 @@
     "pnl_krw": -179443,
     "pnl_pct": -7.45,
     "hold_days": 1,
+    "gap": false
+   },
+   {
+    "code": "396300",
+    "name": "HT ROBOTICS Co. Ltd",
+    "group": "Computer Communications",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-16",
+    "entry_date": "2026-10-19",
+    "entry": 8836.43,
+    "stop": 8217.88,
+    "exit_date": "2026-10-30",
+    "exit": 8193.23,
+    "why": "stop",
+    "shares": 293,
+    "pnl_krw": -192808,
+    "pnl_pct": -7.45,
+    "hold_days": 10,
     "gap": false
    }
   ],
