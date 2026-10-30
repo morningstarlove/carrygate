@@ -1,6 +1,6 @@
 {
  "date": "2026-10-30",
- "generated_at_utc": "2026-10-30T07:17:45Z",
+ "generated_at_utc": "2026-10-30T13:42:23Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -81,8 +81,8 @@
   "bar_errors": 0,
   "stale_codes": 0,
   "by_source": {
-   "yahoo+naver_api": 60,
-   "yahoo": 203
+   "yahoo": 203,
+   "yahoo+naver_api": 60
   },
   "skipped_days": [
    "2026-10-05"
@@ -100,7 +100,7 @@
   "no_flag": []
  },
  "signal_date": "2026-10-30",
- "signals_frozen": false,
+ "signals_frozen": true,
  "frozen_dates": [
   "2026-10-06",
   "2026-10-07",
@@ -118,7 +118,8 @@
   "2026-10-26",
   "2026-10-27",
   "2026-10-28",
-  "2026-10-29"
+  "2026-10-29",
+  "2026-10-30"
  ],
  "variants": {
   "base": {
@@ -215,14 +216,14 @@
    "avg_loss_pct": -7.42,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -13.47,
-   "equity_final": 8652979,
-   "max_drawdown_pct": 13.47,
+   "total_return_pct": -13.69,
+   "equity_final": 8630879,
+   "max_drawdown_pct": 13.69,
    "avg_hold_days": 2.39,
    "skipped": {
     "gap": 0,
     "limit": 42,
-    "cooldown": 2,
+    "cooldown": 0,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -276,7 +277,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -13.47
+    "2026": -13.69
    },
    "open_positions": [
     {
@@ -302,8 +303,8 @@
      "stop": 6930.63,
      "shares": 170,
      "bars_held": 11,
-     "last_close": 8390.0,
-     "unrealized_pct": 12.58
+     "last_close": 8260.0,
+     "unrealized_pct": 10.84
     },
     {
      "code": "033780",
