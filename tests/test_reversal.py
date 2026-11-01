@@ -217,5 +217,36 @@ class Backtest(unittest.TestCase):
         self.assertAlmostEqual(sg3["stop"], 134.0)
 
 
+class BarsHistory(unittest.TestCase):
+    """4시간봉 단위 기록 (reversal_bars.jsonl): 같은 봉은 덮어쓰고, 봉 시각순이며, 단계 변화를 changes 에 남긴다."""
+
+    def _out(self, bar, phase_btc):
+        sig = lambda ph: {"last_bar": bar, "phase": ph, "close": 100.0, "neckline": None, "stop": None, "entry": None,
+                          "unrealized_pct": None, "bars_left": None}
+        return {"date": bar[:10], "generated_at_kst": "x",
+                "summary": {"upbit": {"forward_trades": 0, "forward_net_pct": None}},
+                "venues": {"upbit": {"markets": {"BTC": {"signal": sig(phase_btc)}, "ETH": {"signal": sig("scan")}}}}}
+
+    def test_write_bars_history_dedup_sort_changes(self):
+        import tempfile, json
+        with tempfile.TemporaryDirectory() as d:
+            path = os.path.join(d, "bars.jsonl")
+            reversal.write_bars_history(self._out("2026-11-01 04:00", "scan"), path)
+            reversal.write_bars_history(self._out("2026-11-01 12:00", "armed"), path)    # 08:00 봉은 건너뛰었다(실행 누락)
+            reversal.write_bars_history(self._out("2026-11-01 08:00", "scan"), path)     # 뒤늦게 들어와도 순서대로
+            reversal.write_bars_history(self._out("2026-11-01 12:00", "broken"), path)   # 같은 봉 재실행 → 덮어쓴다
+            rows = [json.loads(l) for l in open(path, encoding="utf-8") if l.strip()]
+            self.assertEqual([r["bar"] for r in rows], ["2026-11-01 04:00", "2026-11-01 08:00", "2026-11-01 12:00"])
+            self.assertEqual(rows[-1]["signals"]["upbit/BTC"]["phase"], "broken")
+            self.assertEqual(rows[0]["changes"], ["upbit/BTC -→scan", "upbit/ETH -→scan"])   # 첫 줄은 직전이 없다
+            self.assertEqual(rows[2]["changes"], ["upbit/BTC scan→broken"])                 # 08:00(scan) 대비
+            self.assertEqual(rows[2]["forward"]["upbit"]["trades"], 0)
+
+    def test_bars_key_is_latest_last_bar(self):
+        out = self._out("2026-11-01 04:00", "scan")
+        out["venues"]["upbit"]["markets"]["ETH"]["signal"]["last_bar"] = "2026-11-01 08:00"
+        self.assertEqual(reversal.bars_key(out), "2026-11-01 08:00")
+
+
 if __name__ == "__main__":
     unittest.main()

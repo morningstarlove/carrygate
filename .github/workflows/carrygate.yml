@@ -177,7 +177,7 @@ jobs:
           # 아무것도 저장되지 않는다(2026-10-02~04 결과 유실). 있는 경로만 하나씩 추가한다.
           for p in status.json history.jsonl funding.json funding_history.jsonl scalp.json scalp_history.jsonl scalp_binance.json scalp_binance_history.jsonl research.json research_history.jsonl \
                    basis.json basis_history.jsonl funding_signal.json funding_signal_history.jsonl kimchi.json kimchi_history.jsonl \
-                   macro.json listing.json momentum.json momentum_history.jsonl live.json live_history.jsonl turtle.json turtle_history.jsonl reversal.json reversal_history.jsonl retest.json retest_history.jsonl verdict.json verdict_history.jsonl \
+                   macro.json listing.json momentum.json momentum_history.jsonl live.json live_history.jsonl turtle.json turtle_history.jsonl reversal.json reversal_history.jsonl reversal_bars.jsonl retest.json retest_history.jsonl verdict.json verdict_history.jsonl \
                    grid.json grid_history.jsonl \
                    data/kr_funding.json data/binance_1m data/cg_funding_snapshots.jsonl data/etf data/upbit_markets.json; do
             if [ -e "$p" ]; then git add -A "$p"; else echo "없음(건너뜀): $p"; fi
