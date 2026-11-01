@@ -637,6 +637,37 @@ def check_kr(problems, notes):
     return checked
 
 
+def check_reversal_bars(problems, notes, path="reversal_bars.jsonl"):
+    """추세 전환 4시간봉 기록: 봉 시각 중복·순서, 봉 시각이 4시간 경계인지, 시장 12개가 다 있는지."""
+    rows = load_rows(path)
+    if not rows:
+        notes.append("추세 전환 4시간봉 기록 파일이 아직 없다")
+        return 0
+    seen, bars, checked = {}, [], 0
+    for n, r in rows:
+        if r is None or not r.get("bar"):
+            problems.append("추세 전환 4시간봉 기록 %d번째 줄이 깨졌거나 봉 시각이 없다" % n)
+            continue
+        b = r["bar"]
+        if b in seen:
+            problems.append("추세 전환 4시간봉 기록 봉 %s 가 %d번, %d번 줄에 중복" % (b, seen[b], n))
+        seen[b] = n
+        bars.append(b)
+        hh = b[11:13] if len(b) >= 16 else ""
+        if hh not in ("00", "04", "08", "12", "16", "20") or b[14:16] != "00":
+            problems.append("추세 전환 4시간봉 기록 봉 %s 가 4시간 경계가 아니다" % b)
+            continue
+        sig = r.get("signals") or {}
+        if len(sig) and len(sig) != 12:
+            problems.append("추세 전환 4시간봉 기록 봉 %s 시장 수 %d (12 여야 한다)" % (b, len(sig)))
+            continue
+        checked += 1
+    if bars != sorted(bars):
+        problems.append("추세 전환 4시간봉 기록이 봉 시각순이 아니다")
+    notes.append("추세 전환 4시간봉 기록 %d봉 (%s ~ %s UTC)" % (len(bars), bars[0] if bars else "-", bars[-1] if bars else "-"))
+    return checked
+
+
 def main():
     problems, notes = [], []
 
@@ -656,6 +687,7 @@ def main():
     basis_checked = check_basis(problems, notes)
     turtle_checked = check_turtle(problems, notes)
     reversal_checked = check_reversal(problems, notes)
+    check_reversal_bars(problems, notes)
     retest_checked = check_retest(problems, notes)
     grid_checked = check_grid(problems, notes)
     kr_checked = check_kr(problems, notes)

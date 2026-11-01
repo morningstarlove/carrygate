@@ -257,7 +257,7 @@ GitHub Actions가 **매일 한국시간 오전 9시 18분**에 자동 실행한�
 | `macro_events.py` / `listing.py` | 이벤트 연구 ⑤⑥ (누적 JSON). 각각 `--report` |
 | `momentum.py` / `etf_update.py` | 장기 ① ETF 듀얼 모멘텀 백테스트·신호 / 일봉 갱신 |
 | `turtle.py` | 중기 터틀 추세추종 규칙 — 3년 백테스트·오늘 신호·순방향 집계. 변형(55/20, Chandelier Exit) 나란히 기록. `--report` 로 신호 변화 |
-| `reversal.py` | 중기 추세 전환 매매법(4시간봉) — 3년 백테스트·오늘 단계·순방향 집계. 변형(`no_vol`, `break_entry`) 나란히 기록. `--report` 로 단계 변화. 설계서 `docs/REVERSAL_4H_PLAN.md` |
+| `reversal.py` | 중기 추세 전환 매매법(4시간봉) — 3년 백테스트·오늘 단계·순방향 집계. 변형(`no_vol`, `break_entry`) 나란히 기록. `--report` 로 단계 변화(하루·봉 단위). 설계서 `docs/REVERSAL_4H_PLAN.md`. 4시간봉이 닫힐 때마다 `reversal_4h.yml` 이 다시 돌려 `reversal_bars.jsonl` 에 봉마다 한 줄 |
 | `retest.py` | 단기 급상승·급하락 패턴(1시간봉) — 1년 백테스트·오늘 단계(횡보/돌파/조정/보유)·순방향 집계. 롱·숏(거울). 변형(`no_vol`, `zone_limit`, `target_2r`) 나란히 기록. `--report` 로 단계 변화. 설계서 `docs/RETEST_PLAN.md` |
 | `kr_universe.py` / `patterns.py` / `kr_breakout.py` / `kr_ohlcv.py` | 한국 주식 트랙 (6절). 각각 유니버스·동조 / 패턴 판정 / 신호·종이매매·백테스트(`--backtest`, `--report`) / 일봉 수집(`--probe`) |
 | `grid.py` | 중기 그리드(종사종팔 v4/v5) — SOXL·TQQQ 16년 백테스트, 수수료 민감도, 블로그 주장 대비, 순방향 가상 계좌. `--report` 로 계좌 추이 |
@@ -281,7 +281,7 @@ GitHub Actions가 **매일 한국시간 오전 9시 18분**에 자동 실행한�
 | `tests/test_research.py` | 보조 연구·호가창 계산 로직 자동 시험 (14건) |
 | `tests/test_midterm.py` / `tests/test_momentum.py` | 중기·이벤트·장기 모듈 자동 시험 (13건 / 18건) |
 | `tests/test_turtle.py` | 터틀 계산 로직 자동 시험 (12건) |
-| `tests/test_reversal.py` | 추세 전환 계산 로직 자동 시험 (13건) |
+| `tests/test_reversal.py` | 추세 전환 계산 로직 자동 시험 (15건, 4시간봉 기록 2건 포함) |
 | `tests/test_retest.py` | 급상승·급하락 패턴 계산 로직 자동 시험 (19건) |
 | `tests/test_grid.py` | 그리드(종사종팔) 계산 로직 자동 시험 (10건) |
 | `tests/test_relay.py` | 한국 중계 처리 자동 시험 (7건) |
