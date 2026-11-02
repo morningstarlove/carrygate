@@ -18,16 +18,22 @@ CARRYGATE — 추세 전환 매매법 (4시간봉, "저점이 안 깨지고 직�
 시장: 업비트 현물 6개(KRW) + OKX 무기한선물 6개(USDT), 모두 롱만(카드가 롱 매매법). 주문 기능 없음, 읽기 전용 공개 API.
 
 사용법
-  python reversal.py                                  # 수집·계산·저장 (reversal.json, reversal_history.jsonl)
+  python reversal.py                                  # 수집·계산·저장 (reversal.json, reversal_history.jsonl, reversal_bars.jsonl)
   python reversal.py --dry-run                        # 저장 안 함
   python reversal.py --fixture tests/fixtures/reversal --dry-run   # 저장된 4시간봉 CSV 로 (인터넷 불필요)
   python reversal.py --save-fixture tests/fixtures/reversal        # 거래소에서 받은 봉을 CSV 로 저장 (Actions 에서)
-  python reversal.py --report                         # 기록 누적 보고
+  python reversal.py --report                         # 기록 누적 보고 (하루 단위 + 4시간봉 단위 단계 변화)
+
+실행 주기 (제안함 P3, 2026-11-01 반영): 매일 09:18 KST 의 CARRYGATE daily 외에 reversal_4h.yml 이 4시간봉이 닫힌 직후
+(00·04·08·12·16·20 UTC + 7분) 이 파일만 다시 돌린다. 규칙은 그대로이고 기록 빈도만 늘린 것이다.
+  - reversal_history.jsonl : 하루 한 줄 (같은 날짜는 그날 마지막 실행이 덮어쓴다) — 기존 보고·검산과 호환
+  - reversal_bars.jsonl    : 완성된 4시간봉마다 한 줄 (같은 봉은 덮어쓴다). 단계가 바뀐 시장을 changes 에 남긴다
 """
 import os, sys, json, math, csv, time, argparse
 from datetime import datetime, timezone, timedelta
 
-from scalp import http_json, f, KST, COINS
+from scalp import COINS
+from common import http_json, f, KST, r4
 
 # ----------------------------------------------------------------- 고정 규칙 (사후 조정 금지)
 BAR_MIN = 240               # 4시간봉
@@ -57,10 +63,6 @@ VENUES = {
     "okx":   {"kind": "perp", "quote": "USDT", "fee_pct": 0.05, "equity": 10_000.0,
               "fee_source": "OKX 선물 테이커 0.05% 일반 등급 (지정가도 보수적으로 같은 값)"},
 }
-
-
-def r4(x):
-    return None if x is None else round(x, 4)
 
 
 def rp(x):
@@ -612,6 +614,60 @@ def write_history(out, path="reversal_history.jsonl"):
         fh.write("\n".join(rows) + "\n")
 
 
+def bars_key(out):
+    """이번 결과가 기준으로 삼은 마지막 완성 4시간봉 (시장별 last_bar 중 가장 늦은 것, UTC "YYYY-MM-DD HH:MM")."""
+    last = ""
+    for vd in out["venues"].values():
+        for s in vd["markets"].values():
+            last = max(last, s["signal"].get("last_bar") or "")
+    return last
+
+
+def bars_line(out, prev=None):
+    """4시간봉 한 줄. prev(직전 봉 줄)와 비교해 단계가 바뀐 시장을 changes 에 적는다."""
+    keys = ("phase", "close", "neckline", "stop", "entry", "unrealized_pct", "bars_left")
+    sig = {}
+    for v, vd in out["venues"].items():
+        for m, s in vd["markets"].items():
+            sig["%s/%s" % (v, m)] = {k: s["signal"].get(k) for k in keys}
+    changes = []
+    pv = (prev or {}).get("signals") or {}
+    for k, s in sig.items():
+        before = (pv.get(k) or {}).get("phase")
+        if before != s["phase"]:
+            changes.append("%s %s→%s" % (k, before or "-", s["phase"]))
+    fwd = {v: {"trades": (out["summary"].get(v) or {}).get("forward_trades"), "net_pct": (out["summary"].get(v) or {}).get("forward_net_pct")}
+           for v in out["venues"]}
+    return {"bar": bars_key(out), "date": out["date"], "generated_at_kst": out["generated_at_kst"],
+            "signals": sig, "changes": changes, "forward": fwd}
+
+
+def write_bars_history(out, path="reversal_bars.jsonl"):
+    """완성된 4시간봉마다 한 줄. 같은 봉이 이미 있으면 덮어쓰고(하루 실행과 4시간 실행이 같은 봉을 볼 때), 봉 시각순으로 둔다."""
+    key = bars_key(out)
+    if not key:
+        return None
+    rows = []
+    try:
+        with open(path, encoding="utf-8") as fh:
+            for l in fh.read().splitlines():
+                if l.strip():
+                    try:
+                        rows.append(json.loads(l))
+                    except Exception:
+                        pass
+    except IOError:
+        pass
+    rows = [r for r in rows if r.get("bar") != key]
+    prev = max((r for r in rows if (r.get("bar") or "") < key), key=lambda r: r["bar"], default=None)
+    line = bars_line(out, prev)
+    rows.append(line)
+    rows.sort(key=lambda r: r.get("bar") or "")
+    with open(path, "w", encoding="utf-8") as fh:
+        fh.write("\n".join(json.dumps(r, ensure_ascii=False) for r in rows) + "\n")
+    return line
+
+
 def print_summary(out):
     print("=== 추세 전환 매매법 (4시간봉: 저점 유지 → 목선 거래량 돌파 → 눌림 진입 / 저점 깨지면 청산) ===")
     for v, vd in out["venues"].items():
@@ -663,6 +719,28 @@ def report(path="reversal_history.jsonl"):
             r["date"], (sm.get("upbit") or {}).get("forward_trades"), (sm.get("upbit") or {}).get("forward_net_pct"),
             (sm.get("okx") or {}).get("forward_trades"), (sm.get("okx") or {}).get("forward_net_pct"),
             ("변화: " + ", ".join(changes)) if changes else ""))
+    report_bars()
+
+
+def report_bars(path="reversal_bars.jsonl", last_n=36):
+    """4시간봉 단위 기록 (최근 last_n 봉 = 6일). 단계가 바뀐 봉만 줄을 쓴다."""
+    if not os.path.exists(path):
+        return
+    rows = []
+    with open(path, encoding="utf-8") as fh:
+        for line in fh:
+            line = line.strip()
+            if line:
+                try:
+                    rows.append(json.loads(line))
+                except Exception:
+                    pass
+    if not rows:
+        return
+    print("=== 4시간봉 단위 (%d봉, %s ~ %s UTC, 최근 %d봉 중 단계가 바뀐 봉만) ===" % (len(rows), rows[0]["bar"], rows[-1]["bar"], last_n))
+    for r in rows[-last_n:]:
+        if r.get("changes"):
+            print("%s  %s" % (r["bar"], ", ".join(r["changes"])))
 
 
 def main(argv=None):
@@ -684,6 +762,7 @@ def main(argv=None):
         with open("reversal.json", "w", encoding="utf-8") as fh:
             json.dump(out, fh, ensure_ascii=False, indent=1)
         write_history(out)
+        write_bars_history(out)
     return 0
 
 

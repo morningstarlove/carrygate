@@ -49,6 +49,17 @@ class KrBreakout(unittest.TestCase):
         self.assertEqual(out["status"], V.NOT_YET)
         self.assertEqual(out["control"]["variant"], "no_sector")
 
+    def test_luck_warning_before_min_trades(self):
+        """운 보정 경고는 표시일 뿐이라 최소 건수 전에도 붙는다 (10/29: 10건 0승 z −2.04 가 안 보였던 틈). 판정은 그대로 NOT_YET."""
+        trades = [kb_trade("stop", -7.0)] * 10                       # 0승 10건, 백테스트 28.86% → z ≈ −2.0
+        out = V.judge_kr_breakout(kb_forward(trades), BT, CRIT["kr_breakout"])
+        self.assertEqual(out["status"], V.NOT_YET)
+        self.assertLess(out["luck"]["z"], CRIT["kr_breakout"]["luck_z_warn_below"])
+        self.assertEqual(len(out["warnings"]), 1)
+        self.assertIn("운 보정 z", out["warnings"][0])
+        ok = [kb_trade("hold20", 5.0)] * 3 + [kb_trade("stop", -7.0)] * 5   # z 가 경고선 위 → 경고 없음
+        self.assertEqual(V.judge_kr_breakout(kb_forward(ok), BT, CRIT["kr_breakout"])["warnings"], [])
+
     def test_pass_when_shape_matches_backtest(self):
         # 승률 30%: 손절 14건(−7%), 20일 보유 6건(전부 승)
         trades = [kb_trade("stop", -7.0)] * 14 + [kb_trade("hold20", 20.0)] * 6

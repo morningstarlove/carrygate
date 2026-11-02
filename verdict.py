@@ -21,9 +21,9 @@ Phil(bennyjo/phil) 에서 가져온 방법 세 가지:
 """
 import os, sys, json, math, hashlib, argparse
 from datetime import datetime, timezone, timedelta
+from common import KST, r2
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-KST = timezone(timedelta(hours=9))
 CRITERIA_PATH = os.path.join(HERE, "criteria.json")
 LOCK_PATH = os.path.join(HERE, "rules_lock.json")
 OUT_PATH = os.path.join(HERE, "verdict.json")
@@ -33,9 +33,6 @@ NOT_YET, PASS, FAIL = "NOT_YET", "PASS", "FAIL"
 
 
 # ----------------------------------------------------------------- 순수 계산
-
-def r2(x):
-    return None if x is None else round(x, 2)
 
 
 def luck_z(n, wins, p):
@@ -153,6 +150,10 @@ def judge_kr_breakout(fwd, backtest, crit):
         out["control"] = {"variant": cv, "trades": c["trades"], "win_rate_pct": c.get("win_rate"),
                           "total_return_pct": c.get("total_return_pct"),
                           "return_delta_pct": r2((st.get("total_return_pct") or 0) - (c.get("total_return_pct") or 0))}
+    # 운 보정 경고는 합격선이 아니라 표시다 — 최소 건수 전에도 붙인다 (2026-10-29 사용자 결정 "A", z −2.04 가 안 보였던 틈)
+    if out["luck"] and out["luck"]["z"] < crit["luck_z_warn_below"]:
+        out["warnings"].append("운 보정 z %.2f — 백테스트 승률(%.1f%%)대로면 %.1f승 기대, 실제 %d승. 생존 편향 의심" % (
+            out["luck"]["z"], bt["win_rate"], out["luck"]["expected_wins"], wins))
     if n < crit["min_trades"]:
         out["status"] = NOT_YET
         out["reason"] = "순방향 매매 %d건 — 최소 %d건 전에는 판단하지 않는다" % (n, crit["min_trades"])
@@ -174,9 +175,6 @@ def judge_kr_breakout(fwd, backtest, crit):
                                          "fail_below": crit["hold20_fail_if_win_share_below"],
                                          "applies": len(h20) >= crit["hold20_min_trades"],
                                          "fail": len(h20) >= crit["hold20_min_trades"] and share < crit["hold20_fail_if_win_share_below"]}
-    if out["luck"] and out["luck"]["z"] < crit["luck_z_warn_below"]:
-        out["warnings"].append("운 보정 z %.2f — 백테스트 승률(%.1f%%)대로면 %.1f승 기대, 실제 %d승. 생존 편향 의심" % (
-            out["luck"]["z"], bt["win_rate"], out["luck"]["expected_wins"], wins))
     if out["checks"]["win_rate"]["fail"]:
         out["status"], out["reason"] = FAIL, "승률 %.1f%% < %.0f%% — 사전 등록 기준 미달" % (wr, crit["fail_if_win_rate_below_pct"])
     elif out["checks"]["hold20_win_share"]["fail"]:
@@ -207,7 +205,7 @@ def _venue_forward(vd):
 
 
 def judge_venue_track(data, crit, name):
-    """터틀·추세전환 공통: 거래소별로 순방향 매매를 채점한다. 기준은 criteria.json[name]."""
+    """터틀·추세전환·급상승 패턴 공통: 거래소별로 순방향 매매를 채점한다. 기준은 criteria.json[name]."""
     venues = {}
     total_n = 0
     for v, vd in (data.get("venues") or {}).items():
@@ -301,7 +299,7 @@ def _file_sha(path):
 def current_rules():
     """세 트랙 + 초단타의 규칙 상수를 소스에서 그대로 읽는다 (저장된 JSON 이 아니라 코드가 기준)."""
     sys.path.insert(0, HERE)
-    import kr_breakout as KB, turtle as T, reversal as R, scalp as S
+    import kr_breakout as KB, turtle as T, reversal as R, scalp as S, retest as RT
     turtle_rules = {"entry_breakout_days": T.ENTRY_N, "exit_breakout_days": T.EXIT_N, "atr_days": T.ATR_N,
                     "stop_n_mult": T.STOP_MULT, "risk_pct_per_trade": T.RISK_PCT, "max_notional_pct": T.MAX_NOTIONAL_PCT,
                     "slippage_pct": T.SLIPPAGE_PCT,
@@ -320,6 +318,7 @@ def current_rules():
         "kr_breakout": {"rule_fixed": KB.RULE_FIXED, "rules": KB.rules_dict()},
         "turtle": {"rule_fixed": T.RULE_FIXED, "rules": turtle_rules},
         "reversal": {"rule_fixed": R.RULE_FIXED, "rules": reversal_rules},
+        "retest": {"rule_fixed": RT.RULE_FIXED, "rules": RT.rules_dict()},
         "scalp": {"rules": scalp_rules},
         "criteria_sha256": _file_sha(CRITERIA_PATH),
     }
@@ -389,7 +388,7 @@ def build(crit=None, files=None):
             out["errors"]["kr_breakout"] = "kr_breakout.json 없음 또는 forward 모드 아님"
     except Exception as e:
         out["errors"]["kr_breakout"] = "%s: %s" % (type(e).__name__, e)
-    for name in ("turtle", "reversal"):
+    for name in ("turtle", "reversal", "retest"):
         try:
             d = get(name + ".json")
             if d:
@@ -427,7 +426,7 @@ def history_line(out):
         k = t["kr_breakout"]
         line["kr_breakout"] = {"n": k["trades"], "wins": k["wins"], "win_rate": k["win_rate_pct"], "ret": k["total_return_pct"],
                                "z": (k["luck"] or {}).get("z"), "days": k["forward_days"]}
-    for name in ("turtle", "reversal"):
+    for name in ("turtle", "reversal", "retest"):
         if name in t:
             line[name] = {v: {"n": f["trades"], "wins": f["wins"], "pf": f["profit_factor"], "z": (f["luck"] or {}).get("z")}
                           for v, f in t[name]["venues"].items()}
@@ -467,7 +466,7 @@ def print_summary(out):
                 k["interpretation"]["pass_pct_if_backtest_true"], k["interpretation"]["pass_pct_if_win_rate_halved"]))
         for w in k.get("warnings", []):
             print("              ⚠ " + w)
-    for name in ("turtle", "reversal"):
+    for name in ("turtle", "reversal", "retest"):
         if name in t:
             tr = t[name]
             print("[%s] %-7s %s" % (name, tr["status"], tr["reason"]))

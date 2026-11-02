@@ -20,7 +20,7 @@ import json, sys, math, argparse, time
 from datetime import datetime, timezone, timedelta
 
 import scalp
-from scalp import http_json, f, KST
+from common import http_json, f, KST, mean, std, corr, r4, append_history, load_history
 
 LEAD_PAIRS = [("okx", "upbit"), ("hyperliquid", "upbit"), ("hyperliquid", "okx"),
               ("okx", "hyperliquid"), ("upbit", "okx"), ("upbit", "hyperliquid"),
@@ -33,30 +33,6 @@ MIN_DAYS = 5             # 누적 판단 최소 일수
 
 
 # ----------------------------------------------------------------- 공용
-
-def mean(xs):
-    return sum(xs) / len(xs) if xs else None
-
-
-def std(xs):
-    if len(xs) < 2:
-        return None
-    m = mean(xs)
-    return math.sqrt(sum((x - m) ** 2 for x in xs) / len(xs))
-
-
-def corr(xs, ys):
-    if len(xs) < 3:
-        return None
-    mx, my = mean(xs), mean(ys)
-    sx, sy = std(xs), std(ys)
-    if not sx or not sy:
-        return None
-    return sum((x - mx) * (y - my) for x, y in zip(xs, ys)) / (len(xs) * sx * sy)
-
-
-def r4(x):
-    return None if x is None else round(x, 4)
 
 
 def cost_of(venue, bars, eval_start, fees):
@@ -268,17 +244,6 @@ def follow_rule(lead_bars, follow_bars, eval_t0, fees, short_ok):
 
 # ----------------------------------------------------------------- 저장·보고
 
-def append_history(rec, path):
-    try:
-        with open(path, encoding="utf-8") as fp:
-            rows = [l for l in fp.read().splitlines() if l.strip()]
-    except IOError:
-        rows = []
-    rows = [l for l in rows if json.loads(l).get("date") != rec["date"]]
-    rows.append(json.dumps(rec, ensure_ascii=False))
-    with open(path, "w", encoding="utf-8") as fp:
-        fp.write("\n".join(rows) + "\n")
-
 
 def print_day(out):
     print("=== 초단타 보조 연구 (%s, 평가일 %s UTC) ===" % (out["date"], out["eval_day_utc"]))
@@ -325,23 +290,6 @@ def print_day(out):
                      "%.0f" % s["hit_rate_pct"] if s.get("hit_rate_pct") is not None else "-"))
     print()
     print("판정:", out["summary"]["verdict"])
-
-
-def load_history(path):
-    rows = []
-    try:
-        with open(path, encoding="utf-8") as fp:
-            for l in fp:
-                l = l.strip()
-                if l:
-                    try:
-                        rows.append(json.loads(l))
-                    except ValueError:
-                        pass
-    except IOError:
-        pass
-    rows.sort(key=lambda r: r.get("date", ""))
-    return rows
 
 
 def wmean(pairs):

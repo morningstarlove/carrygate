@@ -12,11 +12,9 @@ CARRYGATE — 캐리(펀딩비) 브리지
 """
 import os, json, time, sys, urllib.request, urllib.error
 from datetime import datetime, timezone, timedelta
+from common import KST, UA, http_json, f
 
 COINS = ["BTC", "ETH", "XRP", "TRX", "LINK", "DOGE"]
-KST = timezone(timedelta(hours=9))
-UA = {"User-Agent": "Mozilla/5.0 (compatible; carrygate/1.0)",
-      "Accept": "application/json"}
 
 # 진입/청산 문턱 (연 %). 히스테리시스 — 문턱을 다르게 둬서 잦은 진출입을 막는다.
 # 문턱은 수수료를 뺀 순수익(net) 기준으로 비교한다.
@@ -74,31 +72,6 @@ def fee_drag(spot_pct, perp_pct):
 
 ROUND_TRIP_FEE_PCT = 2.0 * (TAKER_FEE_SPOT_PCT + TAKER_FEE_PERP_PCT)
 FEE_DRAG_APR_PCT = fee_drag(TAKER_FEE_SPOT_PCT, TAKER_FEE_PERP_PCT)
-
-
-def http_json(url, tries=3, data=None):
-    last = None
-    for i in range(tries):
-        try:
-            body = json.dumps(data).encode("utf-8") if data is not None else None
-            hdr = dict(UA)
-            if body is not None:
-                hdr["Content-Type"] = "application/json"
-            req = urllib.request.Request(url, headers=hdr, data=body)
-            with urllib.request.urlopen(req, timeout=20) as r:
-                return json.loads(r.read().decode("utf-8"))
-        except Exception as e:
-            last = e
-            time.sleep(1.5 + i * 2)
-    raise RuntimeError("fetch failed %s : %s" % (url, last))
-
-
-def f(x):
-    """문자열/None 안전 float 변환"""
-    try:
-        return float(x)
-    except (TypeError, ValueError):
-        return None
 
 
 def apr(rate, interval_hours):

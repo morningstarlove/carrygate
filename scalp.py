@@ -22,13 +22,11 @@ CARRYGATE — 초단타(스캘핑) 연구 브리지
   python scalp.py --fixture tests/fixtures   # 저장된 CSV 로 평가 (오프라인 검증용)
   python scalp.py --report             # 쌓인 기록으로 규칙별 누적 성적표
 """
-import json, sys, time, csv, os, math, argparse, urllib.request
+import json, sys, time, csv, os, io, math, argparse, zipfile, urllib.request
 from datetime import datetime, timezone, timedelta
+from common import KST, UA, http_json, f, load_history
 
 COINS = ["BTC", "ETH", "XRP", "TRX", "LINK", "DOGE"]
-KST = timezone(timedelta(hours=9))
-UA = {"User-Agent": "Mozilla/5.0 (compatible; carrygate/1.0)",
-      "Accept": "application/json"}
 
 EVAL_BARS = 1440      # 평가 구간: 하루 = 1분봉 1440개
 WARMUP_MIN = 3600     # 지표 계산용 준비 구간(분) = 60시간. 60분봉 VWAP(60봉) 때문. 2026-10-13 전에는 1440(하루)이었고,
@@ -56,28 +54,17 @@ VENUES = {
 HL_ZERO_ADDR = "0x" + "0" * 40
 
 
-def http_json(url, tries=3, data=None):
+def http_bytes(url, tries=3):
     last = None
     for i in range(tries):
         try:
-            body = json.dumps(data).encode("utf-8") if data is not None else None
-            hdr = dict(UA)
-            if body is not None:
-                hdr["Content-Type"] = "application/json"
-            req = urllib.request.Request(url, headers=hdr, data=body)
-            with urllib.request.urlopen(req, timeout=20) as r:
-                return json.loads(r.read().decode("utf-8"))
+            req = urllib.request.Request(url, headers={"User-Agent": UA["User-Agent"]})
+            with urllib.request.urlopen(req, timeout=30) as r:
+                return r.read()
         except Exception as e:
             last = e
             time.sleep(1.5 + i * 2)
     raise RuntimeError("fetch failed %s : %s" % (url, last))
-
-
-def f(x):
-    try:
-        return float(x)
-    except (TypeError, ValueError):
-        return None
 
 
 # ----------------------------------------------------------------- 수집
@@ -159,7 +146,84 @@ def src_okx(coin, start, end):
     return finish(out, start, end)
 
 
+BINANCE_ZIP = "https://data.binance.vision/data/futures/um/daily/klines/{c}USDT/1m/{c}USDT-1m-{d}.zip"
+
+
+RELAY_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "binance_1m")
+RELAY_MAX_AGE_H = 36      # 가상서버 중계 파일이 이보다 오래됐으면 안 쓴다
+# 사용자 가상서버(Vultr 서울)가 Caddy 로 내보내는 중계 파일 주소. 비우면(환경 변수 CARRYGATE_RELAY_URL="") 건너뛴다
+RELAY_URL = os.environ.get("CARRYGATE_RELAY_URL", "http://158.247.206.213/carrygate/binance_1m/")
+
+
+def relay_bars(d, start, end):
+    """중계 파일(dict) → [start,end) 봉 목록. 오래됐거나 준비 구간 앞·평가 구간 끝이 비면 None."""
+    try:
+        gen = datetime.strptime(d.get("generated_at_utc", ""), "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
+    except ValueError:
+        return None
+    if (datetime.now(timezone.utc) - gen).total_seconds() > RELAY_MAX_AGE_H * 3600:
+        return None
+    bars = [bar(b[0], b[1], b[2], b[3], b[4], b[5]) for b in d.get("bars", []) if start <= b[0] < end]
+    if not bars or bars[0]["t"] > start + 3600 or bars[-1]["t"] < end - 3600:
+        return None
+    return finish(bars, start, end)
+
+
+def src_binance_relay(coin, start, end, relay_dir=None):
+    """저장소 안 중계 파일 data/binance_1m/<코인>.json (vps_relay.py 가 토큰으로 올린 것). 못 쓰면 None."""
+    path = os.path.join(relay_dir or RELAY_DIR, coin + ".json")
+    if not os.path.exists(path):
+        return None
+    with open(path, encoding="utf-8") as fp:
+        return relay_bars(json.load(fp), start, end)
+
+
+def src_binance_relay_http(coin, start, end, url=None):
+    """가상서버가 Caddy 로 내보내는 중계 파일 (토큰 불필요). 서버가 꺼져 있거나 못 쓰면 None."""
+    base = RELAY_URL if url is None else url
+    if not base:
+        return None
+    try:
+        d = http_json(base.rstrip("/") + "/" + coin + ".json", tries=2)
+    except Exception:
+        return None
+    return relay_bars(d, start, end) if isinstance(d, dict) else None
+
+
+def src_binance(coin, start, end):
+    """바이낸스 USDT 무기한 1분봉. API(fapi)는 미국 서버에서 451 로 막혀 있다.
+    ① 가상서버 Caddy 주소(RELAY_URL) ② 저장소 안 중계 파일(data/binance_1m) ③ 공개 일별 파일(data.binance.vision) 순서.
+    일별 파일은 그날이 끝난 뒤 올라온다. 파일 하나라도 없으면 실패로 둔다(다음 실행에서 다시 채운다). 제안함 P20·P21"""
+    got = src_binance_relay_http(coin, start, end)
+    if got:
+        print("  binance/%s: 가상서버 중계 파일 (%s)" % (coin, RELAY_URL))
+        return got
+    got = src_binance_relay(coin, start, end)
+    if got:
+        print("  binance/%s: 저장소 중계 파일 (data/binance_1m)" % coin)
+        return got
+    print("  binance/%s: 공개 일별 파일 (data.binance.vision)" % coin)
+    out = []
+    day = start - start % 86400
+    while day < end:
+        ds = datetime.fromtimestamp(day, timezone.utc).strftime("%Y-%m-%d")
+        raw = http_bytes(BINANCE_ZIP.format(c=coin, d=ds))
+        with zipfile.ZipFile(io.BytesIO(raw)) as z:
+            text = z.read(z.namelist()[0]).decode("utf-8")
+        for r in csv.reader(text.splitlines()):
+            if not r or not r[0].strip().isdigit():
+                continue                       # 머리줄(open_time,...)
+            t = int(r[0])
+            t = t // 1000000 if t > 10 ** 14 else t // 1000   # 밀리초(선물) / 마이크로초 모두 받는다
+            out.append(bar(t, f(r[1]), f(r[2]), f(r[3]), f(r[4]), f(r[5])))
+        day += 86400
+        time.sleep(0.1)
+    return finish(out, start, end)
+
+
 SOURCES = [("upbit", src_upbit), ("hyperliquid", src_hyperliquid), ("okx", src_okx)]
+# 기본 기록(scalp_history.jsonl)에 넣지 않는 거래소. --venues 로 따로 돌려 따로 쌓는다(판정 후보 수·잡음 바닥이 바뀌지 않게)
+EXTRA_SOURCES = [("binance", src_binance)]
 
 
 def hl_live_fees():
@@ -679,21 +743,15 @@ def print_day(out):
     print("판정:", s["verdict"])
 
 
-def load_history(path):
-    rows = []
-    try:
-        with open(path, encoding="utf-8") as fp:
-            for l in fp:
-                l = l.strip()
-                if l:
-                    try:
-                        rows.append(json.loads(l))
-                    except ValueError:
-                        pass
-    except IOError:
-        pass
-    rows.sort(key=lambda r: r.get("date", ""))
-    return rows
+def missing_days(rows, n, today):
+    """어제부터 n 일 전까지 평가일(UTC) 중 기록이 없거나 시장이 덜 찬 날. 늦게 올라오는 바이낸스 일별 파일 되채우기용"""
+    have = {r.get("eval_day_utc"): (r.get("summary") or {}).get("markets", 0) for r in rows}
+    out = []
+    for i in range(n, 0, -1):
+        d = (today - timedelta(days=i)).strftime("%Y-%m-%d")
+        if have.get(d, 0) < len(COINS):
+            out.append(d)
+    return out
 
 
 MIN_DAYS = 7       # 이 일수 미만이면 후보를 뽑지 않는다
@@ -782,11 +840,18 @@ def main(argv=None):
     ap.add_argument("--history", default="scalp_history.jsonl")
     ap.add_argument("--eval-bars", type=int, default=EVAL_BARS)
     ap.add_argument("--day", help="평가할 날짜(UTC, YYYY-MM-DD). 생략하면 어제. 빠진 날을 되채울 때 쓴다")
+    ap.add_argument("--venues", help="쉼표로 구분한 거래소만 수집 (예: binance). 생략하면 기본 3곳. 지정하면 결과가 하나도 없을 때 저장하지 않는다")
     ap.add_argument("--save-bars", default="bars_cache.json",
                     help="받은 1분봉을 이 파일에 남긴다 (scalp_research.py 가 재사용). 빈 문자열이면 저장 안 함")
+    ap.add_argument("--missing-days", type=int, help="기록이 빈 최근 평가일(UTC)을 한 줄씩 출력만 한다")
     a = ap.parse_args(argv)
     if a.report:
         return report(a.history)
+    if a.missing_days:
+        today = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0)
+        for d in missing_days(load_history(a.history), a.missing_days, today):
+            print(d)
+        return 0
 
     now = datetime.now(KST)
     fees = {k: dict(v) for k, v in VENUES.items()}
@@ -814,7 +879,11 @@ def main(argv=None):
         mode = "%s %s ~ %s UTC" % ("되채우기 수집" if a.day else "실시간 수집",
                                   datetime.fromtimestamp(start, timezone.utc).strftime("%m-%d %H:%M"),
                                   today.strftime("%m-%d %H:%M"))
-        for venue, fn in SOURCES:
+        sources = SOURCES
+        if a.venues:
+            pool = dict(SOURCES + EXTRA_SOURCES)
+            sources = [(v, pool[v]) for v in a.venues.split(",")]
+        for venue, fn in sources:
             got = {}
             for c in COINS:
                 try:
@@ -923,6 +992,9 @@ def main(argv=None):
     if a.dry_run:
         print("\n(dry-run: 저장하지 않음)")
         return 0
+    if a.venues and not rows:
+        print("\n결과 없음 — 저장하지 않음 (다음 실행에서 다시 채운다)")
+        return 1
     with open(a.out, "w", encoding="utf-8") as fp:
         json.dump(out, fp, ensure_ascii=False, indent=1)
     write_history(out, a.history)

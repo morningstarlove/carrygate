@@ -16,10 +16,9 @@ CARRYGATE — 호가창 표본 수집·분석 (C)
 """
 import json, sys, time, csv, math, argparse, urllib.request
 from datetime import datetime, timezone, timedelta
+from common import KST, UA, f, mean, std, corr, append_history
 
 COINS = ["BTC", "ETH", "XRP", "TRX", "LINK", "DOGE"]
-KST = timezone(timedelta(hours=9))
-UA = {"User-Agent": "Mozilla/5.0 (compatible; carrygate/1.0)", "Accept": "application/json"}
 DEPTH_LEVELS = 5          # 불균형 계산에 쓰는 호가 단수 (최우선 5호가)
 IMB_THRESHOLD = 0.3       # "치우쳤다"고 보는 불균형 기준 ((매수−매도)/(매수+매도))
 HORIZONS = (60, 300)      # 초. 불균형 뒤 1분·5분 가격 변화를 본다
@@ -37,13 +36,6 @@ def http_json(url, data=None, timeout=15):
     req = urllib.request.Request(url, headers=hdr, data=body)
     with urllib.request.urlopen(req, timeout=timeout) as r:
         return json.loads(r.read().decode("utf-8"))
-
-
-def f(x):
-    try:
-        return float(x)
-    except (TypeError, ValueError):
-        return None
 
 
 # ----------------------------------------------------------------- 수집
@@ -145,26 +137,6 @@ def load_samples(path):
     for k in by:
         by[k].sort(key=lambda x: x["ts"])
     return by
-
-
-def mean(xs):
-    return sum(xs) / len(xs) if xs else None
-
-
-def std(xs):
-    if len(xs) < 2:
-        return None
-    m = mean(xs)
-    return math.sqrt(sum((x - m) ** 2 for x in xs) / len(xs))
-
-
-def corr(xs, ys):
-    if len(xs) < 3:
-        return None
-    mx, my, sx, sy = mean(xs), mean(ys), std(xs), std(ys)
-    if not sx or not sy:
-        return None
-    return sum((x - mx) * (y - my) for x, y in zip(xs, ys)) / (len(xs) * sx * sy)
 
 
 def analyze_market(rows):
@@ -289,18 +261,6 @@ def verdict_of(summary):
         im = ("불균형→1분 %+.2fbp 적중 %s%%" % (s["imb_signed60_bp"], s["imb_hit60_pct"])) if s["imb_signed60_bp"] is not None else "불균형 표본 부족"
         parts.append("%s: %s, %s" % (v, mm, im))
     return " / ".join(parts) + " — 하루치, 누적으로 판단"
-
-
-def append_history(rec, path):
-    try:
-        with open(path, encoding="utf-8") as fp:
-            rows = [l for l in fp.read().splitlines() if l.strip()]
-    except IOError:
-        rows = []
-    rows = [l for l in rows if json.loads(l).get("date") != rec["date"]]
-    rows.append(json.dumps(rec, ensure_ascii=False))
-    with open(path, "w", encoding="utf-8") as fp:
-        fp.write("\n".join(rows) + "\n")
 
 
 def report(path="orderbook_history.jsonl"):

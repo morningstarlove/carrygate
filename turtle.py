@@ -26,7 +26,8 @@ CARRYGATE — 터틀(리처드 데니스) 추세추종 규칙 (중기)
 import os, sys, json, math, csv, time, argparse
 from datetime import datetime, timezone, timedelta
 
-from scalp import http_json, f, KST, COINS
+from scalp import COINS
+from common import http_json, f, KST, r4
 
 # ----------------------------------------------------------------- 고정 규칙 (사후 조정 금지)
 ENTRY_N = 20            # 진입 돌파 구간(일)
@@ -55,10 +56,6 @@ VENUES = {
     "okx":   {"kind": "perp", "quote": "USDT", "fee_pct": 0.05, "short_ok": True,  "equity": 10_000.0,
               "fee_source": "OKX 선물 테이커 0.05% 일반 등급"},
 }
-
-
-def r4(x):
-    return None if x is None else round(x, 4)
 
 
 def rp(x):

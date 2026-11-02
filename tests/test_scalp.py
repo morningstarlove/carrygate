@@ -278,6 +278,150 @@ class BackfillDay(unittest.TestCase):
         self.assertIn("데이터 없음", out)
 
 
+class BinanceSource(unittest.TestCase):
+    """바이낸스 공개 일별 파일(zip 속 CSV) → 1분봉, --venues 로 따로 쌓기 (제안함 P20)."""
+
+    def _zip(self, rows, header=True):
+        import io as _io, zipfile
+        lines = (["open_time,open,high,low,close,volume,close_time"] if header else []) + \
+                [",".join(str(x) for x in r) for r in rows]
+        buf = _io.BytesIO()
+        with zipfile.ZipFile(buf, "w") as z:
+            z.writestr("X-1m.csv", "\n".join(lines))
+        return buf.getvalue()
+
+    def test_parse_days_ms_and_us_and_header(self):
+        d0 = 1760918400                                     # 2025-10-20 00:00 UTC
+        files = {"2025-10-20": self._zip([(d0 * 1000, 1, 2, 0.5, 1.5, 10), ((d0 + 60) * 1000, 1.5, 2, 1, 1.8, 5)]),
+                 "2025-10-21": self._zip([((d0 + 86400) * 1000000, 2, 3, 1, 2.5, 7)], header=False)}
+        seen = []
+
+        def fake(url, tries=3):
+            seen.append(url)
+            return files[url.rsplit("-1m-", 1)[1][:-4]]
+        saved = scalp.http_bytes
+        scalp.http_bytes = fake
+        try:
+            bars = scalp.src_binance("XRP", d0, d0 + 86400 + 120)
+        finally:
+            scalp.http_bytes = saved
+        self.assertEqual([b["t"] for b in bars], [d0, d0 + 60, d0 + 86400])
+        self.assertEqual(bars[2]["c"], 2.5)
+        self.assertIn("futures/um/daily/klines/XRPUSDT/1m/XRPUSDT-1m-2025-10-20.zip", seen[0])
+
+    def test_relay_file_preferred_then_zip_fallback(self):
+        from datetime import datetime, timezone
+        d0 = 1760918400
+        start, end = d0, d0 + 7200
+        now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+        with tempfile.TemporaryDirectory() as d:
+            bars = [[d0 + 60 * i, 1, 2, 0.5, 1.5, 10] for i in range(120)]
+            with open(os.path.join(d, "XRP.json"), "w") as fp:
+                json.dump({"generated_at_utc": now, "bars": bars}, fp)
+            with open(os.path.join(d, "ETH.json"), "w") as fp:                       # 오래된 파일
+                json.dump({"generated_at_utc": "2020-01-01T00:00:00Z", "bars": bars}, fp)
+            with open(os.path.join(d, "BTC.json"), "w") as fp:                       # 끝이 비어 있는 파일
+                json.dump({"generated_at_utc": now, "bars": bars[:30]}, fp)
+            got = scalp.src_binance_relay("XRP", start, end, relay_dir=d)
+            self.assertEqual(len(got), 120)
+            self.assertIsNone(scalp.src_binance_relay("ETH", start, end, relay_dir=d))
+            self.assertIsNone(scalp.src_binance_relay("BTC", start, end, relay_dir=d))
+            self.assertIsNone(scalp.src_binance_relay("DOGE", start, end, relay_dir=d))
+            saved = (scalp.RELAY_DIR, scalp.http_bytes, scalp.RELAY_URL)
+            calls = []
+            scalp.RELAY_DIR, scalp.http_bytes = d, lambda url, tries=3: calls.append(url) or self._zip([(d0 * 1000, 1, 2, 0.5, 1.5, 1)])
+            scalp.RELAY_URL = ""                                                     # 서버 주소는 건너뛴다(오프라인 시험)
+            try:
+                self.assertEqual(len(scalp.src_binance("XRP", start, end)), 120)   # 중계 파일 → 다운로드 없음
+                self.assertEqual(calls, [])
+                scalp.src_binance("DOGE", start, end)                                # 파일 없음 → 일별 zip
+                self.assertEqual(len(calls), 1)
+            finally:
+                scalp.RELAY_DIR, scalp.http_bytes, scalp.RELAY_URL = saved
+
+    def test_relay_http_first_then_repo_file(self):
+        from datetime import datetime, timezone
+        d0 = 1760918400
+        start, end = d0, d0 + 7200
+        now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+        payload = {"generated_at_utc": now, "bars": [[d0 + 60 * i, 1, 2, 0.5, 1.5, 10] for i in range(120)]}
+        urls = []
+
+        def fake_http(url, tries=3, data=None):
+            urls.append(url)
+            if "XRP" in url:
+                return payload
+            raise RuntimeError("503")
+        saved = (scalp.http_json, scalp.RELAY_URL, scalp.RELAY_DIR, scalp.http_bytes)
+        with tempfile.TemporaryDirectory() as d:
+            with open(os.path.join(d, "ETH.json"), "w") as fp:
+                json.dump(payload, fp)
+            scalp.http_json, scalp.RELAY_URL, scalp.RELAY_DIR = fake_http, "http://x/relay/", d
+            scalp.http_bytes = lambda url, tries=3: (_ for _ in ()).throw(RuntimeError("no zip"))
+            try:
+                self.assertEqual(len(scalp.src_binance("XRP", start, end)), 120)     # ① 서버 주소
+                self.assertEqual(urls, ["http://x/relay/XRP.json"])
+                self.assertEqual(len(scalp.src_binance("ETH", start, end)), 120)     # ② 서버 실패 → 저장소 파일
+                with self.assertRaises(RuntimeError):
+                    scalp.src_binance("DOGE", start, end)                            # ③ 둘 다 없음 → zip
+                scalp.RELAY_URL = ""
+                self.assertIsNone(scalp.src_binance_relay_http("XRP", start, end))   # 비우면 건너뜀
+            finally:
+                scalp.http_json, scalp.RELAY_URL, scalp.RELAY_DIR, scalp.http_bytes = saved
+
+    def test_vps_relay_out_dir_atomic_write(self):
+        import io as _io, contextlib, vps_relay
+        saved = vps_relay.build
+        vps_relay.build = lambda days=4, coins=None: ({"XRP": {"to_utc": "2026-10-21 00:00", "from_utc": "x", "bars": [[1, 1, 1, 1, 1, 1]]}}, {})
+        with tempfile.TemporaryDirectory() as d:
+            try:
+                with contextlib.redirect_stdout(_io.StringIO()):
+                    rc = vps_relay.main(["--no-upload", "--out-dir", os.path.join(d, "w")])
+            finally:
+                vps_relay.build = saved
+            self.assertEqual(rc, 0)
+            self.assertEqual(sorted(os.listdir(os.path.join(d, "w"))), ["XRP.json"])
+
+    def test_vps_relay_fetch_and_dedupe(self):
+        import vps_relay
+        d0 = 1760918400
+        pages = [[[(d0 + 60 * i) * 1000, "1", "2", "0.5", "1.5", "9"] for i in range(1500)],
+                 [[(d0 + 60 * i) * 1000, "1", "2", "0.5", "1.5", "9"] for i in range(1499, 1600)]]   # 겹치는 봉 하나
+        saved = vps_relay.http_json
+        vps_relay.http_json = lambda url, **kw: pages.pop(0) if pages else []
+        try:
+            bars = vps_relay.fetch_coin("XRP", d0, d0 + 1600 * 60)
+        finally:
+            vps_relay.http_json = saved
+        self.assertEqual(len(bars), 1600)
+        self.assertEqual(bars[0], [d0, 1.0, 2.0, 0.5, 1.5, 9.0])
+        self.assertEqual(bars[-1][0], d0 + 1599 * 60)
+
+    def test_missing_days(self):
+        from datetime import datetime, timezone
+        today = datetime(2026, 10, 23, tzinfo=timezone.utc)
+        rows = [{"eval_day_utc": "2026-10-21", "summary": {"markets": 6}},
+                {"eval_day_utc": "2026-10-22", "summary": {"markets": 4}}]
+        self.assertEqual(scalp.missing_days(rows, 3, today), ["2026-10-20", "2026-10-22"])
+
+    def test_venues_no_result_does_not_save(self):
+        import io as _io, contextlib
+        saved = (scalp.EXTRA_SOURCES, scalp.hl_live_fees)
+        scalp.EXTRA_SOURCES = [("binance", lambda c, s, e: (_ for _ in ()).throw(RuntimeError("404")))]
+        scalp.hl_live_fees = lambda: None
+        with tempfile.TemporaryDirectory() as d:
+            hist, out = os.path.join(d, "h.jsonl"), os.path.join(d, "o.json")
+            try:
+                with contextlib.redirect_stdout(_io.StringIO()):
+                    rc = scalp.main(["--venues", "binance", "--day", "2026-10-20", "--save-bars", "",
+                                     "--history", hist, "--out", out])
+            finally:
+                scalp.EXTRA_SOURCES, scalp.hl_live_fees = saved
+            self.assertEqual(rc, 1)
+            self.assertFalse(os.path.exists(hist))
+            self.assertFalse(os.path.exists(out))
+
+
 class NightFilter(unittest.TestCase):
     """밤(한국시간 21~02시) 필터 규칙: 같은 신호라도 낮에는 None, 밤에는 원래 신호."""
 
@@ -304,6 +448,58 @@ class NightFilter(unittest.TestCase):
         self.assertIn("mr_z20_lim_n", keys)
         self.assertEqual(scalp.TIMEFRAMES, [1, 5, 15, 30, 60])
         self.assertGreaterEqual(scalp.WARMUP_MIN, 60 * 60)   # 60분봉 VWAP 60봉이 평가 시작 전에 차야 한다
+
+
+class OutOfSample(unittest.TestCase):
+    """scripts/scalp_oos_check.py — 얼린 후보를 고른 날 뒤 이력만으로 다시 센다 (제안함 P19)."""
+
+    def setUp(self):
+        sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "scripts"))
+        import scalp_oos_check
+        self.m = scalp_oos_check
+        base = "okx:XRP:30m:" + scalp.BASELINE
+
+        def day(d, a, b):
+            return {"date": "2026-10-%02d" % d, "rows": {
+                "okx:XRP:30m:vwap_fade_lim": {"nt": a, "n": 2},
+                "okx:ETH:30m:vwap_fade_lim": {"nt": b, "n": 2},
+                base: {"nt": -1.0, "n": 5}}}
+        self.ins = [day(d, 1.0, 0.5) for d in range(1, 9)]          # 8일 모두 플러스 → 둘 다 후보
+        self.day = day
+
+    def test_freeze_only_uses_rows_up_to_date(self):
+        fz = self.m.freeze(self.ins + [self.day(9, -50.0, -50.0)], "2026-10-08", ["30m"], "vwap", "okx:XRP:30m:vwap_fade_lim")
+        self.assertEqual(len(fz["keys"]), 2)
+        self.assertEqual(fz["keys"][0]["nt"], 8.0)
+
+    def test_wait_go_no(self):
+        fz = self.m.freeze(self.ins, "2026-10-08", ["30m"], "vwap", "okx:XRP:30m:vwap_fade_lim")
+        self.assertEqual(self.m.check(self.ins, fz)["verdict"], "WAIT")       # 표본 밖 0일
+        good = [self.day(d, 0.3, 0.2) for d in range(9, 19)]                  # 10일
+        self.assertEqual(self.m.check(self.ins + good, fz)["verdict"], "GO")
+        bad = [self.day(d, -0.3, 0.2) for d in range(9, 19)]                  # 주 후보만 손해
+        r = self.m.check(self.ins + bad, fz)
+        self.assertEqual(r["verdict"], "NO")
+        self.assertFalse(r["primary_ok"])
+        self.assertEqual(r["plus"], 1)
+
+    def test_map_venue_dedupes_and_checks_own_rows(self):
+        fz = self.m.freeze(self.ins, "2026-10-08", ["30m"], "vwap", None)
+        fz["keys"].append({"key": "upbit:XRP:30m:vwap_fade_lim", "nt": 1.0})       # 같은 코인·봉·규칙 → 하나로
+        bz = self.m.map_venue(fz, "binance", "binance:XRP:30m:vwap_fade_lim")
+        self.assertEqual(sorted(x["key"] for x in bz["keys"]),
+                         ["binance:ETH:30m:vwap_fade_lim", "binance:XRP:30m:vwap_fade_lim"])
+        self.assertEqual(bz["history"], "scalp_binance_history.jsonl")
+        rows = [{"date": "2026-10-%02d" % d, "rows": {"binance:XRP:30m:vwap_fade_lim": {"nt": 0.2, "n": 1},
+                                                      "binance:ETH:30m:vwap_fade_lim": {"nt": -0.1, "n": 1}}}
+                for d in range(9, 19)]
+        r = self.m.check(rows, bz)
+        self.assertEqual((r["plus"], r["verdict"]), (1, "GO"))                    # 절반(1/2) + 주 후보 통과
+
+    def test_until_cuts_window(self):
+        fz = self.m.freeze(self.ins, "2026-10-08", ["30m"], "vwap", None)
+        rows = self.ins + [self.day(d, 0.3, 0.2) for d in range(9, 19)] + [self.day(25, -99.0, -99.0)]
+        self.assertEqual(self.m.check(rows, fz, until="2026-10-18")["verdict"], "GO")
 
 
 if __name__ == "__main__":

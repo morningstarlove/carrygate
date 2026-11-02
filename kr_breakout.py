@@ -30,8 +30,8 @@ from datetime import datetime, timezone, timedelta
 import kr_universe as KU
 import kr_ohlcv as KO
 import patterns as P
+from common import KST, r2
 
-KST = timezone(timedelta(hours=9))
 
 # ----------------------------------------------------------------- 고정 규칙 (사후 조정 금지)
 RULE_FIXED = "2026-10-05"       # 이 날 이후 기록된 유니버스로 낸 신호만 순방향으로 센다 (첫 평일 실행일 = 2026-10-05 월요일)
@@ -69,10 +69,6 @@ PASS = {"min_trades": 100, "max_dd_pct": 25.0}   # 백테스트 합격선 (설�
 OUT_PATH = "kr_breakout.json"
 HISTORY_PATH = "kr_breakout_history.jsonl"
 BT_PATH = "kr_backtest.json"
-
-
-def r2(x):
-    return None if x is None else round(x, 2)
 
 
 # ----------------------------------------------------------------- 엔진

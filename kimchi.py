@@ -18,36 +18,13 @@ CARRYGATE — 김치프리미엄 신호 (④)
 import json, sys, time, math, argparse
 from datetime import datetime, timezone, timedelta
 
-from scalp import http_json, f, KST, COINS
+from scalp import COINS
+from common import http_json, f, KST, mean, std, corr, r4, append_history
 
 DAYS = 200            # 일 단위 사후 검증 구간
 HI_PCT, LO_PCT = 90, 10   # 과열/냉각 백분위
 FWD = (1, 3, 7)       # 며칠 뒤 수익률을 보나
 INTRADAY_HORIZON = 15 # 분. 하루 안 되돌림을 볼 때
-
-
-def mean(xs):
-    return sum(xs) / len(xs) if xs else None
-
-
-def std(xs):
-    if len(xs) < 2:
-        return None
-    m = mean(xs)
-    return math.sqrt(sum((x - m) ** 2 for x in xs) / len(xs))
-
-
-def corr(xs, ys):
-    if len(xs) < 3:
-        return None
-    mx, my, sx, sy = mean(xs), mean(ys), std(xs), std(ys)
-    if not sx or not sy:
-        return None
-    return sum((x - mx) * (y - my) for x, y in zip(xs, ys)) / (len(xs) * sx * sy)
-
-
-def r4(x):
-    return None if x is None else round(x, 4)
 
 
 # ----------------------------------------------------------------- 환율
@@ -175,17 +152,6 @@ def intraday(up_bars, ok_bars, fx, eval_t0):
 
 
 # ----------------------------------------------------------------- 저장·보고
-
-def append_history(rec, path):
-    try:
-        with open(path, encoding="utf-8") as fp:
-            rows = [l for l in fp.read().splitlines() if l.strip()]
-    except IOError:
-        rows = []
-    rows = [l for l in rows if json.loads(l).get("date") != rec["date"]]
-    rows.append(json.dumps(rec, ensure_ascii=False))
-    with open(path, "w", encoding="utf-8") as fp:
-        fp.write("\n".join(rows) + "\n")
 
 
 def report(path="kimchi_history.jsonl"):

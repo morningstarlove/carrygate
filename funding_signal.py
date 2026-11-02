@@ -19,7 +19,8 @@ CARRYGATE — 펀딩 극단값 역추세 연구 (③)
 import json, sys, time, math, argparse
 from datetime import datetime, timezone
 
-from scalp import http_json, f, KST, COINS
+from scalp import COINS
+from common import http_json, f, KST, mean, r4, append_history
 
 LOOKBACK_DAYS = 180
 SIGNAL_AVG_DAYS = 3          # 신호 = 최근 3일 평균 일간 펀딩
@@ -27,14 +28,6 @@ HI_PCT, LO_PCT = 90, 10
 FWD = (1, 3, 7)
 HOLD_DAYS = 3                # 규칙 검증: 신호 다음날 시가 진입, 3일 뒤 시가 청산
 TAKER_PCT = {"hyperliquid": 0.045, "okx": 0.05}
-
-
-def mean(xs):
-    return sum(xs) / len(xs) if xs else None
-
-
-def r4(x):
-    return None if x is None else round(x, 4)
 
 
 def day_of(t):
@@ -176,17 +169,6 @@ def study(fund_by_day, px_by_day, taker_pct):
 
 
 # ----------------------------------------------------------------- 저장·보고
-
-def append_history(rec, path):
-    try:
-        with open(path, encoding="utf-8") as fp:
-            rows = [l for l in fp.read().splitlines() if l.strip()]
-    except IOError:
-        rows = []
-    rows = [l for l in rows if json.loads(l).get("date") != rec["date"]]
-    rows.append(json.dumps(rec, ensure_ascii=False))
-    with open(path, "w", encoding="utf-8") as fp:
-        fp.write("\n".join(rows) + "\n")
 
 
 def pooled(results):

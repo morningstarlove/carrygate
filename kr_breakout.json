@@ -1,6 +1,6 @@
 {
- "date": "2026-10-21",
- "generated_at_utc": "2026-10-21T07:17:47Z",
+ "date": "2026-11-02",
+ "generated_at_utc": "2026-11-02T07:28:41Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -74,27 +74,21 @@
   }
  },
  "forward": {
-  "days": 11,
+  "days": 19,
   "from": "2026-10-05",
-  "to": "2026-10-21",
-  "codes": 212,
+  "to": "2026-11-02",
+  "codes": 270,
   "bar_errors": 0,
   "stale_codes": 0,
   "by_source": {
-   "yahoo": 171,
-   "yahoo+gapfill": 1,
-   "yahoo+naver_api": 40
+   "yahoo+naver_api": 62,
+   "yahoo": 208
   },
   "skipped_days": [
    "2026-10-05"
   ],
-  "gap_filled": 1,
-  "gap_filled_codes": {
-   "179880": [
-    "2026-10-19",
-    "2026-10-20"
-   ]
-  },
+  "gap_filled": 0,
+  "gap_filled_codes": {},
   "gap_unfilled": 0,
   "note": null
  },
@@ -102,25 +96,25 @@
   "base": [],
   "no_sector": [
    {
-    "code": "009900",
-    "name": "Myoung Shin Industry Co., Ltd.",
-    "group": "Auto Parts: OEM",
+    "code": "086280",
+    "name": "HYUNDAI GLOVIS Co., Ltd.",
+    "group": "Air Freight/Couriers",
     "pattern": "box",
     "patterns": [
      "box"
     ],
-    "signal_close": 10190.0,
-    "pattern_low": 7590.0,
+    "signal_close": 204500.0,
+    "pattern_low": 172800.0,
     "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 11005 이상이면 포기)",
-    "stop_plan": "max(7590, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 220860 이상이면 포기)",
+    "stop_plan": "max(172800, 진입가×0.93)"
    }
   ],
   "hold_10": [],
   "risk_2": [],
   "no_flag": []
  },
- "signal_date": "2026-10-21",
+ "signal_date": "2026-11-02",
  "signals_frozen": false,
  "frozen_dates": [
   "2026-10-06",
@@ -132,36 +126,44 @@
   "2026-10-15",
   "2026-10-16",
   "2026-10-19",
-  "2026-10-20"
+  "2026-10-20",
+  "2026-10-21",
+  "2026-10-22",
+  "2026-10-23",
+  "2026-10-26",
+  "2026-10-27",
+  "2026-10-28",
+  "2026-10-29",
+  "2026-10-30"
  ],
  "variants": {
   "base": {
    "label": "동조 업종 + 패턴 돌파 (기본)",
-   "signals": 20,
-   "trades": 7,
+   "signals": 22,
+   "trades": 11,
    "wins": 0,
    "win_rate": 0.0,
    "avg_win_pct": null,
-   "avg_loss_pct": -7.21,
+   "avg_loss_pct": -7.3,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -3.0,
-   "equity_final": 9700361,
-   "max_drawdown_pct": 5.26,
-   "avg_hold_days": 2.29,
+   "total_return_pct": -10.67,
+   "equity_final": 8933306,
+   "max_drawdown_pct": 10.69,
+   "avg_hold_days": 4.18,
    "skipped": {
     "gap": 0,
     "limit": 9,
-    "cooldown": 2,
-    "size": 0,
+    "cooldown": 0,
+    "size": 1,
     "no_bar": 0,
     "pattern": 0
    },
    "by_pattern": {
     "flag": {
-     "n": 3,
+     "n": 5,
      "wins": 0,
-     "pnl_krw": -307325
+     "pnl_krw": -510279
     },
     "cup_handle": {
      "n": 1,
@@ -169,62 +171,41 @@
      "pnl_krw": -87356
     },
     "box": {
-     "n": 3,
+     "n": 4,
      "wins": 0,
-     "pnl_krw": -277889
+     "pnl_krw": -367611
+    },
+    "triangle": {
+     "n": 1,
+     "wins": 0,
+     "pnl_krw": -86383
     }
    },
    "by_sync": {
     "day": {
-     "n": 7,
+     "n": 11,
      "wins": 0,
-     "pnl_krw": -672570
+     "pnl_krw": -1051629
     }
    },
    "by_exit": {
     "stop": {
-     "n": 7,
+     "n": 11,
      "wins": 0,
-     "pnl_krw": -672570
+     "pnl_krw": -1051629
     }
    },
    "by_year": {
     "2026": {
-     "n": 7,
+     "n": 11,
      "wins": 0,
-     "pnl_krw": -672570
+     "pnl_krw": -1051629
     }
    },
    "yearly_return_pct": {
-    "2026": -3.0
+    "2026": -10.67
    },
    "open_positions": [
-    {
-     "code": "373220",
-     "name": "LG Energy Solution Ltd.",
-     "group": "Electrical Products",
-     "pattern": "triangle",
-     "entry_date": "2026-10-07",
-     "entry": 386656.5,
-     "stop": 359590.54,
-     "shares": 3,
-     "bars_held": 10,
-     "last_close": 411500.0,
-     "unrealized_pct": 6.43
-    },
-    {
-     "code": "396300",
-     "name": "HT ROBOTICS Co. Ltd",
-     "group": "Computer Communications",
-     "pattern": "flag",
-     "entry_date": "2026-10-19",
-     "entry": 8836.43,
-     "stop": 8217.88,
-     "shares": 152,
-     "bars_held": 3,
-     "last_close": 11120.0,
-     "unrealized_pct": 25.84
-    },
     {
      "code": "068270",
      "name": "Celltrion, Inc.",
@@ -234,45 +215,32 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 6,
-     "bars_held": 3,
-     "last_close": 197600.0,
-     "unrealized_pct": 1.6
-    },
-    {
-     "code": "419050",
-     "name": "SAMKEE ENERGY SOLUTIONS CO. LTD",
-     "group": "Electrical Products",
-     "pattern": "flag",
-     "entry_date": "2026-10-20",
-     "entry": 2652.93,
-     "stop": 2467.23,
-     "shares": 521,
-     "bars_held": 2,
-     "last_close": 2525.0,
-     "unrealized_pct": -4.82
+     "bars_held": 11,
+     "last_close": 192000.0,
+     "unrealized_pct": -1.28
     }
    ]
   },
   "no_sector": {
    "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
-   "signals": 55,
-   "trades": 13,
+   "signals": 65,
+   "trades": 18,
    "wins": 0,
    "win_rate": 0.0,
    "avg_win_pct": null,
-   "avg_loss_pct": -7.41,
+   "avg_loss_pct": -7.42,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -4.27,
-   "equity_final": 9572958,
-   "max_drawdown_pct": 11.47,
-   "avg_hold_days": 1.77,
+   "total_return_pct": -13.23,
+   "equity_final": 8677429,
+   "max_drawdown_pct": 13.47,
+   "avg_hold_days": 2.39,
    "skipped": {
     "gap": 0,
-    "limit": 35,
-    "cooldown": 11,
-    "size": 0,
-    "no_bar": 1,
+    "limit": 42,
+    "cooldown": 2,
+    "size": 1,
+    "no_bar": 0,
     "pattern": 0
    },
    "by_pattern": {
@@ -287,44 +255,44 @@
      "pnl_krw": -191105
     },
     "triangle": {
-     "n": 3,
+     "n": 4,
      "wins": 0,
-     "pnl_krw": -303771
+     "pnl_krw": -401380
     },
     "box": {
-     "n": 3,
+     "n": 7,
      "wins": 0,
-     "pnl_krw": -262025
+     "pnl_krw": -630571
     }
    },
    "by_sync": {
     "day": {
-     "n": 4,
+     "n": 5,
      "wins": 0,
-     "pnl_krw": -373842
+     "pnl_krw": -463564
     },
     "none": {
-     "n": 9,
+     "n": 13,
      "wins": 0,
-     "pnl_krw": -881288
+     "pnl_krw": -1257721
     }
    },
    "by_exit": {
     "stop": {
-     "n": 13,
+     "n": 18,
      "wins": 0,
-     "pnl_krw": -1255130
+     "pnl_krw": -1721285
     }
    },
    "by_year": {
     "2026": {
-     "n": 13,
+     "n": 18,
      "wins": 0,
-     "pnl_krw": -1255130
+     "pnl_krw": -1721285
     }
    },
    "yearly_return_pct": {
-    "2026": -4.27
+    "2026": -13.23
    },
    "open_positions": [
     {
@@ -336,35 +304,9 @@
      "entry": 21363.9,
      "stop": 20800.0,
      "shares": 83,
-     "bars_held": 7,
-     "last_close": 23400.0,
-     "unrealized_pct": 9.53
-    },
-    {
-     "code": "028670",
-     "name": "Pan Ocean Co., Ltd.",
-     "group": "Marine Shipping",
-     "pattern": "triangle",
-     "entry_date": "2026-10-14",
-     "entry": 6619.8,
-     "stop": 6156.41,
-     "shares": 198,
-     "bars_held": 6,
-     "last_close": 6530.0,
-     "unrealized_pct": -1.36
-    },
-    {
-     "code": "452280",
-     "name": "HanSun Engineering Co., Ltd.",
-     "group": "Industrial Machinery",
-     "pattern": "box",
-     "entry_date": "2026-10-15",
-     "entry": 15335.87,
-     "stop": 14262.36,
-     "shares": 83,
-     "bars_held": 5,
-     "last_close": 15540.0,
-     "unrealized_pct": 1.33
+     "bars_held": 15,
+     "last_close": 23700.0,
+     "unrealized_pct": 10.93
     },
     {
      "code": "396300",
@@ -375,9 +317,9 @@
      "entry": 7452.29,
      "stop": 6930.63,
      "shares": 170,
-     "bars_held": 4,
-     "last_close": 11120.0,
-     "unrealized_pct": 49.22
+     "bars_held": 12,
+     "last_close": 8490.0,
+     "unrealized_pct": 13.92
     },
     {
      "code": "033780",
@@ -388,39 +330,39 @@
      "entry": 187761.6,
      "stop": 174618.29,
      "shares": 6,
-     "bars_held": 4,
-     "last_close": 194000.0,
-     "unrealized_pct": 3.32
+     "bars_held": 12,
+     "last_close": 192600.0,
+     "unrealized_pct": 2.58
     }
    ]
   },
   "hold_10": {
    "label": "동조 + 패턴, 보유 10일",
-   "signals": 20,
-   "trades": 7,
-   "wins": 0,
-   "win_rate": 0.0,
-   "avg_win_pct": null,
-   "avg_loss_pct": -7.21,
-   "payoff": null,
-   "profit_factor": 0.0,
-   "total_return_pct": -3.0,
-   "equity_final": 9700361,
-   "max_drawdown_pct": 5.26,
-   "avg_hold_days": 2.29,
+   "signals": 22,
+   "trades": 12,
+   "wins": 1,
+   "win_rate": 8.33,
+   "avg_win_pct": 4.89,
+   "avg_loss_pct": -6.87,
+   "payoff": 0.62,
+   "profit_factor": 0.06,
+   "total_return_pct": -9.48,
+   "equity_final": 9051512,
+   "max_drawdown_pct": 9.48,
+   "avg_hold_days": 4.17,
    "skipped": {
     "gap": 0,
     "limit": 9,
-    "cooldown": 2,
-    "size": 0,
+    "cooldown": 0,
+    "size": 1,
     "no_bar": 0,
     "pattern": 0
    },
    "by_pattern": {
     "flag": {
-     "n": 3,
+     "n": 5,
      "wins": 0,
-     "pnl_krw": -307325
+     "pnl_krw": -510279
     },
     "cup_handle": {
      "n": 1,
@@ -428,117 +370,74 @@
      "pnl_krw": -87356
     },
     "box": {
-     "n": 3,
+     "n": 4,
      "wins": 0,
-     "pnl_krw": -277889
+     "pnl_krw": -375767
+    },
+    "triangle": {
+     "n": 2,
+     "wins": 1,
+     "pnl_krw": 24915
     }
    },
    "by_sync": {
     "day": {
-     "n": 7,
-     "wins": 0,
-     "pnl_krw": -672570
+     "n": 12,
+     "wins": 1,
+     "pnl_krw": -948487
     }
    },
    "by_exit": {
     "stop": {
-     "n": 7,
+     "n": 10,
      "wins": 0,
-     "pnl_krw": -672570
+     "pnl_krw": -973402
+    },
+    "hold10": {
+     "n": 2,
+     "wins": 1,
+     "pnl_krw": 24915
     }
    },
    "by_year": {
     "2026": {
-     "n": 7,
-     "wins": 0,
-     "pnl_krw": -672570
+     "n": 12,
+     "wins": 1,
+     "pnl_krw": -948487
     }
    },
    "yearly_return_pct": {
-    "2026": -3.0
+    "2026": -9.48
    },
-   "open_positions": [
-    {
-     "code": "373220",
-     "name": "LG Energy Solution Ltd.",
-     "group": "Electrical Products",
-     "pattern": "triangle",
-     "entry_date": "2026-10-07",
-     "entry": 386656.5,
-     "stop": 359590.54,
-     "shares": 3,
-     "bars_held": 10,
-     "last_close": 411500.0,
-     "unrealized_pct": 6.43
-    },
-    {
-     "code": "396300",
-     "name": "HT ROBOTICS Co. Ltd",
-     "group": "Computer Communications",
-     "pattern": "flag",
-     "entry_date": "2026-10-19",
-     "entry": 8836.43,
-     "stop": 8217.88,
-     "shares": 152,
-     "bars_held": 3,
-     "last_close": 11120.0,
-     "unrealized_pct": 25.84
-    },
-    {
-     "code": "068270",
-     "name": "Celltrion, Inc.",
-     "group": "Biotechnology",
-     "pattern": "triangle",
-     "entry_date": "2026-10-19",
-     "entry": 194481.7,
-     "stop": 180867.98,
-     "shares": 6,
-     "bars_held": 3,
-     "last_close": 197600.0,
-     "unrealized_pct": 1.6
-    },
-    {
-     "code": "419050",
-     "name": "SAMKEE ENERGY SOLUTIONS CO. LTD",
-     "group": "Electrical Products",
-     "pattern": "flag",
-     "entry_date": "2026-10-20",
-     "entry": 2652.93,
-     "stop": 2467.23,
-     "shares": 521,
-     "bars_held": 2,
-     "last_close": 2525.0,
-     "unrealized_pct": -4.82
-    }
-   ]
+   "open_positions": []
   },
   "risk_2": {
    "label": "동조 + 패턴, 위험 2% (명목 상한 30%)",
-   "signals": 21,
-   "trades": 6,
+   "signals": 23,
+   "trades": 9,
    "wins": 0,
    "win_rate": 0.0,
    "avg_win_pct": null,
-   "avg_loss_pct": -7.17,
+   "avg_loss_pct": -7.22,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -4.06,
-   "equity_final": 9594270,
-   "max_drawdown_pct": 9.21,
-   "avg_hold_days": 2.33,
+   "total_return_pct": -16.21,
+   "equity_final": 8378671,
+   "max_drawdown_pct": 16.27,
+   "avg_hold_days": 3,
    "skipped": {
     "gap": 0,
     "limit": 0,
-    "cooldown": 2,
+    "cooldown": 0,
     "size": 13,
     "no_bar": 0,
     "pattern": 0
    },
    "by_pattern": {
     "flag": {
-     "n": 2,
+     "n": 4,
      "wins": 0,
-     "pnl_krw": -412165
+     "pnl_krw": -706823
     },
     "cup_handle": {
      "n": 1,
@@ -546,49 +445,41 @@
      "pnl_krw": -152873
     },
     "box": {
-     "n": 3,
+     "n": 4,
      "wins": 0,
-     "pnl_krw": -549549
+     "pnl_krw": -728992
     }
    },
    "by_sync": {
     "day": {
-     "n": 6,
+     "n": 8,
      "wins": 0,
-     "pnl_krw": -1114587
+     "pnl_krw": -1486838
+    },
+    "week": {
+     "n": 1,
+     "wins": 0,
+     "pnl_krw": -101850
     }
    },
    "by_exit": {
     "stop": {
-     "n": 6,
+     "n": 9,
      "wins": 0,
-     "pnl_krw": -1114587
+     "pnl_krw": -1588688
     }
    },
    "by_year": {
     "2026": {
-     "n": 6,
+     "n": 9,
      "wins": 0,
-     "pnl_krw": -1114587
+     "pnl_krw": -1588688
     }
    },
    "yearly_return_pct": {
-    "2026": -4.06
+    "2026": -16.21
    },
    "open_positions": [
-    {
-     "code": "396300",
-     "name": "HT ROBOTICS Co. Ltd",
-     "group": "Computer Communications",
-     "pattern": "flag",
-     "entry_date": "2026-10-19",
-     "entry": 8836.43,
-     "stop": 8217.88,
-     "shares": 293,
-     "bars_held": 3,
-     "last_close": 11120.0,
-     "unrealized_pct": 25.84
-    },
     {
      "code": "068270",
      "name": "Celltrion, Inc.",
@@ -598,30 +489,30 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 13,
-     "bars_held": 3,
-     "last_close": 197600.0,
-     "unrealized_pct": 1.6
+     "bars_held": 11,
+     "last_close": 192000.0,
+     "unrealized_pct": -1.28
     }
    ]
   },
   "no_flag": {
    "label": "동조 + 패턴, 깃발형 제외",
-   "signals": 8,
-   "trades": 5,
+   "signals": 9,
+   "trades": 7,
    "wins": 0,
    "win_rate": 0.0,
    "avg_win_pct": null,
-   "avg_loss_pct": -7.12,
+   "avg_loss_pct": -7.21,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -3.98,
-   "equity_final": 9601972,
-   "max_drawdown_pct": 4.43,
-   "avg_hold_days": 3.6,
+   "total_return_pct": -6.96,
+   "equity_final": 9304155,
+   "max_drawdown_pct": 7.59,
+   "avg_hold_days": 5,
    "skipped": {
     "gap": 0,
     "limit": 1,
-    "cooldown": 1,
+    "cooldown": 0,
     "size": 0,
     "no_bar": 0,
     "pattern": 0
@@ -633,49 +524,41 @@
      "pnl_krw": -109195
     },
     "box": {
-     "n": 4,
+     "n": 5,
      "wins": 0,
-     "pnl_krw": -384813
+     "pnl_krw": -482691
+    },
+    "triangle": {
+     "n": 1,
+     "wins": 0,
+     "pnl_krw": -86383
     }
    },
    "by_sync": {
     "day": {
-     "n": 5,
+     "n": 7,
      "wins": 0,
-     "pnl_krw": -494008
+     "pnl_krw": -678269
     }
    },
    "by_exit": {
     "stop": {
-     "n": 5,
+     "n": 7,
      "wins": 0,
-     "pnl_krw": -494008
+     "pnl_krw": -678269
     }
    },
    "by_year": {
     "2026": {
-     "n": 5,
+     "n": 7,
      "wins": 0,
-     "pnl_krw": -494008
+     "pnl_krw": -678269
     }
    },
    "yearly_return_pct": {
-    "2026": -3.98
+    "2026": -6.96
    },
    "open_positions": [
-    {
-     "code": "373220",
-     "name": "LG Energy Solution Ltd.",
-     "group": "Electrical Products",
-     "pattern": "triangle",
-     "entry_date": "2026-10-07",
-     "entry": 386656.5,
-     "stop": 359590.54,
-     "shares": 3,
-     "bars_held": 10,
-     "last_close": 411500.0,
-     "unrealized_pct": 6.43
-    },
     {
      "code": "068270",
      "name": "Celltrion, Inc.",
@@ -685,9 +568,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 7,
-     "bars_held": 3,
-     "last_close": 197600.0,
-     "unrealized_pct": 1.6
+     "bars_held": 11,
+     "last_close": 192000.0,
+     "unrealized_pct": -1.28
     }
    ]
   }
@@ -848,6 +731,96 @@
     "pnl_krw": -99671,
     "pnl_pct": -7.45,
     "hold_days": 3,
+    "gap": false
+   },
+   {
+    "code": "419050",
+    "name": "SAMKEE ENERGY SOLUTIONS CO. LTD",
+    "group": "Electrical Products",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-19",
+    "entry_date": "2026-10-20",
+    "entry": 2652.93,
+    "stop": 2467.23,
+    "exit_date": "2026-10-22",
+    "exit": 2459.83,
+    "why": "stop",
+    "shares": 521,
+    "pnl_krw": -102931,
+    "pnl_pct": -7.45,
+    "hold_days": 3,
+    "gap": false
+   },
+   {
+    "code": "373220",
+    "name": "LG Energy Solution Ltd.",
+    "group": "Electrical Products",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-06",
+    "entry_date": "2026-10-07",
+    "entry": 386656.5,
+    "stop": 359590.54,
+    "exit_date": "2026-10-29",
+    "exit": 358511.77,
+    "why": "stop",
+    "shares": 3,
+    "pnl_krw": -86383,
+    "pnl_pct": -7.45,
+    "hold_days": 16,
+    "gap": false
+   },
+   {
+    "code": "053800",
+    "name": "AhnLab, Inc.",
+    "group": "Packaged Software",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-28",
+    "entry_date": "2026-10-29",
+    "entry": 109527.6,
+    "stop": 101860.67,
+    "exit_date": "2026-10-29",
+    "exit": 101555.09,
+    "why": "stop",
+    "shares": 11,
+    "pnl_krw": -89722,
+    "pnl_pct": -7.45,
+    "hold_days": 1,
+    "gap": false
+   },
+   {
+    "code": "396300",
+    "name": "HT ROBOTICS Co. Ltd",
+    "group": "Computer Communications",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-16",
+    "entry_date": "2026-10-19",
+    "entry": 8836.43,
+    "stop": 8217.88,
+    "exit_date": "2026-10-30",
+    "exit": 8193.23,
+    "why": "stop",
+    "shares": 152,
+    "pnl_krw": -100023,
+    "pnl_pct": -7.45,
+    "hold_days": 10,
     "gap": false
    }
   ],
@@ -1142,6 +1115,119 @@
     "pnl_pct": -8.56,
     "hold_days": 3,
     "gap": true
+   },
+   {
+    "code": "028670",
+    "name": "Pan Ocean Co., Ltd.",
+    "group": "Marine Shipping",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle",
+     "cup_handle"
+    ],
+    "sync_by": null,
+    "signal_date": "2026-10-13",
+    "entry_date": "2026-10-14",
+    "entry": 6619.8,
+    "stop": 6156.41,
+    "exit_date": "2026-10-23",
+    "exit": 6137.94,
+    "why": "stop",
+    "shares": 198,
+    "pnl_krw": -97609,
+    "pnl_pct": -7.45,
+    "hold_days": 8,
+    "gap": false
+   },
+   {
+    "code": "452280",
+    "name": "HanSun Engineering Co., Ltd.",
+    "group": "Industrial Machinery",
+    "pattern": "box",
+    "patterns": [
+     "box",
+     "flag"
+    ],
+    "sync_by": null,
+    "signal_date": "2026-10-14",
+    "entry_date": "2026-10-15",
+    "entry": 15335.87,
+    "stop": 14262.36,
+    "exit_date": "2026-10-26",
+    "exit": 14219.57,
+    "why": "stop",
+    "shares": 83,
+    "pnl_krw": -94791,
+    "pnl_pct": -7.45,
+    "hold_days": 8,
+    "gap": false
+   },
+   {
+    "code": "441270",
+    "name": "Fine M-Tec Co.,Ltd.",
+    "group": "Building Products",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": null,
+    "signal_date": "2026-10-23",
+    "entry_date": "2026-10-26",
+    "entry": 10501.41,
+    "stop": 9766.31,
+    "exit_date": "2026-10-26",
+    "exit": 9737.01,
+    "why": "stop",
+    "shares": 122,
+    "pnl_krw": -95409,
+    "pnl_pct": -7.45,
+    "hold_days": 1,
+    "gap": false
+   },
+   {
+    "code": "053800",
+    "name": "AhnLab, Inc.",
+    "group": "Packaged Software",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-28",
+    "entry_date": "2026-10-29",
+    "entry": 109527.6,
+    "stop": 101860.67,
+    "exit_date": "2026-10-29",
+    "exit": 101555.09,
+    "why": "stop",
+    "shares": 11,
+    "pnl_krw": -89722,
+    "pnl_pct": -7.45,
+    "hold_days": 1,
+    "gap": false
+   },
+   {
+    "code": "064400",
+    "name": "LG CNS Co., Ltd.",
+    "group": "Information Technology Services",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": null,
+    "signal_date": "2026-10-28",
+    "entry_date": "2026-10-29",
+    "entry": 79337.3,
+    "stop": 73783.69,
+    "exit_date": "2026-10-30",
+    "exit": 73562.34,
+    "why": "stop",
+    "shares": 15,
+    "pnl_krw": -88624,
+    "pnl_pct": -7.45,
+    "hold_days": 2,
+    "gap": false
    }
   ],
   "hold_10": [
@@ -1300,6 +1386,119 @@
     "pnl_pct": -7.45,
     "hold_days": 3,
     "gap": false
+   },
+   {
+    "code": "373220",
+    "name": "LG Energy Solution Ltd.",
+    "group": "Electrical Products",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-06",
+    "entry_date": "2026-10-07",
+    "entry": 386656.5,
+    "stop": 359590.54,
+    "exit_date": "2026-10-22",
+    "exit": 406277.5,
+    "why": "hold10",
+    "shares": 3,
+    "pnl_krw": 56678,
+    "pnl_pct": 4.89,
+    "hold_days": 10,
+    "gap": false
+   },
+   {
+    "code": "419050",
+    "name": "SAMKEE ENERGY SOLUTIONS CO. LTD",
+    "group": "Electrical Products",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-19",
+    "entry_date": "2026-10-20",
+    "entry": 2652.93,
+    "stop": 2467.23,
+    "exit_date": "2026-10-22",
+    "exit": 2459.83,
+    "why": "stop",
+    "shares": 521,
+    "pnl_krw": -102931,
+    "pnl_pct": -7.45,
+    "hold_days": 3,
+    "gap": false
+   },
+   {
+    "code": "053800",
+    "name": "AhnLab, Inc.",
+    "group": "Packaged Software",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-28",
+    "entry_date": "2026-10-29",
+    "entry": 109527.6,
+    "stop": 101860.67,
+    "exit_date": "2026-10-29",
+    "exit": 101555.09,
+    "why": "stop",
+    "shares": 12,
+    "pnl_krw": -97878,
+    "pnl_pct": -7.45,
+    "hold_days": 1,
+    "gap": false
+   },
+   {
+    "code": "396300",
+    "name": "HT ROBOTICS Co. Ltd",
+    "group": "Computer Communications",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-16",
+    "entry_date": "2026-10-19",
+    "entry": 8836.43,
+    "stop": 8217.88,
+    "exit_date": "2026-10-30",
+    "exit": 8193.23,
+    "why": "stop",
+    "shares": 152,
+    "pnl_krw": -100023,
+    "pnl_pct": -7.45,
+    "hold_days": 10,
+    "gap": false
+   },
+   {
+    "code": "068270",
+    "name": "Celltrion, Inc.",
+    "group": "Biotechnology",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-16",
+    "entry_date": "2026-10-19",
+    "entry": 194481.7,
+    "stop": 180867.98,
+    "exit_date": "2026-11-02",
+    "exit": 189529.7,
+    "why": "hold10",
+    "shares": 6,
+    "pnl_krw": -31763,
+    "pnl_pct": -2.72,
+    "hold_days": 10,
+    "gap": false
    }
   ],
   "risk_2": [
@@ -1436,6 +1635,73 @@
     "pnl_pct": -7.45,
     "hold_days": 3,
     "gap": false
+   },
+   {
+    "code": "207940",
+    "name": "SAMSUNG BIOLOGICS Co., Ltd.",
+    "group": "Biotechnology",
+    "pattern": "flag",
+    "patterns": [
+     "box",
+     "flag"
+    ],
+    "sync_by": "week",
+    "signal_date": "2026-10-23",
+    "entry_date": "2026-10-26",
+    "entry": 1450338.0,
+    "stop": 1355000.0,
+    "exit_date": "2026-10-27",
+    "exit": 1350935.0,
+    "why": "stop",
+    "shares": 1,
+    "pnl_krw": -101850,
+    "pnl_pct": -7.02,
+    "hold_days": 2,
+    "gap": false
+   },
+   {
+    "code": "053800",
+    "name": "AhnLab, Inc.",
+    "group": "Packaged Software",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-28",
+    "entry_date": "2026-10-29",
+    "entry": 109527.6,
+    "stop": 101860.67,
+    "exit_date": "2026-10-29",
+    "exit": 101555.09,
+    "why": "stop",
+    "shares": 22,
+    "pnl_krw": -179443,
+    "pnl_pct": -7.45,
+    "hold_days": 1,
+    "gap": false
+   },
+   {
+    "code": "396300",
+    "name": "HT ROBOTICS Co. Ltd",
+    "group": "Computer Communications",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-16",
+    "entry_date": "2026-10-19",
+    "entry": 8836.43,
+    "stop": 8217.88,
+    "exit_date": "2026-10-30",
+    "exit": 8193.23,
+    "why": "stop",
+    "shares": 293,
+    "pnl_krw": -192808,
+    "pnl_pct": -7.45,
+    "hold_days": 10,
+    "gap": false
    }
   ],
   "no_flag": [
@@ -1548,6 +1814,52 @@
     "pnl_krw": -102163,
     "pnl_pct": -7.45,
     "hold_days": 3,
+    "gap": false
+   },
+   {
+    "code": "373220",
+    "name": "LG Energy Solution Ltd.",
+    "group": "Electrical Products",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-06",
+    "entry_date": "2026-10-07",
+    "entry": 386656.5,
+    "stop": 359590.54,
+    "exit_date": "2026-10-29",
+    "exit": 358511.77,
+    "why": "stop",
+    "shares": 3,
+    "pnl_krw": -86383,
+    "pnl_pct": -7.45,
+    "hold_days": 16,
+    "gap": false
+   },
+   {
+    "code": "053800",
+    "name": "AhnLab, Inc.",
+    "group": "Packaged Software",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-28",
+    "entry_date": "2026-10-29",
+    "entry": 109527.6,
+    "stop": 101860.67,
+    "exit_date": "2026-10-29",
+    "exit": 101555.09,
+    "why": "stop",
+    "shares": 12,
+    "pnl_krw": -97878,
+    "pnl_pct": -7.45,
+    "hold_days": 1,
     "gap": false
    }
   ]

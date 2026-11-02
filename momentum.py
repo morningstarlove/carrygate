@@ -22,8 +22,8 @@ CARRYGATE — 장기 ETF 듀얼 모멘텀 백테스트
 """
 import json, sys, csv, os, math, argparse, statistics
 from datetime import datetime, timezone, timedelta
+from common import KST, load_history
 
-KST = timezone(timedelta(hours=9))
 
 DATA_DIR = "data/etf"
 COST_PCT = 0.25       # 보유 자산을 바꿀 때마다 포트폴리오에서 떼는 비용 (%)
@@ -391,23 +391,6 @@ def write_history(out, path):
     keep.append(line)
     with open(path, "w", encoding="utf-8") as fp:
         fp.write("\n".join(keep) + "\n")
-
-
-def load_history(path):
-    rows = []
-    try:
-        with open(path, encoding="utf-8") as fp:
-            for l in fp:
-                l = l.strip()
-                if l:
-                    try:
-                        rows.append(json.loads(l))
-                    except ValueError:
-                        pass
-    except IOError:
-        pass
-    rows.sort(key=lambda r: r.get("date", ""))
-    return rows
 
 
 # --- 출력 ------------------------------------------------------------------
