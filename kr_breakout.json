@@ -1,6 +1,6 @@
 {
- "date": "2026-10-30",
- "generated_at_utc": "2026-10-30T13:42:23Z",
+ "date": "2026-11-02",
+ "generated_at_utc": "2026-11-02T07:28:41Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -74,15 +74,15 @@
   }
  },
  "forward": {
-  "days": 18,
+  "days": 19,
   "from": "2026-10-05",
-  "to": "2026-10-30",
-  "codes": 263,
+  "to": "2026-11-02",
+  "codes": 270,
   "bar_errors": 0,
   "stale_codes": 0,
   "by_source": {
-   "yahoo": 203,
-   "yahoo+naver_api": 60
+   "yahoo+naver_api": 62,
+   "yahoo": 208
   },
   "skipped_days": [
    "2026-10-05"
@@ -94,13 +94,28 @@
  },
  "signals_today": {
   "base": [],
-  "no_sector": [],
+  "no_sector": [
+   {
+    "code": "086280",
+    "name": "HYUNDAI GLOVIS Co., Ltd.",
+    "group": "Air Freight/Couriers",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 204500.0,
+    "pattern_low": 172800.0,
+    "sync_by": null,
+    "entry_plan": "내일 시가 (시가가 220860 이상이면 포기)",
+    "stop_plan": "max(172800, 진입가×0.93)"
+   }
+  ],
   "hold_10": [],
   "risk_2": [],
   "no_flag": []
  },
- "signal_date": "2026-10-30",
- "signals_frozen": true,
+ "signal_date": "2026-11-02",
+ "signals_frozen": false,
  "frozen_dates": [
   "2026-10-06",
   "2026-10-07",
@@ -132,8 +147,8 @@
    "avg_loss_pct": -7.3,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -10.69,
-   "equity_final": 8930906,
+   "total_return_pct": -10.67,
+   "equity_final": 8933306,
    "max_drawdown_pct": 10.69,
    "avg_hold_days": 4.18,
    "skipped": {
@@ -188,7 +203,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -10.69
+    "2026": -10.67
    },
    "open_positions": [
     {
@@ -200,15 +215,15 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 6,
-     "bars_held": 10,
-     "last_close": 191600.0,
-     "unrealized_pct": -1.48
+     "bars_held": 11,
+     "last_close": 192000.0,
+     "unrealized_pct": -1.28
     }
    ]
   },
   "no_sector": {
    "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
-   "signals": 64,
+   "signals": 65,
    "trades": 18,
    "wins": 0,
    "win_rate": 0.0,
@@ -216,14 +231,14 @@
    "avg_loss_pct": -7.42,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -13.69,
-   "equity_final": 8630879,
-   "max_drawdown_pct": 13.69,
+   "total_return_pct": -13.23,
+   "equity_final": 8677429,
+   "max_drawdown_pct": 13.47,
    "avg_hold_days": 2.39,
    "skipped": {
     "gap": 0,
     "limit": 42,
-    "cooldown": 0,
+    "cooldown": 2,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -277,7 +292,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -13.69
+    "2026": -13.23
    },
    "open_positions": [
     {
@@ -289,9 +304,9 @@
      "entry": 21363.9,
      "stop": 20800.0,
      "shares": 83,
-     "bars_held": 14,
-     "last_close": 23350.0,
-     "unrealized_pct": 9.3
+     "bars_held": 15,
+     "last_close": 23700.0,
+     "unrealized_pct": 10.93
     },
     {
      "code": "396300",
@@ -302,9 +317,9 @@
      "entry": 7452.29,
      "stop": 6930.63,
      "shares": 170,
-     "bars_held": 11,
-     "last_close": 8260.0,
-     "unrealized_pct": 10.84
+     "bars_held": 12,
+     "last_close": 8490.0,
+     "unrealized_pct": 13.92
     },
     {
      "code": "033780",
@@ -315,26 +330,26 @@
      "entry": 187761.6,
      "stop": 174618.29,
      "shares": 6,
-     "bars_held": 11,
-     "last_close": 196200.0,
-     "unrealized_pct": 4.49
+     "bars_held": 12,
+     "last_close": 192600.0,
+     "unrealized_pct": 2.58
     }
    ]
   },
   "hold_10": {
    "label": "동조 + 패턴, 보유 10일",
    "signals": 22,
-   "trades": 11,
+   "trades": 12,
    "wins": 1,
-   "win_rate": 9.09,
+   "win_rate": 8.33,
    "avg_win_pct": 4.89,
-   "avg_loss_pct": -7.29,
-   "payoff": 0.58,
+   "avg_loss_pct": -6.87,
+   "payoff": 0.62,
    "profit_factor": 0.06,
-   "total_return_pct": -9.34,
-   "equity_final": 9065810,
-   "max_drawdown_pct": 9.34,
-   "avg_hold_days": 3.64,
+   "total_return_pct": -9.48,
+   "equity_final": 9051512,
+   "max_drawdown_pct": 9.48,
+   "avg_hold_days": 4.17,
    "skipped": {
     "gap": 0,
     "limit": 9,
@@ -360,16 +375,16 @@
      "pnl_krw": -375767
     },
     "triangle": {
-     "n": 1,
+     "n": 2,
      "wins": 1,
-     "pnl_krw": 56678
+     "pnl_krw": 24915
     }
    },
    "by_sync": {
     "day": {
-     "n": 11,
+     "n": 12,
      "wins": 1,
-     "pnl_krw": -916724
+     "pnl_krw": -948487
     }
    },
    "by_exit": {
@@ -379,36 +394,22 @@
      "pnl_krw": -973402
     },
     "hold10": {
-     "n": 1,
+     "n": 2,
      "wins": 1,
-     "pnl_krw": 56678
+     "pnl_krw": 24915
     }
    },
    "by_year": {
     "2026": {
-     "n": 11,
+     "n": 12,
      "wins": 1,
-     "pnl_krw": -916724
+     "pnl_krw": -948487
     }
    },
    "yearly_return_pct": {
-    "2026": -9.34
+    "2026": -9.48
    },
-   "open_positions": [
-    {
-     "code": "068270",
-     "name": "Celltrion, Inc.",
-     "group": "Biotechnology",
-     "pattern": "triangle",
-     "entry_date": "2026-10-19",
-     "entry": 194481.7,
-     "stop": 180867.98,
-     "shares": 6,
-     "bars_held": 10,
-     "last_close": 191600.0,
-     "unrealized_pct": -1.48
-    }
-   ]
+   "open_positions": []
   },
   "risk_2": {
    "label": "동조 + 패턴, 위험 2% (명목 상한 30%)",
@@ -420,8 +421,8 @@
    "avg_loss_pct": -7.22,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -16.27,
-   "equity_final": 8373471,
+   "total_return_pct": -16.21,
+   "equity_final": 8378671,
    "max_drawdown_pct": 16.27,
    "avg_hold_days": 3,
    "skipped": {
@@ -476,7 +477,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -16.27
+    "2026": -16.21
    },
    "open_positions": [
     {
@@ -488,9 +489,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 13,
-     "bars_held": 10,
-     "last_close": 191600.0,
-     "unrealized_pct": -1.48
+     "bars_held": 11,
+     "last_close": 192000.0,
+     "unrealized_pct": -1.28
     }
    ]
   },
@@ -504,8 +505,8 @@
    "avg_loss_pct": -7.21,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -6.99,
-   "equity_final": 9301355,
+   "total_return_pct": -6.96,
+   "equity_final": 9304155,
    "max_drawdown_pct": 7.59,
    "avg_hold_days": 5,
    "skipped": {
@@ -555,7 +556,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -6.99
+    "2026": -6.96
    },
    "open_positions": [
     {
@@ -567,9 +568,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 7,
-     "bars_held": 10,
-     "last_close": 191600.0,
-     "unrealized_pct": -1.48
+     "bars_held": 11,
+     "last_close": 192000.0,
+     "unrealized_pct": -1.28
     }
    ]
   }
@@ -1473,6 +1474,29 @@
     "shares": 152,
     "pnl_krw": -100023,
     "pnl_pct": -7.45,
+    "hold_days": 10,
+    "gap": false
+   },
+   {
+    "code": "068270",
+    "name": "Celltrion, Inc.",
+    "group": "Biotechnology",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-16",
+    "entry_date": "2026-10-19",
+    "entry": 194481.7,
+    "stop": 180867.98,
+    "exit_date": "2026-11-02",
+    "exit": 189529.7,
+    "why": "hold10",
+    "shares": 6,
+    "pnl_krw": -31763,
+    "pnl_pct": -2.72,
     "hold_days": 10,
     "gap": false
    }
