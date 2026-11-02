@@ -37,6 +37,7 @@
 | 현황판 결과 파일 갱신 | 매일 17:37 | Routine trig_015SCRNNwatvAhHFdJF8F9Z9 → 세션 session_01UBXi3SEnxJwqCj4dY5q4J5 (10/10 부터. 이전 새-세션 루틴 trig_01NtBpUqqUuZxogBQxRWurDj 는 꺼 둠) |
 | 매일 점검·이상 보고 (10/7부터 판정 변화·규칙 잠금 불일치·운 보정 경고도 보고, 보고 끝에 판정 한 줄) | 매일 10:00 | Routine trig_01T529xQcka6vj6YYZFAnuyL (새 세션) |
 | 매크로 달력 갱신 | 매주 월 11:10 | Routine trig_01CBFoNkLZyBHafCjmsAK5Jp |
+| 초단타 전략·가설 일일 보고 (판정·어제 성적·전략 현황·가설 1개; 사용자 요청 11/2) | 매일 17:10 | Routine trig_01Sq7GkfWcgjfZfiRQsfrrhJ → 세션 session_01NW6d8yMKTBLhW7RdeHRgsq |
 | 바이낸스 1분봉 중계 (4일치 → `/var/www/carrygate/binance_1m/`, Caddy `/carrygate/*`) | 매일 09:05 | **사용자 Vultr 서버** cron `/root/carrygate-relay/vps_relay.py`, 로그 `relay.log`. 끄기: `crontab -l \| grep -v vps_relay.py \| crontab -` |
 | 초단타 표본 밖 재확인 (P19) | 2026-11-04 16:31, 1회 | Routine trig_01Lzq3K3xahcKnRc4mbmauQV → 세션 session_01WP7a8oLwaHMUj5MimZSF6k (10/21 재확인 trig_01WWuHJTvmZxK7GWpuvdSZca 는 실행 끝) |
 
