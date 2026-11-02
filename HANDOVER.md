@@ -57,6 +57,8 @@
 
 **2026-10-28 헬퍼 중복 정리 (규칙 변경 없음):** 19개 모듈이 각자 복사해 두던 작은 헬퍼(`http_json`·`f`·`r2`·`r4`·`mean`·`std`·`corr`·`load_json`·`append_history`·`load_history`·`KST`·`UA`)를 `common.py` 한 곳으로 모았다(359줄 삭제). 전에는 `scalp.py` 가 사실상 공용 모듈 노릇을 해서 8개 모듈이 초단타 파일에서 헬퍼를 가져다 썼다 — 이제 `scalp.py` 에서 가져오는 것은 `COINS` 뿐. 일부러 다르게 둔 복사본(호가창의 재시도 없는 요청, 한국 주식의 NaN 처리·25초, 판정기의 저장소 기준 경로, PC·서버 단독 실행 중계 스크립트)은 그대로이며 이유는 `common.py` 머리말에 있다. 단위시험 258건·selfcheck·오프라인 dry-run 8종 통과. 작업 기록 `docs/sessions/2026-10-28_helper_dedup.md`.
 
+**2026-10-21 외부 저장소 검토 (anthropics/financial-services):** SNS 게시물 계기로 직접 받아 확인. 애널리스트 보고서 초안 도구(유료 MCP 12개, 한국 시장 0건, 매매 코드 없음)라 **설치 안 함**. 다른 세션 40개 중 실적 시즌과 관련된 것은 알파카 미국 주식 트랙 하나뿐. 실적 달력은 이미 있는 트레이딩뷰 MCP 로 무료 확인 가능(TSLA 10/21·MSFT 10/28·AAPL 11/2 실호출). 규칙·코드 변경 없음. 기록 `docs/sessions/2026-10-21_financial_services_review.md`, `docs/AI_FRAMEWORKS_REVIEW.md` 1절 행 추가.
+
 **규칙을 바꾸고 싶을 때:** `proposals.md` 에 근거 → 그 트랙 `RULE_FIXED` 새 날짜 → `python verdict.py --lock`. 이 순서 없이 바꾸면 CI 가 막는다(원칙 5).
 
 **세션 입구:** 루트 `CLAUDE.md`(2026-10-10 부터, 세션 시작마다 자동으로 읽힘 — 읽는 순서·절대 규칙·역할 분담·AI 도구 정책). 이 문서가 원본이고 `CLAUDE.md` 는 요약이다.
