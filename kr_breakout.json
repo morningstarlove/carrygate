@@ -1,6 +1,6 @@
 {
  "date": "2026-11-03",
- "generated_at_utc": "2026-11-02T16:41:12Z",
+ "generated_at_utc": "2026-11-03T07:14:33Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -74,15 +74,15 @@
   }
  },
  "forward": {
-  "days": 19,
+  "days": 20,
   "from": "2026-10-05",
-  "to": "2026-11-02",
-  "codes": 270,
+  "to": "2026-11-03",
+  "codes": 276,
   "bar_errors": 0,
   "stale_codes": 0,
   "by_source": {
-   "yahoo": 4,
-   "yahoo+naver_api": 266
+   "yahoo+naver_api": 62,
+   "yahoo": 214
   },
   "skipped_days": [
    "2026-10-05"
@@ -93,29 +93,119 @@
   "note": null
  },
  "signals_today": {
-  "base": [],
-  "no_sector": [
+  "base": [
    {
-    "code": "086280",
-    "name": "HYUNDAI GLOVIS Co., Ltd.",
-    "group": "Air Freight/Couriers",
+    "code": "267850",
+    "name": "Asiana IDT Inc.",
+    "group": "Information Technology Services",
     "pattern": "box",
     "patterns": [
      "box"
     ],
-    "signal_close": 204500.0,
-    "pattern_low": 172800.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 220860 이상이면 포기)",
-    "stop_plan": "max(172800, 진입가×0.93)"
+    "signal_close": 10590.0,
+    "pattern_low": 8840.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 11437 이상이면 포기)",
+    "stop_plan": "max(8840, 진입가×0.93)"
    }
   ],
-  "hold_10": [],
-  "risk_2": [],
-  "no_flag": []
+  "no_sector": [
+   {
+    "code": "150900",
+    "name": "FASOO AI Co.Ltd.",
+    "group": "Packaged Software",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 5330.0,
+    "pattern_low": 3800.0,
+    "sync_by": null,
+    "entry_plan": "내일 시가 (시가가 5756 이상이면 포기)",
+    "stop_plan": "max(3800, 진입가×0.93)"
+   },
+   {
+    "code": "267850",
+    "name": "Asiana IDT Inc.",
+    "group": "Information Technology Services",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 10590.0,
+    "pattern_low": 8840.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 11437 이상이면 포기)",
+    "stop_plan": "max(8840, 진입가×0.93)"
+   },
+   {
+    "code": "002320",
+    "name": "HANJIN Logistics Corporation",
+    "group": "Trucking",
+    "pattern": "flag",
+    "patterns": [
+     "box",
+     "flag",
+     "cup_handle"
+    ],
+    "signal_close": 20800.0,
+    "pattern_low": 16000.0,
+    "sync_by": null,
+    "entry_plan": "내일 시가 (시가가 22464 이상이면 포기)",
+    "stop_plan": "max(16000, 진입가×0.93)"
+   }
+  ],
+  "hold_10": [
+   {
+    "code": "267850",
+    "name": "Asiana IDT Inc.",
+    "group": "Information Technology Services",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 10590.0,
+    "pattern_low": 8840.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 11437 이상이면 포기)",
+    "stop_plan": "max(8840, 진입가×0.93)"
+   }
+  ],
+  "risk_2": [
+   {
+    "code": "267850",
+    "name": "Asiana IDT Inc.",
+    "group": "Information Technology Services",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 10590.0,
+    "pattern_low": 8840.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 11437 이상이면 포기)",
+    "stop_plan": "max(8840, 진입가×0.93)"
+   }
+  ],
+  "no_flag": [
+   {
+    "code": "267850",
+    "name": "Asiana IDT Inc.",
+    "group": "Information Technology Services",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 10590.0,
+    "pattern_low": 8840.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 11437 이상이면 포기)",
+    "stop_plan": "max(8840, 진입가×0.93)"
+   }
+  ]
  },
- "signal_date": "2026-11-02",
- "signals_frozen": true,
+ "signal_date": "2026-11-03",
+ "signals_frozen": false,
  "frozen_dates": [
   "2026-10-06",
   "2026-10-07",
@@ -140,7 +230,7 @@
  "variants": {
   "base": {
    "label": "동조 업종 + 패턴 돌파 (기본)",
-   "signals": 22,
+   "signals": 23,
    "trades": 11,
    "wins": 0,
    "win_rate": 0.0,
@@ -148,9 +238,9 @@
    "avg_loss_pct": -7.3,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -10.61,
-   "equity_final": 8938706,
-   "max_drawdown_pct": 10.69,
+   "total_return_pct": -10.79,
+   "equity_final": 8920706,
+   "max_drawdown_pct": 10.79,
    "avg_hold_days": 4.18,
    "skipped": {
     "gap": 0,
@@ -204,7 +294,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -10.61
+    "2026": -10.79
    },
    "open_positions": [
     {
@@ -216,15 +306,15 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 6,
-     "bars_held": 11,
-     "last_close": 192900.0,
-     "unrealized_pct": -0.81
+     "bars_held": 12,
+     "last_close": 189900.0,
+     "unrealized_pct": -2.36
     }
    ]
   },
   "no_sector": {
    "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
-   "signals": 65,
+   "signals": 68,
    "trades": 18,
    "wins": 0,
    "win_rate": 0.0,
@@ -232,14 +322,14 @@
    "avg_loss_pct": -7.42,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -13.12,
-   "equity_final": 8688029,
-   "max_drawdown_pct": 13.47,
+   "total_return_pct": -15.02,
+   "equity_final": 8497726,
+   "max_drawdown_pct": 15.02,
    "avg_hold_days": 2.39,
    "skipped": {
     "gap": 0,
     "limit": 42,
-    "cooldown": 0,
+    "cooldown": 2,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -293,7 +383,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -13.12
+    "2026": -15.02
    },
    "open_positions": [
     {
@@ -305,9 +395,9 @@
      "entry": 21363.9,
      "stop": 20800.0,
      "shares": 83,
-     "bars_held": 15,
-     "last_close": 23600.0,
-     "unrealized_pct": 10.47
+     "bars_held": 16,
+     "last_close": 23250.0,
+     "unrealized_pct": 8.83
     },
     {
      "code": "396300",
@@ -318,9 +408,9 @@
      "entry": 7452.29,
      "stop": 6930.63,
      "shares": 170,
-     "bars_held": 12,
-     "last_close": 8580.0,
-     "unrealized_pct": 15.13
+     "bars_held": 13,
+     "last_close": 7830.0,
+     "unrealized_pct": 5.07
     },
     {
      "code": "033780",
@@ -331,15 +421,28 @@
      "entry": 187761.6,
      "stop": 174618.29,
      "shares": 6,
-     "bars_held": 12,
-     "last_close": 193200.0,
-     "unrealized_pct": 2.9
+     "bars_held": 13,
+     "last_close": 192700.0,
+     "unrealized_pct": 2.63
+    },
+    {
+     "code": "086280",
+     "name": "HYUNDAI GLOVIS Co., Ltd.",
+     "group": "Air Freight/Couriers",
+     "pattern": "box",
+     "entry_date": "2026-11-03",
+     "entry": 207119.5,
+     "stop": 192621.13,
+     "shares": 5,
+     "bars_held": 1,
+     "last_close": 201000.0,
+     "unrealized_pct": -2.95
     }
    ]
   },
   "hold_10": {
    "label": "동조 + 패턴, 보유 10일",
-   "signals": 22,
+   "signals": 23,
    "trades": 12,
    "wins": 1,
    "win_rate": 8.33,
@@ -414,7 +517,7 @@
   },
   "risk_2": {
    "label": "동조 + 패턴, 위험 2% (명목 상한 30%)",
-   "signals": 23,
+   "signals": 24,
    "trades": 9,
    "wins": 0,
    "win_rate": 0.0,
@@ -422,9 +525,9 @@
    "avg_loss_pct": -7.22,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -16.1,
-   "equity_final": 8390371,
-   "max_drawdown_pct": 16.27,
+   "total_return_pct": -16.49,
+   "equity_final": 8351371,
+   "max_drawdown_pct": 16.49,
    "avg_hold_days": 3,
    "skipped": {
     "gap": 0,
@@ -478,7 +581,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -16.1
+    "2026": -16.49
    },
    "open_positions": [
     {
@@ -490,15 +593,15 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 13,
-     "bars_held": 11,
-     "last_close": 192900.0,
-     "unrealized_pct": -0.81
+     "bars_held": 12,
+     "last_close": 189900.0,
+     "unrealized_pct": -2.36
     }
    ]
   },
   "no_flag": {
    "label": "동조 + 패턴, 깃발형 제외",
-   "signals": 9,
+   "signals": 10,
    "trades": 7,
    "wins": 0,
    "win_rate": 0.0,
@@ -506,8 +609,8 @@
    "avg_loss_pct": -7.21,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -6.9,
-   "equity_final": 9310455,
+   "total_return_pct": -7.11,
+   "equity_final": 9289455,
    "max_drawdown_pct": 7.59,
    "avg_hold_days": 5,
    "skipped": {
@@ -557,7 +660,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -6.9
+    "2026": -7.11
    },
    "open_positions": [
     {
@@ -569,9 +672,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 7,
-     "bars_held": 11,
-     "last_close": 192900.0,
-     "unrealized_pct": -0.81
+     "bars_held": 12,
+     "last_close": 189900.0,
+     "unrealized_pct": -2.36
     }
    ]
   }

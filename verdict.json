@@ -1,19 +1,19 @@
 {
   "schema": "carrygate-verdict/1",
   "date": "2026-11-03",
-  "generated_at_utc": "2026-11-02T16:41:12Z",
+  "generated_at_utc": "2026-11-03T07:14:33Z",
   "criteria_sealed": "2026-10-22",
   "tracks": {
     "kr_breakout": {
       "variant": "base",
-      "forward_days": 19,
+      "forward_days": 20,
       "rule_fixed": "2026-10-05",
       "trades": 11,
       "wins": 0,
       "win_rate_pct": 0.0,
-      "total_return_pct": -10.61,
-      "max_drawdown_pct": 10.69,
-      "signals": 22,
+      "total_return_pct": -10.79,
+      "max_drawdown_pct": 10.79,
+      "signals": 23,
       "skipped_no_slot": 9,
       "backtest_win_rate_pct": 29.35,
       "luck": {
@@ -34,8 +34,8 @@
         "variant": "no_sector",
         "trades": 18,
         "win_rate_pct": 0.0,
-        "total_return_pct": -13.12,
-        "return_delta_pct": 2.51
+        "total_return_pct": -15.02,
+        "return_delta_pct": 4.23
       },
       "status": "NOT_YET",
       "reason": "순방향 매매 11건 — 최소 15건 전에는 판단하지 않는다"
@@ -145,9 +145,9 @@
           "net_pct": -2.931,
           "profit_factor": 0.0,
           "avg_r": -0.99,
-          "backtest_win_rate_pct": 35.5705,
-          "backtest_profit_factor": 2.4933,
-          "backtest_trades": 149,
+          "backtest_win_rate_pct": 35.8108,
+          "backtest_profit_factor": 2.5248,
+          "backtest_trades": 148,
           "luck": {
             "expected_wins": 1.07,
             "actual_wins": 0,
@@ -155,9 +155,9 @@
           },
           "variants": {
             "no_vol": {
-              "trades": 8,
+              "trades": 9,
               "wins": 0,
-              "net_pct": -6.17,
+              "net_pct": -7.1415,
               "profit_factor": 0.0
             },
             "break_entry": {
@@ -169,12 +169,12 @@
           },
           "warnings": [],
           "interpretation": {
-            "false_pass_pct": 29.02,
-            "miss_pct": 10.82,
+            "false_pass_pct": 28.89,
+            "miss_pct": 10.41,
             "wins_needed": 5,
-            "per_trade_sharpe": 0.36,
-            "min_trades_95": 21,
-            "min_trades_t3": 68,
+            "per_trade_sharpe": 0.37,
+            "min_trades_95": 20,
+            "min_trades_t3": 66,
             "note": "false_pass = 실력 0 규칙이 이 합격선을 넘을 확률, miss = 백테스트만큼 실력이어도 못 넘을 확률, min_trades_95 = 샤프>0 을 95% 확신하는 데 필요한 건수(MinTRL), min_trades_t3 = t>3 기준 건수. PASS = 소액 시험 후보"
           },
           "status": "NOT_YET",
@@ -197,9 +197,9 @@
           },
           "variants": {
             "no_vol": {
-              "trades": 13,
+              "trades": 14,
               "wins": 0,
-              "net_pct": -8.53,
+              "net_pct": -9.5436,
               "profit_factor": 0.0
             },
             "break_entry": {
