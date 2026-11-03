@@ -1,6 +1,6 @@
 {
  "date": "2026-11-03",
- "generated_at_utc": "2026-11-03T07:14:33Z",
+ "generated_at_utc": "2026-11-03T14:45:06Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -205,7 +205,7 @@
   ]
  },
  "signal_date": "2026-11-03",
- "signals_frozen": false,
+ "signals_frozen": true,
  "frozen_dates": [
   "2026-10-06",
   "2026-10-07",
@@ -225,7 +225,8 @@
   "2026-10-28",
   "2026-10-29",
   "2026-10-30",
-  "2026-11-02"
+  "2026-11-02",
+  "2026-11-03"
  ],
  "variants": {
   "base": {
@@ -322,14 +323,14 @@
    "avg_loss_pct": -7.42,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -15.02,
-   "equity_final": 8497726,
-   "max_drawdown_pct": 15.02,
+   "total_return_pct": -15.07,
+   "equity_final": 8492626,
+   "max_drawdown_pct": 15.07,
    "avg_hold_days": 2.39,
    "skipped": {
     "gap": 0,
     "limit": 42,
-    "cooldown": 2,
+    "cooldown": 0,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -383,7 +384,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -15.02
+    "2026": -15.07
    },
    "open_positions": [
     {
@@ -409,8 +410,8 @@
      "stop": 6930.63,
      "shares": 170,
      "bars_held": 13,
-     "last_close": 7830.0,
-     "unrealized_pct": 5.07
+     "last_close": 7800.0,
+     "unrealized_pct": 4.67
     },
     {
      "code": "033780",
