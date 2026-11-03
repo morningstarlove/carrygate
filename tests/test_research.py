@@ -159,6 +159,51 @@ class OrderbookAnalysis(unittest.TestCase):
             self.assertEqual(by["okx:BTC"][0]["aq"], 4.0)
 
 
+class MarketMakingPaper(unittest.TestCase):
+    """호가 제공 종이 규칙(P26): 지나쳐야 체결, 재고 ±1, TTL 뒤 시장가."""
+
+    def _rows(self, seq):
+        return [{"ts": i * 10, "bid": b, "ask": a, "bq": 1.0, "aq": 1.0} for i, (b, a) in enumerate(seq)]
+
+    def test_buy_fill_then_maker_exit(self):
+        seq = [(100.0, 100.5)] * 30          # 양쪽 걸어 둠 (매수 100.0 / 매도 100.5)
+        seq += [(99.5, 99.9)]                # 매도1 99.9 < 내 매수가 100.0 → 매수 체결(100.0), 청산 매도 99.9 에 재게시
+        seq += [(100.1, 100.6)]              # 매수1 100.1 > 99.9 → 지정가 청산 99.9 ... 가 아니라 전 표본에서 재게시 가격은 99.9
+        seq += [(100.0, 100.5)] * 5
+        r = ob.mm_paper(self._rows(seq), {"maker_pct": 0.05, "taker_pct": 0.05})
+        self.assertEqual(r["fills"], 1)
+        self.assertEqual(r["trades"], 1)
+        self.assertEqual(r["maker_exits"], 1)
+        # 100.0 매수 → 99.9 지정가 매도 = −10bp, 메이커 수수료 5+5bp → −20bp
+        self.assertAlmostEqual(r["gross_bp_avg"], -10.0, places=1)
+        self.assertAlmostEqual(r["net_bp_avg"], -20.0, places=1)
+
+    def test_requote_follows_market_then_exits_higher(self):
+        seq = [(100.0, 100.5)] * 30
+        seq += [(99.5, 99.9)]                # 매수 체결 100.0, 청산 호가 99.9
+        seq += [(100.1, 100.6)]              # 매수1 100.1 > 99.9 → 즉시 지정가 청산 99.9
+        r = ob.mm_paper(self._rows(seq + [(100.0, 100.5)] * 3), {"maker_pct": 0.05, "taker_pct": 0.05})
+        self.assertEqual(r["trades"], 1)
+        # 재게시가 따라가도록 변형: 체결 뒤 시장이 안 지나치고 올라가는 경로
+        seq2 = [(100.0, 100.5)] * 30 + [(99.5, 99.9)] + [(99.6, 99.95)] + [(99.7, 100.2)] + [(100.3, 100.8)] + [(100.0, 100.5)] * 3
+        r2 = ob.mm_paper(self._rows(seq2), {"maker_pct": 0.05, "taker_pct": 0.05})
+        # 99.9 → 99.95 → 100.2 로 재게시, 다음 표본 매수1 100.3 > 100.2 → 지정가 청산 100.2: +20bp − 10bp 수수료 = +10bp
+        self.assertEqual(r2["trades"], 1)
+        self.assertEqual(r2["maker_exits"], 1)
+        self.assertAlmostEqual(r2["net_bp_avg"], 10.0, places=1)
+
+    def test_ttl_market_exit_and_short_side(self):
+        seq = [(100.0, 100.5)] * 30
+        seq += [(100.6, 101.0)]              # 매수1 100.6 > 내 매도가 100.5 → 매도 체결(100.5), 청산 매수 100.6 에 재게시
+        seq += [(100.6, 101.0)] * 31         # 310초 동안 안 지나침 → TTL → 매도1 101.0 에 시장가 매수
+        r = ob.mm_paper(self._rows(seq), {"maker_pct": 0.05, "taker_pct": 0.05})
+        self.assertEqual(r["trades"], 1)
+        self.assertEqual(r["maker_exits"], 0)
+        # 숏 100.5 → 101.0 매수 = −49.75bp, 수수료 5+5 → 약 −59.8bp
+        self.assertLess(r["net_bp_avg"], -55.0)
+        self.assertGreater(r["net_bp_avg"], -65.0)
+
+
 class ResearchHistory(unittest.TestCase):
     def test_same_date_overwrites(self):
         with tempfile.TemporaryDirectory() as d:
