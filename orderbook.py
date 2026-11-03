@@ -23,6 +23,7 @@ DEPTH_LEVELS = 5          # 불균형 계산에 쓰는 호가 단수 (최우선 
 IMB_THRESHOLD = 0.3       # "치우쳤다"고 보는 불균형 기준 ((매수−매도)/(매수+매도))
 HORIZONS = (60, 300)      # 초. 불균형 뒤 1분·5분 가격 변화를 본다
 MIN_DAYS = 5
+MM_TTL_SEC = 300          # 호가 제공 종이 규칙: 재고가 생긴 뒤 지정가 청산을 기다리는 최대 초. 넘으면 상대 호가에 시장가
 FEES = {"upbit": {"taker_pct": 0.05, "maker_pct": 0.05},
         "hyperliquid": {"taker_pct": 0.045, "maker_pct": 0.015},
         "okx": {"taker_pct": 0.05, "maker_pct": 0.02}}
@@ -186,8 +187,64 @@ def analyze_market(rows):
     return out
 
 
+def mm_paper(rows, fee):
+    """호가 제공(양방향 지정가) 종이 규칙 — 2026-11-03 추가(제안함 P26). 주문 없음, 표본으로만 계산.
+
+    재고가 없으면 매 표본의 최우선 매수·매도호가에 1단위씩 걸어 둔다. 다음 표본에서 상대 호가가 내 가격을
+    **지나쳐야**(매도1 < 내 매수가, 매수1 > 내 매도가) 체결로 본다 — scalp.limit_filled 와 같은 보수적 가정.
+    재고가 생기면 반대쪽만 현재 최우선호가에 다시 걸고, 지나쳐야 체결. MM_TTL_SEC 안에 안 되면 상대 호가에 시장가.
+    비용: 지정가 체결 = 메이커 수수료, 시장가 = 테이커 수수료(호가 폭은 가격에 이미 들어 있다). 끝에 남은 재고는 시장가."""
+    n = len(rows)
+    if n < 30:
+        return {"n": n}
+    mk, tk = fee.get("maker_pct", 0.0) * 100.0, fee.get("taker_pct", 0.0) * 100.0
+    inv, entry_px, entry_ts, close_px = 0, None, None, None
+    qb, qa = rows[0]["bid"], rows[0]["ask"]
+    nets, grosses, fills, maker_exits = [], [], 0, 0
+
+    def settle(exit_px, maker):
+        g = inv * (exit_px / entry_px - 1.0) * 1e4
+        nets.append(g - mk - (mk if maker else tk))
+        grosses.append(g)
+
+    for r in rows[1:]:
+        if inv == 0:
+            if r["ask"] < qb:
+                inv, entry_px, entry_ts, fills = 1, qb, r["ts"], fills + 1
+                close_px = r["ask"]
+            elif r["bid"] > qa:
+                inv, entry_px, entry_ts, fills = -1, qa, r["ts"], fills + 1
+                close_px = r["bid"]
+            else:
+                qb, qa = r["bid"], r["ask"]
+            continue
+        hit = (r["bid"] > close_px) if inv == 1 else (r["ask"] < close_px)
+        if hit:
+            settle(close_px, True)
+            maker_exits += 1
+        elif r["ts"] - entry_ts >= MM_TTL_SEC:
+            settle(r["bid"] if inv == 1 else r["ask"], False)
+        else:
+            close_px = r["ask"] if inv == 1 else r["bid"]
+            continue
+        inv, qb, qa = 0, r["bid"], r["ask"]
+    if inv != 0:
+        r = rows[-1]
+        settle(r["bid"] if inv == 1 else r["ask"], False)
+    t = len(nets)
+    return {"n": n, "fills": fills, "trades": t, "maker_exits": maker_exits,
+            "maker_exit_pct": round(100.0 * maker_exits / t, 1) if t else None,
+            "gross_bp_avg": round(mean(grosses), 3) if t else None,
+            "net_bp_avg": round(mean(nets), 3) if t else None,
+            "net_bp_sum": round(sum(nets), 3),
+            "hit_rate_pct": round(100.0 * sum(1 for x in nets if x > 0) / t, 1) if t else None}
+
+
 def analyze(by, fees=FEES):
     markets = {k: analyze_market(v) for k, v in by.items()}
+    for k, v in by.items():
+        if markets[k].get("n", 0) >= 30:
+            markets[k]["mm"] = mm_paper(v, fees.get(k.split(":")[0], {}))
     by_venue = {}
     for k, m in markets.items():
         venue = k.split(":")[0]
@@ -219,6 +276,15 @@ def analyze(by, fees=FEES):
                           "imb_hit60_pct": round(mean(b["hit60"]), 1) if b["hit60"] else None}
         # 지정가 양쪽 걸기 여지: 호가 폭의 절반이 지정가 수수료보다 커야 한 번 왕복에 남는다
         summary[venue]["half_spread_minus_maker_fee_bp"] = round(summary[venue]["spread_bp_mean"] / 2.0 - summary[venue]["maker_fee_bp"], 3)
+        # 호가 제공 종이 규칙 합산 (P26)
+        mms = [m["mm"] for k, m in markets.items() if k.split(":")[0] == venue and m.get("mm", {}).get("trades")]
+        tr = sum(m["trades"] for m in mms)
+        summary[venue]["mm_fills"] = sum(m["fills"] for m in mms)
+        summary[venue]["mm_trades"] = tr
+        summary[venue]["mm_net_bp_sum"] = round(sum(m["net_bp_sum"] for m in mms), 3)
+        summary[venue]["mm_net_bp_avg"] = round(sum(m["net_bp_sum"] for m in mms) / tr, 3) if tr else None
+        summary[venue]["mm_maker_exit_pct"] = round(100.0 * sum(m["maker_exits"] for m in mms) / tr, 1) if tr else None
+        summary[venue]["mm_hit_rate_pct"] = round(sum(m["hit_rate_pct"] * m["trades"] for m in mms) / tr, 1) if tr else None
     return markets, summary
 
 
@@ -246,6 +312,16 @@ def print_result(out):
                  "%.2f" % m["spread_over_move60"] if m.get("spread_over_move60") is not None else "-",
                  "%+.2f" % h["signed_ret_bp"] if h.get("signed_ret_bp") is not None else "-",
                  "%.0f" % h["hit_rate_pct"] if h.get("hit_rate_pct") is not None else "-"))
+    print()
+    print("--- 호가 제공 종이 규칙 (양방향 지정가, 지나쳐야 체결, %d초 안에 못 닫으면 시장가) ---" % MM_TTL_SEC)
+    print("%-12s %6s %6s %9s %10s %10s %8s" % ("거래소", "체결", "왕복", "지정가청산%", "건당순bp", "순bp합", "적중%"))
+    for v, s in out["summary"].items():
+        print("%-12s %6d %6d %9s %10s %10s %8s"
+              % (v, s.get("mm_fills", 0), s.get("mm_trades", 0),
+                 "%.0f" % s["mm_maker_exit_pct"] if s.get("mm_maker_exit_pct") is not None else "-",
+                 "%+.2f" % s["mm_net_bp_avg"] if s.get("mm_net_bp_avg") is not None else "-",
+                 "%+.1f" % s["mm_net_bp_sum"] if s.get("mm_net_bp_sum") is not None else "-",
+                 "%.0f" % s["mm_hit_rate_pct"] if s.get("mm_hit_rate_pct") is not None else "-"))
     if out.get("errors"):
         print("수집 오류:", json.dumps(out["errors"], ensure_ascii=False))
     print()
@@ -259,7 +335,8 @@ def verdict_of(summary):
     for v, s in summary.items():
         mm = "지정가 양쪽 걸기 여지 %s(반폭−수수료 %+.2fbp)" % ("있음" if s["half_spread_minus_maker_fee_bp"] > 0 else "없음", s["half_spread_minus_maker_fee_bp"])
         im = ("불균형→1분 %+.2fbp 적중 %s%%" % (s["imb_signed60_bp"], s["imb_hit60_pct"])) if s["imb_signed60_bp"] is not None else "불균형 표본 부족"
-        parts.append("%s: %s, %s" % (v, mm, im))
+        pm = ("호가제공 종이 건당 %+.1fbp(%d왕복)" % (s["mm_net_bp_avg"], s["mm_trades"])) if s.get("mm_net_bp_avg") is not None else "호가제공 왕복 없음"
+        parts.append("%s: %s, %s, %s" % (v, mm, im, pm))
     return " / ".join(parts) + " — 하루치, 누적으로 판단"
 
 
@@ -287,6 +364,20 @@ def report(path="orderbook_history.jsonl"):
         print("%-12s %4d %9.2f %11.2f %12s %12s %8s %5d/%d"
               % (v, len(ss), sp, hs, "%+.2f" % mean(s60) if s60 else "-", "%+.2f" % mean(s300) if s300 else "-",
                  "%.0f" % mean(hit) if hit else "-", sum(1 for x in s60 if x > 0), len(s60)))
+    mm_rows = [r for r in rows if any(s.get("mm_trades") for s in r.get("summary", {}).values())]
+    if mm_rows:
+        print()
+        print("--- 호가 제공 종이 규칙 누적 (2026-11-03 시작, P26) ---")
+        print("%-12s %4s %6s %6s %9s %10s %10s %8s" % ("거래소", "일수", "체결", "왕복", "지정가청산%", "건당순bp", "순bp합", "플러스일"))
+        for v in venues:
+            ss = [r["summary"][v] for r in mm_rows if r["summary"].get(v, {}).get("mm_trades")]
+            if not ss:
+                continue
+            tr = sum(s["mm_trades"] for s in ss); net = sum(s["mm_net_bp_sum"] for s in ss)
+            mk = sum(s["mm_maker_exit_pct"] * s["mm_trades"] for s in ss if s.get("mm_maker_exit_pct") is not None)
+            print("%-12s %4d %6d %6d %9s %+10.2f %+10.1f %5d/%d"
+                  % (v, len(ss), sum(s["mm_fills"] for s in ss), tr, "%.0f" % (mk / tr) if tr else "-",
+                     net / tr if tr else 0.0, net, sum(1 for s in ss if s["mm_net_bp_sum"] > 0), len(ss)))
     if len(rows) < MIN_DAYS:
         print("아직 %d일치. %d일 이상 모여야 방향을 말할 수 있다." % (len(rows), MIN_DAYS))
     return 0
@@ -323,7 +414,8 @@ def main(argv=None):
            "window_utc": [fmt(min(ts_all)), fmt(max(ts_all))] if ts_all else ["-", "-"],
            "method": {"depth": "최우선 %d호가 금액 합" % DEPTH_LEVELS,
                       "imbalance": "(매수잔량−매도잔량)/(합). |불균형| ≥ %.1f 을 '치우침'으로 보고, 치우친 방향의 %d·%d초 뒤 중간가 변화(bp)를 잰다" % (IMB_THRESHOLD, HORIZONS[0], HORIZONS[1]),
-                      "spread": "호가 폭 = (매도1−매수1)/중간가. 반폭 − 지정가 수수료 > 0 이면 양쪽 지정가로 한 번 왕복에 남는 여지가 있다는 뜻 (체결·역선택은 별도)"},
+                      "spread": "호가 폭 = (매도1−매수1)/중간가. 반폭 − 지정가 수수료 > 0 이면 양쪽 지정가로 한 번 왕복에 남는 여지가 있다는 뜻 (체결·역선택은 별도)",
+                      "mm": "호가 제공 종이 규칙(P26): 최우선 매수·매도호가에 1단위씩, 다음 표본의 상대 호가가 내 가격을 지나쳐야 체결. 재고 ±1, 반대쪽 최우선호가에 재게시, %d초 안에 못 닫으면 상대 호가에 시장가. 지정가=메이커·시장가=테이커 수수료" % MM_TTL_SEC},
            "markets": markets, "summary": summary, "errors": errors,
            "verdict": verdict_of(summary)}
     print_result(out)
