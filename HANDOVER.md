@@ -55,6 +55,8 @@
 
 **2026-10-15 백테스트 과적합 논문 검토 → 판정기 보강 (제안함 P17·P18 반영):** 댓글 권고로 Bailey·López de Prado·Harvey·Hansen 등 17편을 읽고 공식을 실데이터에 대입(`docs/BACKTEST_OVERFITTING_REVIEW.md`, `scripts/overfit_check.py`). 발견: 초단타 10/7 PASS(후보 12개)는 실력 0 이어도 뜨는 후보 수(378개 중 42~53개)의 1/4 이었고, 터틀·추세전환 20건 합격선은 실력 0 도 19~40% 확률로 PASS 한다. 반영: ① `criteria.json scalp.noise_floor` — 부호 뒤집기 500회의 후보 수 중앙값보다 실제 후보가 많아야 PASS, 같거나 적으면 NOT_YET(잡음 이하). ② 판정 파일 각 거래소에 `interpretation`(실력 0 PASS 확률·놓칠 확률·필요 건수 MinTRL·t>3). 합격선 숫자·매매 규칙 변경 없음, criteria sealed 2026-10-15, 잠금 재생성. 현황판 카드에는 아직 안 올렸다(판정 파일에만). 작업 기록 `docs/sessions/2026-10-15_backtest_overfitting.md`.
 
+**2026-11-03 결과 저장 충돌 사고와 수정 (규칙 변경 없음):** daily 가 예약(09:18)보다 6시간 늦게 15:52 KST 에 돌아 한국 주식 워크플로(16:14 KST 커밋)와 겹쳤다. 둘 다 `verdict.json`·`verdict_history.jsonl` 을 써서 `git pull --rebase` 가 충돌 → 그날 결과 43개 파일이 저장되지 못했다(실행 #82 빨간불). 수동 재실행(17:59 KST, a7ec3cf)으로 복구. 재발 방지로 **`push_results.py`** 를 만들어 4개 워크플로(daily·한국 주식·호가창·추세 전환 4H)의 저장 단계를 모두 바꿨다: 충돌 나면 기록 파일(*.jsonl)은 양쪽 줄을 합치고(같은 날짜·같은 봉은 지금 올리는 쪽, 날짜순 정렬), 결과 파일은 방금 계산한 값을 쓰고, `--verdict` 면 합친 입력으로 판정을 다시 계산해 올린다. 푸시가 밀리면 5번까지 다시 당겨서 시도. 11/3 사고를 실데이터로 재현해 새 방식이 실제 재실행 결과와 같은 파일을 만드는 것을 확인(시각만 다름). 작업 기록 `docs/sessions/2026-11-03_push_conflict_guard.md`.
+
 **2026-10-28 헬퍼 중복 정리 (규칙 변경 없음):** 19개 모듈이 각자 복사해 두던 작은 헬퍼(`http_json`·`f`·`r2`·`r4`·`mean`·`std`·`corr`·`load_json`·`append_history`·`load_history`·`KST`·`UA`)를 `common.py` 한 곳으로 모았다(359줄 삭제). 전에는 `scalp.py` 가 사실상 공용 모듈 노릇을 해서 8개 모듈이 초단타 파일에서 헬퍼를 가져다 썼다 — 이제 `scalp.py` 에서 가져오는 것은 `COINS` 뿐. 일부러 다르게 둔 복사본(호가창의 재시도 없는 요청, 한국 주식의 NaN 처리·25초, 판정기의 저장소 기준 경로, PC·서버 단독 실행 중계 스크립트)은 그대로이며 이유는 `common.py` 머리말에 있다. 단위시험 258건·selfcheck·오프라인 dry-run 8종 통과. 작업 기록 `docs/sessions/2026-10-28_helper_dedup.md`.
 
 **2026-10-21 외부 저장소 검토 (anthropics/financial-services):** SNS 게시물 계기로 직접 받아 확인. 애널리스트 보고서 초안 도구(유료 MCP 12개, 한국 시장 0건, 매매 코드 없음)라 **설치 안 함**. 다른 세션 40개 중 실적 시즌과 관련된 것은 알파카 미국 주식 트랙 하나뿐. 실적 달력은 이미 있는 트레이딩뷰 MCP 로 무료 확인 가능(TSLA 10/21·MSFT 10/28·AAPL 11/2 실호출). 규칙·코드 변경 없음. 기록 `docs/sessions/2026-10-21_financial_services_review.md`, `docs/AI_FRAMEWORKS_REVIEW.md` 1절 행 추가.
@@ -1212,6 +1214,7 @@ GitHub 저장소 → Actions 탭 → `CARRYGATE daily` → Run workflow
 - `python3 -m unittest tests.test_selfcheck` — 형식 검산(P14): 키 누락·타입·null·파일 없음 + 실제 결과 파일·현황판 `FILES` 대조 (11건, 인터넷 불필요)
 - `python3 -m unittest tests.test_scalp` — 가짜 데이터로 계산 로직 (20건, 인터넷 불필요)
 - `python3 -m unittest tests.test_common` — 공용 헬퍼 8건 (HTTP 재시도·반올림·상관·기록 파일 덮어쓰기, 인터넷 불필요)
+- `python3 -m unittest tests.test_push_results` — 결과 저장 충돌 자동 해결 7건 (임시 원격 저장소로 두 워크플로 동시 저장 재현, 인터넷 불필요)
 - `python3 scalp.py --fixture tests/fixtures --dry-run` — 저장된 실데이터 CSV 로 전체 흐름 (인터넷 불필요)
 - `python3 -m unittest tests.test_research` — 보조 연구·호가창 계산 로직 (14건)
 - `python3 scalp_research.py --fixture tests/fixtures --dry-run` — A1·B 를 실데이터 CSV 로 (펀딩은 생략됨)
