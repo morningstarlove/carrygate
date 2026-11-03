@@ -113,14 +113,9 @@ jobs:
         run: |
           git config user.name  "carrygate-bot"
           git config user.email "carrygate-bot@users.noreply.github.com"
-          git add -A kr_sector.json kr_sector_history.jsonl kr_breakout.json kr_breakout_history.jsonl verdict.json verdict_history.jsonl || true
-          if git diff --staged --quiet; then
-            echo "no change"
-          else
-            git commit -m "kr_sector $(date -u +%Y-%m-%d)"
-            git pull --rebase origin "${GITHUB_REF_NAME}" || true
-            git push
-          fi
+          # daily 와 verdict 파일을 같이 쓴다. 먼저 올라간 쪽이 있으면 합치고 판정을 다시 계산해 올린다 (2026-11-03 충돌 재발 방지)
+          python push_results.py --verdict -m "kr_sector $(date -u +%Y-%m-%d)" \
+            kr_sector.json kr_sector_history.jsonl kr_breakout.json kr_breakout_history.jsonl verdict.json verdict_history.jsonl
 
       - name: Fail if universe step failed
         if: steps.universe.outcome == 'failure'

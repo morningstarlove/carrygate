@@ -48,19 +48,8 @@ jobs:
         run: |
           git config user.name  "carrygate-bot"
           git config user.email "carrygate-bot@users.noreply.github.com"
-          for p in reversal.json reversal_history.jsonl reversal_bars.jsonl; do
-            if [ -e "$p" ]; then git add -A "$p"; else echo "없음(건너뜀): $p"; fi
-          done
-          if git diff --staged --quiet; then
-            echo "no change"
-          else
-            git commit -m "reversal 4h $(date -u +%Y-%m-%dT%H:%M)"
-            # 같은 시간대에 daily·orderbook 워크플로가 커밋할 수 있어 밀리면 다시 당겨서 올린다 (최대 4번)
-            for i in 1 2 3 4; do
-              git pull --rebase origin "${GITHUB_REF_NAME}" && git push && break
-              echo "push 재시도 $i"; sleep $((i * 5))
-            done
-          fi
+          # daily 도 reversal_* 를 쓴다. 겹치면 봉·날짜 기록을 합쳐 올린다 (push_results.py, 최대 5번 재시도)
+          python push_results.py -m "reversal 4h $(date -u +%Y-%m-%dT%H:%M)" reversal.json reversal_history.jsonl reversal_bars.jsonl
 
       # 저장된 값을 다시 계산해 대조한다. 어긋나면 여기서 실패해 빨간불로 알린다.
       - name: Selfcheck (검산)
