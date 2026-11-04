@@ -1,19 +1,19 @@
 {
   "schema": "carrygate-verdict/1",
   "date": "2026-11-04",
-  "generated_at_utc": "2026-11-04T06:56:28Z",
+  "generated_at_utc": "2026-11-04T07:14:58Z",
   "criteria_sealed": "2026-10-22",
   "tracks": {
     "kr_breakout": {
       "variant": "base",
-      "forward_days": 20,
+      "forward_days": 21,
       "rule_fixed": "2026-10-05",
       "trades": 11,
       "wins": 0,
       "win_rate_pct": 0.0,
-      "total_return_pct": -10.79,
+      "total_return_pct": -10.16,
       "max_drawdown_pct": 10.79,
-      "signals": 23,
+      "signals": 24,
       "skipped_no_slot": 9,
       "backtest_win_rate_pct": 29.35,
       "luck": {
@@ -32,10 +32,10 @@
       },
       "control": {
         "variant": "no_sector",
-        "trades": 18,
-        "win_rate_pct": 0.0,
-        "total_return_pct": -15.07,
-        "return_delta_pct": 4.28
+        "trades": 20,
+        "win_rate_pct": 5.0,
+        "total_return_pct": -15.41,
+        "return_delta_pct": 5.25
       },
       "status": "NOT_YET",
       "reason": "순방향 매매 11건 — 최소 15건 전에는 판단하지 않는다"

@@ -1,6 +1,6 @@
 {
- "date": "2026-11-03",
- "generated_at_utc": "2026-11-03T14:45:06Z",
+ "date": "2026-11-04",
+ "generated_at_utc": "2026-11-04T07:14:53Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -74,15 +74,15 @@
   }
  },
  "forward": {
-  "days": 20,
+  "days": 21,
   "from": "2026-10-05",
-  "to": "2026-11-03",
-  "codes": 276,
+  "to": "2026-11-04",
+  "codes": 287,
   "bar_errors": 0,
   "stale_codes": 0,
   "by_source": {
-   "yahoo+naver_api": 62,
-   "yahoo": 214
+   "yahoo+naver_api": 64,
+   "yahoo": 223
   },
   "skipped_days": [
    "2026-10-05"
@@ -95,117 +95,101 @@
  "signals_today": {
   "base": [
    {
-    "code": "267850",
-    "name": "Asiana IDT Inc.",
-    "group": "Information Technology Services",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 10590.0,
-    "pattern_low": 8840.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 11437 이상이면 포기)",
-    "stop_plan": "max(8840, 진입가×0.93)"
-   }
-  ],
-  "no_sector": [
-   {
-    "code": "150900",
-    "name": "FASOO AI Co.Ltd.",
+    "code": "259960",
+    "name": "Krafton, Inc.",
     "group": "Packaged Software",
     "pattern": "box",
     "patterns": [
      "box"
     ],
-    "signal_close": 5330.0,
-    "pattern_low": 3800.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 5756 이상이면 포기)",
-    "stop_plan": "max(3800, 진입가×0.93)"
-   },
+    "signal_close": 212000.0,
+    "pattern_low": 178500.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 228960 이상이면 포기)",
+    "stop_plan": "max(178500, 진입가×0.93)"
+   }
+  ],
+  "no_sector": [
    {
-    "code": "267850",
-    "name": "Asiana IDT Inc.",
-    "group": "Information Technology Services",
+    "code": "015760",
+    "name": "Korea Electric Power Corporation",
+    "group": "Electric Utilities",
     "pattern": "box",
     "patterns": [
      "box"
     ],
-    "signal_close": 10590.0,
-    "pattern_low": 8840.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 11437 이상이면 포기)",
-    "stop_plan": "max(8840, 진입가×0.93)"
+    "signal_close": 30450.0,
+    "pattern_low": 27550.0,
+    "sync_by": null,
+    "entry_plan": "내일 시가 (시가가 32886 이상이면 포기)",
+    "stop_plan": "max(27550, 진입가×0.93)"
    },
    {
-    "code": "002320",
-    "name": "HANJIN Logistics Corporation",
-    "group": "Trucking",
-    "pattern": "flag",
+    "code": "259960",
+    "name": "Krafton, Inc.",
+    "group": "Packaged Software",
+    "pattern": "box",
     "patterns": [
-     "box",
-     "flag",
-     "cup_handle"
+     "box"
     ],
-    "signal_close": 20800.0,
-    "pattern_low": 16000.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 22464 이상이면 포기)",
-    "stop_plan": "max(16000, 진입가×0.93)"
+    "signal_close": 212000.0,
+    "pattern_low": 178500.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 228960 이상이면 포기)",
+    "stop_plan": "max(178500, 진입가×0.93)"
    }
   ],
   "hold_10": [
    {
-    "code": "267850",
-    "name": "Asiana IDT Inc.",
-    "group": "Information Technology Services",
+    "code": "259960",
+    "name": "Krafton, Inc.",
+    "group": "Packaged Software",
     "pattern": "box",
     "patterns": [
      "box"
     ],
-    "signal_close": 10590.0,
-    "pattern_low": 8840.0,
+    "signal_close": 212000.0,
+    "pattern_low": 178500.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 11437 이상이면 포기)",
-    "stop_plan": "max(8840, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 228960 이상이면 포기)",
+    "stop_plan": "max(178500, 진입가×0.93)"
    }
   ],
   "risk_2": [
    {
-    "code": "267850",
-    "name": "Asiana IDT Inc.",
-    "group": "Information Technology Services",
+    "code": "259960",
+    "name": "Krafton, Inc.",
+    "group": "Packaged Software",
     "pattern": "box",
     "patterns": [
      "box"
     ],
-    "signal_close": 10590.0,
-    "pattern_low": 8840.0,
+    "signal_close": 212000.0,
+    "pattern_low": 178500.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 11437 이상이면 포기)",
-    "stop_plan": "max(8840, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 228960 이상이면 포기)",
+    "stop_plan": "max(178500, 진입가×0.93)"
    }
   ],
   "no_flag": [
    {
-    "code": "267850",
-    "name": "Asiana IDT Inc.",
-    "group": "Information Technology Services",
+    "code": "259960",
+    "name": "Krafton, Inc.",
+    "group": "Packaged Software",
     "pattern": "box",
     "patterns": [
      "box"
     ],
-    "signal_close": 10590.0,
-    "pattern_low": 8840.0,
+    "signal_close": 212000.0,
+    "pattern_low": 178500.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 11437 이상이면 포기)",
-    "stop_plan": "max(8840, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 228960 이상이면 포기)",
+    "stop_plan": "max(178500, 진입가×0.93)"
    }
   ]
  },
- "signal_date": "2026-11-03",
- "signals_frozen": true,
+ "signal_date": "2026-11-04",
+ "signals_frozen": false,
  "frozen_dates": [
   "2026-10-06",
   "2026-10-07",
@@ -231,7 +215,7 @@
  "variants": {
   "base": {
    "label": "동조 업종 + 패턴 돌파 (기본)",
-   "signals": 23,
+   "signals": 24,
    "trades": 11,
    "wins": 0,
    "win_rate": 0.0,
@@ -239,14 +223,14 @@
    "avg_loss_pct": -7.3,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -10.79,
-   "equity_final": 8920706,
+   "total_return_pct": -10.16,
+   "equity_final": 8983910,
    "max_drawdown_pct": 10.79,
    "avg_hold_days": 4.18,
    "skipped": {
     "gap": 0,
     "limit": 9,
-    "cooldown": 0,
+    "cooldown": 2,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -295,7 +279,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -10.79
+    "2026": -10.16
    },
    "open_positions": [
     {
@@ -307,39 +291,52 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 6,
-     "bars_held": 12,
-     "last_close": 189900.0,
-     "unrealized_pct": -2.36
+     "bars_held": 13,
+     "last_close": 200000.0,
+     "unrealized_pct": 2.84
+    },
+    {
+     "code": "267850",
+     "name": "Asiana IDT Inc.",
+     "group": "Information Technology Services",
+     "pattern": "box",
+     "entry_date": "2026-11-04",
+     "entry": 9638.83,
+     "stop": 8964.11,
+     "shares": 132,
+     "bars_held": 1,
+     "last_close": 9660.0,
+     "unrealized_pct": 0.22
     }
    ]
   },
   "no_sector": {
    "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
-   "signals": 68,
-   "trades": 18,
-   "wins": 0,
-   "win_rate": 0.0,
-   "avg_win_pct": null,
+   "signals": 70,
+   "trades": 20,
+   "wins": 1,
+   "win_rate": 5.0,
+   "avg_win_pct": 6.57,
    "avg_loss_pct": -7.42,
-   "payoff": null,
-   "profit_factor": 0.0,
-   "total_return_pct": -15.07,
-   "equity_final": 8492626,
-   "max_drawdown_pct": 15.07,
-   "avg_hold_days": 2.39,
+   "payoff": 0.87,
+   "profit_factor": 0.05,
+   "total_return_pct": -15.41,
+   "equity_final": 8459227,
+   "max_drawdown_pct": 15.41,
+   "avg_hold_days": 2.85,
    "skipped": {
     "gap": 0,
-    "limit": 42,
-    "cooldown": 0,
+    "limit": 43,
+    "cooldown": 2,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
    },
    "by_pattern": {
     "flag": {
-     "n": 5,
-     "wins": 0,
-     "pnl_krw": -498229
+     "n": 6,
+     "wins": 1,
+     "pnl_krw": -415010
     },
     "cup_handle": {
      "n": 2,
@@ -352,9 +349,9 @@
      "pnl_krw": -401380
     },
     "box": {
-     "n": 7,
+     "n": 8,
      "wins": 0,
-     "pnl_krw": -630571
+     "pnl_krw": -720584
     }
    },
    "by_sync": {
@@ -364,27 +361,32 @@
      "pnl_krw": -463564
     },
     "none": {
-     "n": 13,
-     "wins": 0,
-     "pnl_krw": -1257721
+     "n": 15,
+     "wins": 1,
+     "pnl_krw": -1264515
     }
    },
    "by_exit": {
     "stop": {
-     "n": 18,
+     "n": 19,
      "wins": 0,
-     "pnl_krw": -1721285
+     "pnl_krw": -1811298
+    },
+    "low10": {
+     "n": 1,
+     "wins": 1,
+     "pnl_krw": 83219
     }
    },
    "by_year": {
     "2026": {
-     "n": 18,
-     "wins": 0,
-     "pnl_krw": -1721285
+     "n": 20,
+     "wins": 1,
+     "pnl_krw": -1728079
     }
    },
    "yearly_return_pct": {
-    "2026": -15.07
+    "2026": -15.41
    },
    "open_positions": [
     {
@@ -396,22 +398,9 @@
      "entry": 21363.9,
      "stop": 20800.0,
      "shares": 83,
-     "bars_held": 16,
-     "last_close": 23250.0,
-     "unrealized_pct": 8.83
-    },
-    {
-     "code": "396300",
-     "name": "HT ROBOTICS Co. Ltd",
-     "group": "Computer Communications",
-     "pattern": "flag",
-     "entry_date": "2026-10-16",
-     "entry": 7452.29,
-     "stop": 6930.63,
-     "shares": 170,
-     "bars_held": 13,
-     "last_close": 7800.0,
-     "unrealized_pct": 4.67
+     "bars_held": 17,
+     "last_close": 23600.0,
+     "unrealized_pct": 10.47
     },
     {
      "code": "033780",
@@ -422,9 +411,9 @@
      "entry": 187761.6,
      "stop": 174618.29,
      "shares": 6,
-     "bars_held": 13,
-     "last_close": 192700.0,
-     "unrealized_pct": 2.63
+     "bars_held": 14,
+     "last_close": 192000.0,
+     "unrealized_pct": 2.26
     },
     {
      "code": "086280",
@@ -435,15 +424,28 @@
      "entry": 207119.5,
      "stop": 192621.13,
      "shares": 5,
+     "bars_held": 2,
+     "last_close": 202000.0,
+     "unrealized_pct": -2.47
+    },
+    {
+     "code": "267850",
+     "name": "Asiana IDT Inc.",
+     "group": "Information Technology Services",
+     "pattern": "box",
+     "entry_date": "2026-11-04",
+     "entry": 9638.83,
+     "stop": 8964.11,
+     "shares": 125,
      "bars_held": 1,
-     "last_close": 201000.0,
-     "unrealized_pct": -2.95
+     "last_close": 9660.0,
+     "unrealized_pct": 0.22
     }
    ]
   },
   "hold_10": {
    "label": "동조 + 패턴, 보유 10일",
-   "signals": 23,
+   "signals": 24,
    "trades": 12,
    "wins": 1,
    "win_rate": 8.33,
@@ -451,14 +453,14 @@
    "avg_loss_pct": -6.87,
    "payoff": 0.62,
    "profit_factor": 0.06,
-   "total_return_pct": -9.48,
-   "equity_final": 9051512,
+   "total_return_pct": -9.46,
+   "equity_final": 9054155,
    "max_drawdown_pct": 9.48,
    "avg_hold_days": 4.17,
    "skipped": {
     "gap": 0,
     "limit": 9,
-    "cooldown": 0,
+    "cooldown": 2,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -512,13 +514,27 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -9.48
+    "2026": -9.46
    },
-   "open_positions": []
+   "open_positions": [
+    {
+     "code": "267850",
+     "name": "Asiana IDT Inc.",
+     "group": "Information Technology Services",
+     "pattern": "box",
+     "entry_date": "2026-11-04",
+     "entry": 9638.83,
+     "stop": 8964.11,
+     "shares": 134,
+     "bars_held": 1,
+     "last_close": 9660.0,
+     "unrealized_pct": 0.22
+    }
+   ]
   },
   "risk_2": {
    "label": "동조 + 패턴, 위험 2% (명목 상한 30%)",
-   "signals": 24,
+   "signals": 25,
    "trades": 9,
    "wins": 0,
    "win_rate": 0.0,
@@ -526,14 +542,14 @@
    "avg_loss_pct": -7.22,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -16.49,
-   "equity_final": 8351371,
+   "total_return_pct": -15.12,
+   "equity_final": 8487543,
    "max_drawdown_pct": 16.49,
    "avg_hold_days": 3,
    "skipped": {
     "gap": 0,
     "limit": 0,
-    "cooldown": 0,
+    "cooldown": 1,
     "size": 13,
     "no_bar": 0,
     "pattern": 0
@@ -582,7 +598,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -16.49
+    "2026": -15.12
    },
    "open_positions": [
     {
@@ -594,15 +610,28 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 13,
-     "bars_held": 12,
-     "last_close": 189900.0,
-     "unrealized_pct": -2.36
+     "bars_held": 13,
+     "last_close": 200000.0,
+     "unrealized_pct": 2.84
+    },
+    {
+     "code": "267850",
+     "name": "Asiana IDT Inc.",
+     "group": "Information Technology Services",
+     "pattern": "box",
+     "entry_date": "2026-11-04",
+     "entry": 9638.83,
+     "stop": 8964.11,
+     "shares": 247,
+     "bars_held": 1,
+     "last_close": 9660.0,
+     "unrealized_pct": 0.22
     }
    ]
   },
   "no_flag": {
    "label": "동조 + 패턴, 깃발형 제외",
-   "signals": 10,
+   "signals": 11,
    "trades": 7,
    "wins": 0,
    "win_rate": 0.0,
@@ -610,14 +639,14 @@
    "avg_loss_pct": -7.21,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -7.11,
-   "equity_final": 9289455,
+   "total_return_pct": -6.37,
+   "equity_final": 9362857,
    "max_drawdown_pct": 7.59,
    "avg_hold_days": 5,
    "skipped": {
     "gap": 0,
     "limit": 1,
-    "cooldown": 0,
+    "cooldown": 2,
     "size": 0,
     "no_bar": 0,
     "pattern": 0
@@ -661,7 +690,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -7.11
+    "2026": -6.37
    },
    "open_positions": [
     {
@@ -673,9 +702,22 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 7,
-     "bars_held": 12,
-     "last_close": 189900.0,
-     "unrealized_pct": -2.36
+     "bars_held": 13,
+     "last_close": 200000.0,
+     "unrealized_pct": 2.84
+    },
+    {
+     "code": "267850",
+     "name": "Asiana IDT Inc.",
+     "group": "Information Technology Services",
+     "pattern": "box",
+     "entry_date": "2026-11-04",
+     "entry": 9638.83,
+     "stop": 8964.11,
+     "shares": 137,
+     "bars_held": 1,
+     "last_close": 9660.0,
+     "unrealized_pct": 0.22
     }
    ]
   }
@@ -1332,6 +1374,50 @@
     "pnl_krw": -88624,
     "pnl_pct": -7.45,
     "hold_days": 2,
+    "gap": false
+   },
+   {
+    "code": "396300",
+    "name": "HT ROBOTICS Co. Ltd",
+    "group": "Computer Communications",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": null,
+    "signal_date": "2026-10-15",
+    "entry_date": "2026-10-16",
+    "entry": 7452.29,
+    "stop": 6930.63,
+    "exit_date": "2026-11-04",
+    "exit": 7956.06,
+    "why": "low10",
+    "shares": 170,
+    "pnl_krw": 83219,
+    "pnl_pct": 6.57,
+    "hold_days": 13,
+    "gap": false
+   },
+   {
+    "code": "150900",
+    "name": "FASOO AI Co.Ltd.",
+    "group": "Packaged Software",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": null,
+    "signal_date": "2026-11-03",
+    "entry_date": "2026-11-04",
+    "entry": 5165.45,
+    "stop": 4803.87,
+    "exit_date": "2026-11-04",
+    "exit": 4789.46,
+    "why": "stop",
+    "shares": 234,
+    "pnl_krw": -90013,
+    "pnl_pct": -7.45,
+    "hold_days": 1,
     "gap": false
    }
   ],
