@@ -20,7 +20,7 @@
 | 한국 주식 돌파 | 판단 전 (순방향 17일, 10건 0승, −9.69%, **z −2.04 경고** — 10/29) | 15건 쌓이면(5건 남음). 0승 유지 시 승률 15% 미만 FAIL 쪽. 보유 2(HT로보틱스 +1.1%, 셀트리온 −2.7%) |
 | 터틀 | 판단 전 (0건) | 거래소별 20건 (2~3개월) |
 | 추세 전환 4H | 판단 전 (0건) | 거래소별 20건 (2~3개월) |
-| 초단타 | **PASS(잡음 수준)** (누적 23일, 후보 92개 / 잡음 바닥 중앙값 89·95% 104 — 10/21). 바이낸스 별도 기록 `scalp_binance_history.jsonl` 10/17~21 5일치(판정 밖) | 10/7 후보 12개는 표본 밖 14일 전부 마이너스 → **우연이었다**(P10 종결). 새 후보는 30·60분봉 VWAP 되돌림(8일치). 사용자 결정 10/21 "A": 47개 얼림, **11/4 표본 밖 재확인**(P19) |
+| 초단타 | **NOT_YET(잡음 이하)** (누적 37일, 후보 25개 ≤ 잡음 바닥 중앙값 32 — 11/4). 바이낸스 별도 기록 10/17~11/3(판정 밖) | 10/7 후보 12개 → 우연(P10). **11/4 P19 재확인 NO:** OKX 47개 중 표본 밖 플러스 27개(57%)·바이낸스 12/19(63%)로 절반 조건은 넘었으나 주 후보(XRP 30m VWAP 지정가) OKX +1.1%·6/14일, 바이낸스 −0.8% 로 미달. **체결 시험 시작 안 함.** 다음은 사용자 결정(아래) |
 | 급상승·급하락 패턴 1H (10/22 신설) | 판단 전 (순방향 1건 — 10/22 PR #76 dry_run 1년 백테스트: 업비트 −10.3%/25건/PF 0.31, OKX +3.5%/82건/PF 1.10) | 거래소별 20건. 백테스트는 약한 근거 — 규칙은 안 고친다 |
 
 **캐리 (바이낸스·바이비트, 마일스톤 11):** 10/9 첫 7일 평균(표본 5개) 붙음 — 전 코인 문턱 미달, LINK 만 플러스(바이비트 +2.8% / 바이낸스 +1.4%), 나머지 −1.4~−4.7%, TRX −28~−42%. 같은 날 하이퍼리퀴드도 XRP 7.6% 로 내려와 캐리 전체가 17일 만에 "대기"로 바뀜. 현황판 "캐리 이자율" 카드에 코인 × 거래소 표로 보인다. 손댈 것 없음 — 펀딩이 돌아서면 매일 점검 루틴이 알린다.
@@ -39,7 +39,7 @@
 | 매크로 달력 갱신 | 매주 월 11:10 | Routine trig_01CBFoNkLZyBHafCjmsAK5Jp |
 | 초단타 전략·가설 일일 보고 (판정·어제 성적·전략 현황·가설 1개; 사용자 요청 11/2) | 매일 17:10 | Routine trig_01Sq7GkfWcgjfZfiRQsfrrhJ → 세션 session_01NW6d8yMKTBLhW7RdeHRgsq |
 | 바이낸스 1분봉 중계 (4일치 → `/var/www/carrygate/binance_1m/`, Caddy `/carrygate/*`) | 매일 09:05 | **사용자 Vultr 서버** cron `/root/carrygate-relay/vps_relay.py`, 로그 `relay.log`. 끄기: `crontab -l \| grep -v vps_relay.py \| crontab -` |
-| 초단타 표본 밖 재확인 (P19) | 2026-11-04 16:31, 1회 | Routine trig_01Lzq3K3xahcKnRc4mbmauQV → 세션 session_01WP7a8oLwaHMUj5MimZSF6k (10/21 재확인 trig_01WWuHJTvmZxK7GWpuvdSZca 는 실행 끝) |
+| ~~초단타 표본 밖 재확인 (P19)~~ | 2026-11-04 16:31 — **실행 끝(NO)** | trig_01Lzq3K3xahcKnRc4mbmauQV (1회용) |
 
 세션 session_01WP7a8oLwaHMUj5MimZSF6k 를 보관(archive)하면 그 세션으로 배달되는 Routine 2개가 멈춘다. 세션 session_01UBXi3SEnxJwqCj4dY5q4J5(마일스톤 15 작업 세션)를 보관하면 현황판 갱신 루틴이 멈춘다.
 
@@ -51,7 +51,9 @@
 
 **사용자 결정 2026-10-21 "A" (제안함 P20): 바이낸스 선물도 기록.** 바이낸스 API 는 미국 서버에서 막혀 공개 일별 파일(data.binance.vision)로 1분봉을 받는다. 매일 워크플로가 최근 4일 중 빈 날을 채워 `scalp_binance_history.jsonl` 에 따로 쌓는다(기본 판정과 섞지 않음). 47개를 바이낸스로 옮긴 19개도 얼렸고 11/4 에 OKX 와 나란히 본다. 첫 실데이터 확인은 10/22 아침 실행 로그 "Scalp Binance futures" 단계. **같은 날 사용자 "내 가상서버에서" → `vps_relay.py` + `docs/VPS_SETUP.md`(제안함 P21):** 미국 밖 가상서버가 매일 09:05 바이낸스 1분봉 4일치를 `data/binance_1m/` 에 올리면 Actions 가 그것을 먼저 쓴다. 없으면 공개 파일. **사용자가 서버에서 설정 절차를 따라야 켜진다**(아직 안 켜짐). 사용자 서버(사용자 기록 2026-10-21): **Vultr 서울, Ubuntu 24.04, `ssh root@158.247.206.213`**, 바이낸스 봇 여러 개(대부분 데모, bbv2·donchian 실계좌)가 systemd·cron 으로 가동, Caddy :80 분기, 봇마다 `/root/<이름>/`+`.env`(600)+`watch.py`, 신규 크립토 봇은 donchian 복제(CCXT), 키는 서버 `.env` 에만·문서 기록 금지, 한국 IP(맥)는 바이낸스 차단 → 바이낸스 작업은 반드시 서버에서. 설치는 `scripts/vps_relay_install.sh` 한 줄(토큰만 묻고 `.env` 에 저장), 폴더 `/root/carrygate-relay`, 포트 없음, cron 09:05 KST, 실패 시 텔레그램(선택). 규칙 대조표는 `docs/VPS_SETUP.md`. **이 클라우드 세션은 그 서버에 SSH 로 못 들어간다**(ssh 없음·네트워크 403·키 없음, 10/21 확인). 사용자 "니가 해" → **끌어오기 방식**으로 바꿈: 서버는 `/var/www/carrygate/binance_1m/` 에 쓰고 Caddy 가 `/carrygate/*` 로 내보내며 `scalp.RELAY_URL`(http://158.247.206.213/carrygate/binance_1m/)이 ① 순서로 읽는다 → 토큰 불필요. 설치는 `scripts/vps_relay_install_pull.sh` 한 줄, **맥의 Claude Code 세션에 `docs/VPS_MAC_PROMPT.md` 상자를 붙여 넣으면 그 세션이 대신 한다.** **켜짐(맥 세션 보고 2026-10-22):** 10/21 18:17 KST 설치 성공(Caddyfile 2행 import, 백업 `.bak.carrygate.20261021181752`), 10/22 09:05 첫 cron 실행 6코인×5,760봉, 공개 URL 200. Actions #67(13:53 KST)이 바이낸스 10/20·21 을 32초에 채움 — 중계 파일 생성 00:05 UTC·실행 04:59 UTC 로 ① 조건 충족. **10/23 확정:** 실행 #70 로그에 6코인 모두 "가상서버 중계 파일"(PR #74 문구). 바이낸스 단계 9초.
 
-**사용자 결정 대기:** 없음. 10/29 SNS 글 두 건(이평선 수렴 매매법 P24, CIS 원칙 P25)은 사용자 결정 "A" 로 기록만 — `docs/MA_CONVERGENCE_REVIEW.md`·`docs/CIS_PRINCIPLES_REVIEW.md`, 트랙·규칙 변경 없음. 다음은 11/4 초단타 재확인과 첫 판정이 뜨는 날. **10/22 신설 급상승 패턴 트랙**: 백테스트 표 기록·현황판 카드(타일·카드·판정 줄, 라이브 버전)까지 끝. 갱신 Routine 파일 목록에 `retest.json` 도 반영 확인(10/24). 남은 것: Actions 에서 오프라인 고정 봉 저장(`--save-fixture`).
+**2026-11-04 초단타 P19 표본 밖 재확인 — NO.** 10/22~11/4 14일만 센 성적: OKX 47개 중 플러스 27개, 바이낸스 19개 중 12개(폭 조건 통과). 그러나 미리 정한 주 후보 XRP 30m VWAP 지정가가 OKX +1.12%·플러스 6/14일(60% 미달), 바이낸스 −0.77% 로 미달 → 사전 등록 조건대로 **소액 체결 시험 시작 안 함.** 표본 밖 1위 하이퍼리퀴드 DOGE 30m 지정가 +11.9%(11/14일)는 결과를 보고 고른 것이라 근거가 아니다. 판정기는 후보 25 ≤ 잡음 32 로 NOT_YET. 기록 `docs/sessions/2026-11-04_scalp_p19_result.md`.
+
+**사용자 결정 대기:** 초단타 다음 단계(작업 기록 3절 선택지 A/B/C). 10/29 SNS 글 두 건(이평선 수렴 매매법 P24, CIS 원칙 P25)은 사용자 결정 "A" 로 기록만 — `docs/MA_CONVERGENCE_REVIEW.md`·`docs/CIS_PRINCIPLES_REVIEW.md`, 트랙·규칙 변경 없음. 다음은 11/4 초단타 재확인과 첫 판정이 뜨는 날. **10/22 신설 급상승 패턴 트랙**: 백테스트 표 기록·현황판 카드(타일·카드·판정 줄, 라이브 버전)까지 끝. 갱신 Routine 파일 목록에 `retest.json` 도 반영 확인(10/24). 남은 것: Actions 에서 오프라인 고정 봉 저장(`--save-fixture`).
 
 **2026-10-15 백테스트 과적합 논문 검토 → 판정기 보강 (제안함 P17·P18 반영):** 댓글 권고로 Bailey·López de Prado·Harvey·Hansen 등 17편을 읽고 공식을 실데이터에 대입(`docs/BACKTEST_OVERFITTING_REVIEW.md`, `scripts/overfit_check.py`). 발견: 초단타 10/7 PASS(후보 12개)는 실력 0 이어도 뜨는 후보 수(378개 중 42~53개)의 1/4 이었고, 터틀·추세전환 20건 합격선은 실력 0 도 19~40% 확률로 PASS 한다. 반영: ① `criteria.json scalp.noise_floor` — 부호 뒤집기 500회의 후보 수 중앙값보다 실제 후보가 많아야 PASS, 같거나 적으면 NOT_YET(잡음 이하). ② 판정 파일 각 거래소에 `interpretation`(실력 0 PASS 확률·놓칠 확률·필요 건수 MinTRL·t>3). 합격선 숫자·매매 규칙 변경 없음, criteria sealed 2026-10-15, 잠금 재생성. 현황판 카드에는 아직 안 올렸다(판정 파일에만). 작업 기록 `docs/sessions/2026-10-15_backtest_overfitting.md`.
 
