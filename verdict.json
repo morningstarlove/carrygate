@@ -1,7 +1,7 @@
 {
   "schema": "carrygate-verdict/1",
   "date": "2026-11-04",
-  "generated_at_utc": "2026-11-04T07:14:58Z",
+  "generated_at_utc": "2026-11-04T14:56:42Z",
   "criteria_sealed": "2026-10-22",
   "tracks": {
     "kr_breakout": {
@@ -145,13 +145,13 @@
           "net_pct": -2.931,
           "profit_factor": 0.0,
           "avg_r": -0.99,
-          "backtest_win_rate_pct": 35.8108,
-          "backtest_profit_factor": 2.5248,
-          "backtest_trades": 148,
+          "backtest_win_rate_pct": 36.0544,
+          "backtest_profit_factor": 2.556,
+          "backtest_trades": 147,
           "luck": {
-            "expected_wins": 1.07,
+            "expected_wins": 1.08,
             "actual_wins": 0,
-            "z": -1.29
+            "z": -1.3
           },
           "variants": {
             "no_vol": {
@@ -169,12 +169,12 @@
           },
           "warnings": [],
           "interpretation": {
-            "false_pass_pct": 28.89,
-            "miss_pct": 10.41,
+            "false_pass_pct": 28.79,
+            "miss_pct": 10.02,
             "wins_needed": 5,
             "per_trade_sharpe": 0.37,
             "min_trades_95": 20,
-            "min_trades_t3": 66,
+            "min_trades_t3": 65,
             "note": "false_pass = 실력 0 규칙이 이 합격선을 넘을 확률, miss = 백테스트만큼 실력이어도 못 넘을 확률, min_trades_95 = 샤프>0 을 95% 확신하는 데 필요한 건수(MinTRL), min_trades_t3 = t>3 기준 건수. PASS = 소액 시험 후보"
           },
           "status": "NOT_YET",
