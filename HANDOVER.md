@@ -55,6 +55,8 @@
 
 **2026-11-04 "닮은 과거" 예측 검증 — 기각 (P27):** 현황판의 닮은 과거 20구간 예측을 12종목 2시간봉 307일로 순방향 재현. 적중 51%(잡음과 같음), 매매 16변형 전부 수수료 뒤 마이너스, 상반기 효과가 하반기에 뒤집힘. 트랙 안 만듦. 기록 `docs/sessions/2026-11-04_analog_forecast_check.md`.
 
+**2026-11-05 예측 v2 설계 (P28, 구현 전):** 상황 변수 10개 선별 — 방향은 전부 잡음(반전 규칙 −4.8bp, 하반기 −28bp), 크기(변동성)만 안정(상/하위 3분위 |12h| 비율 1.36, 상반 1.44·하반 1.41). 설계 = 크기 예측기 + 방향 예측기 3개 채점만 + 60일 합격선 사전 등록, 쓰임은 기존 트랙 포지션 크기 조절·문지기. `docs/FORECAST_PLAN.md`, 기록 `docs/sessions/2026-11-05_forecast_v2_design.md`. **사용자 결정 대기: 구현 A / 보관 B / 크기 조절만 C.**
+
 **사용자 결정 대기:** 초단타 다음 단계(작업 기록 3절 선택지 A/B/C). 10/29 SNS 글 두 건(이평선 수렴 매매법 P24, CIS 원칙 P25)은 사용자 결정 "A" 로 기록만 — `docs/MA_CONVERGENCE_REVIEW.md`·`docs/CIS_PRINCIPLES_REVIEW.md`, 트랙·규칙 변경 없음. 다음은 11/4 초단타 재확인과 첫 판정이 뜨는 날. **10/22 신설 급상승 패턴 트랙**: 백테스트 표 기록·현황판 카드(타일·카드·판정 줄, 라이브 버전)까지 끝. 갱신 Routine 파일 목록에 `retest.json` 도 반영 확인(10/24). 남은 것: Actions 에서 오프라인 고정 봉 저장(`--save-fixture`).
 
 **2026-10-15 백테스트 과적합 논문 검토 → 판정기 보강 (제안함 P17·P18 반영):** 댓글 권고로 Bailey·López de Prado·Harvey·Hansen 등 17편을 읽고 공식을 실데이터에 대입(`docs/BACKTEST_OVERFITTING_REVIEW.md`, `scripts/overfit_check.py`). 발견: 초단타 10/7 PASS(후보 12개)는 실력 0 이어도 뜨는 후보 수(378개 중 42~53개)의 1/4 이었고, 터틀·추세전환 20건 합격선은 실력 0 도 19~40% 확률로 PASS 한다. 반영: ① `criteria.json scalp.noise_floor` — 부호 뒤집기 500회의 후보 수 중앙값보다 실제 후보가 많아야 PASS, 같거나 적으면 NOT_YET(잡음 이하). ② 판정 파일 각 거래소에 `interpretation`(실력 0 PASS 확률·놓칠 확률·필요 건수 MinTRL·t>3). 합격선 숫자·매매 규칙 변경 없음, criteria sealed 2026-10-15, 잠금 재생성. 현황판 카드에는 아직 안 올렸다(판정 파일에만). 작업 기록 `docs/sessions/2026-10-15_backtest_overfitting.md`.
