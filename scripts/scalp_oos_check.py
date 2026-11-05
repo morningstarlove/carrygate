@@ -11,6 +11,8 @@
       --primary okx:XRP:30m:vwap_fade_lim               # 새로 얼리기 (같은 이름은 덮어쓰지 않음)
   python scripts/scalp_oos_check.py --map 2026-10-21 --venue binance \
       --primary binance:XRP:30m:vwap_fade_lim           # 얼린 목록의 (코인·봉·규칙)을 다른 거래소로 옮겨 얼림 (P20)
+  python scripts/scalp_oos_check.py --auto              # 매일(워크플로): 판정기가 잡음 95% 선을 넘으면 그날 후보를 스스로 얼리고,
+                                                        # 얼린 목록 전부의 표본 밖 상태를 scalp_oos.json 에 쓴다 (P28)
 
 표준 라이브러리만 쓴다. 매매 규칙·criteria.json·잠금과 무관(읽기만).
 """
@@ -24,6 +26,13 @@ FROZEN = os.path.join(ROOT, "scalp_oos_frozen.json")
 HISTORY = os.path.join(ROOT, "scalp_history.jsonl")
 # 통과 조건 (P19, 2026-10-21 결과 전 등록). 얼릴 때 파일에 함께 적힌다 — 여기 값을 바꿔도 이미 얼린 것은 안 바뀐다
 DEFAULT_RULE = {"min_oos_days": 10, "primary_min_pos_ratio": 0.6, "breadth_min_share": 0.5}
+# 자동 얼림 (P28, 2026-11-05 사용자 결정 "A", 결과 전 등록): 사람이 날짜·후보를 고르지 않는다.
+#   방아쇠: verdict.json 초단타 후보 수 > 잡음 바닥 95% 선(p95). 중앙값보다 엄격 — "운으로 설명되지 않는 합격"
+#   얼리는 것: 그날 후보 전부, 주 후보 = 누적 1위. 통과 조건은 P19 와 같고 표본 밖 기간만 14일(2주)
+#   간격: 직전 자동 얼림이 아직 판정 전(WAIT)이면 새로 얼리지 않는다 — 같은 운을 여러 번 세지 않게
+AUTO_RULE = dict(DEFAULT_RULE, min_oos_days=14)
+VERDICT = os.path.join(ROOT, "verdict.json")
+OOS_OUT = os.path.join(ROOT, "scalp_oos.json")
 
 
 def load_rows(path=HISTORY):
@@ -97,6 +106,41 @@ def check(rows, fz, until=None):
             "share": round(share, 3), "primary": prim, "primary_ok": prim_ok, "verdict": verdict, "rows": out}
 
 
+def auto_freeze(data, verdict, rows, loader=None):
+    """방아쇠가 당겨졌으면 새 얼림 dict, 아니면 (None, 이유)."""
+    sc = (verdict.get("tracks") or {}).get("scalp") or {}
+    nf = sc.get("noise_floor") or {}
+    n, p95, date = sc.get("candidates"), nf.get("p95"), verdict.get("date")
+    if n is None or p95 is None or not date:
+        return None, "판정 파일에 후보 수·잡음 95% 선이 없다"
+    if n <= p95:
+        return None, "후보 %d개 ≤ 잡음 95%% 선 %d개 — 자동 얼림 안 함" % (n, p95)
+    name = "auto-" + date
+    if any(f.get("name") == name for f in data["freezes"]):
+        return None, "%s 는 이미 얼려 있다" % name
+    for f in data["freezes"]:
+        if f.get("auto") and check((loader or load_rows)(f.get("history", HISTORY)), f)["verdict"] == "WAIT":
+            return None, "직전 자동 얼림 %s 가 아직 판정 전 — 새로 얼리지 않는다" % f["name"]
+    upto = [r for r in rows if r.get("date", "") <= date]
+    cands = scalp.cumulative_candidates(scalp.accumulate(upto))
+    if not cands:
+        return None, "후보 없음"
+    fz = freeze(rows, date, None, None, cands[0][0])
+    fz.update({"name": name, "auto": True, "rule": dict(AUTO_RULE),
+               "trigger": {"candidates": n, "noise_p95": p95, "noise_median": nf.get("median")}})
+    return fz, "후보 %d개 > 잡음 95%% 선 %d개 — %s 로 %d개 얼림, 주 후보 %s" % (n, p95, name, len(fz["keys"]), fz["primary"])
+
+
+def status_all(data, until=None):
+    out = []
+    for fz in data["freezes"]:
+        r = check(load_rows(fz.get("history", HISTORY)), fz, until)
+        out.append({k: r[k] for k in ("name", "date", "oos_days", "plus", "total", "share", "primary_ok", "verdict")}
+                   | {"auto": bool(fz.get("auto")), "min_oos_days": fz["rule"]["min_oos_days"],
+                      "primary": (r["primary"] or {}).get("key"), "primary_oos_nt": (r["primary"] or {}).get("oos_nt")})
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--freeze")
@@ -106,9 +150,27 @@ def main():
     ap.add_argument("--until")
     ap.add_argument("--map", help="이미 얼린 목록 이름 → --venue 거래소로 옮겨 얼림")
     ap.add_argument("--venue")
+    ap.add_argument("--auto", action="store_true", help="자동 얼림 + scalp_oos.json 쓰기 (워크플로용)")
     a = ap.parse_args()
     data = json.load(open(FROZEN, encoding="utf-8")) if os.path.exists(FROZEN) else {"freezes": []}
     names = [f.get("name", f["date"]) for f in data["freezes"]]
+    if a.auto:
+        verdict = json.load(open(VERDICT, encoding="utf-8")) if os.path.exists(VERDICT) else {}
+        fz, why = auto_freeze(data, verdict, load_rows())
+        print("자동 얼림:", why)
+        if fz:
+            data["freezes"].append(fz)
+            with open(FROZEN, "w", encoding="utf-8") as fh:
+                json.dump(data, fh, ensure_ascii=False, indent=1)
+        st = status_all(data)
+        with open(OOS_OUT, "w", encoding="utf-8") as fh:
+            json.dump({"schema": "carrygate-scalp-oos/1", "date": verdict.get("date"), "auto_freeze": why,
+                       "freezes": st}, fh, ensure_ascii=False, indent=1)
+        for x in st:
+            print("  %-22s 표본 밖 %2d/%d일  플러스 %d/%d  주 후보 %s %s  → %s" % (
+                x["name"], x["oos_days"], x["min_oos_days"], x["plus"], x["total"], x["primary"],
+                "-" if x["primary_oos_nt"] is None else "%+.2f%%" % x["primary_oos_nt"], x["verdict"]))
+        return
     if a.freeze or a.map:
         if a.freeze:
             new = freeze(load_rows(), a.freeze, a.tf.split(",") if a.tf else None, a.rule, a.primary)

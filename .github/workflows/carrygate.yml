@@ -108,6 +108,12 @@ jobs:
         continue-on-error: true
         run: python verdict.py
 
+      # 판정기가 잡음 95% 선을 넘는 날 그날 초단타 후보를 스스로 얼리고, 얼린 목록 전부의 표본 밖 상태를 쓴다 (P28)
+      - name: Scalp out-of-sample (초단타 표본 밖 자동 얼림·확인)
+        if: inputs.day == ''
+        continue-on-error: true
+        run: python scripts/scalp_oos_check.py --auto
+
       - name: Live carry monitor (실전 캐리 감시, 지갑 주소만)
         if: inputs.day == ''
         continue-on-error: true
@@ -181,7 +187,7 @@ jobs:
           python push_results.py --verdict -m "$MSG" \
             status.json history.jsonl funding.json funding_history.jsonl scalp.json scalp_history.jsonl scalp_binance.json scalp_binance_history.jsonl research.json research_history.jsonl \
             basis.json basis_history.jsonl funding_signal.json funding_signal_history.jsonl kimchi.json kimchi_history.jsonl \
-            macro.json listing.json momentum.json momentum_history.jsonl live.json live_history.jsonl turtle.json turtle_history.jsonl reversal.json reversal_history.jsonl reversal_bars.jsonl retest.json retest_history.jsonl verdict.json verdict_history.jsonl \
+            macro.json listing.json momentum.json momentum_history.jsonl live.json live_history.jsonl turtle.json turtle_history.jsonl reversal.json reversal_history.jsonl reversal_bars.jsonl retest.json retest_history.jsonl verdict.json verdict_history.jsonl scalp_oos.json scalp_oos_frozen.json \
             grid.json grid_history.jsonl \
             data/kr_funding.json data/binance_1m data/cg_funding_snapshots.jsonl data/etf data/upbit_markets.json
 

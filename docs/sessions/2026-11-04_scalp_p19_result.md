@@ -33,3 +33,10 @@
 ## 4. 같은 날
 
 - 한국 주식 돌파: 21일, 11건 0승, z −2.14 경고. 보유 셀트리온 +2.8%·아시아나IDT. 크래프톤 신호. 정기 예약 미발동 → Routine 대신 실행.
+
+## 5. 사용자 결정 (11/5 "ㄱㄱ" → A, 제안함 P28)
+
+- `scripts/scalp_oos_check.py --auto` 추가, 워크플로 단계 "Scalp out-of-sample"(판정 직후), 결과 `scalp_oos.json`·얼림 `scalp_oos_frozen.json` 커밋 목록에 추가.
+- 방아쇠: 후보 수 > 잡음 95% 선. 얼림 이름 `auto-YYYY-MM-DD`, 주 후보 누적 1위, 표본 밖 14일, 직전 자동 얼림 WAIT 중엔 쉼.
+- 시험 `tests.test_scalp.OutOfSample.test_auto_freeze_trigger_and_spacing`. 전체 시험·검산·잠금 대조 통과.
+- 11/5 실행: 후보 32 ≤ p95 55 → 안 얼림. 기존 두 얼림은 15일째도 NO.
