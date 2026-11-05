@@ -70,7 +70,7 @@ def fetch_upbit():
 def fetch_upbit_trades(last_ms, interval):
     """업비트 최근 체결(공개, 키 불필요) -> 코인별 직전 표본 이후 체결 중
     매도 주도(ask_bid=ASK: 누군가 매수호가를 때림) 최저가 sell_lo, 매수 주도(BID) 최고가 buy_hi.
-    호가 제공 '닿으면 체결' 종이 규칙(P28)에 쓴다. last_ms 는 코인별 마지막으로 본 체결 시각(ms)."""
+    호가 제공 '닿으면 체결' 종이 규칙(P29)에 쓴다. last_ms 는 코인별 마지막으로 본 체결 시각(ms)."""
     out = {}
     now_ms = int(time.time() * 1000)
     for c in COINS:
@@ -284,7 +284,7 @@ def mm_paper(rows, fee):
 
 
 def mm_touch(rows, fee):
-    """호가 제공 '닿으면 체결' 종이 규칙 — 2026-11-05 추가(제안함 P28). mm_paper(P26)와 나란히, 주문 없음.
+    """호가 제공 '닿으면 체결' 종이 규칙 — 2026-11-05 추가(제안함 P29). mm_paper(P26)와 나란히, 주문 없음.
 
     P26 의 '지나쳐야 체결'은 체결 = 이미 불리하게 움직인 뒤라 역선택이 100% 다(첫 이틀 업비트 건당 −19.7bp, 적중 2%).
     여기서는 실제 체결 기록으로 본다: 직전 표본에 건 내 매수호가 이하에서 **매도 주도 체결**(sell_lo ≤ 내 매수가)이 찍히면 매수 체결,
@@ -396,7 +396,7 @@ def analyze(by, fees=FEES):
         summary[venue]["mm_net_bp_avg"] = round(sum(m["net_bp_sum"] for m in mms) / tr, 3) if tr else None
         summary[venue]["mm_maker_exit_pct"] = round(100.0 * sum(m["maker_exits"] for m in mms) / tr, 1) if tr else None
         summary[venue]["mm_hit_rate_pct"] = round(sum(m["hit_rate_pct"] * m["trades"] for m in mms) / tr, 1) if tr else None
-        # 닿으면 체결 변형 (P28) — 체결 기록이 있는 거래소(업비트)만
+        # 닿으면 체결 변형 (P29) — 체결 기록이 있는 거래소(업비트)만
         mts = [m["mm_touch"] for k, m in markets.items() if k.split(":")[0] == venue and m.get("mm_touch", {}).get("trades")]
         if mts:
             tr2 = sum(m["trades"] for m in mts)
@@ -445,7 +445,7 @@ def print_result(out):
                  "%.0f" % s["mm_hit_rate_pct"] if s.get("mm_hit_rate_pct") is not None else "-"))
     tv = {v: s for v, s in out["summary"].items() if s.get("mmt_trades")}
     if tv:
-        print("--- 호가 제공 '닿으면 체결' 변형 (실제 체결 기록, P28) ---")
+        print("--- 호가 제공 '닿으면 체결' 변형 (실제 체결 기록, P29) ---")
         print("%-12s %6s %8s %9s %10s %10s %8s" % ("거래소", "왕복", "양쪽동시", "지정가청산%", "건당순bp", "순bp합", "적중%"))
         for v, s in tv.items():
             print("%-12s %6d %8d %9.0f %+10.2f %+10.1f %8.0f" % (v, s["mmt_trades"], s["mmt_both_sides"], s["mmt_maker_exit_pct"],
@@ -509,7 +509,7 @@ def report(path="orderbook_history.jsonl"):
     t_rows = [r for r in rows if any(s.get("mmt_trades") for s in r.get("summary", {}).values())]
     if t_rows:
         print()
-        print("--- 호가 제공 '닿으면 체결' 변형 누적 (2026-11-05 시작, P28) ---")
+        print("--- 호가 제공 '닿으면 체결' 변형 누적 (2026-11-05 시작, P29) ---")
         print("%-12s %4s %6s %8s %10s %10s %8s" % ("거래소", "일수", "왕복", "양쪽동시", "건당순bp", "순bp합", "플러스일"))
         for v in venues:
             ss = [r["summary"][v] for r in t_rows if r["summary"].get(v, {}).get("mmt_trades")]
@@ -556,7 +556,7 @@ def main(argv=None):
                       "imbalance": "(매수잔량−매도잔량)/(합). |불균형| ≥ %.1f 을 '치우침'으로 보고, 치우친 방향의 %d·%d초 뒤 중간가 변화(bp)를 잰다" % (IMB_THRESHOLD, HORIZONS[0], HORIZONS[1]),
                       "spread": "호가 폭 = (매도1−매수1)/중간가. 반폭 − 지정가 수수료 > 0 이면 양쪽 지정가로 한 번 왕복에 남는 여지가 있다는 뜻 (체결·역선택은 별도)",
                       "mm": "호가 제공 종이 규칙(P26): 최우선 매수·매도호가에 1단위씩, 다음 표본의 상대 호가가 내 가격을 지나쳐야 체결. 재고 ±1, 반대쪽 최우선호가에 재게시, %d초 안에 못 닫으면 상대 호가에 시장가. 지정가=메이커·시장가=테이커 수수료" % MM_TTL_SEC,
-                      "mm_touch": "닿으면 체결 변형(P28, 업비트만): 직전 표본 이후 실제 체결 중 매도 주도 최저가 ≤ 내 매수가면 매수 체결, 매수 주도 최고가 ≥ 내 매도가면 매도 체결. 줄 서기 무시(낙관 쪽 경계). 나머지는 P26 과 같음"},
+                      "mm_touch": "닿으면 체결 변형(P29, 업비트만): 직전 표본 이후 실제 체결 중 매도 주도 최저가 ≤ 내 매수가면 매수 체결, 매수 주도 최고가 ≥ 내 매도가면 매도 체결. 줄 서기 무시(낙관 쪽 경계). 나머지는 P26 과 같음"},
            "markets": markets, "summary": summary, "errors": errors,
            "verdict": verdict_of(summary)}
     print_result(out)

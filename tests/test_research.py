@@ -205,7 +205,7 @@ class MarketMakingPaper(unittest.TestCase):
 
 
 class MarketMakingTouch(unittest.TestCase):
-    """닿으면 체결 변형(P28): 실제 체결 기록(sell_lo·buy_hi)으로 체결 판단."""
+    """닿으면 체결 변형(P29): 실제 체결 기록(sell_lo·buy_hi)으로 체결 판단."""
 
     def _rows(self, seq):
         return [{"ts": i * 10, "bid": b, "ask": a, "bq": 1.0, "aq": 1.0, "sell_lo": lo, "buy_hi": hi}

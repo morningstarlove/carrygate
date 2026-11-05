@@ -467,6 +467,26 @@ class OutOfSample(unittest.TestCase):
         self.ins = [day(d, 1.0, 0.5) for d in range(1, 9)]          # 8일 모두 플러스 → 둘 다 후보
         self.day = day
 
+    def test_auto_freeze_trigger_and_spacing(self):
+        """P28: 후보 수가 잡음 95% 선을 넘을 때만 그날 후보를 얼리고, 직전 자동 얼림이 판정 전이면 쉰다."""
+        v = lambda n, p95, d: {"date": d, "tracks": {"scalp": {"candidates": n, "noise_floor": {"p95": p95, "median": 1}}}}
+        data = {"freezes": []}
+        fz, why = self.m.auto_freeze(data, v(2, 2, "2026-10-08"), self.ins)
+        self.assertIsNone(fz)                                                  # 2 ≤ 2 → 안 얼림
+        fz, why = self.m.auto_freeze(data, v(3, 2, "2026-10-08"), self.ins)
+        self.assertEqual(fz["name"], "auto-2026-10-08")
+        self.assertEqual(fz["primary"], "okx:XRP:30m:vwap_fade_lim")          # 누적 1위
+        self.assertEqual(fz["rule"]["min_oos_days"], 14)
+        self.assertEqual(len(fz["keys"]), 2)
+        data["freezes"].append(fz)
+        rows = self.ins + [self.day(d, 0.3, 0.2) for d in range(9, 12)]       # 표본 밖 3일 → WAIT
+        fz2, why = self.m.auto_freeze(data, v(9, 2, "2026-10-11"), rows, loader=lambda h: rows)
+        self.assertIsNone(fz2)
+        self.assertIn("판정 전", why)
+        rows = self.ins + [self.day(d, 0.3, 0.2) for d in range(9, 25)]       # 16일 → 판정 남 → 다시 얼릴 수 있음
+        fz3, _ = self.m.auto_freeze(data, v(9, 2, "2026-10-24"), rows, loader=lambda h: rows)
+        self.assertEqual(fz3["name"], "auto-2026-10-24")
+
     def test_freeze_only_uses_rows_up_to_date(self):
         fz = self.m.freeze(self.ins + [self.day(9, -50.0, -50.0)], "2026-10-08", ["30m"], "vwap", "okx:XRP:30m:vwap_fade_lim")
         self.assertEqual(len(fz["keys"]), 2)
