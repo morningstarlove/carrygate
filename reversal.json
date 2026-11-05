@@ -1,7 +1,7 @@
 {
  "schema": "carrygate-reversal/1",
- "date": "2026-11-05",
- "generated_at_kst": "2026-11-05 21:12:00",
+ "date": "2026-11-06",
+ "generated_at_kst": "2026-11-06 06:56:13",
  "rules": {
   "bar_minutes": 240,
   "pivot_k": 3,
@@ -44,7 +44,7 @@
     "BTC": {
      "bars": 6600,
      "stats": {
-      "period": "2023-11-01 08:00 ~ 2026-11-05 08:00",
+      "period": "2023-11-01 16:00 ~ 2026-11-05 16:00",
       "days": 1100,
       "trades": 29,
       "wins": 12,
@@ -79,7 +79,7 @@
        "wins": 0,
        "net_pct": -1.056
       },
-      "buy_hold_pct": 130.3418
+      "buy_hold_pct": 120.8857
      },
      "returns_pct": [
       -0.36512189518229166,
@@ -267,9 +267,9 @@
       }
      ],
      "signal": {
-      "last_bar": "2026-11-05 08:00",
-      "close": 108157000.0,
-      "atr": 1139460.60033164,
+      "last_bar": "2026-11-05 16:00",
+      "close": 103792000.0,
+      "atr": 1368065.69179931,
       "phase": "scan",
       "position": "flat",
       "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
@@ -278,14 +278,14 @@
     "ETH": {
      "bars": 6600,
      "stats": {
-      "period": "2023-11-01 08:00 ~ 2026-11-05 08:00",
+      "period": "2023-11-01 16:00 ~ 2026-11-05 16:00",
       "days": 1100,
       "trades": 26,
       "wins": 8,
       "win_rate_pct": 30.7692,
-      "net_pct": 7.3456,
+      "net_pct": 6.952,
       "realized_net_pct": 7.3456,
-      "cagr_pct": 2.3799,
+      "cagr_pct": 2.2552,
       "max_drawdown_pct": -5.4763,
       "profit_factor": 1.7187,
       "avg_r": 0.2896,
@@ -306,14 +306,14 @@
        "2023": -0.5302,
        "2024": 2.5111,
        "2025": 2.9426,
-       "2026": 2.2651
+       "2026": 1.8901
       },
       "forward": {
        "trades": 0,
        "wins": 0,
        "net_pct": null
       },
-      "buy_hold_pct": 32.7088
+      "buy_hold_pct": 23.435
      },
      "returns_pct": [
       -0.5302182827004219,
@@ -472,47 +472,42 @@
       }
      ],
      "signal": {
-      "last_bar": "2026-11-05 08:00",
-      "close": 3258000.0,
-      "atr": 46160.0509479,
-      "phase": "broken",
-      "position": "flat",
-      "neckline": 3120000.0,
+      "last_bar": "2026-11-05 16:00",
+      "close": 3076000.0,
+      "atr": 54671.94598048,
+      "phase": "long",
+      "position": "long",
+      "entry": 3120000.0,
+      "entry_date": "2026-11-05 12:00",
+      "units": 0.8945469937110087,
       "stop": 3000000.0,
-      "pattern_low_date": "2026-11-04 00:00",
-      "bottom_date": "2026-10-30 00:00",
-      "neckline_distance_pct": -4.2357,
-      "bars_left": 7,
-      "breakout": {
-       "idx": 6594,
-       "date": "2026-11-04 12:00",
-       "vol_ratio": 4.8492,
-       "close": 3253000.0
-      },
-      "units_if_fill": 0.8333333333333334,
-      "notional_pct_if_fill": 26.0,
-      "action": "돌파 확인 — 3,120,000 에 지정가 매수 대기, 손절 3,000,000 (남은 7봉)"
+      "stop0": 3000000.0,
+      "neckline": 3120000.0,
+      "stop_distance_pct": -2.4707,
+      "unrealized_pct": -1.4103,
+      "stop_raises": 0,
+      "action": "보유 — 저가가 3,000,000 아래로 내려오면 청산"
      }
     },
     "XRP": {
      "bars": 6600,
      "stats": {
-      "period": "2023-11-01 08:00 ~ 2026-11-05 08:00",
+      "period": "2023-11-01 16:00 ~ 2026-11-05 16:00",
       "days": 1100,
-      "trades": 23,
+      "trades": 24,
       "wins": 8,
-      "win_rate_pct": 34.7826,
-      "net_pct": 27.4952,
-      "realized_net_pct": 25.8267,
-      "cagr_pct": 8.3939,
+      "win_rate_pct": 33.3333,
+      "net_pct": 24.6633,
+      "realized_net_pct": 24.6633,
+      "cagr_pct": 7.589,
       "max_drawdown_pct": -5.118,
-      "profit_factor": 3.1274,
-      "avg_r": 1.0704,
-      "avg_hold_bars": 24.4783,
+      "profit_factor": 2.8539,
+      "avg_r": 0.9872,
+      "avg_hold_bars": 23.9167,
       "stops": 5,
-      "trails": 18,
-      "avg_mfe_pct": 13.454,
-      "avg_giveback_pct": 6.6399,
+      "trails": 19,
+      "avg_mfe_pct": 13.0976,
+      "avg_giveback_pct": 6.6667,
       "counts": {
        "setups": 205,
        "fake_breaks": 28,
@@ -525,14 +520,14 @@
        "2023": -0.3296,
        "2024": 17.8833,
        "2025": 8.6742,
-       "2026": -0.1498
+       "2026": -2.3677
       },
       "forward": {
-       "trades": 1,
+       "trades": 2,
        "wins": 0,
-       "net_pct": -0.8005
+       "net_pct": -1.7177
       },
-      "buy_hold_pct": 115.6744
+      "buy_hold_pct": 104.5949
      },
      "returns_pct": [
       -0.3295814545454518,
@@ -557,7 +552,8 @@
       -0.5592883055555508,
       0.2179672895683466,
       0.9780279021739129,
-      -0.8005120319148918
+      -0.8005120319148918,
+      -0.9245778586956519
      ],
      "forward_trades": [
       {
@@ -584,34 +580,34 @@
        "ret_pct": -0.8005120319148918,
        "r_multiple": -0.8005,
        "forward": true
-      }
-     ],
-     "recent_trades": [
+      },
       {
        "market": "XRP",
        "dir": "long",
-       "entry_date": "2026-05-06 12:00",
-       "exit_date": "2026-05-07 00:00",
-       "bars": 2,
-       "entry": 2099.0,
-       "exit": 2073.9625,
-       "units": 5311.920267303918,
-       "neckline": 2099.0,
-       "pattern_low": 2075.0,
-       "pattern_low_date": "2026-05-06 00:00",
-       "bottom_date": "2026-04-29 16:00",
-       "stop_final": 2075.0,
-       "stop_raises": 0,
-       "reason": "stop",
+       "entry_date": "2026-11-03 16:00",
+       "exit_date": "2026-11-05 16:00",
+       "bars": 11,
+       "entry": 1714.0,
+       "exit": 1673.163,
+       "units": 2735.3625199411754,
+       "neckline": 1714.0,
+       "pattern_low": 1668.0,
+       "pattern_low_date": "2026-11-02 16:00",
+       "bottom_date": "2026-10-30 00:00",
+       "stop_final": 1674.0,
+       "stop_raises": 1,
+       "reason": "trail",
        "entry_how": "pullback_limit",
-       "pnl": -144080.4257,
-       "fees": 11083.222,
-       "mfe_pct": 1.0958,
-       "price_ret_pct": -1.1928,
-       "ret_pct": -1.130165885416663,
-       "r_multiple": -1.1302,
-       "forward": false
-      },
+       "pnl": -116336.5586,
+       "fees": 4632.5594,
+       "mfe_pct": 4.9008,
+       "price_ret_pct": -2.3826,
+       "ret_pct": -0.9245778586956519,
+       "r_multiple": -0.9246,
+       "forward": true
+      }
+     ],
+     "recent_trades": [
       {
        "market": "XRP",
        "dir": "long",
@@ -711,30 +707,46 @@
        "ret_pct": -0.8005120319148918,
        "r_multiple": -0.8005,
        "forward": true
+      },
+      {
+       "market": "XRP",
+       "dir": "long",
+       "entry_date": "2026-11-03 16:00",
+       "exit_date": "2026-11-05 16:00",
+       "bars": 11,
+       "entry": 1714.0,
+       "exit": 1673.163,
+       "units": 2735.3625199411754,
+       "neckline": 1714.0,
+       "pattern_low": 1668.0,
+       "pattern_low_date": "2026-11-02 16:00",
+       "bottom_date": "2026-10-30 00:00",
+       "stop_final": 1674.0,
+       "stop_raises": 1,
+       "reason": "trail",
+       "entry_how": "pullback_limit",
+       "pnl": -116336.5586,
+       "fees": 4632.5594,
+       "mfe_pct": 4.9008,
+       "price_ret_pct": -2.3826,
+       "ret_pct": -0.9245778586956519,
+       "r_multiple": -0.9246,
+       "forward": true
       }
      ],
      "signal": {
-      "last_bar": "2026-11-05 08:00",
-      "close": 1775.0,
-      "atr": 25.19326219,
-      "phase": "long",
-      "position": "long",
-      "entry": 1714.0,
-      "entry_date": "2026-11-03 16:00",
-      "units": 2735.3625199411754,
-      "stop": 1674.0,
-      "stop0": 1668.0,
-      "neckline": 1714.0,
-      "stop_distance_pct": -5.6901,
-      "unrealized_pct": 3.5589,
-      "stop_raises": 1,
-      "action": "보유 — 저가가 1,674 아래로 내려오면 청산"
+      "last_bar": "2026-11-05 16:00",
+      "close": 1692.0,
+      "atr": 28.86191912,
+      "phase": "scan",
+      "position": "flat",
+      "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
      }
     },
     "TRX": {
      "bars": 6600,
      "stats": {
-      "period": "2023-11-01 08:00 ~ 2026-11-05 08:00",
+      "period": "2023-11-01 16:00 ~ 2026-11-05 16:00",
       "days": 1100,
       "trades": 9,
       "wins": 5,
@@ -769,7 +781,7 @@
        "wins": 0,
        "net_pct": -1.0948
       },
-      "buy_hold_pct": 220.1493
+      "buy_hold_pct": 217.6471
      },
      "returns_pct": [
       9.157240000000037,
@@ -937,9 +949,9 @@
       }
      ],
      "signal": {
-      "last_bar": "2026-11-05 08:00",
-      "close": 429.0,
-      "atr": 5.49607948,
+      "last_bar": "2026-11-05 16:00",
+      "close": 432.0,
+      "atr": 5.30271173,
       "phase": "scan",
       "position": "flat",
       "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
@@ -948,7 +960,7 @@
     "LINK": {
      "bars": 6600,
      "stats": {
-      "period": "2023-11-01 08:00 ~ 2026-11-05 08:00",
+      "period": "2023-11-01 16:00 ~ 2026-11-05 16:00",
       "days": 1100,
       "trades": 37,
       "wins": 12,
@@ -983,7 +995,7 @@
        "wins": 0,
        "net_pct": null
       },
-      "buy_hold_pct": 4.6527
+      "buy_hold_pct": -3.3399
      },
      "returns_pct": [
       0.1964139162561576,
@@ -1153,24 +1165,24 @@
       }
      ],
      "signal": {
-      "last_bar": "2026-11-05 08:00",
-      "close": 15520.0,
-      "atr": 341.52317034,
+      "last_bar": "2026-11-05 16:00",
+      "close": 14760.0,
+      "atr": 383.24966123,
       "phase": "armed",
       "position": "flat",
       "neckline": 16090.0,
       "stop": 14340.0,
       "pattern_low_date": "2026-11-04 00:00",
       "bottom_date": "2026-10-30 00:00",
-      "neckline_distance_pct": 3.6727,
-      "bars_left": 25,
-      "action": "구조 확인 — 종가 16,090 위 + 거래량 2배면 돌파 (남은 25봉)"
+      "neckline_distance_pct": 9.0108,
+      "bars_left": 23,
+      "action": "구조 확인 — 종가 16,090 위 + 거래량 2배면 돌파 (남은 23봉)"
      }
     },
     "DOGE": {
      "bars": 6600,
      "stats": {
-      "period": "2023-11-01 08:00 ~ 2026-11-05 08:00",
+      "period": "2023-11-01 16:00 ~ 2026-11-05 16:00",
       "days": 1100,
       "trades": 23,
       "wins": 8,
@@ -1205,7 +1217,7 @@
        "wins": 0,
        "net_pct": null
       },
-      "buy_hold_pct": 13.0626
+      "buy_hold_pct": 6.3578
      },
      "returns_pct": [
       -0.616347325,
@@ -1361,9 +1373,9 @@
       }
      ],
      "signal": {
-      "last_bar": "2026-11-05 08:00",
-      "close": 103.0,
-      "atr": 2.30948685,
+      "last_bar": "2026-11-05 16:00",
+      "close": 98.7,
+      "atr": 2.53656189,
       "phase": "scan",
       "position": "flat",
       "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
@@ -1380,22 +1392,22 @@
      "XRP"
     ],
     "stats": {
-     "period": "2023-11-01 08:00 ~ 2026-11-05 08:00",
+     "period": "2023-11-01 16:00 ~ 2026-11-05 16:00",
      "days": 1100,
-     "trades": 145,
+     "trades": 146,
      "wins": 52,
-     "win_rate_pct": 35.8621,
-     "net_pct": 130.7364,
-     "realized_net_pct": 127.7167,
-     "cagr_pct": 31.9741,
+     "win_rate_pct": 35.6164,
+     "net_pct": 124.7763,
+     "realized_net_pct": 125.6113,
+     "cagr_pct": 30.833,
      "max_drawdown_pct": -9.907,
-     "profit_factor": 2.55,
-     "avg_r": 0.6064,
-     "avg_hold_bars": 26.1448,
+     "profit_factor": 2.4864,
+     "avg_r": 0.5959,
+     "avg_hold_bars": 26.0411,
      "stops": 23,
-     "trails": 122,
-     "avg_mfe_pct": 8.8418,
-     "avg_giveback_pct": 6.6972,
+     "trails": 123,
+     "avg_mfe_pct": 8.8148,
+     "avg_giveback_pct": 6.7012,
      "counts": {
       "setups": 1026,
       "fake_breaks": 177,
@@ -1408,12 +1420,12 @@
       "2023": 7.7303,
       "2024": 46.6519,
       "2025": 23.9073,
-      "2026": 17.8674
+      "2026": 14.8228
      },
      "forward": {
-      "trades": 3,
+      "trades": 4,
       "wins": 0,
-      "net_pct": -2.931
+      "net_pct": -3.8284
      }
     },
     "returns_pct": [
@@ -1561,14 +1573,15 @@
      -0.32263171616541236,
      -1.0560065798433775,
      -0.8090557134838803,
-     -1.0947699999999958
+     -1.0947699999999958,
+     -0.9245778586956518
     ],
     "open_positions": {
-     "XRP": {
-      "entry": 1714.0,
-      "entry_date": "2026-11-03 16:00",
-      "stop": 1674.0,
-      "units": 4950.363274242893,
+     "ETH": {
+      "entry": 3120000.0,
+      "entry_date": "2026-11-05 12:00",
+      "stop": 3000000.0,
+      "units": 1.8976392551264423,
       "capped": false
      }
     },
@@ -1647,9 +1660,34 @@
       "ret_pct": -1.0947699999999958,
       "r_multiple": -1.0948,
       "forward": true
+     },
+     {
+      "market": "XRP",
+      "dir": "long",
+      "entry_date": "2026-11-03 16:00",
+      "exit_date": "2026-11-05 16:00",
+      "bars": 11,
+      "entry": 1714.0,
+      "exit": 1673.163,
+      "units": 4950.363274242893,
+      "neckline": 1714.0,
+      "pattern_low": 1668.0,
+      "pattern_low_date": "2026-11-02 16:00",
+      "bottom_date": "2026-10-30 00:00",
+      "stop_final": 1674.0,
+      "stop_raises": 1,
+      "reason": "trail",
+      "entry_how": "pullback_limit",
+      "pnl": -210541.8287,
+      "fees": 8383.8437,
+      "mfe_pct": 4.9008,
+      "price_ret_pct": -2.3826,
+      "ret_pct": -0.9245778586956518,
+      "r_multiple": -0.9246,
+      "forward": true
      }
     ],
-    "equity_now": 23073643.2212
+    "equity_now": 22477633.1056
    },
    "variants": {
     "no_vol": {
@@ -1657,7 +1695,7 @@
       "BTC": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-01 08:00 ~ 2026-11-05 08:00",
+        "period": "2023-11-01 16:00 ~ 2026-11-05 16:00",
         "days": 1100,
         "trades": 47,
         "wins": 20,
@@ -1692,7 +1730,7 @@
          "wins": 0,
          "net_pct": -2.6478
         },
-        "buy_hold_pct": 130.3418
+        "buy_hold_pct": 120.8857
        },
        "returns_pct": [
         -0.36512189518229166,
@@ -1948,9 +1986,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-05 08:00",
-        "close": 108157000.0,
-        "atr": 1139460.60033164,
+        "last_bar": "2026-11-05 16:00",
+        "close": 103792000.0,
+        "atr": 1368065.69179931,
         "phase": "scan",
         "position": "flat",
         "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
@@ -1959,14 +1997,14 @@
       "ETH": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-01 08:00 ~ 2026-11-05 08:00",
+        "period": "2023-11-01 16:00 ~ 2026-11-05 16:00",
         "days": 1100,
         "trades": 46,
         "wins": 12,
         "win_rate_pct": 26.087,
-        "net_pct": 1.4575,
+        "net_pct": -0.0638,
         "realized_net_pct": 0.304,
-        "cagr_pct": 0.4813,
+        "cagr_pct": -0.0212,
         "max_drawdown_pct": -12.3269,
         "profit_factor": 1.0152,
         "avg_r": 0.0175,
@@ -1987,14 +2025,14 @@
          "2023": 0.9701,
          "2024": -1.5195,
          "2025": 3.4082,
-         "2026": -1.3298
+         "2026": -2.8093
         },
         "forward": {
          "trades": 3,
          "wins": 0,
          "net_pct": -2.9713
         },
-        "buy_hold_pct": 32.7088
+        "buy_hold_pct": 23.435
        },
        "returns_pct": [
         1.5083150537634407,
@@ -2249,9 +2287,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-05 08:00",
-        "close": 3258000.0,
-        "atr": 46160.0509479,
+        "last_bar": "2026-11-05 16:00",
+        "close": 3076000.0,
+        "atr": 54671.94598048,
         "phase": "long",
         "position": "long",
         "entry": 3120000.0,
@@ -2260,8 +2298,8 @@
         "stop": 3000000.0,
         "stop0": 3000000.0,
         "neckline": 3120000.0,
-        "stop_distance_pct": -7.919,
-        "unrealized_pct": 4.4231,
+        "stop_distance_pct": -2.4707,
+        "unrealized_pct": -1.4103,
         "stop_raises": 0,
         "action": "보유 — 저가가 3,000,000 아래로 내려오면 청산"
        }
@@ -2269,22 +2307,22 @@
       "XRP": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-01 08:00 ~ 2026-11-05 08:00",
+        "period": "2023-11-01 16:00 ~ 2026-11-05 16:00",
         "days": 1100,
-        "trades": 39,
+        "trades": 40,
         "wins": 16,
-        "win_rate_pct": 41.0256,
-        "net_pct": 48.4592,
-        "realized_net_pct": 46.5162,
-        "cagr_pct": 14.0098,
-        "max_drawdown_pct": -8.397,
-        "profit_factor": 2.9456,
-        "avg_r": 1.1152,
-        "avg_hold_bars": 26.2564,
+        "win_rate_pct": 40.0,
+        "net_pct": 45.1616,
+        "realized_net_pct": 45.1616,
+        "cagr_pct": 13.1632,
+        "max_drawdown_pct": -8.8675,
+        "profit_factor": 2.7876,
+        "avg_r": 1.0642,
+        "avg_hold_bars": 25.875,
         "stops": 10,
-        "trails": 29,
-        "avg_mfe_pct": 11.4233,
-        "avg_giveback_pct": 6.5133,
+        "trails": 30,
+        "avg_mfe_pct": 11.2603,
+        "avg_giveback_pct": 6.5326,
         "counts": {
          "setups": 199,
          "fake_breaks": 0,
@@ -2297,14 +2335,14 @@
          "2023": -0.3296,
          "2024": 40.585,
          "2025": 11.2407,
-         "2026": -4.7559
+         "2026": -6.8715
         },
         "forward": {
-         "trades": 3,
+         "trades": 4,
          "wins": 0,
-         "net_pct": -2.8788
+         "net_pct": -3.7768
         },
-        "buy_hold_pct": 115.6744
+        "buy_hold_pct": 104.5949
        },
        "returns_pct": [
         -0.3295814545454518,
@@ -2345,7 +2383,8 @@
         0.9780279021739129,
         -1.067667374999998,
         -0.8005120319148916,
-        -1.038508589552238
+        -1.038508589552238,
+        -0.9245778586956518
        ],
        "forward_trades": [
         {
@@ -2422,34 +2461,34 @@
          "ret_pct": -1.038508589552238,
          "r_multiple": -1.0385,
          "forward": true
-        }
-       ],
-       "recent_trades": [
+        },
         {
          "market": "XRP",
          "dir": "long",
-         "entry_date": "2026-06-15 00:00",
-         "exit_date": "2026-06-17 08:00",
-         "bars": 13,
-         "entry": 1780.0,
-         "exit": 1812.0935,
-         "units": 1072.4684359323387,
-         "neckline": 1780.0,
-         "pattern_low": 1641.0,
-         "pattern_low_date": "2026-06-10 20:00",
-         "bottom_date": "2026-06-06 04:00",
-         "stop_final": 1813.0,
+         "entry_date": "2026-11-03 16:00",
+         "exit_date": "2026-11-05 16:00",
+         "bars": 11,
+         "entry": 1714.0,
+         "exit": 1673.163,
+         "units": 3185.135213342181,
+         "neckline": 1714.0,
+         "pattern_low": 1668.0,
+         "pattern_low_date": "2026-11-02 16:00",
+         "bottom_date": "2026-10-30 00:00",
+         "stop_final": 1674.0,
          "stop_raises": 1,
          "reason": "trail",
          "entry_how": "pullback_limit",
-         "pnl": 32493.0623,
-         "fees": 1926.2034,
-         "mfe_pct": 8.9326,
-         "price_ret_pct": 1.803,
-         "ret_pct": 0.21796728956834655,
-         "r_multiple": 0.218,
-         "forward": false
-        },
+         "pnl": -135465.6528,
+         "fees": 5394.2861,
+         "mfe_pct": 4.9008,
+         "price_ret_pct": -2.3826,
+         "ret_pct": -0.9245778586956518,
+         "r_multiple": -0.9246,
+         "forward": true
+        }
+       ],
+       "recent_trades": [
         {
          "market": "XRP",
          "dir": "long",
@@ -2549,30 +2588,46 @@
          "ret_pct": -1.038508589552238,
          "r_multiple": -1.0385,
          "forward": true
+        },
+        {
+         "market": "XRP",
+         "dir": "long",
+         "entry_date": "2026-11-03 16:00",
+         "exit_date": "2026-11-05 16:00",
+         "bars": 11,
+         "entry": 1714.0,
+         "exit": 1673.163,
+         "units": 3185.135213342181,
+         "neckline": 1714.0,
+         "pattern_low": 1668.0,
+         "pattern_low_date": "2026-11-02 16:00",
+         "bottom_date": "2026-10-30 00:00",
+         "stop_final": 1674.0,
+         "stop_raises": 1,
+         "reason": "trail",
+         "entry_how": "pullback_limit",
+         "pnl": -135465.6528,
+         "fees": 5394.2861,
+         "mfe_pct": 4.9008,
+         "price_ret_pct": -2.3826,
+         "ret_pct": -0.9245778586956518,
+         "r_multiple": -0.9246,
+         "forward": true
         }
        ],
        "signal": {
-        "last_bar": "2026-11-05 08:00",
-        "close": 1775.0,
-        "atr": 25.19326219,
-        "phase": "long",
-        "position": "long",
-        "entry": 1714.0,
-        "entry_date": "2026-11-03 16:00",
-        "units": 3185.135213342181,
-        "stop": 1674.0,
-        "stop0": 1668.0,
-        "neckline": 1714.0,
-        "stop_distance_pct": -5.6901,
-        "unrealized_pct": 3.5589,
-        "stop_raises": 1,
-        "action": "보유 — 저가가 1,674 아래로 내려오면 청산"
+        "last_bar": "2026-11-05 16:00",
+        "close": 1692.0,
+        "atr": 28.86191912,
+        "phase": "scan",
+        "position": "flat",
+        "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
        }
       },
       "TRX": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-01 08:00 ~ 2026-11-05 08:00",
+        "period": "2023-11-01 16:00 ~ 2026-11-05 16:00",
         "days": 1100,
         "trades": 29,
         "wins": 12,
@@ -2607,7 +2662,7 @@
          "wins": 0,
          "net_pct": -1.0948
         },
-        "buy_hold_pct": 220.1493
+        "buy_hold_pct": 217.6471
        },
        "returns_pct": [
         -0.06948841666666834,
@@ -2795,9 +2850,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-05 08:00",
-        "close": 429.0,
-        "atr": 5.49607948,
+        "last_bar": "2026-11-05 16:00",
+        "close": 432.0,
+        "atr": 5.30271173,
         "phase": "scan",
         "position": "flat",
         "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
@@ -2806,7 +2861,7 @@
       "LINK": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-01 08:00 ~ 2026-11-05 08:00",
+        "period": "2023-11-01 16:00 ~ 2026-11-05 16:00",
         "days": 1100,
         "trades": 60,
         "wins": 21,
@@ -2841,7 +2896,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": 4.6527
+        "buy_hold_pct": -3.3399
        },
        "returns_pct": [
         0.1964139162561576,
@@ -3034,24 +3089,24 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-05 08:00",
-        "close": 15520.0,
-        "atr": 341.52317034,
+        "last_bar": "2026-11-05 16:00",
+        "close": 14760.0,
+        "atr": 383.24966123,
         "phase": "armed",
         "position": "flat",
         "neckline": 16090.0,
         "stop": 14340.0,
         "pattern_low_date": "2026-11-04 00:00",
         "bottom_date": "2026-10-30 00:00",
-        "neckline_distance_pct": 3.6727,
-        "bars_left": 25,
-        "action": "구조 확인 — 종가 16,090 위 + 거래량 2배면 돌파 (남은 25봉)"
+        "neckline_distance_pct": 9.0108,
+        "bars_left": 23,
+        "action": "구조 확인 — 종가 16,090 위 + 거래량 2배면 돌파 (남은 23봉)"
        }
       },
       "DOGE": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-01 08:00 ~ 2026-11-05 08:00",
+        "period": "2023-11-01 16:00 ~ 2026-11-05 16:00",
         "days": 1100,
         "trades": 34,
         "wins": 11,
@@ -3086,7 +3141,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": 13.0626
+        "buy_hold_pct": 6.3578
        },
        "returns_pct": [
         -0.616347325,
@@ -3253,9 +3308,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-05 08:00",
-        "close": 103.0,
-        "atr": 2.30948685,
+        "last_bar": "2026-11-05 16:00",
+        "close": 98.7,
+        "atr": 2.53656189,
         "phase": "scan",
         "position": "flat",
         "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
@@ -3272,22 +3327,22 @@
        "XRP"
       ],
       "stats": {
-       "period": "2023-11-01 08:00 ~ 2026-11-05 08:00",
+       "period": "2023-11-01 16:00 ~ 2026-11-05 16:00",
        "days": 1100,
-       "trades": 248,
+       "trades": 249,
        "wins": 90,
-       "win_rate_pct": 36.2903,
-       "net_pct": 129.53,
-       "realized_net_pct": 123.9837,
-       "cagr_pct": 31.7447,
+       "win_rate_pct": 36.1446,
+       "net_pct": 121.0913,
+       "realized_net_pct": 121.9126,
+       "cagr_pct": 30.1173,
        "max_drawdown_pct": -17.6277,
-       "profit_factor": 1.7681,
-       "avg_r": 0.3562,
-       "avg_hold_bars": 25.1008,
+       "profit_factor": 1.7457,
+       "avg_r": 0.351,
+       "avg_hold_bars": 25.0442,
        "stops": 46,
-       "trails": 202,
-       "avg_mfe_pct": 7.7507,
-       "avg_giveback_pct": 6.1436,
+       "trails": 203,
+       "avg_mfe_pct": 7.7393,
+       "avg_giveback_pct": 6.1482,
        "counts": {
         "setups": 1033,
         "fake_breaks": 0,
@@ -3300,12 +3355,12 @@
         "2023": 11.5025,
         "2024": 68.8366,
         "2025": 21.3427,
-        "2026": 0.4788
+        "2026": -3.2153
        },
        "forward": {
-        "trades": 10,
+        "trades": 11,
         "wins": 0,
-        "net_pct": -7.1502
+        "net_pct": -8.0088
        }
       },
       "returns_pct": [
@@ -3556,7 +3611,8 @@
        -0.011844603082691797,
        -1.0947699999999958,
        -1.0353940722386354,
-       -0.009461284114968032
+       -0.009461284114968032,
+       -0.924665343910952
       ],
       "open_positions": {
        "ETH": {
@@ -3564,13 +3620,6 @@
         "entry_date": "2026-11-04 12:00",
         "stop": 3000000.0,
         "units": 1.8665309112063864,
-        "capped": false
-       },
-       "XRP": {
-        "entry": 1714.0,
-        "entry_date": "2026-11-03 16:00",
-        "stop": 1674.0,
-        "units": 4869.671806197363,
         "capped": false
        }
       },
@@ -3824,9 +3873,34 @@
         "ret_pct": -0.009461284114968032,
         "r_multiple": -0.0095,
         "forward": true
+       },
+       {
+        "market": "XRP",
+        "dir": "long",
+        "entry_date": "2026-11-03 16:00",
+        "exit_date": "2026-11-05 16:00",
+        "bars": 11,
+        "entry": 1714.0,
+        "exit": 1673.163,
+        "units": 4869.671806197363,
+        "neckline": 1714.0,
+        "pattern_low": 1668.0,
+        "pattern_low_date": "2026-11-02 16:00",
+        "bottom_date": "2026-10-30 00:00",
+        "stop_final": 1674.0,
+        "stop_raises": 1,
+        "reason": "trail",
+        "entry_how": "pullback_limit",
+        "pnl": -207109.9736,
+        "fees": 8247.1861,
+        "mfe_pct": 4.9008,
+        "price_ret_pct": -2.3826,
+        "ret_pct": -0.924665343910952,
+        "r_multiple": -0.9247,
+        "forward": true
        }
       ],
-      "equity_now": 22953002.1804
+      "equity_now": 22109133.6008
      },
      "label": "거래량 조건 없음 (돌파만)"
     },
@@ -3835,7 +3909,7 @@
       "BTC": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-01 08:00 ~ 2026-11-05 08:00",
+        "period": "2023-11-01 16:00 ~ 2026-11-05 16:00",
         "days": 1100,
         "trades": 44,
         "wins": 21,
@@ -3870,7 +3944,7 @@
          "wins": 0,
          "net_pct": -1.0429
         },
-        "buy_hold_pct": 130.3418
+        "buy_hold_pct": 120.8857
        },
        "returns_pct": [
         -0.38558309505957367,
@@ -4073,9 +4147,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-05 08:00",
-        "close": 108157000.0,
-        "atr": 1139460.60033164,
+        "last_bar": "2026-11-05 16:00",
+        "close": 103792000.0,
+        "atr": 1368065.69179931,
         "phase": "scan",
         "position": "flat",
         "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
@@ -4084,14 +4158,14 @@
       "ETH": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-01 08:00 ~ 2026-11-05 08:00",
+        "period": "2023-11-01 16:00 ~ 2026-11-05 16:00",
         "days": 1100,
         "trades": 39,
         "wins": 17,
         "win_rate_pct": 43.5897,
-        "net_pct": 16.454,
+        "net_pct": 15.6217,
         "realized_net_pct": 16.4386,
-        "cagr_pct": 5.1844,
+        "cagr_pct": 4.9343,
         "max_drawdown_pct": -5.9605,
         "profit_factor": 2.1678,
         "avg_r": 0.4021,
@@ -4112,14 +4186,14 @@
          "2023": 0.6204,
          "2024": 10.5913,
          "2025": 4.5733,
-         "2026": 0.0752
+         "2026": -0.6401
         },
         "forward": {
          "trades": 1,
          "wins": 0,
          "net_pct": -1.0533
         },
-        "buy_hold_pct": 32.7088
+        "buy_hold_pct": 23.435
        },
        "returns_pct": [
         1.1984203434204606,
@@ -4317,9 +4391,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-05 08:00",
-        "close": 3258000.0,
-        "atr": 46160.0509479,
+        "last_bar": "2026-11-05 16:00",
+        "close": 3076000.0,
+        "atr": 54671.94598048,
         "phase": "long",
         "position": "long",
         "entry": 3254626.5,
@@ -4328,8 +4402,8 @@
         "stop": 3000000.0,
         "stop0": 3000000.0,
         "neckline": 3120000.0,
-        "stop_distance_pct": -7.919,
-        "unrealized_pct": 0.1037,
+        "stop_distance_pct": -2.4707,
+        "unrealized_pct": -5.4884,
         "stop_raises": 0,
         "action": "보유 — 저가가 3,000,000 아래로 내려오면 청산"
        }
@@ -4337,22 +4411,22 @@
       "XRP": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-01 08:00 ~ 2026-11-05 08:00",
+        "period": "2023-11-01 16:00 ~ 2026-11-05 16:00",
         "days": 1100,
-        "trades": 34,
+        "trades": 35,
         "wins": 13,
-        "win_rate_pct": 38.2353,
-        "net_pct": 21.0299,
-        "realized_net_pct": 20.0108,
-        "cagr_pct": 6.5382,
-        "max_drawdown_pct": -4.7536,
-        "profit_factor": 2.5211,
-        "avg_r": 0.5825,
-        "avg_hold_bars": 29.7059,
+        "win_rate_pct": 37.1429,
+        "net_pct": 18.8825,
+        "realized_net_pct": 18.8825,
+        "cagr_pct": 5.9072,
+        "max_drawdown_pct": -5.1431,
+        "profit_factor": 2.322,
+        "avg_r": 0.539,
+        "avg_hold_bars": 29.2,
         "stops": 4,
-        "trails": 30,
-        "avg_mfe_pct": 11.5624,
-        "avg_giveback_pct": 7.0623,
+        "trails": 31,
+        "avg_mfe_pct": 11.3515,
+        "avg_giveback_pct": 7.0672,
         "counts": {
          "setups": 200,
          "fake_breaks": 29,
@@ -4365,14 +4439,14 @@
          "2023": -0.4988,
          "2024": 17.2019,
          "2025": 5.5727,
-         "2026": -1.6944
+         "2026": -3.4386
         },
         "forward": {
-         "trades": 1,
+         "trades": 2,
          "wins": 0,
-         "net_pct": -0.8843
+         "net_pct": -1.8161
         },
-        "buy_hold_pct": 115.6744
+        "buy_hold_pct": 104.5949
        },
        "returns_pct": [
         -0.4988360353470946,
@@ -4408,7 +4482,8 @@
         0.13699636991292705,
         0.5193181501912053,
         0.25131995384776795,
-        -0.8843184677947653
+        -0.8843184677947653,
+        -0.9401427997407644
        ],
        "forward_trades": [
         {
@@ -4435,34 +4510,34 @@
          "ret_pct": -0.8843184677947653,
          "r_multiple": -0.8843,
          "forward": true
-        }
-       ],
-       "recent_trades": [
+        },
         {
          "market": "XRP",
          "dir": "long",
-         "entry_date": "2026-05-10 16:00",
-         "exit_date": "2026-05-13 12:00",
-         "bars": 16,
-         "entry": 2175.087,
-         "exit": 2103.9475,
-         "units": 1299.2327277028776,
-         "neckline": 2127.0,
-         "pattern_low": 2082.0,
-         "pattern_low_date": "2026-05-10 00:00",
-         "bottom_date": "2026-04-29 16:00",
-         "stop_final": 2105.0,
+         "entry_date": "2026-11-03 12:00",
+         "exit_date": "2026-11-05 16:00",
+         "bars": 12,
+         "entry": 1725.8625,
+         "exit": 1673.163,
+         "units": 2074.0681411723904,
+         "neckline": 1714.0,
+         "pattern_low": 1668.0,
+         "pattern_low_date": "2026-11-02 16:00",
+         "bottom_date": "2026-10-30 00:00",
+         "stop_final": 1674.0,
          "stop_raises": 1,
          "reason": "trail",
          "entry_how": "breakout_close",
-         "pnl": -95206.4975,
-         "fees": 2779.7308,
-         "mfe_pct": 1.4212,
-         "price_ret_pct": -3.2707,
-         "ret_pct": -0.7872099997851447,
-         "r_multiple": -0.7872,
-         "forward": false
-        },
+         "pnl": -112827.2593,
+         "fees": 3524.9053,
+         "mfe_pct": 4.1798,
+         "price_ret_pct": -3.0535,
+         "ret_pct": -0.9401427997407644,
+         "r_multiple": -0.9401,
+         "forward": true
+        }
+       ],
+       "recent_trades": [
         {
          "market": "XRP",
          "dir": "long",
@@ -4562,30 +4637,46 @@
          "ret_pct": -0.8843184677947653,
          "r_multiple": -0.8843,
          "forward": true
+        },
+        {
+         "market": "XRP",
+         "dir": "long",
+         "entry_date": "2026-11-03 12:00",
+         "exit_date": "2026-11-05 16:00",
+         "bars": 12,
+         "entry": 1725.8625,
+         "exit": 1673.163,
+         "units": 2074.0681411723904,
+         "neckline": 1714.0,
+         "pattern_low": 1668.0,
+         "pattern_low_date": "2026-11-02 16:00",
+         "bottom_date": "2026-10-30 00:00",
+         "stop_final": 1674.0,
+         "stop_raises": 1,
+         "reason": "trail",
+         "entry_how": "breakout_close",
+         "pnl": -112827.2593,
+         "fees": 3524.9053,
+         "mfe_pct": 4.1798,
+         "price_ret_pct": -3.0535,
+         "ret_pct": -0.9401427997407644,
+         "r_multiple": -0.9401,
+         "forward": true
         }
        ],
        "signal": {
-        "last_bar": "2026-11-05 08:00",
-        "close": 1775.0,
-        "atr": 25.19326219,
-        "phase": "long",
-        "position": "long",
-        "entry": 1725.8625,
-        "entry_date": "2026-11-03 12:00",
-        "units": 2074.0681411723904,
-        "stop": 1674.0,
-        "stop0": 1668.0,
-        "neckline": 1714.0,
-        "stop_distance_pct": -5.6901,
-        "unrealized_pct": 2.8471,
-        "stop_raises": 1,
-        "action": "보유 — 저가가 1,674 아래로 내려오면 청산"
+        "last_bar": "2026-11-05 16:00",
+        "close": 1692.0,
+        "atr": 28.86191912,
+        "phase": "scan",
+        "position": "flat",
+        "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
        }
       },
       "TRX": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-01 08:00 ~ 2026-11-05 08:00",
+        "period": "2023-11-01 16:00 ~ 2026-11-05 16:00",
         "days": 1100,
         "trades": 13,
         "wins": 6,
@@ -4620,7 +4711,7 @@
          "wins": 0,
          "net_pct": -1.0122
         },
-        "buy_hold_pct": 220.1493
+        "buy_hold_pct": 217.6471
        },
        "returns_pct": [
         -0.5884026435474691,
@@ -4792,9 +4883,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-05 08:00",
-        "close": 429.0,
-        "atr": 5.49607948,
+        "last_bar": "2026-11-05 16:00",
+        "close": 432.0,
+        "atr": 5.30271173,
         "phase": "scan",
         "position": "flat",
         "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
@@ -4803,7 +4894,7 @@
       "LINK": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-01 08:00 ~ 2026-11-05 08:00",
+        "period": "2023-11-01 16:00 ~ 2026-11-05 16:00",
         "days": 1100,
         "trades": 55,
         "wins": 19,
@@ -4838,7 +4929,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": 4.6527
+        "buy_hold_pct": -3.3399
        },
        "returns_pct": [
         -0.024902532011515086,
@@ -5026,24 +5117,24 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-05 08:00",
-        "close": 15520.0,
-        "atr": 341.52317034,
+        "last_bar": "2026-11-05 16:00",
+        "close": 14760.0,
+        "atr": 383.24966123,
         "phase": "armed",
         "position": "flat",
         "neckline": 16090.0,
         "stop": 14340.0,
         "pattern_low_date": "2026-11-04 00:00",
         "bottom_date": "2026-10-30 00:00",
-        "neckline_distance_pct": 3.6727,
-        "bars_left": 25,
-        "action": "구조 확인 — 종가 16,090 위 + 거래량 2배면 돌파 (남은 25봉)"
+        "neckline_distance_pct": 9.0108,
+        "bars_left": 23,
+        "action": "구조 확인 — 종가 16,090 위 + 거래량 2배면 돌파 (남은 23봉)"
        }
       },
       "DOGE": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-01 08:00 ~ 2026-11-05 08:00",
+        "period": "2023-11-01 16:00 ~ 2026-11-05 16:00",
         "days": 1100,
         "trades": 32,
         "wins": 14,
@@ -5078,7 +5169,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": 13.0626
+        "buy_hold_pct": 6.3578
        },
        "returns_pct": [
         -0.6530706113774076,
@@ -5243,9 +5334,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-05 08:00",
-        "close": 103.0,
-        "atr": 2.30948685,
+        "last_bar": "2026-11-05 16:00",
+        "close": 98.7,
+        "atr": 2.53656189,
         "phase": "scan",
         "position": "flat",
         "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
@@ -5262,22 +5353,22 @@
        "XRP"
       ],
       "stats": {
-       "period": "2023-11-01 08:00 ~ 2026-11-05 08:00",
+       "period": "2023-11-01 16:00 ~ 2026-11-05 16:00",
        "days": 1100,
-       "trades": 216,
+       "trades": 217,
        "wins": 89,
-       "win_rate_pct": 41.2037,
-       "net_pct": 112.5806,
-       "realized_net_pct": 110.744,
-       "cagr_pct": 28.4335,
+       "win_rate_pct": 41.0138,
+       "net_pct": 107.2632,
+       "realized_net_pct": 108.7416,
+       "cagr_pct": 27.3585,
        "max_drawdown_pct": -13.0902,
-       "profit_factor": 2.0554,
-       "avg_r": 0.3632,
-       "avg_hold_bars": 29.4769,
+       "profit_factor": 2.0169,
+       "avg_r": 0.3571,
+       "avg_hold_bars": 29.3963,
        "stops": 25,
-       "trails": 191,
-       "avg_mfe_pct": 8.8548,
-       "avg_giveback_pct": 7.163,
+       "trails": 192,
+       "avg_mfe_pct": 8.8332,
+       "avg_giveback_pct": 7.1633,
        "counts": {
         "setups": 994,
         "fake_breaks": 170,
@@ -5290,12 +5381,12 @@
         "2023": 4.5478,
         "2024": 59.7202,
         "2025": 19.7419,
-        "2026": 6.3171
+        "2026": 3.6577
        },
        "forward": {
-        "trades": 4,
+        "trades": 5,
         "wins": 0,
-        "net_pct": -3.9425
+        "net_pct": -4.8552
        }
       },
       "returns_pct": [
@@ -5514,7 +5605,8 @@
        -1.0429180318004831,
        -0.8936383836368036,
        -1.012231794908263,
-       -1.0532864315146557
+       -1.0532864315146557,
+       -0.9501506071649876
       ],
       "open_positions": {
        "ETH": {
@@ -5522,13 +5614,6 @@
         "entry_date": "2026-11-04 12:00",
         "stop": 3000000.0,
         "units": 0.8276593808324332,
-        "capped": false
-       },
-       "XRP": {
-        "entry": 1725.8625,
-        "entry_date": "2026-11-03 12:00",
-        "stop": 1674.0,
-        "units": 3680.922505802981,
         "capped": false
        }
       },
@@ -5632,9 +5717,34 @@
         "ret_pct": -1.0532864315146557,
         "r_multiple": -1.0533,
         "forward": true
+       },
+       {
+        "market": "XRP",
+        "dir": "long",
+        "entry_date": "2026-11-03 12:00",
+        "exit_date": "2026-11-05 16:00",
+        "bars": 12,
+        "entry": 1725.8625,
+        "exit": 1673.163,
+        "units": 3680.922505802981,
+        "neckline": 1714.0,
+        "pattern_low": 1668.0,
+        "pattern_low_date": "2026-11-02 16:00",
+        "bottom_date": "2026-10-30 00:00",
+        "stop_final": 1674.0,
+        "stop_raises": 1,
+        "reason": "trail",
+        "entry_how": "breakout_close",
+        "pnl": -200238.5503,
+        "fees": 6255.7747,
+        "mfe_pct": 4.1798,
+        "price_ret_pct": -3.0535,
+        "ret_pct": -0.9501506071649876,
+        "r_multiple": -0.9502,
+        "forward": true
        }
       ],
-      "equity_now": 21258064.5719
+      "equity_now": 20726320.6846
      },
      "label": "눌림 안 기다리고 돌파 봉 종가에 진입"
     }
@@ -5650,7 +5760,7 @@
     "BTC": {
      "bars": 6600,
      "stats": {
-      "period": "2023-11-01 12:00 ~ 2026-11-05 08:00",
+      "period": "2023-11-01 20:00 ~ 2026-11-05 16:00",
       "days": 1099,
       "trades": 36,
       "wins": 17,
@@ -5685,7 +5795,7 @@
        "wins": 0,
        "net_pct": -1.9925
       },
-      "buy_hold_pct": 134.4833
+      "buy_hold_pct": 115.4878
      },
      "returns_pct": [
       1.0776031328962437,
@@ -5905,9 +6015,9 @@
       }
      ],
      "signal": {
-      "last_bar": "2026-11-05 08:00",
-      "close": 80389.3,
-      "atr": 902.46492875,
+      "last_bar": "2026-11-05 16:00",
+      "close": 76322.1,
+      "atr": 1114.90384819,
       "phase": "scan",
       "position": "flat",
       "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
@@ -5916,15 +6026,15 @@
     "ETH": {
      "bars": 6600,
      "stats": {
-      "period": "2023-11-01 12:00 ~ 2026-11-05 08:00",
+      "period": "2023-11-01 20:00 ~ 2026-11-05 16:00",
       "days": 1099,
       "trades": 33,
       "wins": 12,
       "win_rate_pct": 36.3636,
-      "net_pct": 0.0695,
+      "net_pct": -0.5485,
       "realized_net_pct": 0.0695,
-      "cagr_pct": 0.0231,
-      "max_drawdown_pct": -4.9989,
+      "cagr_pct": -0.1825,
+      "max_drawdown_pct": -5.6832,
       "profit_factor": 1.0047,
       "avg_r": 0.0083,
       "avg_hold_bars": 20.0303,
@@ -5944,14 +6054,14 @@
        "2023": -0.5167,
        "2024": 4.4709,
        "2025": -2.1846,
-       "2026": -1.565
+       "2026": -2.173
       },
       "forward": {
        "trades": 2,
        "wins": 0,
        "net_pct": -1.9091
       },
-      "buy_hold_pct": 35.0467
+      "buy_hold_pct": 22.3745
      },
      "returns_pct": [
       -0.2796456012122281,
@@ -6168,47 +6278,42 @@
       }
      ],
      "signal": {
-      "last_bar": "2026-11-05 08:00",
-      "close": 2420.59,
-      "atr": 36.09264124,
-      "phase": "broken",
-      "position": "flat",
-      "neckline": 2318.09,
+      "last_bar": "2026-11-05 16:00",
+      "close": 2260.6,
+      "atr": 43.79718372,
+      "phase": "long",
+      "position": "long",
+      "entry": 2318.09,
+      "entry_date": "2026-11-05 12:00",
+      "units": 1.0750915581449159,
       "stop": 2225.01,
-      "pattern_low_date": "2026-11-04 00:00",
-      "bottom_date": "2026-10-30 00:00",
-      "neckline_distance_pct": -4.2345,
-      "bars_left": 7,
-      "breakout": {
-       "idx": 6594,
-       "date": "2026-11-04 12:00",
-       "vol_ratio": 4.8927,
-       "close": 2425.8
-      },
-      "units_if_fill": 1.074344649763645,
-      "notional_pct_if_fill": 24.9043,
-      "action": "돌파 확인 — 2,318 에 지정가 매수 대기, 손절 2,225 (남은 7봉)"
+      "stop0": 2225.01,
+      "neckline": 2318.09,
+      "stop_distance_pct": -1.5744,
+      "unrealized_pct": -2.4801,
+      "stop_raises": 0,
+      "action": "보유 — 저가가 2,225 아래로 내려오면 청산"
      }
     },
     "XRP": {
      "bars": 6600,
      "stats": {
-      "period": "2023-11-01 12:00 ~ 2026-11-05 08:00",
+      "period": "2023-11-01 20:00 ~ 2026-11-05 16:00",
       "days": 1099,
-      "trades": 24,
+      "trades": 25,
       "wins": 6,
-      "win_rate_pct": 25.0,
-      "net_pct": 4.7636,
-      "realized_net_pct": 3.5913,
-      "cagr_pct": 1.5576,
-      "max_drawdown_pct": -8.4161,
-      "profit_factor": 1.2773,
-      "avg_r": 0.1857,
-      "avg_hold_bars": 18.625,
+      "win_rate_pct": 24.0,
+      "net_pct": 2.6924,
+      "realized_net_pct": 2.6924,
+      "cagr_pct": 0.8863,
+      "max_drawdown_pct": -8.8833,
+      "profit_factor": 1.1944,
+      "avg_r": 0.1436,
+      "avg_hold_bars": 18.28,
       "stops": 8,
-      "trails": 16,
-      "avg_mfe_pct": 10.4162,
-      "avg_giveback_pct": 7.6655,
+      "trails": 17,
+      "avg_mfe_pct": 10.2147,
+      "avg_giveback_pct": 7.6777,
       "counts": {
        "setups": 206,
        "fake_breaks": 26,
@@ -6221,14 +6326,14 @@
        "2023": -2.0998,
        "2024": 10.796,
        "2025": -0.878,
-       "2026": -2.561
+       "2026": -4.4874
       },
       "forward": {
-       "trades": 1,
+       "trades": 2,
        "wins": 0,
-       "net_pct": -0.8105
+       "net_pct": -1.6713
       },
-      "buy_hold_pct": 120.9022
+      "buy_hold_pct": 104.1842
      },
      "returns_pct": [
       -1.085173958715588,
@@ -6254,7 +6359,8 @@
       -0.39225899126984115,
       -0.520310441358024,
       -1.0435928166666664,
-      -0.8105218096910073
+      -0.8105218096910073,
+      -0.8677896126582247
      ],
      "forward_trades": [
       {
@@ -6281,34 +6387,34 @@
        "ret_pct": -0.8105218096910073,
        "r_multiple": -0.8105,
        "forward": true
-      }
-     ],
-     "recent_trades": [
+      },
       {
        "market": "XRP",
        "dir": "long",
-       "entry_date": "2026-03-18 12:00",
-       "exit_date": "2026-03-19 12:00",
-       "bars": 5,
-       "entry": 1.4726,
-       "exit": 1.43438245,
-       "units": 1196.6862122884722,
-       "neckline": 1.4726,
-       "pattern_low": 1.3832,
-       "pattern_low_date": "2026-03-14 04:00",
-       "bottom_date": "2026-02-28 08:00",
-       "stop_final": 1.4351,
+       "entry_date": "2026-11-03 16:00",
+       "exit_date": "2026-11-05 12:00",
+       "bars": 10,
+       "entry": 1.2736,
+       "exit": 1.2405794,
+       "units": 2622.565157330691,
+       "neckline": 1.2736,
+       "pattern_low": 1.2341,
+       "pattern_low_date": "2026-11-02 16:00",
+       "bottom_date": "2026-10-30 00:00",
+       "stop_final": 1.2412,
        "stop_raises": 1,
        "reason": "trail",
        "entry_how": "pullback_limit",
-       "pnl": -47.4738,
-       "fees": 1.7394,
-       "mfe_pct": 1.1816,
-       "price_ret_pct": -2.5952,
-       "ret_pct": -0.44374766470916943,
-       "r_multiple": -0.4437,
-       "forward": false
-      },
+       "pnl": -89.8955,
+       "fees": 3.2968,
+       "mfe_pct": 5.3785,
+       "price_ret_pct": -2.5927,
+       "ret_pct": -0.8677896126582247,
+       "r_multiple": -0.8678,
+       "forward": true
+      }
+     ],
+     "recent_trades": [
       {
        "market": "XRP",
        "dir": "long",
@@ -6408,30 +6514,46 @@
        "ret_pct": -0.8105218096910073,
        "r_multiple": -0.8105,
        "forward": true
+      },
+      {
+       "market": "XRP",
+       "dir": "long",
+       "entry_date": "2026-11-03 16:00",
+       "exit_date": "2026-11-05 12:00",
+       "bars": 10,
+       "entry": 1.2736,
+       "exit": 1.2405794,
+       "units": 2622.565157330691,
+       "neckline": 1.2736,
+       "pattern_low": 1.2341,
+       "pattern_low_date": "2026-11-02 16:00",
+       "bottom_date": "2026-10-30 00:00",
+       "stop_final": 1.2412,
+       "stop_raises": 1,
+       "reason": "trail",
+       "entry_how": "pullback_limit",
+       "pnl": -89.8955,
+       "fees": 3.2968,
+       "mfe_pct": 5.3785,
+       "price_ret_pct": -2.5927,
+       "ret_pct": -0.8677896126582247,
+       "r_multiple": -0.8678,
+       "forward": true
       }
      ],
      "signal": {
-      "last_bar": "2026-11-05 08:00",
-      "close": 1.3183,
-      "atr": 0.02014355,
-      "phase": "long",
-      "position": "long",
-      "entry": 1.2736,
-      "entry_date": "2026-11-03 16:00",
-      "units": 2622.565157330691,
-      "stop": 1.2412,
-      "stop0": 1.2341,
-      "neckline": 1.2736,
-      "stop_distance_pct": -5.8484,
-      "unrealized_pct": 3.5097,
-      "stop_raises": 1,
-      "action": "보유 — 저가가 1.241 아래로 내려오면 청산"
+      "last_bar": "2026-11-05 16:00",
+      "close": 1.2434,
+      "atr": 0.02359206,
+      "phase": "scan",
+      "position": "flat",
+      "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
      }
     },
     "TRX": {
      "bars": 6600,
      "stats": {
-      "period": "2023-11-01 12:00 ~ 2026-11-05 08:00",
+      "period": "2023-11-01 20:00 ~ 2026-11-05 16:00",
       "days": 1099,
       "trades": 12,
       "wins": 3,
@@ -6466,7 +6588,7 @@
        "wins": 0,
        "net_pct": -1.0488
       },
-      "buy_hold_pct": 220.5373
+      "buy_hold_pct": 216.873
      },
      "returns_pct": [
       2.281070603197679,
@@ -6637,9 +6759,9 @@
       }
      ],
      "signal": {
-      "last_bar": "2026-11-05 08:00",
-      "close": 0.31855,
-      "atr": 0.0031102,
+      "last_bar": "2026-11-05 16:00",
+      "close": 0.31738,
+      "atr": 0.00309438,
       "phase": "scan",
       "position": "flat",
       "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
@@ -6648,7 +6770,7 @@
     "LINK": {
      "bars": 6600,
      "stats": {
-      "period": "2023-11-01 12:00 ~ 2026-11-05 08:00",
+      "period": "2023-11-01 20:00 ~ 2026-11-05 16:00",
       "days": 1099,
       "trades": 33,
       "wins": 8,
@@ -6668,7 +6790,7 @@
        "setups": 217,
        "fake_breaks": 49,
        "no_pullback": 19,
-       "stopped_before_entry": 136,
+       "stopped_before_entry": 137,
        "expired": 28,
        "ambiguous": 0
       },
@@ -6683,7 +6805,7 @@
        "wins": 0,
        "net_pct": -1.0415
       },
-      "buy_hold_pct": 6.5294
+      "buy_hold_pct": -6.8841
      },
      "returns_pct": [
       -0.15641725677757118,
@@ -6875,39 +6997,33 @@
       }
      ],
      "signal": {
-      "last_bar": "2026-11-05 08:00",
-      "close": 11.535,
-      "atr": 0.26588699,
-      "phase": "armed",
+      "last_bar": "2026-11-05 16:00",
+      "close": 10.848,
+      "atr": 0.30458051,
+      "phase": "scan",
       "position": "flat",
-      "neckline": 11.942,
-      "stop": 10.617,
-      "pattern_low_date": "2026-11-04 00:00",
-      "bottom_date": "2026-10-30 00:00",
-      "neckline_distance_pct": 3.5284,
-      "bars_left": 25,
-      "action": "구조 확인 — 종가 11.94 위 + 거래량 2배면 돌파 (남은 25봉)"
+      "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
      }
     },
     "DOGE": {
      "bars": 6600,
      "stats": {
-      "period": "2023-11-01 12:00 ~ 2026-11-05 08:00",
+      "period": "2023-11-01 20:00 ~ 2026-11-05 16:00",
       "days": 1099,
-      "trades": 18,
+      "trades": 19,
       "wins": 3,
-      "win_rate_pct": 16.6667,
-      "net_pct": -5.1585,
-      "realized_net_pct": -5.1668,
-      "cagr_pct": -1.7436,
-      "max_drawdown_pct": -8.9327,
-      "profit_factor": 0.5318,
-      "avg_r": -0.2889,
-      "avg_hold_bars": 14.2778,
-      "stops": 6,
+      "win_rate_pct": 15.7895,
+      "net_pct": -6.138,
+      "realized_net_pct": -6.138,
+      "cagr_pct": -2.0818,
+      "max_drawdown_pct": -9.7846,
+      "profit_factor": 0.4888,
+      "avg_r": -0.3276,
+      "avg_hold_bars": 13.7368,
+      "stops": 7,
       "trails": 12,
-      "avg_mfe_pct": 6.3223,
-      "avg_giveback_pct": 7.8028,
+      "avg_mfe_pct": 6.0601,
+      "avg_giveback_pct": 7.779,
       "counts": {
        "setups": 224,
        "fake_breaks": 37,
@@ -6920,14 +7036,14 @@
        "2023": 2.0817,
        "2024": 0.2644,
        "2025": -2.7962,
-       "2026": -4.672
+       "2026": -5.6565
       },
       "forward": {
-       "trades": 1,
+       "trades": 2,
        "wins": 0,
-       "net_pct": -1.0648
+       "net_pct": -2.078
       },
-      "buy_hold_pct": 16.1929
+      "buy_hold_pct": 5.2212
      },
      "returns_pct": [
       2.081711247079444,
@@ -6947,7 +7063,8 @@
       -0.6747023846499087,
       -0.4770834734133789,
       -0.6466520486111113,
-      -1.064767975409835
+      -1.064767975409835,
+      -1.0241521708515262
      ],
      "forward_trades": [
       {
@@ -6974,34 +7091,34 @@
        "ret_pct": -1.064767975409835,
        "r_multiple": -1.0648,
        "forward": true
-      }
-     ],
-     "recent_trades": [
+      },
       {
        "market": "DOGE",
        "dir": "long",
-       "entry_date": "2026-03-04 16:00",
-       "exit_date": "2026-03-06 08:00",
-       "bars": 9,
-       "entry": 0.09782,
-       "exit": 0.0925637,
-       "units": 10234.240959524119,
-       "neckline": 0.09782,
-       "pattern_low": 0.08823,
-       "pattern_low_date": "2026-03-03 20:00",
-       "bottom_date": "2026-02-28 08:00",
-       "stop_final": 0.09261,
-       "stop_raises": 1,
-       "reason": "trail",
+       "entry_date": "2026-11-04 16:00",
+       "exit_date": "2026-11-05 12:00",
+       "bars": 4,
+       "entry": 0.07681,
+       "exit": 0.07219389,
+       "units": 20705.93965322216,
+       "neckline": 0.07681,
+       "pattern_low": 0.07223,
+       "pattern_low_date": "2026-11-04 00:00",
+       "bottom_date": "2026-10-30 00:00",
+       "stop_final": 0.07223,
+       "stop_raises": 0,
+       "reason": "stop",
        "entry_how": "pullback_limit",
-       "pnl": -54.7685,
-       "fees": 0.9742,
-       "mfe_pct": 6.6142,
-       "price_ret_pct": -5.3734,
-       "ret_pct": -0.5580288683524506,
-       "r_multiple": -0.558,
-       "forward": false
-      },
+       "pnl": -97.1236,
+       "fees": 1.5426,
+       "mfe_pct": 1.341,
+       "price_ret_pct": -6.0098,
+       "ret_pct": -1.0241521708515262,
+       "r_multiple": -1.0242,
+       "forward": true
+      }
+     ],
+     "recent_trades": [
       {
        "market": "DOGE",
        "dir": "long",
@@ -7101,24 +7218,40 @@
        "ret_pct": -1.064767975409835,
        "r_multiple": -1.0648,
        "forward": true
+      },
+      {
+       "market": "DOGE",
+       "dir": "long",
+       "entry_date": "2026-11-04 16:00",
+       "exit_date": "2026-11-05 12:00",
+       "bars": 4,
+       "entry": 0.07681,
+       "exit": 0.07219389,
+       "units": 20705.93965322216,
+       "neckline": 0.07681,
+       "pattern_low": 0.07223,
+       "pattern_low_date": "2026-11-04 00:00",
+       "bottom_date": "2026-10-30 00:00",
+       "stop_final": 0.07223,
+       "stop_raises": 0,
+       "reason": "stop",
+       "entry_how": "pullback_limit",
+       "pnl": -97.1236,
+       "fees": 1.5426,
+       "mfe_pct": 1.341,
+       "price_ret_pct": -6.0098,
+       "ret_pct": -1.0241521708515262,
+       "r_multiple": -1.0242,
+       "forward": true
       }
      ],
      "signal": {
-      "last_bar": "2026-11-05 08:00",
-      "close": 0.07685,
-      "atr": 0.00130374,
-      "phase": "long",
-      "position": "long",
-      "entry": 0.07681,
-      "entry_date": "2026-11-04 16:00",
-      "units": 20705.93965322216,
-      "stop": 0.07223,
-      "stop0": 0.07223,
-      "neckline": 0.07681,
-      "stop_distance_pct": -6.0117,
-      "unrealized_pct": 0.0521,
-      "stop_raises": 0,
-      "action": "보유 — 저가가 0.07223 아래로 내려오면 청산"
+      "last_bar": "2026-11-05 16:00",
+      "close": 0.07255,
+      "atr": 0.0015393,
+      "phase": "scan",
+      "position": "flat",
+      "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
      }
     }
    },
@@ -7132,27 +7265,27 @@
      "XRP"
     ],
     "stats": {
-     "period": "2023-11-01 12:00 ~ 2026-11-05 08:00",
+     "period": "2023-11-01 20:00 ~ 2026-11-05 16:00",
      "days": 1099,
-     "trades": 156,
+     "trades": 158,
      "wins": 49,
-     "win_rate_pct": 31.4103,
-     "net_pct": 9.5555,
-     "realized_net_pct": 8.3202,
-     "cagr_pct": 3.0774,
-     "max_drawdown_pct": -12.9292,
-     "profit_factor": 1.12,
-     "avg_r": 0.062,
-     "avg_hold_bars": 19.6538,
-     "stops": 35,
-     "trails": 121,
-     "avg_mfe_pct": 6.6905,
-     "avg_giveback_pct": 6.2,
+     "win_rate_pct": 31.0127,
+     "net_pct": 5.6018,
+     "realized_net_pct": 6.2709,
+     "cagr_pct": 1.8267,
+     "max_drawdown_pct": -14.8627,
+     "profit_factor": 1.0878,
+     "avg_r": 0.0492,
+     "avg_hold_bars": 19.4937,
+     "stops": 36,
+     "trails": 122,
+     "avg_mfe_pct": 6.6483,
+     "avg_giveback_pct": 6.2185,
      "counts": {
       "setups": 1267,
       "fake_breaks": 249,
       "no_pullback": 108,
-      "stopped_before_entry": 792,
+      "stopped_before_entry": 793,
       "expired": 207,
       "ambiguous": 0
      },
@@ -7160,12 +7293,12 @@
       "2023": 7.4312,
       "2024": 13.4921,
       "2025": -5.0634,
-      "2026": -5.3535
+      "2026": -8.7691
      },
      "forward": {
-      "trades": 8,
+      "trades": 10,
       "wins": 0,
-      "net_pct": -6.0559
+      "net_pct": -7.8332
      }
     },
     "returns_pct": [
@@ -7324,21 +7457,16 @@
      -0.8513671402742706,
      -0.8285494013366933,
      -1.0710978988042248,
-     -1.0487724650590529
+     -1.0487724650590529,
+     -0.8677896126582247,
+     -1.0331174568284422
     ],
     "open_positions": {
-     "XRP": {
-      "entry": 1.2736,
-      "entry_date": "2026-11-03 16:00",
-      "stop": 1.2412,
-      "units": 2742.2841491395066,
-      "capped": false
-     },
-     "DOGE": {
-      "entry": 0.07681,
-      "entry_date": "2026-11-04 16:00",
-      "stop": 0.07223,
-      "units": 23650.703906334224,
+     "ETH": {
+      "entry": 2318.09,
+      "entry_date": "2026-11-05 12:00",
+      "stop": 2225.01,
+      "units": 1.1637325299850756,
       "capped": false
      }
     },
@@ -7542,9 +7670,59 @@
       "ret_pct": -1.0487724650590529,
       "r_multiple": -1.0488,
       "forward": true
+     },
+     {
+      "market": "XRP",
+      "dir": "long",
+      "entry_date": "2026-11-03 16:00",
+      "exit_date": "2026-11-05 12:00",
+      "bars": 10,
+      "entry": 1.2736,
+      "exit": 1.2405794,
+      "units": 2742.2841491395066,
+      "neckline": 1.2736,
+      "pattern_low": 1.2341,
+      "pattern_low_date": "2026-11-02 16:00",
+      "bottom_date": "2026-10-30 00:00",
+      "stop_final": 1.2412,
+      "stop_raises": 1,
+      "reason": "trail",
+      "entry_how": "pullback_limit",
+      "pnl": -93.9992,
+      "fees": 3.4473,
+      "mfe_pct": 5.3785,
+      "price_ret_pct": -2.5927,
+      "ret_pct": -0.8677896126582247,
+      "r_multiple": -0.8678,
+      "forward": true
+     },
+     {
+      "market": "DOGE",
+      "dir": "long",
+      "entry_date": "2026-11-04 16:00",
+      "exit_date": "2026-11-05 12:00",
+      "bars": 4,
+      "entry": 0.07681,
+      "exit": 0.07219389,
+      "units": 23650.703906334224,
+      "neckline": 0.07681,
+      "pattern_low": 0.07223,
+      "pattern_low_date": "2026-11-04 00:00",
+      "bottom_date": "2026-10-30 00:00",
+      "stop_final": 0.07223,
+      "stop_raises": 0,
+      "reason": "stop",
+      "entry_how": "pullback_limit",
+      "pnl": -110.9364,
+      "fees": 1.762,
+      "mfe_pct": 1.341,
+      "price_ret_pct": -6.0098,
+      "ret_pct": -1.0331174568284422,
+      "r_multiple": -1.0331,
+      "forward": true
      }
     ],
-    "equity_now": 10955.5485
+    "equity_now": 10560.1838
    },
    "variants": {
     "no_vol": {
@@ -7552,7 +7730,7 @@
       "BTC": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-01 12:00 ~ 2026-11-05 08:00",
+        "period": "2023-11-01 20:00 ~ 2026-11-05 16:00",
         "days": 1099,
         "trades": 67,
         "wins": 26,
@@ -7587,7 +7765,7 @@
          "wins": 0,
          "net_pct": -2.816
         },
-        "buy_hold_pct": 134.4833
+        "buy_hold_pct": 115.4878
        },
        "returns_pct": [
         1.0776031328962437,
@@ -7863,9 +8041,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-05 08:00",
-        "close": 80389.3,
-        "atr": 902.46492875,
+        "last_bar": "2026-11-05 16:00",
+        "close": 76322.1,
+        "atr": 1114.90384819,
         "phase": "scan",
         "position": "flat",
         "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
@@ -7874,15 +8052,15 @@
       "ETH": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-01 12:00 ~ 2026-11-05 08:00",
+        "period": "2023-11-01 20:00 ~ 2026-11-05 16:00",
         "days": 1099,
         "trades": 54,
         "wins": 14,
         "win_rate_pct": 25.9259,
-        "net_pct": -7.4117,
+        "net_pct": -8.9858,
         "realized_net_pct": -8.4201,
-        "cagr_pct": -2.5251,
-        "max_drawdown_pct": -12.4024,
+        "cagr_pct": -3.0787,
+        "max_drawdown_pct": -13.0334,
         "profit_factor": 0.6224,
         "avg_r": -0.159,
         "avg_hold_bars": 15.463,
@@ -7902,14 +8080,14 @@
          "2023": 0.0825,
          "2024": -3.3715,
          "2025": -2.4002,
-         "2026": -1.9056
+         "2026": -3.5734
         },
         "forward": {
          "trades": 3,
          "wins": 0,
          "net_pct": -2.9961
         },
-        "buy_hold_pct": 35.0467
+        "buy_hold_pct": 22.3745
        },
        "returns_pct": [
         0.6023978807747148,
@@ -8172,9 +8350,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-05 08:00",
-        "close": 2420.59,
-        "atr": 36.09264124,
+        "last_bar": "2026-11-05 16:00",
+        "close": 2260.6,
+        "atr": 43.79718372,
         "phase": "long",
         "position": "long",
         "entry": 2318.09,
@@ -8183,8 +8361,8 @@
         "stop": 2225.01,
         "stop0": 2225.01,
         "neckline": 2318.09,
-        "stop_distance_pct": -8.0798,
-        "unrealized_pct": 4.4217,
+        "stop_distance_pct": -1.5744,
+        "unrealized_pct": -2.4801,
         "stop_raises": 0,
         "action": "보유 — 저가가 2,225 아래로 내려오면 청산"
        }
@@ -8192,22 +8370,22 @@
       "XRP": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-01 12:00 ~ 2026-11-05 08:00",
+        "period": "2023-11-01 20:00 ~ 2026-11-05 16:00",
         "days": 1099,
-        "trades": 40,
+        "trades": 41,
         "wins": 16,
-        "win_rate_pct": 40.0,
-        "net_pct": 25.5992,
-        "realized_net_pct": 24.1938,
-        "cagr_pct": 7.8638,
-        "max_drawdown_pct": -6.0963,
-        "profit_factor": 2.3001,
-        "avg_r": 0.5784,
-        "avg_hold_bars": 26.6,
+        "win_rate_pct": 39.0244,
+        "net_pct": 23.116,
+        "realized_net_pct": 23.116,
+        "cagr_pct": 7.1508,
+        "max_drawdown_pct": -6.5753,
+        "profit_factor": 2.1741,
+        "avg_r": 0.5431,
+        "avg_hold_bars": 26.1951,
         "stops": 8,
-        "trails": 32,
-        "avg_mfe_pct": 12.0198,
-        "avg_giveback_pct": 7.7471,
+        "trails": 33,
+        "avg_mfe_pct": 11.8579,
+        "avg_giveback_pct": 7.7526,
         "counts": {
          "setups": 205,
          "fake_breaks": 0,
@@ -8220,14 +8398,14 @@
          "2023": -2.0807,
          "2024": 20.3906,
          "2025": 5.5939,
-         "2026": 0.8991
+         "2026": -1.0957
         },
         "forward": {
-         "trades": 3,
+         "trades": 4,
          "wins": 0,
-         "net_pct": -2.4971
+         "net_pct": -3.3432
         },
-        "buy_hold_pct": 120.9022
+        "buy_hold_pct": 104.1842
        },
        "returns_pct": [
         -1.085173958715588,
@@ -8269,7 +8447,8 @@
         5.449397106707331,
         -0.6623762194029839,
         -0.8105218096910073,
-        -1.044875161046508
+        -1.044875161046508,
+        -0.8677896126582245
        ],
        "forward_trades": [
         {
@@ -8346,34 +8525,34 @@
          "ret_pct": -1.044875161046508,
          "r_multiple": -1.0449,
          "forward": true
-        }
-       ],
-       "recent_trades": [
+        },
         {
          "market": "XRP",
          "dir": "long",
-         "entry_date": "2026-05-30 04:00",
-         "exit_date": "2026-06-01 12:00",
-         "bars": 13,
-         "entry": 1.338,
-         "exit": 1.2923535,
-         "units": 2712.573840936583,
-         "neckline": 1.338,
-         "pattern_low": 1.293,
-         "pattern_low_date": "2026-05-29 12:00",
-         "bottom_date": "2026-05-28 04:00",
-         "stop_final": 1.293,
-         "stop_raises": 0,
-         "reason": "stop",
+         "entry_date": "2026-11-03 16:00",
+         "exit_date": "2026-11-05 12:00",
+         "bars": 10,
+         "entry": 1.2736,
+         "exit": 1.2405794,
+         "units": 3144.1457587260793,
+         "neckline": 1.2736,
+         "pattern_low": 1.2341,
+         "pattern_low_date": "2026-11-02 16:00",
+         "bottom_date": "2026-10-30 00:00",
+         "stop_final": 1.2412,
+         "stop_raises": 1,
+         "reason": "trail",
          "entry_how": "pullback_limit",
-         "pnl": -127.387,
-         "fees": 3.5675,
-         "mfe_pct": 1.1211,
-         "price_ret_pct": -3.4115,
-         "ret_pct": -1.0435928166666664,
-         "r_multiple": -1.0436,
-         "forward": false
-        },
+         "pnl": -107.7741,
+         "fees": 3.9525,
+         "mfe_pct": 5.3785,
+         "price_ret_pct": -2.5927,
+         "ret_pct": -0.8677896126582245,
+         "r_multiple": -0.8678,
+         "forward": true
+        }
+       ],
+       "recent_trades": [
         {
          "market": "XRP",
          "dir": "long",
@@ -8473,30 +8652,46 @@
          "ret_pct": -1.044875161046508,
          "r_multiple": -1.0449,
          "forward": true
+        },
+        {
+         "market": "XRP",
+         "dir": "long",
+         "entry_date": "2026-11-03 16:00",
+         "exit_date": "2026-11-05 12:00",
+         "bars": 10,
+         "entry": 1.2736,
+         "exit": 1.2405794,
+         "units": 3144.1457587260793,
+         "neckline": 1.2736,
+         "pattern_low": 1.2341,
+         "pattern_low_date": "2026-11-02 16:00",
+         "bottom_date": "2026-10-30 00:00",
+         "stop_final": 1.2412,
+         "stop_raises": 1,
+         "reason": "trail",
+         "entry_how": "pullback_limit",
+         "pnl": -107.7741,
+         "fees": 3.9525,
+         "mfe_pct": 5.3785,
+         "price_ret_pct": -2.5927,
+         "ret_pct": -0.8677896126582245,
+         "r_multiple": -0.8678,
+         "forward": true
         }
        ],
        "signal": {
-        "last_bar": "2026-11-05 08:00",
-        "close": 1.3183,
-        "atr": 0.02014355,
-        "phase": "long",
-        "position": "long",
-        "entry": 1.2736,
-        "entry_date": "2026-11-03 16:00",
-        "units": 3144.1457587260793,
-        "stop": 1.2412,
-        "stop0": 1.2341,
-        "neckline": 1.2736,
-        "stop_distance_pct": -5.8484,
-        "unrealized_pct": 3.5097,
-        "stop_raises": 1,
-        "action": "보유 — 저가가 1.241 아래로 내려오면 청산"
+        "last_bar": "2026-11-05 16:00",
+        "close": 1.2434,
+        "atr": 0.02359206,
+        "phase": "scan",
+        "position": "flat",
+        "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
        }
       },
       "TRX": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-01 12:00 ~ 2026-11-05 08:00",
+        "period": "2023-11-01 20:00 ~ 2026-11-05 16:00",
         "days": 1099,
         "trades": 50,
         "wins": 20,
@@ -8531,7 +8726,7 @@
          "wins": 0,
          "net_pct": -2.745
         },
-        "buy_hold_pct": 220.5373
+        "buy_hold_pct": 216.873
        },
        "returns_pct": [
         0.14461613492063288,
@@ -8790,9 +8985,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-05 08:00",
-        "close": 0.31855,
-        "atr": 0.0031102,
+        "last_bar": "2026-11-05 16:00",
+        "close": 0.31738,
+        "atr": 0.00309438,
         "phase": "scan",
         "position": "flat",
         "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
@@ -8801,7 +8996,7 @@
       "LINK": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-01 12:00 ~ 2026-11-05 08:00",
+        "period": "2023-11-01 20:00 ~ 2026-11-05 16:00",
         "days": 1099,
         "trades": 57,
         "wins": 19,
@@ -8821,7 +9016,7 @@
          "setups": 211,
          "fake_breaks": 0,
          "no_pullback": 14,
-         "stopped_before_entry": 124,
+         "stopped_before_entry": 125,
          "expired": 15,
          "ambiguous": 0
         },
@@ -8836,7 +9031,7 @@
          "wins": 0,
          "net_pct": -2.0773
         },
-        "buy_hold_pct": 6.5294
+        "buy_hold_pct": -6.8841
        },
        "returns_pct": [
         -0.15641725677757118,
@@ -9077,39 +9272,33 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-05 08:00",
-        "close": 11.535,
-        "atr": 0.26588699,
-        "phase": "armed",
+        "last_bar": "2026-11-05 16:00",
+        "close": 10.848,
+        "atr": 0.30458051,
+        "phase": "scan",
         "position": "flat",
-        "neckline": 11.942,
-        "stop": 10.617,
-        "pattern_low_date": "2026-11-04 00:00",
-        "bottom_date": "2026-10-30 00:00",
-        "neckline_distance_pct": 3.5284,
-        "bars_left": 25,
-        "action": "구조 확인 — 종가 11.94 위 + 거래량 2배면 돌파 (남은 25봉)"
+        "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
        }
       },
       "DOGE": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-01 12:00 ~ 2026-11-05 08:00",
+        "period": "2023-11-01 20:00 ~ 2026-11-05 16:00",
         "days": 1099,
-        "trades": 46,
+        "trades": 47,
         "wins": 13,
-        "win_rate_pct": 28.2609,
-        "net_pct": -2.2699,
-        "realized_net_pct": -2.2784,
-        "cagr_pct": -0.7597,
-        "max_drawdown_pct": -14.6788,
-        "profit_factor": 0.9116,
-        "avg_r": -0.04,
-        "avg_hold_bars": 16.3261,
-        "stops": 13,
+        "win_rate_pct": 27.6596,
+        "net_pct": -3.2792,
+        "realized_net_pct": -3.2792,
+        "cagr_pct": -1.1013,
+        "max_drawdown_pct": -15.477,
+        "profit_factor": 0.8775,
+        "avg_r": -0.0609,
+        "avg_hold_bars": 16.0638,
+        "stops": 14,
         "trails": 33,
-        "avg_mfe_pct": 7.9224,
-        "avg_giveback_pct": 7.8431,
+        "avg_mfe_pct": 7.7823,
+        "avg_giveback_pct": 7.8327,
         "counts": {
          "setups": 224,
          "fake_breaks": 0,
@@ -9122,14 +9311,14 @@
          "2023": 2.0817,
          "2024": 4.9178,
          "2025": 1.9563,
-         "2026": -10.5012
+         "2026": -11.4256
         },
         "forward": {
-         "trades": 3,
+         "trades": 4,
          "wins": 0,
-         "net_pct": -2.4789
+         "net_pct": -3.4777
         },
-        "buy_hold_pct": 16.1929
+        "buy_hold_pct": 5.2212
        },
        "returns_pct": [
         2.081711247079444,
@@ -9177,7 +9366,8 @@
         -1.0521069352589647,
         -1.0670622028795773,
         -1.064767975409835,
-        -0.3662102158018895
+        -0.3662102158018895,
+        -1.024152170851526
        ],
        "forward_trades": [
         {
@@ -9254,34 +9444,34 @@
          "ret_pct": -0.3662102158018895,
          "r_multiple": -0.3662,
          "forward": true
-        }
-       ],
-       "recent_trades": [
+        },
         {
          "market": "DOGE",
          "dir": "long",
-         "entry_date": "2026-08-12 04:00",
-         "exit_date": "2026-08-14 08:00",
-         "bars": 12,
-         "entry": 0.07144,
-         "exit": 0.06941527,
-         "units": 31459.93610631363,
-         "neckline": 0.07144,
-         "pattern_low": 0.0682,
-         "pattern_low_date": "2026-08-06 12:00",
-         "bottom_date": "2026-08-01 16:00",
-         "stop_final": 0.06945,
-         "stop_raises": 2,
-         "reason": "trail",
+         "entry_date": "2026-11-04 16:00",
+         "exit_date": "2026-11-05 12:00",
+         "bars": 4,
+         "entry": 0.07681,
+         "exit": 0.07219389,
+         "units": 21336.587345619304,
+         "neckline": 0.07681,
+         "pattern_low": 0.07223,
+         "pattern_low_date": "2026-11-04 00:00",
+         "bottom_date": "2026-10-30 00:00",
+         "stop_final": 0.07223,
+         "stop_raises": 0,
+         "reason": "stop",
          "entry_how": "pullback_limit",
-         "pnl": -65.9134,
-         "fees": 2.2156,
-         "mfe_pct": 1.1898,
-         "price_ret_pct": -2.8342,
-         "ret_pct": -0.6466520486111113,
-         "r_multiple": -0.6467,
-         "forward": false
-        },
+         "pnl": -100.0818,
+         "fees": 1.5896,
+         "mfe_pct": 1.341,
+         "price_ret_pct": -6.0098,
+         "ret_pct": -1.024152170851526,
+         "r_multiple": -1.0242,
+         "forward": true
+        }
+       ],
+       "recent_trades": [
         {
          "market": "DOGE",
          "dir": "long",
@@ -9381,24 +9571,40 @@
          "ret_pct": -0.3662102158018895,
          "r_multiple": -0.3662,
          "forward": true
+        },
+        {
+         "market": "DOGE",
+         "dir": "long",
+         "entry_date": "2026-11-04 16:00",
+         "exit_date": "2026-11-05 12:00",
+         "bars": 4,
+         "entry": 0.07681,
+         "exit": 0.07219389,
+         "units": 21336.587345619304,
+         "neckline": 0.07681,
+         "pattern_low": 0.07223,
+         "pattern_low_date": "2026-11-04 00:00",
+         "bottom_date": "2026-10-30 00:00",
+         "stop_final": 0.07223,
+         "stop_raises": 0,
+         "reason": "stop",
+         "entry_how": "pullback_limit",
+         "pnl": -100.0818,
+         "fees": 1.5896,
+         "mfe_pct": 1.341,
+         "price_ret_pct": -6.0098,
+         "ret_pct": -1.024152170851526,
+         "r_multiple": -1.0242,
+         "forward": true
         }
        ],
        "signal": {
-        "last_bar": "2026-11-05 08:00",
-        "close": 0.07685,
-        "atr": 0.00130374,
-        "phase": "long",
-        "position": "long",
-        "entry": 0.07681,
-        "entry_date": "2026-11-04 16:00",
-        "units": 21336.587345619304,
-        "stop": 0.07223,
-        "stop0": 0.07223,
-        "neckline": 0.07681,
-        "stop_distance_pct": -6.0117,
-        "unrealized_pct": 0.0521,
-        "stop_raises": 0,
-        "action": "보유 — 저가가 0.07223 아래로 내려오면 청산"
+        "last_bar": "2026-11-05 16:00",
+        "close": 0.07255,
+        "atr": 0.0015393,
+        "phase": "scan",
+        "position": "flat",
+        "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
        }
       }
      },
@@ -9412,27 +9618,27 @@
        "XRP"
       ],
       "stats": {
-       "period": "2023-11-01 12:00 ~ 2026-11-05 08:00",
+       "period": "2023-11-01 20:00 ~ 2026-11-05 16:00",
        "days": 1099,
-       "trades": 305,
+       "trades": 307,
        "wins": 104,
-       "win_rate_pct": 34.0984,
-       "net_pct": 32.6283,
-       "realized_net_pct": 29.7205,
-       "cagr_pct": 9.8323,
-       "max_drawdown_pct": -18.4167,
-       "profit_factor": 1.1993,
-       "avg_r": 0.0981,
-       "avg_hold_bars": 19.6557,
-       "stops": 67,
-       "trails": 238,
-       "avg_mfe_pct": 6.2932,
-       "avg_giveback_pct": 5.7087,
+       "win_rate_pct": 33.8762,
+       "net_pct": 26.4651,
+       "realized_net_pct": 27.2663,
+       "cagr_pct": 8.1102,
+       "max_drawdown_pct": -19.7234,
+       "profit_factor": 1.1799,
+       "avg_r": 0.0912,
+       "avg_hold_bars": 19.5733,
+       "stops": 68,
+       "trails": 239,
+       "avg_mfe_pct": 6.2741,
+       "avg_giveback_pct": 5.7214,
        "counts": {
         "setups": 1273,
         "fake_breaks": 0,
         "no_pullback": 75,
-        "stopped_before_entry": 729,
+        "stopped_before_entry": 730,
         "expired": 142,
         "ambiguous": 0
        },
@@ -9440,12 +9646,12 @@
         "2023": 5.0146,
         "2024": 25.4283,
         "2025": 11.5197,
-        "2026": -9.7101
+        "2026": -13.9058
        },
        "forward": {
-        "trades": 14,
+        "trades": 16,
         "wins": 0,
-        "net_pct": -9.5436
+        "net_pct": -11.255
        }
       },
       "returns_pct": [
@@ -9753,7 +9959,9 @@
        -0.5105151579514627,
        -0.37131121054388994,
        -1.0487724650590529,
-       -1.1081976803868236
+       -1.1081976803868236,
+       -0.8677896126582247,
+       -1.033117456828442
       ],
       "open_positions": {
        "ETH": {
@@ -9761,20 +9969,6 @@
         "entry_date": "2026-11-04 12:00",
         "stop": 2225.01,
         "units": 1.3936453809753384,
-        "capped": false
-       },
-       "XRP": {
-        "entry": 1.2736,
-        "entry_date": "2026-11-03 16:00",
-        "stop": 1.2412,
-        "units": 3284.0635964856733,
-        "capped": false
-       },
-       "DOGE": {
-        "entry": 0.07681,
-        "entry_date": "2026-11-04 16:00",
-        "stop": 0.07223,
-        "units": 28323.25590855554,
         "capped": false
        }
       },
@@ -10128,9 +10322,59 @@
         "ret_pct": -1.1081976803868236,
         "r_multiple": -1.1082,
         "forward": true
+       },
+       {
+        "market": "XRP",
+        "dir": "long",
+        "entry_date": "2026-11-03 16:00",
+        "exit_date": "2026-11-05 12:00",
+        "bars": 10,
+        "entry": 1.2736,
+        "exit": 1.2405794,
+        "units": 3284.0635964856733,
+        "neckline": 1.2736,
+        "pattern_low": 1.2341,
+        "pattern_low_date": "2026-11-02 16:00",
+        "bottom_date": "2026-10-30 00:00",
+        "stop_final": 1.2412,
+        "stop_raises": 1,
+        "reason": "trail",
+        "entry_how": "pullback_limit",
+        "pnl": -112.5701,
+        "fees": 4.1284,
+        "mfe_pct": 5.3785,
+        "price_ret_pct": -2.5927,
+        "ret_pct": -0.8677896126582247,
+        "r_multiple": -0.8678,
+        "forward": true
+       },
+       {
+        "market": "DOGE",
+        "dir": "long",
+        "entry_date": "2026-11-04 16:00",
+        "exit_date": "2026-11-05 12:00",
+        "bars": 4,
+        "entry": 0.07681,
+        "exit": 0.07219389,
+        "units": 28323.25590855554,
+        "neckline": 0.07681,
+        "pattern_low": 0.07223,
+        "pattern_low_date": "2026-11-04 00:00",
+        "bottom_date": "2026-10-30 00:00",
+        "stop_final": 0.07223,
+        "stop_raises": 0,
+        "reason": "stop",
+        "entry_how": "pullback_limit",
+        "pnl": -132.8535,
+        "fees": 2.1101,
+        "mfe_pct": 1.341,
+        "price_ret_pct": -6.0098,
+        "ret_pct": -1.033117456828442,
+        "r_multiple": -1.0331,
+        "forward": true
        }
       ],
-      "equity_now": 13262.8304
+      "equity_now": 12646.5069
      },
      "label": "거래량 조건 없음 (돌파만)"
     },
@@ -10139,7 +10383,7 @@
       "BTC": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-01 12:00 ~ 2026-11-05 08:00",
+        "period": "2023-11-01 20:00 ~ 2026-11-05 16:00",
         "days": 1099,
         "trades": 49,
         "wins": 24,
@@ -10174,7 +10418,7 @@
          "wins": 0,
          "net_pct": -1.9991
         },
-        "buy_hold_pct": 134.4833
+        "buy_hold_pct": 115.4878
        },
        "returns_pct": [
         0.977755207652353,
@@ -10407,9 +10651,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-05 08:00",
-        "close": 80389.3,
-        "atr": 902.46492875,
+        "last_bar": "2026-11-05 16:00",
+        "close": 76322.1,
+        "atr": 1114.90384819,
         "phase": "scan",
         "position": "flat",
         "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
@@ -10418,15 +10662,15 @@
       "ETH": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-01 12:00 ~ 2026-11-05 08:00",
+        "period": "2023-11-01 20:00 ~ 2026-11-05 16:00",
         "days": 1099,
         "trades": 46,
         "wins": 23,
         "win_rate_pct": 50.0,
-        "net_pct": 7.4554,
+        "net_pct": 6.6041,
         "realized_net_pct": 7.4896,
-        "cagr_pct": 2.4169,
-        "max_drawdown_pct": -4.4981,
+        "cagr_pct": 2.1467,
+        "max_drawdown_pct": -4.5422,
         "profit_factor": 1.4719,
         "avg_r": 0.162,
         "avg_hold_bars": 25.413,
@@ -10446,14 +10690,14 @@
          "2023": 0.6331,
          "2024": 6.6322,
          "2025": 2.3856,
-         "2026": -2.1951
+         "2026": -2.97
         },
         "forward": {
          "trades": 2,
          "wins": 0,
          "net_pct": -1.889
         },
-        "buy_hold_pct": 35.0467
+        "buy_hold_pct": 22.3745
        },
        "returns_pct": [
         1.209678391741385,
@@ -10683,9 +10927,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-05 08:00",
-        "close": 2420.59,
-        "atr": 36.09264124,
+        "last_bar": "2026-11-05 16:00",
+        "close": 2260.6,
+        "atr": 43.79718372,
         "phase": "long",
         "position": "long",
         "entry": 2427.0129,
@@ -10694,8 +10938,8 @@
         "stop": 2225.01,
         "stop0": 2225.01,
         "neckline": 2318.09,
-        "stop_distance_pct": -8.0798,
-        "unrealized_pct": -0.2646,
+        "stop_distance_pct": -1.5744,
+        "unrealized_pct": -6.8567,
         "stop_raises": 0,
         "action": "보유 — 저가가 2,225 아래로 내려오면 청산"
        }
@@ -10703,22 +10947,22 @@
       "XRP": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-01 12:00 ~ 2026-11-05 08:00",
+        "period": "2023-11-01 20:00 ~ 2026-11-05 16:00",
         "days": 1099,
-        "trades": 42,
+        "trades": 43,
         "wins": 13,
-        "win_rate_pct": 30.9524,
-        "net_pct": 15.5322,
-        "realized_net_pct": 14.6136,
-        "cagr_pct": 4.9119,
+        "win_rate_pct": 30.2326,
+        "net_pct": 13.5954,
+        "realized_net_pct": 13.5954,
+        "cagr_pct": 4.3245,
         "max_drawdown_pct": -5.5834,
-        "profit_factor": 1.8497,
-        "avg_r": 0.3539,
-        "avg_hold_bars": 25.119,
+        "profit_factor": 1.7463,
+        "avg_r": 0.325,
+        "avg_hold_bars": 24.7907,
         "stops": 8,
-        "trails": 34,
-        "avg_mfe_pct": 11.7945,
-        "avg_giveback_pct": 8.9191,
+        "trails": 35,
+        "avg_mfe_pct": 11.6314,
+        "avg_giveback_pct": 8.896,
         "counts": {
          "setups": 201,
          "fake_breaks": 26,
@@ -10731,14 +10975,14 @@
          "2023": -2.072,
          "2024": 10.9216,
          "2025": 3.7066,
-         "2026": 2.5589
+         "2026": 0.8397
         },
         "forward": {
-         "trades": 1,
+         "trades": 2,
          "wins": 0,
-         "net_pct": -0.8145
+         "net_pct": -1.6956
         },
-        "buy_hold_pct": 120.9022
+        "buy_hold_pct": 104.1842
        },
        "returns_pct": [
         -1.0627982966530372,
@@ -10782,7 +11026,8 @@
         0.39702594930488605,
         4.721457381233141,
         -0.25997798210481554,
-        -0.8144960761152469
+        -0.8144960761152469,
+        -0.8883466177864375
        ],
        "forward_trades": [
         {
@@ -10809,34 +11054,34 @@
          "ret_pct": -0.8144960761152469,
          "r_multiple": -0.8145,
          "forward": true
-        }
-       ],
-       "recent_trades": [
+        },
         {
          "market": "XRP",
          "dir": "long",
-         "entry_date": "2026-06-15 08:00",
-         "exit_date": "2026-06-17 08:00",
+         "entry_date": "2026-11-03 12:00",
+         "exit_date": "2026-11-05 12:00",
          "bars": 11,
-         "entry": 1.232616,
-         "exit": 1.203398,
-         "units": 758.3356958064077,
-         "neckline": 1.186,
-         "pattern_low": 1.087,
-         "pattern_low_date": "2026-06-10 20:00",
-         "bottom_date": "2026-06-06 04:00",
-         "stop_final": 1.204,
+         "entry": 1.2808401,
+         "exit": 1.2405794,
+         "units": 2452.1467403440724,
+         "neckline": 1.2736,
+         "pattern_low": 1.2341,
+         "pattern_low_date": "2026-11-02 16:00",
+         "bottom_date": "2026-10-30 00:00",
+         "stop_final": 1.2412,
          "stop_raises": 1,
          "reason": "trail",
          "entry_how": "breakout_close",
-         "pnl": -23.0807,
-         "fees": 0.9237,
-         "mfe_pct": 4.8177,
-         "price_ret_pct": -2.3704,
-         "ret_pct": -0.20901554087462895,
-         "r_multiple": -0.209,
-         "forward": false
-        },
+         "pnl": -101.8166,
+         "fees": 3.0914,
+         "mfe_pct": 4.7828,
+         "price_ret_pct": -3.1433,
+         "ret_pct": -0.8883466177864375,
+         "r_multiple": -0.8883,
+         "forward": true
+        }
+       ],
+       "recent_trades": [
         {
          "market": "XRP",
          "dir": "long",
@@ -10936,30 +11181,46 @@
          "ret_pct": -0.8144960761152469,
          "r_multiple": -0.8145,
          "forward": true
+        },
+        {
+         "market": "XRP",
+         "dir": "long",
+         "entry_date": "2026-11-03 12:00",
+         "exit_date": "2026-11-05 12:00",
+         "bars": 11,
+         "entry": 1.2808401,
+         "exit": 1.2405794,
+         "units": 2452.1467403440724,
+         "neckline": 1.2736,
+         "pattern_low": 1.2341,
+         "pattern_low_date": "2026-11-02 16:00",
+         "bottom_date": "2026-10-30 00:00",
+         "stop_final": 1.2412,
+         "stop_raises": 1,
+         "reason": "trail",
+         "entry_how": "breakout_close",
+         "pnl": -101.8166,
+         "fees": 3.0914,
+         "mfe_pct": 4.7828,
+         "price_ret_pct": -3.1433,
+         "ret_pct": -0.8883466177864375,
+         "r_multiple": -0.8883,
+         "forward": true
         }
        ],
        "signal": {
-        "last_bar": "2026-11-05 08:00",
-        "close": 1.3183,
-        "atr": 0.02014355,
-        "phase": "long",
-        "position": "long",
-        "entry": 1.2808401,
-        "entry_date": "2026-11-03 12:00",
-        "units": 2452.1467403440724,
-        "stop": 1.2412,
-        "stop0": 1.2341,
-        "neckline": 1.2736,
-        "stop_distance_pct": -5.8484,
-        "unrealized_pct": 2.9246,
-        "stop_raises": 1,
-        "action": "보유 — 저가가 1.241 아래로 내려오면 청산"
+        "last_bar": "2026-11-05 16:00",
+        "close": 1.2434,
+        "atr": 0.02359206,
+        "phase": "scan",
+        "position": "flat",
+        "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
        }
       },
       "TRX": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-01 12:00 ~ 2026-11-05 08:00",
+        "period": "2023-11-01 20:00 ~ 2026-11-05 16:00",
         "days": 1099,
         "trades": 34,
         "wins": 14,
@@ -10994,7 +11255,7 @@
          "wins": 0,
          "net_pct": -1.0178
         },
-        "buy_hold_pct": 220.5373
+        "buy_hold_pct": 216.873
        },
        "returns_pct": [
         -0.1035961017591492,
@@ -11187,9 +11448,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-05 08:00",
-        "close": 0.31855,
-        "atr": 0.0031102,
+        "last_bar": "2026-11-05 16:00",
+        "close": 0.31738,
+        "atr": 0.00309438,
         "phase": "scan",
         "position": "flat",
         "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
@@ -11198,7 +11459,7 @@
       "LINK": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-01 12:00 ~ 2026-11-05 08:00",
+        "period": "2023-11-01 20:00 ~ 2026-11-05 16:00",
         "days": 1099,
         "trades": 48,
         "wins": 16,
@@ -11218,7 +11479,7 @@
          "setups": 206,
          "fake_breaks": 43,
          "no_pullback": 0,
-         "stopped_before_entry": 130,
+         "stopped_before_entry": 131,
          "expired": 27,
          "ambiguous": 0
         },
@@ -11233,7 +11494,7 @@
          "wins": 0,
          "net_pct": -1.021
         },
-        "buy_hold_pct": 6.5294
+        "buy_hold_pct": -6.8841
        },
        "returns_pct": [
         -0.4153166992018541,
@@ -11440,39 +11701,33 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-05 08:00",
-        "close": 11.535,
-        "atr": 0.26588699,
-        "phase": "armed",
+        "last_bar": "2026-11-05 16:00",
+        "close": 10.848,
+        "atr": 0.30458051,
+        "phase": "scan",
         "position": "flat",
-        "neckline": 11.942,
-        "stop": 10.617,
-        "pattern_low_date": "2026-11-04 00:00",
-        "bottom_date": "2026-10-30 00:00",
-        "neckline_distance_pct": 3.5284,
-        "bars_left": 25,
-        "action": "구조 확인 — 종가 11.94 위 + 거래량 2배면 돌파 (남은 25봉)"
+        "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
        }
       },
       "DOGE": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-01 12:00 ~ 2026-11-05 08:00",
+        "period": "2023-11-01 20:00 ~ 2026-11-05 16:00",
         "days": 1099,
-        "trades": 33,
+        "trades": 34,
         "wins": 16,
-        "win_rate_pct": 48.4848,
-        "net_pct": 1.3152,
-        "realized_net_pct": 1.4104,
-        "cagr_pct": 0.4349,
+        "win_rate_pct": 47.0588,
+        "net_pct": 0.3742,
+        "realized_net_pct": 0.3742,
+        "cagr_pct": 0.1241,
         "max_drawdown_pct": -6.2516,
-        "profit_factor": 1.1049,
-        "avg_r": 0.0478,
-        "avg_hold_bars": 20.5152,
-        "stops": 7,
+        "profit_factor": 1.0259,
+        "avg_r": 0.0164,
+        "avg_hold_bars": 20.0588,
+        "stops": 8,
         "trails": 26,
-        "avg_mfe_pct": 12.9671,
-        "avg_giveback_pct": 11.0222,
+        "avg_mfe_pct": 12.6242,
+        "avg_giveback_pct": 10.9317,
         "counts": {
          "setups": 222,
          "fake_breaks": 35,
@@ -11485,14 +11740,14 @@
          "2023": 0.7809,
          "2024": 4.1266,
          "2025": 0.2039,
-         "2026": -3.6504
+         "2026": -4.5453
         },
         "forward": {
-         "trades": 2,
+         "trades": 3,
          "wins": 0,
-         "net_pct": -2.0684
+         "net_pct": -3.069
         },
-        "buy_hold_pct": 16.1929
+        "buy_hold_pct": 5.2212
        },
        "returns_pct": [
         0.7809108748610829,
@@ -11527,7 +11782,8 @@
         2.2395182409335486,
         0.3968006883845303,
         -1.0546914711269304,
-        -1.0244660195860886
+        -1.0244660195860886,
+        -1.0217462217902973
        ],
        "forward_trades": [
         {
@@ -11579,34 +11835,34 @@
          "ret_pct": -1.0244660195860886,
          "r_multiple": -1.0245,
          "forward": true
-        }
-       ],
-       "recent_trades": [
+        },
         {
          "market": "DOGE",
          "dir": "long",
-         "entry_date": "2026-08-11 20:00",
-         "exit_date": "2026-08-14 08:00",
-         "bars": 14,
-         "entry": 0.07189593,
-         "exit": 0.06941527,
-         "units": 27485.59701732611,
-         "neckline": 0.07144,
-         "pattern_low": 0.0682,
-         "pattern_low_date": "2026-08-06 12:00",
-         "bottom_date": "2026-08-01 16:00",
-         "stop_final": 0.06945,
-         "stop_raises": 2,
-         "reason": "trail",
+         "entry_date": "2026-11-04 12:00",
+         "exit_date": "2026-11-05 12:00",
+         "bars": 5,
+         "entry": 0.07732864,
+         "exit": 0.07219389,
+         "units": 19889.66753174146,
+         "neckline": 0.07681,
+         "pattern_low": 0.07223,
+         "pattern_low_date": "2026-11-04 00:00",
+         "bottom_date": "2026-10-30 00:00",
+         "stop_final": 0.07223,
+         "stop_raises": 0,
+         "reason": "stop",
          "entry_how": "breakout_close",
-         "pnl": -70.1243,
-         "fees": 1.942,
-         "mfe_pct": 1.7304,
-         "price_ret_pct": -3.4503,
-         "ret_pct": -0.6903027390940829,
-         "r_multiple": -0.6903,
-         "forward": false
-        },
+         "pnl": -103.6156,
+         "fees": 1.487,
+         "mfe_pct": 1.3079,
+         "price_ret_pct": -6.6402,
+         "ret_pct": -1.0217462217902973,
+         "r_multiple": -1.0217,
+         "forward": true
+        }
+       ],
+       "recent_trades": [
         {
          "market": "DOGE",
          "dir": "long",
@@ -11706,24 +11962,40 @@
          "ret_pct": -1.0244660195860886,
          "r_multiple": -1.0245,
          "forward": true
+        },
+        {
+         "market": "DOGE",
+         "dir": "long",
+         "entry_date": "2026-11-04 12:00",
+         "exit_date": "2026-11-05 12:00",
+         "bars": 5,
+         "entry": 0.07732864,
+         "exit": 0.07219389,
+         "units": 19889.66753174146,
+         "neckline": 0.07681,
+         "pattern_low": 0.07223,
+         "pattern_low_date": "2026-11-04 00:00",
+         "bottom_date": "2026-10-30 00:00",
+         "stop_final": 0.07223,
+         "stop_raises": 0,
+         "reason": "stop",
+         "entry_how": "breakout_close",
+         "pnl": -103.6156,
+         "fees": 1.487,
+         "mfe_pct": 1.3079,
+         "price_ret_pct": -6.6402,
+         "ret_pct": -1.0217462217902973,
+         "r_multiple": -1.0217,
+         "forward": true
         }
        ],
        "signal": {
-        "last_bar": "2026-11-05 08:00",
-        "close": 0.07685,
-        "atr": 0.00130374,
-        "phase": "long",
-        "position": "long",
-        "entry": 0.07732864,
-        "entry_date": "2026-11-04 12:00",
-        "units": 19889.66753174146,
-        "stop": 0.07223,
-        "stop0": 0.07223,
-        "neckline": 0.07681,
-        "stop_distance_pct": -6.0117,
-        "unrealized_pct": -0.619,
-        "stop_raises": 0,
-        "action": "보유 — 저가가 0.07223 아래로 내려오면 청산"
+        "last_bar": "2026-11-05 16:00",
+        "close": 0.07255,
+        "atr": 0.0015393,
+        "phase": "scan",
+        "position": "flat",
+        "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
        }
       }
      },
@@ -11737,27 +12009,27 @@
        "XRP"
       ],
       "stats": {
-       "period": "2023-11-01 12:00 ~ 2026-11-05 08:00",
+       "period": "2023-11-01 20:00 ~ 2026-11-05 16:00",
        "days": 1099,
-       "trades": 251,
+       "trades": 253,
        "wins": 105,
-       "win_rate_pct": 41.8327,
-       "net_pct": 52.0387,
-       "realized_net_pct": 51.0181,
-       "cagr_pct": 14.9293,
+       "win_rate_pct": 41.502,
+       "net_pct": 46.8894,
+       "realized_net_pct": 48.1335,
+       "cagr_pct": 13.6216,
        "max_drawdown_pct": -17.0901,
-       "profit_factor": 1.4738,
-       "avg_r": 0.1732,
-       "avg_hold_bars": 24.9004,
-       "stops": 35,
-       "trails": 216,
-       "avg_mfe_pct": 8.4243,
-       "avg_giveback_pct": 7.1584,
+       "profit_factor": 1.4354,
+       "avg_r": 0.1642,
+       "avg_hold_bars": 24.7668,
+       "stops": 36,
+       "trails": 217,
+       "avg_mfe_pct": 8.3818,
+       "avg_giveback_pct": 7.1645,
        "counts": {
         "setups": 1223,
         "fake_breaks": 230,
         "no_pullback": 0,
-        "stopped_before_entry": 769,
+        "stopped_before_entry": 770,
         "expired": 197,
         "ambiguous": 0
        },
@@ -11765,12 +12037,12 @@
         "2023": 3.1175,
         "2024": 45.1157,
         "2025": 3.07,
-        "2026": -1.4232
+        "2026": -4.7618
        },
        "forward": {
-        "trades": 9,
+        "trades": 11,
         "wins": 0,
-        "net_pct": -6.9271
+        "net_pct": -8.7048
        }
       },
       "returns_pct": [
@@ -12024,7 +12296,9 @@
        -0.8323431397071077,
        -1.0488188618606835,
        -1.0353247003245958,
-       -1.0284613651996362
+       -1.0284613651996362,
+       -0.8883466177864375,
+       -1.030904224602168
       ],
       "open_positions": {
        "ETH": {
@@ -12032,20 +12306,6 @@
         "entry_date": "2026-11-04 12:00",
         "stop": 2225.01,
         "units": 0.7476036557002135,
-        "capped": false
-       },
-       "XRP": {
-        "entry": 1.2808401,
-        "entry_date": "2026-11-03 12:00",
-        "stop": 1.2412,
-        "units": 3231.0180445066317,
-        "capped": false
-       },
-       "DOGE": {
-        "entry": 0.07732864,
-        "entry_date": "2026-11-04 12:00",
-        "stop": 0.07223,
-        "units": 29619.26286337744,
         "capped": false
        }
       },
@@ -12274,9 +12534,59 @@
         "ret_pct": -1.0284613651996362,
         "r_multiple": -1.0285,
         "forward": true
+       },
+       {
+        "market": "XRP",
+        "dir": "long",
+        "entry_date": "2026-11-03 12:00",
+        "exit_date": "2026-11-05 12:00",
+        "bars": 11,
+        "entry": 1.2808401,
+        "exit": 1.2405794,
+        "units": 3231.0180445066317,
+        "neckline": 1.2736,
+        "pattern_low": 1.2341,
+        "pattern_low_date": "2026-11-02 16:00",
+        "bottom_date": "2026-10-30 00:00",
+        "stop_final": 1.2412,
+        "stop_raises": 1,
+        "reason": "trail",
+        "entry_how": "breakout_close",
+        "pnl": -134.1564,
+        "fees": 4.0734,
+        "mfe_pct": 4.7828,
+        "price_ret_pct": -3.1433,
+        "ret_pct": -0.8883466177864375,
+        "r_multiple": -0.8883,
+        "forward": true
+       },
+       {
+        "market": "DOGE",
+        "dir": "long",
+        "entry_date": "2026-11-04 12:00",
+        "exit_date": "2026-11-05 12:00",
+        "bars": 5,
+        "entry": 0.07732864,
+        "exit": 0.07219389,
+        "units": 29619.26286337744,
+        "neckline": 0.07681,
+        "pattern_low": 0.07223,
+        "pattern_low_date": "2026-11-04 00:00",
+        "bottom_date": "2026-10-30 00:00",
+        "stop_final": 0.07223,
+        "stop_raises": 0,
+        "reason": "stop",
+        "entry_how": "breakout_close",
+        "pnl": -154.3022,
+        "fees": 2.2144,
+        "mfe_pct": 1.3079,
+        "price_ret_pct": -6.6402,
+        "ret_pct": -1.030904224602168,
+        "r_multiple": -1.0309,
+        "forward": true
        }
       ],
-      "equity_now": 15203.8654
+      "equity_now": 14688.9412
      },
      "label": "눌림 안 기다리고 돌파 봉 종가에 진입"
     }
@@ -12288,85 +12598,84 @@
   "ok": true,
   "markets": 12,
   "upbit": {
-   "portfolio_net_pct": 130.7364,
-   "cagr_pct": 31.9741,
+   "portfolio_net_pct": 124.7763,
+   "cagr_pct": 30.833,
    "max_drawdown_pct": -9.907,
-   "trades": 145,
-   "win_rate_pct": 35.8621,
-   "profit_factor": 2.55,
+   "trades": 146,
+   "win_rate_pct": 35.6164,
+   "profit_factor": 2.4864,
    "phases": {
     "BTC": "scan",
-    "ETH": "broken",
-    "XRP": "long",
+    "ETH": "long",
+    "XRP": "scan",
     "TRX": "scan",
     "LINK": "armed",
     "DOGE": "scan"
    },
    "open": [
-    "XRP"
+    "ETH"
    ],
-   "forward_trades": 3,
-   "forward_net_pct": -2.931,
+   "forward_trades": 4,
+   "forward_net_pct": -3.8284,
    "variants": {
     "no_vol": {
-     "portfolio_net_pct": 129.53,
-     "cagr_pct": 31.7447,
+     "portfolio_net_pct": 121.0913,
+     "cagr_pct": 30.1173,
      "max_drawdown_pct": -17.6277,
-     "trades": 248,
-     "win_rate_pct": 36.2903,
-     "forward_trades": 10,
-     "forward_net_pct": -7.1502
+     "trades": 249,
+     "win_rate_pct": 36.1446,
+     "forward_trades": 11,
+     "forward_net_pct": -8.0088
     },
     "break_entry": {
-     "portfolio_net_pct": 112.5806,
-     "cagr_pct": 28.4335,
+     "portfolio_net_pct": 107.2632,
+     "cagr_pct": 27.3585,
      "max_drawdown_pct": -13.0902,
-     "trades": 216,
-     "win_rate_pct": 41.2037,
-     "forward_trades": 4,
-     "forward_net_pct": -3.9425
+     "trades": 217,
+     "win_rate_pct": 41.0138,
+     "forward_trades": 5,
+     "forward_net_pct": -4.8552
     }
    }
   },
   "okx": {
-   "portfolio_net_pct": 9.5555,
-   "cagr_pct": 3.0774,
-   "max_drawdown_pct": -12.9292,
-   "trades": 156,
-   "win_rate_pct": 31.4103,
-   "profit_factor": 1.12,
+   "portfolio_net_pct": 5.6018,
+   "cagr_pct": 1.8267,
+   "max_drawdown_pct": -14.8627,
+   "trades": 158,
+   "win_rate_pct": 31.0127,
+   "profit_factor": 1.0878,
    "phases": {
     "BTC": "scan",
-    "ETH": "broken",
-    "XRP": "long",
+    "ETH": "long",
+    "XRP": "scan",
     "TRX": "scan",
-    "LINK": "armed",
-    "DOGE": "long"
+    "LINK": "scan",
+    "DOGE": "scan"
    },
    "open": [
-    "XRP",
-    "DOGE"
+    "ETH"
    ],
-   "forward_trades": 8,
-   "forward_net_pct": -6.0559,
+   "forward_trades": 10,
+   "forward_net_pct": -7.8332,
    "variants": {
     "no_vol": {
-     "portfolio_net_pct": 32.6283,
-     "cagr_pct": 9.8323,
-     "max_drawdown_pct": -18.4167,
-     "trades": 305,
-     "win_rate_pct": 34.0984,
-     "forward_trades": 14,
-     "forward_net_pct": -9.5436
+     "portfolio_net_pct": 26.4651,
+     "cagr_pct": 8.1102,
+     "max_drawdown_pct": -19.7234,
+     "trades": 307,
+     "win_rate_pct": 33.8762,
+     "forward_trades": 16,
+     "forward_net_pct": -11.255
     },
     "break_entry": {
-     "portfolio_net_pct": 52.0387,
-     "cagr_pct": 14.9293,
+     "portfolio_net_pct": 46.8894,
+     "cagr_pct": 13.6216,
      "max_drawdown_pct": -17.0901,
-     "trades": 251,
-     "win_rate_pct": 41.8327,
-     "forward_trades": 9,
-     "forward_net_pct": -6.9271
+     "trades": 253,
+     "win_rate_pct": 41.502,
+     "forward_trades": 11,
+     "forward_net_pct": -8.7048
     }
    }
   }
