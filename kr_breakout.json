@@ -1,6 +1,6 @@
 {
  "date": "2026-11-06",
- "generated_at_utc": "2026-11-05T15:02:21Z",
+ "generated_at_utc": "2026-11-06T07:16:13Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -74,15 +74,15 @@
   }
  },
  "forward": {
-  "days": 22,
+  "days": 23,
   "from": "2026-10-05",
-  "to": "2026-11-05",
-  "codes": 292,
+  "to": "2026-11-06",
+  "codes": 297,
   "bar_errors": 0,
   "stale_codes": 0,
   "by_source": {
-   "yahoo": 141,
-   "yahoo+naver_api": 151
+   "yahoo": 231,
+   "yahoo+naver_api": 66
   },
   "skipped_days": [
    "2026-10-05"
@@ -95,270 +95,143 @@
  "signals_today": {
   "base": [
    {
-    "code": "128940",
-    "name": "Hanmi Pharmaceutical Co., Ltd.",
-    "group": "Pharmaceuticals: Major",
-    "pattern": "flag",
-    "patterns": [
-     "box",
-     "flag"
-    ],
-    "signal_close": 465000.0,
-    "pattern_low": 403000.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 502200 이상이면 포기)",
-    "stop_plan": "max(403000, 진입가×0.93)"
-   },
-   {
-    "code": "326030",
-    "name": "SK Biopharmaceuticals Co., Ltd.",
-    "group": "Pharmaceuticals: Major",
-    "pattern": "cup_handle",
-    "patterns": [
-     "box",
-     "cup_handle"
-    ],
-    "signal_close": 90600.0,
-    "pattern_low": 74500.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 97848 이상이면 포기)",
-    "stop_plan": "max(74500, 진입가×0.93)"
-   },
-   {
-    "code": "0126Z0",
-    "name": "Samsung Epis Holdings Co., Ltd.",
-    "group": "Pharmaceuticals: Major",
-    "pattern": "triangle",
-    "patterns": [
-     "box",
-     "triangle"
-    ],
-    "signal_close": 367000.0,
-    "pattern_low": 303500.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 396360 이상이면 포기)",
-    "stop_plan": "max(303500, 진입가×0.93)"
-   }
-  ],
-  "no_sector": [
-   {
-    "code": "068270",
-    "name": "Celltrion, Inc.",
-    "group": "Biotechnology",
-    "pattern": "cup_handle",
-    "patterns": [
-     "box",
-     "cup_handle"
-    ],
-    "signal_close": 215000.0,
-    "pattern_low": 187500.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 232200 이상이면 포기)",
-    "stop_plan": "max(187500, 진입가×0.93)"
-   },
-   {
-    "code": "128940",
-    "name": "Hanmi Pharmaceutical Co., Ltd.",
-    "group": "Pharmaceuticals: Major",
-    "pattern": "flag",
-    "patterns": [
-     "box",
-     "flag"
-    ],
-    "signal_close": 465000.0,
-    "pattern_low": 403000.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 502200 이상이면 포기)",
-    "stop_plan": "max(403000, 진입가×0.93)"
-   },
-   {
-    "code": "003490",
-    "name": "Korean Air Lines Co., Ltd.",
-    "group": "Airlines",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 30350.0,
-    "pattern_low": 25100.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 32778 이상이면 포기)",
-    "stop_plan": "max(25100, 진입가×0.93)"
-   },
-   {
-    "code": "326030",
-    "name": "SK Biopharmaceuticals Co., Ltd.",
-    "group": "Pharmaceuticals: Major",
-    "pattern": "cup_handle",
-    "patterns": [
-     "box",
-     "cup_handle"
-    ],
-    "signal_close": 90600.0,
-    "pattern_low": 74500.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 97848 이상이면 포기)",
-    "stop_plan": "max(74500, 진입가×0.93)"
-   },
-   {
-    "code": "0126Z0",
-    "name": "Samsung Epis Holdings Co., Ltd.",
-    "group": "Pharmaceuticals: Major",
-    "pattern": "triangle",
-    "patterns": [
-     "box",
-     "triangle"
-    ],
-    "signal_close": 367000.0,
-    "pattern_low": 303500.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 396360 이상이면 포기)",
-    "stop_plan": "max(303500, 진입가×0.93)"
-   },
-   {
-    "code": "259960",
-    "name": "Krafton, Inc.",
+    "code": "035420",
+    "name": "NAVER Corp.",
     "group": "Packaged Software",
     "pattern": "box",
     "patterns": [
      "box"
     ],
-    "signal_close": 221000.0,
-    "pattern_low": 178500.0,
+    "signal_close": 190200.0,
+    "pattern_low": 166000.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 205416 이상이면 포기)",
+    "stop_plan": "max(166000, 진입가×0.93)"
+   }
+  ],
+  "no_sector": [
+   {
+    "code": "035420",
+    "name": "NAVER Corp.",
+    "group": "Packaged Software",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 190200.0,
+    "pattern_low": 166000.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 205416 이상이면 포기)",
+    "stop_plan": "max(166000, 진입가×0.93)"
+   },
+   {
+    "code": "089860",
+    "name": "LOTTE rental co., ltd.",
+    "group": "Finance/Rental/Leasing",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 58400.0,
+    "pattern_low": 47250.0,
     "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 238680 이상이면 포기)",
-    "stop_plan": "max(178500, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 63072 이상이면 포기)",
+    "stop_plan": "max(47250, 진입가×0.93)"
+   },
+   {
+    "code": "030200",
+    "name": "KT Corporation",
+    "group": "Major Telecommunications",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 53300.0,
+    "pattern_low": 44600.0,
+    "sync_by": null,
+    "entry_plan": "내일 시가 (시가가 57564 이상이면 포기)",
+    "stop_plan": "max(44600, 진입가×0.93)"
+   },
+   {
+    "code": "032640",
+    "name": "LG Uplus Corp",
+    "group": "Major Telecommunications",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 16760.0,
+    "pattern_low": 13640.0,
+    "sync_by": null,
+    "entry_plan": "내일 시가 (시가가 18101 이상이면 포기)",
+    "stop_plan": "max(13640, 진입가×0.93)"
+   },
+   {
+    "code": "181710",
+    "name": "NHN Corporation",
+    "group": "Internet Software/Services",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 59200.0,
+    "pattern_low": 45900.0,
+    "sync_by": null,
+    "entry_plan": "내일 시가 (시가가 63936 이상이면 포기)",
+    "stop_plan": "max(45900, 진입가×0.93)"
    }
   ],
   "hold_10": [
    {
-    "code": "128940",
-    "name": "Hanmi Pharmaceutical Co., Ltd.",
-    "group": "Pharmaceuticals: Major",
-    "pattern": "flag",
+    "code": "035420",
+    "name": "NAVER Corp.",
+    "group": "Packaged Software",
+    "pattern": "box",
     "patterns": [
-     "box",
-     "flag"
+     "box"
     ],
-    "signal_close": 465000.0,
-    "pattern_low": 403000.0,
+    "signal_close": 190200.0,
+    "pattern_low": 166000.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 502200 이상이면 포기)",
-    "stop_plan": "max(403000, 진입가×0.93)"
-   },
-   {
-    "code": "326030",
-    "name": "SK Biopharmaceuticals Co., Ltd.",
-    "group": "Pharmaceuticals: Major",
-    "pattern": "cup_handle",
-    "patterns": [
-     "box",
-     "cup_handle"
-    ],
-    "signal_close": 90600.0,
-    "pattern_low": 74500.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 97848 이상이면 포기)",
-    "stop_plan": "max(74500, 진입가×0.93)"
-   },
-   {
-    "code": "0126Z0",
-    "name": "Samsung Epis Holdings Co., Ltd.",
-    "group": "Pharmaceuticals: Major",
-    "pattern": "triangle",
-    "patterns": [
-     "box",
-     "triangle"
-    ],
-    "signal_close": 367000.0,
-    "pattern_low": 303500.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 396360 이상이면 포기)",
-    "stop_plan": "max(303500, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 205416 이상이면 포기)",
+    "stop_plan": "max(166000, 진입가×0.93)"
    }
   ],
   "risk_2": [
    {
-    "code": "128940",
-    "name": "Hanmi Pharmaceutical Co., Ltd.",
-    "group": "Pharmaceuticals: Major",
-    "pattern": "flag",
+    "code": "035420",
+    "name": "NAVER Corp.",
+    "group": "Packaged Software",
+    "pattern": "box",
     "patterns": [
-     "box",
-     "flag"
+     "box"
     ],
-    "signal_close": 465000.0,
-    "pattern_low": 403000.0,
+    "signal_close": 190200.0,
+    "pattern_low": 166000.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 502200 이상이면 포기)",
-    "stop_plan": "max(403000, 진입가×0.93)"
-   },
-   {
-    "code": "326030",
-    "name": "SK Biopharmaceuticals Co., Ltd.",
-    "group": "Pharmaceuticals: Major",
-    "pattern": "cup_handle",
-    "patterns": [
-     "box",
-     "cup_handle"
-    ],
-    "signal_close": 90600.0,
-    "pattern_low": 74500.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 97848 이상이면 포기)",
-    "stop_plan": "max(74500, 진입가×0.93)"
-   },
-   {
-    "code": "0126Z0",
-    "name": "Samsung Epis Holdings Co., Ltd.",
-    "group": "Pharmaceuticals: Major",
-    "pattern": "triangle",
-    "patterns": [
-     "box",
-     "triangle"
-    ],
-    "signal_close": 367000.0,
-    "pattern_low": 303500.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 396360 이상이면 포기)",
-    "stop_plan": "max(303500, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 205416 이상이면 포기)",
+    "stop_plan": "max(166000, 진입가×0.93)"
    }
   ],
   "no_flag": [
    {
-    "code": "326030",
-    "name": "SK Biopharmaceuticals Co., Ltd.",
-    "group": "Pharmaceuticals: Major",
-    "pattern": "cup_handle",
+    "code": "035420",
+    "name": "NAVER Corp.",
+    "group": "Packaged Software",
+    "pattern": "box",
     "patterns": [
-     "box",
-     "cup_handle"
+     "box"
     ],
-    "signal_close": 90600.0,
-    "pattern_low": 74500.0,
+    "signal_close": 190200.0,
+    "pattern_low": 166000.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 97848 이상이면 포기)",
-    "stop_plan": "max(74500, 진입가×0.93)"
-   },
-   {
-    "code": "0126Z0",
-    "name": "Samsung Epis Holdings Co., Ltd.",
-    "group": "Pharmaceuticals: Major",
-    "pattern": "triangle",
-    "patterns": [
-     "box",
-     "triangle"
-    ],
-    "signal_close": 367000.0,
-    "pattern_low": 303500.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 396360 이상이면 포기)",
-    "stop_plan": "max(303500, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 205416 이상이면 포기)",
+    "stop_plan": "max(166000, 진입가×0.93)"
    }
   ]
  },
- "signal_date": "2026-11-05",
- "signals_frozen": true,
+ "signal_date": "2026-11-06",
+ "signals_frozen": false,
  "frozen_dates": [
   "2026-10-06",
   "2026-10-07",
@@ -386,7 +259,7 @@
  "variants": {
   "base": {
    "label": "동조 업종 + 패턴 돌파 (기본)",
-   "signals": 27,
+   "signals": 28,
    "trades": 11,
    "wins": 0,
    "win_rate": 0.0,
@@ -394,14 +267,14 @@
    "avg_loss_pct": -7.3,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -7.92,
-   "equity_final": 9208439,
+   "total_return_pct": -6.55,
+   "equity_final": 9345263,
    "max_drawdown_pct": 10.79,
    "avg_hold_days": 4.18,
    "skipped": {
     "gap": 0,
-    "limit": 9,
-    "cooldown": 0,
+    "limit": 10,
+    "cooldown": 1,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -450,7 +323,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -7.92
+    "2026": -6.55
    },
    "open_positions": [
     {
@@ -462,9 +335,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 6,
-     "bars_held": 14,
-     "last_close": 215000.0,
-     "unrealized_pct": 10.55
+     "bars_held": 15,
+     "last_close": 211000.0,
+     "unrealized_pct": 8.49
     },
     {
      "code": "267850",
@@ -475,9 +348,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 132,
-     "bars_held": 2,
-     "last_close": 10300.0,
-     "unrealized_pct": 6.86
+     "bars_held": 3,
+     "last_close": 10870.0,
+     "unrealized_pct": 12.77
     },
     {
      "code": "259960",
@@ -488,30 +361,56 @@
      "entry": 209627.0,
      "stop": 194953.11,
      "shares": 6,
+     "bars_held": 2,
+     "last_close": 220500.0,
+     "unrealized_pct": 5.19
+    },
+    {
+     "code": "128940",
+     "name": "Hanmi Pharmaceutical Co., Ltd.",
+     "group": "Pharmaceuticals: Major",
+     "pattern": "flag",
+     "entry_date": "2026-11-06",
+     "entry": 445833.5,
+     "stop": 414625.15,
+     "shares": 2,
      "bars_held": 1,
-     "last_close": 218000.0,
-     "unrealized_pct": 3.99
+     "last_close": 467000.0,
+     "unrealized_pct": 4.75
+    },
+    {
+     "code": "326030",
+     "name": "SK Biopharmaceuticals Co., Ltd.",
+     "group": "Pharmaceuticals: Major",
+     "pattern": "cup_handle",
+     "entry_date": "2026-11-06",
+     "entry": 86759.5,
+     "stop": 80686.33,
+     "shares": 14,
+     "bars_held": 1,
+     "last_close": 88800.0,
+     "unrealized_pct": 2.35
     }
    ]
   },
   "no_sector": {
    "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
-   "signals": 76,
-   "trades": 20,
+   "signals": 81,
+   "trades": 21,
    "wins": 1,
-   "win_rate": 5.0,
+   "win_rate": 4.76,
    "avg_win_pct": 6.57,
-   "avg_loss_pct": -7.42,
+   "avg_loss_pct": -7.53,
    "payoff": 0.87,
-   "profit_factor": 0.05,
-   "total_return_pct": -15.06,
-   "equity_final": 8493693,
-   "max_drawdown_pct": 15.41,
-   "avg_hold_days": 2.85,
+   "profit_factor": 0.04,
+   "total_return_pct": -16.25,
+   "equity_final": 8375477,
+   "max_drawdown_pct": 16.25,
+   "avg_hold_days": 2.9,
    "skipped": {
     "gap": 0,
-    "limit": 44,
-    "cooldown": 0,
+    "limit": 50,
+    "cooldown": 2,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -533,9 +432,9 @@
      "pnl_krw": -401380
     },
     "box": {
-     "n": 8,
+     "n": 9,
      "wins": 0,
-     "pnl_krw": -720584
+     "pnl_krw": -820703
     }
    },
    "by_sync": {
@@ -545,16 +444,16 @@
      "pnl_krw": -463564
     },
     "none": {
-     "n": 15,
+     "n": 16,
      "wins": 1,
-     "pnl_krw": -1264515
+     "pnl_krw": -1364634
     }
    },
    "by_exit": {
     "stop": {
-     "n": 19,
+     "n": 20,
      "wins": 0,
-     "pnl_krw": -1811298
+     "pnl_krw": -1911417
     },
     "low10": {
      "n": 1,
@@ -564,13 +463,13 @@
    },
    "by_year": {
     "2026": {
-     "n": 20,
+     "n": 21,
      "wins": 1,
-     "pnl_krw": -1728079
+     "pnl_krw": -1828198
     }
    },
    "yearly_return_pct": {
-    "2026": -15.06
+    "2026": -16.25
    },
    "open_positions": [
     {
@@ -582,9 +481,9 @@
      "entry": 21363.9,
      "stop": 20800.0,
      "shares": 83,
-     "bars_held": 18,
-     "last_close": 22800.0,
-     "unrealized_pct": 6.72
+     "bars_held": 19,
+     "last_close": 22050.0,
+     "unrealized_pct": 3.21
     },
     {
      "code": "033780",
@@ -595,22 +494,9 @@
      "entry": 187761.6,
      "stop": 174618.29,
      "shares": 6,
-     "bars_held": 15,
-     "last_close": 194200.0,
-     "unrealized_pct": 3.43
-    },
-    {
-     "code": "086280",
-     "name": "HYUNDAI GLOVIS Co., Ltd.",
-     "group": "Air Freight/Couriers",
-     "pattern": "box",
-     "entry_date": "2026-11-03",
-     "entry": 207119.5,
-     "stop": 192621.13,
-     "shares": 5,
-     "bars_held": 3,
-     "last_close": 200000.0,
-     "unrealized_pct": -3.44
+     "bars_held": 16,
+     "last_close": 189900.0,
+     "unrealized_pct": 1.14
     },
     {
      "code": "267850",
@@ -621,9 +507,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 125,
-     "bars_held": 2,
-     "last_close": 10300.0,
-     "unrealized_pct": 6.86
+     "bars_held": 3,
+     "last_close": 10870.0,
+     "unrealized_pct": 12.77
     },
     {
      "code": "015760",
@@ -634,15 +520,15 @@
      "entry": 30892.4,
      "stop": 28729.93,
      "shares": 39,
-     "bars_held": 1,
-     "last_close": 31350.0,
-     "unrealized_pct": 1.48
+     "bars_held": 2,
+     "last_close": 30400.0,
+     "unrealized_pct": -1.59
     }
    ]
   },
   "hold_10": {
    "label": "동조 + 패턴, 보유 10일",
-   "signals": 27,
+   "signals": 28,
    "trades": 12,
    "wins": 1,
    "win_rate": 8.33,
@@ -650,14 +536,14 @@
    "avg_loss_pct": -6.87,
    "payoff": 0.62,
    "profit_factor": 0.06,
-   "total_return_pct": -8.1,
-   "equity_final": 9189964,
+   "total_return_pct": -6.46,
+   "equity_final": 9353956,
    "max_drawdown_pct": 9.48,
    "avg_hold_days": 4.17,
    "skipped": {
     "gap": 0,
-    "limit": 9,
-    "cooldown": 0,
+    "limit": 10,
+    "cooldown": 1,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -711,7 +597,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -8.1
+    "2026": -6.46
    },
    "open_positions": [
     {
@@ -723,9 +609,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 134,
-     "bars_held": 2,
-     "last_close": 10300.0,
-     "unrealized_pct": 6.86
+     "bars_held": 3,
+     "last_close": 10870.0,
+     "unrealized_pct": 12.77
     },
     {
      "code": "259960",
@@ -736,15 +622,41 @@
      "entry": 209627.0,
      "stop": 194953.11,
      "shares": 6,
+     "bars_held": 2,
+     "last_close": 220500.0,
+     "unrealized_pct": 5.19
+    },
+    {
+     "code": "128940",
+     "name": "Hanmi Pharmaceutical Co., Ltd.",
+     "group": "Pharmaceuticals: Major",
+     "pattern": "flag",
+     "entry_date": "2026-11-06",
+     "entry": 445833.5,
+     "stop": 414625.15,
+     "shares": 2,
      "bars_held": 1,
-     "last_close": 218000.0,
-     "unrealized_pct": 3.99
+     "last_close": 467000.0,
+     "unrealized_pct": 4.75
+    },
+    {
+     "code": "326030",
+     "name": "SK Biopharmaceuticals Co., Ltd.",
+     "group": "Pharmaceuticals: Major",
+     "pattern": "cup_handle",
+     "entry_date": "2026-11-06",
+     "entry": 86759.5,
+     "stop": 80686.33,
+     "shares": 15,
+     "bars_held": 1,
+     "last_close": 88800.0,
+     "unrealized_pct": 2.35
     }
    ]
   },
   "risk_2": {
    "label": "동조 + 패턴, 위험 2% (명목 상한 30%)",
-   "signals": 28,
+   "signals": 29,
    "trades": 9,
    "wins": 0,
    "win_rate": 0.0,
@@ -752,15 +664,15 @@
    "avg_loss_pct": -7.22,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -10.68,
-   "equity_final": 8932380,
+   "total_return_pct": -9.51,
+   "equity_final": 9048670,
    "max_drawdown_pct": 16.49,
    "avg_hold_days": 3,
    "skipped": {
     "gap": 0,
     "limit": 0,
-    "cooldown": 0,
-    "size": 13,
+    "cooldown": 1,
+    "size": 16,
     "no_bar": 0,
     "pattern": 0
    },
@@ -808,7 +720,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -10.68
+    "2026": -9.51
    },
    "open_positions": [
     {
@@ -820,9 +732,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 13,
-     "bars_held": 14,
-     "last_close": 215000.0,
-     "unrealized_pct": 10.55
+     "bars_held": 15,
+     "last_close": 211000.0,
+     "unrealized_pct": 8.49
     },
     {
      "code": "267850",
@@ -833,9 +745,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 247,
-     "bars_held": 2,
-     "last_close": 10300.0,
-     "unrealized_pct": 6.86
+     "bars_held": 3,
+     "last_close": 10870.0,
+     "unrealized_pct": 12.77
     },
     {
      "code": "259960",
@@ -846,15 +758,15 @@
      "entry": 209627.0,
      "stop": 194953.11,
      "shares": 11,
-     "bars_held": 1,
-     "last_close": 218000.0,
-     "unrealized_pct": 3.99
+     "bars_held": 2,
+     "last_close": 220500.0,
+     "unrealized_pct": 5.19
     }
    ]
   },
   "no_flag": {
    "label": "동조 + 패턴, 깃발형 제외",
-   "signals": 13,
+   "signals": 14,
    "trades": 7,
    "wins": 0,
    "win_rate": 0.0,
@@ -862,14 +774,14 @@
    "avg_loss_pct": -7.21,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -3.94,
-   "equity_final": 9605587,
+   "total_return_pct": -2.83,
+   "equity_final": 9717347,
    "max_drawdown_pct": 7.59,
    "avg_hold_days": 5,
    "skipped": {
     "gap": 0,
     "limit": 1,
-    "cooldown": 0,
+    "cooldown": 1,
     "size": 0,
     "no_bar": 0,
     "pattern": 0
@@ -913,7 +825,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -3.94
+    "2026": -2.83
    },
    "open_positions": [
     {
@@ -925,9 +837,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 7,
-     "bars_held": 14,
-     "last_close": 215000.0,
-     "unrealized_pct": 10.55
+     "bars_held": 15,
+     "last_close": 211000.0,
+     "unrealized_pct": 8.49
     },
     {
      "code": "267850",
@@ -938,9 +850,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 137,
-     "bars_held": 2,
-     "last_close": 10300.0,
-     "unrealized_pct": 6.86
+     "bars_held": 3,
+     "last_close": 10870.0,
+     "unrealized_pct": 12.77
     },
     {
      "code": "259960",
@@ -951,9 +863,35 @@
      "entry": 209627.0,
      "stop": 194953.11,
      "shares": 6,
+     "bars_held": 2,
+     "last_close": 220500.0,
+     "unrealized_pct": 5.19
+    },
+    {
+     "code": "326030",
+     "name": "SK Biopharmaceuticals Co., Ltd.",
+     "group": "Pharmaceuticals: Major",
+     "pattern": "cup_handle",
+     "entry_date": "2026-11-06",
+     "entry": 86759.5,
+     "stop": 80686.33,
+     "shares": 15,
      "bars_held": 1,
-     "last_close": 218000.0,
-     "unrealized_pct": 3.99
+     "last_close": 88800.0,
+     "unrealized_pct": 2.35
+    },
+    {
+     "code": "0126Z0",
+     "name": "Samsung Epis Holdings Co., Ltd.",
+     "group": "Pharmaceuticals: Major",
+     "pattern": "triangle",
+     "entry_date": "2026-11-06",
+     "entry": 344029.0,
+     "stop": 319946.97,
+     "shares": 3,
+     "bars_held": 1,
+     "last_close": 349500.0,
+     "unrealized_pct": 1.59
     }
    ]
   }
@@ -1655,6 +1593,28 @@
     "pnl_pct": -7.45,
     "hold_days": 1,
     "gap": false
+   },
+   {
+    "code": "086280",
+    "name": "HYUNDAI GLOVIS Co., Ltd.",
+    "group": "Air Freight/Couriers",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": null,
+    "signal_date": "2026-11-02",
+    "entry_date": "2026-11-03",
+    "entry": 207119.5,
+    "stop": 192621.13,
+    "exit_date": "2026-11-06",
+    "exit": 187436.0,
+    "why": "stop",
+    "shares": 5,
+    "pnl_krw": -100119,
+    "pnl_pct": -9.67,
+    "hold_days": 4,
+    "gap": true
    }
   ],
   "hold_10": [
