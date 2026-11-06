@@ -1,7 +1,7 @@
 {
   "_comment": "사전 등록(pre-registration) 판정 기준. 결과가 나오기 전에 봉인한다. 바꾸려면 proposals.md 에 근거를 적고, sealed 날짜를 새로 잡고, `python verdict.py --lock` 으로 잠금을 다시 만든다. verdict.py 는 이 파일만 읽어 PASS / FAIL / NOT_YET 을 기계로 판정한다.",
-  "sealed": "2026-10-22",
-  "sealed_history": ["2026-10-06 첫 봉인(네 트랙)", "2026-10-15 제안함 P17 초단타 잡음 바닥 추가(P18 표시는 기준 아님). 다른 트랙 합격선 숫자 변경 없음", "2026-10-22 제안함 P22 급상승·급하락 패턴(retest) 트랙 추가. 기존 네 트랙 합격선 숫자 변경 없음"],
+  "sealed": "2026-11-06",
+  "sealed_history": ["2026-10-06 첫 봉인(네 트랙)", "2026-10-15 제안함 P17 초단타 잡음 바닥 추가(P18 표시는 기준 아님). 다른 트랙 합격선 숫자 변경 없음", "2026-10-22 제안함 P22 급상승·급하락 패턴(retest) 트랙 추가. 기존 네 트랙 합격선 숫자 변경 없음", "2026-11-06 제안함 P28 예측 v2(forecast) 트랙 추가. 기존 다섯 트랙 합격선 숫자 변경 없음"],
   "sealed_by": "Claude 세션(설계) — 출처: HANDOVER.md 마일스톤 12-4 기준 4개, docs/REVERSAL_4H_PLAN.md 5절, HANDOVER.md 마일스톤 10 다음 단계, scalp.py 자체 규칙",
   "status_meaning": {
     "NOT_YET": "최소 건수 전. 판단하지 않는다",
@@ -51,5 +51,14 @@
     "source": "scalp.py 자체 규칙(MIN_DAYS=7, 누적 순수익 > 0, 양수일 60% 이상, 기준선 초과). verdict 는 그 결과를 옮겨 적는다. 2026-10-15 제안함 P17: 잡음 바닥(noise_floor) 추가 — 조합별 일별 순수익의 부호를 무작위로 뒤집은(실력 0) 기록에 같은 후보 규칙을 sims 회 적용한 후보 수 중앙값보다 실제 후보 수가 많아야 PASS. 같거나 적으면 NOT_YET(잡음 이하). 근거 docs/BACKTEST_OVERFITTING_REVIEW.md 2절(White 2000, Bailey 2014)",
     "min_days": 7,
     "noise_floor": {"sims": 500, "seed": 7, "pass_only_if_candidates_above_median": true}
+  },
+  "forecast": {
+    "source": "docs/FORECAST_PLAN.md 5절: 60일 채점 전 판단 금지. 크기(변동성) 예측이 핵심 — 예측 상위 3분위 실제 |12h 수익| ÷ 하위 ≥ 1.20 이고 앞·뒤 30일 각 ≥ 1.10 이면 PASS(포지션 크기 조절·문지기 제안 후보), < 1.05 면 FAIL. 방향 D1·D2 는 잡음 바닥 95% 선 초과 + Brier 가 기준선 D3 보다 0.005 이상 좋음(전체·앞·뒤 모두)일 때만 PASS, 아니면 FAIL(기록 중단). 결손 > 6일이면 NOT_YET",
+    "rule_fixed": "2026-11-06",
+    "min_days": 60,
+    "max_missing_days": 6,
+    "size": {"pass_if_ratio_at_least": 1.2, "each_half_at_least": 1.1, "fail_if_ratio_below": 1.05},
+    "direction": {"brier_better_than_baseline_by": 0.005},
+    "noise_floor": {"sims": 500, "seed": 7}
   }
 }

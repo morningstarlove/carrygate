@@ -103,7 +103,12 @@ jobs:
         continue-on-error: true
         run: python retest.py
 
-      - name: Verdict (판정 규율 — 다섯 트랙 순방향 채점, 사전 등록 기준)
+      - name: Forecast v2 (예측 — 12h 움직임 크기·방향 확률, 채점만; 2시간봉)
+        if: inputs.day == ''
+        continue-on-error: true
+        run: python forecast.py
+
+      - name: Verdict (판정 규율 — 여섯 트랙 순방향 채점, 사전 등록 기준)
         if: inputs.day == ''
         continue-on-error: true
         run: python verdict.py
@@ -160,13 +165,17 @@ jobs:
         if: always()
         run: python grid.py --report || echo "그리드 기록 없음"
 
+      - name: Show forecast trend (예측 채점 누적)
+        if: always()
+        run: python forecast.py --report || echo "예측 기록 없음"
+
       - name: Show research trend (보조 연구 누적)
         if: always()
         run: python scalp_research.py --report || echo "연구 기록 없음"
 
       - name: Unit tests (계산 로직)
         if: always()
-        run: python -m unittest tests.test_scalp tests.test_research tests.test_midterm tests.test_momentum tests.test_live tests.test_turtle tests.test_reversal tests.test_retest tests.test_relay tests.test_verdict tests.test_grid tests.test_selfcheck tests.test_common tests.test_push_results
+        run: python -m unittest tests.test_scalp tests.test_research tests.test_midterm tests.test_momentum tests.test_live tests.test_turtle tests.test_reversal tests.test_retest tests.test_forecast tests.test_relay tests.test_verdict tests.test_grid tests.test_selfcheck tests.test_common tests.test_push_results
 
       - name: Commit results
         if: always() && inputs.dry_run != true
@@ -181,7 +190,7 @@ jobs:
           python push_results.py --verdict -m "$MSG" \
             status.json history.jsonl funding.json funding_history.jsonl scalp.json scalp_history.jsonl scalp_binance.json scalp_binance_history.jsonl research.json research_history.jsonl \
             basis.json basis_history.jsonl funding_signal.json funding_signal_history.jsonl kimchi.json kimchi_history.jsonl \
-            macro.json listing.json momentum.json momentum_history.jsonl live.json live_history.jsonl turtle.json turtle_history.jsonl reversal.json reversal_history.jsonl reversal_bars.jsonl retest.json retest_history.jsonl verdict.json verdict_history.jsonl \
+            macro.json listing.json momentum.json momentum_history.jsonl live.json live_history.jsonl turtle.json turtle_history.jsonl reversal.json reversal_history.jsonl reversal_bars.jsonl retest.json retest_history.jsonl forecast.json forecast_history.jsonl verdict.json verdict_history.jsonl \
             grid.json grid_history.jsonl \
             data/kr_funding.json data/binance_1m data/cg_funding_snapshots.jsonl data/etf data/upbit_markets.json
 

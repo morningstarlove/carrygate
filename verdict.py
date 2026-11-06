@@ -19,7 +19,7 @@ Phil(bennyjo/phil) 에서 가져온 방법 세 가지:
   python verdict.py --check-lock # 잠금과 현재 규칙 대조 (어긋나면 종료코드 1)
   python verdict.py --lock       # 잠금 재생성 (사전 등록 절차의 마지막 단계)
 """
-import os, sys, json, math, hashlib, argparse
+import os, sys, json, math, hashlib, argparse, random
 from datetime import datetime, timezone, timedelta
 from common import KST, r2
 
@@ -289,6 +289,73 @@ def judge_scalp(history_rows, crit):
     return out
 
 
+def judge_forecast(history_rows, crit):
+    """forecast_history.jsonl 의 채점 누적에 criteria.json forecast 를 적용한다 (설계서 docs/FORECAST_PLAN.md 5절).
+    핵심 = 크기(변동성) 예측: 예측 상위 3분위의 실제 |12h 수익| ÷ 하위 3분위. 방향 예측기 D1·D2 는 따로 PASS/FAIL 만 표시하고
+    전체 판정에는 넣지 않는다(설계서: 방향 FAIL 이면 기록 중단, 크기만 남긴다). 잡음 바닥 = 예측을 (날짜,코인) 사이에서 무작위로
+    섞었을 때의 적중률 분포(실력 0)."""
+    sys.path.insert(0, HERE)
+    import forecast as F
+    summ = F.score_summary(history_rows, crit.get("rule_fixed", F.RULE_FIXED))
+    pts = summ.pop("_points", [])
+    out = {"days": summ["days"], "points": summ["points"], "first_date": summ["first_date"], "last_date": summ["last_date"],
+           "missing_days": summ["missing_days"], "base_up_rate": summ["base_up_rate"],
+           "size": summ["size"], "direction": summ["direction"], "predictors": {}, "warnings": []}
+    # 방향 잡음 바닥 (결정적)
+    nf = crit.get("noise_floor") or {}
+    if pts and nf:
+        rng = random.Random(nf.get("seed", 7))
+        ups = [p[4] for p in pts]
+        hits_dist = {nm: [] for nm in F.PREDICTORS}
+        for _ in range(int(nf.get("sims", 500))):
+            perm = ups[:]
+            rng.shuffle(perm)
+            for nm in F.PREDICTORS:
+                dec = [(p[5][nm][0], u) for p, u in zip(pts, perm) if nm in p[5] and p[5][nm][0] != 0.5]
+                hits_dist[nm].append(sum(1 for q, u in dec if (q > 0.5) == u) / len(dec) if dec else 0.5)
+        out["noise_floor"] = {"sims": int(nf.get("sims", 500)), "seed": nf.get("seed", 7),
+                              "hit_rate_median": {nm: round(sorted(v)[len(v) // 2], 4) for nm, v in hits_dist.items()},
+                              "hit_rate_p95": {nm: round(sorted(v)[int(len(v) * 0.95)], 4) for nm, v in hits_dist.items()}}
+    # 방향 예측기 판정 (D3 는 기준선)
+    d_all, d1, d2 = summ["direction"]["all"], summ["direction"]["first_half"], summ["direction"]["second_half"]
+    for nm in ("D1", "D2"):
+        pr = {"status": NOT_YET, "reason": ""}
+        if summ["days"] >= crit["min_days"] and d_all[nm]["brier"] is not None and d_all["D3"]["brier"] is not None:
+            p95 = (out.get("noise_floor") or {}).get("hit_rate_p95", {}).get(nm)
+            beats_noise = p95 is not None and d_all[nm]["hit_rate"] is not None and d_all[nm]["hit_rate"] > p95
+            margin = crit["direction"]["brier_better_than_baseline_by"]
+            beats_brier = all(h[nm]["brier"] is not None and h["D3"]["brier"] is not None and h["D3"]["brier"] - h[nm]["brier"] >= margin
+                              for h in (d_all, d1, d2))
+            if beats_noise and beats_brier:
+                pr["status"], pr["reason"] = PASS, "적중 %.3f > 잡음 95%% %.3f, Brier 가 기준선보다 %.3f 이상 좋음(앞뒤 절반 모두)" % (d_all[nm]["hit_rate"], p95, margin)
+            else:
+                pr["status"], pr["reason"] = FAIL, "적중 %s vs 잡음 95%% %s, Brier %s vs 기준선 %s — 정보 없음, 기록 중단 대상" % (
+                    d_all[nm]["hit_rate"], p95, d_all[nm]["brier"], d_all["D3"]["brier"])
+        else:
+            pr["reason"] = "채점 %d일 — 최소 %d일 전에는 판단하지 않는다" % (summ["days"], crit["min_days"])
+        out["predictors"][nm] = pr
+    # 크기 판정 = 전체 판정
+    sz = summ["size"]
+    r_all, r1, r2 = sz["all"]["ratio_high_low"], sz["first_half"]["ratio_high_low"], sz["second_half"]["ratio_high_low"]
+    if summ["days"] < crit["min_days"]:
+        out["status"], out["reason"] = NOT_YET, "채점 %d일 %d건 — 최소 %d일 전에는 판단하지 않는다" % (summ["days"], summ["points"], crit["min_days"])
+    elif summ["missing_days"] > crit["max_missing_days"]:
+        out["status"], out["reason"] = NOT_YET, "결손 %d일 > %d일 — 자료가 이어지지 않아 판단 보류" % (summ["missing_days"], crit["max_missing_days"])
+    elif r_all is None or r1 is None or r2 is None:
+        out["status"], out["reason"] = NOT_YET, "상위·하위 분위 표본 부족"
+    elif r_all < crit["size"]["fail_if_ratio_below"]:
+        out["status"], out["reason"] = FAIL, "크기 비율 %.2f < %.2f — 변동성 예측이 실제와 안 맞는다" % (r_all, crit["size"]["fail_if_ratio_below"])
+    elif r_all >= crit["size"]["pass_if_ratio_at_least"] and min(r1, r2) >= crit["size"]["each_half_at_least"]:
+        out["status"], out["reason"] = PASS, "크기 비율 %.2f ≥ %.2f, 앞 %.2f·뒤 %.2f ≥ %.2f — 포지션 크기 조절·문지기 제안 후보" % (
+            r_all, crit["size"]["pass_if_ratio_at_least"], r1, r2, crit["size"]["each_half_at_least"])
+    else:
+        out["status"], out["reason"] = NOT_YET, "크기 비율 %.2f (앞 %.2f·뒤 %.2f) 는 %.2f~%.2f 사이 — 더 모은다" % (
+            r_all, r1, r2, crit["size"]["fail_if_ratio_below"], crit["size"]["pass_if_ratio_at_least"])
+    if summ["days"] and summ["missing_days"] > 0:
+        out["warnings"].append("결손 %d일" % summ["missing_days"])
+    return out
+
+
 # ----------------------------------------------------------------- 규칙 잠금
 
 def _file_sha(path):
@@ -299,7 +366,7 @@ def _file_sha(path):
 def current_rules():
     """세 트랙 + 초단타의 규칙 상수를 소스에서 그대로 읽는다 (저장된 JSON 이 아니라 코드가 기준)."""
     sys.path.insert(0, HERE)
-    import kr_breakout as KB, turtle as T, reversal as R, scalp as S, retest as RT
+    import kr_breakout as KB, turtle as T, reversal as R, scalp as S, retest as RT, forecast as F
     turtle_rules = {"entry_breakout_days": T.ENTRY_N, "exit_breakout_days": T.EXIT_N, "atr_days": T.ATR_N,
                     "stop_n_mult": T.STOP_MULT, "risk_pct_per_trade": T.RISK_PCT, "max_notional_pct": T.MAX_NOTIONAL_PCT,
                     "slippage_pct": T.SLIPPAGE_PCT,
@@ -320,6 +387,7 @@ def current_rules():
         "reversal": {"rule_fixed": R.RULE_FIXED, "rules": reversal_rules},
         "retest": {"rule_fixed": RT.RULE_FIXED, "rules": RT.rules_dict()},
         "scalp": {"rules": scalp_rules},
+        "forecast": {"rule_fixed": F.RULE_FIXED, "rules": F.rules_dict()},
         "criteria_sha256": _file_sha(CRITERIA_PATH),
     }
 
@@ -411,6 +479,19 @@ def build(crit=None, files=None):
     except Exception as e:
         out["errors"]["scalp"] = "%s: %s" % (type(e).__name__, e)
     try:
+        if "forecast_history" in files:
+            fh_rows = files["forecast_history"]
+        else:
+            sys.path.insert(0, HERE)
+            import forecast as F
+            fh_rows = F.read_history(os.path.join(HERE, "forecast_history.jsonl"))
+        if fh_rows:
+            out["tracks"]["forecast"] = judge_forecast(fh_rows, crit["forecast"])
+        else:
+            out["errors"]["forecast"] = "forecast_history.jsonl 없음"
+    except Exception as e:
+        out["errors"]["forecast"] = "%s: %s" % (type(e).__name__, e)
+    try:
         diffs = check_lock()
         out["rules_lock"] = {"ok": not diffs, "diffs": diffs}
     except Exception as e:
@@ -433,6 +514,11 @@ def history_line(out):
     if "scalp" in t:
         line["scalp"] = {"days": t["scalp"]["history_days"], "candidates": t["scalp"]["candidates"],
                          "noise_median": (t["scalp"].get("noise_floor") or {}).get("median")}
+    if "forecast" in t:
+        fc = t["forecast"]
+        line["forecast"] = {"days": fc["days"], "points": fc["points"], "size_ratio": fc["size"]["all"]["ratio_high_low"],
+                            "hit": {nm: fc["direction"]["all"][nm]["hit_rate"] for nm in ("D1", "D2", "D3")},
+                            "brier": {nm: fc["direction"]["all"][nm]["brier"] for nm in ("D1", "D2", "D3")}}
     return line
 
 
@@ -490,6 +576,18 @@ def print_summary(out):
         for c in s["top"][:5]:
             print("   %-38s 누적 %+.3f%%  %d일 중 %d일 플러스  매매 %d건" % (c["key"], c["net_pct"], c["days"], c["pos_days"], c["trades"]))
         for w in s.get("warnings", []):
+            print("   ⚠ " + w)
+    if "forecast" in t:
+        fc = t["forecast"]
+        print("[forecast] %-7s %s" % (fc["status"], fc["reason"]))
+        sz = fc["size"]["all"]; dr = fc["direction"]["all"]
+        print("   크기: 상위 %s%% 하위 %s%% 비율 %s (앞 %s 뒤 %s) | 방향 적중 D1 %s D2 %s D3 %s | Brier D1 %s D2 %s D3 %s" % (
+            sz["mean_abs_pct"]["high"], sz["mean_abs_pct"]["low"], sz["ratio_high_low"],
+            fc["size"]["first_half"]["ratio_high_low"], fc["size"]["second_half"]["ratio_high_low"],
+            dr["D1"]["hit_rate"], dr["D2"]["hit_rate"], dr["D3"]["hit_rate"], dr["D1"]["brier"], dr["D2"]["brier"], dr["D3"]["brier"]))
+        for nm, pr in fc["predictors"].items():
+            print("   %s %-7s %s" % (nm, pr["status"], pr["reason"]))
+        for w in fc.get("warnings", []):
             print("   ⚠ " + w)
     rl = out["rules_lock"]
     print("[rules_lock] %s" % ("일치" if rl["ok"] else "불일치 — 사전 등록 없이 규칙이 바뀌었다"))

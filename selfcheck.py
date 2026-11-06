@@ -39,6 +39,8 @@ SHAPES = {
     "reversal.json": {"date": "str", "rules": "dict", "rules.rule_fixed": "str", "venues": "dict", "venues.upbit": "dict", "venues.okx": "dict",
                       "summary": "dict", "summary.markets": "int"},
     "retest.json": {"date": "str", "rules": "dict", "rules.rule_fixed": "str", "venues": "dict", "summary": "dict", "summary.markets": "int"},
+    "forecast.json": {"date": "str", "rules": "dict", "rules.rule_fixed": "str", "coins": "dict", "summary": "dict", "summary.verdict": "str",
+                      "cumulative": "dict", "cumulative.days": "int", "cumulative.points": "int"},
     "live.json": {"date": "str", "status": "dict", "status.coin": "str", "status.days": "num", "status.warnings": "list"},
     "scalp.json": {"date": "str", "eval_day_utc": "str", "method": "dict", "method.strategies": "list", "summary": "dict",
                    "summary.rows_total": "int", "summary.rows_positive": "int", "summary.rows_robust": "int",
@@ -697,7 +699,7 @@ def main():
     for path, label in (("basis_history.jsonl", "베이시스"), ("funding_signal_history.jsonl", "펀딩 신호"),
                         ("kimchi_history.jsonl", "김치프리미엄"), ("momentum_history.jsonl", "듀얼 모멘텀"),
                         ("live_history.jsonl", "실전 캐리"), ("turtle_history.jsonl", "터틀"),
-                        ("reversal_history.jsonl", "추세 전환"), ("retest_history.jsonl", "급상승 패턴"), ("grid_history.jsonl", "그리드")):
+                        ("reversal_history.jsonl", "추세 전환"), ("retest_history.jsonl", "급상승 패턴"), ("forecast_history.jsonl", "예측 v2"), ("grid_history.jsonl", "그리드")):
         check_jsonl_dates(path, label, problems, notes)
 
     print("=== 검산 ===")
