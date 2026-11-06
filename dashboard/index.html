@@ -472,7 +472,7 @@ details{margin-top:8px} summary{cursor:pointer;font-size:13px;color:var(--accent
       '<div class="note">승률 80% 안팎이라 평소엔 꾸준히 버는 것처럼 보이지만, 급락 한 번에 그동안 번 것을 내놓는 구조. 낙폭 −40~−50% 를 실제로 견딜 수 있는지가 핵심.</div>';
   }
 
-  // ---------------- 예측 v2 (제안함 P28, docs/FORECAST_PLAN.md) ----------------
+  // ---------------- 예측 v2 (제안함 P31, docs/FORECAST_PLAN.md) ----------------
   var FBK={low:["하","neutral"],mid:["중","neutral"],high:["상","warn"]};
   function pc(x){ return x==null?"-":num(x*100,0)+"%"; }
   function rForecast(d){
@@ -497,7 +497,7 @@ details{margin-top:8px} summary{cursor:pointer;font-size:13px;color:var(--accent
   }
   function rForecastMissing(){
     $("t-forecast").innerHTML=pill("첫 실행 전","neutral"); $("t-forecast-d").textContent="매일 09:18 KST 실행 뒤 표시";
-    section("s-forecast").body.innerHTML='<div class="err">아직 결과 파일이 없다 (forecast.json). 제안함 P28 병합 뒤 CARRYGATE daily 가 처음 돌면(매일 09:18 KST) 생기고, 17:37 KST 자동 작업이 여기 옮겨 싣는다. 설계는 docs/FORECAST_PLAN.md.</div>';
+    section("s-forecast").body.innerHTML='<div class="err">아직 결과 파일이 없다 (forecast.json). 제안함 P31 병합 뒤 CARRYGATE daily 가 처음 돌면(매일 09:18 KST) 생기고, 17:37 KST 자동 작업이 여기 옮겨 싣는다. 설계는 docs/FORECAST_PLAN.md.</div>';
   }
 
   // ---------------- 판정 규율 (마일스톤 14, Phil 방식) ----------------

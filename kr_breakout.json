@@ -1,6 +1,6 @@
 {
- "date": "2026-11-04",
- "generated_at_utc": "2026-11-04T07:14:53Z",
+ "date": "2026-11-06",
+ "generated_at_utc": "2026-11-05T15:02:21Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -74,15 +74,15 @@
   }
  },
  "forward": {
-  "days": 21,
+  "days": 22,
   "from": "2026-10-05",
-  "to": "2026-11-04",
-  "codes": 287,
+  "to": "2026-11-05",
+  "codes": 292,
   "bar_errors": 0,
   "stale_codes": 0,
   "by_source": {
-   "yahoo+naver_api": 64,
-   "yahoo": 223
+   "yahoo": 141,
+   "yahoo+naver_api": 151
   },
   "skipped_days": [
    "2026-10-05"
@@ -95,34 +95,125 @@
  "signals_today": {
   "base": [
    {
-    "code": "259960",
-    "name": "Krafton, Inc.",
-    "group": "Packaged Software",
-    "pattern": "box",
+    "code": "128940",
+    "name": "Hanmi Pharmaceutical Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "flag",
     "patterns": [
-     "box"
+     "box",
+     "flag"
     ],
-    "signal_close": 212000.0,
-    "pattern_low": 178500.0,
+    "signal_close": 465000.0,
+    "pattern_low": 403000.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 228960 이상이면 포기)",
-    "stop_plan": "max(178500, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 502200 이상이면 포기)",
+    "stop_plan": "max(403000, 진입가×0.93)"
+   },
+   {
+    "code": "326030",
+    "name": "SK Biopharmaceuticals Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "cup_handle",
+    "patterns": [
+     "box",
+     "cup_handle"
+    ],
+    "signal_close": 90600.0,
+    "pattern_low": 74500.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 97848 이상이면 포기)",
+    "stop_plan": "max(74500, 진입가×0.93)"
+   },
+   {
+    "code": "0126Z0",
+    "name": "Samsung Epis Holdings Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle"
+    ],
+    "signal_close": 367000.0,
+    "pattern_low": 303500.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 396360 이상이면 포기)",
+    "stop_plan": "max(303500, 진입가×0.93)"
    }
   ],
   "no_sector": [
    {
-    "code": "015760",
-    "name": "Korea Electric Power Corporation",
-    "group": "Electric Utilities",
+    "code": "068270",
+    "name": "Celltrion, Inc.",
+    "group": "Biotechnology",
+    "pattern": "cup_handle",
+    "patterns": [
+     "box",
+     "cup_handle"
+    ],
+    "signal_close": 215000.0,
+    "pattern_low": 187500.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 232200 이상이면 포기)",
+    "stop_plan": "max(187500, 진입가×0.93)"
+   },
+   {
+    "code": "128940",
+    "name": "Hanmi Pharmaceutical Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "flag",
+    "patterns": [
+     "box",
+     "flag"
+    ],
+    "signal_close": 465000.0,
+    "pattern_low": 403000.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 502200 이상이면 포기)",
+    "stop_plan": "max(403000, 진입가×0.93)"
+   },
+   {
+    "code": "003490",
+    "name": "Korean Air Lines Co., Ltd.",
+    "group": "Airlines",
     "pattern": "box",
     "patterns": [
      "box"
     ],
-    "signal_close": 30450.0,
-    "pattern_low": 27550.0,
+    "signal_close": 30350.0,
+    "pattern_low": 25100.0,
     "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 32886 이상이면 포기)",
-    "stop_plan": "max(27550, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 32778 이상이면 포기)",
+    "stop_plan": "max(25100, 진입가×0.93)"
+   },
+   {
+    "code": "326030",
+    "name": "SK Biopharmaceuticals Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "cup_handle",
+    "patterns": [
+     "box",
+     "cup_handle"
+    ],
+    "signal_close": 90600.0,
+    "pattern_low": 74500.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 97848 이상이면 포기)",
+    "stop_plan": "max(74500, 진입가×0.93)"
+   },
+   {
+    "code": "0126Z0",
+    "name": "Samsung Epis Holdings Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle"
+    ],
+    "signal_close": 367000.0,
+    "pattern_low": 303500.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 396360 이상이면 포기)",
+    "stop_plan": "max(303500, 진입가×0.93)"
    },
    {
     "code": "259960",
@@ -132,64 +223,142 @@
     "patterns": [
      "box"
     ],
-    "signal_close": 212000.0,
+    "signal_close": 221000.0,
     "pattern_low": 178500.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 228960 이상이면 포기)",
+    "sync_by": null,
+    "entry_plan": "내일 시가 (시가가 238680 이상이면 포기)",
     "stop_plan": "max(178500, 진입가×0.93)"
    }
   ],
   "hold_10": [
    {
-    "code": "259960",
-    "name": "Krafton, Inc.",
-    "group": "Packaged Software",
-    "pattern": "box",
+    "code": "128940",
+    "name": "Hanmi Pharmaceutical Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "flag",
     "patterns": [
-     "box"
+     "box",
+     "flag"
     ],
-    "signal_close": 212000.0,
-    "pattern_low": 178500.0,
+    "signal_close": 465000.0,
+    "pattern_low": 403000.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 228960 이상이면 포기)",
-    "stop_plan": "max(178500, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 502200 이상이면 포기)",
+    "stop_plan": "max(403000, 진입가×0.93)"
+   },
+   {
+    "code": "326030",
+    "name": "SK Biopharmaceuticals Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "cup_handle",
+    "patterns": [
+     "box",
+     "cup_handle"
+    ],
+    "signal_close": 90600.0,
+    "pattern_low": 74500.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 97848 이상이면 포기)",
+    "stop_plan": "max(74500, 진입가×0.93)"
+   },
+   {
+    "code": "0126Z0",
+    "name": "Samsung Epis Holdings Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle"
+    ],
+    "signal_close": 367000.0,
+    "pattern_low": 303500.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 396360 이상이면 포기)",
+    "stop_plan": "max(303500, 진입가×0.93)"
    }
   ],
   "risk_2": [
    {
-    "code": "259960",
-    "name": "Krafton, Inc.",
-    "group": "Packaged Software",
-    "pattern": "box",
+    "code": "128940",
+    "name": "Hanmi Pharmaceutical Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "flag",
     "patterns": [
-     "box"
+     "box",
+     "flag"
     ],
-    "signal_close": 212000.0,
-    "pattern_low": 178500.0,
+    "signal_close": 465000.0,
+    "pattern_low": 403000.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 228960 이상이면 포기)",
-    "stop_plan": "max(178500, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 502200 이상이면 포기)",
+    "stop_plan": "max(403000, 진입가×0.93)"
+   },
+   {
+    "code": "326030",
+    "name": "SK Biopharmaceuticals Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "cup_handle",
+    "patterns": [
+     "box",
+     "cup_handle"
+    ],
+    "signal_close": 90600.0,
+    "pattern_low": 74500.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 97848 이상이면 포기)",
+    "stop_plan": "max(74500, 진입가×0.93)"
+   },
+   {
+    "code": "0126Z0",
+    "name": "Samsung Epis Holdings Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle"
+    ],
+    "signal_close": 367000.0,
+    "pattern_low": 303500.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 396360 이상이면 포기)",
+    "stop_plan": "max(303500, 진입가×0.93)"
    }
   ],
   "no_flag": [
    {
-    "code": "259960",
-    "name": "Krafton, Inc.",
-    "group": "Packaged Software",
-    "pattern": "box",
+    "code": "326030",
+    "name": "SK Biopharmaceuticals Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "cup_handle",
     "patterns": [
-     "box"
+     "box",
+     "cup_handle"
     ],
-    "signal_close": 212000.0,
-    "pattern_low": 178500.0,
+    "signal_close": 90600.0,
+    "pattern_low": 74500.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 228960 이상이면 포기)",
-    "stop_plan": "max(178500, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 97848 이상이면 포기)",
+    "stop_plan": "max(74500, 진입가×0.93)"
+   },
+   {
+    "code": "0126Z0",
+    "name": "Samsung Epis Holdings Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle"
+    ],
+    "signal_close": 367000.0,
+    "pattern_low": 303500.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 396360 이상이면 포기)",
+    "stop_plan": "max(303500, 진입가×0.93)"
    }
   ]
  },
- "signal_date": "2026-11-04",
- "signals_frozen": false,
+ "signal_date": "2026-11-05",
+ "signals_frozen": true,
  "frozen_dates": [
   "2026-10-06",
   "2026-10-07",
@@ -210,12 +379,14 @@
   "2026-10-29",
   "2026-10-30",
   "2026-11-02",
-  "2026-11-03"
+  "2026-11-03",
+  "2026-11-04",
+  "2026-11-05"
  ],
  "variants": {
   "base": {
    "label": "동조 업종 + 패턴 돌파 (기본)",
-   "signals": 24,
+   "signals": 27,
    "trades": 11,
    "wins": 0,
    "win_rate": 0.0,
@@ -223,14 +394,14 @@
    "avg_loss_pct": -7.3,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -10.16,
-   "equity_final": 8983910,
+   "total_return_pct": -7.92,
+   "equity_final": 9208439,
    "max_drawdown_pct": 10.79,
    "avg_hold_days": 4.18,
    "skipped": {
     "gap": 0,
     "limit": 9,
-    "cooldown": 2,
+    "cooldown": 0,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -279,7 +450,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -10.16
+    "2026": -7.92
    },
    "open_positions": [
     {
@@ -291,9 +462,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 6,
-     "bars_held": 13,
-     "last_close": 200000.0,
-     "unrealized_pct": 2.84
+     "bars_held": 14,
+     "last_close": 215000.0,
+     "unrealized_pct": 10.55
     },
     {
      "code": "267850",
@@ -304,15 +475,28 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 132,
+     "bars_held": 2,
+     "last_close": 10300.0,
+     "unrealized_pct": 6.86
+    },
+    {
+     "code": "259960",
+     "name": "Krafton, Inc.",
+     "group": "Packaged Software",
+     "pattern": "box",
+     "entry_date": "2026-11-05",
+     "entry": 209627.0,
+     "stop": 194953.11,
+     "shares": 6,
      "bars_held": 1,
-     "last_close": 9660.0,
-     "unrealized_pct": 0.22
+     "last_close": 218000.0,
+     "unrealized_pct": 3.99
     }
    ]
   },
   "no_sector": {
    "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
-   "signals": 70,
+   "signals": 76,
    "trades": 20,
    "wins": 1,
    "win_rate": 5.0,
@@ -320,14 +504,14 @@
    "avg_loss_pct": -7.42,
    "payoff": 0.87,
    "profit_factor": 0.05,
-   "total_return_pct": -15.41,
-   "equity_final": 8459227,
+   "total_return_pct": -15.06,
+   "equity_final": 8493693,
    "max_drawdown_pct": 15.41,
    "avg_hold_days": 2.85,
    "skipped": {
     "gap": 0,
-    "limit": 43,
-    "cooldown": 2,
+    "limit": 44,
+    "cooldown": 0,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -386,7 +570,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -15.41
+    "2026": -15.06
    },
    "open_positions": [
     {
@@ -398,9 +582,9 @@
      "entry": 21363.9,
      "stop": 20800.0,
      "shares": 83,
-     "bars_held": 17,
-     "last_close": 23600.0,
-     "unrealized_pct": 10.47
+     "bars_held": 18,
+     "last_close": 22800.0,
+     "unrealized_pct": 6.72
     },
     {
      "code": "033780",
@@ -411,9 +595,9 @@
      "entry": 187761.6,
      "stop": 174618.29,
      "shares": 6,
-     "bars_held": 14,
-     "last_close": 192000.0,
-     "unrealized_pct": 2.26
+     "bars_held": 15,
+     "last_close": 194200.0,
+     "unrealized_pct": 3.43
     },
     {
      "code": "086280",
@@ -424,9 +608,9 @@
      "entry": 207119.5,
      "stop": 192621.13,
      "shares": 5,
-     "bars_held": 2,
-     "last_close": 202000.0,
-     "unrealized_pct": -2.47
+     "bars_held": 3,
+     "last_close": 200000.0,
+     "unrealized_pct": -3.44
     },
     {
      "code": "267850",
@@ -437,15 +621,28 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 125,
+     "bars_held": 2,
+     "last_close": 10300.0,
+     "unrealized_pct": 6.86
+    },
+    {
+     "code": "015760",
+     "name": "Korea Electric Power Corporation",
+     "group": "Electric Utilities",
+     "pattern": "box",
+     "entry_date": "2026-11-05",
+     "entry": 30892.4,
+     "stop": 28729.93,
+     "shares": 39,
      "bars_held": 1,
-     "last_close": 9660.0,
-     "unrealized_pct": 0.22
+     "last_close": 31350.0,
+     "unrealized_pct": 1.48
     }
    ]
   },
   "hold_10": {
    "label": "동조 + 패턴, 보유 10일",
-   "signals": 24,
+   "signals": 27,
    "trades": 12,
    "wins": 1,
    "win_rate": 8.33,
@@ -453,14 +650,14 @@
    "avg_loss_pct": -6.87,
    "payoff": 0.62,
    "profit_factor": 0.06,
-   "total_return_pct": -9.46,
-   "equity_final": 9054155,
+   "total_return_pct": -8.1,
+   "equity_final": 9189964,
    "max_drawdown_pct": 9.48,
    "avg_hold_days": 4.17,
    "skipped": {
     "gap": 0,
     "limit": 9,
-    "cooldown": 2,
+    "cooldown": 0,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -514,7 +711,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -9.46
+    "2026": -8.1
    },
    "open_positions": [
     {
@@ -526,15 +723,28 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 134,
+     "bars_held": 2,
+     "last_close": 10300.0,
+     "unrealized_pct": 6.86
+    },
+    {
+     "code": "259960",
+     "name": "Krafton, Inc.",
+     "group": "Packaged Software",
+     "pattern": "box",
+     "entry_date": "2026-11-05",
+     "entry": 209627.0,
+     "stop": 194953.11,
+     "shares": 6,
      "bars_held": 1,
-     "last_close": 9660.0,
-     "unrealized_pct": 0.22
+     "last_close": 218000.0,
+     "unrealized_pct": 3.99
     }
    ]
   },
   "risk_2": {
    "label": "동조 + 패턴, 위험 2% (명목 상한 30%)",
-   "signals": 25,
+   "signals": 28,
    "trades": 9,
    "wins": 0,
    "win_rate": 0.0,
@@ -542,14 +752,14 @@
    "avg_loss_pct": -7.22,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -15.12,
-   "equity_final": 8487543,
+   "total_return_pct": -10.68,
+   "equity_final": 8932380,
    "max_drawdown_pct": 16.49,
    "avg_hold_days": 3,
    "skipped": {
     "gap": 0,
     "limit": 0,
-    "cooldown": 1,
+    "cooldown": 0,
     "size": 13,
     "no_bar": 0,
     "pattern": 0
@@ -598,7 +808,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -15.12
+    "2026": -10.68
    },
    "open_positions": [
     {
@@ -610,9 +820,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 13,
-     "bars_held": 13,
-     "last_close": 200000.0,
-     "unrealized_pct": 2.84
+     "bars_held": 14,
+     "last_close": 215000.0,
+     "unrealized_pct": 10.55
     },
     {
      "code": "267850",
@@ -623,15 +833,28 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 247,
+     "bars_held": 2,
+     "last_close": 10300.0,
+     "unrealized_pct": 6.86
+    },
+    {
+     "code": "259960",
+     "name": "Krafton, Inc.",
+     "group": "Packaged Software",
+     "pattern": "box",
+     "entry_date": "2026-11-05",
+     "entry": 209627.0,
+     "stop": 194953.11,
+     "shares": 11,
      "bars_held": 1,
-     "last_close": 9660.0,
-     "unrealized_pct": 0.22
+     "last_close": 218000.0,
+     "unrealized_pct": 3.99
     }
    ]
   },
   "no_flag": {
    "label": "동조 + 패턴, 깃발형 제외",
-   "signals": 11,
+   "signals": 13,
    "trades": 7,
    "wins": 0,
    "win_rate": 0.0,
@@ -639,14 +862,14 @@
    "avg_loss_pct": -7.21,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -6.37,
-   "equity_final": 9362857,
+   "total_return_pct": -3.94,
+   "equity_final": 9605587,
    "max_drawdown_pct": 7.59,
    "avg_hold_days": 5,
    "skipped": {
     "gap": 0,
     "limit": 1,
-    "cooldown": 2,
+    "cooldown": 0,
     "size": 0,
     "no_bar": 0,
     "pattern": 0
@@ -690,7 +913,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -6.37
+    "2026": -3.94
    },
    "open_positions": [
     {
@@ -702,9 +925,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 7,
-     "bars_held": 13,
-     "last_close": 200000.0,
-     "unrealized_pct": 2.84
+     "bars_held": 14,
+     "last_close": 215000.0,
+     "unrealized_pct": 10.55
     },
     {
      "code": "267850",
@@ -715,9 +938,22 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 137,
+     "bars_held": 2,
+     "last_close": 10300.0,
+     "unrealized_pct": 6.86
+    },
+    {
+     "code": "259960",
+     "name": "Krafton, Inc.",
+     "group": "Packaged Software",
+     "pattern": "box",
+     "entry_date": "2026-11-05",
+     "entry": 209627.0,
+     "stop": 194953.11,
+     "shares": 6,
      "bars_held": 1,
-     "last_close": 9660.0,
-     "unrealized_pct": 0.22
+     "last_close": 218000.0,
+     "unrealized_pct": 3.99
     }
    ]
   }

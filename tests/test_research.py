@@ -204,6 +204,56 @@ class MarketMakingPaper(unittest.TestCase):
         self.assertGreater(r["net_bp_avg"], -65.0)
 
 
+class MarketMakingTouch(unittest.TestCase):
+    """닿으면 체결 변형(P29): 실제 체결 기록(sell_lo·buy_hi)으로 체결 판단."""
+
+    def _rows(self, seq):
+        return [{"ts": i * 10, "bid": b, "ask": a, "bq": 1.0, "aq": 1.0, "sell_lo": lo, "buy_hi": hi}
+                for i, (b, a, lo, hi) in enumerate(seq)]
+
+    def test_both_sides_round_trip_captures_spread(self):
+        seq = [(100.0, 100.5, None, None)] * 30
+        seq += [(100.0, 100.5, 100.0, 100.5)]     # 내 매수 100.0 에 매도 체결, 내 매도 100.5 에 매수 체결 → 왕복
+        seq += [(100.0, 100.5, None, None)] * 3
+        r = ob.mm_touch(self._rows(seq), {"maker_pct": 0.05, "taker_pct": 0.05})
+        self.assertEqual(r["both_sides"], 1)
+        self.assertEqual(r["trades"], 1)
+        # 100.0 → 100.5 = +50bp, 메이커 5+5 → +40bp
+        self.assertAlmostEqual(r["net_bp_avg"], 40.0, places=1)
+
+    def test_one_side_then_maker_exit(self):
+        seq = [(100.0, 100.5, None, None)] * 30
+        seq += [(100.0, 100.5, 100.0, None)]      # 매수만 체결(100.0), 청산 매도 100.5 게시
+        seq += [(100.0, 100.5, None, 100.5)]      # 100.5 에 매수 주도 체결 → 지정가 청산
+        r = ob.mm_touch(self._rows(seq), {"maker_pct": 0.05, "taker_pct": 0.05})
+        self.assertEqual(r["trades"], 1)
+        self.assertEqual(r["both_sides"], 0)
+        self.assertEqual(r["maker_exits"], 1)
+        self.assertAlmostEqual(r["net_bp_avg"], 40.0, places=1)
+
+    def test_no_trade_data_skipped(self):
+        rows = [{"ts": i * 10, "bid": 100.0, "ask": 100.5, "bq": 1.0, "aq": 1.0, "sell_lo": None, "buy_hi": None} for i in range(40)]
+        self.assertTrue(ob.mm_touch(rows, {"maker_pct": 0.05, "taker_pct": 0.05}).get("no_trades"))
+
+    def test_csv_with_trade_columns_and_old_csv(self):
+        import csv
+        with tempfile.TemporaryDirectory() as d:
+            p = os.path.join(d, "s.csv")
+            with open(p, "w", newline="") as fp:
+                w = csv.DictWriter(fp, fieldnames=ob.CSV_FIELDS)
+                w.writeheader()
+                w.writerow({"ts": 1, "venue": "upbit", "coin": "BTC", "bid": 1, "ask": 2, "bid_notional": 3, "ask_notional": 4, "sell_lo": "", "buy_hi": 2})
+            by = ob.load_samples(p)
+            self.assertIsNone(by["upbit:BTC"][0]["sell_lo"])
+            self.assertEqual(by["upbit:BTC"][0]["buy_hi"], 2.0)
+            p2 = os.path.join(d, "old.csv")
+            with open(p2, "w", newline="") as fp:
+                w = csv.DictWriter(fp, fieldnames=["ts", "venue", "coin", "bid", "ask", "bid_notional", "ask_notional"])
+                w.writeheader()
+                w.writerow({"ts": 1, "venue": "okx", "coin": "BTC", "bid": 1, "ask": 2, "bid_notional": 3, "ask_notional": 4})
+            self.assertIsNone(ob.load_samples(p2)["okx:BTC"][0]["sell_lo"])
+
+
 class ResearchHistory(unittest.TestCase):
     def test_same_date_overwrites(self):
         with tempfile.TemporaryDirectory() as d:
