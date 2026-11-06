@@ -1,7 +1,48 @@
 {
   "_comment": "규칙 잠금. 트랙 코드의 규칙 상수와 criteria.json 지문을 적어 둔다. tests/test_verdict.py 가 매번 대조하므로, 규칙을 바꾸면 반드시 (1) proposals.md 에 근거 (2) 그 트랙의 RULE_FIXED 를 새 날짜로 (3) `python verdict.py --lock` 순서로 간다.",
-  "_locked_at": "2026-10-22T08:14:50Z",
-  "criteria_sha256": "bee09d40aacab3d5b7e7a7c17296d1af0acd6e09b4d9e6ed510a3d234f5d1e6c",
+  "_locked_at": "2026-11-06T03:40:51Z",
+  "criteria_sha256": "d0eb36dc1f3f123aa718226bfbb1ea7a31d758d142b13c7247ad28691521698a",
+  "forecast": {
+    "rule_fixed": "2026-11-06",
+    "rules": {
+      "bar_minutes": 120,
+      "coins": [
+        "BTC",
+        "ETH",
+        "SOL",
+        "XRP",
+        "BNB",
+        "DOGE",
+        "LINK",
+        "DOT",
+        "ARB",
+        "AAVE",
+        "PEPE",
+        "BONK"
+      ],
+      "d1_feature": "r12",
+      "d2_features": [
+        "rv12",
+        "r12",
+        "btc_r12"
+      ],
+      "horizon_bars": 6,
+      "lookback_points": 300,
+      "min_analog": 10,
+      "predictors": [
+        "D1",
+        "D2",
+        "D3"
+      ],
+      "ret_bars": 12,
+      "rv_bars": 12,
+      "size_feature": "rv12",
+      "tercile_pct": [
+        33.3,
+        66.7
+      ]
+    }
+  },
   "kr_breakout": {
     "rule_fixed": "2026-10-05",
     "rules": {

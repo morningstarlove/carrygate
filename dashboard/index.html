@@ -55,6 +55,7 @@ td.n,th.n{text-align:right;font-family:var(--font-num);font-variant-numeric:tabu
 tr:last-child td{border-bottom:0}
 td .pill{font-size:11px;padding:0 6px}
 .tbl.wrapfirst td:first-child,.tbl.wrapfirst th:first-child{white-space:normal;min-width:120px}
+.tbl.wraplast td:last-child,.tbl.wraplast th:last-child{white-space:normal;min-width:260px}
 .pos{color:var(--good)} .neg{color:var(--bad)}
 .note{font-size:12px;color:var(--muted);margin-top:8px}
 .err{font-size:13px;color:var(--muted);padding:6px 0}
@@ -80,6 +81,7 @@ details{margin-top:8px} summary{cursor:pointer;font-size:13px;color:var(--accent
     <div class="tile"><div class="k">터틀 추세</div><div class="v" id="t-turtle">…</div><div class="d" id="t-turtle-d"></div></div>
     <div class="tile"><div class="k">추세 전환 4H</div><div class="v" id="t-rev">…</div><div class="d" id="t-rev-d"></div></div>
     <div class="tile"><div class="k">급상승 패턴 1H</div><div class="v" id="t-retest">…</div><div class="d" id="t-retest-d"></div></div>
+    <div class="tile"><div class="k">예측 v2 (12h 폭)</div><div class="v" id="t-forecast">…</div><div class="d" id="t-forecast-d"></div></div>
     <div class="tile"><div class="k">한국 주식 돌파</div><div class="v" id="t-kr">…</div><div class="d" id="t-kr-d"></div></div>
     <div class="tile"><div class="k">초단타 기록</div><div class="v" id="t-scalp">…</div><div class="d" id="t-scalp-d"></div></div>
     <div class="tile"><div class="k">실전 계좌</div><div class="v" id="t-live">…</div><div class="d" id="t-live-d"></div></div>
@@ -97,8 +99,8 @@ details{margin-top:8px} summary{cursor:pointer;font-size:13px;color:var(--accent
       <section class="card wide" id="s-turtle"><h2>터틀 추세추종 (일봉 · 20일 돌파 · 10일 이탈 · 2N · 1%÷N) <span class="when"></span></h2><div class="body"><div class="skeleton"></div><div class="skeleton"></div></div></section>
       <section class="card wide" id="s-reversal"><h2>추세 전환 매매법 (4시간봉 · 저점 유지 · 목선 거래량 돌파 · 눌림 진입) <span class="when"></span></h2><div class="body"><div class="skeleton"></div><div class="skeleton"></div></div></section>
       <section class="card wide" id="s-retest"><h2>급상승·급하락 패턴 (1시간봉 · 1차 상승 · 횡보 지지 구간 · 2차 상승 · 조정 뒤 확인 봉 진입) <span class="when"></span></h2><div class="body"><div class="skeleton"></div><div class="skeleton"></div></div></section>
-      <section class="card" id="s-kr"><h2>한국 주식 ① 거래대금 상위 100 · 업종 동조 <span class="when"></span></h2><div class="body"><div class="skeleton"></div><div class="skeleton"></div></div></section>
-      <section class="card" id="s-krb"><h2>한국 주식 ② 패턴 돌파 종이매매 (순방향) <span class="when"></span></h2><div class="body"><div class="skeleton"></div><div class="skeleton"></div></div></section>
+      <section class="card wide" id="s-kr"><h2>한국 주식 ① 거래대금 상위 100 · 업종 동조 <span class="when"></span></h2><div class="body"><div class="skeleton"></div><div class="skeleton"></div></div></section>
+      <section class="card wide" id="s-krb"><h2>한국 주식 ② 패턴 돌파 종이매매 (순방향) <span class="when"></span></h2><div class="body"><div class="skeleton"></div><div class="skeleton"></div></div></section>
       <section class="card wide" id="s-krbt"><h2>한국 주식 ③ 3년 백테스트 <span class="when"></span></h2><div class="body"><div class="skeleton"></div></div></section>
       <section class="card wide" id="s-grid"><h2>그리드 · 종사종팔 v4/v5 (SOXL, 종가 분할 매매) <span class="when"></span></h2><div class="body"><div class="skeleton"></div><div class="skeleton"></div></div></section>
     </div>
@@ -116,6 +118,7 @@ details{margin-top:8px} summary{cursor:pointer;font-size:13px;color:var(--accent
     <h3>연구 <span class="count">판단에 참고하는 사실 수집</span></h3>
     <p class="desc">매매 규칙이 아니라 "언제·무엇이 통하나"를 매일 쌓는 것. 결론이 나면 위의 매매 전략으로 올라간다.</p>
     <div class="grid">
+      <section class="card wide" id="s-forecast"><h2>예측 v2 (2시간봉 · 앞 12시간 움직임 크기 · 방향 확률은 채점만 · 매매에 안 씀) <span class="when"></span></h2><div class="body"><div class="skeleton"></div><div class="skeleton"></div></div></section>
       <section class="card" id="s-scalp"><h2>초단타 고정 규칙 성적표 (1·5·15분봉) <span class="when"></span></h2><div class="body"><div class="skeleton"></div><div class="skeleton"></div></div></section>
       <section class="card" id="s-research"><h2>초단타 보조 연구 (시간대 · 펀딩 · 선행) <span class="when"></span></h2><div class="body"><div class="skeleton"></div></div></section>
       <section class="card" id="s-orderbook"><h2>호가창 (호가 폭 · 잔량 불균형) <span class="when"></span></h2><div class="body"><div class="skeleton"></div></div></section>
@@ -134,7 +137,7 @@ details{margin-top:8px} summary{cursor:pointer;font-size:13px;color:var(--accent
   var FILES={status:"status.json",funding:"funding.json",basis:"basis.json",turtle:"turtle.json",reversal:"reversal.json",retest:"retest.json",live:"live.json",scalp:"scalp.json",
              research:"research.json",orderbook:"orderbook.json",fsig:"funding_signal.json",kimchi:"kimchi.json",
              macro:"macro.json",listing:"listing.json",momentum:"momentum.json",grid:"grid.json",
-             kr:"kr_sector.json",krb:"kr_breakout.json",krbt:"kr_backtest.json",verdict:"verdict.json"};
+             kr:"kr_sector.json",krb:"kr_breakout.json",krbt:"kr_backtest.json",verdict:"verdict.json",forecast:"forecast.json"};
   var $=function(id){return document.getElementById(id);};
   function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
   function num(x,d){ if(x==null||isNaN(x)) return "-"; return Number(x).toFixed(d==null?2:d); }
@@ -262,7 +265,7 @@ details{margin-top:8px} summary{cursor:pointer;font-size:13px;color:var(--accent
       '<details open><summary>시장별 오늘 단계 (마지막 4시간봉 '+esc(lastBar)+' UTC · 목선 = 돌파·지정가 가격, 손절 = 유지 저점)</summary>'+
       tbl([{t:"시장"},{t:"단계"},{t:"종가",n:1},{t:"목선 / 진입가",n:1},{t:"손절",n:1},{t:"미실현 / 남은봉",n:1},{t:"3년 순 / 보유",n:1}],mrow)+'</details>'+
       '<div class="note">업비트 3년 구조 '+(cn.setups||0)+'개 중 진입 전 저점 이탈 '+(cn.stopped_before_entry||0)+' · 거래량 부족 돌파 '+(cn.fake_breaks||0)+' · 눌림 없음 '+(cn.no_pullback||0)+' · 만료 '+(cn.expired||0)+'. '+
-      '같은 코인인데 업비트와 OKX 성적이 크게 다르고 매매 겹침이 절반 이하라 봉 하나 차이에 민감한 규칙이다. OKX 숫자를 실력으로 본다. 거래량 2배 조건은 수익이 아니라 낙폭·매매 수를 줄이는 장치였고, 눌림 대기는 OKX 에서 손해였다. 순방향 20건 전엔 판단하지 않는다. 하루 1회 기록이라 4시간봉 6개 중 마지막 봉 상태만 남는다.</div>';
+      '같은 코인인데 업비트와 OKX 성적이 크게 다르고 매매 겹침이 절반 이하라 봉 하나 차이에 민감한 규칙이다. OKX 숫자를 실력으로 본다. 거래량 2배 조건은 수익이 아니라 낙폭·매매 수를 줄이는 장치였고, 눌림 대기는 OKX 에서 손해였다. 순방향 20건 전엔 판단하지 않는다. 2026-11-01 부터 4시간봉이 닫힐 때마다(KST 09:07·13:07·17:07·21:07·01:07·05:07) 저장소 기록이 갱신되고 봉마다 한 줄이 reversal_bars.jsonl 에 남는다(제안함 P3). 이 카드는 매일 17:40 사본 기준이라 "최신으로" 를 누르면 지금 저장소 값으로 바뀐다.</div>';
   }
 
   // ---------------- 급상승·급하락 패턴 (마일스톤 16) ----------------
@@ -469,6 +472,34 @@ details{margin-top:8px} summary{cursor:pointer;font-size:13px;color:var(--accent
       '<div class="note">승률 80% 안팎이라 평소엔 꾸준히 버는 것처럼 보이지만, 급락 한 번에 그동안 번 것을 내놓는 구조. 낙폭 −40~−50% 를 실제로 견딜 수 있는지가 핵심.</div>';
   }
 
+  // ---------------- 예측 v2 (제안함 P31, docs/FORECAST_PLAN.md) ----------------
+  var FBK={low:["하","neutral"],mid:["중","neutral"],high:["상","warn"]};
+  function pc(x){ return x==null?"-":num(x*100,0)+"%"; }
+  function rForecast(d){
+    var s=section("s-forecast"); s.when.textContent=d.date||"";
+    var sm=d.summary||{}; var c=d.cumulative||{}; var szA=((c.size||{}).all)||{}; var rules=d.rules||{};
+    $("t-forecast").innerHTML=pill("폭 상 "+((sm.size_high||[]).length)+" · 하 "+((sm.size_low||[]).length)+" / "+(sm.coins_total||0),"neutral");
+    $("t-forecast-d").textContent="채점 "+(c.days||0)+"일 "+(c.points||0)+"건 · 크기 비율 "+(szA.ratio_high_low!=null?num(szA.ratio_high_low,2):"-")+" (규칙 고정 "+(rules.rule_fixed||"")+")";
+    var rows=Object.keys(d.coins||{}).map(function(k){ var p=d.coins[k]; if(!p.ok) return [esc(k), pill("없음","neutral"), esc(p.reason||""), "-","-","-","-","-"];
+      var b=FBK[p.size.bucket]||[p.size.bucket||"-","neutral"]; var d2=p.direction.D2;
+      return [esc(k), pill(b[0],b[1])+" "+num(p.size.expected_abs_pct,2)+"%", num(p.size.all_abs_pct,2)+"%", pc(p.direction.D1.p_up), pc(d2.p_up)+(d2.fallback?' <span class="pill neutral">대체</span>':' <span class="pill neutral">n='+d2.n+'</span>'), pc(p.direction.D3.p_up), sgn(d2.q25_pct,2)+" / "+sgn(d2.median_pct,2)+" / "+sgn(d2.q75_pct,2), esc((p.bar_utc||"").slice(5))]; });
+    var parts=[["전체","all"],["앞 절반","first_half"],["뒤 절반","second_half"]];
+    var crow=parts.map(function(pp){ var sz=((c.size||{})[pp[1]])||{}; var dr=((c.direction||{})[pp[1]])||{}; var n=sz.n||{}; var m=sz.mean_abs_pct||{};
+      var hit=function(k){ var x=dr[k]||{}; return x.hit_rate!=null?num(x.hit_rate*100,1)+"% ("+x.decisive+")":"-"; }; var br=function(k){ var x=dr[k]||{}; return x.brier!=null?num(x.brier,4):"-"; };
+      return [esc(pp[0]), sz.ratio_high_low!=null?num(sz.ratio_high_low,2):"-", (m.high!=null?num(m.high,2)+"%":"-")+" ("+(n.high||0)+")", (m.low!=null?num(m.low,2)+"%":"-")+" ("+(n.low||0)+")", hit("D1"), hit("D2"), hit("D3"), br("D1")+" / "+br("D2")+" / "+br("D3")]; });
+    var errs=Object.keys(d.errors||{}).map(function(k){return esc(k+": "+d.errors[k]);});
+    s.body.innerHTML='<div class="verdict">'+esc(sm.verdict||"")+'<br>맞힐 수 있는 것만 예측한다. <b>크기</b> = 최근 24시간 변동성 분위(상·중·하)별로 과거 300시점의 12h 뒤 |수익| 중앙값. <b>방향</b>은 세 예측기를 기록·채점만 한다 — D1 24h 반전, D2 상황(변동성·24h·BTC 분위)이 같은 과거의 상승 비율, D3 기준선(과거 전체 상승 비율 = 정보 없음). 사전 선별(11/5)에서 방향은 전부 잡음, 크기만 안정(비율 1.36). 60일 뒤 판정 PASS 면 기존 트랙의 포지션 크기 조절·문지기로 제안.</div>'+
+      '<details open><summary>오늘 예측 (마지막 2시간봉 기준 · 폭 = 앞 12h 예상 |수익| 중앙값)</summary>'+
+      tbl([{t:"코인"},{t:"폭 분위 · 예상폭",n:1},{t:"전체 중앙값",n:1},{t:"D1 상승",n:1},{t:"D2 상승",n:1},{t:"D3 기준",n:1},{t:"D2 분포 25/50/75 %",n:1},{t:"봉 UTC"}],rows)+'</details>'+
+      '<details open><summary>누적 채점 ('+(c.days||0)+'일 '+(c.points||0)+'건'+(c.first_date?', '+esc(c.first_date)+' ~ '+esc(c.last_date||""):'')+(c.missing_days?', 결손 '+c.missing_days+'일':'')+')</summary>'+
+      tbl([{t:"구간"},{t:"크기 비율 상÷하",n:1},{t:"상위 실제 |r|",n:1},{t:"하위 실제 |r|",n:1},{t:"D1 적중",n:1},{t:"D2 적중",n:1},{t:"D3 적중",n:1},{t:"Brier D1/D2/D3",n:1}],crow)+'</details>'+
+      '<div class="note">합격선(봉인): 크기 비율 ≥ 1.20 이고 앞·뒤 30일 각 ≥ 1.10 → 합격, < 1.05 → 불합격. 방향은 잡음 바닥 95% 선 초과 + Brier 가 D3 보다 0.005 이상 좋을 때만 합격, 아니면 기록 중단. 이 카드의 확률로 매매하지 않는다.'+(errs.length?'<br>오류: '+errs.join(" · "):"")+'</div>';
+  }
+  function rForecastMissing(){
+    $("t-forecast").innerHTML=pill("첫 실행 전","neutral"); $("t-forecast-d").textContent="매일 09:18 KST 실행 뒤 표시";
+    section("s-forecast").body.innerHTML='<div class="err">아직 결과 파일이 없다 (forecast.json). 제안함 P31 병합 뒤 CARRYGATE daily 가 처음 돌면(매일 09:18 KST) 생기고, 17:37 KST 자동 작업이 여기 옮겨 싣는다. 설계는 docs/FORECAST_PLAN.md.</div>';
+  }
+
   // ---------------- 판정 규율 (마일스톤 14, Phil 방식) ----------------
   var VST={NOT_YET:["판단 전","neutral"],PASS:["합격","good"],FAIL:["불합격","bad"]};
   function vpill(st){ var x=VST[st]||[st||"-","neutral"]; return pill(x[0],x[1]); }
@@ -476,8 +507,8 @@ details{margin-top:8px} summary{cursor:pointer;font-size:13px;color:var(--accent
   function rVerdict(d){
     var s=section("s-verdict"); s.when.textContent=(d.date||"")+" · 기준 봉인 "+(d.criteria_sealed||"");
     var t=d.tracks||{}; var sm=d.summary||{}; var rl=d.rules_lock||{};
-    var order=["kr_breakout","turtle","reversal","retest","scalp"]; var NM={kr_breakout:"한국 주식 돌파",turtle:"터틀",reversal:"추세 전환",retest:"급상승 패턴 1H",scalp:"초단타"};
-    var MIN={kr_breakout:"15건",turtle:"20건/거래소",reversal:"20건/거래소",retest:"20건/거래소",scalp:"7일"};
+    var order=["kr_breakout","turtle","reversal","retest","scalp","forecast"]; var NM={kr_breakout:"한국 주식 돌파",turtle:"터틀",reversal:"추세 전환",retest:"급상승 패턴 1H",scalp:"초단타",forecast:"예측 v2 (크기)"};
+    var MIN={kr_breakout:"15건",turtle:"20건/거래소",reversal:"20건/거래소",retest:"20건/거래소",scalp:"7일",forecast:"60일"};
     var pass=order.filter(function(k){return sm[k]==="PASS";}).length, fail=order.filter(function(k){return sm[k]==="FAIL";}).length, wait=order.filter(function(k){return sm[k]==="NOT_YET";}).length;
     $("t-verdict").innerHTML=(pass?pill("합격 "+pass,"good")+" ":"")+(fail?pill("불합격 "+fail,"bad")+" ":"")+pill("판단 전 "+wait,"neutral");
     $("t-verdict-d").textContent="규칙 잠금 "+(rl.ok?"일치":"불일치")+" · 기준 봉인 "+(d.criteria_sealed||"");
@@ -493,9 +524,12 @@ details{margin-top:8px} summary{cursor:pointer;font-size:13px;color:var(--accent
     if(t.scalp){ var c=t.scalp;
       var top=(c.top||[])[0]; var cw=(c.warnings||[]).length?' '+pill("다중 비교 주의","warn"):"";
       rows.push([esc(NM.scalp), vpill(c.status)+cw, (c.history_days||0)+"일", top?(top.pos_days+"/"+top.days+"일 플러스"):"-", "후보 "+(c.candidates||0)+" / 조합 "+(c.combos||0)+(top?"<br>1위 "+esc(top.key)+" "+sgn(top.net_pct,2,"%"):""), "-", MIN.scalp, esc(c.reason||"")]); }
+    if(t.forecast){ var fc=t.forecast; var fsz=((fc.size||{}).all)||{}; var fdr=((fc.direction||{}).all)||{}; var fpr=fc.predictors||{};
+      var fh=function(k){ var x=fdr[k]||{}; return x.hit_rate!=null?num(x.hit_rate*100,0)+"%":"-"; };
+      rows.push([esc(NM.forecast), vpill(fc.status), (fc.days||0)+"일 / "+(fc.points||0)+"건", "방향 D1 "+fh("D1")+" D2 "+fh("D2")+" 기준 "+fh("D3"), "크기 비율 "+(fsz.ratio_high_low!=null?num(fsz.ratio_high_low,2):"-")+"<br>D1 "+vpill((fpr.D1||{}).status)+" D2 "+vpill((fpr.D2||{}).status), "-", MIN.forecast, esc(fc.reason||"")]); }
     var errs=Object.keys(d.errors||{}).map(function(k){return esc(k+": "+d.errors[k]);});
     s.body.innerHTML='<div class="verdict">합격선은 결과가 나오기 전에 <code>criteria.json</code> 에 봉인했고, <code>verdict.py</code> 가 매일 기계로 판정한다. 최소 건수 전에는 "판단 전". 운 보정 z = (실제 승수 − 백테스트 승률대로의 기대 승수) ÷ 표준편차. z 가 −2 아래면 불운이 아니라 백테스트가 부풀려진 것(생존 편향)으로 본다. 규칙 상수는 <code>rules_lock.json</code> 에 잠겨 있어 사전 등록(<code>proposals.md</code>) 없이 바꾸면 CI 가 막는다.</div>'+
-      tbl([{t:"트랙"},{t:"판정"},{t:"순방향",n:1},{t:"승률",n:1},{t:"성적",n:1},{t:"운 보정 z"},{t:"최소"},{t:"사유"}],rows).replace('class="tbl"','class="tbl wrapfirst"')+
+      tbl([{t:"트랙"},{t:"판정"},{t:"순방향",n:1},{t:"승률",n:1},{t:"성적",n:1},{t:"운 보정 z"},{t:"최소"},{t:"사유"}],rows).replace('class="tbl"','class="tbl wrapfirst wraplast"')+
       '<div class="note">규칙 잠금: '+(rl.ok?pill("일치","good"):pill("불일치 — 사전 등록 없이 규칙이 바뀌었다","bad")+(rl.diffs&&rl.diffs.length?'<br>'+rl.diffs.map(esc).join("<br>"):""))+
       (errs.length?'<br>오류: '+errs.join(" · "):"")+'<br>합격 = 소액 실전 설계 후보. 불합격 = 규칙은 고치지 않고 "이 규칙은 안 된다"로 기록. 초단타 불합격은 날마다 다시 계산된다.</div>';
   }
@@ -504,14 +538,14 @@ details{margin-top:8px} summary{cursor:pointer;font-size:13px;color:var(--accent
     section("s-verdict").body.innerHTML='<div class="err">아직 결과 파일이 없다 (verdict.json). CARRYGATE daily(매일 09:18 KST) 또는 KR sector breakout(평일 15:50 KST) 이 처음 돌면 생긴다.</div>';
   }
 
-  var RENDER={status:rStatus,funding:rFunding,basis:rBasis,turtle:rTurtle,reversal:rReversal,retest:rRetest,live:rLive,scalp:rScalp,research:rResearch,orderbook:rOrderbook,fsig:rFsig,kimchi:rKimchi,macro:rMacro,listing:rListing,momentum:rMomentum,grid:rGrid,kr:rKr,krb:rKrb,krbt:rKrbt,verdict:rVerdict};
-  var SECTION={status:"s-status",funding:"s-funding",basis:"s-basis",turtle:"s-turtle",reversal:"s-reversal",retest:"s-retest",live:"s-live",scalp:"s-scalp",research:"s-research",orderbook:"s-orderbook",fsig:"s-fsig",kimchi:"s-kimchi",macro:"s-macro",listing:"s-listing",momentum:"s-momentum",grid:"s-grid",kr:"s-kr",krb:"s-krb",krbt:"s-krbt",verdict:"s-verdict"};
+  var RENDER={status:rStatus,funding:rFunding,basis:rBasis,turtle:rTurtle,reversal:rReversal,retest:rRetest,live:rLive,scalp:rScalp,research:rResearch,orderbook:rOrderbook,fsig:rFsig,kimchi:rKimchi,macro:rMacro,listing:rListing,momentum:rMomentum,grid:rGrid,kr:rKr,krb:rKrb,krbt:rKrbt,verdict:rVerdict,forecast:rForecast};
+  var SECTION={status:"s-status",funding:"s-funding",basis:"s-basis",turtle:"s-turtle",reversal:"s-reversal",retest:"s-retest",live:"s-live",scalp:"s-scalp",research:"s-research",orderbook:"s-orderbook",fsig:"s-fsig",kimchi:"s-kimchi",macro:"s-macro",listing:"s-listing",momentum:"s-momentum",grid:"s-grid",kr:"s-kr",krb:"s-krb",krbt:"s-krbt",verdict:"s-verdict",forecast:"s-forecast"};
 
   function safeRender(key,data){
     try{ RENDER[key](data); }catch(e){ setErr(SECTION[key],"render",String(e&&e.message||e)); }
   }
   function markTileFail(key){
-    var map={status:"t-gate",funding:"t-carry",basis:"t-basis",turtle:"t-turtle",reversal:"t-rev",retest:"t-retest",scalp:"t-scalp",live:"t-live",kr:"t-kr",verdict:"t-verdict"};
+    var map={status:"t-gate",funding:"t-carry",basis:"t-basis",turtle:"t-turtle",reversal:"t-rev",retest:"t-retest",scalp:"t-scalp",live:"t-live",kr:"t-kr",verdict:"t-verdict",forecast:"t-forecast"};
     if(map[key]){ $(map[key]).textContent="-"; }
   }
   // ---------------- 불러오기 ----------------
@@ -526,6 +560,7 @@ details{margin-top:8px} summary{cursor:pointer;font-size:13px;color:var(--accent
     if(k==="retest"){ rRetestMissing(); return true; }
     if(k==="grid"){ rGridMissing(); return true; }
     if(k==="verdict"){ rVerdictMissing(); return true; }
+    if(k==="forecast"){ rForecastMissing(); return true; }
     if(k==="kr"||k==="krb"||k==="krbt"){ rKrMissing(k); return true; }
     return false;
   }
