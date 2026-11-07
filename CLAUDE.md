@@ -23,6 +23,7 @@
 ## 작업 방식
 - 브랜치는 `main` 에서 따고 PR 로 합친다. 워크플로는 `main` 에서만 돈다.
 - **역할 분담:** 설계·기획·판정 해석·규칙 제안은 세션의 최상위 모델이 직접. 자료 수집·형식 변환·반복 검산·긴 파일 훑기는 하위 에이전트(Agent 도구, 더 작은 모델)에 목표·금지 사항·읽을 파일을 명시해 맡긴다. 하위 에이전트는 규칙 상수·`criteria.json`·`rules_lock.json` 을 고치지 않는다.
+- **새 트랙·규칙을 시작하면 "한 장 카드"를 반드시 만든다** (사용자 지시 2026-11-07): 실데이터 캔들 + 진입·청산 지점 + 어떤 논리로 들어가는가 + 목표 + 기대값(수수료 뺀 뒤) + 결과 예측 + 다음 판정일을 **SVG 한 장**으로. `python track_card.py --bars <봉 CSV> --spec docs/cards/<번호_이름>.json --out docs/cards/<번호_이름>.svg` (scalp 규칙은 `--preset scalp` 로 실제 진입·청산을 자동 표시). 카드와 봉 CSV(`docs/cards/data/`)는 규칙을 추가하는 그 PR 에 넣고, `docs/cards/README.md` 목록과 proposals 줄에 링크한다. 카드 없는 트랙 추가는 미완성이다.
 - **마일스톤마다 인수인계서를 갱신한다.** `HANDOVER.md` 0절(상태)·해당 절, `docs/sessions/YYYY-MM-DD_*.md`(한 일·숫자·사용자 결정·Routine). 사용자는 코딩 지식이 없다 — 문서는 그 전제로 쓴다.
 - 답은 핵심 문장으로 짧게. 질문은 최소화하고, 할 때는 선택지를 준다. 자체 시험을 거친 뒤 최종 보고 형태로.
 - 워크플로에서 결과를 커밋할 때는 `python push_results.py -m "<메시지>" <경로…>` 를 쓴다(판정 파일을 쓰면 `--verdict`). `git pull --rebase || true; git push` 직접 금지 — 2026-11-03 동시 저장 충돌로 하루 결과 유실.
@@ -36,7 +37,7 @@
 ## 시험 (인터넷 불필요, 수정 뒤 반드시)
 ```
 python -m unittest tests.test_scalp tests.test_research tests.test_midterm tests.test_momentum tests.test_live tests.test_turtle tests.test_reversal tests.test_retest tests.test_relay tests.test_verdict tests.test_grid tests.test_selfcheck tests.test_common tests.test_push_results
-python -m unittest tests.test_kr_universe tests.test_patterns tests.test_kr_breakout
+python -m unittest tests.test_kr_universe tests.test_patterns tests.test_kr_breakout tests.test_track_card
 python selfcheck.py
 ```
 실데이터 확인은 GitHub Actions `CARRYGATE daily` → Run workflow → `dry_run`. 전체 목록은 `HANDOVER.md` 4절 "테스트".
