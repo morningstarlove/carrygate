@@ -114,6 +114,12 @@ jobs:
         continue-on-error: true
         run: python scripts/scalp_oos_check.py --auto
 
+      # 전날 이긴 묶음(30·60분 되돌림 vs 돌파)의 오늘 성적을 따로 센다 (P30, 2026-11-07)
+      - name: Scalp regime rotation (초단타 국면 교대)
+        if: inputs.day == ''
+        continue-on-error: true
+        run: python scalp_rotate.py
+
       - name: Live carry monitor (실전 캐리 감시, 지갑 주소만)
         if: inputs.day == ''
         continue-on-error: true
@@ -187,7 +193,7 @@ jobs:
           python push_results.py --verdict -m "$MSG" \
             status.json history.jsonl funding.json funding_history.jsonl scalp.json scalp_history.jsonl scalp_binance.json scalp_binance_history.jsonl research.json research_history.jsonl \
             basis.json basis_history.jsonl funding_signal.json funding_signal_history.jsonl kimchi.json kimchi_history.jsonl \
-            macro.json listing.json momentum.json momentum_history.jsonl live.json live_history.jsonl turtle.json turtle_history.jsonl reversal.json reversal_history.jsonl reversal_bars.jsonl retest.json retest_history.jsonl verdict.json verdict_history.jsonl scalp_oos.json scalp_oos_frozen.json \
+            macro.json listing.json momentum.json momentum_history.jsonl live.json live_history.jsonl turtle.json turtle_history.jsonl reversal.json reversal_history.jsonl reversal_bars.jsonl retest.json retest_history.jsonl verdict.json verdict_history.jsonl scalp_oos.json scalp_oos_frozen.json scalp_rotate.json \
             grid.json grid_history.jsonl \
             data/kr_funding.json data/binance_1m data/cg_funding_snapshots.jsonl data/etf data/upbit_markets.json
 
