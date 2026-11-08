@@ -3,7 +3,7 @@
  "rule_fixed": "2026-11-07",
  "forward_from": "2026-11-06",
  "method": "전날 18시장 합계가 큰 묶음(되돌림=30·60분 VWAP 지정가+평균회귀 지정가, 돌파=30·60분 20봉 돌파; 같으면 되돌림)의 오늘 합계",
- "date": "2026-11-07",
+ "date": "2026-11-08",
  "next_pick": "rev",
  "backtest": {
   "days": 23,
@@ -14,12 +14,12 @@
   "picked_rev": 16
  },
  "forward": {
-  "days": 1,
-  "net_pct": -4.85,
-  "plus_days": 0,
-  "rev_only_pct": 9.085,
-  "brk_only_pct": -4.85,
-  "picked_rev": 0
+  "days": 2,
+  "net_pct": 5.429,
+  "plus_days": 1,
+  "rev_only_pct": 19.365,
+  "brk_only_pct": -16.822,
+  "picked_rev": 1
  },
  "forward_days": [
   {
@@ -28,6 +28,13 @@
    "net_pct": -4.8503,
    "rev_pct": 9.0852,
    "brk_pct": -4.8503
+  },
+  {
+   "eval_day": "2026-11-07",
+   "pick": "rev",
+   "net_pct": 10.2798,
+   "rev_pct": 10.2798,
+   "brk_pct": -11.9713
   }
  ],
  "min_forward_days": 14
