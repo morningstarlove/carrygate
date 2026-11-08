@@ -315,3 +315,29 @@ class FollowRule(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class MarketMakingWide(unittest.TestCase):
+    """P31: 닿으면 체결 결과를 시장별로 남기고 호가폭 ≥ WIDE_SPREAD_BP 시장만 합산."""
+
+    def _rows(self, bid, ask, hits):
+        seq = [(bid, ask, None, None)] * 30 + [(bid, ask, bid, ask)] * hits + [(bid, ask, None, None)] * 3
+        return [{"ts": i * 10, "bid": b, "ask": a, "bq": 1.0, "aq": 1.0, "sell_lo": lo, "buy_hi": hi}
+                for i, (b, a, lo, hi) in enumerate(seq)]
+
+    def test_wide_subset_and_by_market(self):
+        self.assertEqual(ob.WIDE_SPREAD_BP, 20.0)   # 2026-11-08 고정: 업비트 왕복 지정가 수수료 10bp 의 2배
+        by = {"upbit:TRX": self._rows(437.0, 438.0, 2),      # 호가폭 ≈ 22.9bp → 넓음
+              "upbit:BTC": self._rows(100000.0, 100010.0, 2)}  # 호가폭 1bp → 좁음
+        markets, summary = ob.analyze(by)
+        s = summary["upbit"]
+        self.assertEqual(set(s["mmt_by_market"]), {"TRX", "BTC"})
+        self.assertTrue(s["mmt_by_market"]["TRX"]["wide"])
+        self.assertFalse(s["mmt_by_market"]["BTC"]["wide"])
+        self.assertEqual(s["mmt_wide_markets"], ["TRX"])
+        self.assertEqual(s["mmt_wide_trades"], s["mmt_by_market"]["TRX"]["trades"])
+        self.assertAlmostEqual(s["mmt_wide_net_bp_sum"], s["mmt_by_market"]["TRX"]["net_bp_sum"], places=3)
+        # 전체 합(P29)은 바뀌지 않는다: 시장별 합 = 거래소 합
+        self.assertAlmostEqual(sum(x["net_bp_sum"] for x in s["mmt_by_market"].values()), s["mmt_net_bp_sum"], places=2)
+        self.assertGreater(s["mmt_by_market"]["TRX"]["net_bp_avg"], 0)   # 반폭 11.4bp > 수수료 5bp → 왕복 플러스
+
