@@ -1,4 +1,4 @@
-# 2026-11-06 예측 v2 구현 (제안함 P32 반영, 사용자 결정 "A")
+# 2026-11-06 예측 v2 구현 (제안함 P33 반영, 사용자 결정 "A")
 
 ## 사용자 결정
 11/5 설계서 `docs/FORECAST_PLAN.md` 선택지 중 **A 구현 시작**.
@@ -16,6 +16,9 @@
 | `.github/workflows/carrygate.yml` | "Forecast v2" 단계(retest 뒤, verdict 앞), `--report`, 테스트 목록, 저장 목록 |
 | `selfcheck.py` | `forecast.json` 모양·`forecast_history.jsonl` 날짜 검사 |
 | 현황판 | 타일 "예측 v2 (12h 폭)", 카드(오늘 예측 표 + 누적 채점 표), 판정 카드에 줄. **라이브 버전을 읽고 그 위에** 고쳐 publish, `dashboard/index.html` 백업도 라이브와 맞춤(라이브에만 있던 수정 3곳 포함) |
+
+## 한 장 카드 (11/8 추가, CLAUDE.md 11/7 규칙)
+`docs/cards/p33_forecast.svg` — OKX BTC 2시간봉 실데이터(`docs/cards/data/okx_btc_2h.csv`)에 `forecast.predict_one` 을 세 시점에 돌려 예상 폭(점선)과 12h 뒤 실제 수익을 그렸다. `python track_card.py --bars docs/cards/data/okx_btc_2h.csv --spec docs/cards/p33_forecast.json --out docs/cards/p33_forecast.svg --last 84`. 번호는 main 과 두 번 겹쳐 P28→P31→P33 으로 옮겼다(닮은 과거 기각은 P32).
 
 ## 확인한 것
 - fixture dry-run: 12/12 종목 예측. BTC 10/2~11/4 12h \|수익\| 중앙값 0.58%(조용한 달), 상위 분위 예상폭 0.578%.
