@@ -26,8 +26,12 @@
 - 누수 검사 통과, 단위시험 전체 통과, selfcheck 문제 없음.
 - OKX 실데이터는 이 세션에서 접속 불가(000) — **병합 뒤 첫 daily 실행 로그 "Forecast v2" 단계에서 확인해야 한다.** 실패해도 continue-on-error 라 다른 단계는 돈다.
 
+## 병합·실데이터 확인 (11/8)
+- 사용자 결정 "니가 병합하고 진행해" → PR #95 를 `main` 에 병합(`9abe34f`). main 이 세 번 앞서가 제안 번호가 P28→P31→P33 으로 옮겨졌다(닮은 과거 기각 P32).
+- `CARRYGATE daily` dry_run 실행 #89(main): **Forecast v2 단계 성공** — OKX 2시간봉 12/12 종목 예측(봉 2026-11-08 10:00 UTC, 전부 변동성 하위 분위, 예상 폭 BTC 0.53% ~ PEPE 2.08%, D2 ARB 는 닮은 상황 8개라 D3 로 대체). Verdict `[forecast] NOT_YET 채점 0일`, Unit tests·Selfcheck 성공. dry_run 이라 저장 안 함 — 첫 저장 11/9 09:18.
+
 ## 남은 것
-1. 갱신 Routine(trig_015SCRNNwatvAhHFdJF8F9Z9) 파일 목록에 `forecast.json` 추가 — 그 세션(session_01UBXi3SEnxJwqCj4dY5q4J5)만 고칠 수 있어 메시지로 요청함. 답이 없으면 사용자가 그 세션에서 "프롬프트 1단계 목록에 forecast.json 추가" 라고 말하면 된다.
+1. ~~갱신 Routine 파일 목록에 `forecast.json` 추가~~ — 그 세션이 11/6 반영 완료.
 2. 첫 daily 뒤 `forecast.json` 이 생겼는지, 다음 날 `scored_now` 가 12인지 점검 루틴이 보고.
 3. 2027-01-05 전후 첫 판정. PASS 면 설계서 4절(포지션 크기 조절·문지기) 제안함 등록.
 
