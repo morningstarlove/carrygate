@@ -26,6 +26,15 @@ FAMILIES = {
 }
 MIN_FORWARD_DAYS = 14          # 첫 판단까지 순방향 일수 (판단은 사람이 이 문서 기준으로 한다)
 
+# 보조 기록(제안함 P34, 2026-11-08 추가): 60분봉만으로 같은 교대를 돌린 것과 '60분 되돌림 고정'을 나란히 센다.
+# 11/8 보고에서 10/13~11/7 사후로 "60분만 교대 < 60분 되돌림 고정" 이 보여 세운 가설. P30 계산은 건드리지 않는다. 새 문턱 없음.
+AUX_FIXED = "2026-11-08"
+AUX_FORWARD_FROM = "2026-11-08"     # 이 평가일부터 순방향 (규칙은 평가일 11/7 까지 보고 만듦)
+FAMILIES.update({
+    "rev60": {"tfs": ("60m",), "strategies": ("vwap_fade_lim", "mr_z20_lim")},
+    "brk60": {"tfs": ("60m",), "strategies": ("brk_20",)},
+})
+
 
 def load_history(path="scalp_history.jsonl"):
     rows = []
@@ -55,13 +64,14 @@ def family_sum(rec, fam):
     return (round(tot, 4), n)
 
 
-def rotate(rows):
+def rotate(rows, rev_fam="rev", brk_fam="brk"):
     """[(평가일, 고른 묶음, 그날 성적, 되돌림 합, 돌파 합)] — 첫날은 전날이 없어 빠진다.
-    30·60분봉 행이 없는 날(10/13 전)은 묶음 합이 0개 행이라 건너뛴다."""
+    30·60분봉 행이 없는 날(10/13 전)은 묶음 합이 0개 행이라 건너뛴다.
+    rev_fam/brk_fam 을 "rev60"/"brk60" 으로 주면 60분봉만의 교대(P34 보조 기록)."""
     days = []
     for r in rows:
-        rev, nr = family_sum(r, "rev")
-        brk, nb = family_sum(r, "brk")
+        rev, nr = family_sum(r, rev_fam)
+        brk, nb = family_sum(r, brk_fam)
         if nr == 0 or nb == 0:
             continue
         days.append((r.get("eval_day_utc") or r.get("date"), rev, brk))
@@ -93,7 +103,13 @@ def build(rows):
     seq, nxt = rotate(rows)
     back = [d for d in seq if d["eval_day"] < FORWARD_FROM]
     fwd = [d for d in seq if d["eval_day"] >= FORWARD_FROM]
-    return {"schema": "carrygate-scalp-rotate/1", "rule_fixed": RULE_FIXED, "forward_from": FORWARD_FROM,
+    seq60, nxt60 = rotate(rows, "rev60", "brk60")
+    back60 = [d for d in seq60 if d["eval_day"] < AUX_FORWARD_FROM]
+    fwd60 = [d for d in seq60 if d["eval_day"] >= AUX_FORWARD_FROM]
+    aux = {"fixed": AUX_FIXED, "forward_from": AUX_FORWARD_FROM,
+           "method": "P34 보조: 60분봉만(되돌림=60분 VWAP 지정가+평균회귀 지정가, 돌파=60분 20봉 돌파) 같은 교대. rev_only_pct 가 '60분 되돌림 고정'",
+           "next_pick": nxt60, "backtest": summarize(back60), "forward": summarize(fwd60), "forward_days": fwd60[-30:]}
+    return {"schema": "carrygate-scalp-rotate/2", "rule_fixed": RULE_FIXED, "forward_from": FORWARD_FROM, "aux60": aux,
             "method": "전날 18시장 합계가 큰 묶음(되돌림=30·60분 VWAP 지정가+평균회귀 지정가, 돌파=30·60분 20봉 돌파; 같으면 되돌림)의 오늘 합계",
             "date": rows[-1].get("date") if rows else None,
             "next_pick": nxt,
@@ -114,6 +130,15 @@ def print_summary(out):
     print("내일 고를 묶음: %s" % ({"rev": "되돌림", "brk": "돌파"}.get(out["next_pick"], "-")))
     if f.get("days", 0) < MIN_FORWARD_DAYS:
         print("순방향 %d일 — %d일 전에는 판단하지 않는다." % (f.get("days", 0), MIN_FORWARD_DAYS))
+    a = out.get("aux60")
+    if a:
+        ab, af = a["backtest"], a["forward"]
+        print("--- P34 보조: 60분봉만 (순방향 평가일 %s~) ---" % a["forward_from"])
+        print("사후 %s일: 60분만 교대 %+.1f%%  60분 되돌림 고정 %+.1f%%  60분 돌파만 %+.1f%%  교대 플러스일 %s"
+              % (ab.get("days", 0), ab.get("net_pct", 0), ab.get("rev_only_pct", 0), ab.get("brk_only_pct", 0), ab.get("plus_days", "-")))
+        print("순방향 %s일: 60분만 교대 %+.1f%%  60분 되돌림 고정 %+.1f%%  60분 돌파만 %+.1f%%  교대 플러스일 %s  내일 %s"
+              % (af.get("days", 0), af.get("net_pct", 0), af.get("rev_only_pct", 0), af.get("brk_only_pct", 0), af.get("plus_days", "-"),
+                 {"rev": "되돌림", "brk": "돌파"}.get(a["next_pick"], "-")))
 
 
 def main(argv=None):
