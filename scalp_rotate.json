@@ -1,0 +1,34 @@
+{
+ "schema": "carrygate-scalp-rotate/1",
+ "rule_fixed": "2026-11-07",
+ "forward_from": "2026-11-06",
+ "method": "전날 18시장 합계가 큰 묶음(되돌림=30·60분 VWAP 지정가+평균회귀 지정가, 돌파=30·60분 20봉 돌파; 같으면 되돌림)의 오늘 합계",
+ "date": "2026-11-07",
+ "next_pick": "rev",
+ "backtest": {
+  "days": 23,
+  "net_pct": 101.126,
+  "plus_days": 13,
+  "rev_only_pct": -64.865,
+  "brk_only_pct": -142.254,
+  "picked_rev": 16
+ },
+ "forward": {
+  "days": 1,
+  "net_pct": -4.85,
+  "plus_days": 0,
+  "rev_only_pct": 9.085,
+  "brk_only_pct": -4.85,
+  "picked_rev": 0
+ },
+ "forward_days": [
+  {
+   "eval_day": "2026-11-06",
+   "pick": "brk",
+   "net_pct": -4.8503,
+   "rev_pct": 9.0852,
+   "brk_pct": -4.8503
+  }
+ ],
+ "min_forward_days": 14
+}

@@ -522,5 +522,40 @@ class OutOfSample(unittest.TestCase):
         self.assertEqual(self.m.check(rows, fz, until="2026-10-18")["verdict"], "GO")
 
 
+class RegimeRotate(unittest.TestCase):
+    """국면 교대(P30): 전날 큰 묶음의 오늘 성적. 순방향은 FORWARD_FROM 부터."""
+
+    def _rec(self, day, rev, brk):
+        return {"date": day, "eval_day_utc": day,
+                "rows": {"okx:XRP:30m:vwap_fade_lim": {"nt": rev}, "okx:XRP:60m:brk_20": {"nt": brk},
+                         "okx:XRP:15m:vwap_fade_lim": {"nt": 99.0}}}   # 15분봉은 묶음 밖
+
+    def test_pick_previous_winner(self):
+        import scalp_rotate as R
+        rows = [self._rec("2026-11-01", 5.0, -1.0), self._rec("2026-11-02", -3.0, 4.0), self._rec("2026-11-03", 2.0, -2.0)]
+        seq, nxt = R.rotate(rows)
+        self.assertEqual([d["pick"] for d in seq], ["rev", "brk"])     # 11/1 되돌림 승 → 11/2 되돌림, 11/2 돌파 승 → 11/3 돌파
+        self.assertEqual([d["net_pct"] for d in seq], [-3.0, -2.0])
+        self.assertEqual(nxt, "rev")                                   # 11/3 되돌림 승 → 다음 날 되돌림
+
+    def test_tie_goes_to_reversion_and_skips_days_without_30_60(self):
+        import scalp_rotate as R
+        old = {"date": "2026-10-10", "eval_day_utc": "2026-10-10", "rows": {"okx:XRP:15m:vwap_fade_lim": {"nt": 1.0}}}
+        rows = [old, self._rec("2026-11-01", 1.0, 1.0), self._rec("2026-11-02", 0.5, 7.0)]
+        seq, _ = R.rotate(rows)
+        self.assertEqual(len(seq), 1)
+        self.assertEqual(seq[0]["pick"], "rev")
+        self.assertEqual(seq[0]["net_pct"], 0.5)
+
+    def test_forward_split(self):
+        import scalp_rotate as R
+        rows = [self._rec("2026-11-04", 1.0, 0.0), self._rec("2026-11-05", 2.0, 0.0), self._rec("2026-11-06", -1.0, 3.0), self._rec("2026-11-07", 4.0, 0.0)]
+        out = R.build(rows)
+        self.assertEqual(out["backtest"]["days"], 1)    # 11/5
+        self.assertEqual(out["forward"]["days"], 2)     # 11/6(rev −1), 11/7(brk 0)
+        self.assertAlmostEqual(out["forward"]["net_pct"], -1.0)
+        self.assertEqual(out["next_pick"], "rev")
+
+
 if __name__ == "__main__":
     unittest.main()
