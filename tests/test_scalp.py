@@ -553,8 +553,29 @@ class RegimeRotate(unittest.TestCase):
         out = R.build(rows)
         self.assertEqual(out["backtest"]["days"], 1)    # 11/5
         self.assertEqual(out["forward"]["days"], 2)     # 11/6(rev −1), 11/7(brk 0)
-        self.assertAlmostEqual(out["forward"]["net_pct"], -1.0)
-        self.assertEqual(out["next_pick"], "rev")
+
+    def test_aux60_uses_only_60m_and_leaves_p30_unchanged(self):
+        """P34 보조: 60분봉만의 교대와 60분 되돌림 고정. P30 결과는 그대로."""
+        import scalp_rotate as R
+        self.assertEqual(R.AUX_FORWARD_FROM, "2026-11-08")
+        def rec(day, rev30, rev60, brk60):
+            return {"date": day, "eval_day_utc": day,
+                    "rows": {"okx:XRP:30m:vwap_fade_lim": {"nt": rev30}, "okx:XRP:60m:mr_z20_lim": {"nt": rev60},
+                             "okx:XRP:60m:brk_20": {"nt": brk60}}}
+        rows = [rec("2026-11-06", -10.0, 2.0, 1.0), rec("2026-11-07", -10.0, 3.0, 5.0), rec("2026-11-08", -10.0, 4.0, -1.0)]
+        out = R.build(rows)
+        # P30(30+60): 11/6 되돌림 −8 < 돌파 1 → 11/7 돌파 5; 11/7 되돌림 −7 < 돌파 5 → 11/8 돌파 −1
+        self.assertEqual([d["pick"] for d in out["forward_days"]], ["brk", "brk"])
+        a = out["aux60"]
+        # 60분만: 11/6 되돌림 2 > 돌파 1 → 11/7 되돌림 3; 11/7 되돌림 3 < 돌파 5 → 11/8 돌파 −1
+        self.assertEqual(a["backtest"]["days"], 1)                  # 11/7 (순방향 전)
+        self.assertEqual(a["backtest"]["net_pct"], 3.0)
+        self.assertEqual(a["forward"]["days"], 1)                   # 11/8
+        self.assertEqual(a["forward"]["net_pct"], -1.0)
+        self.assertEqual(a["forward"]["rev_only_pct"], 4.0)         # 60분 되돌림 고정
+        self.assertEqual(a["next_pick"], "rev")                     # 11/8 되돌림 4 > 돌파 −1
+        self.assertEqual(out["forward"]["net_pct"], 4.0)            # P30 그대로: 11/7 돌파 5 + 11/8 돌파 −1
+        self.assertEqual(out["next_pick"], "brk")                   # P30: 11/8 되돌림 −6 < 돌파 −1
 
 
 if __name__ == "__main__":
