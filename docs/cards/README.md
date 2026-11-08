@@ -9,6 +9,7 @@
 | 번호 | 카드 | 규칙 | 봉 데이터 | 만든 날 | 다음 판정 |
 |---|---|---|---|---|---|
 | P30 | [p30_rotate.svg](p30_rotate.svg) | 국면 교대 `scalp_rotate.py` | `data/okx_xrp_30m.csv` (OKX XRP 무기한선물 30분봉, 2026-10-31~11-07 UTC, TradingView 수집) | 2026-11-07 | 2026-11-20 |
+| P31 | [p31_mm_wide.svg](p31_mm_wide.svg) | 호가 제공 넓은 호가폭 시장만 `orderbook.py WIDE_SPREAD_BP` | `data/upbit_trx_1m.csv` (업비트 TRX/KRW 1분봉, 2026-11-07 16:22~11-08 02:01 UTC, TradingView 수집) | 2026-11-08 | 2026-11-15 |
 
 ## 만드는 법
 

@@ -23,6 +23,7 @@ DEPTH_LEVELS = 5          # 불균형 계산에 쓰는 호가 단수 (최우선 
 IMB_THRESHOLD = 0.3       # "치우쳤다"고 보는 불균형 기준 ((매수−매도)/(매수+매도))
 HORIZONS = (60, 300)      # 초. 불균형 뒤 1분·5분 가격 변화를 본다
 MIN_DAYS = 5
+WIDE_SPREAD_BP = 20.0     # P31(2026-11-08 고정): 평균 호가폭이 이 값(=업비트 왕복 지정가 수수료 10bp 의 2배) 이상인 시장만 따로 합산. 결과 보고 바꾸지 않는다
 MM_TTL_SEC = 300          # 호가 제공 종이 규칙: 재고가 생긴 뒤 지정가 청산을 기다리는 최대 초. 넘으면 상대 호가에 시장가
 FEES = {"upbit": {"taker_pct": 0.05, "maker_pct": 0.05},
         "hyperliquid": {"taker_pct": 0.045, "maker_pct": 0.015},
@@ -406,6 +407,22 @@ def analyze(by, fees=FEES):
             summary[venue]["mmt_net_bp_avg"] = round(sum(m["net_bp_sum"] for m in mts) / tr2, 3)
             summary[venue]["mmt_maker_exit_pct"] = round(100.0 * sum(m["maker_exits"] for m in mts) / tr2, 1)
             summary[venue]["mmt_hit_rate_pct"] = round(sum(m["hit_rate_pct"] * m["trades"] for m in mts) / tr2, 1)
+            # P31: 시장별 기록 + 호가폭 ≥ WIDE_SPREAD_BP 시장만 합산 (history 에 남아 날짜별 누적이 가능하도록 summary 에 둔다)
+            bym = {}
+            for k, m in markets.items():
+                if k.split(":")[0] != venue or not m.get("mm_touch", {}).get("trades"):
+                    continue
+                t = m["mm_touch"]
+                bym[k.split(":")[1]] = {"spread_bp": m["spread_bp_mean"], "trades": t["trades"], "both_sides": t["both_sides"],
+                                        "net_bp_sum": round(t["net_bp_sum"], 3), "net_bp_avg": round(t["net_bp_sum"] / t["trades"], 3),
+                                        "wide": m["spread_bp_mean"] >= WIDE_SPREAD_BP}
+            summary[venue]["mmt_by_market"] = bym
+            wide = [x for x in bym.values() if x["wide"]]
+            trw = sum(x["trades"] for x in wide)
+            summary[venue]["mmt_wide_markets"] = sorted(c for c, x in bym.items() if x["wide"])
+            summary[venue]["mmt_wide_trades"] = trw
+            summary[venue]["mmt_wide_net_bp_sum"] = round(sum(x["net_bp_sum"] for x in wide), 3)
+            summary[venue]["mmt_wide_net_bp_avg"] = round(sum(x["net_bp_sum"] for x in wide) / trw, 3) if trw else None
     return markets, summary
 
 
@@ -450,6 +467,13 @@ def print_result(out):
         for v, s in tv.items():
             print("%-12s %6d %8d %9.0f %+10.2f %+10.1f %8.0f" % (v, s["mmt_trades"], s["mmt_both_sides"], s["mmt_maker_exit_pct"],
                                                               s["mmt_net_bp_avg"], s["mmt_net_bp_sum"], s["mmt_hit_rate_pct"]))
+    for v, s in tv.items():
+        if s.get("mmt_by_market"):
+            print("--- 닿으면 체결 시장별 (P31: 호가폭 ≥ %.0fbp = ★) ---" % WIDE_SPREAD_BP)
+            for c, x in sorted(s["mmt_by_market"].items(), key=lambda kv: -kv[1]["spread_bp"]):
+                print("  %-6s %-4s 호가폭 %6.2fbp  왕복 %5d  건당 %+7.2fbp  합 %+9.1f" % (v, c + ("★" if x["wide"] else ""), x["spread_bp"], x["trades"], x["net_bp_avg"], x["net_bp_sum"]))
+            if s.get("mmt_wide_trades"):
+                print("  ★ 넓은 시장 합(%s): 왕복 %d 건당 %+.2fbp" % (",".join(s["mmt_wide_markets"]), s["mmt_wide_trades"], s["mmt_wide_net_bp_avg"]))
     if out.get("errors"):
         print("수집 오류:", json.dumps(out["errors"], ensure_ascii=False))
     print()
@@ -518,6 +542,25 @@ def report(path="orderbook_history.jsonl"):
             tr = sum(s["mmt_trades"] for s in ss); net = sum(s["mmt_net_bp_sum"] for s in ss)
             print("%-12s %4d %6d %8d %+10.2f %+10.1f %5d/%d" % (v, len(ss), tr, sum(s["mmt_both_sides"] for s in ss),
                                                                 net / tr if tr else 0.0, net, sum(1 for s in ss if s["mmt_net_bp_sum"] > 0), len(ss)))
+    m_rows = [r for r in rows if any(s.get("mmt_by_market") for s in r.get("summary", {}).values())]
+    if m_rows:
+        print()
+        print("--- 닿으면 체결 시장별 누적 (2026-11-08 기록 시작, P31: 호가폭 ≥ %.0fbp 시장 = ★) ---" % WIDE_SPREAD_BP)
+        print("%-14s %4s %6s %8s %10s %10s %8s" % ("시장", "일수", "왕복", "평균호가폭", "건당순bp", "순bp합", "플러스일"))
+        for v in venues:
+            acc = {}
+            for r in m_rows:
+                for c, x in r["summary"].get(v, {}).get("mmt_by_market", {}).items():
+                    a = acc.setdefault(c, {"days": 0, "trades": 0, "net": 0.0, "sp": [], "plus": 0, "wide": 0})
+                    a["days"] += 1; a["trades"] += x["trades"]; a["net"] += x["net_bp_sum"]; a["sp"].append(x["spread_bp"])
+                    a["plus"] += x["net_bp_sum"] > 0; a["wide"] += x["wide"]
+            for c, a in sorted(acc.items(), key=lambda kv: -mean(kv[1]["sp"])):
+                print("%-14s %4d %6d %8.2f %+10.2f %+10.1f %5d/%d" % ("%s:%s%s" % (v, c, "★" if a["wide"] == a["days"] else ""), a["days"], a["trades"],
+                                                                     mean(a["sp"]), a["net"] / a["trades"] if a["trades"] else 0.0, a["net"], a["plus"], a["days"]))
+            ws = [r["summary"][v] for r in m_rows if r["summary"].get(v, {}).get("mmt_wide_trades")]
+            if ws:
+                tr = sum(s["mmt_wide_trades"] for s in ws); net = sum(s["mmt_wide_net_bp_sum"] for s in ws)
+                print("%-14s %4d %6d %8s %+10.2f %+10.1f %5d/%d" % (v + ":★합계", len(ws), tr, "-", net / tr if tr else 0.0, net, sum(1 for s in ws if s["mmt_wide_net_bp_sum"] > 0), len(ws)))
     if len(rows) < MIN_DAYS:
         print("아직 %d일치. %d일 이상 모여야 방향을 말할 수 있다." % (len(rows), MIN_DAYS))
     return 0
@@ -556,6 +599,7 @@ def main(argv=None):
                       "imbalance": "(매수잔량−매도잔량)/(합). |불균형| ≥ %.1f 을 '치우침'으로 보고, 치우친 방향의 %d·%d초 뒤 중간가 변화(bp)를 잰다" % (IMB_THRESHOLD, HORIZONS[0], HORIZONS[1]),
                       "spread": "호가 폭 = (매도1−매수1)/중간가. 반폭 − 지정가 수수료 > 0 이면 양쪽 지정가로 한 번 왕복에 남는 여지가 있다는 뜻 (체결·역선택은 별도)",
                       "mm": "호가 제공 종이 규칙(P26): 최우선 매수·매도호가에 1단위씩, 다음 표본의 상대 호가가 내 가격을 지나쳐야 체결. 재고 ±1, 반대쪽 최우선호가에 재게시, %d초 안에 못 닫으면 상대 호가에 시장가. 지정가=메이커·시장가=테이커 수수료" % MM_TTL_SEC,
+                      "mm_wide": "P31(2026-11-08): 닿으면 체결 결과를 시장별로 남기고, 평균 호가폭 ≥ %.0fbp(왕복 지정가 수수료의 2배) 시장만 따로 합산(mmt_wide_*). 문턱은 수수료에서 나온 값으로 고정" % WIDE_SPREAD_BP,
                       "mm_touch": "닿으면 체결 변형(P29, 업비트만): 직전 표본 이후 실제 체결 중 매도 주도 최저가 ≤ 내 매수가면 매수 체결, 매수 주도 최고가 ≥ 내 매도가면 매도 체결. 줄 서기 무시(낙관 쪽 경계). 나머지는 P26 과 같음"},
            "markets": markets, "summary": summary, "errors": errors,
            "verdict": verdict_of(summary)}
