@@ -1,6 +1,6 @@
 {
- "date": "2026-11-06",
- "generated_at_utc": "2026-11-06T14:42:17Z",
+ "date": "2026-11-09",
+ "generated_at_utc": "2026-11-09T07:23:26Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -74,14 +74,14 @@
   }
  },
  "forward": {
-  "days": 23,
+  "days": 24,
   "from": "2026-10-05",
-  "to": "2026-11-06",
-  "codes": 297,
+  "to": "2026-11-09",
+  "codes": 299,
   "bar_errors": 0,
   "stale_codes": 0,
   "by_source": {
-   "yahoo": 231,
+   "yahoo": 233,
    "yahoo+naver_api": 66
   },
   "skipped_days": [
@@ -93,145 +93,14 @@
   "note": null
  },
  "signals_today": {
-  "base": [
-   {
-    "code": "035420",
-    "name": "NAVER Corp.",
-    "group": "Packaged Software",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 190200.0,
-    "pattern_low": 166000.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 205416 이상이면 포기)",
-    "stop_plan": "max(166000, 진입가×0.93)"
-   }
-  ],
-  "no_sector": [
-   {
-    "code": "035420",
-    "name": "NAVER Corp.",
-    "group": "Packaged Software",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 190200.0,
-    "pattern_low": 166000.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 205416 이상이면 포기)",
-    "stop_plan": "max(166000, 진입가×0.93)"
-   },
-   {
-    "code": "089860",
-    "name": "LOTTE rental co., ltd.",
-    "group": "Finance/Rental/Leasing",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 58400.0,
-    "pattern_low": 47250.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 63072 이상이면 포기)",
-    "stop_plan": "max(47250, 진입가×0.93)"
-   },
-   {
-    "code": "030200",
-    "name": "KT Corporation",
-    "group": "Major Telecommunications",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 53300.0,
-    "pattern_low": 44600.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 57564 이상이면 포기)",
-    "stop_plan": "max(44600, 진입가×0.93)"
-   },
-   {
-    "code": "032640",
-    "name": "LG Uplus Corp",
-    "group": "Major Telecommunications",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 16760.0,
-    "pattern_low": 13640.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 18101 이상이면 포기)",
-    "stop_plan": "max(13640, 진입가×0.93)"
-   },
-   {
-    "code": "181710",
-    "name": "NHN Corporation",
-    "group": "Internet Software/Services",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 59200.0,
-    "pattern_low": 45900.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 63936 이상이면 포기)",
-    "stop_plan": "max(45900, 진입가×0.93)"
-   }
-  ],
-  "hold_10": [
-   {
-    "code": "035420",
-    "name": "NAVER Corp.",
-    "group": "Packaged Software",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 190200.0,
-    "pattern_low": 166000.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 205416 이상이면 포기)",
-    "stop_plan": "max(166000, 진입가×0.93)"
-   }
-  ],
-  "risk_2": [
-   {
-    "code": "035420",
-    "name": "NAVER Corp.",
-    "group": "Packaged Software",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 190200.0,
-    "pattern_low": 166000.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 205416 이상이면 포기)",
-    "stop_plan": "max(166000, 진입가×0.93)"
-   }
-  ],
-  "no_flag": [
-   {
-    "code": "035420",
-    "name": "NAVER Corp.",
-    "group": "Packaged Software",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 190200.0,
-    "pattern_low": 166000.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 205416 이상이면 포기)",
-    "stop_plan": "max(166000, 진입가×0.93)"
-   }
-  ]
+  "base": [],
+  "no_sector": [],
+  "hold_10": [],
+  "risk_2": [],
+  "no_flag": []
  },
- "signal_date": "2026-11-06",
- "signals_frozen": true,
+ "signal_date": "2026-11-09",
+ "signals_frozen": false,
  "frozen_dates": [
   "2026-10-06",
   "2026-10-07",
@@ -268,14 +137,14 @@
    "avg_loss_pct": -7.3,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -6.55,
-   "equity_final": 9345263,
+   "total_return_pct": -2.62,
+   "equity_final": 9738183,
    "max_drawdown_pct": 10.79,
    "avg_hold_days": 4.18,
    "skipped": {
     "gap": 0,
-    "limit": 10,
-    "cooldown": 0,
+    "limit": 11,
+    "cooldown": 1,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -324,7 +193,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -6.55
+    "2026": -2.62
    },
    "open_positions": [
     {
@@ -336,9 +205,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 6,
-     "bars_held": 15,
-     "last_close": 211000.0,
-     "unrealized_pct": 8.49
+     "bars_held": 16,
+     "last_close": 210000.0,
+     "unrealized_pct": 7.98
     },
     {
      "code": "267850",
@@ -349,9 +218,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 132,
-     "bars_held": 3,
-     "last_close": 10870.0,
-     "unrealized_pct": 12.77
+     "bars_held": 4,
+     "last_close": 14130.0,
+     "unrealized_pct": 46.59
     },
     {
      "code": "259960",
@@ -362,9 +231,9 @@
      "entry": 209627.0,
      "stop": 194953.11,
      "shares": 6,
-     "bars_held": 2,
-     "last_close": 220500.0,
-     "unrealized_pct": 5.19
+     "bars_held": 3,
+     "last_close": 217500.0,
+     "unrealized_pct": 3.76
     },
     {
      "code": "128940",
@@ -375,9 +244,9 @@
      "entry": 445833.5,
      "stop": 414625.15,
      "shares": 2,
-     "bars_held": 1,
-     "last_close": 467000.0,
-     "unrealized_pct": 4.75
+     "bars_held": 2,
+     "last_close": 475000.0,
+     "unrealized_pct": 6.54
     },
     {
      "code": "326030",
@@ -388,30 +257,30 @@
      "entry": 86759.5,
      "stop": 80686.33,
      "shares": 14,
-     "bars_held": 1,
-     "last_close": 88800.0,
-     "unrealized_pct": 2.35
+     "bars_held": 2,
+     "last_close": 86700.0,
+     "unrealized_pct": -0.07
     }
    ]
   },
   "no_sector": {
    "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
    "signals": 81,
-   "trades": 21,
+   "trades": 22,
    "wins": 1,
-   "win_rate": 4.76,
+   "win_rate": 4.55,
    "avg_win_pct": 6.57,
-   "avg_loss_pct": -7.53,
-   "payoff": 0.87,
+   "avg_loss_pct": -7.32,
+   "payoff": 0.89,
    "profit_factor": 0.04,
-   "total_return_pct": -16.25,
-   "equity_final": 8375477,
+   "total_return_pct": -14.11,
+   "equity_final": 8588725,
    "max_drawdown_pct": 16.25,
-   "avg_hold_days": 2.9,
+   "avg_hold_days": 3.68,
    "skipped": {
     "gap": 0,
-    "limit": 50,
-    "cooldown": 0,
+    "limit": 54,
+    "cooldown": 2,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -423,9 +292,9 @@
      "pnl_krw": -415010
     },
     "cup_handle": {
-     "n": 2,
+     "n": 3,
      "wins": 0,
-     "pnl_krw": -191105
+     "pnl_krw": -246194
     },
     "triangle": {
      "n": 4,
@@ -445,16 +314,16 @@
      "pnl_krw": -463564
     },
     "none": {
-     "n": 16,
+     "n": 17,
      "wins": 1,
-     "pnl_krw": -1364634
+     "pnl_krw": -1419723
     }
    },
    "by_exit": {
     "stop": {
-     "n": 20,
+     "n": 21,
      "wins": 0,
-     "pnl_krw": -1911417
+     "pnl_krw": -1966506
     },
     "low10": {
      "n": 1,
@@ -464,28 +333,15 @@
    },
    "by_year": {
     "2026": {
-     "n": 21,
+     "n": 22,
      "wins": 1,
-     "pnl_krw": -1828198
+     "pnl_krw": -1883287
     }
    },
    "yearly_return_pct": {
-    "2026": -16.25
+    "2026": -14.11
    },
    "open_positions": [
-    {
-     "code": "011200",
-     "name": "HMM CO.,LTD",
-     "group": "Marine Shipping",
-     "pattern": "cup_handle",
-     "entry_date": "2026-10-13",
-     "entry": 21363.9,
-     "stop": 20800.0,
-     "shares": 83,
-     "bars_held": 19,
-     "last_close": 22050.0,
-     "unrealized_pct": 3.21
-    },
     {
      "code": "033780",
      "name": "KT & G Corporation",
@@ -495,9 +351,9 @@
      "entry": 187761.6,
      "stop": 174618.29,
      "shares": 6,
-     "bars_held": 16,
-     "last_close": 189900.0,
-     "unrealized_pct": 1.14
+     "bars_held": 17,
+     "last_close": 182400.0,
+     "unrealized_pct": -2.86
     },
     {
      "code": "267850",
@@ -508,9 +364,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 125,
-     "bars_held": 3,
-     "last_close": 10870.0,
-     "unrealized_pct": 12.77
+     "bars_held": 4,
+     "last_close": 14130.0,
+     "unrealized_pct": 46.59
     },
     {
      "code": "015760",
@@ -521,9 +377,22 @@
      "entry": 30892.4,
      "stop": 28729.93,
      "shares": 39,
-     "bars_held": 2,
-     "last_close": 30400.0,
-     "unrealized_pct": -1.59
+     "bars_held": 3,
+     "last_close": 29900.0,
+     "unrealized_pct": -3.21
+    },
+    {
+     "code": "035420",
+     "name": "NAVER Corp.",
+     "group": "Packaged Software",
+     "pattern": "box",
+     "entry_date": "2026-11-09",
+     "entry": 190068.5,
+     "stop": 176763.7,
+     "shares": 6,
+     "bars_held": 1,
+     "last_close": 187100.0,
+     "unrealized_pct": -1.56
     }
    ]
   },
@@ -537,14 +406,14 @@
    "avg_loss_pct": -6.87,
    "payoff": 0.62,
    "profit_factor": 0.06,
-   "total_return_pct": -6.46,
-   "equity_final": 9353956,
+   "total_return_pct": -2.64,
+   "equity_final": 9736317,
    "max_drawdown_pct": 9.48,
    "avg_hold_days": 4.17,
    "skipped": {
     "gap": 0,
     "limit": 10,
-    "cooldown": 0,
+    "cooldown": 1,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -598,7 +467,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -6.46
+    "2026": -2.64
    },
    "open_positions": [
     {
@@ -610,9 +479,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 134,
-     "bars_held": 3,
-     "last_close": 10870.0,
-     "unrealized_pct": 12.77
+     "bars_held": 4,
+     "last_close": 14130.0,
+     "unrealized_pct": 46.59
     },
     {
      "code": "259960",
@@ -623,9 +492,9 @@
      "entry": 209627.0,
      "stop": 194953.11,
      "shares": 6,
-     "bars_held": 2,
-     "last_close": 220500.0,
-     "unrealized_pct": 5.19
+     "bars_held": 3,
+     "last_close": 217500.0,
+     "unrealized_pct": 3.76
     },
     {
      "code": "128940",
@@ -636,9 +505,9 @@
      "entry": 445833.5,
      "stop": 414625.15,
      "shares": 2,
-     "bars_held": 1,
-     "last_close": 467000.0,
-     "unrealized_pct": 4.75
+     "bars_held": 2,
+     "last_close": 475000.0,
+     "unrealized_pct": 6.54
     },
     {
      "code": "326030",
@@ -649,9 +518,22 @@
      "entry": 86759.5,
      "stop": 80686.33,
      "shares": 15,
+     "bars_held": 2,
+     "last_close": 86700.0,
+     "unrealized_pct": -0.07
+    },
+    {
+     "code": "035420",
+     "name": "NAVER Corp.",
+     "group": "Packaged Software",
+     "pattern": "box",
+     "entry_date": "2026-11-09",
+     "entry": 190068.5,
+     "stop": 176763.7,
+     "shares": 7,
      "bars_held": 1,
-     "last_close": 88800.0,
-     "unrealized_pct": 2.35
+     "last_close": 187100.0,
+     "unrealized_pct": -1.56
     }
    ]
   },
@@ -665,15 +547,15 @@
    "avg_loss_pct": -7.22,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -9.51,
-   "equity_final": 9048670,
+   "total_return_pct": -1.92,
+   "equity_final": 9807890,
    "max_drawdown_pct": 16.49,
    "avg_hold_days": 3,
    "skipped": {
     "gap": 0,
     "limit": 0,
-    "cooldown": 0,
-    "size": 16,
+    "cooldown": 1,
+    "size": 17,
     "no_bar": 0,
     "pattern": 0
    },
@@ -721,7 +603,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -9.51
+    "2026": -1.92
    },
    "open_positions": [
     {
@@ -733,9 +615,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 13,
-     "bars_held": 15,
-     "last_close": 211000.0,
-     "unrealized_pct": 8.49
+     "bars_held": 16,
+     "last_close": 210000.0,
+     "unrealized_pct": 7.98
     },
     {
      "code": "267850",
@@ -746,9 +628,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 247,
-     "bars_held": 3,
-     "last_close": 10870.0,
-     "unrealized_pct": 12.77
+     "bars_held": 4,
+     "last_close": 14130.0,
+     "unrealized_pct": 46.59
     },
     {
      "code": "259960",
@@ -759,9 +641,9 @@
      "entry": 209627.0,
      "stop": 194953.11,
      "shares": 11,
-     "bars_held": 2,
-     "last_close": 220500.0,
-     "unrealized_pct": 5.19
+     "bars_held": 3,
+     "last_close": 217500.0,
+     "unrealized_pct": 3.76
     }
    ]
   },
@@ -775,14 +657,14 @@
    "avg_loss_pct": -7.21,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -2.83,
-   "equity_final": 9717347,
+   "total_return_pct": 1.0,
+   "equity_final": 10099967,
    "max_drawdown_pct": 7.59,
    "avg_hold_days": 5,
    "skipped": {
     "gap": 0,
-    "limit": 1,
-    "cooldown": 0,
+    "limit": 2,
+    "cooldown": 1,
     "size": 0,
     "no_bar": 0,
     "pattern": 0
@@ -826,7 +708,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -2.83
+    "2026": 1.0
    },
    "open_positions": [
     {
@@ -838,9 +720,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 7,
-     "bars_held": 15,
-     "last_close": 211000.0,
-     "unrealized_pct": 8.49
+     "bars_held": 16,
+     "last_close": 210000.0,
+     "unrealized_pct": 7.98
     },
     {
      "code": "267850",
@@ -851,9 +733,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 137,
-     "bars_held": 3,
-     "last_close": 10870.0,
-     "unrealized_pct": 12.77
+     "bars_held": 4,
+     "last_close": 14130.0,
+     "unrealized_pct": 46.59
     },
     {
      "code": "259960",
@@ -864,9 +746,9 @@
      "entry": 209627.0,
      "stop": 194953.11,
      "shares": 6,
-     "bars_held": 2,
-     "last_close": 220500.0,
-     "unrealized_pct": 5.19
+     "bars_held": 3,
+     "last_close": 217500.0,
+     "unrealized_pct": 3.76
     },
     {
      "code": "326030",
@@ -877,9 +759,9 @@
      "entry": 86759.5,
      "stop": 80686.33,
      "shares": 15,
-     "bars_held": 1,
-     "last_close": 88800.0,
-     "unrealized_pct": 2.35
+     "bars_held": 2,
+     "last_close": 86700.0,
+     "unrealized_pct": -0.07
     },
     {
      "code": "0126Z0",
@@ -890,9 +772,9 @@
      "entry": 344029.0,
      "stop": 319946.97,
      "shares": 3,
-     "bars_held": 1,
-     "last_close": 349500.0,
-     "unrealized_pct": 1.59
+     "bars_held": 2,
+     "last_close": 347000.0,
+     "unrealized_pct": 0.86
     }
    ]
   }
@@ -1616,6 +1498,29 @@
     "pnl_pct": -9.67,
     "hold_days": 4,
     "gap": true
+   },
+   {
+    "code": "011200",
+    "name": "HMM CO.,LTD",
+    "group": "Marine Shipping",
+    "pattern": "cup_handle",
+    "patterns": [
+     "triangle",
+     "cup_handle"
+    ],
+    "sync_by": null,
+    "signal_date": "2026-10-12",
+    "entry_date": "2026-10-13",
+    "entry": 21363.9,
+    "stop": 20800.0,
+    "exit_date": "2026-11-09",
+    "exit": 20737.6,
+    "why": "stop",
+    "shares": 83,
+    "pnl_krw": -55089,
+    "pnl_pct": -3.11,
+    "hold_days": 20,
+    "gap": false
    }
   ],
   "hold_10": [
