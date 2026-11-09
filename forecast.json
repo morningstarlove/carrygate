@@ -1,0 +1,709 @@
+{
+  "schema": "carrygate-forecast/1",
+  "date": "2026-11-09",
+  "generated_at_utc": "2026-11-09T07:03:05Z",
+  "source": "okx /v5/market/candles bar=2H (USDT 무기한)",
+  "rules": {
+    "bar_minutes": 120,
+    "horizon_bars": 6,
+    "lookback_points": 300,
+    "rv_bars": 12,
+    "ret_bars": 12,
+    "tercile_pct": [
+      33.3,
+      66.7
+    ],
+    "min_analog": 10,
+    "coins": [
+      "BTC",
+      "ETH",
+      "SOL",
+      "XRP",
+      "BNB",
+      "DOGE",
+      "LINK",
+      "DOT",
+      "ARB",
+      "AAVE",
+      "PEPE",
+      "BONK"
+    ],
+    "predictors": [
+      "D1",
+      "D2",
+      "D3"
+    ],
+    "size_feature": "rv12",
+    "d1_feature": "r12",
+    "d2_features": [
+      "rv12",
+      "r12",
+      "btc_r12"
+    ],
+    "rule_fixed": "2026-11-06"
+  },
+  "coins": {
+    "BTC": {
+      "ok": true,
+      "features": {
+        "rv12": 0.0078,
+        "r12": -0.0181,
+        "btc_r12": -0.0181
+      },
+      "buckets": {
+        "rv12": "high",
+        "r12": "low",
+        "btc_r12": "low"
+      },
+      "size": {
+        "bucket": "high",
+        "expected_abs_pct": 0.77,
+        "all_abs_pct": 0.562,
+        "n": 100
+      },
+      "direction": {
+        "D1": {
+          "p_up": 0.56,
+          "n": 100
+        },
+        "D2": {
+          "p_up": 0.449,
+          "n": 49,
+          "fallback": false,
+          "q25_pct": -0.809,
+          "median_pct": -0.164,
+          "q75_pct": 0.438
+        },
+        "D3": {
+          "p_up": 0.4633,
+          "n": 300
+        }
+      },
+      "hist_points": 300,
+      "t_bar": 1794196800,
+      "bar_utc": "2026-11-09 04:00",
+      "t_target": 1794240000,
+      "c0": 74442.1,
+      "bars": 358
+    },
+    "ETH": {
+      "ok": true,
+      "features": {
+        "rv12": 0.0137,
+        "r12": -0.0487,
+        "btc_r12": -0.0181
+      },
+      "buckets": {
+        "rv12": "high",
+        "r12": "low",
+        "btc_r12": "low"
+      },
+      "size": {
+        "bucket": "high",
+        "expected_abs_pct": 0.928,
+        "all_abs_pct": 0.806,
+        "n": 100
+      },
+      "direction": {
+        "D1": {
+          "p_up": 0.58,
+          "n": 100
+        },
+        "D2": {
+          "p_up": 0.6591,
+          "n": 44,
+          "fallback": false,
+          "q25_pct": -0.309,
+          "median_pct": 0.326,
+          "q75_pct": 1.193
+        },
+        "D3": {
+          "p_up": 0.4767,
+          "n": 300
+        }
+      },
+      "hist_points": 300,
+      "t_bar": 1794196800,
+      "bar_utc": "2026-11-09 04:00",
+      "t_target": 1794240000,
+      "c0": 2128.01,
+      "bars": 358
+    },
+    "SOL": {
+      "ok": true,
+      "features": {
+        "rv12": 0.0135,
+        "r12": -0.0296,
+        "btc_r12": -0.0181
+      },
+      "buckets": {
+        "rv12": "high",
+        "r12": "low",
+        "btc_r12": "low"
+      },
+      "size": {
+        "bucket": "high",
+        "expected_abs_pct": 1.396,
+        "all_abs_pct": 0.947,
+        "n": 100
+      },
+      "direction": {
+        "D1": {
+          "p_up": 0.62,
+          "n": 100
+        },
+        "D2": {
+          "p_up": 0.6136,
+          "n": 44,
+          "fallback": false,
+          "q25_pct": -1.065,
+          "median_pct": 0.282,
+          "q75_pct": 1.368
+        },
+        "D3": {
+          "p_up": 0.44,
+          "n": 300
+        }
+      },
+      "hist_points": 300,
+      "t_bar": 1794196800,
+      "bar_utc": "2026-11-09 04:00",
+      "t_target": 1794240000,
+      "c0": 86.56,
+      "bars": 358
+    },
+    "XRP": {
+      "ok": true,
+      "features": {
+        "rv12": 0.011,
+        "r12": -0.0613,
+        "btc_r12": -0.0181
+      },
+      "buckets": {
+        "rv12": "high",
+        "r12": "low",
+        "btc_r12": "low"
+      },
+      "size": {
+        "bucket": "high",
+        "expected_abs_pct": 1.285,
+        "all_abs_pct": 0.968,
+        "n": 100
+      },
+      "direction": {
+        "D1": {
+          "p_up": 0.42,
+          "n": 100
+        },
+        "D2": {
+          "p_up": 0.3333,
+          "n": 42,
+          "fallback": false,
+          "q25_pct": -1.811,
+          "median_pct": -0.527,
+          "q75_pct": 0.686
+        },
+        "D3": {
+          "p_up": 0.46,
+          "n": 300
+        }
+      },
+      "hist_points": 300,
+      "t_bar": 1794196800,
+      "bar_utc": "2026-11-09 04:00",
+      "t_target": 1794240000,
+      "c0": 1.0939,
+      "bars": 358
+    },
+    "BNB": {
+      "ok": true,
+      "features": {
+        "rv12": 0.0081,
+        "r12": -0.0173,
+        "btc_r12": -0.0181
+      },
+      "buckets": {
+        "rv12": "high",
+        "r12": "low",
+        "btc_r12": "low"
+      },
+      "size": {
+        "bucket": "high",
+        "expected_abs_pct": 0.641,
+        "all_abs_pct": 0.703,
+        "n": 100
+      },
+      "direction": {
+        "D1": {
+          "p_up": 0.52,
+          "n": 100
+        },
+        "D2": {
+          "p_up": 0.5714,
+          "n": 35,
+          "fallback": false,
+          "q25_pct": -0.515,
+          "median_pct": 0.354,
+          "q75_pct": 0.868
+        },
+        "D3": {
+          "p_up": 0.4733,
+          "n": 300
+        }
+      },
+      "hist_points": 300,
+      "t_bar": 1794196800,
+      "bar_utc": "2026-11-09 04:00",
+      "t_target": 1794240000,
+      "c0": 684.44,
+      "bars": 358
+    },
+    "DOGE": {
+      "ok": true,
+      "features": {
+        "rv12": 0.0129,
+        "r12": -0.0304,
+        "btc_r12": -0.0181
+      },
+      "buckets": {
+        "rv12": "high",
+        "r12": "low",
+        "btc_r12": "low"
+      },
+      "size": {
+        "bucket": "high",
+        "expected_abs_pct": 0.99,
+        "all_abs_pct": 0.932,
+        "n": 100
+      },
+      "direction": {
+        "D1": {
+          "p_up": 0.55,
+          "n": 100
+        },
+        "D2": {
+          "p_up": 0.6579,
+          "n": 38,
+          "fallback": false,
+          "q25_pct": -0.27,
+          "median_pct": 0.559,
+          "q75_pct": 1.552
+        },
+        "D3": {
+          "p_up": 0.4467,
+          "n": 300
+        }
+      },
+      "hist_points": 300,
+      "t_bar": 1794196800,
+      "bar_utc": "2026-11-09 04:00",
+      "t_target": 1794240000,
+      "c0": 0.06906,
+      "bars": 358
+    },
+    "LINK": {
+      "ok": true,
+      "features": {
+        "rv12": 0.0145,
+        "r12": -0.0299,
+        "btc_r12": -0.0181
+      },
+      "buckets": {
+        "rv12": "high",
+        "r12": "low",
+        "btc_r12": "low"
+      },
+      "size": {
+        "bucket": "high",
+        "expected_abs_pct": 1.827,
+        "all_abs_pct": 1.337,
+        "n": 100
+      },
+      "direction": {
+        "D1": {
+          "p_up": 0.57,
+          "n": 100
+        },
+        "D2": {
+          "p_up": 0.7714,
+          "n": 35,
+          "fallback": false,
+          "q25_pct": 0.479,
+          "median_pct": 1.27,
+          "q75_pct": 3.406
+        },
+        "D3": {
+          "p_up": 0.4467,
+          "n": 300
+        }
+      },
+      "hist_points": 300,
+      "t_bar": 1794196800,
+      "bar_utc": "2026-11-09 04:00",
+      "t_target": 1794240000,
+      "c0": 10.437,
+      "bars": 358
+    },
+    "DOT": {
+      "ok": true,
+      "features": {
+        "rv12": 0.013,
+        "r12": -0.0382,
+        "btc_r12": -0.0181
+      },
+      "buckets": {
+        "rv12": "mid",
+        "r12": "low",
+        "btc_r12": "low"
+      },
+      "size": {
+        "bucket": "mid",
+        "expected_abs_pct": 1.245,
+        "all_abs_pct": 1.36,
+        "n": 100
+      },
+      "direction": {
+        "D1": {
+          "p_up": 0.55,
+          "n": 100
+        },
+        "D2": {
+          "p_up": 0.45,
+          "n": 20,
+          "fallback": false,
+          "q25_pct": -2.651,
+          "median_pct": -1.09,
+          "q75_pct": 0.865
+        },
+        "D3": {
+          "p_up": 0.4267,
+          "n": 300
+        }
+      },
+      "hist_points": 300,
+      "t_bar": 1794196800,
+      "bar_utc": "2026-11-09 04:00",
+      "t_target": 1794240000,
+      "c0": 0.8623,
+      "bars": 358
+    },
+    "ARB": {
+      "ok": true,
+      "features": {
+        "rv12": 0.0152,
+        "r12": 0.0252,
+        "btc_r12": -0.0181
+      },
+      "buckets": {
+        "rv12": "high",
+        "r12": "high",
+        "btc_r12": "low"
+      },
+      "size": {
+        "bucket": "high",
+        "expected_abs_pct": 2.179,
+        "all_abs_pct": 1.74,
+        "n": 100
+      },
+      "direction": {
+        "D1": {
+          "p_up": 0.38,
+          "n": 100
+        },
+        "D2": {
+          "p_up": 0.4733,
+          "n": 8,
+          "fallback": true,
+          "q25_pct": -2.112,
+          "median_pct": -0.174,
+          "q75_pct": 1.351
+        },
+        "D3": {
+          "p_up": 0.4733,
+          "n": 300
+        }
+      },
+      "hist_points": 300,
+      "t_bar": 1794196800,
+      "bar_utc": "2026-11-09 04:00",
+      "t_target": 1794240000,
+      "c0": 0.17263,
+      "bars": 358
+    },
+    "AAVE": {
+      "ok": true,
+      "features": {
+        "rv12": 0.0145,
+        "r12": -0.01,
+        "btc_r12": -0.0181
+      },
+      "buckets": {
+        "rv12": "high",
+        "r12": "mid",
+        "btc_r12": "low"
+      },
+      "size": {
+        "bucket": "high",
+        "expected_abs_pct": 1.945,
+        "all_abs_pct": 1.871,
+        "n": 100
+      },
+      "direction": {
+        "D1": {
+          "p_up": 0.42,
+          "n": 100
+        },
+        "D2": {
+          "p_up": 0.7692,
+          "n": 13,
+          "fallback": false,
+          "q25_pct": 0.084,
+          "median_pct": 0.301,
+          "q75_pct": 0.75
+        },
+        "D3": {
+          "p_up": 0.4667,
+          "n": 300
+        }
+      },
+      "hist_points": 300,
+      "t_bar": 1794196800,
+      "bar_utc": "2026-11-09 04:00",
+      "t_target": 1794240000,
+      "c0": 129.39,
+      "bars": 358
+    },
+    "PEPE": {
+      "ok": true,
+      "features": {
+        "rv12": 0.0194,
+        "r12": 0.0259,
+        "btc_r12": -0.0181
+      },
+      "buckets": {
+        "rv12": "high",
+        "r12": "high",
+        "btc_r12": "low"
+      },
+      "size": {
+        "bucket": "high",
+        "expected_abs_pct": 2.436,
+        "all_abs_pct": 2.228,
+        "n": 100
+      },
+      "direction": {
+        "D1": {
+          "p_up": 0.47,
+          "n": 100
+        },
+        "D2": {
+          "p_up": 0.4967,
+          "n": 8,
+          "fallback": true,
+          "q25_pct": -1.999,
+          "median_pct": -0.026,
+          "q75_pct": 2.648
+        },
+        "D3": {
+          "p_up": 0.4967,
+          "n": 300
+        }
+      },
+      "hist_points": 300,
+      "t_bar": 1794196800,
+      "bar_utc": "2026-11-09 04:00",
+      "t_target": 1794240000,
+      "c0": 5.0309e-06,
+      "bars": 358
+    },
+    "BONK": {
+      "ok": true,
+      "features": {
+        "rv12": 0.0167,
+        "r12": -0.0273,
+        "btc_r12": -0.0181
+      },
+      "buckets": {
+        "rv12": "high",
+        "r12": "low",
+        "btc_r12": "low"
+      },
+      "size": {
+        "bucket": "high",
+        "expected_abs_pct": 2.076,
+        "all_abs_pct": 1.791,
+        "n": 100
+      },
+      "direction": {
+        "D1": {
+          "p_up": 0.58,
+          "n": 100
+        },
+        "D2": {
+          "p_up": 0.7429,
+          "n": 35,
+          "fallback": false,
+          "q25_pct": 0.151,
+          "median_pct": 1.243,
+          "q75_pct": 3.278
+        },
+        "D3": {
+          "p_up": 0.4367,
+          "n": 300
+        }
+      },
+      "hist_points": 300,
+      "t_bar": 1794196800,
+      "bar_utc": "2026-11-09 04:00",
+      "t_target": 1794240000,
+      "c0": 2.706e-06,
+      "bars": 358
+    }
+  },
+  "errors": {},
+  "cumulative": {
+    "rule_fixed": "2026-11-06",
+    "days": 0,
+    "points": 0,
+    "first_date": null,
+    "last_date": null,
+    "missing_days": 0,
+    "base_up_rate": null,
+    "size": {
+      "all": {
+        "n": {
+          "low": 0,
+          "mid": 0,
+          "high": 0
+        },
+        "mean_abs_pct": {
+          "low": null,
+          "mid": null,
+          "high": null
+        },
+        "ratio_high_low": null
+      },
+      "first_half": {
+        "n": {
+          "low": 0,
+          "mid": 0,
+          "high": 0
+        },
+        "mean_abs_pct": {
+          "low": null,
+          "mid": null,
+          "high": null
+        },
+        "ratio_high_low": null
+      },
+      "second_half": {
+        "n": {
+          "low": 0,
+          "mid": 0,
+          "high": 0
+        },
+        "mean_abs_pct": {
+          "low": null,
+          "mid": null,
+          "high": null
+        },
+        "ratio_high_low": null
+      }
+    },
+    "direction": {
+      "all": {
+        "D1": {
+          "n": 0,
+          "decisive": 0,
+          "hits": 0,
+          "hit_rate": null,
+          "brier": null
+        },
+        "D2": {
+          "n": 0,
+          "decisive": 0,
+          "hits": 0,
+          "hit_rate": null,
+          "brier": null
+        },
+        "D3": {
+          "n": 0,
+          "decisive": 0,
+          "hits": 0,
+          "hit_rate": null,
+          "brier": null
+        }
+      },
+      "first_half": {
+        "D1": {
+          "n": 0,
+          "decisive": 0,
+          "hits": 0,
+          "hit_rate": null,
+          "brier": null
+        },
+        "D2": {
+          "n": 0,
+          "decisive": 0,
+          "hits": 0,
+          "hit_rate": null,
+          "brier": null
+        },
+        "D3": {
+          "n": 0,
+          "decisive": 0,
+          "hits": 0,
+          "hit_rate": null,
+          "brier": null
+        }
+      },
+      "second_half": {
+        "D1": {
+          "n": 0,
+          "decisive": 0,
+          "hits": 0,
+          "hit_rate": null,
+          "brier": null
+        },
+        "D2": {
+          "n": 0,
+          "decisive": 0,
+          "hits": 0,
+          "hit_rate": null,
+          "brier": null
+        },
+        "D3": {
+          "n": 0,
+          "decisive": 0,
+          "hits": 0,
+          "hit_rate": null,
+          "brier": null
+        }
+      }
+    }
+  },
+  "summary": {
+    "ok": true,
+    "coins_ok": 12,
+    "coins_total": 12,
+    "scored_now": 0,
+    "size_high": [
+      "BTC",
+      "ETH",
+      "SOL",
+      "XRP",
+      "BNB",
+      "DOGE",
+      "LINK",
+      "ARB",
+      "AAVE",
+      "PEPE",
+      "BONK"
+    ],
+    "size_low": [],
+    "history_days": 0,
+    "points": 0,
+    "size_ratio": null,
+    "verdict": "12/12 종목 예측 — 앞 12h 폭 상위 11·하위 0종목, 누적 채점 0일 0건, 크기 비율 -"
+  }
+}

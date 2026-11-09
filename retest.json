@@ -1,7 +1,7 @@
 {
  "schema": "carrygate-retest/1",
- "date": "2026-11-08",
- "generated_at_kst": "2026-11-08 15:21:41",
+ "date": "2026-11-09",
+ "generated_at_kst": "2026-11-09 15:54:23",
  "rules": {
   "bar_minutes": 60,
   "pivot_k": 3,
@@ -77,7 +77,7 @@
      "bars": 8760,
      "dir": "long",
      "stats": {
-      "period": "2025-11-07 16:00 ~ 2026-11-08 05:00",
+      "period": "2025-11-08 11:00 ~ 2026-11-09 05:00",
       "days": 365,
       "trades": 10,
       "wins": 1,
@@ -115,7 +115,7 @@
        "wins": 0,
        "net_pct": null
       },
-      "buy_hold_pct": -31.7385
+      "buy_hold_pct": -33.401
      },
      "returns_pct": [
       -0.9103216847268099,
@@ -278,9 +278,9 @@
       }
      ],
      "signal": {
-      "last_bar": "2026-11-08 05:00",
-      "close": 103425000.0,
-      "atr": 289441.92906467,
+      "last_bar": "2026-11-09 05:00",
+      "close": 101319000.0,
+      "atr": 475617.2106291,
       "phase": "scan",
       "dir": "long",
       "phase_ko": "대기",
@@ -292,37 +292,37 @@
      "bars": 8760,
      "dir": "long",
      "stats": {
-      "period": "2025-11-07 16:00 ~ 2026-11-08 05:00",
+      "period": "2025-11-08 12:00 ~ 2026-11-09 05:00",
       "days": 365,
-      "trades": 6,
+      "trades": 5,
       "wins": 1,
-      "win_rate_pct": 16.6667,
-      "net_pct": 0.3508,
-      "realized_net_pct": 0.3508,
-      "cagr_pct": 0.3508,
+      "win_rate_pct": 20.0,
+      "net_pct": 0.7793,
+      "realized_net_pct": 0.7793,
+      "cagr_pct": 0.7793,
       "max_drawdown_pct": -3.6869,
-      "profit_factor": 1.1047,
-      "avg_r": 0.0722,
-      "avg_hold_bars": 13.0,
+      "profit_factor": 1.2652,
+      "avg_r": 0.1717,
+      "avg_hold_bars": 12.0,
       "stops": 2,
-      "trails": 4,
+      "trails": 3,
       "targets": 0,
-      "longs": 6,
+      "longs": 5,
       "shorts": 0,
-      "avg_mfe_pct": 2.9933,
-      "avg_giveback_pct": 2.5258,
+      "avg_mfe_pct": 3.07,
+      "avg_giveback_pct": 2.4358,
       "counts": {
        "poles": 118,
-       "box_failed": 105,
-       "breakouts": 13,
+       "box_failed": 106,
+       "breakouts": 12,
        "rise2_failed": 4,
        "no_pullback": 3,
        "zone_lost": 0,
-       "entries": 6,
+       "entries": 5,
        "ambiguous": 0
       },
       "by_year": {
-       "2025": -1.0949,
+       "2025": -0.6725,
        "2026": 1.4616
       },
       "forward": {
@@ -330,15 +330,14 @@
        "wins": 0,
        "net_pct": null
       },
-      "buy_hold_pct": -38.491
+      "buy_hold_pct": -43.1041
      },
      "returns_pct": [
-      -0.4252609902742472,
       -0.5121688892278267,
       -0.16113668814182117,
       3.743256306692101,
       -1.1260199059427105,
-      -1.085488519598294
+      -1.0854885195982937
      ],
      "forward_trades": [],
      "recent_trades": [
@@ -350,7 +349,7 @@
        "bars": 6,
        "entry": 4590294.0,
        "exit": 4532732.5,
-       "units": 0.8209370538503615,
+       "units": 0.8244430886935875,
        "zone_lo": 4469000.0,
        "zone_hi": 4560000.0,
        "stop0": 4469000.0,
@@ -363,8 +362,8 @@
        "rise2_date": "2025-11-28 14:00",
        "reason": "trail",
        "entry_how": "confirm_close",
-       "pnl": -50999.0835,
-       "fees": 3744.7152,
+       "pnl": -51216.8889,
+       "fees": 3760.7081,
        "mfe_pct": 0.059,
        "price_ret_pct": -1.254,
        "ret_pct": -0.5121688892278267,
@@ -379,7 +378,7 @@
        "bars": 23,
        "entry": 4754376.0,
        "exit": 4732632.5,
-       "units": 0.6026716076251285,
+       "units": 0.6052454805493026,
        "zone_lo": 4590000.0,
        "zone_hi": 4730000.0,
        "stop0": 4590000.0,
@@ -392,8 +391,8 @@
        "rise2_date": "2025-12-09 17:00",
        "reason": "trail",
        "entry_how": "confirm_close",
-       "pnl": -15962.9654,
-       "fees": 2858.7753,
+       "pnl": -16031.1396,
+       "fees": 2870.9845,
        "mfe_pct": 2.3057,
        "price_ret_pct": -0.4573,
        "ret_pct": -0.16113668814182117,
@@ -408,7 +407,7 @@
        "bars": 30,
        "entry": 2749374.0,
        "exit": 2944527.0,
-       "units": 1.9251979312621739,
+       "units": 1.9334200123528662,
        "zone_lo": 2698000.0,
        "zone_hi": 2738000.0,
        "stop0": 2698000.0,
@@ -421,8 +420,8 @@
        "rise2_date": "2026-02-25 02:00",
        "reason": "trail",
        "entry_how": "confirm_close",
-       "pnl": 370227.2087,
-       "fees": 5480.9432,
+       "pnl": 371808.3646,
+       "fees": 5504.3511,
        "mfe_pct": 12.0255,
        "price_ret_pct": 7.0981,
        "ret_pct": 3.743256306692101,
@@ -437,7 +436,7 @@
        "bars": 1,
        "entry": 2476237.5,
        "exit": 2445776.5,
-       "units": 3.509444740738057,
+       "units": 3.5244327784733422,
        "zone_lo": 2447000.0,
        "zone_hi": 2475000.0,
        "stop0": 2447000.0,
@@ -450,8 +449,8 @@
        "rise2_date": "2026-06-25 06:00",
        "reason": "stop",
        "entry_how": "confirm_close",
-       "pnl": -115537.9643,
-       "fees": 8636.7681,
+       "pnl": -116031.4006,
+       "fees": 8673.6537,
        "mfe_pct": 0.9596,
        "price_ret_pct": -1.2301,
        "ret_pct": -1.1260199059427105,
@@ -466,7 +465,7 @@
        "bars": 0,
        "entry": 2707353.0,
        "exit": 2680659.0,
-       "units": 3.7472768037312467,
+       "units": 3.7632805679412713,
        "zone_lo": 2682000.0,
        "zone_hi": 2711000.0,
        "stop0": 2682000.0,
@@ -479,19 +478,19 @@
        "rise2_date": "2026-07-06 21:00",
        "reason": "stop",
        "entry_how": "confirm_close",
-       "pnl": -110124.9932,
-       "fees": 10095.1862,
+       "pnl": -110595.3119,
+       "fees": 10138.3004,
        "mfe_pct": 0.0,
        "price_ret_pct": -0.986,
-       "ret_pct": -1.085488519598294,
+       "ret_pct": -1.0854885195982937,
        "r_multiple": -1.0855,
        "forward": false
       }
      ],
      "signal": {
-      "last_bar": "2026-11-08 05:00",
-      "close": 3049000.0,
-      "atr": 12610.77186498,
+      "last_bar": "2026-11-09 05:00",
+      "close": 2896000.0,
+      "atr": 20512.85695699,
       "phase": "scan",
       "dir": "long",
       "phase_ko": "대기",
@@ -503,7 +502,7 @@
      "bars": 8760,
      "dir": "long",
      "stats": {
-      "period": "2025-11-07 16:00 ~ 2026-11-08 05:00",
+      "period": "2025-11-08 12:00 ~ 2026-11-09 05:00",
       "days": 365,
       "trades": 6,
       "wins": 1,
@@ -523,8 +522,8 @@
       "avg_mfe_pct": 1.3027,
       "avg_giveback_pct": 2.149,
       "counts": {
-       "poles": 109,
-       "box_failed": 98,
+       "poles": 108,
+       "box_failed": 97,
        "breakouts": 11,
        "rise2_failed": 1,
        "no_pullback": 3,
@@ -541,7 +540,7 @@
        "wins": 0,
        "net_pct": -0.4809
       },
-      "buy_hold_pct": -53.2291
+      "buy_hold_pct": -56.5674
      },
      "returns_pct": [
       -0.3711107837713555,
@@ -730,9 +729,9 @@
       }
      ],
      "signal": {
-      "last_bar": "2026-11-08 05:00",
-      "close": 1586.0,
-      "atr": 10.5232475,
+      "last_bar": "2026-11-09 05:00",
+      "close": 1488.0,
+      "atr": 14.45943892,
       "phase": "scan",
       "dir": "long",
       "phase_ko": "대기",
@@ -744,7 +743,7 @@
      "bars": 8760,
      "dir": "long",
      "stats": {
-      "period": "2025-11-07 11:00 ~ 2026-11-08 05:00",
+      "period": "2025-11-08 06:00 ~ 2026-11-09 05:00",
       "days": 365,
       "trades": 0,
       "wins": 0,
@@ -782,15 +781,15 @@
        "wins": 0,
        "net_pct": null
       },
-      "buy_hold_pct": 2.8169
+      "buy_hold_pct": -0.2304
      },
      "returns_pct": [],
      "forward_trades": [],
      "recent_trades": [],
      "signal": {
-      "last_bar": "2026-11-08 05:00",
-      "close": 438.0,
-      "atr": 1.53033416,
+      "last_bar": "2026-11-09 05:00",
+      "close": 433.0,
+      "atr": 2.02988005,
       "phase": "scan",
       "dir": "long",
       "phase_ko": "대기",
@@ -802,7 +801,7 @@
      "bars": 8760,
      "dir": "long",
      "stats": {
-      "period": "2025-11-07 12:00 ~ 2026-11-08 05:00",
+      "period": "2025-11-08 07:00 ~ 2026-11-09 05:00",
       "days": 365,
       "trades": 2,
       "wins": 0,
@@ -840,7 +839,7 @@
        "wins": 0,
        "net_pct": -0.7446
       },
-      "buy_hold_pct": -32.2238
+      "buy_hold_pct": -39.3939
      },
      "returns_pct": [
       -1.0795727517594895,
@@ -938,9 +937,9 @@
       }
      ],
      "signal": {
-      "last_bar": "2026-11-08 05:00",
-      "close": 14660.0,
-      "atr": 97.42343335,
+      "last_bar": "2026-11-09 05:00",
+      "close": 14200.0,
+      "atr": 131.0104856,
       "phase": "scan",
       "dir": "long",
       "phase_ko": "대기",
@@ -952,7 +951,7 @@
      "bars": 8760,
      "dir": "long",
      "stats": {
-      "period": "2025-11-07 13:00 ~ 2026-11-08 05:00",
+      "period": "2025-11-08 08:00 ~ 2026-11-09 05:00",
       "days": 365,
       "trades": 0,
       "wins": 0,
@@ -990,15 +989,15 @@
        "wins": 0,
        "net_pct": null
       },
-      "buy_hold_pct": -60.0412
+      "buy_hold_pct": -65.3137
      },
      "returns_pct": [],
      "forward_trades": [],
      "recent_trades": [],
      "signal": {
-      "last_bar": "2026-11-08 05:00",
-      "close": 97.1,
-      "atr": 0.58009222,
+      "last_bar": "2026-11-09 05:00",
+      "close": 94.0,
+      "atr": 0.80595351,
       "phase": "scan",
       "dir": "long",
       "phase_ko": "대기",
@@ -1017,37 +1016,37 @@
      "XRP/long"
     ],
     "stats": {
-     "period": "2025-11-07 11:00 ~ 2026-11-08 05:00",
+     "period": "2025-11-08 06:00 ~ 2026-11-09 05:00",
      "days": 365,
-     "trades": 24,
+     "trades": 23,
      "wins": 3,
-     "win_rate_pct": 12.5,
-     "net_pct": -9.6694,
-     "realized_net_pct": -9.6694,
-     "cagr_pct": -9.6694,
+     "win_rate_pct": 13.0435,
+     "net_pct": -9.2836,
+     "realized_net_pct": -9.2836,
+     "cagr_pct": -9.2836,
      "max_drawdown_pct": -12.762,
-     "profit_factor": 0.3306,
-     "avg_r": -0.4181,
-     "avg_hold_bars": 17.625,
+     "profit_factor": 0.3406,
+     "avg_r": -0.4178,
+     "avg_hold_bars": 17.6087,
      "stops": 8,
-     "trails": 16,
+     "trails": 15,
      "targets": 0,
-     "longs": 24,
+     "longs": 23,
      "shorts": 0,
-     "avg_mfe_pct": 1.3937,
-     "avg_giveback_pct": 1.9463,
+     "avg_mfe_pct": 1.3408,
+     "avg_giveback_pct": 1.9016,
      "counts": {
-      "poles": 498,
+      "poles": 497,
       "box_failed": 436,
-      "breakouts": 62,
+      "breakouts": 61,
       "rise2_failed": 16,
       "no_pullback": 18,
       "zone_lost": 4,
-      "entries": 24,
+      "entries": 23,
       "ambiguous": 0
      },
      "by_year": {
-      "2025": -1.8793,
+      "2025": -1.4602,
       "2026": -7.9393
      },
      "forward": {
@@ -1057,30 +1056,29 @@
      }
     },
     "returns_pct": [
-     -0.4252609902742472,
      -0.3908822861380694,
-     -0.9138939342298046,
+     -0.9138939342298045,
      -0.1611366881418212,
      -0.37111078377135553,
-     3.7432563066921007,
+     3.743256306692101,
      -0.5105280353573007,
      0.46613268206594255,
      -0.37566861507548294,
-     -0.9989232056312055,
-     0.6453021465630471,
-     -1.0973652528084672,
-     -0.8841582590561679,
+     -0.9989232056312056,
+     0.6453021465630472,
+     -1.0973652528084674,
+     -0.8841582590561676,
      -0.31703485969012946,
-     -1.0795727517594895,
+     -1.0795727517594893,
      -1.0757717067724843,
      -1.089331346153849,
      -1.1260199059427105,
-     -1.085488519598294,
-     -0.38643606474397163,
-     -0.7953726493938749,
+     -1.0854885195982942,
+     -0.3864360647439716,
+     -0.7953726493938748,
      -0.5793228951470473,
-     -0.48085137228796915,
-     -0.7446290878243861
+     -0.48085137228796904,
+     -0.744629087824386
     ],
     "open_positions": {},
     "forward_trades": [
@@ -1092,7 +1090,7 @@
       "bars": 2,
       "entry": 1777.8885,
       "exit": 1771.114,
-      "units": 5143.630781757589,
+      "units": 5165.598055200723,
       "zone_lo": 1772.0,
       "zone_hi": 1788.0,
       "stop0": 1772.0,
@@ -1105,11 +1103,11 @@
       "rise2_date": "2026-10-21 09:00",
       "reason": "stop",
       "entry_how": "confirm_close",
-      "pnl": -43972.906,
-      "fees": 9127.3793,
+      "pnl": -44160.7042,
+      "fees": 9166.3602,
       "mfe_pct": 0.2875,
       "price_ret_pct": -0.381,
-      "ret_pct": -0.48085137228796915,
+      "ret_pct": -0.48085137228796904,
       "r_multiple": -0.4809,
       "forward": true
      },
@@ -1121,7 +1119,7 @@
       "bars": 27,
       "entry": 15267.63,
       "exit": 14852.57,
-      "units": 157.55464759707868,
+      "units": 158.22752754761413,
       "zone_lo": 14690.0,
       "zone_hi": 15180.0,
       "stop0": 14690.0,
@@ -1134,16 +1132,16 @@
       "rise2_date": "2026-10-31 00:00",
       "reason": "trail",
       "entry_how": "confirm_close",
-      "pnl": -67767.4208,
-      "fees": 2372.7887,
+      "pnl": -68056.84,
+      "fees": 2382.9224,
       "mfe_pct": 0.736,
       "price_ret_pct": -2.7186,
-      "ret_pct": -0.7446290878243861,
+      "ret_pct": -0.744629087824386,
       "r_multiple": -0.7446,
       "forward": true
      }
     ],
-    "equity_now": 9033061.6884
+    "equity_now": 9071639.8338
    },
    "variants": {
     "no_vol": {
@@ -1152,7 +1150,7 @@
        "bars": 8760,
        "dir": "long",
        "stats": {
-        "period": "2025-11-07 16:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-08 11:00 ~ 2026-11-09 05:00",
         "days": 365,
         "trades": 28,
         "wins": 8,
@@ -1173,7 +1171,7 @@
         "avg_giveback_pct": 1.4664,
         "counts": {
          "poles": 304,
-         "box_failed": 250,
+         "box_failed": 251,
          "breakouts": 53,
          "rise2_failed": 11,
          "no_pullback": 12,
@@ -1190,7 +1188,7 @@
          "wins": 0,
          "net_pct": -0.8099
         },
-        "buy_hold_pct": -31.7385
+        "buy_hold_pct": -33.401
        },
        "returns_pct": [
         0.10497438153542,
@@ -1430,25 +1428,21 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 103425000.0,
-        "atr": 289441.92906467,
-        "phase": "box",
+        "last_bar": "2026-11-09 05:00",
+        "close": 101319000.0,
+        "atr": 475617.2106291,
+        "phase": "scan",
         "dir": "long",
-        "phase_ko": "횡보 중",
+        "phase_ko": "대기",
         "position": "flat",
-        "zone_lo": 103200000.0,
-        "zone_hi": 103897000.0,
-        "pole_date": "2026-11-06 15:00",
-        "box_date": "2026-11-07 09:00",
-        "action": "횡보 중(103,200,000~103,897,000) — 종가가 103,897,000 을 넘으면 돌파. 되돌림 50% 넘으면 무효"
+        "action": "대기 — 1차 상승 + 횡보 구조 없음"
        }
       },
       "ETH/long": {
        "bars": 8760,
        "dir": "long",
        "stats": {
-        "period": "2025-11-07 16:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-08 12:00 ~ 2026-11-09 05:00",
         "days": 365,
         "trades": 25,
         "wins": 5,
@@ -1468,7 +1462,7 @@
         "avg_mfe_pct": 2.8285,
         "avg_giveback_pct": 2.2612,
         "counts": {
-         "poles": 282,
+         "poles": 281,
          "box_failed": 229,
          "breakouts": 52,
          "rise2_failed": 15,
@@ -1486,7 +1480,7 @@
          "wins": 0,
          "net_pct": -0.8999
         },
-        "buy_hold_pct": -38.491
+        "buy_hold_pct": -43.1041
        },
        "returns_pct": [
         0.009869067567056791,
@@ -1694,25 +1688,21 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 3049000.0,
-        "atr": 12610.77186498,
-        "phase": "box",
+        "last_bar": "2026-11-09 05:00",
+        "close": 2896000.0,
+        "atr": 20512.85695699,
+        "phase": "scan",
         "dir": "long",
-        "phase_ko": "횡보 중",
+        "phase_ko": "대기",
         "position": "flat",
-        "zone_lo": 3037000.0,
-        "zone_hi": 3070000.0,
-        "pole_date": "2026-11-06 15:00",
-        "box_date": "2026-11-07 02:00",
-        "action": "횡보 중(3,037,000~3,070,000) — 종가가 3,070,000 을 넘으면 돌파. 되돌림 50% 넘으면 무효"
+        "action": "대기 — 1차 상승 + 횡보 구조 없음"
        }
       },
       "XRP/long": {
        "bars": 8760,
        "dir": "long",
        "stats": {
-        "period": "2025-11-07 16:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-08 12:00 ~ 2026-11-09 05:00",
         "days": 365,
         "trades": 16,
         "wins": 2,
@@ -1732,8 +1722,8 @@
         "avg_mfe_pct": 1.6917,
         "avg_giveback_pct": 2.2243,
         "counts": {
-         "poles": 270,
-         "box_failed": 228,
+         "poles": 271,
+         "box_failed": 229,
          "breakouts": 42,
          "rise2_failed": 16,
          "no_pullback": 10,
@@ -1750,7 +1740,7 @@
          "wins": 0,
          "net_pct": -0.4809
         },
-        "buy_hold_pct": -53.2291
+        "buy_hold_pct": -56.5674
        },
        "returns_pct": [
         0.04071700570427061,
@@ -1949,9 +1939,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 1586.0,
-        "atr": 10.5232475,
+        "last_bar": "2026-11-09 05:00",
+        "close": 1488.0,
+        "atr": 14.45943892,
         "phase": "scan",
         "dir": "long",
         "phase_ko": "대기",
@@ -1963,7 +1953,7 @@
        "bars": 8760,
        "dir": "long",
        "stats": {
-        "period": "2025-11-07 11:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-08 06:00 ~ 2026-11-09 05:00",
         "days": 365,
         "trades": 6,
         "wins": 0,
@@ -1983,8 +1973,8 @@
         "avg_mfe_pct": 1.2103,
         "avg_giveback_pct": 2.1503,
         "counts": {
-         "poles": 96,
-         "box_failed": 76,
+         "poles": 97,
+         "box_failed": 78,
          "breakouts": 19,
          "rise2_failed": 12,
          "no_pullback": 1,
@@ -2001,7 +1991,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": 2.8169
+        "buy_hold_pct": -0.2304
        },
        "returns_pct": [
         -1.1276801780245012,
@@ -2160,25 +2150,21 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 438.0,
-        "atr": 1.53033416,
-        "phase": "box",
+        "last_bar": "2026-11-09 05:00",
+        "close": 433.0,
+        "atr": 2.02988005,
+        "phase": "scan",
         "dir": "long",
-        "phase_ko": "횡보 중",
+        "phase_ko": "대기",
         "position": "flat",
-        "zone_lo": 431.0,
-        "zone_hi": 439.0,
-        "pole_date": "2026-11-05 10:00",
-        "box_date": "2026-11-05 21:00",
-        "action": "횡보 중(431~439) — 종가가 439 을 넘으면 돌파. 되돌림 50% 넘으면 무효"
+        "action": "대기 — 1차 상승 + 횡보 구조 없음"
        }
       },
       "LINK/long": {
        "bars": 8760,
        "dir": "long",
        "stats": {
-        "period": "2025-11-07 12:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-08 07:00 ~ 2026-11-09 05:00",
         "days": 365,
         "trades": 23,
         "wins": 5,
@@ -2198,10 +2184,10 @@
         "avg_mfe_pct": 2.1099,
         "avg_giveback_pct": 2.5446,
         "counts": {
-         "poles": 286,
-         "box_failed": 233,
+         "poles": 284,
+         "box_failed": 231,
          "breakouts": 53,
-         "rise2_failed": 17,
+         "rise2_failed": 18,
          "no_pullback": 9,
          "zone_lost": 3,
          "entries": 23,
@@ -2216,7 +2202,7 @@
          "wins": 0,
          "net_pct": -0.7446
         },
-        "buy_hold_pct": -32.2238
+        "buy_hold_pct": -39.3939
        },
        "returns_pct": [
         0.0686081247832238,
@@ -2422,27 +2408,21 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 14660.0,
-        "atr": 97.42343335,
-        "phase": "rise2",
+        "last_bar": "2026-11-09 05:00",
+        "close": 14200.0,
+        "atr": 131.0104856,
+        "phase": "scan",
         "dir": "long",
-        "phase_ko": "돌파 — 2차 상승 대기",
+        "phase_ko": "대기",
         "position": "flat",
-        "zone_lo": 14630.0,
-        "zone_hi": 14850.0,
-        "pole_date": "2026-11-05 23:00",
-        "box_date": "2026-11-07 02:00",
-        "bars_left": 21,
-        "breakout_date": "2026-11-07 14:00",
-        "action": "돌파 확인(2026-11-07 14:00) — 2차 상승 고점 확정 대기 (지지 구간 14,630~14,850, 남은 21봉)"
+        "action": "대기 — 1차 상승 + 횡보 구조 없음"
        }
       },
       "DOGE/long": {
        "bars": 8760,
        "dir": "long",
        "stats": {
-        "period": "2025-11-07 13:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-08 08:00 ~ 2026-11-09 05:00",
         "days": 365,
         "trades": 6,
         "wins": 2,
@@ -2480,7 +2460,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": -60.0412
+        "buy_hold_pct": -65.3137
        },
        "returns_pct": [
         0.25165635815287335,
@@ -2639,9 +2619,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 97.1,
-        "atr": 0.58009222,
+        "last_bar": "2026-11-09 05:00",
+        "close": 94.0,
+        "atr": 0.80595351,
         "phase": "scan",
         "dir": "long",
         "phase_ko": "대기",
@@ -2660,7 +2640,7 @@
        "XRP/long"
       ],
       "stats": {
-       "period": "2025-11-07 11:00 ~ 2026-11-08 05:00",
+       "period": "2025-11-08 06:00 ~ 2026-11-09 05:00",
        "days": 365,
        "trades": 99,
        "wins": 22,
@@ -2680,10 +2660,10 @@
        "avg_mfe_pct": 2.0286,
        "avg_giveback_pct": 2.1443,
        "counts": {
-        "poles": 1347,
-        "box_failed": 1112,
+        "poles": 1346,
+        "box_failed": 1114,
         "breakouts": 232,
-        "rise2_failed": 77,
+        "rise2_failed": 78,
         "no_pullback": 42,
         "zone_lost": 8,
         "entries": 99,
@@ -2958,7 +2938,7 @@
        "bars": 8760,
        "dir": "long",
        "stats": {
-        "period": "2025-11-07 16:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-08 11:00 ~ 2026-11-09 05:00",
         "days": 365,
         "trades": 12,
         "wins": 2,
@@ -2996,7 +2976,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": -31.7385
+        "buy_hold_pct": -33.401
        },
        "returns_pct": [
         -0.8762327457041464,
@@ -3161,9 +3141,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 103425000.0,
-        "atr": 289441.92906467,
+        "last_bar": "2026-11-09 05:00",
+        "close": 101319000.0,
+        "atr": 475617.2106291,
         "phase": "scan",
         "dir": "long",
         "phase_ko": "대기",
@@ -3175,37 +3155,37 @@
        "bars": 8760,
        "dir": "long",
        "stats": {
-        "period": "2025-11-07 16:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-08 12:00 ~ 2026-11-09 05:00",
         "days": 365,
-        "trades": 8,
+        "trades": 7,
         "wins": 2,
-        "win_rate_pct": 25.0,
-        "net_pct": 0.8077,
-        "realized_net_pct": 0.8077,
-        "cagr_pct": 0.8077,
+        "win_rate_pct": 28.5714,
+        "net_pct": 1.9139,
+        "realized_net_pct": 1.9139,
+        "cagr_pct": 1.9139,
         "max_drawdown_pct": -4.5728,
-        "profit_factor": 1.1908,
-        "avg_r": 0.1188,
-        "avg_hold_bars": 9.875,
-        "stops": 3,
+        "profit_factor": 1.6014,
+        "avg_r": 0.2908,
+        "avg_hold_bars": 11.1429,
+        "stops": 2,
         "trails": 5,
         "targets": 0,
-        "longs": 8,
+        "longs": 7,
         "shorts": 0,
-        "avg_mfe_pct": 2.3996,
-        "avg_giveback_pct": 2.0621,
+        "avg_mfe_pct": 2.7424,
+        "avg_giveback_pct": 2.1016,
         "counts": {
-         "poles": 120,
+         "poles": 119,
          "box_failed": 106,
-         "breakouts": 14,
+         "breakouts": 13,
          "rise2_failed": 4,
          "no_pullback": 2,
          "zone_lost": 0,
-         "entries": 8,
+         "entries": 7,
          "ambiguous": 0
         },
         "by_year": {
-         "2025": -1.4108,
+         "2025": -0.329,
          "2026": 2.2503
         },
         "forward": {
@@ -3213,17 +3193,16 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": -38.491
+        "buy_hold_pct": -43.1041
        },
        "returns_pct": [
-        -1.085366288043478,
         -0.3496029258241758,
-        0.02068703571428571,
-        5.0921434125,
-        -1.1315674375000002,
+        0.020687035714285713,
+        5.0921434125000005,
+        -1.1315674375,
         -1.1392010172413793,
-        -0.4225425,
-        -0.034222857142857145
+        -0.42254250000000004,
+        -0.03422285714285714
        ],
        "forward_trades": [],
        "recent_trades": [
@@ -3235,7 +3214,7 @@
          "bars": 32,
          "entry": 2738000.0,
          "exit": 2944527.0,
-         "units": 2.4647304056628907,
+         "units": 2.4917752946852,
          "zone_lo": 2698000.0,
          "zone_hi": 2738000.0,
          "stop0": 2698000.0,
@@ -3248,11 +3227,11 @@
          "rise2_date": "2026-02-25 02:00",
          "reason": "trail",
          "entry_how": "zone_limit",
-         "pnl": 502030.428,
-         "fees": 7002.9485,
+         "pnl": 507539.0861,
+         "fees": 7079.7902,
          "mfe_pct": 12.4909,
          "price_ret_pct": 7.543,
-         "ret_pct": 5.0921434125,
+         "ret_pct": 5.0921434125000005,
          "r_multiple": 5.0921,
          "forward": false
         },
@@ -3264,7 +3243,7 @@
          "bars": 2,
          "entry": 2475000.0,
          "exit": 2445776.5,
-         "units": 3.7003400180724833,
+         "units": 3.7409429517254496,
          "zone_lo": 2447000.0,
          "zone_hi": 2475000.0,
          "stop0": 2447000.0,
@@ -3277,11 +3256,11 @@
          "rise2_date": "2026-06-25 06:00",
          "reason": "stop",
          "entry_how": "zone_limit",
-         "pnl": -117241.1596,
-         "fees": 9104.2731,
+         "pnl": -118527.6184,
+         "fees": 9204.1721,
          "mfe_pct": 1.0101,
          "price_ret_pct": -1.1807,
-         "ret_pct": -1.1315674375000002,
+         "ret_pct": -1.1315674375,
          "r_multiple": -1.1316,
          "forward": false
         },
@@ -3293,7 +3272,7 @@
          "bars": 2,
          "entry": 2711000.0,
          "exit": 2680659.0,
-         "units": 3.532314100339083,
+         "units": 3.57107332634454,
          "zone_lo": 2682000.0,
          "zone_hi": 2711000.0,
          "stop0": 2682000.0,
@@ -3306,8 +3285,8 @@
          "rise2_date": "2026-07-06 21:00",
          "reason": "stop",
          "entry_how": "zone_limit",
-         "pnl": -116696.4587,
-         "fees": 9522.5166,
+         "pnl": -117976.9406,
+         "fees": 9627.0048,
          "mfe_pct": 0.2951,
          "price_ret_pct": -1.1192,
          "ret_pct": -1.1392010172413793,
@@ -3322,7 +3301,7 @@
          "bars": 11,
          "entry": 2739000.0,
          "exit": 2728635.0,
-         "units": 3.2667788491322556,
+         "units": 3.3026244212208784,
          "zone_lo": 2708000.0,
          "zone_hi": 2739000.0,
          "stop0": 2708000.0,
@@ -3335,11 +3314,11 @@
          "rise2_date": "2026-07-19 02:00",
          "reason": "trail",
          "entry_how": "zone_limit",
-         "pnl": -42790.94,
-         "fees": 8930.7772,
+         "pnl": -43260.4746,
+         "fees": 9028.7724,
          "mfe_pct": 1.4969,
          "price_ret_pct": -0.3784,
-         "ret_pct": -0.4225425,
+         "ret_pct": -0.42254250000000004,
          "r_multiple": -0.4225,
          "forward": false
         },
@@ -3351,7 +3330,7 @@
          "bars": 11,
          "entry": 2797000.0,
          "exit": 2798600.0,
-         "units": 2.8812067121006715,
+         "units": 2.9128214946343163,
          "zone_lo": 2762000.0,
          "zone_hi": 2797000.0,
          "stop0": 2762000.0,
@@ -3364,19 +3343,19 @@
          "rise2_date": "2026-07-21 08:00",
          "reason": "trail",
          "entry_how": "zone_limit",
-         "pnl": -3451.1094,
-         "fees": 8061.0401,
+         "pnl": -3488.9776,
+         "fees": 8149.492,
          "mfe_pct": 1.5731,
          "price_ret_pct": 0.0572,
-         "ret_pct": -0.034222857142857145,
+         "ret_pct": -0.03422285714285714,
          "r_multiple": -0.0342,
          "forward": false
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 3049000.0,
-        "atr": 12610.77186498,
+        "last_bar": "2026-11-09 05:00",
+        "close": 2896000.0,
+        "atr": 20512.85695699,
         "phase": "scan",
         "dir": "long",
         "phase_ko": "대기",
@@ -3388,7 +3367,7 @@
        "bars": 8760,
        "dir": "long",
        "stats": {
-        "period": "2025-11-07 16:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-08 12:00 ~ 2026-11-09 05:00",
         "days": 365,
         "trades": 7,
         "wins": 0,
@@ -3408,8 +3387,8 @@
         "avg_mfe_pct": 1.5415,
         "avg_giveback_pct": 2.4414,
         "counts": {
-         "poles": 111,
-         "box_failed": 99,
+         "poles": 110,
+         "box_failed": 98,
          "breakouts": 12,
          "rise2_failed": 1,
          "no_pullback": 4,
@@ -3426,7 +3405,7 @@
          "wins": 0,
          "net_pct": -1.0439
         },
-        "buy_hold_pct": -53.2291
+        "buy_hold_pct": -56.5674
        },
        "returns_pct": [
         -1.1460257416666677,
@@ -3616,9 +3595,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 1586.0,
-        "atr": 10.5232475,
+        "last_bar": "2026-11-09 05:00",
+        "close": 1488.0,
+        "atr": 14.45943892,
         "phase": "scan",
         "dir": "long",
         "phase_ko": "대기",
@@ -3630,7 +3609,7 @@
        "bars": 8760,
        "dir": "long",
        "stats": {
-        "period": "2025-11-07 11:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-08 06:00 ~ 2026-11-09 05:00",
         "days": 365,
         "trades": 0,
         "wins": 0,
@@ -3668,15 +3647,15 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": 2.8169
+        "buy_hold_pct": -0.2304
        },
        "returns_pct": [],
        "forward_trades": [],
        "recent_trades": [],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 438.0,
-        "atr": 1.53033416,
+        "last_bar": "2026-11-09 05:00",
+        "close": 433.0,
+        "atr": 2.02988005,
         "phase": "scan",
         "dir": "long",
         "phase_ko": "대기",
@@ -3688,7 +3667,7 @@
        "bars": 8760,
        "dir": "long",
        "stats": {
-        "period": "2025-11-07 12:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-08 07:00 ~ 2026-11-09 05:00",
         "days": 365,
         "trades": 7,
         "wins": 0,
@@ -3726,7 +3705,7 @@
          "wins": 0,
          "net_pct": -1.7808
         },
-        "buy_hold_pct": -32.2238
+        "buy_hold_pct": -39.3939
        },
        "returns_pct": [
         -0.44265464814814737,
@@ -3945,9 +3924,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 14660.0,
-        "atr": 97.42343335,
+        "last_bar": "2026-11-09 05:00",
+        "close": 14200.0,
+        "atr": 131.0104856,
         "phase": "scan",
         "dir": "long",
         "phase_ko": "대기",
@@ -3959,7 +3938,7 @@
        "bars": 8760,
        "dir": "long",
        "stats": {
-        "period": "2025-11-07 13:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-08 08:00 ~ 2026-11-09 05:00",
         "days": 365,
         "trades": 0,
         "wins": 0,
@@ -3997,15 +3976,15 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": -60.0412
+        "buy_hold_pct": -65.3137
        },
        "returns_pct": [],
        "forward_trades": [],
        "recent_trades": [],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 97.1,
-        "atr": 0.58009222,
+        "last_bar": "2026-11-09 05:00",
+        "close": 94.0,
+        "atr": 0.80595351,
         "phase": "scan",
         "dir": "long",
         "phase_ko": "대기",
@@ -4024,37 +4003,37 @@
        "XRP/long"
       ],
       "stats": {
-       "period": "2025-11-07 11:00 ~ 2026-11-08 05:00",
+       "period": "2025-11-08 06:00 ~ 2026-11-09 05:00",
        "days": 365,
-       "trades": 33,
+       "trades": 32,
        "wins": 4,
-       "win_rate_pct": 12.1212,
-       "net_pct": -6.3756,
-       "realized_net_pct": -6.3756,
-       "cagr_pct": -6.3756,
+       "win_rate_pct": 12.5,
+       "net_pct": -5.3482,
+       "realized_net_pct": -5.3482,
+       "cagr_pct": -5.3482,
        "max_drawdown_pct": -12.2316,
-       "profit_factor": 0.6586,
-       "avg_r": -0.1855,
-       "avg_hold_bars": 14.7879,
-       "stops": 9,
+       "profit_factor": 0.6992,
+       "avg_r": -0.1574,
+       "avg_hold_bars": 15.2188,
+       "stops": 8,
        "trails": 24,
        "targets": 0,
-       "longs": 33,
+       "longs": 32,
        "shorts": 0,
-       "avg_mfe_pct": 1.9477,
-       "avg_giveback_pct": 2.123,
+       "avg_mfe_pct": 2.0085,
+       "avg_giveback_pct": 2.1335,
        "counts": {
-        "poles": 504,
-        "box_failed": 440,
-        "breakouts": 64,
+        "poles": 502,
+        "box_failed": 439,
+        "breakouts": 63,
         "rise2_failed": 15,
         "no_pullback": 15,
         "zone_lost": 0,
-        "entries": 33,
+        "entries": 32,
         "ambiguous": 0
        },
        "by_year": {
-        "2025": -2.2698,
+        "2025": -1.1974,
         "2026": -4.2011
        },
        "forward": {
@@ -4064,38 +4043,37 @@
        }
       },
       "returns_pct": [
-       -1.085366288043478,
        -0.34161454742672726,
-       -0.8792363449648094,
-       0.020687035714285706,
-       -1.1460257416666675,
-       5.092143412499999,
+       -0.8792363449648091,
+       0.020687035714285713,
+       -1.1460257416666677,
+       5.0921434125,
        -0.44265464814814737,
        -0.40477292357262146,
        -0.5184194912060301,
-       -1.0007606346153841,
+       -1.0007606346153843,
        -0.703577153652397,
        0.7076165023894863,
-       -0.9817218144796379,
-       -0.7361011173425367,
+       -0.981721814479638,
+       -0.7361011173425368,
        -0.2846246778987024,
-       -0.43718158840441135,
+       -0.4371815884044114,
        -0.18728763043478483,
-       -1.1033538225806483,
+       -1.1033538225806485,
        -1.1333028625000048,
-       -1.1315674375,
+       -1.1315674375000002,
        -1.1392010172413793,
-       -0.05943760092317318,
+       -0.0594376009231732,
        -0.4169045659292672,
        -0.014470157875919688,
-       -0.4678143250503518,
+       -0.46781432505035175,
        -0.13435764973788702,
        7.298523041310541,
-       -0.7902645937499999,
-       -0.6241959371926772,
+       -0.7902645937500001,
+       -0.6241959371926773,
        -0.24447502364864865,
        -1.043934955257269,
-       -0.6988699693877557,
+       -0.6988699693877556,
        -1.0895851499999971
       ],
       "open_positions": {},
@@ -4108,7 +4086,7 @@
         "bars": 4,
         "entry": 1788.0,
         "exit": 1771.114,
-        "units": 5387.448117085357,
+        "units": 5446.563278770081,
         "zone_lo": 1772.0,
         "zone_hi": 1788.0,
         "stop0": 1772.0,
@@ -4121,8 +4099,8 @@
         "rise2_date": "2026-10-21 09:00",
         "reason": "stop",
         "entry_how": "zone_limit",
-        "pnl": -100559.7199,
-        "fees": 9587.271,
+        "pnl": -101663.1373,
+        "fees": 9692.4698,
         "mfe_pct": 0.8389,
         "price_ret_pct": -0.9444,
         "ret_pct": -1.043934955257269,
@@ -4137,7 +4115,7 @@
         "bars": 28,
         "entry": 15180.0,
         "exit": 14852.57,
-        "units": 194.53464313131875,
+        "units": 196.66922459401866,
         "zone_lo": 14690.0,
         "zone_hi": 15180.0,
         "stop0": 14690.0,
@@ -4150,11 +4128,11 @@
         "rise2_date": "2026-10-31 00:00",
         "reason": "trail",
         "entry_how": "zone_limit",
-        "pnl": -66617.6658,
-        "fees": 2921.1876,
+        "pnl": -67348.6453,
+        "fees": 2953.2411,
         "mfe_pct": 1.3175,
         "price_ret_pct": -2.157,
-        "ret_pct": -0.6988699693877557,
+        "ret_pct": -0.6988699693877556,
         "r_multiple": -0.6989,
         "forward": true
        },
@@ -4166,7 +4144,7 @@
         "bars": 0,
         "entry": 15100.0,
         "exit": 14842.575,
-        "units": 378.62319390361995,
+        "units": 382.7777343908345,
         "zone_lo": 14850.0,
         "zone_hi": 15100.0,
         "stop0": 14850.0,
@@ -4179,8 +4157,8 @@
         "rise2_date": "2026-11-04 15:00",
         "reason": "stop",
         "entry_how": "zone_limit",
-        "pnl": -103135.5524,
-        "fees": 5668.4767,
+        "pnl": -104267.2338,
+        "fees": 5730.6755,
         "mfe_pct": 0.0,
         "price_ret_pct": -1.7048,
         "ret_pct": -1.0895851499999971,
@@ -4188,7 +4166,7 @@
         "forward": true
        }
       ],
-      "equity_now": 9362444.2952
+      "equity_now": 9465176.126
      },
      "label": "상승 캔들 안 기다리고 지지 상단에 지정가 진입"
     },
@@ -4198,7 +4176,7 @@
        "bars": 8760,
        "dir": "long",
        "stats": {
-        "period": "2025-11-07 16:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-08 11:00 ~ 2026-11-09 05:00",
         "days": 365,
         "trades": 10,
         "wins": 1,
@@ -4236,7 +4214,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": -31.7385
+        "buy_hold_pct": -33.401
        },
        "returns_pct": [
         -0.9103216847268099,
@@ -4399,9 +4377,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 103425000.0,
-        "atr": 289441.92906467,
+        "last_bar": "2026-11-09 05:00",
+        "close": 101319000.0,
+        "atr": 475617.2106291,
         "phase": "scan",
         "dir": "long",
         "phase_ko": "대기",
@@ -4413,37 +4391,37 @@
        "bars": 8760,
        "dir": "long",
        "stats": {
-        "period": "2025-11-07 16:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-08 12:00 ~ 2026-11-09 05:00",
         "days": 365,
-        "trades": 6,
-        "wins": 2,
-        "win_rate_pct": 33.3333,
-        "net_pct": 0.9221,
-        "realized_net_pct": 0.9221,
-        "cagr_pct": 0.9221,
+        "trades": 5,
+        "wins": 1,
+        "win_rate_pct": 20.0,
+        "net_pct": -0.9671,
+        "realized_net_pct": -0.9671,
+        "cagr_pct": -0.9671,
         "max_drawdown_pct": -2.2916,
-        "profit_factor": 1.3121,
-        "avg_r": 0.1614,
-        "avg_hold_bars": 6.6667,
+        "profit_factor": 0.6665,
+        "avg_r": -0.1879,
+        "avg_hold_bars": 7.0,
         "stops": 2,
         "trails": 2,
-        "targets": 2,
-        "longs": 6,
+        "targets": 1,
+        "longs": 5,
         "shorts": 0,
-        "avg_mfe_pct": 1.2487,
-        "avg_giveback_pct": 0.9154,
+        "avg_mfe_pct": 1.2805,
+        "avg_giveback_pct": 1.3185,
         "counts": {
-         "poles": 120,
+         "poles": 119,
          "box_failed": 107,
-         "breakouts": 13,
+         "breakouts": 12,
          "rise2_failed": 4,
          "no_pullback": 3,
          "zone_lost": 0,
-         "entries": 6,
+         "entries": 5,
          "ambiguous": 0
         },
         "by_year": {
-         "2025": 1.2224,
+         "2025": -0.6725,
          "2026": -0.2966
         },
         "forward": {
@@ -4451,12 +4429,11 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": -38.491
+        "buy_hold_pct": -43.1041
        },
        "returns_pct": [
-        1.9076658887221174,
         -0.5121688892278267,
-        -0.1611366881418212,
+        -0.16113668814182117,
         1.945483162689298,
         -1.1260199059427105,
         -1.085488519598294
@@ -4471,7 +4448,7 @@
          "bars": 6,
          "entry": 4590294.0,
          "exit": 4532732.5,
-         "units": 0.840170708268522,
+         "units": 0.8244430886935875,
          "zone_lo": 4469000.0,
          "zone_hi": 4560000.0,
          "stop0": 4469000.0,
@@ -4484,8 +4461,8 @@
          "rise2_date": "2025-11-28 14:00",
          "reason": "trail",
          "entry_how": "confirm_close",
-         "pnl": -52193.936,
-         "fees": 3832.4498,
+         "pnl": -51216.8889,
+         "fees": 3760.7081,
          "mfe_pct": 0.059,
          "price_ret_pct": -1.254,
          "ret_pct": -0.5121688892278267,
@@ -4500,7 +4477,7 @@
          "bars": 23,
          "entry": 4754376.0,
          "exit": 4732632.5,
-         "units": 0.6167915421247739,
+         "units": 0.6052454805493026,
          "zone_lo": 4590000.0,
          "zone_hi": 4730000.0,
          "stop0": 4590000.0,
@@ -4513,11 +4490,11 @@
          "rise2_date": "2025-12-09 17:00",
          "reason": "trail",
          "entry_how": "confirm_close",
-         "pnl": -16336.9602,
-         "fees": 2925.7533,
+         "pnl": -16031.1396,
+         "fees": 2870.9845,
          "mfe_pct": 2.3057,
          "price_ret_pct": -0.4573,
-         "ret_pct": -0.1611366881418212,
+         "ret_pct": -0.16113668814182117,
          "r_multiple": -0.1611,
          "forward": false
         },
@@ -4529,7 +4506,7 @@
          "bars": 5,
          "entry": 2749374.0,
          "exit": 2852122.0,
-         "units": 1.9703032064142483,
+         "units": 1.9334200123528662,
          "zone_lo": 2698000.0,
          "zone_hi": 2738000.0,
          "stop0": 2698000.0,
@@ -4542,8 +4519,8 @@
          "rise2_date": "2026-02-25 02:00",
          "reason": "target",
          "entry_how": "confirm_close",
-         "pnl": 196926.3911,
-         "fees": 5518.3228,
+         "pnl": 193240.0172,
+         "fees": 5415.0222,
          "mfe_pct": 3.078,
          "price_ret_pct": 3.7371,
          "ret_pct": 1.945483162689298,
@@ -4558,7 +4535,7 @@
          "bars": 1,
          "entry": 2476237.5,
          "exit": 2445776.5,
-         "units": 3.5294269632220447,
+         "units": 3.4633576703405176,
          "zone_lo": 2447000.0,
          "zone_hi": 2475000.0,
          "stop0": 2447000.0,
@@ -4571,8 +4548,8 @@
          "rise2_date": "2026-06-25 06:00",
          "reason": "stop",
          "entry_how": "confirm_close",
-         "pnl": -116195.8192,
-         "fees": 8685.9445,
+         "pnl": -114020.6855,
+         "fees": 8523.3475,
          "mfe_pct": 0.9596,
          "price_ret_pct": -1.2301,
          "ret_pct": -1.1260199059427105,
@@ -4587,7 +4564,7 @@
          "bars": 0,
          "entry": 2707353.0,
          "exit": 2680659.0,
-         "units": 3.7686132043110994,
+         "units": 3.6980664520628213,
          "zone_lo": 2682000.0,
          "zone_hi": 2711000.0,
          "stop0": 2682000.0,
@@ -4600,8 +4577,8 @@
          "rise2_date": "2026-07-06 21:00",
          "reason": "stop",
          "entry_how": "confirm_close",
-         "pnl": -110752.0275,
-         "fees": 10152.6666,
+         "pnl": -108678.7991,
+         "fees": 9962.6132,
          "mfe_pct": 0.0,
          "price_ret_pct": -0.986,
          "ret_pct": -1.085488519598294,
@@ -4610,9 +4587,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 3049000.0,
-        "atr": 12610.77186498,
+        "last_bar": "2026-11-09 05:00",
+        "close": 2896000.0,
+        "atr": 20512.85695699,
         "phase": "scan",
         "dir": "long",
         "phase_ko": "대기",
@@ -4624,7 +4601,7 @@
        "bars": 8760,
        "dir": "long",
        "stats": {
-        "period": "2025-11-07 16:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-08 12:00 ~ 2026-11-09 05:00",
         "days": 365,
         "trades": 6,
         "wins": 1,
@@ -4644,8 +4621,8 @@
         "avg_mfe_pct": 0.9496,
         "avg_giveback_pct": 1.4095,
         "counts": {
-         "poles": 110,
-         "box_failed": 98,
+         "poles": 109,
+         "box_failed": 97,
          "breakouts": 12,
          "rise2_failed": 1,
          "no_pullback": 4,
@@ -4662,7 +4639,7 @@
          "wins": 0,
          "net_pct": -0.4809
         },
-        "buy_hold_pct": -53.2291
+        "buy_hold_pct": -56.5674
        },
        "returns_pct": [
         -0.3711107837713555,
@@ -4851,9 +4828,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 1586.0,
-        "atr": 10.5232475,
+        "last_bar": "2026-11-09 05:00",
+        "close": 1488.0,
+        "atr": 14.45943892,
         "phase": "scan",
         "dir": "long",
         "phase_ko": "대기",
@@ -4865,7 +4842,7 @@
        "bars": 8760,
        "dir": "long",
        "stats": {
-        "period": "2025-11-07 11:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-08 06:00 ~ 2026-11-09 05:00",
         "days": 365,
         "trades": 0,
         "wins": 0,
@@ -4903,15 +4880,15 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": 2.8169
+        "buy_hold_pct": -0.2304
        },
        "returns_pct": [],
        "forward_trades": [],
        "recent_trades": [],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 438.0,
-        "atr": 1.53033416,
+        "last_bar": "2026-11-09 05:00",
+        "close": 433.0,
+        "atr": 2.02988005,
         "phase": "scan",
         "dir": "long",
         "phase_ko": "대기",
@@ -4923,7 +4900,7 @@
        "bars": 8760,
        "dir": "long",
        "stats": {
-        "period": "2025-11-07 12:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-08 07:00 ~ 2026-11-09 05:00",
         "days": 365,
         "trades": 2,
         "wins": 0,
@@ -4961,7 +4938,7 @@
          "wins": 0,
          "net_pct": -0.7446
         },
-        "buy_hold_pct": -32.2238
+        "buy_hold_pct": -39.3939
        },
        "returns_pct": [
         -1.0795727517594895,
@@ -5059,9 +5036,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 14660.0,
-        "atr": 97.42343335,
+        "last_bar": "2026-11-09 05:00",
+        "close": 14200.0,
+        "atr": 131.0104856,
         "phase": "scan",
         "dir": "long",
         "phase_ko": "대기",
@@ -5073,7 +5050,7 @@
        "bars": 8760,
        "dir": "long",
        "stats": {
-        "period": "2025-11-07 13:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-08 08:00 ~ 2026-11-09 05:00",
         "days": 365,
         "trades": 0,
         "wins": 0,
@@ -5111,15 +5088,15 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": -60.0412
+        "buy_hold_pct": -65.3137
        },
        "returns_pct": [],
        "forward_trades": [],
        "recent_trades": [],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 97.1,
-        "atr": 0.58009222,
+        "last_bar": "2026-11-09 05:00",
+        "close": 94.0,
+        "atr": 0.80595351,
         "phase": "scan",
         "dir": "long",
         "phase_ko": "대기",
@@ -5138,37 +5115,37 @@
        "XRP/long"
       ],
       "stats": {
-       "period": "2025-11-07 11:00 ~ 2026-11-08 05:00",
+       "period": "2025-11-08 06:00 ~ 2026-11-09 05:00",
        "days": 365,
-       "trades": 24,
-       "wins": 4,
-       "win_rate_pct": 16.6667,
-       "net_pct": -7.8263,
-       "realized_net_pct": -7.8263,
-       "cagr_pct": -7.8263,
+       "trades": 23,
+       "wins": 3,
+       "win_rate_pct": 13.0435,
+       "net_pct": -9.5518,
+       "realized_net_pct": -9.5518,
+       "cagr_pct": -9.5518,
        "max_drawdown_pct": -11.4148,
-       "profit_factor": 0.4528,
-       "avg_r": -0.3346,
-       "avg_hold_bars": 15.125,
+       "profit_factor": 0.3194,
+       "avg_r": -0.432,
+       "avg_hold_bars": 15.5652,
        "stops": 8,
        "trails": 13,
-       "targets": 3,
-       "longs": 24,
+       "targets": 2,
+       "longs": 23,
        "shorts": 0,
-       "avg_mfe_pct": 0.8693,
-       "avg_giveback_pct": 1.3589,
+       "avg_mfe_pct": 0.8597,
+       "avg_giveback_pct": 1.4658,
        "counts": {
-        "poles": 501,
-        "box_failed": 438,
-        "breakouts": 63,
+        "poles": 499,
+        "box_failed": 437,
+        "breakouts": 62,
         "rise2_failed": 16,
         "no_pullback": 19,
         "zone_lost": 4,
-        "entries": 24,
+        "entries": 23,
         "ambiguous": 0
        },
        "by_year": {
-        "2025": 0.4196,
+        "2025": -1.4602,
         "2026": -8.2114
        },
        "forward": {
@@ -5178,10 +5155,9 @@
        }
       },
       "returns_pct": [
-       1.9076658887221174,
-       -0.39088228613806936,
-       -0.9138939342298046,
-       -0.16113668814182117,
+       -0.3908822861380694,
+       -0.9138939342298045,
+       -0.1611366881418212,
        -0.37111078377135553,
        1.945483162689298,
        -0.5105280353573007,
@@ -5192,16 +5168,16 @@
        -1.0973652528084674,
        -0.8841582590561676,
        -0.31703485969012946,
-       -1.0795727517594895,
-       -1.0757717067724846,
-       -1.0893313461538492,
-       -1.1260199059427105,
+       -1.0795727517594893,
+       -1.0757717067724843,
+       -1.089331346153849,
+       -1.1260199059427107,
        -1.085488519598294,
-       -0.38643606474397163,
-       -0.7953726493938749,
-       -0.5793228951470473,
+       -0.3864360647439717,
+       -0.7953726493938751,
+       -0.5793228951470474,
        -0.48085137228796904,
-       -0.7446290878243859
+       -0.7446290878243861
       ],
       "open_positions": {},
       "forward_trades": [
@@ -5213,7 +5189,7 @@
         "bars": 2,
         "entry": 1777.8885,
         "exit": 1771.114,
-        "units": 5248.578978717595,
+        "units": 5150.3279296464025,
         "zone_lo": 1772.0,
         "zone_hi": 1788.0,
         "stop0": 1772.0,
@@ -5226,8 +5202,8 @@
         "rise2_date": "2026-10-21 09:00",
         "reason": "stop",
         "entry_how": "confirm_close",
-        "pnl": -44870.1082,
-        "fees": 9313.61,
+        "pnl": -44030.1599,
+        "fees": 9139.2633,
         "mfe_pct": 0.2875,
         "price_ret_pct": -0.381,
         "ret_pct": -0.48085137228796904,
@@ -5242,7 +5218,7 @@
         "bars": 27,
         "entry": 15267.63,
         "exit": 14852.57,
-        "units": 160.76931771815853,
+        "units": 157.75978805530713,
         "zone_lo": 14690.0,
         "zone_hi": 15180.0,
         "stop0": 14690.0,
@@ -5255,16 +5231,16 @@
         "rise2_date": "2026-10-31 00:00",
         "reason": "trail",
         "entry_how": "confirm_close",
-        "pnl": -69150.115,
-        "fees": 2421.202,
+        "pnl": -67855.6558,
+        "fees": 2375.8782,
         "mfe_pct": 0.736,
         "price_ret_pct": -2.7186,
-        "ret_pct": -0.7446290878243859,
+        "ret_pct": -0.7446290878243861,
         "r_multiple": -0.7446,
         "forward": true
        }
       ],
-      "equity_now": 9217367.9843
+      "equity_now": 9044822.9816
      },
      "label": "손절폭 2배에서 익절 (래칫 손절도 유지)"
     }
@@ -5285,7 +5261,7 @@
      "bars": 8760,
      "dir": "long",
      "stats": {
-      "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+      "period": "2025-11-09 06:00 ~ 2026-11-09 05:00",
       "days": 364,
       "trades": 5,
       "wins": 3,
@@ -5305,8 +5281,8 @@
       "avg_mfe_pct": 7.0858,
       "avg_giveback_pct": 3.2453,
       "counts": {
-       "poles": 131,
-       "box_failed": 110,
+       "poles": 130,
+       "box_failed": 109,
        "breakouts": 21,
        "rise2_failed": 9,
        "no_pullback": 4,
@@ -5323,7 +5299,7 @@
        "wins": 0,
        "net_pct": null
       },
-      "buy_hold_pct": -25.816
+      "buy_hold_pct": -26.7999
      },
      "returns_pct": [
       0.7439896175387465,
@@ -5481,9 +5457,9 @@
       }
      ],
      "signal": {
-      "last_bar": "2026-11-08 05:00",
-      "close": 75799.9,
-      "atr": 216.03237268,
+      "last_bar": "2026-11-09 05:00",
+      "close": 74442.1,
+      "atr": 419.02107842,
       "phase": "scan",
       "dir": "long",
       "phase_ko": "대기",
@@ -5495,7 +5471,7 @@
      "bars": 8760,
      "dir": "short",
      "stats": {
-      "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+      "period": "2025-11-09 06:00 ~ 2026-11-09 05:00",
       "days": 364,
       "trades": 11,
       "wins": 3,
@@ -5533,7 +5509,7 @@
        "wins": 0,
        "net_pct": null
       },
-      "buy_hold_pct": -25.816
+      "buy_hold_pct": -26.7999
      },
      "returns_pct": [
       2.0688685471174537,
@@ -5697,27 +5673,30 @@
       }
      ],
      "signal": {
-      "last_bar": "2026-11-08 05:00",
-      "close": 75799.9,
-      "atr": 216.03237268,
-      "phase": "rise2",
+      "last_bar": "2026-11-09 05:00",
+      "close": 74442.1,
+      "atr": 419.02107842,
+      "phase": "pullback",
       "dir": "short",
-      "phase_ko": "돌파 — 2차 상승 대기",
+      "phase_ko": "조정 중 — 확인 봉 대기",
       "position": "flat",
       "zone_lo": 75750.0,
       "zone_hi": 76216.8,
       "pole_date": "2026-11-05 15:00",
       "box_date": "2026-11-07 03:00",
-      "bars_left": 22,
-      "breakout_date": "2026-11-07 15:00",
-      "action": "돌파 확인(2026-11-07 15:00) — 2차 하락 고점 확정 대기 (지지 구간 75,750~76,217, 남은 22봉)"
+      "bars_left": 40,
+      "rise2_date": "2026-11-08 21:00",
+      "rise2_high": 73385.0,
+      "units_if_fill_at_zone_edge": 0.2142245072836319,
+      "notional_pct_if_fill": 100.0,
+      "action": "조정 중 — 지지 구간 75,750~76,217 에서 음봉 확인 봉이 닫히면 그 종가에 매도(숏), 손절 76,217 (남은 40봉)"
      }
     },
     "ETH/long": {
      "bars": 8760,
      "dir": "long",
      "stats": {
-      "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+      "period": "2025-11-09 06:00 ~ 2026-11-09 05:00",
       "days": 364,
       "trades": 6,
       "wins": 1,
@@ -5737,8 +5716,8 @@
       "avg_mfe_pct": 5.8002,
       "avg_giveback_pct": 2.2322,
       "counts": {
-       "poles": 134,
-       "box_failed": 115,
+       "poles": 133,
+       "box_failed": 114,
        "breakouts": 19,
        "rise2_failed": 5,
        "no_pullback": 6,
@@ -5755,7 +5734,7 @@
        "wins": 0,
        "net_pct": null
       },
-      "buy_hold_pct": -35.117
+      "buy_hold_pct": -37.4711
      },
      "returns_pct": [
       -0.3149455495514047,
@@ -5914,9 +5893,9 @@
       }
      ],
      "signal": {
-      "last_bar": "2026-11-08 05:00",
-      "close": 2234.31,
-      "atr": 9.0255235,
+      "last_bar": "2026-11-09 05:00",
+      "close": 2128.01,
+      "atr": 19.03100779,
       "phase": "scan",
       "dir": "long",
       "phase_ko": "대기",
@@ -5928,7 +5907,7 @@
      "bars": 8760,
      "dir": "short",
      "stats": {
-      "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+      "period": "2025-11-09 06:00 ~ 2026-11-09 05:00",
       "days": 364,
       "trades": 10,
       "wins": 1,
@@ -5966,7 +5945,7 @@
        "wins": 0,
        "net_pct": null
       },
-      "buy_hold_pct": -35.117
+      "buy_hold_pct": -37.4711
      },
      "returns_pct": [
       -0.4592750180019244,
@@ -6129,9 +6108,9 @@
       }
      ],
      "signal": {
-      "last_bar": "2026-11-08 05:00",
-      "close": 2234.31,
-      "atr": 9.0255235,
+      "last_bar": "2026-11-09 05:00",
+      "close": 2128.01,
+      "atr": 19.03100779,
       "phase": "scan",
       "dir": "short",
       "phase_ko": "대기",
@@ -6143,7 +6122,7 @@
      "bars": 8760,
      "dir": "long",
      "stats": {
-      "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+      "period": "2025-11-09 07:00 ~ 2026-11-09 06:00",
       "days": 364,
       "trades": 8,
       "wins": 1,
@@ -6163,8 +6142,8 @@
       "avg_mfe_pct": 2.3237,
       "avg_giveback_pct": 2.8009,
       "counts": {
-       "poles": 120,
-       "box_failed": 103,
+       "poles": 118,
+       "box_failed": 101,
        "breakouts": 17,
        "rise2_failed": 5,
        "no_pullback": 3,
@@ -6181,7 +6160,7 @@
        "wins": 0,
        "net_pct": null
       },
-      "buy_hold_pct": -49.9096
+      "buy_hold_pct": -52.4494
      },
      "returns_pct": [
       -1.1291519175200977,
@@ -6342,9 +6321,9 @@
       }
      ],
      "signal": {
-      "last_bar": "2026-11-08 05:00",
-      "close": 1.1631,
-      "atr": 0.00783755,
+      "last_bar": "2026-11-09 06:00",
+      "close": 1.091,
+      "atr": 0.01222,
       "phase": "scan",
       "dir": "long",
       "phase_ko": "대기",
@@ -6356,7 +6335,7 @@
      "bars": 8760,
      "dir": "short",
      "stats": {
-      "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+      "period": "2025-11-09 07:00 ~ 2026-11-09 06:00",
       "days": 364,
       "trades": 8,
       "wins": 2,
@@ -6378,7 +6357,7 @@
       "counts": {
        "poles": 113,
        "box_failed": 94,
-       "breakouts": 18,
+       "breakouts": 19,
        "rise2_failed": 4,
        "no_pullback": 5,
        "zone_lost": 1,
@@ -6394,7 +6373,7 @@
        "wins": 0,
        "net_pct": null
       },
-      "buy_hold_pct": -49.9096
+      "buy_hold_pct": -52.4494
      },
      "returns_pct": [
       -1.1103280747756787,
@@ -6555,25 +6534,30 @@
       }
      ],
      "signal": {
-      "last_bar": "2026-11-08 05:00",
-      "close": 1.1631,
-      "atr": 0.00783755,
-      "phase": "box",
+      "last_bar": "2026-11-09 06:00",
+      "close": 1.091,
+      "atr": 0.01222,
+      "phase": "pullback",
       "dir": "short",
-      "phase_ko": "횡보 중",
+      "phase_ko": "조정 중 — 확인 봉 대기",
       "position": "flat",
-      "zone_lo": 1.1486,
+      "zone_lo": 1.1457,
       "zone_hi": 1.1814,
       "pole_date": "2026-11-05 15:00",
       "box_date": "2026-11-07 03:00",
-      "action": "횡보 중(1.149~1.181) — 종가가 1.149 을 넘으면 돌파. 되돌림 50% 넘으면 무효"
+      "bars_left": 39,
+      "rise2_date": "2026-11-08 21:00",
+      "rise2_high": 1.0912,
+      "units_if_fill_at_zone_edge": 2801.1204481792665,
+      "notional_pct_if_fill": 32.0924,
+      "action": "조정 중 — 지지 구간 1.146~1.181 에서 음봉 확인 봉이 닫히면 그 종가에 매도(숏), 손절 1.181 (남은 39봉)"
      }
     },
     "TRX/long": {
      "bars": 8760,
      "dir": "long",
      "stats": {
-      "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+      "period": "2025-11-09 07:00 ~ 2026-11-09 06:00",
       "days": 364,
       "trades": 4,
       "wins": 1,
@@ -6593,8 +6577,8 @@
       "avg_mfe_pct": 0.4651,
       "avg_giveback_pct": 0.7166,
       "counts": {
-       "poles": 71,
-       "box_failed": 57,
+       "poles": 70,
+       "box_failed": 56,
        "breakouts": 14,
        "rise2_failed": 3,
        "no_pullback": 6,
@@ -6611,7 +6595,7 @@
        "wins": 0,
        "net_pct": null
       },
-      "buy_hold_pct": 10.0697
+      "buy_hold_pct": 9.1881
      },
      "returns_pct": [
       -0.9041980739589437,
@@ -6739,9 +6723,9 @@
       }
      ],
      "signal": {
-      "last_bar": "2026-11-08 05:00",
-      "close": 0.32071,
-      "atr": 0.00054307,
+      "last_bar": "2026-11-09 06:00",
+      "close": 0.31658,
+      "atr": 0.00060822,
       "phase": "scan",
       "dir": "long",
       "phase_ko": "대기",
@@ -6753,7 +6737,7 @@
      "bars": 8760,
      "dir": "short",
      "stats": {
-      "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+      "period": "2025-11-09 07:00 ~ 2026-11-09 06:00",
       "days": 364,
       "trades": 5,
       "wins": 2,
@@ -6791,7 +6775,7 @@
        "wins": 0,
        "net_pct": null
       },
-      "buy_hold_pct": 10.0697
+      "buy_hold_pct": 9.1881
      },
      "returns_pct": [
       1.6746756852040214,
@@ -6949,9 +6933,9 @@
       }
      ],
      "signal": {
-      "last_bar": "2026-11-08 05:00",
-      "close": 0.32071,
-      "atr": 0.00054307,
+      "last_bar": "2026-11-09 06:00",
+      "close": 0.31658,
+      "atr": 0.00060822,
       "phase": "scan",
       "dir": "short",
       "phase_ko": "대기",
@@ -6963,7 +6947,7 @@
      "bars": 8760,
      "dir": "long",
      "stats": {
-      "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+      "period": "2025-11-09 07:00 ~ 2026-11-09 06:00",
       "days": 364,
       "trades": 4,
       "wins": 1,
@@ -7001,7 +6985,7 @@
        "wins": 0,
        "net_pct": null
       },
-      "buy_hold_pct": -31.5075
+      "buy_hold_pct": -32.6715
      },
      "returns_pct": [
       -0.10061620001699977,
@@ -7129,9 +7113,9 @@
       }
      ],
      "signal": {
-      "last_bar": "2026-11-08 05:00",
-      "close": 10.754,
-      "atr": 0.07640029,
+      "last_bar": "2026-11-09 06:00",
+      "close": 10.343,
+      "atr": 0.11246904,
       "phase": "scan",
       "dir": "long",
       "phase_ko": "대기",
@@ -7143,7 +7127,7 @@
      "bars": 8760,
      "dir": "short",
      "stats": {
-      "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+      "period": "2025-11-09 07:00 ~ 2026-11-09 06:00",
       "days": 364,
       "trades": 7,
       "wins": 5,
@@ -7163,8 +7147,8 @@
       "avg_mfe_pct": 2.946,
       "avg_giveback_pct": 2.1941,
       "counts": {
-       "poles": 97,
-       "box_failed": 80,
+       "poles": 98,
+       "box_failed": 81,
        "breakouts": 17,
        "rise2_failed": 4,
        "no_pullback": 4,
@@ -7181,7 +7165,7 @@
        "wins": 0,
        "net_pct": null
       },
-      "buy_hold_pct": -31.5075
+      "buy_hold_pct": -32.6715
      },
      "returns_pct": [
       0.9428336666434188,
@@ -7341,9 +7325,9 @@
       }
      ],
      "signal": {
-      "last_bar": "2026-11-08 05:00",
-      "close": 10.754,
-      "atr": 0.07640029,
+      "last_bar": "2026-11-09 06:00",
+      "close": 10.343,
+      "atr": 0.11246904,
       "phase": "scan",
       "dir": "short",
       "phase_ko": "대기",
@@ -7355,7 +7339,7 @@
      "bars": 8760,
      "dir": "long",
      "stats": {
-      "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+      "period": "2025-11-09 07:00 ~ 2026-11-09 06:00",
       "days": 364,
       "trades": 6,
       "wins": 0,
@@ -7393,7 +7377,7 @@
        "wins": 0,
        "net_pct": -1.144
       },
-      "buy_hold_pct": -60.342
+      "buy_hold_pct": -60.7586
      },
      "returns_pct": [
       -0.21563952754349464,
@@ -7582,9 +7566,9 @@
       }
      ],
      "signal": {
-      "last_bar": "2026-11-08 05:00",
-      "close": 0.07119,
-      "atr": 0.0003953,
+      "last_bar": "2026-11-09 06:00",
+      "close": 0.0687,
+      "atr": 0.00069876,
       "phase": "scan",
       "dir": "long",
       "phase_ko": "대기",
@@ -7596,7 +7580,7 @@
      "bars": 8760,
      "dir": "short",
      "stats": {
-      "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+      "period": "2025-11-09 07:00 ~ 2026-11-09 06:00",
       "days": 364,
       "trades": 7,
       "wins": 5,
@@ -7634,7 +7618,7 @@
        "wins": 0,
        "net_pct": null
       },
-      "buy_hold_pct": -60.342
+      "buy_hold_pct": -60.7586
      },
      "returns_pct": [
       -0.6994284567783915,
@@ -7794,9 +7778,9 @@
       }
      ],
      "signal": {
-      "last_bar": "2026-11-08 05:00",
-      "close": 0.07119,
-      "atr": 0.0003953,
+      "last_bar": "2026-11-09 06:00",
+      "close": 0.0687,
+      "atr": 0.00069876,
       "phase": "pullback",
       "dir": "short",
       "phase_ko": "조정 중 — 확인 봉 대기",
@@ -7805,12 +7789,12 @@
       "zone_hi": 0.07214,
       "pole_date": "2026-11-05 15:00",
       "box_date": "2026-11-07 03:00",
-      "bars_left": 40,
+      "bars_left": 15,
       "rise2_date": "2026-11-07 21:00",
       "rise2_high": 0.0708,
       "units_if_fill_at_zone_edge": 192307.69230769502,
       "notional_pct_if_fill": 100.0,
-      "action": "조정 중 — 지지 구간 0.07162~0.07214 에서 음봉 확인 봉이 닫히면 그 종가에 매도(숏), 손절 0.07214 (남은 40봉)"
+      "action": "조정 중 — 지지 구간 0.07162~0.07214 에서 음봉 확인 봉이 닫히면 그 종가에 매도(숏), 손절 0.07214 (남은 15봉)"
      }
     }
    },
@@ -7830,14 +7814,14 @@
      "XRP/short"
     ],
     "stats": {
-     "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
-     "days": 364,
+     "period": "2025-11-09 06:00 ~ 2026-11-09 06:00",
+     "days": 365,
      "trades": 79,
      "wins": 25,
      "win_rate_pct": 31.6456,
      "net_pct": 3.9512,
      "realized_net_pct": 3.9512,
-     "cagr_pct": 3.9623,
+     "cagr_pct": 3.9512,
      "max_drawdown_pct": -15.9864,
      "profit_factor": 1.1179,
      "avg_r": 0.072,
@@ -7850,9 +7834,9 @@
      "avg_mfe_pct": 2.7875,
      "avg_giveback_pct": 2.3055,
      "counts": {
-      "poles": 1358,
-      "box_failed": 1123,
-      "breakouts": 234,
+      "poles": 1354,
+      "box_failed": 1119,
+      "breakouts": 235,
       "rise2_failed": 63,
       "no_pullback": 62,
       "zone_lost": 26,
@@ -7991,7 +7975,7 @@
        "bars": 8760,
        "dir": "long",
        "stats": {
-        "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-09 06:00 ~ 2026-11-09 05:00",
         "days": 364,
         "trades": 32,
         "wins": 6,
@@ -8012,7 +7996,7 @@
         "avg_giveback_pct": 1.8228,
         "counts": {
          "poles": 300,
-         "box_failed": 236,
+         "box_failed": 237,
          "breakouts": 63,
          "rise2_failed": 19,
          "no_pullback": 8,
@@ -8029,7 +8013,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": -25.816
+        "buy_hold_pct": -26.7999
        },
        "returns_pct": [
         0.3795777598667477,
@@ -8214,25 +8198,21 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 75799.9,
-        "atr": 216.03237268,
-        "phase": "box",
+        "last_bar": "2026-11-09 05:00",
+        "close": 74442.1,
+        "atr": 419.02107842,
+        "phase": "scan",
         "dir": "long",
-        "phase_ko": "횡보 중",
+        "phase_ko": "대기",
         "position": "flat",
-        "zone_lo": 75531.0,
-        "zone_hi": 76216.8,
-        "pole_date": "2026-11-06 15:00",
-        "box_date": "2026-11-07 09:00",
-        "action": "횡보 중(75,531~76,217) — 종가가 76,217 을 넘으면 돌파. 되돌림 50% 넘으면 무효"
+        "action": "대기 — 1차 상승 + 횡보 구조 없음"
        }
       },
       "BTC/short": {
        "bars": 8760,
        "dir": "short",
        "stats": {
-        "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-09 06:00 ~ 2026-11-09 05:00",
         "days": 364,
         "trades": 28,
         "wins": 7,
@@ -8252,8 +8232,8 @@
         "avg_mfe_pct": 1.2991,
         "avg_giveback_pct": 1.6855,
         "counts": {
-         "poles": 297,
-         "box_failed": 238,
+         "poles": 299,
+         "box_failed": 240,
          "breakouts": 59,
          "rise2_failed": 11,
          "no_pullback": 18,
@@ -8270,7 +8250,7 @@
          "wins": 1,
          "net_pct": 0.0921
         },
-        "buy_hold_pct": -25.816
+        "buy_hold_pct": -26.7999
        },
        "returns_pct": [
         2.0688685471174537,
@@ -8481,9 +8461,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 75799.9,
-        "atr": 216.03237268,
+        "last_bar": "2026-11-09 05:00",
+        "close": 74442.1,
+        "atr": 419.02107842,
         "phase": "scan",
         "dir": "short",
         "phase_ko": "대기",
@@ -8495,37 +8475,37 @@
        "bars": 8760,
        "dir": "long",
        "stats": {
-        "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-09 06:00 ~ 2026-11-09 05:00",
         "days": 364,
-        "trades": 27,
+        "trades": 26,
         "wins": 5,
-        "win_rate_pct": 18.5185,
-        "net_pct": 14.7316,
-        "realized_net_pct": 14.7316,
-        "cagr_pct": 14.7749,
+        "win_rate_pct": 19.2308,
+        "net_pct": 14.9774,
+        "realized_net_pct": 14.9774,
+        "cagr_pct": 15.0215,
         "max_drawdown_pct": -10.969,
-        "profit_factor": 1.8474,
-        "avg_r": 0.6178,
-        "avg_hold_bars": 20.7037,
+        "profit_factor": 1.8704,
+        "avg_r": 0.6498,
+        "avg_hold_bars": 20.7308,
         "stops": 10,
-        "trails": 17,
+        "trails": 16,
         "targets": 0,
-        "longs": 27,
+        "longs": 26,
         "shorts": 0,
-        "avg_mfe_pct": 2.5852,
-        "avg_giveback_pct": 2.1021,
+        "avg_mfe_pct": 2.5569,
+        "avg_giveback_pct": 2.0509,
         "counts": {
-         "poles": 324,
-         "box_failed": 263,
-         "breakouts": 60,
+         "poles": 326,
+         "box_failed": 267,
+         "breakouts": 59,
          "rise2_failed": 15,
          "no_pullback": 14,
          "zone_lost": 4,
-         "entries": 27,
+         "entries": 26,
          "ambiguous": 0
         },
         "by_year": {
-         "2025": -0.7215,
+         "2025": -0.5088,
          "2026": 15.5654
         },
         "forward": {
@@ -8533,36 +8513,35 @@
          "wins": 0,
          "net_pct": -1.8737
         },
-        "buy_hold_pct": -35.117
+        "buy_hold_pct": -37.4711
        },
        "returns_pct": [
-        -0.21376811941251178,
-        -0.31494554955140464,
-        4.763853645435743,
+        -0.3149455495514047,
+        4.763853645435742,
         -1.0911110632715664,
-        -0.42568531870438125,
+        -0.42568531870438114,
         -1.0599873744621175,
         -0.159428196264152,
         -0.9671495332758484,
         -0.9779361411518503,
         0.8772394329645319,
         -1.0963327777728291,
-        -1.092872270855076,
+        -1.0928722708550762,
         -0.6225932808118819,
-        -0.735583074704194,
+        -0.7355830747041938,
         -1.1118248249757867,
         -1.1463318979883963,
-        2.0675917524601624,
+        2.067591752460162,
         -0.9470711661368847,
         -0.9350815272515772,
-        -0.7603794845536865,
-        25.185942469231687,
-        -0.5188230194902513,
+        -0.7603794845536864,
+        25.18594246923168,
+        -0.5188230194902512,
         -0.11768305517841704,
-        -0.7827434582970811,
-        0.746145358419654,
+        -0.7827434582970814,
+        0.7461453584196537,
         -1.1014072759331244,
-        -0.7808618780897822
+        -0.7808618780897827
        ],
        "forward_trades": [
         {
@@ -8573,7 +8552,7 @@
          "bars": 2,
          "entry": 2410.70475,
          "exit": 2374.2123,
-         "units": 3.311802373487035,
+         "units": 3.3188971174402213,
          "zone_lo": 2375.4,
          "zone_hi": 2416.82,
          "stop0": 2375.4,
@@ -8586,8 +8565,8 @@
          "rise2_date": "2026-10-20 14:00",
          "reason": "stop",
          "entry_how": "confirm_close",
-         "pnl": -128.7791,
-         "fees": 7.9233,
+         "pnl": -129.055,
+         "fees": 7.9403,
          "mfe_pct": 0.2566,
          "price_ret_pct": -1.5138,
          "ret_pct": -1.1014072759331244,
@@ -8602,7 +8581,7 @@
          "bars": 31,
          "entry": 2254.34661,
          "exit": 2238.989945,
-         "units": 5.129404813304486,
+         "units": 5.140393335468121,
          "zone_lo": 2234.67,
          "zone_hi": 2251.15,
          "stop0": 2234.67,
@@ -8615,11 +8594,11 @@
          "rise2_date": "2026-11-01 02:00",
          "reason": "trail",
          "entry_how": "confirm_close",
-         "pnl": -90.2946,
-         "fees": 11.5241,
+         "pnl": -90.4881,
+         "fees": 11.5488,
          "mfe_pct": 2.38,
          "price_ret_pct": -0.6812,
-         "ret_pct": -0.7808618780897822,
+         "ret_pct": -0.7808618780897827,
          "r_multiple": -0.7809,
          "forward": true
         }
@@ -8633,7 +8612,7 @@
          "bars": 15,
          "entry": 2661.019845,
          "exit": 2660.54906,
-         "units": 4.400937281169667,
+         "units": 4.410365235993872,
          "zone_lo": 2642.08,
          "zone_hi": 2714.0,
          "stop0": 2642.08,
@@ -8646,8 +8625,8 @@
          "rise2_date": "2026-09-21 20:00",
          "reason": "trail",
          "entry_how": "confirm_close",
-         "pnl": -13.7818,
-         "fees": 11.7099,
+         "pnl": -13.8114,
+         "fees": 11.735,
          "mfe_pct": 1.5919,
          "price_ret_pct": -0.0177,
          "ret_pct": -0.11768305517841704,
@@ -8662,7 +8641,7 @@
          "bars": 30,
          "entry": 2717.848245,
          "exit": 2679.57954,
-         "units": 2.2349239262877214,
+         "units": 2.239711715903068,
          "zone_lo": 2665.51,
          "zone_hi": 2699.27,
          "stop0": 2665.51,
@@ -8675,11 +8654,11 @@
          "rise2_date": "2026-09-25 11:00",
          "reason": "trail",
          "entry_how": "confirm_close",
-         "pnl": -91.5591,
-         "fees": 6.0314,
+         "pnl": -91.7552,
+         "fees": 6.0443,
          "mfe_pct": 0.1355,
          "price_ret_pct": -1.4081,
-         "ret_pct": -0.7827434582970811,
+         "ret_pct": -0.7827434582970814,
          "r_multiple": -0.7827,
          "forward": false
         },
@@ -8691,7 +8670,7 @@
          "bars": 71,
          "entry": 2491.0449,
          "exit": 2512.133305,
-         "units": 4.658944740963783,
+         "units": 4.668925415020241,
          "zone_lo": 2468.55,
          "zone_hi": 2485.69,
          "stop0": 2468.55,
@@ -8704,11 +8683,11 @@
          "rise2_date": "2026-10-09 11:00",
          "reason": "trail",
          "entry_how": "confirm_close",
-         "pnl": 86.5949,
-         "fees": 11.6548,
+         "pnl": 86.7805,
+         "fees": 11.6797,
          "mfe_pct": 3.5084,
          "price_ret_pct": 0.8466,
-         "ret_pct": 0.746145358419654,
+         "ret_pct": 0.7461453584196537,
          "r_multiple": 0.7461,
          "forward": false
         },
@@ -8720,7 +8699,7 @@
          "bars": 2,
          "entry": 2410.70475,
          "exit": 2374.2123,
-         "units": 3.311802373487035,
+         "units": 3.3188971174402213,
          "zone_lo": 2375.4,
          "zone_hi": 2416.82,
          "stop0": 2375.4,
@@ -8733,8 +8712,8 @@
          "rise2_date": "2026-10-20 14:00",
          "reason": "stop",
          "entry_how": "confirm_close",
-         "pnl": -128.7791,
-         "fees": 7.9233,
+         "pnl": -129.055,
+         "fees": 7.9403,
          "mfe_pct": 0.2566,
          "price_ret_pct": -1.5138,
          "ret_pct": -1.1014072759331244,
@@ -8749,7 +8728,7 @@
          "bars": 31,
          "entry": 2254.34661,
          "exit": 2238.989945,
-         "units": 5.129404813304486,
+         "units": 5.140393335468121,
          "zone_lo": 2234.67,
          "zone_hi": 2251.15,
          "stop0": 2234.67,
@@ -8762,35 +8741,31 @@
          "rise2_date": "2026-11-01 02:00",
          "reason": "trail",
          "entry_how": "confirm_close",
-         "pnl": -90.2946,
-         "fees": 11.5241,
+         "pnl": -90.4881,
+         "fees": 11.5488,
          "mfe_pct": 2.38,
          "price_ret_pct": -0.6812,
-         "ret_pct": -0.7808618780897822,
+         "ret_pct": -0.7808618780897827,
          "r_multiple": -0.7809,
          "forward": true
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 2234.31,
-        "atr": 9.0255235,
-        "phase": "box",
+        "last_bar": "2026-11-09 05:00",
+        "close": 2128.01,
+        "atr": 19.03100779,
+        "phase": "scan",
         "dir": "long",
-        "phase_ko": "횡보 중",
+        "phase_ko": "대기",
         "position": "flat",
-        "zone_lo": 2228.51,
-        "zone_hi": 2240.79,
-        "pole_date": "2026-11-06 15:00",
-        "box_date": "2026-11-07 23:00",
-        "action": "횡보 중(2,229~2,241) — 종가가 2,241 을 넘으면 돌파. 되돌림 50% 넘으면 무효"
+        "action": "대기 — 1차 상승 + 횡보 구조 없음"
        }
       },
       "ETH/short": {
        "bars": 8760,
        "dir": "short",
        "stats": {
-        "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-09 06:00 ~ 2026-11-09 05:00",
         "days": 364,
         "trades": 28,
         "wins": 5,
@@ -8828,7 +8803,7 @@
          "wins": 1,
          "net_pct": 0.6855
         },
-        "buy_hold_pct": -35.117
+        "buy_hold_pct": -37.4711
        },
        "returns_pct": [
         -0.652428416646532,
@@ -9039,9 +9014,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 2234.31,
-        "atr": 9.0255235,
+        "last_bar": "2026-11-09 05:00",
+        "close": 2128.01,
+        "atr": 19.03100779,
         "phase": "scan",
         "dir": "short",
         "phase_ko": "대기",
@@ -9053,7 +9028,7 @@
        "bars": 8760,
        "dir": "long",
        "stats": {
-        "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-09 07:00 ~ 2026-11-09 06:00",
         "days": 364,
         "trades": 25,
         "wins": 2,
@@ -9073,8 +9048,8 @@
         "avg_mfe_pct": 1.93,
         "avg_giveback_pct": 2.665,
         "counts": {
-         "poles": 292,
-         "box_failed": 236,
+         "poles": 291,
+         "box_failed": 235,
          "breakouts": 56,
          "rise2_failed": 19,
          "no_pullback": 12,
@@ -9091,7 +9066,7 @@
          "wins": 0,
          "net_pct": -1.1122
         },
-        "buy_hold_pct": -49.9096
+        "buy_hold_pct": -52.4494
        },
        "returns_pct": [
         -0.2913427962525836,
@@ -9299,9 +9274,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 1.1631,
-        "atr": 0.00783755,
+        "last_bar": "2026-11-09 06:00",
+        "close": 1.091,
+        "atr": 0.01222,
         "phase": "scan",
         "dir": "long",
         "phase_ko": "대기",
@@ -9313,29 +9288,29 @@
        "bars": 8760,
        "dir": "short",
        "stats": {
-        "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-09 07:00 ~ 2026-11-09 06:00",
         "days": 364,
-        "trades": 38,
-        "wins": 13,
-        "win_rate_pct": 34.2105,
-        "net_pct": 0.5366,
-        "realized_net_pct": -0.6236,
-        "cagr_pct": 0.5381,
+        "trades": 39,
+        "wins": 14,
+        "win_rate_pct": 35.8974,
+        "net_pct": 0.4042,
+        "realized_net_pct": 0.4042,
+        "cagr_pct": 0.4053,
         "max_drawdown_pct": -9.7155,
-        "profit_factor": 0.9697,
-        "avg_r": -0.0029,
-        "avg_hold_bars": 18.9474,
+        "profit_factor": 1.0196,
+        "avg_r": 0.0237,
+        "avg_hold_bars": 19.5641,
         "stops": 13,
-        "trails": 25,
+        "trails": 26,
         "targets": 0,
         "longs": 0,
-        "shorts": 38,
-        "avg_mfe_pct": 2.4307,
-        "avg_giveback_pct": 2.5533,
+        "shorts": 39,
+        "avg_mfe_pct": 2.4684,
+        "avg_giveback_pct": 2.5243,
         "counts": {
-         "poles": 286,
+         "poles": 287,
          "box_failed": 219,
-         "breakouts": 67,
+         "breakouts": 68,
          "rise2_failed": 14,
          "no_pullback": 11,
          "zone_lost": 3,
@@ -9344,14 +9319,14 @@
         },
         "by_year": {
          "2025": 4.267,
-         "2026": -3.5777
+         "2026": -3.7047
         },
         "forward": {
-         "trades": 0,
-         "wins": 0,
-         "net_pct": null
+         "trades": 1,
+         "wins": 1,
+         "net_pct": 1.0342
         },
-        "buy_hold_pct": -49.9096
+        "buy_hold_pct": -52.4494
        },
        "returns_pct": [
         -1.0618655725507602,
@@ -9391,39 +9366,41 @@
         -0.48586677231371955,
         -0.6896664993192303,
         0.593621335038228,
-        -0.6823305380455382
+        -0.6823305380455382,
+        1.0342319849879444
        ],
-       "forward_trades": [],
-       "recent_trades": [
+       "forward_trades": [
         {
          "market": "XRP/short",
          "dir": "short",
-         "entry_date": "2026-08-27 10:00",
-         "exit_date": "2026-08-29 05:00",
-         "bars": 42,
-         "entry": 1.4218887,
-         "exit": 1.3894944,
-         "units": 1638.6608040962742,
-         "zone_lo": 1.4414,
-         "zone_hi": 1.483,
-         "stop0": 1.483,
-         "stop_final": 1.3888,
+         "entry_date": "2026-11-06 10:00",
+         "exit_date": "2026-11-08 06:00",
+         "bars": 43,
+         "entry": 1.1952021,
+         "exit": 1.1655825,
+         "units": 3613.9646824777606,
+         "zone_lo": 1.199,
+         "zone_hi": 1.2227,
+         "stop0": 1.2227,
+         "stop_final": 1.165,
          "stop_raises": 4,
          "target": null,
-         "pole_date": "2026-08-25 02:00",
-         "box_date": "2026-08-25 13:00",
-         "breakout_date": "2026-08-25 21:00",
-         "rise2_date": "2026-08-26 15:00",
+         "pole_date": "2026-11-04 15:00",
+         "box_date": "2026-11-05 23:00",
+         "breakout_date": "2026-11-06 05:00",
+         "rise2_date": "2026-11-06 07:00",
          "reason": "trail",
          "entry_how": "confirm_close",
-         "pnl": 50.7798,
-         "fees": 2.3035,
-         "mfe_pct": 4.1908,
-         "price_ret_pct": 2.2783,
-         "ret_pct": 0.507084752738036,
-         "r_multiple": 0.5071,
-         "forward": false
-        },
+         "pnl": 102.7783,
+         "fees": 4.2659,
+         "mfe_pct": 3.8991,
+         "price_ret_pct": 2.4782,
+         "ret_pct": 1.0342319849879444,
+         "r_multiple": 1.0342,
+         "forward": true
+        }
+       ],
+       "recent_trades": [
         {
          "market": "XRP/short",
          "dir": "short",
@@ -9539,35 +9516,59 @@
          "ret_pct": -0.6823305380455382,
          "r_multiple": -0.6823,
          "forward": false
+        },
+        {
+         "market": "XRP/short",
+         "dir": "short",
+         "entry_date": "2026-11-06 10:00",
+         "exit_date": "2026-11-08 06:00",
+         "bars": 43,
+         "entry": 1.1952021,
+         "exit": 1.1655825,
+         "units": 3613.9646824777606,
+         "zone_lo": 1.199,
+         "zone_hi": 1.2227,
+         "stop0": 1.2227,
+         "stop_final": 1.165,
+         "stop_raises": 4,
+         "target": null,
+         "pole_date": "2026-11-04 15:00",
+         "box_date": "2026-11-05 23:00",
+         "breakout_date": "2026-11-06 05:00",
+         "rise2_date": "2026-11-06 07:00",
+         "reason": "trail",
+         "entry_how": "confirm_close",
+         "pnl": 102.7783,
+         "fees": 4.2659,
+         "mfe_pct": 3.8991,
+         "price_ret_pct": 2.4782,
+         "ret_pct": 1.0342319849879444,
+         "r_multiple": 1.0342,
+         "forward": true
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 1.1631,
-        "atr": 0.00783755,
-        "phase": "long",
+        "last_bar": "2026-11-09 06:00",
+        "close": 1.091,
+        "atr": 0.01222,
+        "phase": "rise2",
         "dir": "short",
-        "phase_ko": "보유",
-        "position": "short",
-        "entry": 1.1952021,
-        "entry_date": "2026-11-06 10:00",
-        "units": 3613.9646824777606,
-        "stop": 1.165,
-        "stop0": 1.2227,
-        "zone_lo": 1.199,
-        "zone_hi": 1.2227,
-        "target": null,
-        "stop_distance_pct": -0.1634,
-        "unrealized_pct": 2.6859,
-        "stop_raises": 4,
-        "action": "보유(매도(숏)) — 고가가 1.165 넘으면 청산"
+        "phase_ko": "돌파 — 2차 상승 대기",
+        "position": "flat",
+        "zone_lo": 1.0912,
+        "zone_hi": 1.1319,
+        "pole_date": "2026-11-07 09:00",
+        "box_date": "2026-11-08 21:00",
+        "bars_left": 36,
+        "breakout_date": "2026-11-09 06:00",
+        "action": "돌파 확인(2026-11-09 06:00) — 2차 하락 고점 확정 대기 (지지 구간 1.091~1.132, 남은 36봉)"
        }
       },
       "TRX/long": {
        "bars": 8760,
        "dir": "long",
        "stats": {
-        "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-09 07:00 ~ 2026-11-09 06:00",
         "days": 364,
         "trades": 31,
         "wins": 11,
@@ -9587,12 +9588,12 @@
         "avg_mfe_pct": 0.871,
         "avg_giveback_pct": 0.8556,
         "counts": {
-         "poles": 316,
-         "box_failed": 252,
+         "poles": 315,
+         "box_failed": 251,
          "breakouts": 64,
          "rise2_failed": 15,
          "no_pullback": 14,
-         "zone_lost": 3,
+         "zone_lost": 4,
          "entries": 31,
          "ambiguous": 0
         },
@@ -9605,7 +9606,7 @@
          "wins": 1,
          "net_pct": 0.0655
         },
-        "buy_hold_pct": 10.0697
+        "buy_hold_pct": 9.1881
        },
        "returns_pct": [
         0.02059440123893355,
@@ -9848,27 +9849,21 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 0.32071,
-        "atr": 0.00054307,
-        "phase": "rise2",
+        "last_bar": "2026-11-09 06:00",
+        "close": 0.31658,
+        "atr": 0.00060822,
+        "phase": "scan",
         "dir": "long",
-        "phase_ko": "돌파 — 2차 상승 대기",
+        "phase_ko": "대기",
         "position": "flat",
-        "zone_lo": 0.31914,
-        "zone_hi": 0.32002,
-        "pole_date": "2026-11-07 03:00",
-        "box_date": "2026-11-07 13:00",
-        "bars_left": 26,
-        "breakout_date": "2026-11-07 19:00",
-        "action": "돌파 확인(2026-11-07 19:00) — 2차 상승 고점 확정 대기 (지지 구간 0.3191~0.32, 남은 26봉)"
+        "action": "대기 — 1차 상승 + 횡보 구조 없음"
        }
       },
       "TRX/short": {
        "bars": 8760,
        "dir": "short",
        "stats": {
-        "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-09 07:00 ~ 2026-11-09 06:00",
         "days": 364,
         "trades": 24,
         "wins": 7,
@@ -9888,8 +9883,8 @@
         "avg_mfe_pct": 1.0254,
         "avg_giveback_pct": 0.8317,
         "counts": {
-         "poles": 293,
-         "box_failed": 237,
+         "poles": 292,
+         "box_failed": 236,
          "breakouts": 56,
          "rise2_failed": 17,
          "no_pullback": 10,
@@ -9906,7 +9901,7 @@
          "wins": 0,
          "net_pct": -0.2062
         },
-        "buy_hold_pct": 10.0697
+        "buy_hold_pct": 9.1881
        },
        "returns_pct": [
         1.9071250340322348,
@@ -10113,9 +10108,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 0.32071,
-        "atr": 0.00054307,
+        "last_bar": "2026-11-09 06:00",
+        "close": 0.31658,
+        "atr": 0.00060822,
         "phase": "scan",
         "dir": "short",
         "phase_ko": "대기",
@@ -10127,7 +10122,7 @@
        "bars": 8760,
        "dir": "long",
        "stats": {
-        "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-09 07:00 ~ 2026-11-09 06:00",
         "days": 364,
         "trades": 23,
         "wins": 6,
@@ -10165,7 +10160,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": -31.5075
+        "buy_hold_pct": -32.6715
        },
        "returns_pct": [
         0.36581523438880775,
@@ -10341,9 +10336,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 10.754,
-        "atr": 0.07640029,
+        "last_bar": "2026-11-09 06:00",
+        "close": 10.343,
+        "atr": 0.11246904,
         "phase": "scan",
         "dir": "long",
         "phase_ko": "대기",
@@ -10355,7 +10350,7 @@
        "bars": 8760,
        "dir": "short",
        "stats": {
-        "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-09 07:00 ~ 2026-11-09 06:00",
         "days": 364,
         "trades": 28,
         "wins": 9,
@@ -10375,9 +10370,9 @@
         "avg_mfe_pct": 2.942,
         "avg_giveback_pct": 2.756,
         "counts": {
-         "poles": 311,
-         "box_failed": 249,
-         "breakouts": 62,
+         "poles": 310,
+         "box_failed": 247,
+         "breakouts": 63,
          "rise2_failed": 18,
          "no_pullback": 13,
          "zone_lost": 3,
@@ -10393,7 +10388,7 @@
          "wins": 1,
          "net_pct": 1.4348
         },
-        "buy_hold_pct": -31.5075
+        "buy_hold_pct": -32.6715
        },
        "returns_pct": [
         7.815030349790697,
@@ -10633,51 +10628,60 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 10.754,
-        "atr": 0.07640029,
-        "phase": "scan",
+        "last_bar": "2026-11-09 06:00",
+        "close": 10.343,
+        "atr": 0.11246904,
+        "phase": "pullback",
         "dir": "short",
-        "phase_ko": "대기",
+        "phase_ko": "조정 중 — 확인 봉 대기",
         "position": "flat",
-        "action": "대기 — 1차 하락 + 횡보 구조 없음"
+        "zone_lo": 10.691,
+        "zone_hi": 10.808,
+        "pole_date": "2026-11-06 22:00",
+        "box_date": "2026-11-08 09:00",
+        "bars_left": 39,
+        "rise2_date": "2026-11-08 21:00",
+        "rise2_high": 10.124,
+        "units_if_fill_at_zone_edge": 854.7008547008612,
+        "notional_pct_if_fill": 91.3761,
+        "action": "조정 중 — 지지 구간 10.69~10.81 에서 음봉 확인 봉이 닫히면 그 종가에 매도(숏), 손절 10.81 (남은 39봉)"
        }
       },
       "DOGE/long": {
        "bars": 8760,
        "dir": "long",
        "stats": {
-        "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-09 07:00 ~ 2026-11-09 06:00",
         "days": 364,
-        "trades": 27,
+        "trades": 26,
         "wins": 7,
-        "win_rate_pct": 25.9259,
-        "net_pct": -3.1405,
-        "realized_net_pct": -3.1405,
-        "cagr_pct": -3.149,
+        "win_rate_pct": 26.9231,
+        "net_pct": -2.5576,
+        "realized_net_pct": -2.5576,
+        "cagr_pct": -2.5645,
         "max_drawdown_pct": -8.8017,
-        "profit_factor": 0.7683,
-        "avg_r": -0.1093,
-        "avg_hold_bars": 15.5556,
+        "profit_factor": 0.8038,
+        "avg_r": -0.0905,
+        "avg_hold_bars": 15.7308,
         "stops": 9,
-        "trails": 18,
+        "trails": 17,
         "targets": 0,
-        "longs": 27,
+        "longs": 26,
         "shorts": 0,
-        "avg_mfe_pct": 2.9604,
-        "avg_giveback_pct": 3.1192,
+        "avg_mfe_pct": 2.9352,
+        "avg_giveback_pct": 3.06,
         "counts": {
-         "poles": 314,
-         "box_failed": 259,
-         "breakouts": 55,
+         "poles": 316,
+         "box_failed": 262,
+         "breakouts": 54,
          "rise2_failed": 19,
          "no_pullback": 7,
          "zone_lost": 2,
-         "entries": 27,
+         "entries": 26,
          "ambiguous": 0
         },
         "by_year": {
-         "2025": -2.7667,
+         "2025": -2.1815,
          "2026": -0.3845
         },
         "forward": {
@@ -10685,36 +10689,35 @@
          "wins": 0,
          "net_pct": -2.2255
         },
-        "buy_hold_pct": -60.342
+        "buy_hold_pct": -60.7586
        },
        "returns_pct": [
-        -0.5982442585540257,
         -0.4292286382548766,
-        -0.05067104058234811,
+        -0.05067104058234812,
         -1.101075561990122,
         0.39731829897180354,
         -1.0089925056108937,
         -0.15926807657587166,
         -0.5223998518556774,
-        -1.1199869788258712,
-        -0.4729021233324279,
-        0.5063415556627803,
+        -1.1199869788258714,
+        -0.4729021233324278,
+        0.5063415556627802,
         -0.37601490585238356,
-        -1.0747089298968913,
-        0.7367633493850116,
-        -1.0509979266359883,
-        0.42439690491391324,
-        -1.1025475896740697,
+        -1.0747089298968917,
+        0.7367633493850114,
+        -1.0509979266359886,
+        0.42439690491391313,
+        -1.10254758967407,
         0.8427516889512366,
-        -1.0529727820722048,
-        -0.18824252006779732,
-        3.372573485273385,
+        -1.052972782072205,
+        -0.1882425200677973,
+        3.3725734852733864,
         4.730249102654328,
         -0.9999629545758953,
-        -0.38843113150633446,
-        -0.02800314171259434,
+        -0.3884311315063344,
+        -0.028003141712594347,
         -1.1439973096632472,
-        -1.0940558447638389
+        -1.094055844763839
        ],
        "forward_trades": [
         {
@@ -10725,7 +10728,7 @@
          "bars": 6,
          "entry": 0.0792396,
          "exit": 0.07838079,
-         "units": 120868.95483652291,
+         "units": 121596.39830800905,
          "zone_lo": 0.07842,
          "zone_hi": 0.08025,
          "stop0": 0.07842,
@@ -10738,8 +10741,8 @@
          "rise2_date": "2026-10-20 14:00",
          "reason": "stop",
          "entry_how": "confirm_close",
-         "pnl": -113.3292,
-         "fees": 9.5257,
+         "pnl": -114.0112,
+         "fees": 9.583,
          "mfe_pct": 0.7829,
          "price_ret_pct": -1.0838,
          "ret_pct": -1.1439973096632472,
@@ -10754,7 +10757,7 @@
          "bars": 10,
          "entry": 0.07919958,
          "exit": 0.07791103,
-         "units": 78371.0555978673,
+         "units": 78842.72768955746,
          "zone_lo": 0.07795,
          "zone_hi": 0.07894,
          "stop0": 0.07795,
@@ -10767,11 +10770,11 @@
          "rise2_date": "2026-10-28 03:00",
          "reason": "stop",
          "entry_how": "confirm_close",
-         "pnl": -107.1419,
-         "fees": 6.1565,
+         "pnl": -107.7867,
+         "fees": 6.1935,
          "mfe_pct": 2.1091,
          "price_ret_pct": -1.627,
-         "ret_pct": -1.0940558447638389,
+         "ret_pct": -1.094055844763839,
          "r_multiple": -1.0941,
          "forward": true
         }
@@ -10785,7 +10788,7 @@
          "bars": 5,
          "entry": 0.1022411,
          "exit": 0.09872061,
-         "units": 27749.38059552166,
+         "units": 27916.38878864535,
          "zone_lo": 0.09862,
          "zone_hi": 0.10135,
          "stop0": 0.09862,
@@ -10798,8 +10801,8 @@
          "rise2_date": "2026-09-23 03:00",
          "reason": "trail",
          "entry_how": "confirm_close",
-         "pnl": -100.4794,
-         "fees": 2.7883,
+         "pnl": -101.0842,
+         "fees": 2.8051,
          "mfe_pct": 0.0,
          "price_ret_pct": -3.4433,
          "ret_pct": -0.9999629545758953,
@@ -10814,7 +10817,7 @@
          "bars": 12,
          "entry": 0.09795896,
          "exit": 0.09668164,
-         "units": 28109.52643327534,
+         "units": 28278.702145252904,
          "zone_lo": 0.09442,
          "zone_hi": 0.0975,
          "stop0": 0.09442,
@@ -10827,11 +10830,11 @@
          "rise2_date": "2026-09-25 22:00",
          "reason": "trail",
          "entry_how": "confirm_close",
-         "pnl": -38.6405,
-         "fees": 2.7356,
+         "pnl": -38.873,
+         "fees": 2.7521,
          "mfe_pct": 0.7361,
          "price_ret_pct": -1.3039,
-         "ret_pct": -0.38843113150633446,
+         "ret_pct": -0.3884311315063344,
          "r_multiple": -0.3884,
          "forward": false
         },
@@ -10843,7 +10846,7 @@
          "bars": 34,
          "entry": 0.08597297,
          "exit": 0.08599698,
-         "units": 44777.908480968224,
+         "units": 45047.40197692292,
          "zone_lo": 0.08376,
          "zone_hi": 0.08557,
          "stop0": 0.08376,
@@ -10856,11 +10859,11 @@
          "rise2_date": "2026-10-10 04:00",
          "reason": "trail",
          "entry_how": "confirm_close",
-         "pnl": -2.7749,
-         "fees": 3.8502,
+         "pnl": -2.7916,
+         "fees": 3.8734,
          "mfe_pct": 2.4741,
          "price_ret_pct": 0.0279,
-         "ret_pct": -0.02800314171259434,
+         "ret_pct": -0.028003141712594347,
          "r_multiple": -0.028,
          "forward": false
         },
@@ -10872,7 +10875,7 @@
          "bars": 6,
          "entry": 0.0792396,
          "exit": 0.07838079,
-         "units": 120868.95483652291,
+         "units": 121596.39830800905,
          "zone_lo": 0.07842,
          "zone_hi": 0.08025,
          "stop0": 0.07842,
@@ -10885,8 +10888,8 @@
          "rise2_date": "2026-10-20 14:00",
          "reason": "stop",
          "entry_how": "confirm_close",
-         "pnl": -113.3292,
-         "fees": 9.5257,
+         "pnl": -114.0112,
+         "fees": 9.583,
          "mfe_pct": 0.7829,
          "price_ret_pct": -1.0838,
          "ret_pct": -1.1439973096632472,
@@ -10901,7 +10904,7 @@
          "bars": 10,
          "entry": 0.07919958,
          "exit": 0.07791103,
-         "units": 78371.0555978673,
+         "units": 78842.72768955746,
          "zone_lo": 0.07795,
          "zone_hi": 0.07894,
          "stop0": 0.07795,
@@ -10914,19 +10917,19 @@
          "rise2_date": "2026-10-28 03:00",
          "reason": "stop",
          "entry_how": "confirm_close",
-         "pnl": -107.1419,
-         "fees": 6.1565,
+         "pnl": -107.7867,
+         "fees": 6.1935,
          "mfe_pct": 2.1091,
          "price_ret_pct": -1.627,
-         "ret_pct": -1.0940558447638389,
+         "ret_pct": -1.094055844763839,
          "r_multiple": -1.0941,
          "forward": true
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 0.07119,
-        "atr": 0.0003953,
+        "last_bar": "2026-11-09 06:00",
+        "close": 0.0687,
+        "atr": 0.00069876,
         "phase": "scan",
         "dir": "long",
         "phase_ko": "대기",
@@ -10938,7 +10941,7 @@
        "bars": 8760,
        "dir": "short",
        "stats": {
-        "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-09 07:00 ~ 2026-11-09 06:00",
         "days": 364,
         "trades": 25,
         "wins": 10,
@@ -10958,9 +10961,9 @@
         "avg_mfe_pct": 2.9005,
         "avg_giveback_pct": 2.621,
         "counts": {
-         "poles": 290,
-         "box_failed": 235,
-         "breakouts": 54,
+         "poles": 289,
+         "box_failed": 234,
+         "breakouts": 55,
          "rise2_failed": 12,
          "no_pullback": 13,
          "zone_lost": 4,
@@ -10976,7 +10979,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": -60.342
+        "buy_hold_pct": -60.7586
        },
        "returns_pct": [
         -0.6994284567783915,
@@ -11154,18 +11157,23 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 0.07119,
-        "atr": 0.0003953,
-        "phase": "box",
+        "last_bar": "2026-11-09 06:00",
+        "close": 0.0687,
+        "atr": 0.00069876,
+        "phase": "pullback",
         "dir": "short",
-        "phase_ko": "횡보 중",
+        "phase_ko": "조정 중 — 확인 봉 대기",
         "position": "flat",
-        "zone_lo": 0.0708,
-        "zone_hi": 0.07162,
+        "zone_lo": 0.07042,
+        "zone_hi": 0.07165,
         "pole_date": "2026-11-06 14:00",
         "box_date": "2026-11-07 21:00",
-        "action": "횡보 중(0.0708~0.07162) — 종가가 0.0708 을 넘으면 돌파. 되돌림 50% 넘으면 무효"
+        "bars_left": 39,
+        "rise2_date": "2026-11-08 21:00",
+        "rise2_high": 0.06701,
+        "units_if_fill_at_zone_edge": 81300.8130081295,
+        "notional_pct_if_fill": 57.252,
+        "action": "조정 중 — 지지 구간 0.07042~0.07165 에서 음봉 확인 봉이 닫히면 그 종가에 매도(숏), 손절 0.07165 (남은 39봉)"
        }
       }
      },
@@ -11185,187 +11193,187 @@
        "XRP/short"
       ],
       "stats": {
-       "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
-       "days": 364,
-       "trades": 298,
-       "wins": 77,
-       "win_rate_pct": 25.8389,
-       "net_pct": -26.1935,
-       "realized_net_pct": -27.0452,
-       "cagr_pct": -26.2551,
+       "period": "2025-11-09 06:00 ~ 2026-11-09 06:00",
+       "days": 365,
+       "trades": 299,
+       "wins": 79,
+       "win_rate_pct": 26.4214,
+       "net_pct": -27.2012,
+       "realized_net_pct": -27.2012,
+       "cagr_pct": -27.2012,
        "max_drawdown_pct": -42.487,
-       "profit_factor": 0.7543,
-       "avg_r": -0.0954,
-       "avg_hold_bars": 18.4094,
+       "profit_factor": 0.7493,
+       "avg_r": -0.0958,
+       "avg_hold_bars": 18.5284,
        "stops": 98,
-       "trails": 200,
+       "trails": 201,
        "targets": 0,
        "longs": 150,
-       "shorts": 148,
-       "avg_mfe_pct": 2.1151,
-       "avg_giveback_pct": 2.1655,
+       "shorts": 149,
+       "avg_mfe_pct": 2.1148,
+       "avg_giveback_pct": 2.1559,
        "counts": {
-        "poles": 3658,
-        "box_failed": 2929,
-        "breakouts": 726,
+        "poles": 3657,
+        "box_failed": 2930,
+        "breakouts": 727,
         "rise2_failed": 200,
         "no_pullback": 151,
-        "zone_lost": 37,
+        "zone_lost": 38,
         "entries": 299,
         "ambiguous": 0
        },
        "by_year": {
-        "2025": 2.1329,
-        "2026": -27.7349
+        "2025": 0.8713,
+        "2026": -27.83
        },
        "forward": {
-        "trades": 11,
-        "wins": 4,
-        "net_pct": -2.4295
+        "trades": 12,
+        "wins": 5,
+        "net_pct": -1.4204
        }
       },
       "returns_pct": [
-       -0.21376811941251178,
-       -0.02367482328449116,
-       2.069358464076947,
+       0.02059440123893355,
+       -0.024619466860658985,
+       0.573317434619187,
        -1.1283028628934817,
-       4.488147018968595,
+       4.488147018968596,
        1.8252070578742476,
-       -0.6407336999331729,
-       -0.4292286382548766,
-       -1.0176458470169933,
-       0.2373737943925225,
+       -0.6407336999331728,
+       -0.42922863825487656,
+       -1.0176458470169936,
+       0.23737379439252243,
        0.3658152343888077,
        0.2863455205985932,
-       -0.36839688054496567,
+       -0.3683968805449657,
        -0.9607043231163901,
        -0.4501939377608167,
-       -1.0782454683477734,
-       -0.0506710405823481,
+       -1.0782454683477736,
+       -0.05067104058234811,
        -0.2976954680244804,
-       -0.005490499233160968,
+       -0.00549049923316097,
        -0.36729868190973514,
-       -0.0012305004363465447,
-       -1.101075561990122,
-       -0.31494554955140464,
-       -0.24900324482641992,
-       -0.6232433614386867,
-       1.1193650122664809,
-       -0.4383651411558913,
+       -0.001230500436346412,
+       -1.1010755619901218,
+       -0.3149455495514047,
+       -0.2490032448264199,
+       -0.6232433614386869,
+       1.1193650122664804,
+       -0.43836514115589126,
        2.0676101143073833,
        0.9428336666434188,
-       -0.17050108710288708,
-       0.39731829897180343,
-       -1.0660800707995226,
-       -0.2733896355521942,
-       -0.02396330270718774,
-       0.5123859952072155,
+       -0.17050108710288703,
+       0.39731829897180354,
+       -1.0660800707995228,
+       -0.27338963555219414,
+       -0.023963302707187686,
+       0.5123859952072157,
        -0.7008373584058518,
        0.6097635479427632,
-       -0.2913427962525836,
-       0.21336365237326096,
-       -0.32346486266715885,
+       -0.29134279625258347,
+       0.21336365237326094,
+       -0.3234648626671588,
        4.763853645435741,
-       -0.4936292435066691,
+       -0.4936292435066692,
        3.7032628208094374,
        -0.7153553874590971,
-       0.00011695426656054888,
-       -0.17638696484641656,
-       -0.0045774039320046235,
-       -0.06248515702617679,
-       -0.68603632045506,
-       -0.7396855033223002,
+       0.00011695426656054903,
+       -0.17638696484641658,
+       -0.004577403932004578,
+       -0.062485157026177296,
+       -0.6860363204550599,
+       -0.7396855033223003,
        -0.8270268108941323,
-       -1.129151917520098,
+       -1.1291519175200977,
        -1.110328074775679,
-       -0.2399910995751804,
-       1.0195632810327766,
-       0.014673786953602264,
-       -1.108352896634065,
-       0.0016926208256938546,
-       8.663721687816228,
-       0.674609282113749,
-       0.6351531538251359,
-       -0.17395601927208187,
+       -0.23999109957518033,
+       1.019563281032777,
+       0.01467378695360225,
+       -1.1083528966340648,
+       0.0016926208256939274,
+       8.663721687816226,
+       0.6746092821137492,
+       0.6351531538251358,
+       -0.17395601927208182,
        -0.5343184769672784,
-       -0.3702156445087621,
-       0.08450542190354418,
+       -0.37021564450876204,
+       0.08450542190354417,
        -0.5959477574413266,
-       -1.0918232727219648,
-       -0.6729953181248748,
-       -0.5342138201096408,
+       -1.0918232727219643,
+       -0.6729953181248751,
+       -0.5342138201096409,
        -0.5740712273073161,
-       -0.22270716119395909,
-       0.5166669369340781,
-       -0.6650814456896121,
+       -0.22270716119395895,
+       0.5166669369340783,
+       -0.6650814456896115,
        -0.1962489924443872,
        0.2721486133075887,
-       2.642789357161644,
-       2.3591825815656855,
-       1.6540278884599227,
+       2.642789357161643,
+       2.3591825815656846,
+       1.6540278884599222,
        -1.0417692932274067,
        -0.29889640610827906,
        -0.4243481173872162,
-       -0.568509346637589,
+       -0.5685093466375889,
        -0.3946009402227386,
-       -0.42568531870438125,
-       -0.577459457344393,
-       -0.3154244293301206,
+       -0.4256853187043813,
+       -0.5774594573443931,
+       -0.31542442933012066,
        -0.8477117842471602,
        -0.10147642765244255,
-       -0.1592680765758717,
+       -0.15926807657587166,
        -1.1123506631400057,
-       -1.0599873744621178,
-       -0.2855348418181853,
+       -1.0599873744621175,
+       -0.2855348418181854,
        -1.106834124292024,
-       -0.159428196264152,
-       -0.4545974408806515,
-       -0.2622228239618188,
+       -0.15942819626415203,
+       -0.4545974408806514,
+       -0.26222282396181884,
        -0.5799420574882589,
        -0.950968925774423,
-       -0.7254543084371663,
+       -0.7254543084371664,
        -0.8573064109757355,
-       1.1285629292426114,
+       1.1285629292426111,
        -1.093441020888117,
-       -0.27791354677104435,
-       -0.3688463815664113,
-       -1.1241333038410721,
-       -1.0961809844002106,
+       -0.2779135467710444,
+       -0.3688463815664116,
+       -1.124133303841072,
+       -1.0961809844002108,
        -0.9671495332758484,
        -1.055515163699987,
-       -0.5884673042870623,
-       -0.01584279116332402,
-       -8.332931523622682e-06,
+       -0.5884673042870624,
+       -0.015842791163323936,
+       -8.332931523595989e-06,
        -1.1237310710755724,
        -0.8435376064037797,
-       0.4460016410336388,
+       0.4460016410336389,
        -0.21312664505763212,
-       -0.37476758973712987,
+       -0.37476758973713,
        -1.0807036469717097,
        -0.6039503025117389,
-       -0.348892758000805,
+       -0.34889275800080494,
        -0.9813550492722664,
-       -0.4729021233324279,
-       0.07449717126169454,
-       -0.776848856538382,
-       -0.32144612416859675,
+       -0.4729021233324278,
+       0.07449717126169451,
+       -0.7768488565383819,
+       -0.32144612416859664,
        -1.1184555056034182,
        0.5063415556627802,
-       -0.00035580125855048695,
+       -0.0003558012585504299,
        0.05807442096549154,
-       -0.00825975199558573,
+       -0.00825975199558586,
        1.2814966221509962,
-       -0.37601490585238356,
+       -0.37601490585238345,
        -1.0747089298968915,
-       -0.36283514174535386,
+       -0.3628351417453538,
        0.36912291605162306,
-       -0.4528985514981046,
+       -0.4528985514981045,
        0.39142463639725633,
-       -0.8139742490244103,
-       -1.0963327777728293,
+       -0.8139742490244104,
+       -1.0963327777728291,
        -1.09994962265887,
        -0.9739709873237501,
-       -0.00042781833968199933,
+       -0.000427818339681996,
        -0.4852654829692782,
        -1.0901132159720133,
        -0.914850199484206,
@@ -11375,165 +11383,157 @@
        -1.092872270855076,
        -0.5051564985127782,
        -0.03827661005808481,
-       0.0011395194846719838,
-       -0.6225932808118819,
-       -0.22491974523246924,
+       0.0011395194846719981,
+       -0.622593280811882,
+       -0.2249197452324693,
        -0.6134440457829617,
-       0.7570749125273837,
-       0.006091652154752345,
-       2.0975439223047316,
+       0.7570749125273832,
+       0.006091652154752216,
+       2.097543922304731,
        4.158004324154898,
-       0.08266768368441675,
-       -0.04081684891078269,
+       0.08266768368441679,
+       -0.04081684891078273,
        -0.36780545647719487,
-       -0.735583074704194,
+       -0.7355830747041939,
        -1.0733669083099053,
        -1.0621806121385025,
        0.7367633493850115,
        0.051961636675776086,
        -1.0509979266359886,
-       0.05129905518104652,
+       0.051299055181046535,
        -1.1444400214802988,
-       -0.061536066354079134,
-       -1.142058790654999,
-       -0.0903863732112441,
+       -0.06153606635407922,
+       -1.1420587906549993,
+       -0.09038637321124392,
        1.233200814049598,
-       1.1550552705023165,
-       0.18637684455730769,
-       -0.5681155241057512,
+       1.1550552705023174,
+       0.18637684455730708,
+       -0.5681155241057511,
        -1.1118248249757867,
-       -0.27174244912862094,
+       -0.2717424491286209,
        0.1661610472325453,
-       -0.8808829442052879,
-       -0.42621535741527505,
-       -0.6529883046044862,
-       0.0032186374899741284,
+       -0.8808829442052876,
+       -0.426215357415275,
+       -0.6529883046044861,
+       0.0032186374899742746,
        -0.5161115290609722,
-       -0.8188106227379945,
+       -0.8188106227379943,
        0.42439690491391313,
-       -0.06340502174098143,
-       -0.045594721680737534,
-       1.3503294268271255,
+       -0.06340502174098142,
+       -0.045594721680737395,
+       1.3503294268271253,
        -0.755478337519382,
        -0.6690749052619459,
-       -0.0030714770431213493,
+       -0.0030714770431213554,
        -0.8504075066410424,
-       -0.24532703582698778,
-       -0.3861240260054591,
-       -1.098339232080385,
+       -0.2453270358269877,
+       -0.38612402600545903,
+       -1.0983392320803853,
        -0.2582469217146077,
-       -0.559248835424456,
-       -0.043170534028914374,
+       -0.5592488354244559,
+       -0.04317053402891437,
        0.5065807896268266,
-       -0.002426282228213892,
-       -0.0013709066853986992,
+       -0.0024262822282139188,
+       -0.0013709066853986624,
        -0.5229192017206226,
-       0.0026464020609737906,
-       1.3461267513935287,
-       -0.1969997477265783,
-       -0.38749028388806983,
-       -0.40123526602180526,
-       -0.06514341856843166,
+       0.0026464020609735326,
+       1.3461267513935289,
+       -0.19699974772657827,
+       -0.38749028388807,
+       -0.40123526602180515,
+       -0.06514341856843167,
        -0.19785164746649345,
        -1.1312953462806954,
-       -0.9470711661368847,
+       -0.9470711661368848,
        -0.15818226112050499,
-       -0.119709912452957,
+       -0.11970991245295703,
        -0.9100533559506148,
-       -0.000534018021464343,
-       -1.0814952815743324,
-       -0.56269585098968,
-       -1.1025475896740697,
-       -0.4728388197700617,
+       -0.0005340180214643571,
+       -1.081495281574333,
+       -0.5626958509896799,
+       -1.10254758967407,
+       -0.47283881977006165,
        -1.1239402090479078,
-       -0.5002257244456157,
-       0.2757513236227125,
-       -1.1371335559265452,
-       -0.04359788216845695,
+       -0.5002257244456159,
+       0.27575132362271254,
+       -1.1371335559265454,
+       -0.04359788216845699,
        -0.6714093918858369,
-       -0.0012144552883275408,
-       -0.06898125641667235,
-       0.8433436729795215,
-       -0.935081527251577,
+       -0.0012144552883275681,
+       -0.06898125641667237,
+       0.8433436729795213,
+       -0.9350815272515772,
        -0.2031139866481414,
-       -0.7603794845536864,
-       -0.22498629939200843,
-       -0.0015490171441221398,
+       -0.7603794845536865,
+       -0.22498629939200848,
+       -0.0015490171441221129,
        18.33790314371971,
        -1.052972782072205,
-       0.02540648519256274,
-       -0.62632608145942,
-       -0.8313027942376263,
-       -0.2935005448772795,
+       0.025406485192565016,
+       -0.6263260814594201,
+       -0.8313027942376261,
+       -0.29350054487727945,
        -0.396765093194929,
-       -0.00015935672871357167,
-       -0.40661192072932684,
+       -0.0001593567287135304,
+       -0.40661192072932695,
        0.511184049059547,
-       -0.2827880475211071,
-       -1.1309941623566715,
-       0.03315338458083296,
+       -0.28278804752110703,
+       -1.1309941623566717,
+       0.033153384580832966,
        -0.48586677231371955,
        -0.7490192285243639,
-       0.9929676769705311,
-       -0.6531279334211452,
-       0.8936436401925325,
+       0.992967676970531,
+       -0.6531279334211453,
+       0.8936436401925327,
        -1.0148634232890883,
        -0.40071609649177975,
        -0.06779397485681983,
-       -1.131710859788658,
+       -1.1317108597886583,
        -0.20701294323223068,
-       -1.1321946143058672,
-       0.000372855287888818,
-       1.1228821188463227,
-       -0.4815908346806966,
-       4.7302491026543265,
+       -1.132194614305867,
+       0.0003728552878888455,
+       1.1228821188463238,
+       -0.4815908346806967,
+       4.730249102654329,
        -0.9999629545758953,
        -1.032914513631042,
-       -0.10114265956564474,
-       -0.24455325549191292,
+       -0.10114265956564475,
+       -0.24455325549191326,
        -0.1909714477581538,
-       -0.7861637239267629,
-       -0.13044727700110498,
-       -0.3521347712115185,
-       0.5957190690189815,
-       -0.0010867962852084358,
+       -0.7861637239267628,
+       -0.13044727700110492,
+       -0.35213477121151837,
+       0.5957190690189814,
+       -0.0010867962852084197,
        0.02375600787281959,
        -0.3130210266043282,
-       -0.06910090508814544,
+       -0.06910090508814543,
        0.3307750363628569,
-       0.7461453584196538,
+       0.7461453584196541,
        -0.200100050025005,
-       -0.4724197274926863,
-       -0.6823305380455383,
+       -0.4724197274926862,
+       -0.6823305380455386,
        -0.9919208197682707,
-       -0.31510649466234214,
+       -0.3151064946623421,
        0.1919868488026822,
        -0.509776157537811,
-       -0.00022966069651734523,
-       0.3169616315003876,
-       0.2468603391458896,
-       -1.1121631587781082,
-       -0.043690607430360115,
+       -0.00022966069651733482,
+       0.31696163150038753,
+       0.24686033914588953,
+       -1.1121631587781087,
+       -0.043690607430359886,
        -1.1444973475063969,
        -0.20616736290480514,
-       1.6687501124723114,
-       0.002182775066221545,
+       1.6687501124723119,
+       0.0021827750662215192,
        0.6742249066014311,
        -0.3848975015893917,
-       -1.0940558447638389,
-       0.000546600604972899,
-       -0.7808576099173624
+       -1.094055844763839,
+       0.0005466006049728229,
+       -0.7808576099173626,
+       1.0342319849879447
       ],
-      "open_positions": {
-       "XRP/short": {
-        "dir": "short",
-        "entry": 1.1952021,
-        "entry_date": "2026-11-06 10:00",
-        "stop": 1.165,
-        "units": 2653.1031027687327,
-        "capped": false
-       }
-      },
+      "open_positions": {},
       "forward_trades": [
        {
         "market": "XRP/long",
@@ -11543,7 +11543,7 @@
         "bars": 3,
         "entry": 1.348674,
         "exit": 1.3301346,
-        "units": 4183.247700990087,
+        "units": 4131.575335040267,
         "zone_lo": 1.3308,
         "zone_hi": 1.3441,
         "stop0": 1.3308,
@@ -11556,11 +11556,11 @@
         "rise2_date": "2026-10-21 09:00",
         "reason": "stop",
         "entry_how": "confirm_close",
-        "pnl": -83.158,
-        "fees": 5.6031,
+        "pnl": -82.1308,
+        "fees": 5.5338,
         "mfe_pct": 0.1799,
         "price_ret_pct": -1.3746,
-        "ret_pct": -1.1121631587781082,
+        "ret_pct": -1.1121631587781087,
         "r_multiple": -1.1122,
         "forward": true
        },
@@ -11572,7 +11572,7 @@
         "bars": 2,
         "entry": 2410.70475,
         "exit": 2374.2123,
-        "units": 0.08307784308771504,
+        "units": 0.08205164788790988,
         "zone_lo": 2375.4,
         "zone_hi": 2416.82,
         "stop0": 2375.4,
@@ -11585,11 +11585,11 @@
         "rise2_date": "2026-10-20 14:00",
         "reason": "stop",
         "entry_how": "confirm_close",
-        "pnl": -3.2305,
-        "fees": 0.1988,
+        "pnl": -3.1906,
+        "fees": 0.1963,
         "mfe_pct": 0.2566,
         "price_ret_pct": -1.5138,
-        "ret_pct": -0.043690607430360115,
+        "ret_pct": -0.043690607430359886,
         "r_multiple": -0.0437,
         "forward": true
        },
@@ -11601,7 +11601,7 @@
         "bars": 6,
         "entry": 0.0792396,
         "exit": 0.07838079,
-        "units": 90214.48241048452,
+        "units": 89100.13392282867,
         "zone_lo": 0.07842,
         "zone_hi": 0.08025,
         "stop0": 0.07842,
@@ -11614,8 +11614,8 @@
         "rise2_date": "2026-10-20 14:00",
         "reason": "stop",
         "entry_how": "confirm_close",
-        "pnl": -84.5869,
-        "fees": 7.1098,
+        "pnl": -83.5421,
+        "fees": 7.022,
         "mfe_pct": 0.7829,
         "price_ret_pct": -1.0838,
         "ret_pct": -1.1444973475063969,
@@ -11630,7 +11630,7 @@
         "bars": 10,
         "entry": 0.32996493,
         "exit": 0.33031508,
-        "units": 22142.236366554782,
+        "units": 21868.730750282226,
         "zone_lo": 0.32973,
         "zone_hi": 0.33135,
         "stop0": 0.33135,
@@ -11643,8 +11643,8 @@
         "rise2_date": "2026-10-22 17:00",
         "reason": "trail",
         "entry_how": "confirm_close",
-        "pnl": -15.0629,
-        "fees": 7.31,
+        "pnl": -14.8769,
+        "fees": 7.2197,
         "mfe_pct": 0.2167,
         "price_ret_pct": -0.1061,
         "ret_pct": -0.20616736290480514,
@@ -11659,7 +11659,7 @@
         "bars": 35,
         "entry": 11.8530705,
         "exit": 11.423709,
-        "units": 291.27001631001355,
+        "units": 287.67218707570385,
         "zone_lo": 11.851,
         "zone_hi": 12.087,
         "stop0": 12.087,
@@ -11672,11 +11672,11 @@
         "rise2_date": "2026-10-23 22:00",
         "reason": "trail",
         "entry_how": "confirm_close",
-        "pnl": 121.6702,
-        "fees": 3.3899,
+        "pnl": 120.1673,
+        "fees": 3.348,
         "mfe_pct": 5.2735,
         "price_ret_pct": 3.6224,
-        "ret_pct": 1.6687501124723114,
+        "ret_pct": 1.6687501124723119,
         "r_multiple": 1.6688,
         "forward": true
        },
@@ -11688,7 +11688,7 @@
         "bars": 35,
         "entry": 80786.1867,
         "exit": 80589.2745,
-        "units": 0.001392168720259103,
+        "units": 0.0013749723559223317,
         "zone_lo": 80900.0,
         "zone_hi": 82047.6,
         "stop0": 82047.6,
@@ -11701,11 +11701,11 @@
         "rise2_date": "2026-10-24 15:00",
         "reason": "trail",
         "entry_how": "confirm_close",
-        "pnl": 0.1618,
-        "fees": 0.1123,
+        "pnl": 0.1598,
+        "fees": 0.1109,
         "mfe_pct": 1.8113,
         "price_ret_pct": 0.2437,
-        "ret_pct": 0.002182775066221545,
+        "ret_pct": 0.0021827750662215192,
         "r_multiple": 0.0022,
         "forward": true
        },
@@ -11717,7 +11717,7 @@
         "bars": 62,
         "entry": 2372.03339,
         "exit": 2338.66875,
-        "units": 1.611769463445353,
+        "units": 1.591860543989739,
         "zone_lo": 2384.0,
         "zone_hi": 2417.27,
         "stop0": 2417.27,
@@ -11730,8 +11730,8 @@
         "rise2_date": "2026-10-23 22:00",
         "reason": "trail",
         "entry_how": "confirm_close",
-        "pnl": 49.9798,
-        "fees": 3.7963,
+        "pnl": 49.3625,
+        "fees": 3.7494,
         "mfe_pct": 3.8369,
         "price_ret_pct": 1.4066,
         "ret_pct": 0.6742249066014311,
@@ -11746,7 +11746,7 @@
         "bars": 4,
         "entry": 0.32940462,
         "exit": 0.32846568,
-        "units": 22655.755432227008,
+        "units": 22375.906719159742,
         "zone_lo": 0.32863,
         "zone_hi": 0.32937,
         "stop0": 0.32863,
@@ -11759,8 +11759,8 @@
         "rise2_date": "2026-10-25 20:00",
         "reason": "stop",
         "entry_how": "confirm_close",
-        "pnl": -28.7246,
-        "fees": 7.4523,
+        "pnl": -28.3697,
+        "fees": 7.3602,
         "mfe_pct": 0.1079,
         "price_ret_pct": -0.285,
         "ret_pct": -0.3848975015893917,
@@ -11775,7 +11775,7 @@
         "bars": 10,
         "entry": 0.07919958,
         "exit": 0.07791103,
-        "units": 59493.47743138409,
+        "units": 58758.60133577677,
         "zone_lo": 0.07795,
         "zone_hi": 0.07894,
         "stop0": 0.07795,
@@ -11788,11 +11788,11 @@
         "rise2_date": "2026-10-28 03:00",
         "reason": "stop",
         "entry_how": "confirm_close",
-        "pnl": -81.3341,
-        "fees": 4.6735,
+        "pnl": -80.3295,
+        "fees": 4.6158,
         "mfe_pct": 2.1091,
         "price_ret_pct": -1.627,
-        "ret_pct": -1.0940558447638389,
+        "ret_pct": -1.094055844763839,
         "r_multiple": -1.0941,
         "forward": true
        },
@@ -11804,7 +11804,7 @@
         "bars": 27,
         "entry": 0.31738861,
         "exit": 0.32117933,
-        "units": 11.577569060461341,
+        "units": 11.434560463297338,
         "zone_lo": 0.30971,
         "zone_hi": 0.31679,
         "stop0": 0.30971,
@@ -11817,11 +11817,11 @@
         "rise2_date": "2026-11-02 15:00",
         "reason": "trail",
         "entry_how": "confirm_close",
-        "pnl": 0.0402,
+        "pnl": 0.0397,
         "fees": 0.0037,
         "mfe_pct": 2.1492,
         "price_ret_pct": 1.1943,
-        "ret_pct": 0.000546600604972899,
+        "ret_pct": 0.0005466006049728229,
         "r_multiple": 0.0005,
         "forward": true
        },
@@ -11833,7 +11833,7 @@
         "bars": 31,
         "entry": 2254.34661,
         "exit": 2238.989945,
-        "units": 3.2616332263754315,
+        "units": 3.2213448385691166,
         "zone_lo": 2234.67,
         "zone_hi": 2251.15,
         "stop0": 2234.67,
@@ -11846,16 +11846,45 @@
         "rise2_date": "2026-11-01 02:00",
         "reason": "trail",
         "entry_how": "confirm_close",
-        "pnl": -57.4156,
-        "fees": 7.3278,
+        "pnl": -56.7064,
+        "fees": 7.2373,
         "mfe_pct": 2.38,
         "price_ret_pct": -0.6812,
-        "ret_pct": -0.7808576099173624,
+        "ret_pct": -0.7808576099173626,
         "r_multiple": -0.7809,
+        "forward": true
+       },
+       {
+        "market": "XRP/short",
+        "dir": "short",
+        "entry_date": "2026-11-06 10:00",
+        "exit_date": "2026-11-08 06:00",
+        "bars": 43,
+        "entry": 1.1952021,
+        "exit": 1.1655825,
+        "units": 2620.3314085665406,
+        "zone_lo": 1.199,
+        "zone_hi": 1.2227,
+        "stop0": 1.2227,
+        "stop_final": 1.165,
+        "stop_raises": 4,
+        "target": null,
+        "pole_date": "2026-11-04 15:00",
+        "box_date": "2026-11-05 23:00",
+        "breakout_date": "2026-11-06 05:00",
+        "rise2_date": "2026-11-06 07:00",
+        "reason": "trail",
+        "entry_how": "confirm_close",
+        "pnl": 74.5201,
+        "fees": 3.093,
+        "mfe_pct": 3.8991,
+        "price_ret_pct": 2.4782,
+        "ret_pct": 1.0342319849879447,
+        "r_multiple": 1.0342,
         "forward": true
        }
       ],
-      "equity_now": 7380.6466
+      "equity_now": 7279.8813
      },
      "label": "거래량 조건 3개 전부 없음 (모양만)"
     },
@@ -11865,7 +11894,7 @@
        "bars": 8760,
        "dir": "long",
        "stats": {
-        "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-09 06:00 ~ 2026-11-09 05:00",
         "days": 364,
         "trades": 11,
         "wins": 3,
@@ -11885,8 +11914,8 @@
         "avg_mfe_pct": 3.6749,
         "avg_giveback_pct": 2.1941,
         "counts": {
-         "poles": 132,
-         "box_failed": 110,
+         "poles": 131,
+         "box_failed": 109,
          "breakouts": 22,
          "rise2_failed": 9,
          "no_pullback": 2,
@@ -11903,7 +11932,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": -25.816
+        "buy_hold_pct": -26.7999
        },
        "returns_pct": [
         -0.17686277377392493,
@@ -12067,9 +12096,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 75799.9,
-        "atr": 216.03237268,
+        "last_bar": "2026-11-09 05:00",
+        "close": 74442.1,
+        "atr": 419.02107842,
         "phase": "scan",
         "dir": "long",
         "phase_ko": "대기",
@@ -12081,7 +12110,7 @@
        "bars": 8760,
        "dir": "short",
        "stats": {
-        "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-09 06:00 ~ 2026-11-09 05:00",
         "days": 364,
         "trades": 16,
         "wins": 5,
@@ -12119,7 +12148,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": -25.816
+        "buy_hold_pct": -26.7999
        },
        "returns_pct": [
         1.8847685358882544,
@@ -12288,27 +12317,30 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 75799.9,
-        "atr": 216.03237268,
-        "phase": "rise2",
+        "last_bar": "2026-11-09 05:00",
+        "close": 74442.1,
+        "atr": 419.02107842,
+        "phase": "pullback",
         "dir": "short",
-        "phase_ko": "돌파 — 2차 상승 대기",
+        "phase_ko": "조정 중 — 확인 봉 대기",
         "position": "flat",
         "zone_lo": 75750.0,
         "zone_hi": 76216.8,
         "pole_date": "2026-11-05 15:00",
         "box_date": "2026-11-07 03:00",
-        "bars_left": 22,
-        "breakout_date": "2026-11-07 15:00",
-        "action": "돌파 확인(2026-11-07 15:00) — 2차 하락 고점 확정 대기 (지지 구간 75,750~76,217, 남은 22봉)"
+        "bars_left": 40,
+        "rise2_date": "2026-11-08 21:00",
+        "rise2_high": 73385.0,
+        "units_if_fill_at_zone_edge": 0.2142245072836319,
+        "notional_pct_if_fill": 100.0,
+        "action": "조정 중 — 지지 구간 75,750~76,217 에서 음봉 확인 봉이 닫히면 그 종가에 매도(숏), 손절 76,217 (남은 40봉)"
        }
       },
       "ETH/long": {
        "bars": 8760,
        "dir": "long",
        "stats": {
-        "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-09 06:00 ~ 2026-11-09 05:00",
         "days": 364,
         "trades": 10,
         "wins": 3,
@@ -12328,8 +12360,8 @@
         "avg_mfe_pct": 4.8809,
         "avg_giveback_pct": 2.1003,
         "counts": {
-         "poles": 135,
-         "box_failed": 116,
+         "poles": 134,
+         "box_failed": 115,
          "breakouts": 19,
          "rise2_failed": 5,
          "no_pullback": 4,
@@ -12346,7 +12378,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": -35.117
+        "buy_hold_pct": -37.4711
        },
        "returns_pct": [
         -0.08328377329637869,
@@ -12509,9 +12541,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 2234.31,
-        "atr": 9.0255235,
+        "last_bar": "2026-11-09 05:00",
+        "close": 2128.01,
+        "atr": 19.03100779,
         "phase": "scan",
         "dir": "long",
         "phase_ko": "대기",
@@ -12523,7 +12555,7 @@
        "bars": 8760,
        "dir": "short",
        "stats": {
-        "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-09 06:00 ~ 2026-11-09 05:00",
         "days": 364,
         "trades": 11,
         "wins": 3,
@@ -12561,7 +12593,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": -35.117
+        "buy_hold_pct": -37.4711
        },
        "returns_pct": [
         0.12802670620262185,
@@ -12725,9 +12757,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 2234.31,
-        "atr": 9.0255235,
+        "last_bar": "2026-11-09 05:00",
+        "close": 2128.01,
+        "atr": 19.03100779,
         "phase": "scan",
         "dir": "short",
         "phase_ko": "대기",
@@ -12739,7 +12771,7 @@
        "bars": 8760,
        "dir": "long",
        "stats": {
-        "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-09 07:00 ~ 2026-11-09 06:00",
         "days": 364,
         "trades": 9,
         "wins": 1,
@@ -12759,8 +12791,8 @@
         "avg_mfe_pct": 2.1171,
         "avg_giveback_pct": 2.5834,
         "counts": {
-         "poles": 121,
-         "box_failed": 104,
+         "poles": 119,
+         "box_failed": 102,
          "breakouts": 17,
          "rise2_failed": 5,
          "no_pullback": 3,
@@ -12777,7 +12809,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": -49.9096
+        "buy_hold_pct": -52.4494
        },
        "returns_pct": [
         -1.142780630434782,
@@ -12939,9 +12971,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 1.1631,
-        "atr": 0.00783755,
+        "last_bar": "2026-11-09 06:00",
+        "close": 1.091,
+        "atr": 0.01222,
         "phase": "scan",
         "dir": "long",
         "phase_ko": "대기",
@@ -12953,7 +12985,7 @@
        "bars": 8760,
        "dir": "short",
        "stats": {
-        "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-09 07:00 ~ 2026-11-09 06:00",
         "days": 364,
         "trades": 11,
         "wins": 4,
@@ -12975,7 +13007,7 @@
         "counts": {
          "poles": 113,
          "box_failed": 93,
-         "breakouts": 19,
+         "breakouts": 20,
          "rise2_failed": 4,
          "no_pullback": 3,
          "zone_lost": 0,
@@ -12991,7 +13023,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": -49.9096
+        "buy_hold_pct": -52.4494
        },
        "returns_pct": [
         0.43145846887159706,
@@ -13155,25 +13187,30 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 1.1631,
-        "atr": 0.00783755,
-        "phase": "box",
+        "last_bar": "2026-11-09 06:00",
+        "close": 1.091,
+        "atr": 0.01222,
+        "phase": "pullback",
         "dir": "short",
-        "phase_ko": "횡보 중",
+        "phase_ko": "조정 중 — 확인 봉 대기",
         "position": "flat",
-        "zone_lo": 1.1486,
+        "zone_lo": 1.1457,
         "zone_hi": 1.1814,
         "pole_date": "2026-11-05 15:00",
         "box_date": "2026-11-07 03:00",
-        "action": "횡보 중(1.149~1.181) — 종가가 1.149 을 넘으면 돌파. 되돌림 50% 넘으면 무효"
+        "bars_left": 39,
+        "rise2_date": "2026-11-08 21:00",
+        "rise2_high": 1.0912,
+        "units_if_fill_at_zone_edge": 2801.1204481792665,
+        "notional_pct_if_fill": 32.0924,
+        "action": "조정 중 — 지지 구간 1.146~1.181 에서 음봉 확인 봉이 닫히면 그 종가에 매도(숏), 손절 1.181 (남은 39봉)"
        }
       },
       "TRX/long": {
        "bars": 8760,
        "dir": "long",
        "stats": {
-        "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-09 07:00 ~ 2026-11-09 06:00",
         "days": 364,
         "trades": 7,
         "wins": 3,
@@ -13193,8 +13230,8 @@
         "avg_mfe_pct": 1.0265,
         "avg_giveback_pct": 0.9633,
         "counts": {
-         "poles": 71,
-         "box_failed": 57,
+         "poles": 70,
+         "box_failed": 56,
          "breakouts": 14,
          "rise2_failed": 3,
          "no_pullback": 3,
@@ -13211,7 +13248,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": 10.0697
+        "buy_hold_pct": 9.1881
        },
        "returns_pct": [
         -0.41984000000001576,
@@ -13371,9 +13408,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 0.32071,
-        "atr": 0.00054307,
+        "last_bar": "2026-11-09 06:00",
+        "close": 0.31658,
+        "atr": 0.00060822,
         "phase": "scan",
         "dir": "long",
         "phase_ko": "대기",
@@ -13385,7 +13422,7 @@
        "bars": 8760,
        "dir": "short",
        "stats": {
-        "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-09 07:00 ~ 2026-11-09 06:00",
         "days": 364,
         "trades": 12,
         "wins": 2,
@@ -13423,7 +13460,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": 10.0697
+        "buy_hold_pct": 9.1881
        },
        "returns_pct": [
         -0.6607394132653002,
@@ -13588,9 +13625,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 0.32071,
-        "atr": 0.00054307,
+        "last_bar": "2026-11-09 06:00",
+        "close": 0.31658,
+        "atr": 0.00060822,
         "phase": "scan",
         "dir": "short",
         "phase_ko": "대기",
@@ -13602,7 +13639,7 @@
        "bars": 8760,
        "dir": "long",
        "stats": {
-        "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-09 07:00 ~ 2026-11-09 06:00",
         "days": 364,
         "trades": 8,
         "wins": 4,
@@ -13640,7 +13677,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": -31.5075
+        "buy_hold_pct": -32.6715
        },
        "returns_pct": [
         -0.41583282936508137,
@@ -13801,9 +13838,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 10.754,
-        "atr": 0.07640029,
+        "last_bar": "2026-11-09 06:00",
+        "close": 10.343,
+        "atr": 0.11246904,
         "phase": "scan",
         "dir": "long",
         "phase_ko": "대기",
@@ -13815,7 +13852,7 @@
        "bars": 8760,
        "dir": "short",
        "stats": {
-        "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-09 07:00 ~ 2026-11-09 06:00",
         "days": 364,
         "trades": 10,
         "wins": 5,
@@ -13835,8 +13872,8 @@
         "avg_mfe_pct": 2.9043,
         "avg_giveback_pct": 2.4228,
         "counts": {
-         "poles": 97,
-         "box_failed": 80,
+         "poles": 98,
+         "box_failed": 81,
          "breakouts": 17,
          "rise2_failed": 4,
          "no_pullback": 3,
@@ -13853,7 +13890,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": -31.5075
+        "buy_hold_pct": -32.6715
        },
        "returns_pct": [
         1.2641903925389764,
@@ -14016,9 +14053,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 10.754,
-        "atr": 0.07640029,
+        "last_bar": "2026-11-09 06:00",
+        "close": 10.343,
+        "atr": 0.11246904,
         "phase": "scan",
         "dir": "short",
         "phase_ko": "대기",
@@ -14030,7 +14067,7 @@
        "bars": 8760,
        "dir": "long",
        "stats": {
-        "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-09 07:00 ~ 2026-11-09 06:00",
         "days": 364,
         "trades": 8,
         "wins": 1,
@@ -14068,7 +14105,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": -60.342
+        "buy_hold_pct": -60.7586
        },
        "returns_pct": [
         -1.1061945025252504,
@@ -14229,9 +14266,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 0.07119,
-        "atr": 0.0003953,
+        "last_bar": "2026-11-09 06:00",
+        "close": 0.0687,
+        "atr": 0.00069876,
         "phase": "scan",
         "dir": "long",
         "phase_ko": "대기",
@@ -14243,14 +14280,14 @@
        "bars": 8760,
        "dir": "short",
        "stats": {
-        "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-09 07:00 ~ 2026-11-09 06:00",
         "days": 364,
         "trades": 12,
         "wins": 6,
         "win_rate_pct": 50.0,
-        "net_pct": 1.4409,
+        "net_pct": 4.9466,
         "realized_net_pct": 0.8355,
-        "cagr_pct": 1.4449,
+        "cagr_pct": 4.9605,
         "max_drawdown_pct": -5.7898,
         "profit_factor": 1.1777,
         "avg_r": 0.0737,
@@ -14274,14 +14311,14 @@
         },
         "by_year": {
          "2025": -0.5259,
-         "2026": 1.9772
+         "2026": 5.5014
         },
         "forward": {
          "trades": 0,
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": -60.342
+        "buy_hold_pct": -60.7586
        },
        "returns_pct": [
         -0.5258970833333334,
@@ -14446,9 +14483,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 0.07119,
-        "atr": 0.0003953,
+        "last_bar": "2026-11-09 06:00",
+        "close": 0.0687,
+        "atr": 0.00069876,
         "phase": "long",
         "dir": "short",
         "phase_ko": "보유",
@@ -14456,15 +14493,15 @@
         "entry": 0.07162,
         "entry_date": "2026-11-07 23:00",
         "units": 140792.31911227244,
-        "stop": 0.07214,
+        "stop": 0.07149,
         "stop0": 0.07214,
         "zone_lo": 0.07162,
         "zone_hi": 0.07214,
         "target": null,
-        "stop_distance_pct": -1.3345,
-        "unrealized_pct": 0.6004,
-        "stop_raises": 0,
-        "action": "보유(매도(숏)) — 고가가 0.07214 넘으면 청산"
+        "stop_distance_pct": -4.0611,
+        "unrealized_pct": 4.0771,
+        "stop_raises": 2,
+        "action": "보유(매도(숏)) — 고가가 0.07149 넘으면 청산"
        }
       }
      },
@@ -14484,14 +14521,14 @@
        "XRP/short"
       ],
       "stats": {
-       "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
-       "days": 364,
+       "period": "2025-11-09 06:00 ~ 2026-11-09 06:00",
+       "days": 365,
        "trades": 116,
        "wins": 37,
        "win_rate_pct": 31.8966,
-       "net_pct": 4.5631,
+       "net_pct": 8.1767,
        "realized_net_pct": 3.939,
-       "cagr_pct": 4.5759,
+       "cagr_pct": 8.1767,
        "max_drawdown_pct": -14.5237,
        "profit_factor": 1.0927,
        "avg_r": 0.051,
@@ -14504,9 +14541,9 @@
        "avg_mfe_pct": 2.5442,
        "avg_giveback_pct": 2.1671,
        "counts": {
-        "poles": 1373,
-        "box_failed": 1134,
-        "breakouts": 238,
+        "poles": 1369,
+        "box_failed": 1130,
+        "breakouts": 239,
         "rise2_failed": 63,
         "no_pullback": 41,
         "zone_lost": 2,
@@ -14515,7 +14552,7 @@
        },
        "by_year": {
         "2025": -3.3505,
-        "2026": 8.1879
+        "2026": 11.9268
        },
        "forward": {
         "trades": 0,
@@ -14646,13 +14683,13 @@
         "dir": "short",
         "entry": 0.07162,
         "entry_date": "2026-11-07 23:00",
-        "stop": 0.07214,
+        "stop": 0.07149,
         "units": 145125.68427068795,
         "capped": true
        }
       },
       "forward_trades": [],
-      "equity_now": 10456.3056
+      "equity_now": 10817.6685
      },
      "label": "상승 캔들 안 기다리고 지지 상단에 지정가 진입"
     },
@@ -14662,7 +14699,7 @@
        "bars": 8760,
        "dir": "long",
        "stats": {
-        "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-09 06:00 ~ 2026-11-09 05:00",
         "days": 364,
         "trades": 5,
         "wins": 3,
@@ -14682,8 +14719,8 @@
         "avg_mfe_pct": 1.881,
         "avg_giveback_pct": 0.6282,
         "counts": {
-         "poles": 133,
-         "box_failed": 111,
+         "poles": 132,
+         "box_failed": 110,
          "breakouts": 22,
          "rise2_failed": 9,
          "no_pullback": 5,
@@ -14700,7 +14737,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": -25.816
+        "buy_hold_pct": -26.7999
        },
        "returns_pct": [
         1.9496752948216158,
@@ -14858,9 +14895,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 75799.9,
-        "atr": 216.03237268,
+        "last_bar": "2026-11-09 05:00",
+        "close": 74442.1,
+        "atr": 419.02107842,
         "phase": "scan",
         "dir": "long",
         "phase_ko": "대기",
@@ -14872,7 +14909,7 @@
        "bars": 8760,
        "dir": "short",
        "stats": {
-        "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-09 06:00 ~ 2026-11-09 05:00",
         "days": 364,
         "trades": 11,
         "wins": 3,
@@ -14910,7 +14947,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": -25.816
+        "buy_hold_pct": -26.7999
        },
        "returns_pct": [
         0.9636221905543536,
@@ -15074,27 +15111,30 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 75799.9,
-        "atr": 216.03237268,
-        "phase": "rise2",
+        "last_bar": "2026-11-09 05:00",
+        "close": 74442.1,
+        "atr": 419.02107842,
+        "phase": "pullback",
         "dir": "short",
-        "phase_ko": "돌파 — 2차 상승 대기",
+        "phase_ko": "조정 중 — 확인 봉 대기",
         "position": "flat",
         "zone_lo": 75750.0,
         "zone_hi": 76216.8,
         "pole_date": "2026-11-05 15:00",
         "box_date": "2026-11-07 03:00",
-        "bars_left": 22,
-        "breakout_date": "2026-11-07 15:00",
-        "action": "돌파 확인(2026-11-07 15:00) — 2차 하락 고점 확정 대기 (지지 구간 75,750~76,217, 남은 22봉)"
+        "bars_left": 40,
+        "rise2_date": "2026-11-08 21:00",
+        "rise2_high": 73385.0,
+        "units_if_fill_at_zone_edge": 0.2142245072836319,
+        "notional_pct_if_fill": 100.0,
+        "action": "조정 중 — 지지 구간 75,750~76,217 에서 음봉 확인 봉이 닫히면 그 종가에 매도(숏), 손절 76,217 (남은 40봉)"
        }
       },
       "ETH/long": {
        "bars": 8760,
        "dir": "long",
        "stats": {
-        "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-09 06:00 ~ 2026-11-09 05:00",
         "days": 364,
         "trades": 7,
         "wins": 2,
@@ -15114,8 +15154,8 @@
         "avg_mfe_pct": 1.3965,
         "avg_giveback_pct": 1.6333,
         "counts": {
-         "poles": 137,
-         "box_failed": 117,
+         "poles": 136,
+         "box_failed": 116,
          "breakouts": 20,
          "rise2_failed": 5,
          "no_pullback": 6,
@@ -15132,7 +15172,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": -35.117
+        "buy_hold_pct": -37.4711
        },
        "returns_pct": [
         -0.3149455495514047,
@@ -15292,9 +15332,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 2234.31,
-        "atr": 9.0255235,
+        "last_bar": "2026-11-09 05:00",
+        "close": 2128.01,
+        "atr": 19.03100779,
         "phase": "scan",
         "dir": "long",
         "phase_ko": "대기",
@@ -15306,7 +15346,7 @@
        "bars": 8760,
        "dir": "short",
        "stats": {
-        "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-09 06:00 ~ 2026-11-09 05:00",
         "days": 364,
         "trades": 10,
         "wins": 2,
@@ -15344,7 +15384,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": -35.117
+        "buy_hold_pct": -37.4711
        },
        "returns_pct": [
         -0.4592750180019244,
@@ -15507,9 +15547,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 2234.31,
-        "atr": 9.0255235,
+        "last_bar": "2026-11-09 05:00",
+        "close": 2128.01,
+        "atr": 19.03100779,
         "phase": "scan",
         "dir": "short",
         "phase_ko": "대기",
@@ -15521,7 +15561,7 @@
        "bars": 8760,
        "dir": "long",
        "stats": {
-        "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-09 07:00 ~ 2026-11-09 06:00",
         "days": 364,
         "trades": 8,
         "wins": 1,
@@ -15541,8 +15581,8 @@
         "avg_mfe_pct": 1.4918,
         "avg_giveback_pct": 2.0681,
         "counts": {
-         "poles": 121,
-         "box_failed": 104,
+         "poles": 119,
+         "box_failed": 102,
          "breakouts": 17,
          "rise2_failed": 5,
          "no_pullback": 3,
@@ -15559,7 +15599,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": -49.9096
+        "buy_hold_pct": -52.4494
        },
        "returns_pct": [
         -1.1291519175200977,
@@ -15720,9 +15760,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 1.1631,
-        "atr": 0.00783755,
+        "last_bar": "2026-11-09 06:00",
+        "close": 1.091,
+        "atr": 0.01222,
         "phase": "scan",
         "dir": "long",
         "phase_ko": "대기",
@@ -15734,7 +15774,7 @@
        "bars": 8760,
        "dir": "short",
        "stats": {
-        "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-09 07:00 ~ 2026-11-09 06:00",
         "days": 364,
         "trades": 8,
         "wins": 3,
@@ -15756,7 +15796,7 @@
         "counts": {
          "poles": 116,
          "box_failed": 97,
-         "breakouts": 18,
+         "breakouts": 19,
          "rise2_failed": 4,
          "no_pullback": 5,
          "zone_lost": 1,
@@ -15772,7 +15812,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": -49.9096
+        "buy_hold_pct": -52.4494
        },
        "returns_pct": [
         -1.1103280747756787,
@@ -15933,25 +15973,30 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 1.1631,
-        "atr": 0.00783755,
-        "phase": "box",
+        "last_bar": "2026-11-09 06:00",
+        "close": 1.091,
+        "atr": 0.01222,
+        "phase": "pullback",
         "dir": "short",
-        "phase_ko": "횡보 중",
+        "phase_ko": "조정 중 — 확인 봉 대기",
         "position": "flat",
-        "zone_lo": 1.1486,
+        "zone_lo": 1.1457,
         "zone_hi": 1.1814,
         "pole_date": "2026-11-05 15:00",
         "box_date": "2026-11-07 03:00",
-        "action": "횡보 중(1.149~1.181) — 종가가 1.149 을 넘으면 돌파. 되돌림 50% 넘으면 무효"
+        "bars_left": 39,
+        "rise2_date": "2026-11-08 21:00",
+        "rise2_high": 1.0912,
+        "units_if_fill_at_zone_edge": 2801.1204481792665,
+        "notional_pct_if_fill": 32.0924,
+        "action": "조정 중 — 지지 구간 1.146~1.181 에서 음봉 확인 봉이 닫히면 그 종가에 매도(숏), 손절 1.181 (남은 39봉)"
        }
       },
       "TRX/long": {
        "bars": 8760,
        "dir": "long",
        "stats": {
-        "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-09 07:00 ~ 2026-11-09 06:00",
         "days": 364,
         "trades": 4,
         "wins": 1,
@@ -15971,8 +16016,8 @@
         "avg_mfe_pct": 0.4651,
         "avg_giveback_pct": 0.7166,
         "counts": {
-         "poles": 71,
-         "box_failed": 57,
+         "poles": 70,
+         "box_failed": 56,
          "breakouts": 14,
          "rise2_failed": 3,
          "no_pullback": 6,
@@ -15989,7 +16034,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": 10.0697
+        "buy_hold_pct": 9.1881
        },
        "returns_pct": [
         -0.9041980739589437,
@@ -16117,9 +16162,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 0.32071,
-        "atr": 0.00054307,
+        "last_bar": "2026-11-09 06:00",
+        "close": 0.31658,
+        "atr": 0.00060822,
         "phase": "scan",
         "dir": "long",
         "phase_ko": "대기",
@@ -16131,7 +16176,7 @@
        "bars": 8760,
        "dir": "short",
        "stats": {
-        "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-09 07:00 ~ 2026-11-09 06:00",
         "days": 364,
         "trades": 5,
         "wins": 2,
@@ -16169,7 +16214,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": 10.0697
+        "buy_hold_pct": 9.1881
        },
        "returns_pct": [
         0.9020597785359442,
@@ -16327,9 +16372,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 0.32071,
-        "atr": 0.00054307,
+        "last_bar": "2026-11-09 06:00",
+        "close": 0.31658,
+        "atr": 0.00060822,
         "phase": "scan",
         "dir": "short",
         "phase_ko": "대기",
@@ -16341,7 +16386,7 @@
        "bars": 8760,
        "dir": "long",
        "stats": {
-        "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-09 07:00 ~ 2026-11-09 06:00",
         "days": 364,
         "trades": 4,
         "wins": 1,
@@ -16379,7 +16424,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": -31.5075
+        "buy_hold_pct": -32.6715
        },
        "returns_pct": [
         -0.10061620001699977,
@@ -16507,9 +16552,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 10.754,
-        "atr": 0.07640029,
+        "last_bar": "2026-11-09 06:00",
+        "close": 10.343,
+        "atr": 0.11246904,
         "phase": "scan",
         "dir": "long",
         "phase_ko": "대기",
@@ -16521,7 +16566,7 @@
        "bars": 8760,
        "dir": "short",
        "stats": {
-        "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-09 07:00 ~ 2026-11-09 06:00",
         "days": 364,
         "trades": 7,
         "wins": 5,
@@ -16541,8 +16586,8 @@
         "avg_mfe_pct": 2.0578,
         "avg_giveback_pct": 0.841,
         "counts": {
-         "poles": 97,
-         "box_failed": 81,
+         "poles": 98,
+         "box_failed": 82,
          "breakouts": 16,
          "rise2_failed": 3,
          "no_pullback": 4,
@@ -16559,7 +16604,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": -31.5075
+        "buy_hold_pct": -32.6715
        },
        "returns_pct": [
         0.9428336666434188,
@@ -16719,9 +16764,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 10.754,
-        "atr": 0.07640029,
+        "last_bar": "2026-11-09 06:00",
+        "close": 10.343,
+        "atr": 0.11246904,
         "phase": "scan",
         "dir": "short",
         "phase_ko": "대기",
@@ -16733,7 +16778,7 @@
        "bars": 8760,
        "dir": "long",
        "stats": {
-        "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-09 07:00 ~ 2026-11-09 06:00",
         "days": 364,
         "trades": 6,
         "wins": 0,
@@ -16771,7 +16816,7 @@
          "wins": 0,
          "net_pct": -1.144
         },
-        "buy_hold_pct": -60.342
+        "buy_hold_pct": -60.7586
        },
        "returns_pct": [
         -0.21563952754349464,
@@ -16960,9 +17005,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 0.07119,
-        "atr": 0.0003953,
+        "last_bar": "2026-11-09 06:00",
+        "close": 0.0687,
+        "atr": 0.00069876,
         "phase": "scan",
         "dir": "long",
         "phase_ko": "대기",
@@ -16974,7 +17019,7 @@
        "bars": 8760,
        "dir": "short",
        "stats": {
-        "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
+        "period": "2025-11-09 07:00 ~ 2026-11-09 06:00",
         "days": 364,
         "trades": 7,
         "wins": 6,
@@ -17012,7 +17057,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": -60.342
+        "buy_hold_pct": -60.7586
        },
        "returns_pct": [
         -0.6994284567783915,
@@ -17172,9 +17217,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-08 05:00",
-        "close": 0.07119,
-        "atr": 0.0003953,
+        "last_bar": "2026-11-09 06:00",
+        "close": 0.0687,
+        "atr": 0.00069876,
         "phase": "pullback",
         "dir": "short",
         "phase_ko": "조정 중 — 확인 봉 대기",
@@ -17183,12 +17228,12 @@
         "zone_hi": 0.07214,
         "pole_date": "2026-11-05 15:00",
         "box_date": "2026-11-07 03:00",
-        "bars_left": 40,
+        "bars_left": 15,
         "rise2_date": "2026-11-07 21:00",
         "rise2_high": 0.0708,
         "units_if_fill_at_zone_edge": 192307.69230769502,
         "notional_pct_if_fill": 100.0,
-        "action": "조정 중 — 지지 구간 0.07162~0.07214 에서 음봉 확인 봉이 닫히면 그 종가에 매도(숏), 손절 0.07214 (남은 40봉)"
+        "action": "조정 중 — 지지 구간 0.07162~0.07214 에서 음봉 확인 봉이 닫히면 그 종가에 매도(숏), 손절 0.07214 (남은 15봉)"
        }
       }
      },
@@ -17208,14 +17253,14 @@
        "XRP/short"
       ],
       "stats": {
-       "period": "2025-11-08 06:00 ~ 2026-11-08 05:00",
-       "days": 364,
+       "period": "2025-11-09 06:00 ~ 2026-11-09 06:00",
+       "days": 365,
        "trades": 80,
        "wins": 29,
        "win_rate_pct": 36.25,
        "net_pct": -0.9657,
        "realized_net_pct": -0.9657,
-       "cagr_pct": -0.9683,
+       "cagr_pct": -0.9657,
        "max_drawdown_pct": -12.0926,
        "profit_factor": 0.9705,
        "avg_r": -0.0068,
@@ -17228,9 +17273,9 @@
        "avg_mfe_pct": 1.5399,
        "avg_giveback_pct": 1.2851,
        "counts": {
-        "poles": 1370,
-        "box_failed": 1134,
-        "breakouts": 235,
+        "poles": 1366,
+        "box_failed": 1130,
+        "breakouts": 236,
         "rise2_failed": 62,
         "no_pullback": 63,
         "zone_lost": 26,
@@ -17373,12 +17418,12 @@
   "ok": true,
   "markets": 18,
   "upbit": {
-   "portfolio_net_pct": -9.6694,
-   "cagr_pct": -9.6694,
+   "portfolio_net_pct": -9.2836,
+   "cagr_pct": -9.2836,
    "max_drawdown_pct": -12.762,
-   "trades": 24,
-   "win_rate_pct": 12.5,
-   "profit_factor": 0.3306,
+   "trades": 23,
+   "win_rate_pct": 13.0435,
+   "profit_factor": 0.3406,
    "phases": {
     "BTC/long": "scan",
     "ETH/long": "scan",
@@ -17402,20 +17447,20 @@
      "forward_net_pct": -2.7794
     },
     "zone_limit": {
-     "portfolio_net_pct": -6.3756,
-     "cagr_pct": -6.3756,
+     "portfolio_net_pct": -5.3482,
+     "cagr_pct": -5.3482,
      "max_drawdown_pct": -12.2316,
-     "trades": 33,
-     "win_rate_pct": 12.1212,
+     "trades": 32,
+     "win_rate_pct": 12.5,
      "forward_trades": 3,
      "forward_net_pct": -2.8062
     },
     "target_2r": {
-     "portfolio_net_pct": -7.8263,
-     "cagr_pct": -7.8263,
+     "portfolio_net_pct": -9.5518,
+     "cagr_pct": -9.5518,
      "max_drawdown_pct": -11.4148,
-     "trades": 24,
-     "win_rate_pct": 16.6667,
+     "trades": 23,
+     "win_rate_pct": 13.0435,
      "forward_trades": 2,
      "forward_net_pct": -1.2219
     }
@@ -17423,18 +17468,18 @@
   },
   "okx": {
    "portfolio_net_pct": 3.9512,
-   "cagr_pct": 3.9623,
+   "cagr_pct": 3.9512,
    "max_drawdown_pct": -15.9864,
    "trades": 79,
    "win_rate_pct": 31.6456,
    "profit_factor": 1.1179,
    "phases": {
     "BTC/long": "scan",
-    "BTC/short": "rise2",
+    "BTC/short": "pullback",
     "ETH/long": "scan",
     "ETH/short": "scan",
     "XRP/long": "scan",
-    "XRP/short": "box",
+    "XRP/short": "pullback",
     "TRX/long": "scan",
     "TRX/short": "scan",
     "LINK/long": "scan",
@@ -17444,23 +17489,25 @@
    },
    "open": [],
    "waiting_entry": [
+    "BTC/short",
+    "XRP/short",
     "DOGE/short"
    ],
    "forward_trades": 1,
    "forward_net_pct": -1.144,
    "variants": {
     "no_vol": {
-     "portfolio_net_pct": -26.1935,
-     "cagr_pct": -26.2551,
+     "portfolio_net_pct": -27.2012,
+     "cagr_pct": -27.2012,
      "max_drawdown_pct": -42.487,
-     "trades": 298,
-     "win_rate_pct": 25.8389,
-     "forward_trades": 11,
-     "forward_net_pct": -2.4295
+     "trades": 299,
+     "win_rate_pct": 26.4214,
+     "forward_trades": 12,
+     "forward_net_pct": -1.4204
     },
     "zone_limit": {
-     "portfolio_net_pct": 4.5631,
-     "cagr_pct": 4.5759,
+     "portfolio_net_pct": 8.1767,
+     "cagr_pct": 8.1767,
      "max_drawdown_pct": -14.5237,
      "trades": 116,
      "win_rate_pct": 31.8966,
@@ -17469,7 +17516,7 @@
     },
     "target_2r": {
      "portfolio_net_pct": -0.9657,
-     "cagr_pct": -0.9683,
+     "cagr_pct": -0.9657,
      "max_drawdown_pct": -12.0926,
      "trades": 80,
      "win_rate_pct": 36.25,
