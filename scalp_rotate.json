@@ -6,7 +6,7 @@
   "fixed": "2026-11-08",
   "forward_from": "2026-11-08",
   "method": "P34 보조: 60분봉만(되돌림=60분 VWAP 지정가+평균회귀 지정가, 돌파=60분 20봉 돌파) 같은 교대. rev_only_pct 가 '60분 되돌림 고정'",
-  "next_pick": "brk",
+  "next_pick": "rev",
   "backtest": {
    "days": 25,
    "net_pct": -45.014,
@@ -16,11 +16,11 @@
    "picked_rev": 17
   },
   "forward": {
-   "days": 1,
-   "net_pct": -54.551,
+   "days": 2,
+   "net_pct": -61.09,
    "plus_days": 0,
-   "rev_only_pct": -54.551,
-   "brk_only_pct": 2.004,
+   "rev_only_pct": -50.842,
+   "brk_only_pct": -4.535,
    "picked_rev": 1
   },
   "forward_days": [
@@ -30,12 +30,19 @@
     "net_pct": -54.5513,
     "rev_pct": -54.5513,
     "brk_pct": 2.004
+   },
+   {
+    "eval_day": "2026-11-09",
+    "pick": "brk",
+    "net_pct": -6.539,
+    "rev_pct": 3.7095,
+    "brk_pct": -6.539
    }
   ]
  },
  "method": "전날 18시장 합계가 큰 묶음(되돌림=30·60분 VWAP 지정가+평균회귀 지정가, 돌파=30·60분 20봉 돌파; 같으면 되돌림)의 오늘 합계",
- "date": "2026-11-09",
- "next_pick": "brk",
+ "date": "2026-11-10",
+ "next_pick": "rev",
  "backtest": {
   "days": 23,
   "net_pct": 101.126,
@@ -45,11 +52,11 @@
   "picked_rev": 16
  },
  "forward": {
-  "days": 3,
-  "net_pct": -103.477,
+  "days": 4,
+  "net_pct": -125.731,
   "plus_days": 1,
-  "rev_only_pct": -89.541,
-  "brk_only_pct": 7.699,
+  "rev_only_pct": -55.845,
+  "brk_only_pct": -14.556,
   "picked_rev": 2
  },
  "forward_days": [
@@ -73,6 +80,13 @@
    "net_pct": -108.906,
    "rev_pct": -108.906,
    "brk_pct": 24.5206
+  },
+  {
+   "eval_day": "2026-11-09",
+   "pick": "brk",
+   "net_pct": -22.2548,
+   "rev_pct": 33.6963,
+   "brk_pct": -22.2548
   }
  ],
  "min_forward_days": 14
