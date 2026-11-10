@@ -1,6 +1,6 @@
 {
- "date": "2026-11-10",
- "generated_at_utc": "2026-11-10T07:23:14Z",
+ "date": "2026-11-11",
+ "generated_at_utc": "2026-11-10T15:20:45Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -81,8 +81,8 @@
   "bar_errors": 0,
   "stale_codes": 0,
   "by_source": {
-   "yahoo+naver_api": 68,
-   "yahoo": 238
+   "yahoo": 1,
+   "yahoo+naver_api": 305
   },
   "skipped_days": [
    "2026-10-05"
@@ -343,7 +343,7 @@
   ]
  },
  "signal_date": "2026-11-10",
- "signals_frozen": false,
+ "signals_frozen": true,
  "frozen_dates": [
   "2026-10-06",
   "2026-10-07",
@@ -368,7 +368,8 @@
   "2026-11-04",
   "2026-11-05",
   "2026-11-06",
-  "2026-11-09"
+  "2026-11-09",
+  "2026-11-10"
  ],
  "variants": {
   "base": {
@@ -381,14 +382,14 @@
    "avg_loss_pct": -7.3,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": 2.11,
-   "equity_final": 10210663,
+   "total_return_pct": 0.88,
+   "equity_final": 10088183,
    "max_drawdown_pct": 10.79,
    "avg_hold_days": 4.18,
    "skipped": {
     "gap": 0,
     "limit": 11,
-    "cooldown": 2,
+    "cooldown": 0,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -437,7 +438,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": 2.11
+    "2026": 0.88
    },
    "open_positions": [
     {
@@ -450,8 +451,8 @@
      "stop": 180867.98,
      "shares": 6,
      "bars_held": 17,
-     "last_close": 203000.0,
-     "unrealized_pct": 4.38
+     "last_close": 204500.0,
+     "unrealized_pct": 5.15
     },
     {
      "code": "267850",
@@ -463,8 +464,8 @@
      "stop": 8964.11,
      "shares": 132,
      "bars_held": 5,
-     "last_close": 17870.0,
-     "unrealized_pct": 85.4
+     "last_close": 17280.0,
+     "unrealized_pct": 79.27
     },
     {
      "code": "259960",
@@ -476,8 +477,8 @@
      "stop": 194953.11,
      "shares": 6,
      "bars_held": 4,
-     "last_close": 216500.0,
-     "unrealized_pct": 3.28
+     "last_close": 205500.0,
+     "unrealized_pct": -1.97
     },
     {
      "code": "128940",
@@ -489,8 +490,8 @@
      "stop": 414625.15,
      "shares": 2,
      "bars_held": 3,
-     "last_close": 483500.0,
-     "unrealized_pct": 8.45
+     "last_close": 489000.0,
+     "unrealized_pct": 9.68
     },
     {
      "code": "326030",
@@ -502,8 +503,8 @@
      "stop": 80686.33,
      "shares": 14,
      "bars_held": 3,
-     "last_close": 87400.0,
-     "unrealized_pct": 0.74
+     "last_close": 87500.0,
+     "unrealized_pct": 0.85
     }
    ]
   },
@@ -517,14 +518,14 @@
    "avg_loss_pct": -7.12,
    "payoff": 0.92,
    "profit_factor": 0.04,
-   "total_return_pct": -8.82,
-   "equity_final": 9118022,
+   "total_return_pct": -9.62,
+   "equity_final": 9038122,
    "max_drawdown_pct": 16.25,
    "avg_hold_days": 4.26,
    "skipped": {
     "gap": 0,
     "limit": 54,
-    "cooldown": 4,
+    "cooldown": 0,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -583,7 +584,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -8.82
+    "2026": -9.62
    },
    "open_positions": [
     {
@@ -596,8 +597,8 @@
      "stop": 8964.11,
      "shares": 125,
      "bars_held": 5,
-     "last_close": 17870.0,
-     "unrealized_pct": 85.4
+     "last_close": 17280.0,
+     "unrealized_pct": 79.27
     },
     {
      "code": "015760",
@@ -609,8 +610,8 @@
      "stop": 28729.93,
      "shares": 39,
      "bars_held": 4,
-     "last_close": 30600.0,
-     "unrealized_pct": -0.95
+     "last_close": 30550.0,
+     "unrealized_pct": -1.11
     },
     {
      "code": "035420",
@@ -622,8 +623,8 @@
      "stop": 176763.7,
      "shares": 6,
      "bars_held": 2,
-     "last_close": 193000.0,
-     "unrealized_pct": 1.54
+     "last_close": 192300.0,
+     "unrealized_pct": 1.17
     }
    ]
   },
@@ -637,14 +638,14 @@
    "avg_loss_pct": -6.87,
    "payoff": 0.62,
    "profit_factor": 0.06,
-   "total_return_pct": 3.0,
-   "equity_final": 10300277,
+   "total_return_pct": 1.63,
+   "equity_final": 10162817,
    "max_drawdown_pct": 9.48,
    "avg_hold_days": 4.17,
    "skipped": {
     "gap": 0,
     "limit": 10,
-    "cooldown": 1,
+    "cooldown": 0,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -698,7 +699,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": 3.0
+    "2026": 1.63
    },
    "open_positions": [
     {
@@ -711,8 +712,8 @@
      "stop": 8964.11,
      "shares": 134,
      "bars_held": 5,
-     "last_close": 17870.0,
-     "unrealized_pct": 85.4
+     "last_close": 17280.0,
+     "unrealized_pct": 79.27
     },
     {
      "code": "259960",
@@ -724,8 +725,8 @@
      "stop": 194953.11,
      "shares": 6,
      "bars_held": 4,
-     "last_close": 216500.0,
-     "unrealized_pct": 3.28
+     "last_close": 205500.0,
+     "unrealized_pct": -1.97
     },
     {
      "code": "128940",
@@ -737,8 +738,8 @@
      "stop": 414625.15,
      "shares": 2,
      "bars_held": 3,
-     "last_close": 483500.0,
-     "unrealized_pct": 8.45
+     "last_close": 489000.0,
+     "unrealized_pct": 9.68
     },
     {
      "code": "326030",
@@ -750,8 +751,8 @@
      "stop": 80686.33,
      "shares": 15,
      "bars_held": 3,
-     "last_close": 87400.0,
-     "unrealized_pct": 0.74
+     "last_close": 87500.0,
+     "unrealized_pct": 0.85
     },
     {
      "code": "035420",
@@ -763,8 +764,8 @@
      "stop": 176763.7,
      "shares": 7,
      "bars_held": 2,
-     "last_close": 193000.0,
-     "unrealized_pct": 1.54
+     "last_close": 192300.0,
+     "unrealized_pct": 1.17
     }
    ]
   },
@@ -778,14 +779,14 @@
    "avg_loss_pct": -7.22,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": 6.3,
-   "equity_final": 10629670,
+   "total_return_pct": 3.82,
+   "equity_final": 10382440,
    "max_drawdown_pct": 16.49,
    "avg_hold_days": 3,
    "skipped": {
     "gap": 0,
     "limit": 0,
-    "cooldown": 1,
+    "cooldown": 0,
     "size": 17,
     "no_bar": 0,
     "pattern": 0
@@ -834,7 +835,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": 6.3
+    "2026": 3.82
    },
    "open_positions": [
     {
@@ -847,8 +848,8 @@
      "stop": 180867.98,
      "shares": 13,
      "bars_held": 17,
-     "last_close": 203000.0,
-     "unrealized_pct": 4.38
+     "last_close": 204500.0,
+     "unrealized_pct": 5.15
     },
     {
      "code": "267850",
@@ -860,8 +861,8 @@
      "stop": 8964.11,
      "shares": 247,
      "bars_held": 5,
-     "last_close": 17870.0,
-     "unrealized_pct": 85.4
+     "last_close": 17280.0,
+     "unrealized_pct": 79.27
     },
     {
      "code": "259960",
@@ -873,8 +874,8 @@
      "stop": 194953.11,
      "shares": 11,
      "bars_held": 4,
-     "last_close": 216500.0,
-     "unrealized_pct": 3.28
+     "last_close": 205500.0,
+     "unrealized_pct": -1.97
     }
    ]
   },
@@ -888,14 +889,14 @@
    "avg_loss_pct": -7.21,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": 5.47,
-   "equity_final": 10546847,
+   "total_return_pct": 4.12,
+   "equity_final": 10412017,
    "max_drawdown_pct": 7.59,
    "avg_hold_days": 5,
    "skipped": {
     "gap": 0,
     "limit": 2,
-    "cooldown": 2,
+    "cooldown": 0,
     "size": 0,
     "no_bar": 0,
     "pattern": 0
@@ -939,7 +940,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": 5.47
+    "2026": 4.12
    },
    "open_positions": [
     {
@@ -952,8 +953,8 @@
      "stop": 180867.98,
      "shares": 7,
      "bars_held": 17,
-     "last_close": 203000.0,
-     "unrealized_pct": 4.38
+     "last_close": 204500.0,
+     "unrealized_pct": 5.15
     },
     {
      "code": "267850",
@@ -965,8 +966,8 @@
      "stop": 8964.11,
      "shares": 137,
      "bars_held": 5,
-     "last_close": 17870.0,
-     "unrealized_pct": 85.4
+     "last_close": 17280.0,
+     "unrealized_pct": 79.27
     },
     {
      "code": "259960",
@@ -978,8 +979,8 @@
      "stop": 194953.11,
      "shares": 6,
      "bars_held": 4,
-     "last_close": 216500.0,
-     "unrealized_pct": 3.28
+     "last_close": 205500.0,
+     "unrealized_pct": -1.97
     },
     {
      "code": "326030",
@@ -991,8 +992,8 @@
      "stop": 80686.33,
      "shares": 15,
      "bars_held": 3,
-     "last_close": 87400.0,
-     "unrealized_pct": 0.74
+     "last_close": 87500.0,
+     "unrealized_pct": 0.85
     },
     {
      "code": "0126Z0",
