@@ -1,6 +1,6 @@
 {
  "date": "2026-11-10",
- "generated_at_utc": "2026-11-09T16:59:11Z",
+ "generated_at_utc": "2026-11-10T07:23:14Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -74,15 +74,15 @@
   }
  },
  "forward": {
-  "days": 24,
+  "days": 25,
   "from": "2026-10-05",
-  "to": "2026-11-09",
-  "codes": 299,
+  "to": "2026-11-10",
+  "codes": 306,
   "bar_errors": 0,
   "stale_codes": 0,
   "by_source": {
-   "yahoo+naver_api": 298,
-   "yahoo": 1
+   "yahoo+naver_api": 68,
+   "yahoo": 238
   },
   "skipped_days": [
    "2026-10-05"
@@ -93,14 +93,257 @@
   "note": null
  },
  "signals_today": {
-  "base": [],
-  "no_sector": [],
-  "hold_10": [],
-  "risk_2": [],
-  "no_flag": []
+  "base": [
+   {
+    "code": "003490",
+    "name": "Korean Air Lines Co., Ltd.",
+    "group": "Airlines",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 32450.0,
+    "pattern_low": 25100.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 35046 이상이면 포기)",
+    "stop_plan": "max(25100, 진입가×0.93)"
+   },
+   {
+    "code": "018260",
+    "name": "SAMSUNG SDS CO., LTD.",
+    "group": "Information Technology Services",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 232500.0,
+    "pattern_low": 188000.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 251100 이상이면 포기)",
+    "stop_plan": "max(188000, 진입가×0.93)"
+   },
+   {
+    "code": "009420",
+    "name": "Hanall Biopharma Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 46700.0,
+    "pattern_low": 35100.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 50436 이상이면 포기)",
+    "stop_plan": "max(35100, 진입가×0.93)"
+   }
+  ],
+  "no_sector": [
+   {
+    "code": "180640",
+    "name": "HANJIN KAL Corp.",
+    "group": "Hotels/Resorts/Cruise lines",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 239000.0,
+    "pattern_low": 177400.0,
+    "sync_by": null,
+    "entry_plan": "내일 시가 (시가가 258120 이상이면 포기)",
+    "stop_plan": "max(177400, 진입가×0.93)"
+   },
+   {
+    "code": "003490",
+    "name": "Korean Air Lines Co., Ltd.",
+    "group": "Airlines",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 32450.0,
+    "pattern_low": 25100.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 35046 이상이면 포기)",
+    "stop_plan": "max(25100, 진입가×0.93)"
+   },
+   {
+    "code": "017670",
+    "name": "SK Telecom Co., Ltd.",
+    "group": "Wireless Telecommunications",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 81500.0,
+    "pattern_low": 70200.0,
+    "sync_by": null,
+    "entry_plan": "내일 시가 (시가가 88020 이상이면 포기)",
+    "stop_plan": "max(70200, 진입가×0.93)"
+   },
+   {
+    "code": "018260",
+    "name": "SAMSUNG SDS CO., LTD.",
+    "group": "Information Technology Services",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 232500.0,
+    "pattern_low": 188000.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 251100 이상이면 포기)",
+    "stop_plan": "max(188000, 진입가×0.93)"
+   },
+   {
+    "code": "009420",
+    "name": "Hanall Biopharma Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 46700.0,
+    "pattern_low": 35100.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 50436 이상이면 포기)",
+    "stop_plan": "max(35100, 진입가×0.93)"
+   }
+  ],
+  "hold_10": [
+   {
+    "code": "003490",
+    "name": "Korean Air Lines Co., Ltd.",
+    "group": "Airlines",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 32450.0,
+    "pattern_low": 25100.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 35046 이상이면 포기)",
+    "stop_plan": "max(25100, 진입가×0.93)"
+   },
+   {
+    "code": "018260",
+    "name": "SAMSUNG SDS CO., LTD.",
+    "group": "Information Technology Services",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 232500.0,
+    "pattern_low": 188000.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 251100 이상이면 포기)",
+    "stop_plan": "max(188000, 진입가×0.93)"
+   },
+   {
+    "code": "009420",
+    "name": "Hanall Biopharma Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 46700.0,
+    "pattern_low": 35100.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 50436 이상이면 포기)",
+    "stop_plan": "max(35100, 진입가×0.93)"
+   }
+  ],
+  "risk_2": [
+   {
+    "code": "003490",
+    "name": "Korean Air Lines Co., Ltd.",
+    "group": "Airlines",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 32450.0,
+    "pattern_low": 25100.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 35046 이상이면 포기)",
+    "stop_plan": "max(25100, 진입가×0.93)"
+   },
+   {
+    "code": "018260",
+    "name": "SAMSUNG SDS CO., LTD.",
+    "group": "Information Technology Services",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 232500.0,
+    "pattern_low": 188000.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 251100 이상이면 포기)",
+    "stop_plan": "max(188000, 진입가×0.93)"
+   },
+   {
+    "code": "009420",
+    "name": "Hanall Biopharma Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 46700.0,
+    "pattern_low": 35100.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 50436 이상이면 포기)",
+    "stop_plan": "max(35100, 진입가×0.93)"
+   }
+  ],
+  "no_flag": [
+   {
+    "code": "003490",
+    "name": "Korean Air Lines Co., Ltd.",
+    "group": "Airlines",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 32450.0,
+    "pattern_low": 25100.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 35046 이상이면 포기)",
+    "stop_plan": "max(25100, 진입가×0.93)"
+   },
+   {
+    "code": "018260",
+    "name": "SAMSUNG SDS CO., LTD.",
+    "group": "Information Technology Services",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 232500.0,
+    "pattern_low": 188000.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 251100 이상이면 포기)",
+    "stop_plan": "max(188000, 진입가×0.93)"
+   },
+   {
+    "code": "009420",
+    "name": "Hanall Biopharma Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 46700.0,
+    "pattern_low": 35100.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 50436 이상이면 포기)",
+    "stop_plan": "max(35100, 진입가×0.93)"
+   }
+  ]
  },
- "signal_date": "2026-11-09",
- "signals_frozen": true,
+ "signal_date": "2026-11-10",
+ "signals_frozen": false,
  "frozen_dates": [
   "2026-10-06",
   "2026-10-07",
@@ -130,7 +373,7 @@
  "variants": {
   "base": {
    "label": "동조 업종 + 패턴 돌파 (기본)",
-   "signals": 28,
+   "signals": 31,
    "trades": 11,
    "wins": 0,
    "win_rate": 0.0,
@@ -138,14 +381,14 @@
    "avg_loss_pct": -7.3,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -2.36,
-   "equity_final": 9764183,
+   "total_return_pct": 2.11,
+   "equity_final": 10210663,
    "max_drawdown_pct": 10.79,
    "avg_hold_days": 4.18,
    "skipped": {
     "gap": 0,
     "limit": 11,
-    "cooldown": 0,
+    "cooldown": 2,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -194,7 +437,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -2.36
+    "2026": 2.11
    },
    "open_positions": [
     {
@@ -206,9 +449,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 6,
-     "bars_held": 16,
-     "last_close": 211000.0,
-     "unrealized_pct": 8.49
+     "bars_held": 17,
+     "last_close": 203000.0,
+     "unrealized_pct": 4.38
     },
     {
      "code": "267850",
@@ -219,9 +462,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 132,
-     "bars_held": 4,
-     "last_close": 14130.0,
-     "unrealized_pct": 46.59
+     "bars_held": 5,
+     "last_close": 17870.0,
+     "unrealized_pct": 85.4
     },
     {
      "code": "259960",
@@ -232,9 +475,9 @@
      "entry": 209627.0,
      "stop": 194953.11,
      "shares": 6,
-     "bars_held": 3,
-     "last_close": 218500.0,
-     "unrealized_pct": 4.23
+     "bars_held": 4,
+     "last_close": 216500.0,
+     "unrealized_pct": 3.28
     },
     {
      "code": "128940",
@@ -245,9 +488,9 @@
      "entry": 445833.5,
      "stop": 414625.15,
      "shares": 2,
-     "bars_held": 2,
-     "last_close": 478500.0,
-     "unrealized_pct": 7.33
+     "bars_held": 3,
+     "last_close": 483500.0,
+     "unrealized_pct": 8.45
     },
     {
      "code": "326030",
@@ -258,30 +501,30 @@
      "entry": 86759.5,
      "stop": 80686.33,
      "shares": 14,
-     "bars_held": 2,
-     "last_close": 87200.0,
-     "unrealized_pct": 0.51
+     "bars_held": 3,
+     "last_close": 87400.0,
+     "unrealized_pct": 0.74
     }
    ]
   },
   "no_sector": {
    "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
-   "signals": 81,
-   "trades": 22,
+   "signals": 86,
+   "trades": 23,
    "wins": 1,
-   "win_rate": 4.55,
+   "win_rate": 4.35,
    "avg_win_pct": 6.57,
-   "avg_loss_pct": -7.32,
-   "payoff": 0.89,
+   "avg_loss_pct": -7.12,
+   "payoff": 0.92,
    "profit_factor": 0.04,
-   "total_return_pct": -14.04,
-   "equity_final": 8595625,
+   "total_return_pct": -8.82,
+   "equity_final": 9118022,
    "max_drawdown_pct": 16.25,
-   "avg_hold_days": 3.68,
+   "avg_hold_days": 4.26,
    "skipped": {
     "gap": 0,
     "limit": 54,
-    "cooldown": 0,
+    "cooldown": 4,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -303,9 +546,9 @@
      "pnl_krw": -401380
     },
     "box": {
-     "n": 9,
+     "n": 10,
      "wins": 0,
-     "pnl_krw": -820703
+     "pnl_krw": -853945
     }
    },
    "by_sync": {
@@ -315,9 +558,9 @@
      "pnl_krw": -463564
     },
     "none": {
-     "n": 17,
+     "n": 18,
      "wins": 1,
-     "pnl_krw": -1419723
+     "pnl_krw": -1452965
     }
    },
    "by_exit": {
@@ -327,35 +570,22 @@
      "pnl_krw": -1966506
     },
     "low10": {
-     "n": 1,
+     "n": 2,
      "wins": 1,
-     "pnl_krw": 83219
+     "pnl_krw": 49977
     }
    },
    "by_year": {
     "2026": {
-     "n": 22,
+     "n": 23,
      "wins": 1,
-     "pnl_krw": -1883287
+     "pnl_krw": -1916529
     }
    },
    "yearly_return_pct": {
-    "2026": -14.04
+    "2026": -8.82
    },
    "open_positions": [
-    {
-     "code": "033780",
-     "name": "KT & G Corporation",
-     "group": "Tobacco",
-     "pattern": "box",
-     "entry_date": "2026-10-16",
-     "entry": 187761.6,
-     "stop": 174618.29,
-     "shares": 6,
-     "bars_held": 17,
-     "last_close": 185300.0,
-     "unrealized_pct": -1.31
-    },
     {
      "code": "267850",
      "name": "Asiana IDT Inc.",
@@ -365,9 +595,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 125,
-     "bars_held": 4,
-     "last_close": 14130.0,
-     "unrealized_pct": 46.59
+     "bars_held": 5,
+     "last_close": 17870.0,
+     "unrealized_pct": 85.4
     },
     {
      "code": "015760",
@@ -378,9 +608,9 @@
      "entry": 30892.4,
      "stop": 28729.93,
      "shares": 39,
-     "bars_held": 3,
-     "last_close": 30000.0,
-     "unrealized_pct": -2.89
+     "bars_held": 4,
+     "last_close": 30600.0,
+     "unrealized_pct": -0.95
     },
     {
      "code": "035420",
@@ -391,15 +621,15 @@
      "entry": 190068.5,
      "stop": 176763.7,
      "shares": 6,
-     "bars_held": 1,
-     "last_close": 184700.0,
-     "unrealized_pct": -2.82
+     "bars_held": 2,
+     "last_close": 193000.0,
+     "unrealized_pct": 1.54
     }
    ]
   },
   "hold_10": {
    "label": "동조 + 패턴, 보유 10일",
-   "signals": 28,
+   "signals": 31,
    "trades": 12,
    "wins": 1,
    "win_rate": 8.33,
@@ -407,14 +637,14 @@
    "avg_loss_pct": -6.87,
    "payoff": 0.62,
    "profit_factor": 0.06,
-   "total_return_pct": -2.6,
-   "equity_final": 9740017,
+   "total_return_pct": 3.0,
+   "equity_final": 10300277,
    "max_drawdown_pct": 9.48,
    "avg_hold_days": 4.17,
    "skipped": {
     "gap": 0,
     "limit": 10,
-    "cooldown": 0,
+    "cooldown": 1,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -468,7 +698,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -2.6
+    "2026": 3.0
    },
    "open_positions": [
     {
@@ -480,9 +710,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 134,
-     "bars_held": 4,
-     "last_close": 14130.0,
-     "unrealized_pct": 46.59
+     "bars_held": 5,
+     "last_close": 17870.0,
+     "unrealized_pct": 85.4
     },
     {
      "code": "259960",
@@ -493,9 +723,9 @@
      "entry": 209627.0,
      "stop": 194953.11,
      "shares": 6,
-     "bars_held": 3,
-     "last_close": 218500.0,
-     "unrealized_pct": 4.23
+     "bars_held": 4,
+     "last_close": 216500.0,
+     "unrealized_pct": 3.28
     },
     {
      "code": "128940",
@@ -506,9 +736,9 @@
      "entry": 445833.5,
      "stop": 414625.15,
      "shares": 2,
-     "bars_held": 2,
-     "last_close": 478500.0,
-     "unrealized_pct": 7.33
+     "bars_held": 3,
+     "last_close": 483500.0,
+     "unrealized_pct": 8.45
     },
     {
      "code": "326030",
@@ -519,9 +749,9 @@
      "entry": 86759.5,
      "stop": 80686.33,
      "shares": 15,
-     "bars_held": 2,
-     "last_close": 87200.0,
-     "unrealized_pct": 0.51
+     "bars_held": 3,
+     "last_close": 87400.0,
+     "unrealized_pct": 0.74
     },
     {
      "code": "035420",
@@ -532,15 +762,15 @@
      "entry": 190068.5,
      "stop": 176763.7,
      "shares": 7,
-     "bars_held": 1,
-     "last_close": 184700.0,
-     "unrealized_pct": -2.82
+     "bars_held": 2,
+     "last_close": 193000.0,
+     "unrealized_pct": 1.54
     }
    ]
   },
   "risk_2": {
    "label": "동조 + 패턴, 위험 2% (명목 상한 30%)",
-   "signals": 29,
+   "signals": 32,
    "trades": 9,
    "wins": 0,
    "win_rate": 0.0,
@@ -548,14 +778,14 @@
    "avg_loss_pct": -7.22,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -1.68,
-   "equity_final": 9831890,
+   "total_return_pct": 6.3,
+   "equity_final": 10629670,
    "max_drawdown_pct": 16.49,
    "avg_hold_days": 3,
    "skipped": {
     "gap": 0,
     "limit": 0,
-    "cooldown": 0,
+    "cooldown": 1,
     "size": 17,
     "no_bar": 0,
     "pattern": 0
@@ -604,7 +834,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -1.68
+    "2026": 6.3
    },
    "open_positions": [
     {
@@ -616,9 +846,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 13,
-     "bars_held": 16,
-     "last_close": 211000.0,
-     "unrealized_pct": 8.49
+     "bars_held": 17,
+     "last_close": 203000.0,
+     "unrealized_pct": 4.38
     },
     {
      "code": "267850",
@@ -629,9 +859,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 247,
-     "bars_held": 4,
-     "last_close": 14130.0,
-     "unrealized_pct": 46.59
+     "bars_held": 5,
+     "last_close": 17870.0,
+     "unrealized_pct": 85.4
     },
     {
      "code": "259960",
@@ -642,15 +872,15 @@
      "entry": 209627.0,
      "stop": 194953.11,
      "shares": 11,
-     "bars_held": 3,
-     "last_close": 218500.0,
-     "unrealized_pct": 4.23
+     "bars_held": 4,
+     "last_close": 216500.0,
+     "unrealized_pct": 3.28
     }
    ]
   },
   "no_flag": {
    "label": "동조 + 패턴, 깃발형 제외",
-   "signals": 14,
+   "signals": 17,
    "trades": 7,
    "wins": 0,
    "win_rate": 0.0,
@@ -658,14 +888,14 @@
    "avg_loss_pct": -7.21,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": 1.31,
-   "equity_final": 10130967,
+   "total_return_pct": 5.47,
+   "equity_final": 10546847,
    "max_drawdown_pct": 7.59,
    "avg_hold_days": 5,
    "skipped": {
     "gap": 0,
     "limit": 2,
-    "cooldown": 0,
+    "cooldown": 2,
     "size": 0,
     "no_bar": 0,
     "pattern": 0
@@ -709,7 +939,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": 1.31
+    "2026": 5.47
    },
    "open_positions": [
     {
@@ -721,9 +951,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 7,
-     "bars_held": 16,
-     "last_close": 211000.0,
-     "unrealized_pct": 8.49
+     "bars_held": 17,
+     "last_close": 203000.0,
+     "unrealized_pct": 4.38
     },
     {
      "code": "267850",
@@ -734,9 +964,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 137,
-     "bars_held": 4,
-     "last_close": 14130.0,
-     "unrealized_pct": 46.59
+     "bars_held": 5,
+     "last_close": 17870.0,
+     "unrealized_pct": 85.4
     },
     {
      "code": "259960",
@@ -747,9 +977,9 @@
      "entry": 209627.0,
      "stop": 194953.11,
      "shares": 6,
-     "bars_held": 3,
-     "last_close": 218500.0,
-     "unrealized_pct": 4.23
+     "bars_held": 4,
+     "last_close": 216500.0,
+     "unrealized_pct": 3.28
     },
     {
      "code": "326030",
@@ -760,9 +990,9 @@
      "entry": 86759.5,
      "stop": 80686.33,
      "shares": 15,
-     "bars_held": 2,
-     "last_close": 87200.0,
-     "unrealized_pct": 0.51
+     "bars_held": 3,
+     "last_close": 87400.0,
+     "unrealized_pct": 0.74
     },
     {
      "code": "0126Z0",
@@ -773,9 +1003,9 @@
      "entry": 344029.0,
      "stop": 319946.97,
      "shares": 3,
-     "bars_held": 2,
-     "last_close": 350500.0,
-     "unrealized_pct": 1.88
+     "bars_held": 3,
+     "last_close": 340000.0,
+     "unrealized_pct": -1.17
     }
    ]
   }
@@ -1521,6 +1751,28 @@
     "pnl_krw": -55089,
     "pnl_pct": -3.11,
     "hold_days": 20,
+    "gap": false
+   },
+   {
+    "code": "033780",
+    "name": "KT & G Corporation",
+    "group": "Tobacco",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": null,
+    "signal_date": "2026-10-15",
+    "entry_date": "2026-10-16",
+    "entry": 187761.6,
+    "stop": 174618.29,
+    "exit_date": "2026-11-10",
+    "exit": 182550.7,
+    "why": "low10",
+    "shares": 6,
+    "pnl_krw": -33242,
+    "pnl_pct": -2.95,
+    "hold_days": 17,
     "gap": false
    }
   ],
