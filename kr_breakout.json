@@ -1,6 +1,6 @@
 {
  "date": "2026-11-11",
- "generated_at_utc": "2026-11-11T07:15:29Z",
+ "generated_at_utc": "2026-11-11T14:47:52Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -77,12 +77,12 @@
   "days": 26,
   "from": "2026-10-05",
   "to": "2026-11-11",
-  "codes": 310,
+  "codes": 309,
   "bar_errors": 0,
   "stale_codes": 0,
   "by_source": {
-   "yahoo+naver_api": 69,
-   "yahoo": 241
+   "yahoo": 241,
+   "yahoo+naver_api": 68
   },
   "skipped_days": [
    "2026-10-05"
@@ -100,7 +100,7 @@
   "no_flag": []
  },
  "signal_date": "2026-11-11",
- "signals_frozen": false,
+ "signals_frozen": true,
  "frozen_dates": [
   "2026-10-06",
   "2026-10-07",
@@ -126,7 +126,8 @@
   "2026-11-05",
   "2026-11-06",
   "2026-11-09",
-  "2026-11-10"
+  "2026-11-10",
+  "2026-11-11"
  ],
  "variants": {
   "base": {
@@ -146,7 +147,7 @@
    "skipped": {
     "gap": 0,
     "limit": 14,
-    "cooldown": 3,
+    "cooldown": 0,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -269,7 +270,7 @@
    "skipped": {
     "gap": 0,
     "limit": 57,
-    "cooldown": 4,
+    "cooldown": 0,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -402,7 +403,7 @@
    "skipped": {
     "gap": 0,
     "limit": 13,
-    "cooldown": 2,
+    "cooldown": 0,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -530,7 +531,7 @@
    "skipped": {
     "gap": 0,
     "limit": 0,
-    "cooldown": 2,
+    "cooldown": 0,
     "size": 20,
     "no_bar": 0,
     "pattern": 0
@@ -627,7 +628,7 @@
    "skipped": {
     "gap": 0,
     "limit": 5,
-    "cooldown": 3,
+    "cooldown": 0,
     "size": 0,
     "no_bar": 0,
     "pattern": 0
