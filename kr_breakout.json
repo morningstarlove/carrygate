@@ -1,6 +1,6 @@
 {
  "date": "2026-11-11",
- "generated_at_utc": "2026-11-10T15:20:45Z",
+ "generated_at_utc": "2026-11-11T07:15:29Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -74,15 +74,15 @@
   }
  },
  "forward": {
-  "days": 25,
+  "days": 26,
   "from": "2026-10-05",
-  "to": "2026-11-10",
-  "codes": 306,
+  "to": "2026-11-11",
+  "codes": 310,
   "bar_errors": 0,
   "stale_codes": 0,
   "by_source": {
-   "yahoo": 1,
-   "yahoo+naver_api": 305
+   "yahoo+naver_api": 69,
+   "yahoo": 241
   },
   "skipped_days": [
    "2026-10-05"
@@ -93,257 +93,14 @@
   "note": null
  },
  "signals_today": {
-  "base": [
-   {
-    "code": "003490",
-    "name": "Korean Air Lines Co., Ltd.",
-    "group": "Airlines",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 32450.0,
-    "pattern_low": 25100.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 35046 이상이면 포기)",
-    "stop_plan": "max(25100, 진입가×0.93)"
-   },
-   {
-    "code": "018260",
-    "name": "SAMSUNG SDS CO., LTD.",
-    "group": "Information Technology Services",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 232500.0,
-    "pattern_low": 188000.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 251100 이상이면 포기)",
-    "stop_plan": "max(188000, 진입가×0.93)"
-   },
-   {
-    "code": "009420",
-    "name": "Hanall Biopharma Co., Ltd.",
-    "group": "Pharmaceuticals: Major",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 46700.0,
-    "pattern_low": 35100.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 50436 이상이면 포기)",
-    "stop_plan": "max(35100, 진입가×0.93)"
-   }
-  ],
-  "no_sector": [
-   {
-    "code": "180640",
-    "name": "HANJIN KAL Corp.",
-    "group": "Hotels/Resorts/Cruise lines",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 239000.0,
-    "pattern_low": 177400.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 258120 이상이면 포기)",
-    "stop_plan": "max(177400, 진입가×0.93)"
-   },
-   {
-    "code": "003490",
-    "name": "Korean Air Lines Co., Ltd.",
-    "group": "Airlines",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 32450.0,
-    "pattern_low": 25100.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 35046 이상이면 포기)",
-    "stop_plan": "max(25100, 진입가×0.93)"
-   },
-   {
-    "code": "017670",
-    "name": "SK Telecom Co., Ltd.",
-    "group": "Wireless Telecommunications",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 81500.0,
-    "pattern_low": 70200.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 88020 이상이면 포기)",
-    "stop_plan": "max(70200, 진입가×0.93)"
-   },
-   {
-    "code": "018260",
-    "name": "SAMSUNG SDS CO., LTD.",
-    "group": "Information Technology Services",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 232500.0,
-    "pattern_low": 188000.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 251100 이상이면 포기)",
-    "stop_plan": "max(188000, 진입가×0.93)"
-   },
-   {
-    "code": "009420",
-    "name": "Hanall Biopharma Co., Ltd.",
-    "group": "Pharmaceuticals: Major",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 46700.0,
-    "pattern_low": 35100.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 50436 이상이면 포기)",
-    "stop_plan": "max(35100, 진입가×0.93)"
-   }
-  ],
-  "hold_10": [
-   {
-    "code": "003490",
-    "name": "Korean Air Lines Co., Ltd.",
-    "group": "Airlines",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 32450.0,
-    "pattern_low": 25100.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 35046 이상이면 포기)",
-    "stop_plan": "max(25100, 진입가×0.93)"
-   },
-   {
-    "code": "018260",
-    "name": "SAMSUNG SDS CO., LTD.",
-    "group": "Information Technology Services",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 232500.0,
-    "pattern_low": 188000.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 251100 이상이면 포기)",
-    "stop_plan": "max(188000, 진입가×0.93)"
-   },
-   {
-    "code": "009420",
-    "name": "Hanall Biopharma Co., Ltd.",
-    "group": "Pharmaceuticals: Major",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 46700.0,
-    "pattern_low": 35100.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 50436 이상이면 포기)",
-    "stop_plan": "max(35100, 진입가×0.93)"
-   }
-  ],
-  "risk_2": [
-   {
-    "code": "003490",
-    "name": "Korean Air Lines Co., Ltd.",
-    "group": "Airlines",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 32450.0,
-    "pattern_low": 25100.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 35046 이상이면 포기)",
-    "stop_plan": "max(25100, 진입가×0.93)"
-   },
-   {
-    "code": "018260",
-    "name": "SAMSUNG SDS CO., LTD.",
-    "group": "Information Technology Services",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 232500.0,
-    "pattern_low": 188000.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 251100 이상이면 포기)",
-    "stop_plan": "max(188000, 진입가×0.93)"
-   },
-   {
-    "code": "009420",
-    "name": "Hanall Biopharma Co., Ltd.",
-    "group": "Pharmaceuticals: Major",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 46700.0,
-    "pattern_low": 35100.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 50436 이상이면 포기)",
-    "stop_plan": "max(35100, 진입가×0.93)"
-   }
-  ],
-  "no_flag": [
-   {
-    "code": "003490",
-    "name": "Korean Air Lines Co., Ltd.",
-    "group": "Airlines",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 32450.0,
-    "pattern_low": 25100.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 35046 이상이면 포기)",
-    "stop_plan": "max(25100, 진입가×0.93)"
-   },
-   {
-    "code": "018260",
-    "name": "SAMSUNG SDS CO., LTD.",
-    "group": "Information Technology Services",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 232500.0,
-    "pattern_low": 188000.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 251100 이상이면 포기)",
-    "stop_plan": "max(188000, 진입가×0.93)"
-   },
-   {
-    "code": "009420",
-    "name": "Hanall Biopharma Co., Ltd.",
-    "group": "Pharmaceuticals: Major",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 46700.0,
-    "pattern_low": 35100.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 50436 이상이면 포기)",
-    "stop_plan": "max(35100, 진입가×0.93)"
-   }
-  ]
+  "base": [],
+  "no_sector": [],
+  "hold_10": [],
+  "risk_2": [],
+  "no_flag": []
  },
- "signal_date": "2026-11-10",
- "signals_frozen": true,
+ "signal_date": "2026-11-11",
+ "signals_frozen": false,
  "frozen_dates": [
   "2026-10-06",
   "2026-10-07",
@@ -375,21 +132,21 @@
   "base": {
    "label": "동조 업종 + 패턴 돌파 (기본)",
    "signals": 31,
-   "trades": 11,
+   "trades": 12,
    "wins": 0,
    "win_rate": 0.0,
    "avg_win_pct": null,
-   "avg_loss_pct": -7.3,
+   "avg_loss_pct": -7.31,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": 0.88,
-   "equity_final": 10088183,
+   "total_return_pct": -3.71,
+   "equity_final": 9628988,
    "max_drawdown_pct": 10.79,
-   "avg_hold_days": 4.18,
+   "avg_hold_days": 4.25,
    "skipped": {
     "gap": 0,
-    "limit": 11,
-    "cooldown": 0,
+    "limit": 14,
+    "cooldown": 3,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -406,9 +163,9 @@
      "pnl_krw": -87356
     },
     "box": {
-     "n": 4,
+     "n": 5,
      "wins": 0,
-     "pnl_krw": -367611
+     "pnl_krw": -461276
     },
     "triangle": {
      "n": 1,
@@ -418,27 +175,27 @@
    },
    "by_sync": {
     "day": {
-     "n": 11,
+     "n": 12,
      "wins": 0,
-     "pnl_krw": -1051629
+     "pnl_krw": -1145294
     }
    },
    "by_exit": {
     "stop": {
-     "n": 11,
+     "n": 12,
      "wins": 0,
-     "pnl_krw": -1051629
+     "pnl_krw": -1145294
     }
    },
    "by_year": {
     "2026": {
-     "n": 11,
+     "n": 12,
      "wins": 0,
-     "pnl_krw": -1051629
+     "pnl_krw": -1145294
     }
    },
    "yearly_return_pct": {
-    "2026": 0.88
+    "2026": -3.71
    },
    "open_positions": [
     {
@@ -450,9 +207,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 6,
-     "bars_held": 17,
-     "last_close": 204500.0,
-     "unrealized_pct": 5.15
+     "bars_held": 18,
+     "last_close": 207000.0,
+     "unrealized_pct": 6.44
     },
     {
      "code": "267850",
@@ -463,22 +220,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 132,
-     "bars_held": 5,
-     "last_close": 17280.0,
-     "unrealized_pct": 79.27
-    },
-    {
-     "code": "259960",
-     "name": "Krafton, Inc.",
-     "group": "Packaged Software",
-     "pattern": "box",
-     "entry_date": "2026-11-05",
-     "entry": 209627.0,
-     "stop": 194953.11,
-     "shares": 6,
-     "bars_held": 4,
-     "last_close": 205500.0,
-     "unrealized_pct": -1.97
+     "bars_held": 6,
+     "last_close": 13990.0,
+     "unrealized_pct": 45.14
     },
     {
      "code": "128940",
@@ -489,9 +233,9 @@
      "entry": 445833.5,
      "stop": 414625.15,
      "shares": 2,
-     "bars_held": 3,
-     "last_close": 489000.0,
-     "unrealized_pct": 9.68
+     "bars_held": 4,
+     "last_close": 509000.0,
+     "unrealized_pct": 14.17
     },
     {
      "code": "326030",
@@ -502,39 +246,39 @@
      "entry": 86759.5,
      "stop": 80686.33,
      "shares": 14,
-     "bars_held": 3,
-     "last_close": 87500.0,
-     "unrealized_pct": 0.85
+     "bars_held": 4,
+     "last_close": 86700.0,
+     "unrealized_pct": -0.07
     }
    ]
   },
   "no_sector": {
    "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
    "signals": 86,
-   "trades": 23,
+   "trades": 24,
    "wins": 1,
-   "win_rate": 4.35,
+   "win_rate": 4.17,
    "avg_win_pct": 6.57,
-   "avg_loss_pct": -7.12,
+   "avg_loss_pct": -7.14,
    "payoff": 0.92,
    "profit_factor": 0.04,
-   "total_return_pct": -9.62,
-   "equity_final": 9038122,
+   "total_return_pct": -14.97,
+   "equity_final": 8502721,
    "max_drawdown_pct": 16.25,
-   "avg_hold_days": 4.26,
+   "avg_hold_days": 4.12,
    "skipped": {
     "gap": 0,
-    "limit": 54,
-    "cooldown": 0,
+    "limit": 57,
+    "cooldown": 4,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
    },
    "by_pattern": {
     "flag": {
-     "n": 6,
+     "n": 7,
      "wins": 1,
-     "pnl_krw": -415010
+     "pnl_krw": -504269
     },
     "cup_handle": {
      "n": 3,
@@ -559,16 +303,16 @@
      "pnl_krw": -463564
     },
     "none": {
-     "n": 18,
+     "n": 19,
      "wins": 1,
-     "pnl_krw": -1452965
+     "pnl_krw": -1542224
     }
    },
    "by_exit": {
     "stop": {
-     "n": 21,
+     "n": 22,
      "wins": 0,
-     "pnl_krw": -1966506
+     "pnl_krw": -2055765
     },
     "low10": {
      "n": 2,
@@ -578,13 +322,13 @@
    },
    "by_year": {
     "2026": {
-     "n": 23,
+     "n": 24,
      "wins": 1,
-     "pnl_krw": -1916529
+     "pnl_krw": -2005788
     }
    },
    "yearly_return_pct": {
-    "2026": -9.62
+    "2026": -14.97
    },
    "open_positions": [
     {
@@ -596,9 +340,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 125,
-     "bars_held": 5,
-     "last_close": 17280.0,
-     "unrealized_pct": 79.27
+     "bars_held": 6,
+     "last_close": 13990.0,
+     "unrealized_pct": 45.14
     },
     {
      "code": "015760",
@@ -609,9 +353,9 @@
      "entry": 30892.4,
      "stop": 28729.93,
      "shares": 39,
-     "bars_held": 4,
-     "last_close": 30550.0,
-     "unrealized_pct": -1.11
+     "bars_held": 5,
+     "last_close": 30450.0,
+     "unrealized_pct": -1.43
     },
     {
      "code": "035420",
@@ -622,30 +366,43 @@
      "entry": 190068.5,
      "stop": 176763.7,
      "shares": 6,
-     "bars_held": 2,
-     "last_close": 192300.0,
-     "unrealized_pct": 1.17
+     "bars_held": 3,
+     "last_close": 194300.0,
+     "unrealized_pct": 2.23
+    },
+    {
+     "code": "003490",
+     "name": "Korean Air Lines Co., Ltd.",
+     "group": "Airlines",
+     "pattern": "box",
+     "entry_date": "2026-11-11",
+     "entry": 32597.5,
+     "stop": 30315.67,
+     "shares": 39,
+     "bars_held": 1,
+     "last_close": 31500.0,
+     "unrealized_pct": -3.37
     }
    ]
   },
   "hold_10": {
    "label": "동조 + 패턴, 보유 10일",
    "signals": 31,
-   "trades": 12,
+   "trades": 13,
    "wins": 1,
-   "win_rate": 8.33,
+   "win_rate": 7.69,
    "avg_win_pct": 4.89,
-   "avg_loss_pct": -6.87,
+   "avg_loss_pct": -6.92,
    "payoff": 0.62,
-   "profit_factor": 0.06,
-   "total_return_pct": 1.63,
-   "equity_final": 10162817,
+   "profit_factor": 0.05,
+   "total_return_pct": -3.05,
+   "equity_final": 9695242,
    "max_drawdown_pct": 9.48,
-   "avg_hold_days": 4.17,
+   "avg_hold_days": 4.23,
    "skipped": {
     "gap": 0,
-    "limit": 10,
-    "cooldown": 0,
+    "limit": 13,
+    "cooldown": 2,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -662,9 +419,9 @@
      "pnl_krw": -87356
     },
     "box": {
-     "n": 4,
+     "n": 5,
      "wins": 0,
-     "pnl_krw": -375767
+     "pnl_krw": -469432
     },
     "triangle": {
      "n": 2,
@@ -674,16 +431,16 @@
    },
    "by_sync": {
     "day": {
-     "n": 12,
+     "n": 13,
      "wins": 1,
-     "pnl_krw": -948487
+     "pnl_krw": -1042152
     }
    },
    "by_exit": {
     "stop": {
-     "n": 10,
+     "n": 11,
      "wins": 0,
-     "pnl_krw": -973402
+     "pnl_krw": -1067067
     },
     "hold10": {
      "n": 2,
@@ -693,13 +450,13 @@
    },
    "by_year": {
     "2026": {
-     "n": 12,
+     "n": 13,
      "wins": 1,
-     "pnl_krw": -948487
+     "pnl_krw": -1042152
     }
    },
    "yearly_return_pct": {
-    "2026": 1.63
+    "2026": -3.05
    },
    "open_positions": [
     {
@@ -711,22 +468,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 134,
-     "bars_held": 5,
-     "last_close": 17280.0,
-     "unrealized_pct": 79.27
-    },
-    {
-     "code": "259960",
-     "name": "Krafton, Inc.",
-     "group": "Packaged Software",
-     "pattern": "box",
-     "entry_date": "2026-11-05",
-     "entry": 209627.0,
-     "stop": 194953.11,
-     "shares": 6,
-     "bars_held": 4,
-     "last_close": 205500.0,
-     "unrealized_pct": -1.97
+     "bars_held": 6,
+     "last_close": 13990.0,
+     "unrealized_pct": 45.14
     },
     {
      "code": "128940",
@@ -737,9 +481,9 @@
      "entry": 445833.5,
      "stop": 414625.15,
      "shares": 2,
-     "bars_held": 3,
-     "last_close": 489000.0,
-     "unrealized_pct": 9.68
+     "bars_held": 4,
+     "last_close": 509000.0,
+     "unrealized_pct": 14.17
     },
     {
      "code": "326030",
@@ -750,9 +494,9 @@
      "entry": 86759.5,
      "stop": 80686.33,
      "shares": 15,
-     "bars_held": 3,
-     "last_close": 87500.0,
-     "unrealized_pct": 0.85
+     "bars_held": 4,
+     "last_close": 86700.0,
+     "unrealized_pct": -0.07
     },
     {
      "code": "035420",
@@ -763,31 +507,31 @@
      "entry": 190068.5,
      "stop": 176763.7,
      "shares": 7,
-     "bars_held": 2,
-     "last_close": 192300.0,
-     "unrealized_pct": 1.17
+     "bars_held": 3,
+     "last_close": 194300.0,
+     "unrealized_pct": 2.23
     }
    ]
   },
   "risk_2": {
    "label": "동조 + 패턴, 위험 2% (명목 상한 30%)",
    "signals": 32,
-   "trades": 9,
+   "trades": 10,
    "wins": 0,
    "win_rate": 0.0,
    "avg_win_pct": null,
-   "avg_loss_pct": -7.22,
+   "avg_loss_pct": -7.24,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": 3.82,
-   "equity_final": 10382440,
+   "total_return_pct": -5.24,
+   "equity_final": 9476333,
    "max_drawdown_pct": 16.49,
-   "avg_hold_days": 3,
+   "avg_hold_days": 3.2,
    "skipped": {
     "gap": 0,
     "limit": 0,
-    "cooldown": 0,
-    "size": 17,
+    "cooldown": 2,
+    "size": 20,
     "no_bar": 0,
     "pattern": 0
    },
@@ -803,16 +547,16 @@
      "pnl_krw": -152873
     },
     "box": {
-     "n": 4,
+     "n": 5,
      "wins": 0,
-     "pnl_krw": -728992
+     "pnl_krw": -900712
     }
    },
    "by_sync": {
     "day": {
-     "n": 8,
+     "n": 9,
      "wins": 0,
-     "pnl_krw": -1486838
+     "pnl_krw": -1658558
     },
     "week": {
      "n": 1,
@@ -822,20 +566,20 @@
    },
    "by_exit": {
     "stop": {
-     "n": 9,
+     "n": 10,
      "wins": 0,
-     "pnl_krw": -1588688
+     "pnl_krw": -1760408
     }
    },
    "by_year": {
     "2026": {
-     "n": 9,
+     "n": 10,
      "wins": 0,
-     "pnl_krw": -1588688
+     "pnl_krw": -1760408
     }
    },
    "yearly_return_pct": {
-    "2026": 3.82
+    "2026": -5.24
    },
    "open_positions": [
     {
@@ -847,9 +591,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 13,
-     "bars_held": 17,
-     "last_close": 204500.0,
-     "unrealized_pct": 5.15
+     "bars_held": 18,
+     "last_close": 207000.0,
+     "unrealized_pct": 6.44
     },
     {
      "code": "267850",
@@ -860,43 +604,30 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 247,
-     "bars_held": 5,
-     "last_close": 17280.0,
-     "unrealized_pct": 79.27
-    },
-    {
-     "code": "259960",
-     "name": "Krafton, Inc.",
-     "group": "Packaged Software",
-     "pattern": "box",
-     "entry_date": "2026-11-05",
-     "entry": 209627.0,
-     "stop": 194953.11,
-     "shares": 11,
-     "bars_held": 4,
-     "last_close": 205500.0,
-     "unrealized_pct": -1.97
+     "bars_held": 6,
+     "last_close": 13990.0,
+     "unrealized_pct": 45.14
     }
    ]
   },
   "no_flag": {
    "label": "동조 + 패턴, 깃발형 제외",
    "signals": 17,
-   "trades": 7,
+   "trades": 8,
    "wins": 0,
    "win_rate": 0.0,
    "avg_win_pct": null,
-   "avg_loss_pct": -7.21,
+   "avg_loss_pct": -7.24,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": 4.12,
-   "equity_final": 10412017,
+   "total_return_pct": -0.6,
+   "equity_final": 9940072,
    "max_drawdown_pct": 7.59,
    "avg_hold_days": 5,
    "skipped": {
     "gap": 0,
-    "limit": 2,
-    "cooldown": 0,
+    "limit": 5,
+    "cooldown": 3,
     "size": 0,
     "no_bar": 0,
     "pattern": 0
@@ -908,9 +639,9 @@
      "pnl_krw": -109195
     },
     "box": {
-     "n": 5,
+     "n": 6,
      "wins": 0,
-     "pnl_krw": -482691
+     "pnl_krw": -576356
     },
     "triangle": {
      "n": 1,
@@ -920,27 +651,27 @@
    },
    "by_sync": {
     "day": {
-     "n": 7,
+     "n": 8,
      "wins": 0,
-     "pnl_krw": -678269
+     "pnl_krw": -771934
     }
    },
    "by_exit": {
     "stop": {
-     "n": 7,
+     "n": 8,
      "wins": 0,
-     "pnl_krw": -678269
+     "pnl_krw": -771934
     }
    },
    "by_year": {
     "2026": {
-     "n": 7,
+     "n": 8,
      "wins": 0,
-     "pnl_krw": -678269
+     "pnl_krw": -771934
     }
    },
    "yearly_return_pct": {
-    "2026": 4.12
+    "2026": -0.6
    },
    "open_positions": [
     {
@@ -952,9 +683,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 7,
-     "bars_held": 17,
-     "last_close": 204500.0,
-     "unrealized_pct": 5.15
+     "bars_held": 18,
+     "last_close": 207000.0,
+     "unrealized_pct": 6.44
     },
     {
      "code": "267850",
@@ -965,22 +696,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 137,
-     "bars_held": 5,
-     "last_close": 17280.0,
-     "unrealized_pct": 79.27
-    },
-    {
-     "code": "259960",
-     "name": "Krafton, Inc.",
-     "group": "Packaged Software",
-     "pattern": "box",
-     "entry_date": "2026-11-05",
-     "entry": 209627.0,
-     "stop": 194953.11,
-     "shares": 6,
-     "bars_held": 4,
-     "last_close": 205500.0,
-     "unrealized_pct": -1.97
+     "bars_held": 6,
+     "last_close": 13990.0,
+     "unrealized_pct": 45.14
     },
     {
      "code": "326030",
@@ -991,9 +709,9 @@
      "entry": 86759.5,
      "stop": 80686.33,
      "shares": 15,
-     "bars_held": 3,
-     "last_close": 87500.0,
-     "unrealized_pct": 0.85
+     "bars_held": 4,
+     "last_close": 86700.0,
+     "unrealized_pct": -0.07
     },
     {
      "code": "0126Z0",
@@ -1004,9 +722,9 @@
      "entry": 344029.0,
      "stop": 319946.97,
      "shares": 3,
-     "bars_held": 3,
-     "last_close": 340000.0,
-     "unrealized_pct": -1.17
+     "bars_held": 4,
+     "last_close": 354000.0,
+     "unrealized_pct": 2.9
     }
    ]
   }
@@ -1257,6 +975,28 @@
     "pnl_krw": -100023,
     "pnl_pct": -7.45,
     "hold_days": 10,
+    "gap": false
+   },
+   {
+    "code": "259960",
+    "name": "Krafton, Inc.",
+    "group": "Packaged Software",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-11-04",
+    "entry_date": "2026-11-05",
+    "entry": 209627.0,
+    "stop": 194953.11,
+    "exit_date": "2026-11-11",
+    "exit": 194368.25,
+    "why": "stop",
+    "shares": 6,
+    "pnl_krw": -93665,
+    "pnl_pct": -7.45,
+    "hold_days": 5,
     "gap": false
    }
   ],
@@ -1775,6 +1515,28 @@
     "pnl_pct": -2.95,
     "hold_days": 17,
     "gap": false
+   },
+   {
+    "code": "180640",
+    "name": "HANJIN KAL Corp.",
+    "group": "Hotels/Resorts/Cruise lines",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": null,
+    "signal_date": "2026-11-10",
+    "entry_date": "2026-11-11",
+    "entry": 239717.0,
+    "stop": 222936.81,
+    "exit_date": "2026-11-11",
+    "exit": 222268.0,
+    "why": "stop",
+    "shares": 5,
+    "pnl_krw": -89259,
+    "pnl_pct": -7.45,
+    "hold_days": 1,
+    "gap": false
    }
   ],
   "hold_10": [
@@ -2046,6 +1808,28 @@
     "pnl_pct": -2.72,
     "hold_days": 10,
     "gap": false
+   },
+   {
+    "code": "259960",
+    "name": "Krafton, Inc.",
+    "group": "Packaged Software",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-11-04",
+    "entry_date": "2026-11-05",
+    "entry": 209627.0,
+    "stop": 194953.11,
+    "exit_date": "2026-11-11",
+    "exit": 194368.25,
+    "why": "stop",
+    "shares": 6,
+    "pnl_krw": -93665,
+    "pnl_pct": -7.45,
+    "hold_days": 5,
+    "gap": false
    }
   ],
   "risk_2": [
@@ -2249,6 +2033,28 @@
     "pnl_pct": -7.45,
     "hold_days": 10,
     "gap": false
+   },
+   {
+    "code": "259960",
+    "name": "Krafton, Inc.",
+    "group": "Packaged Software",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-11-04",
+    "entry_date": "2026-11-05",
+    "entry": 209627.0,
+    "stop": 194953.11,
+    "exit_date": "2026-11-11",
+    "exit": 194368.25,
+    "why": "stop",
+    "shares": 11,
+    "pnl_krw": -171720,
+    "pnl_pct": -7.45,
+    "hold_days": 5,
+    "gap": false
    }
   ],
   "no_flag": [
@@ -2407,6 +2213,28 @@
     "pnl_krw": -97878,
     "pnl_pct": -7.45,
     "hold_days": 1,
+    "gap": false
+   },
+   {
+    "code": "259960",
+    "name": "Krafton, Inc.",
+    "group": "Packaged Software",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-11-04",
+    "entry_date": "2026-11-05",
+    "entry": 209627.0,
+    "stop": 194953.11,
+    "exit_date": "2026-11-11",
+    "exit": 194368.25,
+    "why": "stop",
+    "shares": 6,
+    "pnl_krw": -93665,
+    "pnl_pct": -7.45,
+    "hold_days": 5,
     "gap": false
    }
   ]

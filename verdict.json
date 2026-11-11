@@ -1,29 +1,29 @@
 {
   "schema": "carrygate-verdict/1",
   "date": "2026-11-11",
-  "generated_at_utc": "2026-11-11T06:55:37Z",
+  "generated_at_utc": "2026-11-11T07:15:33Z",
   "criteria_sealed": "2026-11-06",
   "tracks": {
     "kr_breakout": {
       "variant": "base",
-      "forward_days": 25,
+      "forward_days": 26,
       "rule_fixed": "2026-10-05",
-      "trades": 11,
+      "trades": 12,
       "wins": 0,
       "win_rate_pct": 0.0,
-      "total_return_pct": 0.88,
+      "total_return_pct": -3.71,
       "max_drawdown_pct": 10.79,
       "signals": 31,
-      "skipped_no_slot": 11,
+      "skipped_no_slot": 14,
       "backtest_win_rate_pct": 29.35,
       "luck": {
-        "expected_wins": 3.23,
+        "expected_wins": 3.52,
         "actual_wins": 0,
-        "z": -2.14
+        "z": -2.23
       },
       "checks": {},
       "warnings": [
-        "운 보정 z -2.14 — 백테스트 승률(29.4%)대로면 3.2승 기대, 실제 0승. 생존 편향 의심"
+        "운 보정 z -2.23 — 백테스트 승률(29.4%)대로면 3.5승 기대, 실제 0승. 생존 편향 의심"
       ],
       "interpretation": {
         "pass_pct_if_backtest_true": 86.17,
@@ -32,13 +32,13 @@
       },
       "control": {
         "variant": "no_sector",
-        "trades": 23,
-        "win_rate_pct": 4.35,
-        "total_return_pct": -9.62,
-        "return_delta_pct": 10.5
+        "trades": 24,
+        "win_rate_pct": 4.17,
+        "total_return_pct": -14.97,
+        "return_delta_pct": 11.26
       },
       "status": "NOT_YET",
-      "reason": "순방향 매매 11건 — 최소 15건 전에는 판단하지 않는다"
+      "reason": "순방향 매매 12건 — 최소 15건 전에는 판단하지 않는다"
     },
     "turtle": {
       "rule_fixed": "2026-10-02",
