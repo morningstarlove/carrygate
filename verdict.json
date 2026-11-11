@@ -1,7 +1,7 @@
 {
   "schema": "carrygate-verdict/1",
   "date": "2026-11-11",
-  "generated_at_utc": "2026-11-10T15:20:50Z",
+  "generated_at_utc": "2026-11-11T06:55:37Z",
   "criteria_sealed": "2026-11-06",
   "tracks": {
     "kr_breakout": {
@@ -54,7 +54,7 @@
           "profit_factor": 0.0,
           "avg_r": -2.11,
           "backtest_win_rate_pct": 36.2069,
-          "backtest_profit_factor": 1.5648,
+          "backtest_profit_factor": 1.565,
           "backtest_trades": 116,
           "luck": {
             "expected_wins": 0.36,
@@ -77,12 +77,12 @@
           },
           "warnings": [],
           "interpretation": {
-            "false_pass_pct": 26.77,
+            "false_pass_pct": 26.76,
             "miss_pct": 37.3,
             "wins_needed": 7,
             "per_trade_sharpe": 0.2,
             "min_trades_95": 68,
-            "min_trades_t3": 227,
+            "min_trades_t3": 226,
             "note": "false_pass = 실력 0 규칙이 이 합격선을 넘을 확률, miss = 백테스트만큼 실력이어도 못 넘을 확률, min_trades_95 = 샤프>0 을 95% 확신하는 데 필요한 건수(MinTRL), min_trades_t3 = t>3 기준 건수. PASS = 소액 시험 후보"
           },
           "status": "NOT_YET",
@@ -96,7 +96,7 @@
           "profit_factor": 0.248,
           "avg_r": -0.45,
           "backtest_win_rate_pct": 33.61,
-          "backtest_profit_factor": 1.1881,
+          "backtest_profit_factor": 1.188,
           "backtest_trades": 241,
           "luck": {
             "expected_wins": 1.01,
@@ -119,12 +119,12 @@
           },
           "warnings": [],
           "interpretation": {
-            "false_pass_pct": 38.73,
+            "false_pass_pct": 38.74,
             "miss_pct": 46.88,
             "wins_needed": 7,
             "per_trade_sharpe": 0.08,
-            "min_trades_95": 434,
-            "min_trades_t3": 1443,
+            "min_trades_95": 435,
+            "min_trades_t3": 1444,
             "note": "false_pass = 실력 0 규칙이 이 합격선을 넘을 확률, miss = 백테스트만큼 실력이어도 못 넘을 확률, min_trades_95 = 샤프>0 을 95% 확신하는 데 필요한 건수(MinTRL), min_trades_t3 = t>3 기준 건수. PASS = 소액 시험 후보"
           },
           "status": "NOT_YET",
@@ -331,130 +331,117 @@
       }
     },
     "scalp": {
-      "history_days": 43,
+      "history_days": 44,
       "combos": 810,
-      "candidates": 24,
+      "candidates": 15,
       "top": [
         {
           "key": "hyperliquid:DOGE:30m:vwap_fade_lim",
-          "net_pct": 18.816,
-          "days": 28,
-          "pos_days": 19,
-          "trades": 40
-        },
-        {
-          "key": "hyperliquid:DOGE:30m:vwap_fade",
-          "net_pct": 17.395,
-          "days": 28,
-          "pos_days": 18,
-          "trades": 41
-        },
-        {
-          "key": "okx:DOGE:30m:vwap_fade_lim",
-          "net_pct": 12.932,
-          "days": 28,
-          "pos_days": 18,
-          "trades": 39
-        },
-        {
-          "key": "okx:DOGE:30m:vwap_fade",
-          "net_pct": 10.802,
-          "days": 28,
-          "pos_days": 18,
-          "trades": 39
-        },
-        {
-          "key": "hyperliquid:LINK:30m:vwap_fade_lim",
-          "net_pct": 9.922,
-          "days": 28,
-          "pos_days": 18,
-          "trades": 40
-        },
-        {
-          "key": "okx:ETH:30m:vwap_fade_lim",
-          "net_pct": 8.022,
-          "days": 28,
-          "pos_days": 17,
+          "net_pct": 18.911,
+          "days": 29,
+          "pos_days": 20,
           "trades": 42
         },
         {
-          "key": "okx:XRP:30m:mr_z20_lim",
-          "net_pct": 8.0,
-          "days": 28,
-          "pos_days": 19,
-          "trades": 58
+          "key": "hyperliquid:DOGE:30m:vwap_fade",
+          "net_pct": 17.34,
+          "days": 29,
+          "pos_days": 18,
+          "trades": 43
         },
         {
-          "key": "hyperliquid:LINK:30m:vwap_fade",
-          "net_pct": 7.824,
-          "days": 28,
+          "key": "okx:DOGE:30m:vwap_fade_lim",
+          "net_pct": 11.563,
+          "days": 29,
           "pos_days": 18,
           "trades": 40
         },
         {
-          "key": "hyperliquid:ETH:30m:vwap_fade_lim",
-          "net_pct": 7.482,
-          "days": 28,
-          "pos_days": 17,
-          "trades": 41
+          "key": "hyperliquid:LINK:30m:vwap_fade_lim",
+          "net_pct": 10.649,
+          "days": 29,
+          "pos_days": 19,
+          "trades": 42
         },
         {
-          "key": "okx:DOGE:60m:mr_z20_lim",
-          "net_pct": 7.401,
-          "days": 28,
+          "key": "okx:DOGE:30m:vwap_fade",
+          "net_pct": 9.396,
+          "days": 29,
           "pos_days": 18,
-          "trades": 29
+          "trades": 40
+        },
+        {
+          "key": "hyperliquid:LINK:30m:vwap_fade",
+          "net_pct": 8.513,
+          "days": 29,
+          "pos_days": 19,
+          "trades": 42
+        },
+        {
+          "key": "hyperliquid:BTC:30m:vwap_fade_lim",
+          "net_pct": 7.147,
+          "days": 29,
+          "pos_days": 18,
+          "trades": 47
+        },
+        {
+          "key": "okx:BTC:30m:vwap_fade_lim",
+          "net_pct": 6.843,
+          "days": 29,
+          "pos_days": 19,
+          "trades": 47
+        },
+        {
+          "key": "okx:XRP:30m:mr_z20_lim",
+          "net_pct": 6.534,
+          "days": 29,
+          "pos_days": 19,
+          "trades": 59
+        },
+        {
+          "key": "hyperliquid:XRP:30m:mr_z20",
+          "net_pct": 5.502,
+          "days": 29,
+          "pos_days": 18,
+          "trades": 59
         }
       ],
       "warnings": [],
       "noise_floor": {
         "sims": 500,
         "seed": 7,
-        "median": 36,
-        "p95": 47,
-        "max": 58,
+        "median": 29,
+        "p95": 39,
+        "max": 44,
         "note": "부호 뒤집기(실력 0) 기록에 같은 후보 규칙을 적용했을 때 뜨는 후보 수. 실제 후보 수가 median 이하면 운으로 설명된다"
       },
       "status": "NOT_YET",
-      "reason": "누적 43일, 후보 24개 ≤ 잡음 바닥 중앙값 36개 (실력 0 이어도 조합 810개 중 이만큼 뜬다) — 운으로 설명된다, 판단 보류"
+      "reason": "누적 44일, 후보 15개 ≤ 잡음 바닥 중앙값 29개 (실력 0 이어도 조합 810개 중 이만큼 뜬다) — 운으로 설명된다, 판단 보류"
     },
     "forecast": {
-      "days": 1,
-      "points": 12,
+      "days": 2,
+      "points": 24,
       "first_date": "2026-11-09",
-      "last_date": "2026-11-09",
+      "last_date": "2026-11-10",
       "missing_days": 0,
-      "base_up_rate": 0.8333,
+      "base_up_rate": 0.4167,
       "size": {
         "all": {
           "n": {
             "low": 0,
-            "mid": 1,
-            "high": 11
+            "mid": 3,
+            "high": 21
           },
           "mean_abs_pct": {
             "low": null,
-            "mid": 1.0383,
-            "high": 1.7155
+            "mid": 1.9065,
+            "high": 2.7527
           },
           "ratio_high_low": null
         },
         "first_half": {
           "n": {
             "low": 0,
-            "mid": 0,
-            "high": 0
-          },
-          "mean_abs_pct": {
-            "low": null,
-            "mid": null,
-            "high": null
-          },
-          "ratio_high_low": null
-        },
-        "second_half": {
-          "n": {
-            "low": 0,
             "mid": 1,
             "high": 11
           },
@@ -462,6 +449,19 @@
             "low": null,
             "mid": 1.0383,
             "high": 1.7155
+          },
+          "ratio_high_low": null
+        },
+        "second_half": {
+          "n": {
+            "low": 0,
+            "mid": 2,
+            "high": 10
+          },
+          "mean_abs_pct": {
+            "low": null,
+            "mid": 2.3405,
+            "high": 3.8936
           },
           "ratio_high_low": null
         }
@@ -469,6 +469,29 @@
       "direction": {
         "all": {
           "D1": {
+            "n": 24,
+            "decisive": 24,
+            "hits": 18,
+            "hit_rate": 0.75,
+            "brier": 0.2062
+          },
+          "D2": {
+            "n": 24,
+            "decisive": 24,
+            "hits": 18,
+            "hit_rate": 0.75,
+            "brier": 0.1726
+          },
+          "D3": {
+            "n": 24,
+            "decisive": 24,
+            "hits": 13,
+            "hit_rate": 0.5417,
+            "brier": 0.2478
+          }
+        },
+        "first_half": {
+          "D1": {
             "n": 12,
             "decisive": 12,
             "hits": 8,
@@ -488,63 +511,40 @@
             "hits": 2,
             "hit_rate": 0.1667,
             "brier": 0.2826
-          }
-        },
-        "first_half": {
-          "D1": {
-            "n": 0,
-            "decisive": 0,
-            "hits": 0,
-            "hit_rate": null,
-            "brier": null
-          },
-          "D2": {
-            "n": 0,
-            "decisive": 0,
-            "hits": 0,
-            "hit_rate": null,
-            "brier": null
-          },
-          "D3": {
-            "n": 0,
-            "decisive": 0,
-            "hits": 0,
-            "hit_rate": null,
-            "brier": null
           }
         },
         "second_half": {
           "D1": {
             "n": 12,
             "decisive": 12,
-            "hits": 8,
-            "hit_rate": 0.6667,
-            "brier": 0.2374
+            "hits": 10,
+            "hit_rate": 0.8333,
+            "brier": 0.175
           },
           "D2": {
             "n": 12,
             "decisive": 12,
-            "hits": 7,
-            "hit_rate": 0.5833,
-            "brier": 0.192
+            "hits": 11,
+            "hit_rate": 0.9167,
+            "brier": 0.1532
           },
           "D3": {
             "n": 12,
             "decisive": 12,
-            "hits": 2,
-            "hit_rate": 0.1667,
-            "brier": 0.2826
+            "hits": 11,
+            "hit_rate": 0.9167,
+            "brier": 0.2131
           }
         }
       },
       "predictors": {
         "D1": {
           "status": "NOT_YET",
-          "reason": "채점 1일 — 최소 60일 전에는 판단하지 않는다"
+          "reason": "채점 2일 — 최소 60일 전에는 판단하지 않는다"
         },
         "D2": {
           "status": "NOT_YET",
-          "reason": "채점 1일 — 최소 60일 전에는 판단하지 않는다"
+          "reason": "채점 2일 — 최소 60일 전에는 판단하지 않는다"
         }
       },
       "warnings": [],
@@ -552,18 +552,18 @@
         "sims": 500,
         "seed": 7,
         "hit_rate_median": {
-          "D1": 0.6667,
-          "D2": 0.5833,
-          "D3": 0.1667
+          "D1": 0.5,
+          "D2": 0.5,
+          "D3": 0.5417
         },
         "hit_rate_p95": {
-          "D1": 0.8333,
-          "D2": 0.75,
-          "D3": 0.1667
+          "D1": 0.6667,
+          "D2": 0.6667,
+          "D3": 0.625
         }
       },
       "status": "NOT_YET",
-      "reason": "채점 1일 12건 — 최소 60일 전에는 판단하지 않는다"
+      "reason": "채점 2일 24건 — 최소 60일 전에는 판단하지 않는다"
     }
   },
   "errors": {},

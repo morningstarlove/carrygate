@@ -1,7 +1,7 @@
 {
  "schema": "carrygate-macro/1",
- "date": "2026-11-10",
- "generated_at_kst": "2026-11-10 16:29:35",
+ "date": "2026-11-11",
+ "generated_at_kst": "2026-11-11 15:36:59",
  "method": {
   "window": "발표 분의 시가를 기준가로, 직전 30분과 직후 (5, 15, 30, 60)분 수익률(bp), 60분 내 최대 상승·하락",
   "baseline": "전날 같은 시각의 30분 변동폭 = 평소 기준",
@@ -2290,17 +2290,52 @@
    "previous": 29,
    "surprise": 100,
    "surprise_dir": -1
-  }
- ],
- "new_today": 0,
- "errors": {},
- "skipped": {},
- "upcoming": [
+  },
   {
    "type": "cpi",
    "title": "Inflation Rate YoY",
-   "time_utc": "2026-11-10T13:30:00Z"
+   "time_utc": "2026-11-10T13:30:00Z",
+   "ts": 1794317400,
+   "coin": "BTC",
+   "source": "hyperliquid",
+   "forward": true,
+   "pre30_bp": -4.03,
+   "post5_bp": -53.14,
+   "post15_bp": -61.61,
+   "post30_bp": -81.92,
+   "post60_bp": -78.43,
+   "maxup60_bp": 35.65,
+   "maxdown60_bp": -120.13,
+   "base_abs_post30_bp": 7.36,
+   "actual": null,
+   "forecast": 3.9,
+   "previous": 3.7
   },
+  {
+   "type": "cpi",
+   "title": "Inflation Rate YoY",
+   "time_utc": "2026-11-10T13:30:00Z",
+   "ts": 1794317400,
+   "coin": "ETH",
+   "source": "hyperliquid",
+   "forward": true,
+   "pre30_bp": -11.91,
+   "post5_bp": -148.38,
+   "post15_bp": -132.64,
+   "post30_bp": -147.43,
+   "post60_bp": -155.54,
+   "maxup60_bp": 48.19,
+   "maxdown60_bp": -359.75,
+   "base_abs_post30_bp": 16.5,
+   "actual": null,
+   "forecast": 3.9,
+   "previous": 3.7
+  }
+ ],
+ "new_today": 2,
+ "errors": {},
+ "skipped": {},
+ "upcoming": [
   {
    "type": "pce",
    "title": "Core PCE Price Index MoM",
@@ -2319,14 +2354,14 @@
  ],
  "summary": {
   "cpi": {
-   "n": 24,
+   "n": 26,
    "n_surprise": 10,
-   "abs_post30_bp": 77.838,
-   "base_abs_post30_bp": 32.728,
-   "ratio_vs_base": 2.378,
-   "abs_post5_bp": 49.512,
-   "maxup60_bp": 116.906,
-   "maxdown60_bp": -53.102,
+   "abs_post30_bp": 80.672,
+   "base_abs_post30_bp": 31.128,
+   "ratio_vs_base": 2.592,
+   "abs_post5_bp": 53.454,
+   "maxup60_bp": 111.138,
+   "maxdown60_bp": -67.475,
    "signed_post30_bp": 93.598,
    "signed_post60_bp": 107.344,
    "hit_rate_pct": 80.0
@@ -2384,22 +2419,22 @@
    "hit_rate_pct": 100.0
   },
   "all": {
-   "n": 104,
-   "abs_post30_bp": 59.898,
-   "base_abs_post30_bp": 26.71,
-   "ratio_vs_base": 2.243
+   "n": 106,
+   "abs_post30_bp": 60.931,
+   "base_abs_post30_bp": 26.431,
+   "ratio_vs_base": 2.305
   }
  },
  "forward_summary": {
   "cpi": {
-   "n": 2,
+   "n": 4,
    "n_surprise": 0,
-   "abs_post30_bp": 148.895,
-   "base_abs_post30_bp": 7.455,
-   "ratio_vs_base": 19.973,
-   "abs_post5_bp": 122.64,
-   "maxup60_bp": 7.595,
-   "maxdown60_bp": -208.525,
+   "abs_post30_bp": 131.785,
+   "base_abs_post30_bp": 9.692,
+   "ratio_vs_base": 13.597,
+   "abs_post5_bp": 111.7,
+   "maxup60_bp": 24.758,
+   "maxdown60_bp": -224.233,
    "signed_post30_bp": null,
    "signed_post60_bp": null,
    "hit_rate_pct": null
@@ -2457,12 +2492,12 @@
    "hit_rate_pct": null
   },
   "all": {
-   "n": 12,
-   "abs_post30_bp": 37.134,
-   "base_abs_post30_bp": 20.425,
-   "ratio_vs_base": 1.818
+   "n": 14,
+   "abs_post30_bp": 48.211,
+   "base_abs_post30_bp": 19.211,
+   "ratio_vs_base": 2.51
   }
  },
- "forward_events": 12,
- "forward_pending_surprise": 0
+ "forward_events": 14,
+ "forward_pending_surprise": 2
 }
