@@ -661,6 +661,12 @@ def check_reversal_bars(problems, notes, path="reversal_bars.jsonl"):
             continue
         sig = r.get("signals") or {}
         if len(sig) and len(sig) != 12:
+            miss = r.get("missing") or []
+            if len(sig) + len(miss) == 12 and not set(miss) & set(sig):
+                # 수집 실패가 표시된 봉(reversal.py 가 missing 에 적음) — 빠진 시장이 정확히 맞으면 기록만 한다
+                notes.append("추세 전환 4시간봉 봉 %s: %s 수집 실패로 %d시장만 기록 (표시됨)" % (b, ", ".join(miss), len(sig)))
+                checked += 1
+                continue
             problems.append("추세 전환 4시간봉 기록 봉 %s 시장 수 %d (12 여야 한다)" % (b, len(sig)))
             continue
         checked += 1

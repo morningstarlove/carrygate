@@ -242,6 +242,29 @@ class BarsHistory(unittest.TestCase):
             self.assertEqual(rows[2]["changes"], ["upbit/BTC scan→broken"])                 # 08:00(scan) 대비
             self.assertEqual(rows[2]["forward"]["upbit"]["trades"], 0)
 
+    def test_missing_markets_marked_and_selfcheck_tolerates(self):
+        """2026-11-08 16:00 봉 사고: 수집 실패 시장은 missing 에 적히고, 검산은 표시된 봉만 빨간불 대신 기록한다."""
+        import tempfile, json, selfcheck
+        out = self._out("2026-11-08 16:00", "scan")
+        out["errors"] = {"upbit/XRP": "fetch failed : timed out"}
+        line = reversal.bars_line(out)
+        self.assertEqual(line["missing"], ["upbit/XRP"])
+        self.assertNotIn("missing", reversal.bars_line(self._out("2026-11-08 20:00", "scan")))
+        sig12 = {"%s/%s" % (v, c): {"phase": "scan"} for v in ("upbit", "okx") for c in ("BTC", "ETH", "XRP", "TRX", "LINK", "DOGE")}
+        sig10 = {k: x for k, x in sig12.items() if k not in ("upbit/BTC", "upbit/ETH")}
+        with tempfile.TemporaryDirectory() as d:
+            path = os.path.join(d, "bars.jsonl")
+            def run(rows):
+                with open(path, "w", encoding="utf-8") as fh:
+                    fh.write("\n".join(json.dumps(r) for r in rows) + "\n")
+                probs, notes = [], []
+                selfcheck.check_reversal_bars(probs, notes, path)
+                return probs
+            self.assertEqual(run([{"bar": "2026-11-08 16:00", "signals": sig10, "missing": ["upbit/BTC", "upbit/ETH"]}]), [])
+            self.assertEqual(len(run([{"bar": "2026-11-08 16:00", "signals": sig10}])), 1)                         # 표시 없으면 빨간불
+            self.assertEqual(len(run([{"bar": "2026-11-08 16:00", "signals": sig10, "missing": ["upbit/BTC"]}])), 1)  # 개수 안 맞으면 빨간불
+            self.assertEqual(run([{"bar": "2026-11-08 16:00", "signals": sig12}]), [])
+
     def test_bars_key_is_latest_last_bar(self):
         out = self._out("2026-11-01 04:00", "scan")
         out["venues"]["upbit"]["markets"]["ETH"]["signal"]["last_bar"] = "2026-11-01 08:00"
