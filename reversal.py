@@ -545,23 +545,31 @@ def build(fixture=None, save_to=None):
     }
     for v, cfg in VENUES.items():
         bars_by = {}
-        for coin in COINS:
-            try:
-                if fixture:
-                    bars = load_fixture(fixture, v, coin)
-                elif v == "upbit":
-                    bars = upbit_4h(coin)
-                else:
-                    bars = okx_4h(coin)
-                if len(bars) < MIN_BARS:
-                    raise RuntimeError("4시간봉 부족 %d" % len(bars))
-                bars_by[coin] = bars
-                if save_to:
-                    save_fixture(save_to, v, coin, bars)
-            except Exception as e:
-                out["errors"]["%s/%s" % (v, coin)] = str(e)[:300]
-            if not fixture:
-                time.sleep(0.3)
+        # 2026-11-08 16:00 봉: 업비트 BTC·ETH 가 시간 초과로 빠져 검산이 9회 연속 빨간불 → 실패한 코인만 한 번 더 받는다
+        for attempt in (1, 2):
+            todo = [c for c in COINS if c not in bars_by]
+            if not todo or (attempt == 2 and fixture):
+                break
+            if attempt == 2:
+                time.sleep(20)
+            for coin in todo:
+                try:
+                    if fixture:
+                        bars = load_fixture(fixture, v, coin)
+                    elif v == "upbit":
+                        bars = upbit_4h(coin)
+                    else:
+                        bars = okx_4h(coin)
+                    if len(bars) < MIN_BARS:
+                        raise RuntimeError("4시간봉 부족 %d" % len(bars))
+                    bars_by[coin] = bars
+                    out["errors"].pop("%s/%s" % (v, coin), None)
+                    if save_to:
+                        save_fixture(save_to, v, coin, bars)
+                except Exception as e:
+                    out["errors"]["%s/%s" % (v, coin)] = str(e)[:300]
+                if not fixture:
+                    time.sleep(0.3)
         if not bars_by:
             continue
         vd = {"kind": cfg["kind"], "quote": cfg["quote"], "fee_pct": cfg["fee_pct"], "fee_source": cfg["fee_source"], "equity0": cfg["equity"]}
@@ -638,8 +646,12 @@ def bars_line(out, prev=None):
             changes.append("%s %s→%s" % (k, before or "-", s["phase"]))
     fwd = {v: {"trades": (out["summary"].get(v) or {}).get("forward_trades"), "net_pct": (out["summary"].get(v) or {}).get("forward_net_pct")}
            for v in out["venues"]}
-    return {"bar": bars_key(out), "date": out["date"], "generated_at_kst": out["generated_at_kst"],
+    line = {"bar": bars_key(out), "date": out["date"], "generated_at_kst": out["generated_at_kst"],
             "signals": sig, "changes": changes, "forward": fwd}
+    missing = sorted(k for k in (out.get("errors") or {}) if "/" in k and k not in sig)
+    if missing:
+        line["missing"] = missing      # 수집 실패한 시장 — 검산은 이 표시가 있으면 빨간불 대신 기록만 한다
+    return line
 
 
 def write_bars_history(out, path="reversal_bars.jsonl"):
