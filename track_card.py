@@ -12,7 +12,7 @@ CARRYGATE — 트랙 한 장 카드 (SVG, 표준 라이브러리만)
 
 bars CSV: t,o,h,l,c,v (t=unix 초, UTC). spec JSON 예는 docs/cards/p30_rotate.json.
 spec 필드: title, subtitle, logic[], entry, exit, target, expected, prediction, risk, next_check, venue(수수료용),
-          markers[] ({"t":..,"px":..,"side":1|-1,"kind":"entry"|"exit","label":".."}), lines[] ({"name":..,"points":[[t,px],..]}),
+          markers[] ({"t":..,"px":..,"side":1|-1,"kind":"entry"|"exit","label":"..","tag":"롱/숏 대신 글자","color":".."}), lines[] ({"name":..,"points":[[t,px],..]}),
           preset_strategies[] (scalp.STRATEGIES 의 key), preset_tf(분)
 """
 import csv, json, sys, argparse, os
@@ -153,14 +153,17 @@ def render(bars, spec, markers, lines, stats):
         if m["kind"] == "entry":
             if m["side"] == 1:
                 out.append('<polygon points="%.1f,%.1f %.1f,%.1f %.1f,%.1f" fill="%s"/>' % (x, y + 16, x - 7, y + 28, x + 7, y + 28, col))
-                out.append('<text x="%.1f" y="%.1f" font-size="10" fill="%s" text-anchor="middle">롱</text>' % (x, y + 40, col))
+                out.append('<text x="%.1f" y="%.1f" font-size="10" fill="%s" text-anchor="middle">%s</text>' % (x, y + 40, col, esc(m.get("tag", "롱"))))
             else:
                 out.append('<polygon points="%.1f,%.1f %.1f,%.1f %.1f,%.1f" fill="%s"/>' % (x, y - 16, x - 7, y - 28, x + 7, y - 28, col))
-                out.append('<text x="%.1f" y="%.1f" font-size="10" fill="%s" text-anchor="middle">숏</text>' % (x, y - 32, col))
+                out.append('<text x="%.1f" y="%.1f" font-size="10" fill="%s" text-anchor="middle">%s</text>' % (x, y - 32, col, esc(m.get("tag", "숏"))))
         else:
             out.append('<circle cx="%.1f" cy="%.1f" r="5" fill="none" stroke="%s" stroke-width="2"/>' % (x, y, col))
             if "pnl" in m:
                 out.append('<text x="%.1f" y="%.1f" font-size="10" fill="%s" text-anchor="middle">%+.2f%%</text>' % (x, y - 9 if m["side"] == 1 else y + 18, "#d33" if m["pnl"] > 0 else "#2a6fd6", m["pnl"]))
+        if m.get("label"):   # 선택: 표시 옆 설명 글자 (P36 부터)
+            dy = (52 if m["kind"] == "entry" else 18) if m["side"] == 1 else (-44 if m["kind"] == "entry" else -10)
+            out.append('<text x="%.1f" y="%.1f" font-size="10.5" font-weight="700" fill="%s" text-anchor="middle">%s</text>' % (x, y + dy, col, esc(m["label"])))
     # right panel
     y = 90
     def section(head, body, color="#111"):
