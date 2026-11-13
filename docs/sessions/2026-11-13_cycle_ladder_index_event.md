@@ -43,7 +43,7 @@ MSTR 발표 전날(11/10)→11/12: MSTR −5.5%, IBIT −3.2%, 초과 −2.3% (�
 - 빨간불 1건: `funding.json coingecko.samples` null(그 실행에서 코인게코 응답 없음). 기존 캐리 모듈, 이번 변경과 무관. dry_run 이라 저장 안 됨, 같은 날 정기 실행 값은 168.
 
 ## 남은 것
-1. ~~현황판 카드~~ — 11/13 라이브 버전 61 에 반영(사용자 "추가해"). 갱신 Routine trig_015SCRNNwatvAhHFdJF8F9Z9 파일 목록 추가는 배달 세션 session_01UBXi3SEnxJwqCj4dY5q4J5 에 요청 — 그 세션에서 사용자 승인 필요(이 세션의 update_trigger 는 거절됨).
+1. ~~현황판 카드~~ — 11/13 라이브 버전 61 에 반영(사용자 "추가해"). 갱신 Routine trig_015SCRNNwatvAhHFdJF8F9Z9 파일 목록 추가는 배달 세션 session_01UBXi3SEnxJwqCj4dY5q4J5 에 요청 → 11/13 14:55 UTC 그 세션이 반영(이 세션이 get_trigger 로 확인). 11/14 17:37 갱신부터 실린다.
 2. 11/30: A 결과 기록. 약 12/29: B 결과 기록. 2027-05-12: P36 첫 판정.
 
 ## 사용자 결정
