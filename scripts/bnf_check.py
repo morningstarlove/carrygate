@@ -171,44 +171,70 @@ def summarize(trs):
             "ex_a": sum(a) / len(a) if a else None, "na": len(a), "ex_b": sum(b) / len(b) if b else None, "nb": len(b)}
 
 
-def main():
-    files = sorted(glob.glob(os.path.join(D, "*.csv.gz")))
-    if not files: sys.exit("자료 없음: %s" % D)
-    res = {g: {m: [] for m in VARIANTS} for g, _ in GROUPS}
-    per = {}
-    for f in files:
+def collect(d, m):
+    """폴더 d 의 모든 종목에 변형 m 을 돌려 시장군별 매매 목록과 종목별 요약을 돌려준다."""
+    res = {g: [] for g, _ in GROUPS}; per = {}
+    for f in sorted(glob.glob(os.path.join(d, "*.csv.gz"))):
         sym = os.path.basename(f)[:-7]; g = group_of(sym)
         if g is None: continue
         rows = load(f)
         if len(rows) < 60: continue
         bh = bh_daily(rows)
-        for m in VARIANTS:
-            trs = run(rows, m, COST[g])
-            for t in trs: t["ex"] = t["ret"] - bh * t["days"]
-            res[g][m].extend(trs)
-            if m == "base": per[sym] = (g, summarize(trs), rows[0][0])
+        trs = run(rows, m, COST[g])
+        for t in trs: t["ex"] = t["ret"] - bh * t["days"]
+        res[g].extend(trs); per[sym] = (g, summarize(trs), rows[0][0])
+    return res, per
+
+
+def line(s):
     f2 = lambda x: "—" if x is None else "%+.2f" % x
-    print("## 시장군 x 변형 (건수 / 건당 순수익 / 같은 일수 매수보유 대비 초과 / 월 묶음 t / 앞·뒤 초과)")
+    return ("%4d건 순 %+.2f%% 초과 %+.2f%% t %+.2f 월t %+.2f(%d개월) 승률 %.0f%% PF %.2f 보유 %.1f일 | 앞 %s(%d) 뒤 %s(%d)"
+            % (s["n"], s["ret"], s["ex"], s["t"], s["mt"], s["months"], s["win"], s["pf"], s["days"],
+               f2(s["ex_a"]), s["na"], f2(s["ex_b"]), s["nb"]))
+
+
+def without_top_months(trs, k=5):
+    by = {}
+    for t in trs: by.setdefault(t["date"][:7], []).append(t)
+    top = sorted(by, key=lambda m: -sum(x["ex"] for x in by[m]))[:k]
+    return [t for t in trs if t["date"][:7] not in top], top
+
+
+def report(d, title):
+    print("\n# %s (%s)" % (title, os.path.relpath(d)))
+    allres = {m: collect(d, m) for m in VARIANTS}
+    print("## 시장군 x 변형 (건당 순수익 / 같은 일수 매수보유 대비 초과 / 월 묶음 t / 앞(~2014)·뒤(2015~) 초과)")
     for g, _ in GROUPS:
         for m in VARIANTS:
-            s = summarize(res[g][m])
-            if not s["n"]: print("%s %-6s 0건" % (g, m)); continue
-            print("%s %-6s %4d건 순 %+.2f%% 초과 %+.2f%% t %+.2f 월t %+.2f(%d개월) 승률 %.0f%% PF %.2f 보유 %.1f일 | 앞 %s(%d) 뒤 %s(%d)"
-                  % (g, m, s["n"], s["ret"], s["ex"], s["t"], s["mt"], s["months"], s["win"], s["pf"], s["days"],
-                     f2(s["ex_a"]), s["na"], f2(s["ex_b"]), s["nb"]))
-    print("\n## 기본 규칙 이익 집중도 (사후 기술 통계 — 판단 기준 아님): 초과 합계 중 상위 5개 진입 월 비중")
+            trs = allres[m][0][g]
+            print("%s %-6s %s" % (g, m, line(summarize(trs)) if trs else "   0건"))
+    print("## 기본 규칙 중앙값·집중도 (사후 기술 통계, 판단 기준 아님)")
     for g, _ in GROUPS:
-        trs = res[g]["base"]
+        trs = allres["base"][0][g]
         if not trs: continue
-        by = {}
-        for t in trs: by[t["date"][:7]] = by.get(t["date"][:7], 0.0) + t["ex"]
-        tot = sum(by.values()); top = sorted(by.items(), key=lambda kv: -kv[1])[:5]
-        print("%s 합계 %+.1f%%p, 상위 5개월 %s = %.0f%%" % (g, tot, ", ".join("%s(%+.0f)" % kv for kv in top),
-              sum(v for _, v in top) / tot * 100 if tot > 0 else float("nan")))
-    print("\n## 종목별 기본 규칙 (건수 / 초과 / t)")
+        r = sorted(t["ret"] for t in trs); rest, top = without_top_months(trs)
+        rs = summarize(rest)
+        print("%s 순수익 중앙값 %+.2f%% | 초과가 큰 5개월 %s 빼면 %d건 초과 %+.2f%% 월t %+.2f"
+              % (g, r[len(r) // 2], ",".join(top), rs["n"], rs["ex"], rs["mt"]))
+    print("## 종목별 기본 규칙")
+    per = allres["base"][1]
     for sym in sorted(per, key=lambda k: (per[k][0], k)):
         g, s, first = per[sym]
-        print("%s %-16s 시작 %s %3d건 초과 %s t %s" % (g, sym, first, s["n"], f2(s["ex"] if s["n"] else None), f2(s["t"] if s["n"] else None)))
+        print("%s %-16s 시작 %s %3d건 초과 %s t %s" % (g, sym, first, s["n"],
+              "%+.2f" % s["ex"] if s["n"] else "—", "%+.2f" % s["t"] if s["n"] else "—"))
+    return allres
+
+
+def main():
+    dirs = sys.argv[1:] or [D, os.path.join(HERE, "..", "data", "bnf_losers")]
+    titles = ["본 표본: 2026-11-13 시가총액 상위 (생존 편향 위쪽)", "비교군: 10년 수익률 최하위 (사업 악화, 편향 아래쪽)"]
+    got = [report(d, titles[i] if i < 2 else d) for i, d in enumerate(dirs) if glob.glob(os.path.join(d, "*.csv.gz"))]
+    if len(got) < 2: return
+    print("\n# 주식 전체 묶음 (본 표본 + 비교군, 암호화폐 제외)")
+    for m in VARIANTS:
+        trs = [t for a in got for g, _ in GROUPS if g != "암호화폐" for t in a[m][0][g]]
+        rest, _ = without_top_months(trs)
+        print("%-6s %s | 상위5개월 빼면 초과 %+.2f%% 월t %+.2f" % (m, line(summarize(trs)), summarize(rest)["ex"], summarize(rest)["mt"]))
 
 
 if __name__ == "__main__":
