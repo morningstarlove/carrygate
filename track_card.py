@@ -108,12 +108,22 @@ def render(bars, spec, markers, lines, stats):
            '<rect width="%d" height="%d" fill="#fbfbfd"/>' % (W, H),
            '<text x="40" y="40" font-size="24" font-weight="700" fill="#111">%s</text>' % esc(spec.get("title", "")),
            '<text x="40" y="62" font-size="13" fill="#555">%s</text>' % esc(spec.get("subtitle", ""))]
+    # 배경 구간(bands): 날짜 단위로 켜고 끄는 규칙(예: P35 '전날 진 날만')을 보이게. [{from, to, color, label}]
+    for bd in spec.get("bands") or []:
+        idx = [i for i, b in enumerate(bars) if bd["from"] <= b["t"] < bd["to"]]
+        if not idx:
+            continue
+        xa, xb = X(idx[0]) - bw / 2, X(idx[-1]) + bw / 2
+        out.append('<rect x="%.1f" y="%d" width="%.1f" height="%d" fill="%s" fill-opacity="0.13"/>' % (xa, y0, xb - xa, ch, bd.get("color", "#999")))
+        if bd.get("label"):
+            for j, part in enumerate(str(bd["label"]).split("\n")[:2]):
+                out.append('<text x="%.1f" y="%d" font-size="10" fill="%s" text-anchor="middle">%s</text>' % ((xa + xb) / 2, y0 + 12 + 12 * j, bd.get("color", "#555"), esc(part)))
     # grid + y labels
     for k in range(6):
         p = lo + (hi - lo) * k / 5
         y = Y(p)
         out.append('<line x1="%d" y1="%.1f" x2="%d" y2="%.1f" stroke="#e4e4ea" stroke-width="1"/>' % (x0, y, x0 + cw, y))
-        out.append('<text x="%d" y="%.1f" font-size="11" fill="#777" text-anchor="start">%s</text>' % (x0 + cw + 6, y + 4, ("%.4g" % p)))
+        out.append('<text x="%d" y="%.1f" font-size="11" fill="#777" text-anchor="start">%s</text>' % (x0 + cw + 6, y + 4, (("{:,.0f}".format(p) if abs(p) >= 1000 else "%.4g" % p))))
     # x labels (KST)
     step = max(1, n // 8)
     for i in range(0, n, step):

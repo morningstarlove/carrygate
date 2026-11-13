@@ -35,6 +35,13 @@ FAMILIES.update({
     "brk60": {"tfs": ("60m",), "strategies": ("brk_20",)},
 })
 
+# 보조 기록 2(제안함 P35, 2026-11-13 추가): "되돌림은 전날 되돌림이 진 날에만 쓴다."
+# 전날 30·60분 되돌림 묶음 합이 0 미만(부호만, 새 숫자 문턱 없음)이면 오늘 되돌림 묶음 합을 성적으로, 아니면 쉰다(0).
+# 11/10 보고에서 평가일 10/13~11/9 사후로 세운 가설. 11/10·11/11 두 날은 제안 뒤 확인했지만 규칙 고정 전이라 사후로 둔다.
+# 순방향은 평가일 2026-11-12 부터(11/12 결과를 보기 전에 규칙을 고정). P30·P34 계산은 건드리지 않는다.
+AUX2_FIXED = "2026-11-13"
+AUX2_FORWARD_FROM = "2026-11-12"
+
 
 def load_history(path="scalp_history.jsonl"):
     rows = []
@@ -88,6 +95,34 @@ def rotate(rows, rev_fam="rev", brk_fam="brk"):
     return out, nxt
 
 
+def rev_after_loss(rows, fam="rev"):
+    """P35: 전날 되돌림 묶음 합 < 0 인 날만 오늘 되돌림을 쓴다. [{eval_day, active, net_pct, rev_pct, prev_rev_pct}], 다음날 쓸지."""
+    days = []
+    for r in rows:
+        rev, nr = family_sum(r, fam)
+        if nr == 0:
+            continue
+        days.append((r.get("eval_day_utc") or r.get("date"), rev))
+    out = []
+    for i in range(1, len(days)):
+        prev = days[i - 1][1]
+        day, rev = days[i]
+        active = prev < 0
+        out.append({"eval_day": day, "active": active, "net_pct": rev if active else 0.0, "rev_pct": rev, "prev_rev_pct": prev})
+    nxt = (days[-1][1] < 0) if days else None
+    return out, nxt
+
+
+def summarize_after_loss(seq):
+    if not seq:
+        return {"days": 0}
+    act = [d for d in seq if d["active"]]
+    return {"days": len(seq), "active_days": len(act), "net_pct": round(sum(d["net_pct"] for d in act), 3),
+            "plus_days": sum(1 for d in act if d["net_pct"] > 0),
+            "rev_only_pct": round(sum(d["rev_pct"] for d in seq), 3),
+            "skipped_rev_pct": round(sum(d["rev_pct"] for d in seq if not d["active"]), 3)}
+
+
 def summarize(seq):
     if not seq:
         return {"days": 0}
@@ -109,7 +144,14 @@ def build(rows):
     aux = {"fixed": AUX_FIXED, "forward_from": AUX_FORWARD_FROM,
            "method": "P34 보조: 60분봉만(되돌림=60분 VWAP 지정가+평균회귀 지정가, 돌파=60분 20봉 돌파) 같은 교대. rev_only_pct 가 '60분 되돌림 고정'",
            "next_pick": nxt60, "backtest": summarize(back60), "forward": summarize(fwd60), "forward_days": fwd60[-30:]}
-    return {"schema": "carrygate-scalp-rotate/2", "rule_fixed": RULE_FIXED, "forward_from": FORWARD_FROM, "aux60": aux,
+    seqL, nxtL = rev_after_loss(rows)
+    aux2 = {"fixed": AUX2_FIXED, "forward_from": AUX2_FORWARD_FROM,
+            "method": "P35 보조: 전날 30·60분 되돌림 묶음 합 < 0 인 날만 오늘 되돌림 묶음을 쓴다(아니면 쉼). skipped_rev_pct = 쉰 날 되돌림이 냈을 합",
+            "next_active": nxtL,
+            "backtest": summarize_after_loss([d for d in seqL if d["eval_day"] < AUX2_FORWARD_FROM]),
+            "forward": summarize_after_loss([d for d in seqL if d["eval_day"] >= AUX2_FORWARD_FROM]),
+            "forward_days": [d for d in seqL if d["eval_day"] >= AUX2_FORWARD_FROM][-30:]}
+    return {"schema": "carrygate-scalp-rotate/3", "rule_fixed": RULE_FIXED, "forward_from": FORWARD_FROM, "aux60": aux, "aux_after_loss": aux2,
             "method": "전날 18시장 합계가 큰 묶음(되돌림=30·60분 VWAP 지정가+평균회귀 지정가, 돌파=30·60분 20봉 돌파; 같으면 되돌림)의 오늘 합계",
             "date": rows[-1].get("date") if rows else None,
             "next_pick": nxt,
@@ -139,6 +181,13 @@ def print_summary(out):
         print("순방향 %s일: 60분만 교대 %+.1f%%  60분 되돌림 고정 %+.1f%%  60분 돌파만 %+.1f%%  교대 플러스일 %s  내일 %s"
               % (af.get("days", 0), af.get("net_pct", 0), af.get("rev_only_pct", 0), af.get("brk_only_pct", 0), af.get("plus_days", "-"),
                  {"rev": "되돌림", "brk": "돌파"}.get(a["next_pick"], "-")))
+    a2 = out.get("aux_after_loss")
+    if a2:
+        for label, x in (("사후", a2["backtest"]), ("순방향(평가일 %s~)" % a2["forward_from"], a2["forward"])):
+            print("%s P35 전날 되돌림이 진 날만: %s일 중 %s일 씀  합 %+.1f%%  플러스 %s/%s  | 되돌림 고정 %+.1f%%  쉰 날 되돌림 %+.1f%%"
+                  % ("---" if label == "사후" else "   ", x.get("days", 0), x.get("active_days", 0), x.get("net_pct", 0),
+                     x.get("plus_days", 0), x.get("active_days", 0), x.get("rev_only_pct", 0), x.get("skipped_rev_pct", 0)) + "  [" + label + "]")
+        print("    내일: %s" % ({True: "되돌림 씀(오늘 되돌림이 마이너스)", False: "쉼(오늘 되돌림이 플러스)"}.get(a2["next_active"], "-")))
 
 
 def main(argv=None):
