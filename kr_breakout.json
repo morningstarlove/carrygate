@@ -1,6 +1,6 @@
 {
  "date": "2026-11-13",
- "generated_at_utc": "2026-11-12T15:41:30Z",
+ "generated_at_utc": "2026-11-13T07:16:54Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -74,15 +74,15 @@
   }
  },
  "forward": {
-  "days": 27,
+  "days": 28,
   "from": "2026-10-05",
-  "to": "2026-11-12",
-  "codes": 312,
+  "to": "2026-11-13",
+  "codes": 318,
   "bar_errors": 0,
   "stale_codes": 0,
   "by_source": {
-   "yahoo+naver_api": 310,
-   "yahoo": 2
+   "yahoo": 249,
+   "yahoo+naver_api": 69
   },
   "skipped_days": [
    "2026-10-05"
@@ -94,42 +94,13 @@
  },
  "signals_today": {
   "base": [],
-  "no_sector": [
-   {
-    "code": "035900",
-    "name": "JYP Entertainment Corp",
-    "group": "Movies/Entertainment",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 45100.0,
-    "pattern_low": 35850.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 48708 이상이면 포기)",
-    "stop_plan": "max(35850, 진입가×0.93)"
-   },
-   {
-    "code": "211270",
-    "name": "Asia Pacific Satellite Inc.",
-    "group": "Telecommunications Equipment",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 10380.0,
-    "pattern_low": 8060.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 11210 이상이면 포기)",
-    "stop_plan": "max(8060, 진입가×0.93)"
-   }
-  ],
+  "no_sector": [],
   "hold_10": [],
   "risk_2": [],
   "no_flag": []
  },
- "signal_date": "2026-11-12",
- "signals_frozen": true,
+ "signal_date": "2026-11-13",
+ "signals_frozen": false,
  "frozen_dates": [
   "2026-10-06",
   "2026-10-07",
@@ -170,8 +141,8 @@
    "avg_loss_pct": -7.31,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -4.91,
-   "equity_final": 9509348,
+   "total_return_pct": -5.3,
+   "equity_final": 9470108,
    "max_drawdown_pct": 10.79,
    "avg_hold_days": 4.25,
    "skipped": {
@@ -226,7 +197,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -4.91
+    "2026": -5.3
    },
    "open_positions": [
     {
@@ -238,9 +209,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 6,
-     "bars_held": 19,
-     "last_close": 210500.0,
-     "unrealized_pct": 8.24
+     "bars_held": 20,
+     "last_close": 214000.0,
+     "unrealized_pct": 10.04
     },
     {
      "code": "267850",
@@ -251,9 +222,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 132,
-     "bars_held": 7,
-     "last_close": 13620.0,
-     "unrealized_pct": 41.3
+     "bars_held": 8,
+     "last_close": 13000.0,
+     "unrealized_pct": 34.87
     },
     {
      "code": "128940",
@@ -264,9 +235,9 @@
      "entry": 445833.5,
      "stop": 414625.15,
      "shares": 2,
-     "bars_held": 5,
-     "last_close": 454000.0,
-     "unrealized_pct": 1.83
+     "bars_held": 6,
+     "last_close": 465500.0,
+     "unrealized_pct": 4.41
     },
     {
      "code": "326030",
@@ -277,30 +248,30 @@
      "entry": 86759.5,
      "stop": 80686.33,
      "shares": 14,
-     "bars_held": 5,
-     "last_close": 88000.0,
-     "unrealized_pct": 1.43
+     "bars_held": 6,
+     "last_close": 87900.0,
+     "unrealized_pct": 1.31
     }
    ]
   },
   "no_sector": {
    "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
    "signals": 88,
-   "trades": 24,
+   "trades": 26,
    "wins": 1,
-   "win_rate": 4.17,
+   "win_rate": 3.85,
    "avg_win_pct": 6.57,
-   "avg_loss_pct": -7.14,
-   "payoff": 0.92,
+   "avg_loss_pct": -7.21,
+   "payoff": 0.91,
    "profit_factor": 0.04,
-   "total_return_pct": -16.43,
-   "equity_final": 8356571,
-   "max_drawdown_pct": 16.43,
-   "avg_hold_days": 4.12,
+   "total_return_pct": -18.36,
+   "equity_final": 8163861,
+   "max_drawdown_pct": 18.36,
+   "avg_hold_days": 4.27,
    "skipped": {
     "gap": 0,
-    "limit": 57,
-    "cooldown": 0,
+    "limit": 58,
+    "cooldown": 4,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -322,28 +293,28 @@
      "pnl_krw": -401380
     },
     "box": {
-     "n": 10,
+     "n": 12,
      "wins": 0,
-     "pnl_krw": -853945
+     "pnl_krw": -1041400
     }
    },
    "by_sync": {
     "day": {
-     "n": 5,
+     "n": 6,
      "wins": 0,
-     "pnl_krw": -463564
+     "pnl_krw": -548490
     },
     "none": {
-     "n": 19,
+     "n": 20,
      "wins": 1,
-     "pnl_krw": -1542224
+     "pnl_krw": -1644753
     }
    },
    "by_exit": {
     "stop": {
-     "n": 22,
+     "n": 24,
      "wins": 0,
-     "pnl_krw": -2055765
+     "pnl_krw": -2243220
     },
     "low10": {
      "n": 2,
@@ -353,13 +324,13 @@
    },
    "by_year": {
     "2026": {
-     "n": 24,
+     "n": 26,
      "wins": 1,
-     "pnl_krw": -2005788
+     "pnl_krw": -2193243
     }
    },
    "yearly_return_pct": {
-    "2026": -16.43
+    "2026": -18.36
    },
    "open_positions": [
     {
@@ -371,35 +342,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 125,
-     "bars_held": 7,
-     "last_close": 13620.0,
-     "unrealized_pct": 41.3
-    },
-    {
-     "code": "015760",
-     "name": "Korea Electric Power Corporation",
-     "group": "Electric Utilities",
-     "pattern": "box",
-     "entry_date": "2026-11-05",
-     "entry": 30892.4,
-     "stop": 28729.93,
-     "shares": 39,
-     "bars_held": 6,
-     "last_close": 29750.0,
-     "unrealized_pct": -3.7
-    },
-    {
-     "code": "035420",
-     "name": "NAVER Corp.",
-     "group": "Packaged Software",
-     "pattern": "box",
-     "entry_date": "2026-11-09",
-     "entry": 190068.5,
-     "stop": 176763.7,
-     "shares": 6,
-     "bars_held": 4,
-     "last_close": 180900.0,
-     "unrealized_pct": -4.82
+     "bars_held": 8,
+     "last_close": 13000.0,
+     "unrealized_pct": 34.87
     },
     {
      "code": "003490",
@@ -410,26 +355,39 @@
      "entry": 32597.5,
      "stop": 30315.67,
      "shares": 39,
-     "bars_held": 2,
-     "last_close": 31700.0,
-     "unrealized_pct": -2.75
+     "bars_held": 3,
+     "last_close": 31550.0,
+     "unrealized_pct": -3.21
+    },
+    {
+     "code": "035900",
+     "name": "JYP Entertainment Corp",
+     "group": "Movies/Entertainment",
+     "pattern": "box",
+     "entry_date": "2026-11-13",
+     "entry": 44332.6,
+     "stop": 41229.32,
+     "shares": 26,
+     "bars_held": 1,
+     "last_close": 43500.0,
+     "unrealized_pct": -1.88
     }
    ]
   },
   "hold_10": {
    "label": "동조 + 패턴, 보유 10일",
    "signals": 31,
-   "trades": 13,
+   "trades": 14,
    "wins": 1,
-   "win_rate": 7.69,
+   "win_rate": 7.14,
    "avg_win_pct": 4.89,
-   "avg_loss_pct": -6.92,
+   "avg_loss_pct": -6.96,
    "payoff": 0.62,
    "profit_factor": 0.05,
-   "total_return_pct": -5.39,
-   "equity_final": 9461362,
+   "total_return_pct": -6.35,
+   "equity_final": 9365081,
    "max_drawdown_pct": 9.48,
-   "avg_hold_days": 4.23,
+   "avg_hold_days": 4.29,
    "skipped": {
     "gap": 0,
     "limit": 13,
@@ -450,9 +408,9 @@
      "pnl_krw": -87356
     },
     "box": {
-     "n": 5,
+     "n": 6,
      "wins": 0,
-     "pnl_krw": -469432
+     "pnl_krw": -568513
     },
     "triangle": {
      "n": 2,
@@ -462,16 +420,16 @@
    },
    "by_sync": {
     "day": {
-     "n": 13,
+     "n": 14,
      "wins": 1,
-     "pnl_krw": -1042152
+     "pnl_krw": -1141233
     }
    },
    "by_exit": {
     "stop": {
-     "n": 11,
+     "n": 12,
      "wins": 0,
-     "pnl_krw": -1067067
+     "pnl_krw": -1166148
     },
     "hold10": {
      "n": 2,
@@ -481,13 +439,13 @@
    },
    "by_year": {
     "2026": {
-     "n": 13,
+     "n": 14,
      "wins": 1,
-     "pnl_krw": -1042152
+     "pnl_krw": -1141233
     }
    },
    "yearly_return_pct": {
-    "2026": -5.39
+    "2026": -6.35
    },
    "open_positions": [
     {
@@ -499,9 +457,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 134,
-     "bars_held": 7,
-     "last_close": 13620.0,
-     "unrealized_pct": 41.3
+     "bars_held": 8,
+     "last_close": 13000.0,
+     "unrealized_pct": 34.87
     },
     {
      "code": "128940",
@@ -512,9 +470,9 @@
      "entry": 445833.5,
      "stop": 414625.15,
      "shares": 2,
-     "bars_held": 5,
-     "last_close": 454000.0,
-     "unrealized_pct": 1.83
+     "bars_held": 6,
+     "last_close": 465500.0,
+     "unrealized_pct": 4.41
     },
     {
      "code": "326030",
@@ -525,22 +483,9 @@
      "entry": 86759.5,
      "stop": 80686.33,
      "shares": 15,
-     "bars_held": 5,
-     "last_close": 88000.0,
-     "unrealized_pct": 1.43
-    },
-    {
-     "code": "035420",
-     "name": "NAVER Corp.",
-     "group": "Packaged Software",
-     "pattern": "box",
-     "entry_date": "2026-11-09",
-     "entry": 190068.5,
-     "stop": 176763.7,
-     "shares": 7,
-     "bars_held": 4,
-     "last_close": 180900.0,
-     "unrealized_pct": -4.82
+     "bars_held": 6,
+     "last_close": 87900.0,
+     "unrealized_pct": 1.31
     }
    ]
   },
@@ -554,8 +499,8 @@
    "avg_loss_pct": -7.24,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -5.7,
-   "equity_final": 9430443,
+   "total_return_pct": -6.77,
+   "equity_final": 9322803,
    "max_drawdown_pct": 16.49,
    "avg_hold_days": 3.2,
    "skipped": {
@@ -610,7 +555,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -5.7
+    "2026": -6.77
    },
    "open_positions": [
     {
@@ -622,9 +567,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 13,
-     "bars_held": 19,
-     "last_close": 210500.0,
-     "unrealized_pct": 8.24
+     "bars_held": 20,
+     "last_close": 214000.0,
+     "unrealized_pct": 10.04
     },
     {
      "code": "267850",
@@ -635,9 +580,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 247,
-     "bars_held": 7,
-     "last_close": 13620.0,
-     "unrealized_pct": 41.3
+     "bars_held": 8,
+     "last_close": 13000.0,
+     "unrealized_pct": 34.87
     }
    ]
   },
@@ -651,8 +596,8 @@
    "avg_loss_pct": -7.24,
    "payoff": null,
    "profit_factor": 0.0,
-   "total_return_pct": -0.88,
-   "equity_final": 9912382,
+   "total_return_pct": -1.63,
+   "equity_final": 9836942,
    "max_drawdown_pct": 7.59,
    "avg_hold_days": 5,
    "skipped": {
@@ -702,7 +647,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -0.88
+    "2026": -1.63
    },
    "open_positions": [
     {
@@ -714,9 +659,9 @@
      "entry": 194481.7,
      "stop": 180867.98,
      "shares": 7,
-     "bars_held": 19,
-     "last_close": 210500.0,
-     "unrealized_pct": 8.24
+     "bars_held": 20,
+     "last_close": 214000.0,
+     "unrealized_pct": 10.04
     },
     {
      "code": "267850",
@@ -727,9 +672,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 137,
-     "bars_held": 7,
-     "last_close": 13620.0,
-     "unrealized_pct": 41.3
+     "bars_held": 8,
+     "last_close": 13000.0,
+     "unrealized_pct": 34.87
     },
     {
      "code": "326030",
@@ -740,9 +685,9 @@
      "entry": 86759.5,
      "stop": 80686.33,
      "shares": 15,
-     "bars_held": 5,
-     "last_close": 88000.0,
-     "unrealized_pct": 1.43
+     "bars_held": 6,
+     "last_close": 87900.0,
+     "unrealized_pct": 1.31
     },
     {
      "code": "0126Z0",
@@ -753,9 +698,9 @@
      "entry": 344029.0,
      "stop": 319946.97,
      "shares": 3,
-     "bars_held": 5,
-     "last_close": 347000.0,
-     "unrealized_pct": 0.86
+     "bars_held": 6,
+     "last_close": 342500.0,
+     "unrealized_pct": -0.44
     }
    ]
   }
@@ -1568,6 +1513,50 @@
     "pnl_pct": -7.45,
     "hold_days": 1,
     "gap": false
+   },
+   {
+    "code": "015760",
+    "name": "Korea Electric Power Corporation",
+    "group": "Electric Utilities",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": null,
+    "signal_date": "2026-11-04",
+    "entry_date": "2026-11-05",
+    "entry": 30892.4,
+    "stop": 28729.93,
+    "exit_date": "2026-11-13",
+    "exit": 28314.8,
+    "why": "stop",
+    "shares": 39,
+    "pnl_krw": -102529,
+    "pnl_pct": -8.51,
+    "hold_days": 7,
+    "gap": true
+   },
+   {
+    "code": "035420",
+    "name": "NAVER Corp.",
+    "group": "Packaged Software",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-11-06",
+    "entry_date": "2026-11-09",
+    "entry": 190068.5,
+    "stop": 176763.7,
+    "exit_date": "2026-11-13",
+    "exit": 176233.41,
+    "why": "stop",
+    "shares": 6,
+    "pnl_krw": -84926,
+    "pnl_pct": -7.45,
+    "hold_days": 5,
+    "gap": false
    }
   ],
   "hold_10": [
@@ -1858,6 +1847,28 @@
     "why": "stop",
     "shares": 6,
     "pnl_krw": -93665,
+    "pnl_pct": -7.45,
+    "hold_days": 5,
+    "gap": false
+   },
+   {
+    "code": "035420",
+    "name": "NAVER Corp.",
+    "group": "Packaged Software",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-11-06",
+    "entry_date": "2026-11-09",
+    "entry": 190068.5,
+    "stop": 176763.7,
+    "exit_date": "2026-11-13",
+    "exit": 176233.41,
+    "why": "stop",
+    "shares": 7,
+    "pnl_krw": -99081,
     "pnl_pct": -7.45,
     "hold_days": 5,
     "gap": false

@@ -1,12 +1,12 @@
 {
- "schema": "carrygate-scalp-rotate/2",
+ "schema": "carrygate-scalp-rotate/3",
  "rule_fixed": "2026-11-07",
  "forward_from": "2026-11-06",
  "aux60": {
   "fixed": "2026-11-08",
   "forward_from": "2026-11-08",
   "method": "P34 보조: 60분봉만(되돌림=60분 VWAP 지정가+평균회귀 지정가, 돌파=60분 20봉 돌파) 같은 교대. rev_only_pct 가 '60분 되돌림 고정'",
-  "next_pick": "rev",
+  "next_pick": "brk",
   "backtest": {
    "days": 25,
    "net_pct": -45.014,
@@ -16,12 +16,12 @@
    "picked_rev": 17
   },
   "forward": {
-   "days": 4,
-   "net_pct": -97.02,
+   "days": 5,
+   "net_pct": -109.141,
    "plus_days": 0,
-   "rev_only_pct": -52.587,
-   "brk_only_pct": -15.115,
-   "picked_rev": 2
+   "rev_only_pct": -64.708,
+   "brk_only_pct": -17.781,
+   "picked_rev": 3
   },
   "forward_days": [
    {
@@ -51,12 +51,50 @@
     "net_pct": -21.7012,
     "rev_pct": 12.4834,
     "brk_pct": -21.7012
+   },
+   {
+    "eval_day": "2026-11-12",
+    "pick": "rev",
+    "net_pct": -12.1207,
+    "rev_pct": -12.1207,
+    "brk_pct": -2.666
+   }
+  ]
+ },
+ "aux_after_loss": {
+  "fixed": "2026-11-13",
+  "forward_from": "2026-11-12",
+  "method": "P35 보조: 전날 30·60분 되돌림 묶음 합 < 0 인 날만 오늘 되돌림 묶음을 쓴다(아니면 쉼). skipped_rev_pct = 쉰 날 되돌림이 냈을 합",
+  "next_active": true,
+  "backtest": {
+   "days": 29,
+   "active_days": 10,
+   "net_pct": 184.026,
+   "plus_days": 9,
+   "rev_only_pct": -126.681,
+   "skipped_rev_pct": -310.708
+  },
+  "forward": {
+   "days": 1,
+   "active_days": 0,
+   "net_pct": 0,
+   "plus_days": 0,
+   "rev_only_pct": -44.0,
+   "skipped_rev_pct": -44.0
+  },
+  "forward_days": [
+   {
+    "eval_day": "2026-11-12",
+    "active": false,
+    "net_pct": 0.0,
+    "rev_pct": -43.9997,
+    "prev_rev_pct": 47.0913
    }
   ]
  },
  "method": "전날 18시장 합계가 큰 묶음(되돌림=30·60분 VWAP 지정가+평균회귀 지정가, 돌파=30·60분 20봉 돌파; 같으면 되돌림)의 오늘 합계",
- "date": "2026-11-12",
- "next_pick": "rev",
+ "date": "2026-11-13",
+ "next_pick": "brk",
  "backtest": {
   "days": 23,
   "net_pct": 101.126,
@@ -66,12 +104,12 @@
   "picked_rev": 16
  },
  "forward": {
-  "days": 6,
-  "net_pct": -223.764,
+  "days": 7,
+  "net_pct": -267.764,
   "plus_days": 1,
-  "rev_only_pct": -61.816,
-  "brk_only_pct": -36.217,
-  "picked_rev": 3
+  "rev_only_pct": -105.816,
+  "brk_only_pct": -37.455,
+  "picked_rev": 4
  },
  "forward_days": [
   {
@@ -115,6 +153,13 @@
    "net_pct": -44.9703,
    "rev_pct": 47.0913,
    "brk_pct": -44.9703
+  },
+  {
+   "eval_day": "2026-11-12",
+   "pick": "rev",
+   "net_pct": -43.9997,
+   "rev_pct": -43.9997,
+   "brk_pct": -1.2381
   }
  ],
  "min_forward_days": 14
