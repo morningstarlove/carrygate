@@ -87,6 +87,8 @@
 
 **2026-11-12 추세 전환 4시간봉 검산 빨간불 수정:** 11/8 16:00 봉에 업비트 BTC·ETH 가 시간 초과로 빠져 `reversal_4h` 가 9회 연속 실패(기록 저장은 정상). 실패 코인 1회 재시도, 빠지면 `missing` 표시, 검산은 표시된 봉을 기록만. 지난 줄엔 로그로 확인된 `missing` 만 덧붙임. `docs/sessions/2026-11-12_reversal_selfcheck_red.md`.
 
+**2026-11-13 SNS 카드 Breaker Block 검토 (제안함 P36, 트랙 없음):** 카드 규칙을 결과 전 숫자로 고정해 코인 5·금·유로달러·나스닥 × 4H·1H 1,465건 측정 — 수수료 뒤 건당 −0.105R, 같은 손절·목표의 무작위 진입 대비 +0.003R(t +0.07) = 패턴의 몫 0. `docs/BREAKER_BLOCK_REVIEW.md`, 재현 `python scripts/breaker_check.py`(자료 `data/breaker/`), 카드 `docs/cards/p36_breaker_block.svg`. **사용자 결정 대기: A 기록만(권장) / B 순방향 연구 기록.**
+
 **사용자 결정 대기:** 없음. 10/29 SNS 글 두 건(이평선 수렴 매매법 P24, CIS 원칙 P25)은 사용자 결정 "A" 로 기록만 — `docs/MA_CONVERGENCE_REVIEW.md`·`docs/CIS_PRINCIPLES_REVIEW.md`, 트랙·규칙 변경 없음. 11/4 SNS 카드 볼린저밴드 하단 재진입(P27)도 기록만 — `docs/BB_REENTRY_REVIEW.md`, 15종목 1,535건 수수료 뒤 매수보유 대비 우위 없음, 트랙·규칙 변경 없음. 다음은 11/4 초단타 재확인과 첫 판정이 뜨는 날. **10/22 신설 급상승 패턴 트랙**: 백테스트 표 기록·현황판 카드(타일·카드·판정 줄, 라이브 버전)까지 끝. 갱신 Routine 파일 목록에 `retest.json` 도 반영 확인(10/24). 남은 것: Actions 에서 오프라인 고정 봉 저장(`--save-fixture`).
 
 **2026-10-15 백테스트 과적합 논문 검토 → 판정기 보강 (제안함 P17·P18 반영):** 댓글 권고로 Bailey·López de Prado·Harvey·Hansen 등 17편을 읽고 공식을 실데이터에 대입(`docs/BACKTEST_OVERFITTING_REVIEW.md`, `scripts/overfit_check.py`). 발견: 초단타 10/7 PASS(후보 12개)는 실력 0 이어도 뜨는 후보 수(378개 중 42~53개)의 1/4 이었고, 터틀·추세전환 20건 합격선은 실력 0 도 19~40% 확률로 PASS 한다. 반영: ① `criteria.json scalp.noise_floor` — 부호 뒤집기 500회의 후보 수 중앙값보다 실제 후보가 많아야 PASS, 같거나 적으면 NOT_YET(잡음 이하). ② 판정 파일 각 거래소에 `interpretation`(실력 0 PASS 확률·놓칠 확률·필요 건수 MinTRL·t>3). 합격선 숫자·매매 규칙 변경 없음, criteria sealed 2026-10-15, 잠금 재생성. 현황판 카드에는 아직 안 올렸다(판정 파일에만). 작업 기록 `docs/sessions/2026-10-15_backtest_overfitting.md`.
