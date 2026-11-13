@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""판정 규율 — 네 트랙(한국주식 돌파·터틀·추세전환·초단타)의 순방향 기록을 한 곳에서 채점한다.
+"""판정 규율 — 트랙들(한국주식 돌파·터틀·추세전환·초단타·급상승 패턴·예측 v2·BTC 사이클)의 순방향 기록을 한 곳에서 채점한다.
 
 Phil(bennyjo/phil) 에서 가져온 방법 세 가지:
   1. 사전 등록: 합격선은 결과가 나오기 전에 criteria.json 에 봉인한다. 이 파일은 기준을 만들지 않고 읽기만 한다.
@@ -356,6 +356,32 @@ def judge_forecast(history_rows, crit):
     return out
 
 
+def judge_cycle(c, crit):
+    """cycle.json(분할매수·DCA 종이 기록)에 criteria.json cycle 을 적용한다 (제안함 P36).
+    평균단가 비율 = 분할매수 평균 ÷ DCA 평균. 체결 0건이면 조건 미발생으로 NOT_YET."""
+    lad, dca = c.get("ladder") or {}, c.get("dca") or {}
+    days = c.get("forward_days") or 0
+    ended = bool(c.get("cycle_end"))
+    ratio = (lad["avg_cost"] / dca["avg_cost"]) if lad.get("avg_cost") and dca.get("avg_cost") else None
+    out = {"forward_days": days, "bar_date": c.get("bar_date"), "close": c.get("close"), "dd_pct": c.get("dd_pct"),
+           "ladder_n": lad.get("n", 0), "ladder_avg": lad.get("avg_cost"), "ladder_mtm_pct": lad.get("mtm_pct"),
+           "dca_n": dca.get("n", 0), "dca_avg": dca.get("avg_cost"), "dca_mtm_pct": dca.get("mtm_pct"),
+           "avg_cost_ratio": round(ratio, 4) if ratio is not None else None, "cycle_end": ended, "warnings": []}
+    if days < crit["min_days"] and not ended:
+        out["status"], out["reason"] = NOT_YET, "순방향 %d일 — 최소 %d일 전에는 판단하지 않는다 (분할매수 %d/4)" % (days, crit["min_days"], out["ladder_n"])
+    elif not out["ladder_n"]:
+        out["status"], out["reason"] = NOT_YET, "순방향 %d일, 분할매수 체결 0건 — 조건 미발생" % days
+    elif ratio is None:
+        out["status"], out["reason"] = NOT_YET, "DCA 기록 없음"
+    elif ratio > crit["fail_if_avg_cost_vs_dca_above"]:
+        out["status"], out["reason"] = FAIL, "평균단가 비율 %.3f > %.2f — 정액 매수보다 비싸게 샀다" % (ratio, crit["fail_if_avg_cost_vs_dca_above"])
+    elif ratio <= crit["pass_if_avg_cost_vs_dca_at_most"] and (not crit.get("pass_requires_mtm_positive") or (lad.get("mtm_pct") or 0) > 0):
+        out["status"], out["reason"] = PASS, "평균단가 비율 %.3f ≤ %.2f, 평가 %s%% — 소액 실전 설계 후보" % (ratio, crit["pass_if_avg_cost_vs_dca_at_most"], lad.get("mtm_pct"))
+    else:
+        out["status"], out["reason"] = NOT_YET, "평균단가 비율 %.3f, 평가 %s%% — 합격선 사이, 더 모은다" % (ratio, lad.get("mtm_pct"))
+    return out
+
+
 # ----------------------------------------------------------------- 규칙 잠금
 
 def _file_sha(path):
@@ -366,7 +392,7 @@ def _file_sha(path):
 def current_rules():
     """세 트랙 + 초단타의 규칙 상수를 소스에서 그대로 읽는다 (저장된 JSON 이 아니라 코드가 기준)."""
     sys.path.insert(0, HERE)
-    import kr_breakout as KB, turtle as T, reversal as R, scalp as S, retest as RT, forecast as F
+    import kr_breakout as KB, turtle as T, reversal as R, scalp as S, retest as RT, forecast as F, cycle as CY, index_event as IE
     turtle_rules = {"entry_breakout_days": T.ENTRY_N, "exit_breakout_days": T.EXIT_N, "atr_days": T.ATR_N,
                     "stop_n_mult": T.STOP_MULT, "risk_pct_per_trade": T.RISK_PCT, "max_notional_pct": T.MAX_NOTIONAL_PCT,
                     "slippage_pct": T.SLIPPAGE_PCT,
@@ -388,6 +414,8 @@ def current_rules():
         "retest": {"rule_fixed": RT.RULE_FIXED, "rules": RT.rules_dict()},
         "scalp": {"rules": scalp_rules},
         "forecast": {"rule_fixed": F.RULE_FIXED, "rules": F.rules_dict()},
+        "cycle": {"rule_fixed": CY.RULE_FIXED, "rules": CY.rules_dict()},
+        "index_event": {"rule_fixed": IE.RULE_FIXED, "rules": IE.rules_dict()},
         "criteria_sha256": _file_sha(CRITERIA_PATH),
     }
 
@@ -492,6 +520,14 @@ def build(crit=None, files=None):
     except Exception as e:
         out["errors"]["forecast"] = "%s: %s" % (type(e).__name__, e)
     try:
+        cy = get("cycle.json")
+        if cy:
+            out["tracks"]["cycle"] = judge_cycle(cy, crit["cycle"])
+        else:
+            out["errors"]["cycle"] = "cycle.json 없음"
+    except Exception as e:
+        out["errors"]["cycle"] = "%s: %s" % (type(e).__name__, e)
+    try:
         diffs = check_lock()
         out["rules_lock"] = {"ok": not diffs, "diffs": diffs}
     except Exception as e:
@@ -519,6 +555,10 @@ def history_line(out):
         line["forecast"] = {"days": fc["days"], "points": fc["points"], "size_ratio": fc["size"]["all"]["ratio_high_low"],
                             "hit": {nm: fc["direction"]["all"][nm]["hit_rate"] for nm in ("D1", "D2", "D3")},
                             "brier": {nm: fc["direction"]["all"][nm]["brier"] for nm in ("D1", "D2", "D3")}}
+    if "cycle" in t:
+        cy = t["cycle"]
+        line["cycle"] = {"days": cy["forward_days"], "dd": cy["dd_pct"], "n": cy["ladder_n"], "ratio": cy["avg_cost_ratio"],
+                         "mtm": cy["ladder_mtm_pct"], "dca_mtm": cy["dca_mtm_pct"]}
     return line
 
 
@@ -589,6 +629,12 @@ def print_summary(out):
             print("   %s %-7s %s" % (nm, pr["status"], pr["reason"]))
         for w in fc.get("warnings", []):
             print("   ⚠ " + w)
+    if "cycle" in t:
+        cy = t["cycle"]
+        print("[cycle] %-7s %s" % (cy["status"], cy["reason"]))
+        print("   %s 종가 %s 낙폭 %s%% | 분할매수 %d/4 평균 %s 평가 %s%% | DCA %d회 평균 %s 평가 %s%%" % (
+            cy["bar_date"], cy["close"], cy["dd_pct"], cy["ladder_n"], cy["ladder_avg"] or "-", cy["ladder_mtm_pct"] if cy["ladder_mtm_pct"] is not None else "-",
+            cy["dca_n"], cy["dca_avg"] or "-", cy["dca_mtm_pct"] if cy["dca_mtm_pct"] is not None else "-"))
     rl = out["rules_lock"]
     print("[rules_lock] %s" % ("일치" if rl["ok"] else "불일치 — 사전 등록 없이 규칙이 바뀌었다"))
     for d in rl["diffs"]:

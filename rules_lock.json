@@ -1,7 +1,40 @@
 {
   "_comment": "규칙 잠금. 트랙 코드의 규칙 상수와 criteria.json 지문을 적어 둔다. tests/test_verdict.py 가 매번 대조하므로, 규칙을 바꾸면 반드시 (1) proposals.md 에 근거 (2) 그 트랙의 RULE_FIXED 를 새 날짜로 (3) `python verdict.py --lock` 순서로 간다.",
-  "_locked_at": "2026-11-08T02:58:16Z",
-  "criteria_sha256": "e63f1c6c5f62f8c4591e69bfff15fda4f3f07d5f83b25d54c31908e8571773e0",
+  "_locked_at": "2026-11-13T06:34:45Z",
+  "criteria_sha256": "254a70b4d59ce02db2ee29edb8fc70a2ea6b6cfe91072cc41a0f60d539b8b23a",
+  "cycle": {
+    "rule_fixed": "2026-11-13",
+    "rules": {
+      "ath_close": 124728.0,
+      "ath_date": "2025-10-06",
+      "dca_every_days": 7,
+      "exit": "none; cycle ends on close > ath_close",
+      "fee_pct": 0.1,
+      "forward_from": "2026-11-13",
+      "ladder": [
+        [
+          "L50",
+          -0.5
+        ],
+        [
+          "L60",
+          -0.6
+        ],
+        [
+          "L70",
+          -0.7
+        ]
+      ],
+      "slippage_pct": 0.05,
+      "source": "bitstamp btcusd 1d close (fallback okx BTC-USDT 1Dutc)",
+      "tranche": 0.25,
+      "trend": {
+        "max_dd": -0.3,
+        "name": "T200",
+        "sma_days": 200
+      }
+    }
+  },
   "forecast": {
     "rule_fixed": "2026-11-06",
     "rules": {
@@ -41,6 +74,26 @@
         33.3,
         66.7
       ]
+    }
+  },
+  "index_event": {
+    "rule_fixed": "2026-11-13",
+    "rules": {
+      "events": [
+        {
+          "announce": "2026-11-11",
+          "bench": "IBIT",
+          "desc": "MSCI USA·World·ACWI 에서 Strategy(MSTR) 편출 (2026-11 정기변경, 비영업 회사 규칙)",
+          "effective": "2026-11-30",
+          "hold_days": 20,
+          "id": "msci_mstr_2026_11",
+          "ref": "2026-11-13",
+          "ticker": "MSTR"
+        }
+      ],
+      "fee_pct": 0.05,
+      "leg_a": "ref close -> effective close, excess = ticker - bench, hypothesis excess < 0",
+      "leg_b": "long ticker / short bench at effective close, exit after hold_days trading days, minus 4 fills fee, hypothesis > 0"
     }
   },
   "kr_breakout": {
