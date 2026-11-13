@@ -577,6 +577,26 @@ class RegimeRotate(unittest.TestCase):
         self.assertEqual(out["forward"]["net_pct"], 4.0)            # P30 그대로: 11/7 돌파 5 + 11/8 돌파 −1
         self.assertEqual(out["next_pick"], "brk")                   # P30: 11/8 되돌림 −6 < 돌파 −1
 
+    def test_after_loss_uses_reversion_only_after_losing_day(self):
+        """P35 보조: 전날 되돌림 합 < 0 인 날만 오늘 되돌림. 부호만, 새 문턱 없음. P30 결과는 그대로."""
+        import scalp_rotate as R
+        self.assertEqual(R.AUX2_FORWARD_FROM, "2026-11-12")
+        rows = [self._rec("2026-11-10", -5.0, 0.0), self._rec("2026-11-11", 3.0, 0.0),
+                self._rec("2026-11-12", 4.0, 1.0), self._rec("2026-11-13", -2.0, 0.0), self._rec("2026-11-14", 6.0, 0.0)]
+        seq, nxt = R.rev_after_loss(rows)
+        self.assertEqual([d["active"] for d in seq], [True, False, False, True])   # 전날 −5 → 씀, +3 → 쉼, +4 → 쉼, −2 → 씀
+        self.assertEqual([d["net_pct"] for d in seq], [3.0, 0.0, 0.0, 6.0])
+        self.assertTrue(nxt is False)                                               # 마지막 날 +6 → 다음날 쉼
+        out = R.build(rows)
+        a = out["aux_after_loss"]
+        self.assertEqual(a["backtest"]["days"], 1)          # 11/11
+        self.assertEqual(a["forward"]["days"], 3)           # 11/12~11/14
+        self.assertEqual(a["forward"]["active_days"], 1)
+        self.assertEqual(a["forward"]["net_pct"], 6.0)
+        self.assertEqual(a["forward"]["skipped_rev_pct"], 2.0)   # 11/12 +4, 11/13 −2
+        self.assertEqual(a["forward"]["rev_only_pct"], 8.0)
+        self.assertIn("aux60", out)                          # P34 그대로
+
 
 if __name__ == "__main__":
     unittest.main()

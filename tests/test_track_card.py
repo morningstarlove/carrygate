@@ -34,6 +34,16 @@ class Render(unittest.TestCase):
         self.assertIn("<circle", svg)
         self.assertIn("+0.50%", svg)
 
+    def test_bands_drawn_behind(self):
+        bars = synth_bars()
+        spec = {"title": "t", "bands": [{"from": bars[0]["t"], "to": bars[48]["t"], "color": "#1a7f37", "label": "씀\n+3.0%"},
+                                        {"from": bars[48]["t"], "to": bars[96]["t"], "color": "#888888", "label": "쉼"}]}
+        svg = track_card.render(bars, spec, [], [], {})
+        xml.dom.minidom.parseString(svg)
+        self.assertEqual(svg.count('fill-opacity="0.13"'), 2)
+        self.assertIn("+3.0%", svg)
+        self.assertLess(svg.index('fill-opacity="0.13"'), svg.index("<line"))   # 배경이 격자·캔들보다 먼저
+
     def test_preset_scalp_runs_rules(self):
         bars = synth_bars(400)
         spec = {"venue": "okx", "preset_tf": 30, "preset_strategies": ["vwap_fade_lim", "brk_20"]}
