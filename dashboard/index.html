@@ -81,6 +81,7 @@ details{margin-top:8px} summary{cursor:pointer;font-size:13px;color:var(--accent
     <div class="tile"><div class="k">터틀 추세</div><div class="v" id="t-turtle">…</div><div class="d" id="t-turtle-d"></div></div>
     <div class="tile"><div class="k">추세 전환 4H</div><div class="v" id="t-rev">…</div><div class="d" id="t-rev-d"></div></div>
     <div class="tile"><div class="k">급상승 패턴 1H</div><div class="v" id="t-retest">…</div><div class="d" id="t-retest-d"></div></div>
+    <div class="tile"><div class="k">BTC 사이클 낙폭</div><div class="v" id="t-cycle">…</div><div class="d" id="t-cycle-d"></div></div>
     <div class="tile"><div class="k">예측 v2 (12h 폭)</div><div class="v" id="t-forecast">…</div><div class="d" id="t-forecast-d"></div></div>
     <div class="tile"><div class="k">한국 주식 돌파</div><div class="v" id="t-kr">…</div><div class="d" id="t-kr-d"></div></div>
     <div class="tile"><div class="k">초단타 기록</div><div class="v" id="t-scalp">…</div><div class="d" id="t-scalp-d"></div></div>
@@ -102,6 +103,7 @@ details{margin-top:8px} summary{cursor:pointer;font-size:13px;color:var(--accent
       <section class="card wide" id="s-kr"><h2>한국 주식 ① 거래대금 상위 100 · 업종 동조 <span class="when"></span></h2><div class="body"><div class="skeleton"></div><div class="skeleton"></div></div></section>
       <section class="card wide" id="s-krb"><h2>한국 주식 ② 패턴 돌파 종이매매 (순방향) <span class="when"></span></h2><div class="body"><div class="skeleton"></div><div class="skeleton"></div></div></section>
       <section class="card wide" id="s-krbt"><h2>한국 주식 ③ 3년 백테스트 <span class="when"></span></h2><div class="body"><div class="skeleton"></div></div></section>
+      <section class="card wide" id="s-cycle"><h2>BTC 사이클 낙폭 분할매수 (일봉 · −50·−60·−70% 계단 + 200일선 위로 건넘 · 각 25% · 주 1회 정액 매수와 비교, 장기) <span class="when"></span></h2><div class="body"><div class="skeleton"></div><div class="skeleton"></div></div></section>
       <section class="card wide" id="s-grid"><h2>그리드 · 종사종팔 v4/v5 (SOXL, 종가 분할 매매) <span class="when"></span></h2><div class="body"><div class="skeleton"></div><div class="skeleton"></div></div></section>
     </div>
   </div>
@@ -119,6 +121,7 @@ details{margin-top:8px} summary{cursor:pointer;font-size:13px;color:var(--accent
     <p class="desc">매매 규칙이 아니라 "언제·무엇이 통하나"를 매일 쌓는 것. 결론이 나면 위의 매매 전략으로 올라간다.</p>
     <div class="grid">
       <section class="card wide" id="s-forecast"><h2>예측 v2 (2시간봉 · 앞 12시간 움직임 크기 · 방향 확률은 채점만 · 매매에 안 씀) <span class="when"></span></h2><div class="body"><div class="skeleton"></div><div class="skeleton"></div></div></section>
+      <section class="card wide" id="s-idx"><h2>지수 편출 이벤트 (MSCI 의 Strategy 편출 · MSTR − IBIT 초과 수익 · 기록만) <span class="when"></span></h2><div class="body"><div class="skeleton"></div></div></section>
       <section class="card" id="s-scalp"><h2>초단타 고정 규칙 성적표 (1·5·15분봉) <span class="when"></span></h2><div class="body"><div class="skeleton"></div><div class="skeleton"></div></div></section>
       <section class="card" id="s-research"><h2>초단타 보조 연구 (시간대 · 펀딩 · 선행) <span class="when"></span></h2><div class="body"><div class="skeleton"></div></div></section>
       <section class="card" id="s-orderbook"><h2>호가창 (호가 폭 · 잔량 불균형) <span class="when"></span></h2><div class="body"><div class="skeleton"></div></div></section>
@@ -137,7 +140,7 @@ details{margin-top:8px} summary{cursor:pointer;font-size:13px;color:var(--accent
   var FILES={status:"status.json",funding:"funding.json",basis:"basis.json",turtle:"turtle.json",reversal:"reversal.json",retest:"retest.json",live:"live.json",scalp:"scalp.json",
              research:"research.json",orderbook:"orderbook.json",fsig:"funding_signal.json",kimchi:"kimchi.json",
              macro:"macro.json",listing:"listing.json",momentum:"momentum.json",grid:"grid.json",
-             kr:"kr_sector.json",krb:"kr_breakout.json",krbt:"kr_backtest.json",verdict:"verdict.json",forecast:"forecast.json"};
+             kr:"kr_sector.json",krb:"kr_breakout.json",krbt:"kr_backtest.json",verdict:"verdict.json",forecast:"forecast.json",cycle:"cycle.json",idx:"index_event.json"};
   var $=function(id){return document.getElementById(id);};
   function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
   function num(x,d){ if(x==null||isNaN(x)) return "-"; return Number(x).toFixed(d==null?2:d); }
@@ -500,6 +503,47 @@ details{margin-top:8px} summary{cursor:pointer;font-size:13px;color:var(--accent
     section("s-forecast").body.innerHTML='<div class="err">아직 결과 파일이 없다 (forecast.json). 제안함 P33 병합 뒤 CARRYGATE daily 가 처음 돌면(매일 09:18 KST) 생기고, 17:37 KST 자동 작업이 여기 옮겨 싣는다. 설계는 docs/FORECAST_PLAN.md.</div>';
   }
 
+  // ---------------- BTC 사이클 낙폭 분할매수 (제안함 P36) ----------------
+  function rCycle(d){
+    var s=section("s-cycle"); s.when.textContent=(d.date||"")+" · 봉 "+(d.bar_date||"");
+    var lad=d.ladder||{}, dca=d.dca||{}, r=d.rules||{};
+    $("t-cycle").innerHTML=sgn(d.dd_pct,1,"%")+" "+pill("매수 "+(lad.n||0)+"/4",(lad.n?"good":"neutral"));
+    $("t-cycle-d").textContent="최고가 뒤 "+(d.days_since_ath||"-")+"일 · 종가 "+px(d.close)+" · 200일선 "+(d.above_sma200?"위":"아래");
+    var LV={L50:"−50% 계단",L60:"−60% 계단",L70:"−70% 계단",T200:"200일선 위로 건넘"};
+    var fills={}; (lad.fills||[]).forEach(function(x){fills[x.name]=x;});
+    var prow=["L50","L60","L70","T200"].map(function(n){ var f=fills[n]; var p=(d.pending||[]).filter(function(x){return x.name===n;})[0]||{};
+      var cond=n==="T200"?("종가 > 200일 평균 "+px(d.sma200)+" (낙폭 −30% 이하일 때)"):("종가 ≤ "+px(p.price_at_or_below||(r.ath_close*(1+({L50:-0.5,L60:-0.6,L70:-0.7})[n]))));
+      var dist=n==="T200"?(d.sma200?sgn((d.sma200/d.close-1)*100,1,"%"):"-"):(p.price_at_or_below?sgn((p.price_at_or_below/d.close-1)*100,1,"%"):"-");
+      return [esc(LV[n]), f?pill("체결","good"):pill("대기","neutral"), esc(cond), f?"-":dist, f?esc(f.date)+" "+px(f.price):"-"]; });
+    var brow=[["분할매수 (4묶음 × 25%)",lad],["주 1회 정액 매수 (비교)",dca]].map(function(x){var b=x[1]; return [esc(x[0]), (b.n||0)+"회", px(b.avg_cost), sgn(b.mtm_pct,1,"%")];});
+    var an=d.analog||{}; var arow=Object.keys(an).map(function(k){var a=an[k]; return [esc(k+" (고점 "+a.ath_date+")"), sgn(a.dd_same_day_pct,1,"%"), sgn(a.min_so_far_pct,1,"%")+" ("+a.min_day+"일)", sgn(a.cycle_min_pct,1,"%")+" ("+a.cycle_min_day+"일)"];});
+    arow.unshift([esc("지금 (고점 "+(r.ath_date||"")+")"), '<b>'+sgn(d.dd_pct,1,"%")+'</b>', "-", "-"]);
+    s.body.innerHTML='<div class="verdict">'+esc(d.summary||"")+'<br>바닥을 맞히지 않는다. 사상 최고 종가 '+px(r.ath_close)+'('+esc(r.ath_date||"")+') 대비 −50·−60·−70% 계단과 "200일 평균을 위로 건너는 날" 네 자리에서만 25%씩 산다. 깊어지면 계단이, 바닥이 이미 지났으면 200일선이 산다. 청산 없음(장기), 종가가 최고가를 넘으면 사이클 끝. 순방향 '+esc(r.forward_from||"")+' 봉부터 '+(d.forward_days||0)+'일.</div>'+
+      tbl([{t:"자리"},{t:"상태"},{t:"조건"},{t:"지금부터 거리",n:1},{t:"체결"}],prow)+
+      tbl([{t:"방식"},{t:"매수",n:1},{t:"평균단가",n:1},{t:"평가 (비용 뺀 뒤)",n:1}],brow)+
+      '<details><summary>과거 사이클 같은 날 (Bitstamp 일봉 종가, 참고만 — 판정에 안 씀)</summary>'+tbl([{t:"사이클"},{t:"같은 날 낙폭",n:1},{t:"그날까지 최저",n:1},{t:"사이클 최저",n:1}],arow)+'</details>'+
+      '<div class="note">첫 판정 2027-05-12(순방향 180일): 분할 평균단가 ≤ 정액 매수 평균 × 0.95 이고 평가 플러스면 합격, 정액 매수보다 비싸게 샀으면 불합격, 체결 0건이면 판단 보류. 매수마다 비용 0.15%. 과거 표본은 3개뿐이라 방향(더 빠진다/바닥이다)을 고르지 않는다. 한 장 카드 docs/cards/p36_cycle_ladder.svg.</div>';
+  }
+  function rCycleMissing(){
+    $("t-cycle").innerHTML=pill("첫 실행 전","neutral"); $("t-cycle-d").textContent="매일 09:18 KST 실행 뒤 표시";
+    section("s-cycle").body.innerHTML='<div class="err">아직 결과 파일이 없다 (cycle.json). 제안함 P36 병합(11/13) 뒤 CARRYGATE daily 가 처음 돌면(매일 09:18 KST) 생기고, 17:37 KST 자동 작업이 여기 옮겨 싣는다. 11/13 시험 실행 값: 11/12 종가 71,374, 고점 대비 −42.8%, 402일째, 200일 평균 73,082 아래, 매수 0/4. 설계는 cycle.py 머리말·docs/cards/p36_cycle_ladder.svg.</div>';
+  }
+  // ---------------- 지수 편출 이벤트 (제안함 P37) ----------------
+  function rIdx(d){
+    var s=section("s-idx"); s.when.textContent=d.date||"";
+    var leg=function(x){ x=x||{}; return [x.from&&x.to?esc(x.from+" → "+x.to):"-", sgn(x.ticker_pct,2,"%"), sgn(x.bench_pct,2,"%"), sgn(x.excess_pct,2,"%"), x.net_pct!=null?sgn(x.net_pct,2,"%"):"-", esc(x.status||x.note||"")+(x.hypothesis_holds!=null?" "+(x.hypothesis_holds?pill("가설 성립","good"):pill("가설 불성립","bad")):"")]; };
+    var html=""; (d.events||[]).forEach(function(e){
+      var rows=[["발표 전날 → 고정일 (참고)",e.before_fix],["A 적용 전 (가설: 초과 < 0)",e.leg_a],["B 적용 뒤 20거래일 (가설: 비용 뺀 초과 > 0)",e.leg_b]].map(function(r){return [esc(r[0])].concat(leg(r[1]));});
+      html+='<div class="verdict">'+esc(e.desc||"")+' · 발표 '+esc(e.announce||"")+' · 적용 '+esc(e.effective||"")+' 장 마감 뒤 · 자료 '+esc(e.last_date||"")+'까지</div>'+
+        tbl([{t:"구간"},{t:"기간"},{t:e.ticker||"종목",n:1},{t:e.bench||"기준",n:1},{t:"초과",n:1},{t:"비용 뺀 뒤",n:1},{t:"상태"}],rows).replace('class="tbl"','class="tbl wrapfirst"');
+    });
+    var errs=Object.keys(d.errors||{}).map(function(k){return esc(k+": "+d.errors[k]);});
+    s.body.innerHTML=(html||'<div class="err">이벤트 없음</div>')+'<div class="note">지수를 따라가는 펀드는 적용일 종가에 규칙대로 판다. MSTR 는 비트코인을 크게 따라가므로 비트코인 현물 ETF(IBIT) 수익을 뺀 "초과"로 본다. 표본 1건이라 판정 트랙이 아니다 — 같은 종류 이벤트 5건 이상 쌓이기 전엔 실거래 제안 안 함. 매수·매도는 종이 기록, 비용 = 체결 4번 × 0.05%.'+(errs.length?'<br>오류: '+errs.join(" · "):"")+'</div>';
+  }
+  function rIdxMissing(){
+    section("s-idx").body.innerHTML='<div class="err">아직 결과 파일이 없다 (index_event.json). 제안함 P37 병합(11/13) 뒤 CARRYGATE daily 가 처음 돌면 생긴다. 11/13 시험 실행 값: 발표 전날(11/10) → 11/12 MSTR −5.5%, IBIT −3.2%, 초과 −2.3% (규칙 고정 전, 참고). A 는 11/30, B 는 약 12/29 에 끝난다.</div>';
+  }
+
   // ---------------- 판정 규율 (마일스톤 14, Phil 방식) ----------------
   var VST={NOT_YET:["판단 전","neutral"],PASS:["합격","good"],FAIL:["불합격","bad"]};
   function vpill(st){ var x=VST[st]||[st||"-","neutral"]; return pill(x[0],x[1]); }
@@ -507,8 +551,8 @@ details{margin-top:8px} summary{cursor:pointer;font-size:13px;color:var(--accent
   function rVerdict(d){
     var s=section("s-verdict"); s.when.textContent=(d.date||"")+" · 기준 봉인 "+(d.criteria_sealed||"");
     var t=d.tracks||{}; var sm=d.summary||{}; var rl=d.rules_lock||{};
-    var order=["kr_breakout","turtle","reversal","retest","scalp","forecast"]; var NM={kr_breakout:"한국 주식 돌파",turtle:"터틀",reversal:"추세 전환",retest:"급상승 패턴 1H",scalp:"초단타",forecast:"예측 v2 (크기)"};
-    var MIN={kr_breakout:"15건",turtle:"20건/거래소",reversal:"20건/거래소",retest:"20건/거래소",scalp:"7일",forecast:"60일"};
+    var order=["kr_breakout","turtle","reversal","retest","scalp","forecast","cycle"]; var NM={kr_breakout:"한국 주식 돌파",turtle:"터틀",reversal:"추세 전환",retest:"급상승 패턴 1H",scalp:"초단타",forecast:"예측 v2 (크기)",cycle:"BTC 사이클 분할매수"};
+    var MIN={kr_breakout:"15건",turtle:"20건/거래소",reversal:"20건/거래소",retest:"20건/거래소",scalp:"7일",forecast:"60일",cycle:"180일"};
     var pass=order.filter(function(k){return sm[k]==="PASS";}).length, fail=order.filter(function(k){return sm[k]==="FAIL";}).length, wait=order.filter(function(k){return sm[k]==="NOT_YET";}).length;
     $("t-verdict").innerHTML=(pass?pill("합격 "+pass,"good")+" ":"")+(fail?pill("불합격 "+fail,"bad")+" ":"")+pill("판단 전 "+wait,"neutral");
     $("t-verdict-d").textContent="규칙 잠금 "+(rl.ok?"일치":"불일치")+" · 기준 봉인 "+(d.criteria_sealed||"");
@@ -527,6 +571,8 @@ details{margin-top:8px} summary{cursor:pointer;font-size:13px;color:var(--accent
     if(t.forecast){ var fc=t.forecast; var fsz=((fc.size||{}).all)||{}; var fdr=((fc.direction||{}).all)||{}; var fpr=fc.predictors||{};
       var fh=function(k){ var x=fdr[k]||{}; return x.hit_rate!=null?num(x.hit_rate*100,0)+"%":"-"; };
       rows.push([esc(NM.forecast), vpill(fc.status), (fc.days||0)+"일 / "+(fc.points||0)+"건", "방향 D1 "+fh("D1")+" D2 "+fh("D2")+" 기준 "+fh("D3"), "크기 비율 "+(fsz.ratio_high_low!=null?num(fsz.ratio_high_low,2):"-")+"<br>D1 "+vpill((fpr.D1||{}).status)+" D2 "+vpill((fpr.D2||{}).status), "-", MIN.forecast, esc(fc.reason||"")]); }
+    if(t.cycle){ var cy=t.cycle;
+      rows.push([esc(NM.cycle), vpill(cy.status), (cy.forward_days||0)+"일 / 매수 "+(cy.ladder_n||0)+"/4", "낙폭 "+sgn(cy.dd_pct,1,"%"), "평균단가 비율 "+(cy.avg_cost_ratio!=null?num(cy.avg_cost_ratio,3):"-")+"<br>평가 "+sgn(cy.ladder_mtm_pct,1,"%")+" · 정액 "+sgn(cy.dca_mtm_pct,1,"%"), "-", MIN.cycle, esc(cy.reason||"")]); }
     var errs=Object.keys(d.errors||{}).map(function(k){return esc(k+": "+d.errors[k]);});
     s.body.innerHTML='<div class="verdict">합격선은 결과가 나오기 전에 <code>criteria.json</code> 에 봉인했고, <code>verdict.py</code> 가 매일 기계로 판정한다. 최소 건수 전에는 "판단 전". 운 보정 z = (실제 승수 − 백테스트 승률대로의 기대 승수) ÷ 표준편차. z 가 −2 아래면 불운이 아니라 백테스트가 부풀려진 것(생존 편향)으로 본다. 규칙 상수는 <code>rules_lock.json</code> 에 잠겨 있어 사전 등록(<code>proposals.md</code>) 없이 바꾸면 CI 가 막는다.</div>'+
       tbl([{t:"트랙"},{t:"판정"},{t:"순방향",n:1},{t:"승률",n:1},{t:"성적",n:1},{t:"운 보정 z"},{t:"최소"},{t:"사유"}],rows).replace('class="tbl"','class="tbl wrapfirst wraplast"')+
@@ -538,14 +584,14 @@ details{margin-top:8px} summary{cursor:pointer;font-size:13px;color:var(--accent
     section("s-verdict").body.innerHTML='<div class="err">아직 결과 파일이 없다 (verdict.json). CARRYGATE daily(매일 09:18 KST) 또는 KR sector breakout(평일 15:50 KST) 이 처음 돌면 생긴다.</div>';
   }
 
-  var RENDER={status:rStatus,funding:rFunding,basis:rBasis,turtle:rTurtle,reversal:rReversal,retest:rRetest,live:rLive,scalp:rScalp,research:rResearch,orderbook:rOrderbook,fsig:rFsig,kimchi:rKimchi,macro:rMacro,listing:rListing,momentum:rMomentum,grid:rGrid,kr:rKr,krb:rKrb,krbt:rKrbt,verdict:rVerdict,forecast:rForecast};
-  var SECTION={status:"s-status",funding:"s-funding",basis:"s-basis",turtle:"s-turtle",reversal:"s-reversal",retest:"s-retest",live:"s-live",scalp:"s-scalp",research:"s-research",orderbook:"s-orderbook",fsig:"s-fsig",kimchi:"s-kimchi",macro:"s-macro",listing:"s-listing",momentum:"s-momentum",grid:"s-grid",kr:"s-kr",krb:"s-krb",krbt:"s-krbt",verdict:"s-verdict",forecast:"s-forecast"};
+  var RENDER={status:rStatus,funding:rFunding,basis:rBasis,turtle:rTurtle,reversal:rReversal,retest:rRetest,live:rLive,scalp:rScalp,research:rResearch,orderbook:rOrderbook,fsig:rFsig,kimchi:rKimchi,macro:rMacro,listing:rListing,momentum:rMomentum,grid:rGrid,kr:rKr,krb:rKrb,krbt:rKrbt,verdict:rVerdict,forecast:rForecast,cycle:rCycle,idx:rIdx};
+  var SECTION={status:"s-status",funding:"s-funding",basis:"s-basis",turtle:"s-turtle",reversal:"s-reversal",retest:"s-retest",live:"s-live",scalp:"s-scalp",research:"s-research",orderbook:"s-orderbook",fsig:"s-fsig",kimchi:"s-kimchi",macro:"s-macro",listing:"s-listing",momentum:"s-momentum",grid:"s-grid",kr:"s-kr",krb:"s-krb",krbt:"s-krbt",verdict:"s-verdict",forecast:"s-forecast",cycle:"s-cycle",idx:"s-idx"};
 
   function safeRender(key,data){
     try{ RENDER[key](data); }catch(e){ setErr(SECTION[key],"render",String(e&&e.message||e)); }
   }
   function markTileFail(key){
-    var map={status:"t-gate",funding:"t-carry",basis:"t-basis",turtle:"t-turtle",reversal:"t-rev",retest:"t-retest",scalp:"t-scalp",live:"t-live",kr:"t-kr",verdict:"t-verdict",forecast:"t-forecast"};
+    var map={status:"t-gate",funding:"t-carry",basis:"t-basis",turtle:"t-turtle",reversal:"t-rev",retest:"t-retest",scalp:"t-scalp",live:"t-live",kr:"t-kr",verdict:"t-verdict",forecast:"t-forecast",cycle:"t-cycle"};
     if(map[key]){ $(map[key]).textContent="-"; }
   }
   // ---------------- 불러오기 ----------------
@@ -561,6 +607,8 @@ details{margin-top:8px} summary{cursor:pointer;font-size:13px;color:var(--accent
     if(k==="grid"){ rGridMissing(); return true; }
     if(k==="verdict"){ rVerdictMissing(); return true; }
     if(k==="forecast"){ rForecastMissing(); return true; }
+    if(k==="cycle"){ rCycleMissing(); return true; }
+    if(k==="idx"){ rIdxMissing(); return true; }
     if(k==="kr"||k==="krb"||k==="krbt"){ rKrMissing(k); return true; }
     return false;
   }
