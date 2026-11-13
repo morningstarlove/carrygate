@@ -196,6 +196,15 @@ def main():
             print("%s %-6s %4d건 순 %+.2f%% 초과 %+.2f%% t %+.2f 월t %+.2f(%d개월) 승률 %.0f%% PF %.2f 보유 %.1f일 | 앞 %s(%d) 뒤 %s(%d)"
                   % (g, m, s["n"], s["ret"], s["ex"], s["t"], s["mt"], s["months"], s["win"], s["pf"], s["days"],
                      f2(s["ex_a"]), s["na"], f2(s["ex_b"]), s["nb"]))
+    print("\n## 기본 규칙 이익 집중도 (사후 기술 통계 — 판단 기준 아님): 초과 합계 중 상위 5개 진입 월 비중")
+    for g, _ in GROUPS:
+        trs = res[g]["base"]
+        if not trs: continue
+        by = {}
+        for t in trs: by[t["date"][:7]] = by.get(t["date"][:7], 0.0) + t["ex"]
+        tot = sum(by.values()); top = sorted(by.items(), key=lambda kv: -kv[1])[:5]
+        print("%s 합계 %+.1f%%p, 상위 5개월 %s = %.0f%%" % (g, tot, ", ".join("%s(%+.0f)" % kv for kv in top),
+              sum(v for _, v in top) / tot * 100 if tot > 0 else float("nan")))
     print("\n## 종목별 기본 규칙 (건수 / 초과 / t)")
     for sym in sorted(per, key=lambda k: (per[k][0], k)):
         g, s, first = per[sym]

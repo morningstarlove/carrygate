@@ -1,5 +1,5 @@
 """TradingView get-ohlcv 결과(저장된 도구 출력 파일)를 data/bnf/<심볼>.csv.gz 로 바꾼다. 표준 라이브러리만.
-사용: python scripts/bnf_tv_to_csv.py <도구출력파일> <EXCH:TICKER> [<도구출력파일2> ...]
+사용: [BNF_OUT=data/bnf_losers] python scripts/bnf_tv_to_csv.py <도구출력파일> <EXCH:TICKER> [<도구출력파일2> ...]
 여러 파일(과거로 넘긴 페이지)을 주면 날짜로 합치고 중복을 없앤다."""
 import sys, os, json, gzip, datetime
 
@@ -39,7 +39,9 @@ def main():
     rows = [seen[k] for k in sorted(seen)]
     if not rows: sys.exit("bars 없음: %s" % files)
     here = os.path.dirname(os.path.abspath(__file__))
-    path = os.path.join(here, "..", "data", "bnf", sym.replace(":", "_") + ".csv.gz")
+    out = os.environ.get("BNF_OUT") or os.path.join(here, "..", "data", "bnf")
+    os.makedirs(out, exist_ok=True)
+    path = os.path.join(out, sym.replace(":", "_") + ".csv.gz")
     with gzip.open(path, "wt", encoding="utf-8", newline="") as g:
         g.write("date,o,h,l,c,v\n")
         for t, o, h, l, c, v in rows:
