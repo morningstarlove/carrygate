@@ -12,7 +12,7 @@
 | P31 | [p31_mm_wide.svg](p31_mm_wide.svg) | 호가 제공 넓은 호가폭 시장만 `orderbook.py WIDE_SPREAD_BP` | `data/upbit_trx_1m.csv` (업비트 TRX/KRW 1분봉, 2026-11-07 16:22~11-08 02:01 UTC, TradingView 수집) | 2026-11-08 | 2026-11-15 |
 | P34 | [p34_rotate60.svg](p34_rotate60.svg) | 국면 교대 보조: 60분봉만 교대 vs 되돌림 고정 `scalp_rotate.py aux60` | `data/okx_xrp_60m.csv` (OKX XRP 무기한선물 60분봉, 2026-10-27~11-08 UTC, TradingView 수집) | 2026-11-08 | 2026-11-22 |
 | P35 | [p35_rev_after_loss.svg](p35_rev_after_loss.svg) | 되돌림은 전날 진 날에만 `scalp_rotate.py aux_after_loss` | `data/okx_btc_60m.csv` (OKX BTC 무기한선물 60분봉, 2026-11-03~11-13 UTC, TradingView 수집) | 2026-11-13 | 2026-11-26 |
-| P36 | [p36_macd_divergence.svg](p36_macd_divergence.svg) | MACD 하락 다이버전스 카드 검증(기록만, 트랙 아님) `scripts/macd_div_check.py` | `data/amex_spy_1d.csv` (SPY 일봉, 2025-05-01~11-28, TradingView 수집, `data/bb_reentry/AMEX_SPY.csv` 에서 자름) | 2026-11-13 | — (사용자 결정 P36) |
+| P36 | [p36_macd_divergence.svg](p36_macd_divergence.svg) | MACD 하락 다이버전스 카드 검증(기록만, 트랙 아님) `scripts/macd_div_check.py` | `data/amex_spy_1d.csv` (SPY 일봉, 2025-05-01~11-28, TradingView 수집, `data/bb_reentry/AMEX_SPY.csv` 에서 자름) | 2026-11-13 | — (P36 종결, 기록만) |
 | P33 | [p33_forecast.svg](p33_forecast.svg) | 예측 v2 `forecast.py` (크기 예측 + 방향 채점) | `data/okx_btc_2h.csv` (OKX BTC 무기한선물 2시간봉 — TradingView 1h 실데이터를 2h 로 합침, 2026-10-02~11-04 UTC) | 2026-11-08 | 2027-01-05 전후 (채점 60일) |
 
 ## 만드는 법
