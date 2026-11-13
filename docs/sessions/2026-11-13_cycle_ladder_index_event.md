@@ -35,10 +35,17 @@ MSTR 발표 전날(11/10)→11/12: MSTR −5.5%, IBIT −3.2%, 초과 −2.3% (�
 - 단위시험 전부 통과(16모듈 + 한국주식 4모듈), `selfcheck.py` 문제 없음, `verdict.py --dry-run` 잠금 일치·cycle NOT_YET.
 - 이 클라우드 세션에서 Bitstamp·OKX·야후 모두 프록시 403 → 실접속은 **main 병합 뒤 Actions dry_run** 으로 확인해야 한다(오프라인 CSV 로는 확인 끝).
 
+## 실데이터 확인 (병합 뒤)
+- 사용자 "1" → PR #105 squash 병합(a5e2cb7), `CARRYGATE daily` dry_run #95 (07:06~07:31 UTC).
+- "BTC cycle": 11/12 종가 71,374, −42.78%, 402일째, 200일 평균 73,081.71(아래), 체결 0/4, 과거 같은 날 −75.55/−81.36/−74.3% — 오프라인 재현과 같다.
+- "Index deletion event": 야후 MSTR·IBIT 11/12 까지, 고정 전 참고 초과 −2.33%, A·B 대기.
+- 판정 `[cycle] NOT_YET 순방향 0일`, 잠금 일치. 단위시험 258건 중 test_cycle 14건 통과.
+- 빨간불 1건: `funding.json coingecko.samples` null(그 실행에서 코인게코 응답 없음). 기존 캐리 모듈, 이번 변경과 무관. dry_run 이라 저장 안 됨, 같은 날 정기 실행 값은 168.
+
 ## 남은 것
-1. PR 병합(사용자 결정) → `CARRYGATE daily` dry_run 으로 "BTC cycle" · "Index deletion event" 단계 실데이터 확인.
-2. 현황판 카드(사이클 낙폭·체결 묶음, 편출 이벤트 A/B) — 라이브 버전 위에, 갱신 Routine 파일 목록에 `cycle.json`·`index_event.json` 추가.
-3. 11/30: A 결과 기록. 약 12/29: B 결과 기록. 2027-05-12: P36 첫 판정.
+1. 현황판 카드(사이클 낙폭·체결 묶음, 편출 이벤트 A/B) — 라이브 버전 위에, 갱신 Routine 파일 목록에 `cycle.json`·`index_event.json` 추가.
+2. 11/30: A 결과 기록. 약 12/29: B 결과 기록. 2027-05-12: P36 첫 판정.
 
 ## 사용자 결정
 - 2026-11-13 "2" — P36·P37 둘 다 등록.
+- 2026-11-13 "1" — 병합하고 dry_run 확인.
