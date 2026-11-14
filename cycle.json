@@ -1,0 +1,111 @@
+{
+ "date": "2026-11-14",
+ "generated_at_kst": "2026-11-14 15:54",
+ "source": "bitstamp",
+ "rules": {
+  "source": "bitstamp btcusd 1d close (fallback okx BTC-USDT 1Dutc)",
+  "forward_from": "2026-11-13",
+  "ath_close": 124728.0,
+  "ath_date": "2025-10-06",
+  "ladder": [
+   [
+    "L50",
+    -0.5
+   ],
+   [
+    "L60",
+    -0.6
+   ],
+   [
+    "L70",
+    -0.7
+   ]
+  ],
+  "trend": {
+   "name": "T200",
+   "sma_days": 200,
+   "max_dd": -0.3
+  },
+  "tranche": 0.25,
+  "dca_every_days": 7,
+  "fee_pct": 0.1,
+  "slippage_pct": 0.05,
+  "exit": "none; cycle ends on close > ath_close",
+  "rule_fixed": "2026-11-13"
+ },
+ "bar_date": "2026-11-13",
+ "close": 68225.9,
+ "dd_pct": -45.3,
+ "days_since_ath": 403,
+ "sma200": 73035.98,
+ "above_sma200": false,
+ "forward_days": 1,
+ "ladder": {
+  "n": 0,
+  "invested": 0.0,
+  "avg_cost": null,
+  "mtm_pct": null,
+  "fills": [],
+  "budget_used_pct": 0.0
+ },
+ "dca": {
+  "n": 1,
+  "invested": 1.0,
+  "avg_cost": 68328.24,
+  "mtm_pct": -0.3,
+  "last_buy": {
+   "date": "2026-11-13",
+   "price": 68225.9
+  }
+ },
+ "pending": [
+  {
+   "name": "L50",
+   "price_at_or_below": 62364.0,
+   "dd_pct": -50.0
+  },
+  {
+   "name": "L60",
+   "price_at_or_below": 49891.2,
+   "dd_pct": -60.0
+  },
+  {
+   "name": "L70",
+   "price_at_or_below": 37418.4,
+   "dd_pct": -70.0
+  },
+  {
+   "name": "T200",
+   "rule": "종가가 200일 평균을 위로 건너는 날(낙폭 ≤ −30%)",
+   "sma200": 73035.98
+  }
+ ],
+ "cycle_end": null,
+ "analog": {
+  "2013": {
+   "ath_date": "2013-11-29",
+   "dd_same_day_pct": -75.55,
+   "min_so_far_pct": -76.68,
+   "min_day": 401,
+   "cycle_min_pct": -84.86,
+   "cycle_min_day": 411
+  },
+  "2017": {
+   "ath_date": "2017-12-16",
+   "dd_same_day_pct": -81.49,
+   "min_so_far_pct": -83.43,
+   "min_day": 364,
+   "cycle_min_pct": -83.43,
+   "cycle_min_day": 364
+  },
+  "2021": {
+   "ath_date": "2021-11-08",
+   "dd_same_day_pct": -75.38,
+   "min_so_far_pct": -76.66,
+   "min_day": 378,
+   "cycle_min_pct": -76.66,
+   "cycle_min_day": 378
+  }
+ },
+ "summary": "2026-11-13 종가 68,226, 고점 대비 -45.3% (403일째). 분할매수 0/4 묶음 | DCA 1회 평균 68,328 평가 -0.3%"
+}

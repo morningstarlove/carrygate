@@ -1,0 +1,54 @@
+{
+ "date": "2026-11-14",
+ "generated_at_kst": "2026-11-14 15:54",
+ "rules": {
+  "fee_pct": 0.05,
+  "events": [
+   {
+    "id": "msci_mstr_2026_11",
+    "desc": "MSCI USA·World·ACWI 에서 Strategy(MSTR) 편출 (2026-11 정기변경, 비영업 회사 규칙)",
+    "ticker": "MSTR",
+    "bench": "IBIT",
+    "announce": "2026-11-11",
+    "ref": "2026-11-13",
+    "effective": "2026-11-30",
+    "hold_days": 20
+   }
+  ],
+  "leg_a": "ref close -> effective close, excess = ticker - bench, hypothesis excess < 0",
+  "leg_b": "long ticker / short bench at effective close, exit after hold_days trading days, minus 4 fills fee, hypothesis > 0",
+  "rule_fixed": "2026-11-13"
+ },
+ "events": [
+  {
+   "id": "msci_mstr_2026_11",
+   "desc": "MSCI USA·World·ACWI 에서 Strategy(MSTR) 편출 (2026-11 정기변경, 비영업 회사 규칙)",
+   "ticker": "MSTR",
+   "bench": "IBIT",
+   "announce": "2026-11-11",
+   "ref": "2026-11-13",
+   "effective": "2026-11-30",
+   "last_date": "2026-11-13",
+   "leg_a": {
+    "from": "2026-11-13",
+    "to": "2026-11-13",
+    "ticker_pct": 0.0,
+    "bench_pct": 0.0,
+    "excess_pct": 0.0,
+    "status": "진행 중"
+   },
+   "leg_b": {
+    "status": "적용일(2026-11-30) 종가 대기"
+   },
+   "before_fix": {
+    "from": "2026-11-10",
+    "to": "2026-11-13",
+    "ticker_pct": -7.81,
+    "bench_pct": -6.57,
+    "excess_pct": -1.23,
+    "note": "규칙 고정 전 구간 — 참고만"
+   }
+  }
+ ],
+ "errors": {}
+}
