@@ -1,6 +1,6 @@
 {
- "date": "2026-11-14",
- "generated_at_kst": "2026-11-14 15:54",
+ "date": "2026-11-15",
+ "generated_at_kst": "2026-11-15 15:59",
  "source": "bitstamp",
  "rules": {
   "source": "bitstamp btcusd 1d close (fallback okx BTC-USDT 1Dutc)",
@@ -33,13 +33,13 @@
   "exit": "none; cycle ends on close > ath_close",
   "rule_fixed": "2026-11-13"
  },
- "bar_date": "2026-11-13",
- "close": 68225.9,
- "dd_pct": -45.3,
- "days_since_ath": 403,
- "sma200": 73035.98,
+ "bar_date": "2026-11-14",
+ "close": 64113.69,
+ "dd_pct": -48.6,
+ "days_since_ath": 404,
+ "sma200": 72974.93,
  "above_sma200": false,
- "forward_days": 1,
+ "forward_days": 2,
  "ladder": {
   "n": 0,
   "invested": 0.0,
@@ -52,7 +52,7 @@
   "n": 1,
   "invested": 1.0,
   "avg_cost": 68328.24,
-  "mtm_pct": -0.3,
+  "mtm_pct": -6.31,
   "last_buy": {
    "date": "2026-11-13",
    "price": 68225.9
@@ -77,7 +77,7 @@
   {
    "name": "T200",
    "rule": "종가가 200일 평균을 위로 건너는 날(낙폭 ≤ −30%)",
-   "sma200": 73035.98
+   "sma200": 72974.93
   }
  ],
  "cycle_end": null,
@@ -92,7 +92,7 @@
   },
   "2017": {
    "ath_date": "2017-12-16",
-   "dd_same_day_pct": -81.49,
+   "dd_same_day_pct": -81.39,
    "min_so_far_pct": -83.43,
    "min_day": 364,
    "cycle_min_pct": -83.43,
@@ -100,12 +100,12 @@
   },
   "2021": {
    "ath_date": "2021-11-08",
-   "dd_same_day_pct": -75.38,
+   "dd_same_day_pct": -75.16,
    "min_so_far_pct": -76.66,
    "min_day": 378,
    "cycle_min_pct": -76.66,
    "cycle_min_day": 378
   }
  },
- "summary": "2026-11-13 종가 68,226, 고점 대비 -45.3% (403일째). 분할매수 0/4 묶음 | DCA 1회 평균 68,328 평가 -0.3%"
+ "summary": "2026-11-14 종가 64,114, 고점 대비 -48.6% (404일째). 분할매수 0/4 묶음 | DCA 1회 평균 68,328 평가 -6.31%"
 }
