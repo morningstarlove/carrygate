@@ -9,7 +9,7 @@
 
 ---
 
-## 0. 지금 상태 한눈에 (2026-11-13 갱신)
+## 0. 지금 상태 한눈에 (2026-11-15 갱신)
 
 > 이 절만 읽어도 "지금 무엇이 돌고, 무엇을 기다리고, 누가 결정할 것"을 안다. 자세한 근거는 아래 절과 `docs/sessions/`.
 
@@ -74,6 +74,8 @@
 
 **2026-11-08 국면 교대 보조 기록 — 60분봉만 (제안함 P34):** `scalp_rotate.py` 가 P30 옆에 60분봉만의 교대와 "60분 되돌림 고정"을 `scalp_rotate.json` `aux60` 으로 센다(순방향 평가일 11/8~). 사후 25일: 60분만 교대 −45% vs 고정 +51%. 11/22 보고에서 14일 첫 판단. 카드 `docs/cards/p34_rotate60.svg`.
 
+**2026-11-15 청산 맵 비대칭 선별 — 근거 없음 (제안함 P38):** 사용자가 공유한 코인글래스 청산 맵(위쪽 숏이 아래쪽 롱보다 약 4배)의 "많이 쌓인 쪽으로 간다" 자석 이론을 시험했다. 공개 자료(미결제약정+가격)로 추정 맵을 직접 계산(`liqmap.py`)하고, 바이낸스 6코인 1시간봉 2026-01-01~11-14 의 236일·신호 570건을 수수료 0.10% 뺀 뒤로 쟀다(설계서 `docs/LIQMAP_PLAN.md` 를 결과 보기 전에 고정). 자석 방향 평균 **−0.260%/일**(t −1.37, 적중 45.8%, 수수료 전에도 −0.160%), 대조 B14 −0.084%·B24 −0.018%, 변형 5%·20% 도 전부 마이너스. 사전 기준 4개 중 3개 실패 → **트랙 신설 없음, 검토 기록만**(P24·P27·P32 와 같은 처리). 추정 맵 자체는 실제 청산과 상관 0.65 로 현실과 닮았고, 틀린 것은 자석 해석이다(비대칭은 한쪽이 쓸려 나간 뒤에 생기는데 올해는 내린 뒤 더 내린 날이 많았다). 한계: 약 300일·BTC 가 내린 한 해·바이낸스 한 곳. 규칙·`criteria.json`·잠금·Routine 변경 없음. 결과 `data/liqmap/screen_result.json`, 기록 `docs/sessions/2026-11-15_liqmap_screen.md`, 시험 `tests.test_liqmap` 28건. **사용자 결정 대기: A 종결(기본) / B 기록 전용 관찰.**
+
 **2026-11-13 BTC 사이클 낙폭 분할매수 (제안함 P36, 판정 일곱 번째 트랙) + 지수 편출 이벤트 기록 (P37) — 사용자 결정 "2":** SNS 글 "사상 최고가 뒤 402일째, 과거 사이클은 −76/−81/−74%, 지금 −41%" 를 Bitstamp 일봉(2013~)으로 재현 — 402일째 숫자는 맞고(−75.6/−81.4/−74.3%, 지금 −42.8%), 과거 바닥은 2013 411일·2017 364일·2021 378일. 표본 3개라 방향을 고르지 않는 규칙으로 만듦: `cycle.py` 가 고점 대비 −50·−60·−70% 계단과 "200일 평균 위로 건넘(낙폭 −30% 이하일 때)" 네 묶음 25%씩을 종이로 사고, 같은 기간 7일마다 정액 매수(DCA)와 평균단가를 비교한다(`cycle.json`·`cycle_history.jsonl`, 검산 `check_cycle`). 첫 판정 2027-05-12. 같은 글의 MSCI 소식은 사실(11/11 확정, 11/30 적용) → `index_event.py` 가 MSTR − IBIT 초과 수익을 적용 전(11/13→11/30)·적용 뒤(11/30→20거래일) 두 구간으로 기록(`index_event.json`). 1건이라 판정 트랙 아님 — 11/30·12/29 에 가설 성립 여부만 적는다. 바이낸스 북한 해킹 $63억(10/29~30)도 사실, ETF 9일 연속 유출은 미확인. 카드 `docs/cards/p36_cycle_ladder.svg`·`p37_index_deletion.svg`, 기록 `docs/sessions/2026-11-13_cycle_ladder_index_event.md`. **11/13 PR #105 병합(사용자 "1"), main dry_run #95 로 실데이터 확인:** "BTC cycle" 단계 11/12 종가 71,374·−42.78%·402일째·200일 평균 73,082(Bitstamp CSV 재현값과 같음), "Index deletion event" 단계 야후 MSTR·IBIT 11/12 까지 수신, 판정 `[cycle] NOT_YET`·잠금 일치. 같은 실행의 빨간불 1건은 기존 캐리 `funding.json coingecko.samples` 가 null(그 실행에서 코인게코 응답 없음 — 이번 변경과 무관, 같은 날 정기 실행 값은 168). **현황판(11/13, 사용자 "추가해"):** 라이브 버전 61 에 타일 "BTC 사이클 낙폭"·카드 "BTC 사이클 낙폭 분할매수"(매수 자리 4개 상태·지금부터 거리, 분할 vs 정액 매수 평균단가·평가, 과거 사이클 같은 날)·카드 "지수 편출 이벤트"(참고·A·B 구간)·판정 카드 cycle 줄 추가, 백업 `dashboard/index.html` 동일, `selfcheck.SHAPES` 에 `cycle.json`·`index_event.json`. 결과 파일은 11/14 09:18 daily 첫 저장 전이라 그때까지 "첫 실행 전"(시험 실행 값 표시). 갱신 Routine trig_015SCRNNwatvAhHFdJF8F9Z9 파일 목록에 두 파일 추가는 배달 세션(session_01UBXi3SEnxJwqCj4dY5q4J5)만 바꿀 수 있어 11/13 그 세션에 요청 → **같은 날 14:55 UTC 반영(get_trigger 로 확인)**. 11/14 17:37 갱신부터 두 카드에 실데이터가 실린다.
 
 **2026-11-13 되돌림은 전날 진 날에만 (제안함 P35):** `scalp_rotate.py` 가 P30·P34 옆에 "전날 30·60분 되돌림 합이 마이너스인 날만 되돌림, 아니면 쉼"을 `scalp_rotate.json` `aux_after_loss` 로 센다(순방향 평가일 11/12~). 사후 29일: 쓴 10일 +184%(9/10 플러스), 쉰 날 되돌림 −311%. 매일 보고에 "내일 씀/쉼". 11/26 보고에서 14일 첫 판단. 카드 `docs/cards/p35_rev_after_loss.svg`(날짜별 씀·쉼 배경 띠 — `track_card.py` 에 `bands` 기능 추가).
@@ -90,7 +92,7 @@
 
 **2026-11-12 추세 전환 4시간봉 검산 빨간불 수정:** 11/8 16:00 봉에 업비트 BTC·ETH 가 시간 초과로 빠져 `reversal_4h` 가 9회 연속 실패(기록 저장은 정상). 실패 코인 1회 재시도, 빠지면 `missing` 표시, 검산은 표시된 봉을 기록만. 지난 줄엔 로그로 확인된 `missing` 만 덧붙임. `docs/sessions/2026-11-12_reversal_selfcheck_red.md`.
 
-**사용자 결정 대기:** 없음. 10/29 SNS 글 두 건(이평선 수렴 매매법 P24, CIS 원칙 P25)은 사용자 결정 "A" 로 기록만 — `docs/MA_CONVERGENCE_REVIEW.md`·`docs/CIS_PRINCIPLES_REVIEW.md`, 트랙·규칙 변경 없음. 11/4 SNS 카드 볼린저밴드 하단 재진입(P27)도 기록만 — `docs/BB_REENTRY_REVIEW.md`, 15종목 1,535건 수수료 뒤 매수보유 대비 우위 없음, 트랙·규칙 변경 없음. 다음은 11/4 초단타 재확인과 첫 판정이 뜨는 날. **10/22 신설 급상승 패턴 트랙**: 백테스트 표 기록·현황판 카드(타일·카드·판정 줄, 라이브 버전)까지 끝. 갱신 Routine 파일 목록에 `retest.json` 도 반영 확인(10/24). 남은 것: Actions 에서 오프라인 고정 봉 저장(`--save-fixture`).
+**사용자 결정 대기:** P38 청산 맵 — A 종결(기본) / B 기록 전용 관찰 중 선택(답 없으면 A). 10/29 SNS 글 두 건(이평선 수렴 매매법 P24, CIS 원칙 P25)은 사용자 결정 "A" 로 기록만 — `docs/MA_CONVERGENCE_REVIEW.md`·`docs/CIS_PRINCIPLES_REVIEW.md`, 트랙·규칙 변경 없음. 11/4 SNS 카드 볼린저밴드 하단 재진입(P27)도 기록만 — `docs/BB_REENTRY_REVIEW.md`, 15종목 1,535건 수수료 뒤 매수보유 대비 우위 없음, 트랙·규칙 변경 없음. 다음은 11/4 초단타 재확인과 첫 판정이 뜨는 날. **10/22 신설 급상승 패턴 트랙**: 백테스트 표 기록·현황판 카드(타일·카드·판정 줄, 라이브 버전)까지 끝. 갱신 Routine 파일 목록에 `retest.json` 도 반영 확인(10/24). 남은 것: Actions 에서 오프라인 고정 봉 저장(`--save-fixture`).
 
 **2026-10-15 백테스트 과적합 논문 검토 → 판정기 보강 (제안함 P17·P18 반영):** 댓글 권고로 Bailey·López de Prado·Harvey·Hansen 등 17편을 읽고 공식을 실데이터에 대입(`docs/BACKTEST_OVERFITTING_REVIEW.md`, `scripts/overfit_check.py`). 발견: 초단타 10/7 PASS(후보 12개)는 실력 0 이어도 뜨는 후보 수(378개 중 42~53개)의 1/4 이었고, 터틀·추세전환 20건 합격선은 실력 0 도 19~40% 확률로 PASS 한다. 반영: ① `criteria.json scalp.noise_floor` — 부호 뒤집기 500회의 후보 수 중앙값보다 실제 후보가 많아야 PASS, 같거나 적으면 NOT_YET(잡음 이하). ② 판정 파일 각 거래소에 `interpretation`(실력 0 PASS 확률·놓칠 확률·필요 건수 MinTRL·t>3). 합격선 숫자·매매 규칙 변경 없음, criteria sealed 2026-10-15, 잠금 재생성. 현황판 카드에는 아직 안 올렸다(판정 파일에만). 작업 기록 `docs/sessions/2026-10-15_backtest_overfitting.md`.
 
@@ -1282,6 +1284,7 @@ GitHub 저장소 → Actions 탭 → `CARRYGATE daily` → Run workflow
 - `python3 -m unittest tests.test_kr_universe` — 한국 주식 유니버스·업종 동조 (9건, 2026-10-03 실데이터 fixture 포함)
 - `python3 kr_universe.py --fixture tests/fixtures/kr/top100_2026-10-03.json --dry-run` — 저장된 상위 100 으로 전체 흐름 (인터넷 불필요)
 - `python3 -m unittest tests.test_patterns tests.test_kr_breakout` — 패턴 판정 22건 / 종이매매 엔진 11건 (실데이터 fixture 포함, 인터넷 불필요)
+- `python3 -m unittest tests.test_liqmap` — 청산 맵 추정 모형 (28건, 인터넷 불필요). 선별 재현 `python3 scripts/liqmap_screen.py` (약 5초, 저장된 `data/liqmap/`)
 - `python3 kr_breakout.py --backtest --fixture tests/fixtures/kr/ohlcv --dry-run` — 저장된 일봉 4종목으로 엔진 전체 흐름 (인터넷 불필요)
 - Actions 수동 실행에서 `backtest` 체크 — 3년 백테스트 다시 돌려 `kr_backtest.json` 갱신 (약 5분)
 
