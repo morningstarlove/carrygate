@@ -6,7 +6,7 @@
   "fixed": "2026-11-08",
   "forward_from": "2026-11-08",
   "method": "P34 보조: 60분봉만(되돌림=60분 VWAP 지정가+평균회귀 지정가, 돌파=60분 20봉 돌파) 같은 교대. rev_only_pct 가 '60분 되돌림 고정'",
-  "next_pick": "brk",
+  "next_pick": "rev",
   "backtest": {
    "days": 25,
    "net_pct": -45.014,
@@ -16,11 +16,11 @@
    "picked_rev": 17
   },
   "forward": {
-   "days": 7,
-   "net_pct": -328.933,
+   "days": 8,
+   "net_pct": -342.547,
    "plus_days": 0,
-   "rev_only_pct": -258.207,
-   "brk_only_pct": 33.502,
+   "rev_only_pct": -210.08,
+   "brk_only_pct": 19.888,
    "picked_rev": 4
   },
   "forward_days": [
@@ -72,6 +72,13 @@
     "net_pct": -209.96,
     "rev_pct": -209.96,
     "brk_pct": 61.1155
+   },
+   {
+    "eval_day": "2026-11-15",
+    "pick": "brk",
+    "net_pct": -13.6142,
+    "rev_pct": 48.1269,
+    "brk_pct": -13.6142
    }
   ]
  },
@@ -79,7 +86,7 @@
   "fixed": "2026-11-13",
   "forward_from": "2026-11-12",
   "method": "P35 보조: 전날 30·60분 되돌림 묶음 합 < 0 인 날만 오늘 되돌림 묶음을 쓴다(아니면 쉼). skipped_rev_pct = 쉰 날 되돌림이 냈을 합",
-  "next_active": true,
+  "next_active": false,
   "backtest": {
    "days": 29,
    "active_days": 10,
@@ -89,11 +96,11 @@
    "skipped_rev_pct": -310.708
   },
   "forward": {
-   "days": 3,
-   "active_days": 1,
-   "net_pct": 5.174,
-   "plus_days": 1,
-   "rev_only_pct": -428.096,
+   "days": 4,
+   "active_days": 2,
+   "net_pct": 90.015,
+   "plus_days": 2,
+   "rev_only_pct": -343.256,
    "skipped_rev_pct": -433.271
   },
   "forward_days": [
@@ -117,12 +124,19 @@
     "net_pct": 0.0,
     "rev_pct": -389.2711,
     "prev_rev_pct": 5.1743
+   },
+   {
+    "eval_day": "2026-11-15",
+    "active": true,
+    "net_pct": 84.8408,
+    "rev_pct": 84.8408,
+    "prev_rev_pct": -389.2711
    }
   ]
  },
  "method": "전날 18시장 합계가 큰 묶음(되돌림=30·60분 VWAP 지정가+평균회귀 지정가, 돌파=30·60분 20봉 돌파; 같으면 되돌림)의 오늘 합계",
- "date": "2026-11-15",
- "next_pick": "brk",
+ "date": "2026-11-16",
+ "next_pick": "rev",
  "backtest": {
   "days": 23,
   "net_pct": 101.126,
@@ -132,11 +146,11 @@
   "picked_rev": 16
  },
  "forward": {
-  "days": 9,
-  "net_pct": -684.216,
+  "days": 10,
+  "net_pct": -734.087,
   "plus_days": 1,
-  "rev_only_pct": -489.912,
-  "brk_only_pct": 59.431,
+  "rev_only_pct": -405.072,
+  "brk_only_pct": 9.559,
   "picked_rev": 5
  },
  "forward_days": [
@@ -202,6 +216,13 @@
    "net_pct": -389.2711,
    "rev_pct": -389.2711,
    "brk_pct": 124.0666
+  },
+  {
+   "eval_day": "2026-11-15",
+   "pick": "brk",
+   "net_pct": -49.8714,
+   "rev_pct": 84.8408,
+   "brk_pct": -49.8714
   }
  ],
  "min_forward_days": 14
