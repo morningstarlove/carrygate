@@ -24,6 +24,7 @@ IMB_THRESHOLD = 0.3       # "치우쳤다"고 보는 불균형 기준 ((매수�
 HORIZONS = (60, 300)      # 초. 불균형 뒤 1분·5분 가격 변화를 본다
 MIN_DAYS = 5
 WIDE_SPREAD_BP = 20.0     # P31(2026-11-08 고정): 평균 호가폭이 이 값(=업비트 왕복 지정가 수수료 10bp 의 2배) 이상인 시장만 따로 합산. 결과 보고 바꾸지 않는다
+QUEUE_MULT = 1.0          # P38(2026-11-16 고정): 내 가격에서 거래된 양이 '주문 낼 때 내 앞 줄(최우선 잔량)'의 이 배수를 넘어야 체결로 센다. 결과 보고 바꾸지 않는다
 MM_TTL_SEC = 300          # 호가 제공 종이 규칙: 재고가 생긴 뒤 지정가 청산을 기다리는 최대 초. 넘으면 상대 호가에 시장가
 FEES = {"upbit": {"taker_pct": 0.05, "maker_pct": 0.05},
         "hyperliquid": {"taker_pct": 0.045, "maker_pct": 0.015},
@@ -51,7 +52,8 @@ def snap(bids, asks):
         return None
     bq = sum(p * q for p, q in bids[:DEPTH_LEVELS])
     aq = sum(p * q for p, q in asks[:DEPTH_LEVELS])
-    return {"bid": bid, "ask": ask, "bid_notional": bq, "ask_notional": aq}
+    return {"bid": bid, "ask": ask, "bid_notional": bq, "ask_notional": aq,
+            "bid1_qty": bids[0][1], "ask1_qty": asks[0][1]}
 
 
 def fetch_upbit():
@@ -68,6 +70,23 @@ def fetch_upbit():
     return out
 
 
+def fmt_px_vol(d):
+    """{가격: 양} -> '437:1200.5;436:30' (CSV 한 칸). 빈 dict 는 ''."""
+    return ";".join("%s:%s" % (("%.10g" % p), ("%.10g" % v)) for p, v in sorted(d.items()))
+
+
+def parse_px_vol(s):
+    out = {}
+    for part in (s or "").split(";"):
+        if ":" in part:
+            p, v = part.split(":", 1)
+            try:
+                out[float(p)] = out.get(float(p), 0.0) + float(v)
+            except ValueError:
+                pass
+    return out
+
+
 def fetch_upbit_trades(last_ms, interval):
     """업비트 최근 체결(공개, 키 불필요) -> 코인별 직전 표본 이후 체결 중
     매도 주도(ask_bid=ASK: 누군가 매수호가를 때림) 최저가 sell_lo, 매수 주도(BID) 최고가 buy_hi.
@@ -78,6 +97,7 @@ def fetch_upbit_trades(last_ms, interval):
         rows = http_json("https://api.upbit.com/v1/trades/ticks?market=KRW-%s&count=200" % c)
         since = last_ms.get(c, now_ms - interval * 1000)
         lo, hi, n, mx = None, None, 0, since
+        sv, bv = {}, {}          # P38: 가격별 매도 주도·매수 주도 체결량(코인 수)
         for r in rows or []:
             t = int(r.get("timestamp") or 0)
             if t <= since:
@@ -85,14 +105,18 @@ def fetch_upbit_trades(last_ms, interval):
             px = f(r.get("trade_price"))
             if px is None:
                 continue
+            vol = f(r.get("trade_volume")) or 0.0
             n += 1
             mx = max(mx, t)
             if r.get("ask_bid") == "ASK":
                 lo = px if lo is None else min(lo, px)
+                sv[px] = sv.get(px, 0.0) + vol
             elif r.get("ask_bid") == "BID":
                 hi = px if hi is None else max(hi, px)
+                bv[px] = bv.get(px, 0.0) + vol
         last_ms[c] = mx
-        out[c] = {"sell_lo": lo, "buy_hi": hi, "n_trades": n}
+        out[c] = {"sell_lo": lo, "buy_hi": hi, "n_trades": n,
+                  "sell_px_vol": fmt_px_vol(sv), "buy_px_vol": fmt_px_vol(bv), "trades_capped": len(rows or []) >= 200 and n >= 200}
         time.sleep(0.12)   # 업비트 공개 API 초당 10회 한도 안
     return out
 
@@ -128,7 +152,8 @@ def fetch_okx():
 
 
 SOURCES = [("upbit", fetch_upbit), ("hyperliquid", fetch_hyperliquid), ("okx", fetch_okx)]
-CSV_FIELDS = ["ts", "venue", "coin", "bid", "ask", "bid_notional", "ask_notional", "sell_lo", "buy_hi"]
+CSV_FIELDS = ["ts", "venue", "coin", "bid", "ask", "bid_notional", "ask_notional", "sell_lo", "buy_hi",
+              "bid1_qty", "ask1_qty", "sell_px_vol", "buy_px_vol"]
 
 
 def collect(minutes, interval, path):
@@ -158,6 +183,10 @@ def collect(minutes, interval, path):
                         tr = trades.get(coin) or {}
                         row["sell_lo"] = "" if tr.get("sell_lo") is None else tr["sell_lo"]
                         row["buy_hi"] = "" if tr.get("buy_hi") is None else tr["buy_hi"]
+                        row["sell_px_vol"] = tr.get("sell_px_vol", "")
+                        row["buy_px_vol"] = tr.get("buy_px_vol", "")
+                        if tr.get("trades_capped"):
+                            errors["upbit_trades_capped"] = errors.get("upbit_trades_capped", 0) + 1
                         w.writerow(row)
                         n += 1
                 except Exception as e:
@@ -178,7 +207,9 @@ def load_samples(path):
             fx = lambda v: float(v) if v not in (None, "") else None
             by.setdefault(key, []).append({"ts": int(r["ts"]), "bid": float(r["bid"]), "ask": float(r["ask"]),
                                           "bq": float(r["bid_notional"]), "aq": float(r["ask_notional"]),
-                                          "sell_lo": fx(r.get("sell_lo")), "buy_hi": fx(r.get("buy_hi"))})
+                                          "sell_lo": fx(r.get("sell_lo")), "buy_hi": fx(r.get("buy_hi")),
+                                          "bid1_qty": fx(r.get("bid1_qty")), "ask1_qty": fx(r.get("ask1_qty")),
+                                          "sell_pv": parse_px_vol(r.get("sell_px_vol")), "buy_pv": parse_px_vol(r.get("buy_px_vol"))})
     for k in by:
         by[k].sort(key=lambda x: x["ts"])
     return by
@@ -349,6 +380,98 @@ def mm_touch(rows, fee):
             "hit_rate_pct": round(100.0 * sum(1 for x in nets if x > 0) / t, 1) if t else None}
 
 
+def mm_queue(rows, fee, mult=None):
+    """호가 제공 '줄 서기 반영' 종이 규칙 — 2026-11-16 추가(제안함 P38). P29(mm_touch)와 나란히, 주문 없음.
+
+    P29 는 내 가격에 거래가 한 번만 찍혀도 체결로 봤다(낙관). 실제로는 같은 가격에 먼저 선 주문부터 체결된다.
+    여기서는 주문을 걸 때 그 가격의 최우선 잔량(bid1_qty/ask1_qty, 코인 수)을 '내 앞 줄'로 적고,
+      ① 그 뒤 내 가격에서 일어난 매도 주도(매수 주문이면)·매수 주도(매도 주문이면) 체결량 누적이 줄 × QUEUE_MULT 를 넘거나
+      ② 내 가격보다 불리한 쪽 가격에서 체결이 찍히거나(줄 전체가 먹힘) 상대 호가가 내 가격을 넘어오면
+    체결로 센다. 최우선 가격이 바뀌면(내 주문이 더는 최우선이 아니면) 취소하고 새 최우선에 줄 맨 뒤로 다시 건다.
+    내 주문 크기는 0 으로 본다(아주 작은 주문). 나머지(재고 ±1, 반대쪽 재게시, MM_TTL_SEC 뒤 시장가)는 P29 와 같다.
+    줄·가격별 체결량 기록(bid1_qty·sell_pv)이 없는 시장·날짜는 계산하지 않는다."""
+    mult = QUEUE_MULT if mult is None else mult
+    n = len(rows)
+    if n < 30 or not any(r.get("bid1_qty") is not None for r in rows) or not any(r.get("sell_pv") or r.get("buy_pv") for r in rows):
+        return {"n": n, "no_queue": True}
+    mk, tk = fee.get("maker_pct", 0.0) * 100.0, fee.get("taker_pct", 0.0) * 100.0
+    nets, grosses, fills, maker_exits, both = [], [], 0, 0, 0
+
+    def new_order(px, q):
+        return {"px": px, "queue": (q or 0.0) * mult, "done": 0.0}
+
+    def buy_filled(o, r):
+        if r["ask"] <= o["px"]:
+            return True
+        sv = r.get("sell_pv") or {}
+        if any(p < o["px"] for p in sv):
+            return True
+        o["done"] += sv.get(o["px"], 0.0)
+        return o["done"] > o["queue"]
+
+    def sell_filled(o, r):
+        if r["bid"] >= o["px"]:
+            return True
+        bv = r.get("buy_pv") or {}
+        if any(p > o["px"] for p in bv):
+            return True
+        o["done"] += bv.get(o["px"], 0.0)
+        return o["done"] > o["queue"]
+
+    def book(entry, exit_px, side, maker_exit):
+        g = side * (exit_px / entry - 1.0) * 1e4
+        nets.append(g - mk - (mk if maker_exit else tk))
+        grosses.append(g)
+
+    r0 = rows[0]
+    ob, oa = new_order(r0["bid"], r0.get("bid1_qty")), new_order(r0["ask"], r0.get("ask1_qty"))
+    inv, entry_px, entry_ts, oc = 0, None, None, None
+    for r in rows[1:]:
+        if inv == 0:
+            b, a = buy_filled(ob, r), sell_filled(oa, r)
+            if b and a:
+                fills += 2
+                both += 1
+                maker_exits += 1
+                book(ob["px"], oa["px"], 1, True)
+            elif b:
+                inv, entry_px, entry_ts, fills = 1, ob["px"], r["ts"], fills + 1
+                oc = new_order(r["ask"], r.get("ask1_qty"))
+                continue
+            elif a:
+                inv, entry_px, entry_ts, fills = -1, oa["px"], r["ts"], fills + 1
+                oc = new_order(r["bid"], r.get("bid1_qty"))
+                continue
+            if b and a or ob["px"] != r["bid"]:
+                ob = new_order(r["bid"], r.get("bid1_qty"))
+            if b and a or oa["px"] != r["ask"]:
+                oa = new_order(r["ask"], r.get("ask1_qty"))
+            continue
+        hit = sell_filled(oc, r) if inv == 1 else buy_filled(oc, r)
+        if hit:
+            book(entry_px, oc["px"], inv, True)
+            maker_exits += 1
+        elif r["ts"] - entry_ts >= MM_TTL_SEC:
+            book(entry_px, r["bid"] if inv == 1 else r["ask"], inv, False)
+        else:
+            best = r["ask"] if inv == 1 else r["bid"]
+            if oc["px"] != best:
+                oc = new_order(best, r.get("ask1_qty") if inv == 1 else r.get("bid1_qty"))
+            continue
+        inv = 0
+        ob, oa = new_order(r["bid"], r.get("bid1_qty")), new_order(r["ask"], r.get("ask1_qty"))
+    if inv != 0:
+        r = rows[-1]
+        book(entry_px, r["bid"] if inv == 1 else r["ask"], inv, False)
+    t = len(nets)
+    return {"n": n, "fills": fills, "trades": t, "maker_exits": maker_exits, "both_sides": both,
+            "maker_exit_pct": round(100.0 * maker_exits / t, 1) if t else None,
+            "gross_bp_avg": round(mean(grosses), 3) if t else None,
+            "net_bp_avg": round(mean(nets), 3) if t else None,
+            "net_bp_sum": round(sum(nets), 3),
+            "hit_rate_pct": round(100.0 * sum(1 for x in nets if x > 0) / t, 1) if t else None}
+
+
 def analyze(by, fees=FEES):
     markets = {k: analyze_market(v) for k, v in by.items()}
     for k, v in by.items():
@@ -357,6 +480,9 @@ def analyze(by, fees=FEES):
             t = mm_touch(v, fees.get(k.split(":")[0], {}))
             if not t.get("no_trades"):
                 markets[k]["mm_touch"] = t
+            q = mm_queue(v, fees.get(k.split(":")[0], {}))
+            if not q.get("no_queue"):
+                markets[k]["mm_queue"] = q
     by_venue = {}
     for k, m in markets.items():
         venue = k.split(":")[0]
@@ -423,6 +549,17 @@ def analyze(by, fees=FEES):
             summary[venue]["mmt_wide_trades"] = trw
             summary[venue]["mmt_wide_net_bp_sum"] = round(sum(x["net_bp_sum"] for x in wide), 3)
             summary[venue]["mmt_wide_net_bp_avg"] = round(sum(x["net_bp_sum"] for x in wide) / trw, 3) if trw else None
+        # 줄 서기 반영 변형 (P38) — 시장별로만 둔다(판단은 TRX·호가폭 ≥ WIDE_SPREAD_BP 시장)
+        bq = {}
+        for k, m in markets.items():
+            if k.split(":")[0] != venue or not m.get("mm_queue", {}).get("trades"):
+                continue
+            q = m["mm_queue"]
+            bq[k.split(":")[1]] = {"spread_bp": m["spread_bp_mean"], "trades": q["trades"], "both_sides": q["both_sides"],
+                                   "net_bp_sum": round(q["net_bp_sum"], 3), "net_bp_avg": round(q["net_bp_sum"] / q["trades"], 3),
+                                   "maker_exit_pct": q["maker_exit_pct"], "wide": m["spread_bp_mean"] >= WIDE_SPREAD_BP}
+        if bq:
+            summary[venue]["mmq_by_market"] = bq
     return markets, summary
 
 
@@ -474,6 +611,12 @@ def print_result(out):
                 print("  %-6s %-4s 호가폭 %6.2fbp  왕복 %5d  건당 %+7.2fbp  합 %+9.1f" % (v, c + ("★" if x["wide"] else ""), x["spread_bp"], x["trades"], x["net_bp_avg"], x["net_bp_sum"]))
             if s.get("mmt_wide_trades"):
                 print("  ★ 넓은 시장 합(%s): 왕복 %d 건당 %+.2fbp" % (",".join(s["mmt_wide_markets"]), s["mmt_wide_trades"], s["mmt_wide_net_bp_avg"]))
+    for v, s in out["summary"].items():
+        if s.get("mmq_by_market"):
+            print("--- 줄 서기 반영 호가 제공 (P38: 내 가격 체결량 > 앞 줄 × %.1f 이어야 체결) ---" % QUEUE_MULT)
+            for c, x in sorted(s["mmq_by_market"].items(), key=lambda kv: -kv[1]["spread_bp"]):
+                print("  %-6s %-4s 호가폭 %6.2fbp  왕복 %5d  건당 %+7.2fbp  합 %+9.1f  지정가청산 %s%%" % (
+                    v, c + ("★" if x["wide"] else ""), x["spread_bp"], x["trades"], x["net_bp_avg"], x["net_bp_sum"], x["maker_exit_pct"]))
     if out.get("errors"):
         print("수집 오류:", json.dumps(out["errors"], ensure_ascii=False))
     print()
@@ -561,6 +704,21 @@ def report(path="orderbook_history.jsonl"):
             if ws:
                 tr = sum(s["mmt_wide_trades"] for s in ws); net = sum(s["mmt_wide_net_bp_sum"] for s in ws)
                 print("%-14s %4d %6d %8s %+10.2f %+10.1f %5d/%d" % (v + ":★합계", len(ws), tr, "-", net / tr if tr else 0.0, net, sum(1 for s in ws if s["mmt_wide_net_bp_sum"] > 0), len(ws)))
+    q_rows = [r for r in rows if any(s.get("mmq_by_market") for s in r.get("summary", {}).values())]
+    if q_rows:
+        print()
+        print("--- 줄 서기 반영 호가 제공 누적 (P38, 2026-11-16 기록 시작, ★ = 호가폭 ≥ %.0fbp) ---" % WIDE_SPREAD_BP)
+        print("%-14s %4s %6s %8s %10s %10s %8s" % ("시장", "일수", "왕복", "평균호가폭", "건당순bp", "순bp합", "플러스일"))
+        for v in venues:
+            acc = {}
+            for r in q_rows:
+                for c, x in r["summary"].get(v, {}).get("mmq_by_market", {}).items():
+                    a = acc.setdefault(c, {"days": 0, "trades": 0, "net": 0.0, "sp": [], "plus": 0, "wide": 0})
+                    a["days"] += 1; a["trades"] += x["trades"]; a["net"] += x["net_bp_sum"]; a["sp"].append(x["spread_bp"])
+                    a["plus"] += x["net_bp_sum"] > 0; a["wide"] += x["wide"]
+            for c, a in sorted(acc.items(), key=lambda kv: -mean(kv[1]["sp"])):
+                print("%-14s %4d %6d %8.2f %+10.2f %+10.1f %5d/%d" % ("%s:%s%s" % (v, c, "★" if a["wide"] == a["days"] else ""), a["days"], a["trades"],
+                                                                     mean(a["sp"]), a["net"] / a["trades"] if a["trades"] else 0.0, a["net"], a["plus"], a["days"]))
     if len(rows) < MIN_DAYS:
         print("아직 %d일치. %d일 이상 모여야 방향을 말할 수 있다." % (len(rows), MIN_DAYS))
     return 0
@@ -600,6 +758,7 @@ def main(argv=None):
                       "spread": "호가 폭 = (매도1−매수1)/중간가. 반폭 − 지정가 수수료 > 0 이면 양쪽 지정가로 한 번 왕복에 남는 여지가 있다는 뜻 (체결·역선택은 별도)",
                       "mm": "호가 제공 종이 규칙(P26): 최우선 매수·매도호가에 1단위씩, 다음 표본의 상대 호가가 내 가격을 지나쳐야 체결. 재고 ±1, 반대쪽 최우선호가에 재게시, %d초 안에 못 닫으면 상대 호가에 시장가. 지정가=메이커·시장가=테이커 수수료" % MM_TTL_SEC,
                       "mm_wide": "P31(2026-11-08): 닿으면 체결 결과를 시장별로 남기고, 평균 호가폭 ≥ %.0fbp(왕복 지정가 수수료의 2배) 시장만 따로 합산(mmt_wide_*). 문턱은 수수료에서 나온 값으로 고정" % WIDE_SPREAD_BP,
+                      "mm_queue": "줄 서기 반영 변형(P38, 업비트만): 주문 낼 때 최우선 잔량을 내 앞 줄로 적고, 그 뒤 내 가격에서 상대 주도 체결량 누적이 줄 × %.1f 을 넘거나 내 가격 너머에서 체결이 찍혀야 체결. 최우선 가격이 바뀌면 새 최우선 줄 맨 뒤로 다시 건다. 내 주문 크기 0 가정" % QUEUE_MULT,
                       "mm_touch": "닿으면 체결 변형(P29, 업비트만): 직전 표본 이후 실제 체결 중 매도 주도 최저가 ≤ 내 매수가면 매수 체결, 매수 주도 최고가 ≥ 내 매도가면 매도 체결. 줄 서기 무시(낙관 쪽 경계). 나머지는 P26 과 같음"},
            "markets": markets, "summary": summary, "errors": errors,
            "verdict": verdict_of(summary)}

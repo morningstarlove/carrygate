@@ -341,3 +341,62 @@ class MarketMakingWide(unittest.TestCase):
         self.assertAlmostEqual(sum(x["net_bp_sum"] for x in s["mmt_by_market"].values()), s["mmt_net_bp_sum"], places=2)
         self.assertGreater(s["mmt_by_market"]["TRX"]["net_bp_avg"], 0)   # 반폭 11.4bp > 수수료 5bp → 왕복 플러스
 
+
+class MarketMakingQueue(unittest.TestCase):
+    """P38: 줄 서기 반영 — 내 가격 체결량이 앞 줄을 넘어야 체결."""
+
+    def _row(self, i, bid=437.0, ask=438.0, bq=1000.0, aq=1000.0, sv=None, bv=None):
+        return {"ts": i * 10, "bid": bid, "ask": ask, "bq": 1.0, "aq": 1.0, "sell_lo": min(sv) if sv else None,
+                "buy_hi": max(bv) if bv else None, "bid1_qty": bq, "ask1_qty": aq, "sell_pv": sv or {}, "buy_pv": bv or {}}
+
+    def _fee(self):
+        return {"maker_pct": 0.05, "taker_pct": 0.05}
+
+    def test_constant_fixed(self):
+        self.assertEqual(ob.QUEUE_MULT, 1.0)   # 2026-11-16 고정
+
+    def test_fill_only_after_queue_traded_through(self):
+        rows = [self._row(i) for i in range(30)]
+        rows += [self._row(30, sv={437.0: 600.0}, bv={438.0: 600.0})]    # 앞 줄 1000 중 600 → 아직
+        rows += [self._row(31, sv={437.0: 500.0}, bv={438.0: 500.0})]    # 누적 1100 > 1000 → 양쪽 체결 = 왕복
+        rows += [self._row(32 + i) for i in range(3)]
+        r = ob.mm_queue(rows, self._fee())
+        self.assertEqual(r["trades"], 1)
+        self.assertEqual(r["both_sides"], 1)
+        self.assertAlmostEqual(r["net_bp_avg"], (438.0 / 437.0 - 1) * 1e4 - 10.0, places=3)
+        t = ob.mm_touch(rows, self._fee())       # P29 는 거래가 찍힐 때마다 체결로 본다(600 에서 한 번, 500 에서 또 한 번)
+        self.assertEqual(t["both_sides"], 2)
+
+    def test_queue_not_reached_no_fill(self):
+        rows = [self._row(i) for i in range(30)] + [self._row(30 + i, sv={437.0: 100.0}, bv={438.0: 100.0}) for i in range(5)]
+        r = ob.mm_queue(rows, self._fee())        # 누적 500 < 1000 → 체결 없음
+        self.assertEqual(r["trades"], 0)
+        t = ob.mm_touch(rows, self._fee())
+        self.assertGreater(t["trades"], 0)
+
+    def test_trade_beyond_my_price_fills(self):
+        rows = [self._row(i) for i in range(30)]
+        rows += [self._row(30, sv={436.0: 1.0})]          # 내 매수 437 아래에서 체결 → 437 줄 전체가 먹힘 → 매수 체결
+        rows += [self._row(31 + i, bid=436.0, ask=437.0, aq=50.0) for i in range(3)]
+        rows += [self._row(34, bid=436.0, ask=437.0, aq=50.0, bv={437.0: 60.0})]   # 청산 매도 437, 앞 줄 50 < 60 → 체결
+        r = ob.mm_queue(rows, self._fee())
+        self.assertEqual(r["trades"], 1)
+        self.assertEqual(r["maker_exits"], 1)
+        self.assertAlmostEqual(r["net_bp_avg"], -10.0, places=3)    # 437 사서 437 팔기 = 수수료만
+
+    def test_price_move_resets_queue(self):
+        rows = [self._row(i, bid=100.0, ask=105.0) for i in range(30)]
+        rows += [self._row(30, bid=100.0, ask=105.0, sv={100.0: 900.0})]                # 900/1000
+        rows += [self._row(31, bid=101.0, ask=105.0, bq=800.0)]                          # 누가 101 에 더 좋은 매수 → 내 100 주문은 뒤로 밀림 → 101 줄 맨 뒤(800)로 다시
+        rows += [self._row(32, bid=101.0, ask=105.0, bq=800.0, sv={101.0: 500.0})]      # 500 < 800 → 아직
+        r = ob.mm_queue(rows, self._fee())
+        self.assertEqual(r["trades"], 0)
+
+    def test_needs_queue_columns(self):
+        rows = [{"ts": i, "bid": 1.0, "ask": 1.1, "bq": 1, "aq": 1, "sell_lo": None, "buy_hi": None} for i in range(40)]
+        self.assertTrue(ob.mm_queue(rows, self._fee()).get("no_queue"))
+
+    def test_px_vol_roundtrip(self):
+        self.assertEqual(ob.parse_px_vol(ob.fmt_px_vol({437.0: 1200.5, 436.0: 30.0})), {437.0: 1200.5, 436.0: 30.0})
+        self.assertEqual(ob.parse_px_vol(""), {})
+
