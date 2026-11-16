@@ -1,6 +1,6 @@
 {
- "date": "2026-11-13",
- "generated_at_utc": "2026-11-13T14:59:35Z",
+ "date": "2026-11-16",
+ "generated_at_utc": "2026-11-16T07:19:58Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -74,15 +74,15 @@
   }
  },
  "forward": {
-  "days": 28,
+  "days": 29,
   "from": "2026-10-05",
-  "to": "2026-11-13",
-  "codes": 318,
+  "to": "2026-11-16",
+  "codes": 323,
   "bar_errors": 0,
   "stale_codes": 0,
   "by_source": {
-   "yahoo": 249,
-   "yahoo+naver_api": 69
+   "yahoo+naver_api": 71,
+   "yahoo": 252
   },
   "skipped_days": [
    "2026-10-05"
@@ -99,8 +99,8 @@
   "risk_2": [],
   "no_flag": []
  },
- "signal_date": "2026-11-13",
- "signals_frozen": true,
+ "signal_date": "2026-11-16",
+ "signals_frozen": false,
  "frozen_dates": [
   "2026-10-06",
   "2026-10-07",
@@ -135,17 +135,17 @@
   "base": {
    "label": "동조 업종 + 패턴 돌파 (기본)",
    "signals": 31,
-   "trades": 12,
-   "wins": 0,
-   "win_rate": 0.0,
-   "avg_win_pct": null,
+   "trades": 13,
+   "wins": 1,
+   "win_rate": 7.69,
+   "avg_win_pct": 10.53,
    "avg_loss_pct": -7.31,
-   "payoff": null,
-   "profit_factor": 0.0,
-   "total_return_pct": -5.3,
-   "equity_final": 9470108,
+   "payoff": 1.29,
+   "profit_factor": 0.11,
+   "total_return_pct": -5.93,
+   "equity_final": 9406888,
    "max_drawdown_pct": 10.79,
-   "avg_hold_days": 4.25,
+   "avg_hold_days": 5.46,
    "skipped": {
     "gap": 0,
     "limit": 14,
@@ -171,16 +171,16 @@
      "pnl_krw": -461276
     },
     "triangle": {
-     "n": 1,
-     "wins": 0,
-     "pnl_krw": -86383
+     "n": 2,
+     "wins": 1,
+     "pnl_krw": 36532
     }
    },
    "by_sync": {
     "day": {
-     "n": 12,
-     "wins": 0,
-     "pnl_krw": -1145294
+     "n": 13,
+     "wins": 1,
+     "pnl_krw": -1022379
     }
    },
    "by_exit": {
@@ -188,32 +188,24 @@
      "n": 12,
      "wins": 0,
      "pnl_krw": -1145294
+    },
+    "hold20": {
+     "n": 1,
+     "wins": 1,
+     "pnl_krw": 122915
     }
    },
    "by_year": {
     "2026": {
-     "n": 12,
-     "wins": 0,
-     "pnl_krw": -1145294
+     "n": 13,
+     "wins": 1,
+     "pnl_krw": -1022379
     }
    },
    "yearly_return_pct": {
-    "2026": -5.3
+    "2026": -5.93
    },
    "open_positions": [
-    {
-     "code": "068270",
-     "name": "Celltrion, Inc.",
-     "group": "Biotechnology",
-     "pattern": "triangle",
-     "entry_date": "2026-10-19",
-     "entry": 194481.7,
-     "stop": 180867.98,
-     "shares": 6,
-     "bars_held": 20,
-     "last_close": 214000.0,
-     "unrealized_pct": 10.04
-    },
     {
      "code": "267850",
      "name": "Asiana IDT Inc.",
@@ -223,9 +215,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 132,
-     "bars_held": 8,
-     "last_close": 13000.0,
-     "unrealized_pct": 34.87
+     "bars_held": 9,
+     "last_close": 12700.0,
+     "unrealized_pct": 31.76
     },
     {
      "code": "128940",
@@ -236,9 +228,9 @@
      "entry": 445833.5,
      "stop": 414625.15,
      "shares": 2,
-     "bars_held": 6,
-     "last_close": 465500.0,
-     "unrealized_pct": 4.41
+     "bars_held": 7,
+     "last_close": 446500.0,
+     "unrealized_pct": 0.15
     },
     {
      "code": "326030",
@@ -249,9 +241,9 @@
      "entry": 86759.5,
      "stop": 80686.33,
      "shares": 14,
-     "bars_held": 6,
-     "last_close": 87900.0,
-     "unrealized_pct": 1.31
+     "bars_held": 7,
+     "last_close": 88500.0,
+     "unrealized_pct": 2.01
     }
    ]
   },
@@ -265,14 +257,14 @@
    "avg_loss_pct": -7.21,
    "payoff": 0.91,
    "profit_factor": 0.04,
-   "total_return_pct": -18.36,
-   "equity_final": 8163861,
-   "max_drawdown_pct": 18.36,
+   "total_return_pct": -18.55,
+   "equity_final": 8145211,
+   "max_drawdown_pct": 18.55,
    "avg_hold_days": 4.27,
    "skipped": {
     "gap": 0,
     "limit": 58,
-    "cooldown": 0,
+    "cooldown": 5,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -331,7 +323,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -18.36
+    "2026": -18.55
    },
    "open_positions": [
     {
@@ -343,9 +335,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 125,
-     "bars_held": 8,
-     "last_close": 13000.0,
-     "unrealized_pct": 34.87
+     "bars_held": 9,
+     "last_close": 12700.0,
+     "unrealized_pct": 31.76
     },
     {
      "code": "003490",
@@ -356,9 +348,9 @@
      "entry": 32597.5,
      "stop": 30315.67,
      "shares": 39,
-     "bars_held": 3,
-     "last_close": 31550.0,
-     "unrealized_pct": -3.21
+     "bars_held": 4,
+     "last_close": 31700.0,
+     "unrealized_pct": -2.75
     },
     {
      "code": "035900",
@@ -369,9 +361,9 @@
      "entry": 44332.6,
      "stop": 41229.32,
      "shares": 26,
-     "bars_held": 1,
-     "last_close": 43500.0,
-     "unrealized_pct": -1.88
+     "bars_held": 2,
+     "last_close": 44000.0,
+     "unrealized_pct": -0.75
     }
    ]
   },
@@ -385,14 +377,14 @@
    "avg_loss_pct": -6.96,
    "payoff": 0.62,
    "profit_factor": 0.05,
-   "total_return_pct": -6.35,
-   "equity_final": 9365081,
-   "max_drawdown_pct": 9.48,
+   "total_return_pct": -7.04,
+   "equity_final": 9295881,
+   "max_drawdown_pct": 9.75,
    "avg_hold_days": 4.29,
    "skipped": {
     "gap": 0,
     "limit": 13,
-    "cooldown": 0,
+    "cooldown": 1,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -446,7 +438,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -6.35
+    "2026": -7.04
    },
    "open_positions": [
     {
@@ -458,9 +450,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 134,
-     "bars_held": 8,
-     "last_close": 13000.0,
-     "unrealized_pct": 34.87
+     "bars_held": 9,
+     "last_close": 12700.0,
+     "unrealized_pct": 31.76
     },
     {
      "code": "128940",
@@ -471,9 +463,9 @@
      "entry": 445833.5,
      "stop": 414625.15,
      "shares": 2,
-     "bars_held": 6,
-     "last_close": 465500.0,
-     "unrealized_pct": 4.41
+     "bars_held": 7,
+     "last_close": 446500.0,
+     "unrealized_pct": 0.15
     },
     {
      "code": "326030",
@@ -484,26 +476,26 @@
      "entry": 86759.5,
      "stop": 80686.33,
      "shares": 15,
-     "bars_held": 6,
-     "last_close": 87900.0,
-     "unrealized_pct": 1.31
+     "bars_held": 7,
+     "last_close": 88500.0,
+     "unrealized_pct": 2.01
     }
    ]
   },
   "risk_2": {
    "label": "동조 + 패턴, 위험 2% (명목 상한 30%)",
    "signals": 32,
-   "trades": 10,
-   "wins": 0,
-   "win_rate": 0.0,
-   "avg_win_pct": null,
+   "trades": 11,
+   "wins": 1,
+   "win_rate": 9.09,
+   "avg_win_pct": 10.53,
    "avg_loss_pct": -7.24,
-   "payoff": null,
-   "profit_factor": 0.0,
-   "total_return_pct": -6.77,
-   "equity_final": 9322803,
+   "payoff": 1.51,
+   "profit_factor": 0.15,
+   "total_return_pct": -7.38,
+   "equity_final": 9261660,
    "max_drawdown_pct": 16.49,
-   "avg_hold_days": 3.2,
+   "avg_hold_days": 4.73,
    "skipped": {
     "gap": 0,
     "limit": 0,
@@ -527,13 +519,18 @@
      "n": 5,
      "wins": 0,
      "pnl_krw": -900712
+    },
+    "triangle": {
+     "n": 1,
+     "wins": 1,
+     "pnl_krw": 266315
     }
    },
    "by_sync": {
     "day": {
-     "n": 9,
-     "wins": 0,
-     "pnl_krw": -1658558
+     "n": 10,
+     "wins": 1,
+     "pnl_krw": -1392243
     },
     "week": {
      "n": 1,
@@ -546,32 +543,24 @@
      "n": 10,
      "wins": 0,
      "pnl_krw": -1760408
+    },
+    "hold20": {
+     "n": 1,
+     "wins": 1,
+     "pnl_krw": 266315
     }
    },
    "by_year": {
     "2026": {
-     "n": 10,
-     "wins": 0,
-     "pnl_krw": -1760408
+     "n": 11,
+     "wins": 1,
+     "pnl_krw": -1494093
     }
    },
    "yearly_return_pct": {
-    "2026": -6.77
+    "2026": -7.38
    },
    "open_positions": [
-    {
-     "code": "068270",
-     "name": "Celltrion, Inc.",
-     "group": "Biotechnology",
-     "pattern": "triangle",
-     "entry_date": "2026-10-19",
-     "entry": 194481.7,
-     "stop": 180867.98,
-     "shares": 13,
-     "bars_held": 20,
-     "last_close": 214000.0,
-     "unrealized_pct": 10.04
-    },
     {
      "code": "267850",
      "name": "Asiana IDT Inc.",
@@ -581,26 +570,26 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 247,
-     "bars_held": 8,
-     "last_close": 13000.0,
-     "unrealized_pct": 34.87
+     "bars_held": 9,
+     "last_close": 12700.0,
+     "unrealized_pct": 31.76
     }
    ]
   },
   "no_flag": {
    "label": "동조 + 패턴, 깃발형 제외",
    "signals": 17,
-   "trades": 8,
-   "wins": 0,
-   "win_rate": 0.0,
-   "avg_win_pct": null,
+   "trades": 9,
+   "wins": 1,
+   "win_rate": 11.11,
+   "avg_win_pct": 10.53,
    "avg_loss_pct": -7.24,
-   "payoff": null,
-   "profit_factor": 0.0,
-   "total_return_pct": -1.63,
-   "equity_final": 9836942,
+   "payoff": 1.49,
+   "profit_factor": 0.19,
+   "total_return_pct": -1.46,
+   "equity_final": 9853819,
    "max_drawdown_pct": 7.59,
-   "avg_hold_days": 5,
+   "avg_hold_days": 6.67,
    "skipped": {
     "gap": 0,
     "limit": 5,
@@ -621,16 +610,16 @@
      "pnl_krw": -576356
     },
     "triangle": {
-     "n": 1,
-     "wins": 0,
-     "pnl_krw": -86383
+     "n": 2,
+     "wins": 1,
+     "pnl_krw": 57018
     }
    },
    "by_sync": {
     "day": {
-     "n": 8,
-     "wins": 0,
-     "pnl_krw": -771934
+     "n": 9,
+     "wins": 1,
+     "pnl_krw": -628533
     }
    },
    "by_exit": {
@@ -638,32 +627,24 @@
      "n": 8,
      "wins": 0,
      "pnl_krw": -771934
+    },
+    "hold20": {
+     "n": 1,
+     "wins": 1,
+     "pnl_krw": 143401
     }
    },
    "by_year": {
     "2026": {
-     "n": 8,
-     "wins": 0,
-     "pnl_krw": -771934
+     "n": 9,
+     "wins": 1,
+     "pnl_krw": -628533
     }
    },
    "yearly_return_pct": {
-    "2026": -1.63
+    "2026": -1.46
    },
    "open_positions": [
-    {
-     "code": "068270",
-     "name": "Celltrion, Inc.",
-     "group": "Biotechnology",
-     "pattern": "triangle",
-     "entry_date": "2026-10-19",
-     "entry": 194481.7,
-     "stop": 180867.98,
-     "shares": 7,
-     "bars_held": 20,
-     "last_close": 214000.0,
-     "unrealized_pct": 10.04
-    },
     {
      "code": "267850",
      "name": "Asiana IDT Inc.",
@@ -673,9 +654,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 137,
-     "bars_held": 8,
-     "last_close": 13000.0,
-     "unrealized_pct": 34.87
+     "bars_held": 9,
+     "last_close": 12700.0,
+     "unrealized_pct": 31.76
     },
     {
      "code": "326030",
@@ -686,9 +667,9 @@
      "entry": 86759.5,
      "stop": 80686.33,
      "shares": 15,
-     "bars_held": 6,
-     "last_close": 87900.0,
-     "unrealized_pct": 1.31
+     "bars_held": 7,
+     "last_close": 88500.0,
+     "unrealized_pct": 2.01
     },
     {
      "code": "0126Z0",
@@ -699,9 +680,9 @@
      "entry": 344029.0,
      "stop": 319946.97,
      "shares": 3,
-     "bars_held": 6,
-     "last_close": 342500.0,
-     "unrealized_pct": -0.44
+     "bars_held": 7,
+     "last_close": 356500.0,
+     "unrealized_pct": 3.62
     }
    ]
   }
@@ -974,6 +955,29 @@
     "pnl_krw": -93665,
     "pnl_pct": -7.45,
     "hold_days": 5,
+    "gap": false
+   },
+   {
+    "code": "068270",
+    "name": "Celltrion, Inc.",
+    "group": "Biotechnology",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-16",
+    "entry_date": "2026-10-19",
+    "entry": 194481.7,
+    "stop": 180867.98,
+    "exit_date": "2026-11-16",
+    "exit": 215352.0,
+    "why": "hold20",
+    "shares": 6,
+    "pnl_krw": 122915,
+    "pnl_pct": 10.53,
+    "hold_days": 20,
     "gap": false
    }
   ],
@@ -2098,6 +2102,29 @@
     "pnl_pct": -7.45,
     "hold_days": 5,
     "gap": false
+   },
+   {
+    "code": "068270",
+    "name": "Celltrion, Inc.",
+    "group": "Biotechnology",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-16",
+    "entry_date": "2026-10-19",
+    "entry": 194481.7,
+    "stop": 180867.98,
+    "exit_date": "2026-11-16",
+    "exit": 215352.0,
+    "why": "hold20",
+    "shares": 13,
+    "pnl_krw": 266315,
+    "pnl_pct": 10.53,
+    "hold_days": 20,
+    "gap": false
    }
   ],
   "no_flag": [
@@ -2278,6 +2305,29 @@
     "pnl_krw": -93665,
     "pnl_pct": -7.45,
     "hold_days": 5,
+    "gap": false
+   },
+   {
+    "code": "068270",
+    "name": "Celltrion, Inc.",
+    "group": "Biotechnology",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-10-16",
+    "entry_date": "2026-10-19",
+    "entry": 194481.7,
+    "stop": 180867.98,
+    "exit_date": "2026-11-16",
+    "exit": 215352.0,
+    "why": "hold20",
+    "shares": 7,
+    "pnl_krw": 143401,
+    "pnl_pct": 10.53,
+    "hold_days": 20,
     "gap": false
    }
   ]
