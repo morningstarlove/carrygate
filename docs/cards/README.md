@@ -15,6 +15,7 @@
 | P38 | [p38_mm_queue.svg](p38_mm_queue.svg) | 호가 제공 줄 서기 반영 `orderbook.py mm_queue` | `data/upbit_trx_1m.csv` (P31 과 같은 업비트 TRX 1분봉) | 2026-11-16 | 2026-11-24 |
 | P36 | [p36_cycle_ladder.svg](p36_cycle_ladder.svg) | BTC 사이클 낙폭 분할매수 `cycle.py` (−50·−60·−70% 계단 + 200일선 위로 건넘, DCA 와 비교) | `data/bitstamp_btcusd_1d_all.csv` (Bitstamp BTC/USD 일봉 2013-01-01~2026-11-13 UTC, TradingView 수집 — 그림은 마지막 440봉, 11/13 봉은 그리는 중) | 2026-11-13 | 2027-05-12 (순방향 180일) |
 | P37 | [p37_index_deletion.svg](p37_index_deletion.svg) | 지수 편출 이벤트 기록 `index_event.py` (MSCI 의 MSTR 편출, MSTR − IBIT) | `data/nasdaq_mstr_1d.csv`·`data/nasdaq_ibit_1d.csv` (나스닥 일봉 2026-05-01~11-12, TradingView 수집) | 2026-11-13 | A 2026-11-30 · B 약 2026-12-29 |
+| P39 | [p39_trendline.svg](p39_trendline.svg) | 추세선 채널 하단 매수 `trendline.py` (저점①-② 하단, ③고점 평행 상단, 중단 — **사용자 결정 대기, 트랙 아님**) | `data/krx_069500_1d.csv` (KODEX 200 일봉 2025-06-27~2026-11-03, `data/bb_reentry/KRX_069500.csv` 마지막 330봉 — `python scripts/trendline_card.py` 로 재생성) | 2026-11-17 | 사용자 결정 뒤(A 면 20건) |
 | P33 | [p33_forecast.svg](p33_forecast.svg) | 예측 v2 `forecast.py` (크기 예측 + 방향 채점) | `data/okx_btc_2h.csv` (OKX BTC 무기한선물 2시간봉 — TradingView 1h 실데이터를 2h 로 합침, 2026-10-02~11-04 UTC) | 2026-11-08 | 2027-01-05 전후 (채점 60일) |
 
 ## 만드는 법
