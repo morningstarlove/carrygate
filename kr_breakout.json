@@ -1,6 +1,6 @@
 {
  "date": "2026-11-18",
- "generated_at_utc": "2026-11-17T16:36:10Z",
+ "generated_at_utc": "2026-11-18T07:17:08Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -74,21 +74,27 @@
   }
  },
  "forward": {
-  "days": 30,
+  "days": 31,
   "from": "2026-10-05",
-  "to": "2026-11-17",
-  "codes": 333,
+  "to": "2026-11-18",
+  "codes": 336,
   "bar_errors": 0,
   "stale_codes": 0,
   "by_source": {
-   "yahoo": 2,
-   "yahoo+naver_api": 331
+   "yahoo": 259,
+   "yahoo+gapfill": 1,
+   "yahoo+naver_api": 76
   },
   "skipped_days": [
    "2026-10-05"
   ],
-  "gap_filled": 0,
-  "gap_filled_codes": {},
+  "gap_filled": 1,
+  "gap_filled_codes": {
+   "493410": [
+    "2026-11-16",
+    "2026-11-17"
+   ]
+  },
   "gap_unfilled": 0,
   "note": null
  },
@@ -96,26 +102,40 @@
   "base": [],
   "no_sector": [
    {
-    "code": "010470",
-    "name": "ORICOM, Inc.",
-    "group": "Advertising/Marketing Services",
-    "pattern": "box",
+    "code": "030530",
+    "name": "WONIK HOLDINGS CO., LTD.",
+    "group": "Semiconductors",
+    "pattern": "flag",
     "patterns": [
-     "box"
+     "flag"
     ],
-    "signal_close": 5510.0,
-    "pattern_low": 4480.0,
+    "signal_close": 35350.0,
+    "pattern_low": 26800.0,
     "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 5951 이상이면 포기)",
-    "stop_plan": "max(4480, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 38178 이상이면 포기)",
+    "stop_plan": "max(26800, 진입가×0.93)"
+   },
+   {
+    "code": "437730",
+    "name": "Samhyun Co., Ltd.",
+    "group": "Building Products",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 53000.0,
+    "pattern_low": 42800.0,
+    "sync_by": null,
+    "entry_plan": "내일 시가 (시가가 57240 이상이면 포기)",
+    "stop_plan": "max(42800, 진입가×0.93)"
    }
   ],
   "hold_10": [],
   "risk_2": [],
   "no_flag": []
  },
- "signal_date": "2026-11-17",
- "signals_frozen": true,
+ "signal_date": "2026-11-18",
+ "signals_frozen": false,
  "frozen_dates": [
   "2026-10-06",
   "2026-10-07",
@@ -159,8 +179,8 @@
    "avg_loss_pct": -7.31,
    "payoff": 1.29,
    "profit_factor": 0.11,
-   "total_return_pct": -7.31,
-   "equity_final": 9268968,
+   "total_return_pct": -7.33,
+   "equity_final": 9267368,
    "max_drawdown_pct": 10.79,
    "avg_hold_days": 5.46,
    "skipped": {
@@ -220,7 +240,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -7.31
+    "2026": -7.33
    },
    "open_positions": [
     {
@@ -232,9 +252,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 132,
-     "bars_held": 10,
-     "last_close": 11540.0,
-     "unrealized_pct": 19.72
+     "bars_held": 11,
+     "last_close": 12040.0,
+     "unrealized_pct": 24.91
     },
     {
      "code": "128940",
@@ -245,9 +265,9 @@
      "entry": 445833.5,
      "stop": 414625.15,
      "shares": 2,
-     "bars_held": 8,
-     "last_close": 448500.0,
-     "unrealized_pct": 0.6
+     "bars_held": 9,
+     "last_close": 438500.0,
+     "unrealized_pct": -1.64
     },
     {
      "code": "326030",
@@ -258,30 +278,30 @@
      "entry": 86759.5,
      "stop": 80686.33,
      "shares": 14,
-     "bars_held": 8,
-     "last_close": 89300.0,
-     "unrealized_pct": 2.93
+     "bars_held": 9,
+     "last_close": 85900.0,
+     "unrealized_pct": -0.99
     }
    ]
   },
   "no_sector": {
    "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
-   "signals": 89,
-   "trades": 26,
+   "signals": 91,
+   "trades": 27,
    "wins": 1,
-   "win_rate": 3.85,
+   "win_rate": 3.7,
    "avg_win_pct": 6.57,
-   "avg_loss_pct": -7.21,
-   "payoff": 0.91,
+   "avg_loss_pct": -7.22,
+   "payoff": 0.92,
    "profit_factor": 0.04,
-   "total_return_pct": -20.33,
-   "equity_final": 7967061,
-   "max_drawdown_pct": 20.33,
-   "avg_hold_days": 4.27,
+   "total_return_pct": -19.66,
+   "equity_final": 8033628,
+   "max_drawdown_pct": 19.66,
+   "avg_hold_days": 4.15,
    "skipped": {
     "gap": 0,
     "limit": 58,
-    "cooldown": 0,
+    "cooldown": 5,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -303,9 +323,9 @@
      "pnl_krw": -401380
     },
     "box": {
-     "n": 12,
+     "n": 13,
      "wins": 0,
-     "pnl_krw": -1041400
+     "pnl_krw": -1126383
     }
    },
    "by_sync": {
@@ -315,16 +335,16 @@
      "pnl_krw": -548490
     },
     "none": {
-     "n": 20,
+     "n": 21,
      "wins": 1,
-     "pnl_krw": -1644753
+     "pnl_krw": -1729736
     }
    },
    "by_exit": {
     "stop": {
-     "n": 24,
+     "n": 25,
      "wins": 0,
-     "pnl_krw": -2243220
+     "pnl_krw": -2328203
     },
     "low10": {
      "n": 2,
@@ -334,13 +354,13 @@
    },
    "by_year": {
     "2026": {
-     "n": 26,
+     "n": 27,
      "wins": 1,
-     "pnl_krw": -2193243
+     "pnl_krw": -2278226
     }
    },
    "yearly_return_pct": {
-    "2026": -20.33
+    "2026": -19.66
    },
    "open_positions": [
     {
@@ -352,9 +372,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 125,
-     "bars_held": 10,
-     "last_close": 11540.0,
-     "unrealized_pct": 19.72
+     "bars_held": 11,
+     "last_close": 12040.0,
+     "unrealized_pct": 24.91
     },
     {
      "code": "003490",
@@ -365,9 +385,9 @@
      "entry": 32597.5,
      "stop": 30315.67,
      "shares": 39,
-     "bars_held": 5,
-     "last_close": 31750.0,
-     "unrealized_pct": -2.6
+     "bars_held": 6,
+     "last_close": 31300.0,
+     "unrealized_pct": -3.98
     },
     {
      "code": "035900",
@@ -378,26 +398,26 @@
      "entry": 44332.6,
      "stop": 41229.32,
      "shares": 26,
-     "bars_held": 3,
-     "last_close": 42650.0,
-     "unrealized_pct": -3.8
+     "bars_held": 4,
+     "last_close": 46750.0,
+     "unrealized_pct": 5.45
     }
    ]
   },
   "hold_10": {
    "label": "동조 + 패턴, 보유 10일",
    "signals": 31,
-   "trades": 14,
-   "wins": 1,
-   "win_rate": 7.14,
-   "avg_win_pct": 4.89,
+   "trades": 15,
+   "wins": 2,
+   "win_rate": 13.33,
+   "avg_win_pct": 12.59,
    "avg_loss_pct": -6.96,
-   "payoff": 0.62,
-   "profit_factor": 0.05,
-   "total_return_pct": -8.44,
-   "equity_final": 9156441,
-   "max_drawdown_pct": 11.1,
-   "avg_hold_days": 4.29,
+   "payoff": 1.73,
+   "profit_factor": 0.27,
+   "total_return_pct": -9.07,
+   "equity_final": 9092929,
+   "max_drawdown_pct": 11.72,
+   "avg_hold_days": 4.67,
    "skipped": {
     "gap": 0,
     "limit": 13,
@@ -418,9 +438,9 @@
      "pnl_krw": -87356
     },
     "box": {
-     "n": 6,
-     "wins": 0,
-     "pnl_krw": -568513
+     "n": 7,
+     "wins": 1,
+     "pnl_krw": -306461
     },
     "triangle": {
      "n": 2,
@@ -430,9 +450,9 @@
    },
    "by_sync": {
     "day": {
-     "n": 14,
-     "wins": 1,
-     "pnl_krw": -1141233
+     "n": 15,
+     "wins": 2,
+     "pnl_krw": -879181
     }
    },
    "by_exit": {
@@ -442,35 +462,22 @@
      "pnl_krw": -1166148
     },
     "hold10": {
-     "n": 2,
-     "wins": 1,
-     "pnl_krw": 24915
+     "n": 3,
+     "wins": 2,
+     "pnl_krw": 286967
     }
    },
    "by_year": {
     "2026": {
-     "n": 14,
-     "wins": 1,
-     "pnl_krw": -1141233
+     "n": 15,
+     "wins": 2,
+     "pnl_krw": -879181
     }
    },
    "yearly_return_pct": {
-    "2026": -8.44
+    "2026": -9.07
    },
    "open_positions": [
-    {
-     "code": "267850",
-     "name": "Asiana IDT Inc.",
-     "group": "Information Technology Services",
-     "pattern": "box",
-     "entry_date": "2026-11-04",
-     "entry": 9638.83,
-     "stop": 8964.11,
-     "shares": 134,
-     "bars_held": 10,
-     "last_close": 11540.0,
-     "unrealized_pct": 19.72
-    },
     {
      "code": "128940",
      "name": "Hanmi Pharmaceutical Co., Ltd.",
@@ -480,9 +487,9 @@
      "entry": 445833.5,
      "stop": 414625.15,
      "shares": 2,
-     "bars_held": 8,
-     "last_close": 448500.0,
-     "unrealized_pct": 0.6
+     "bars_held": 9,
+     "last_close": 438500.0,
+     "unrealized_pct": -1.64
     },
     {
      "code": "326030",
@@ -493,9 +500,9 @@
      "entry": 86759.5,
      "stop": 80686.33,
      "shares": 15,
-     "bars_held": 8,
-     "last_close": 89300.0,
-     "unrealized_pct": 2.93
+     "bars_held": 9,
+     "last_close": 85900.0,
+     "unrealized_pct": -0.99
     }
    ]
   },
@@ -509,8 +516,8 @@
    "avg_loss_pct": -7.24,
    "payoff": 1.51,
    "profit_factor": 0.15,
-   "total_return_pct": -10.25,
-   "equity_final": 8975140,
+   "total_return_pct": -9.01,
+   "equity_final": 9098640,
    "max_drawdown_pct": 16.49,
    "avg_hold_days": 4.73,
    "skipped": {
@@ -575,7 +582,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -10.25
+    "2026": -9.01
    },
    "open_positions": [
     {
@@ -587,9 +594,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 247,
-     "bars_held": 10,
-     "last_close": 11540.0,
-     "unrealized_pct": 19.72
+     "bars_held": 11,
+     "last_close": 12040.0,
+     "unrealized_pct": 24.91
     }
    ]
   },
@@ -603,9 +610,9 @@
    "avg_loss_pct": -7.24,
    "payoff": 1.49,
    "profit_factor": 0.19,
-   "total_return_pct": -2.75,
-   "equity_final": 9724899,
-   "max_drawdown_pct": 7.79,
+   "total_return_pct": -2.58,
+   "equity_final": 9742399,
+   "max_drawdown_pct": 7.63,
    "avg_hold_days": 6.67,
    "skipped": {
     "gap": 0,
@@ -659,7 +666,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -2.75
+    "2026": -2.58
    },
    "open_positions": [
     {
@@ -671,9 +678,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 137,
-     "bars_held": 10,
-     "last_close": 11540.0,
-     "unrealized_pct": 19.72
+     "bars_held": 11,
+     "last_close": 12040.0,
+     "unrealized_pct": 24.91
     },
     {
      "code": "326030",
@@ -684,9 +691,9 @@
      "entry": 86759.5,
      "stop": 80686.33,
      "shares": 15,
-     "bars_held": 8,
-     "last_close": 89300.0,
-     "unrealized_pct": 2.93
+     "bars_held": 9,
+     "last_close": 85900.0,
+     "unrealized_pct": -0.99
     },
     {
      "code": "0126Z0",
@@ -697,7 +704,7 @@
      "entry": 344029.0,
      "stop": 319946.97,
      "shares": 3,
-     "bars_held": 8,
+     "bars_held": 9,
      "last_close": 362500.0,
      "unrealized_pct": 5.37
     }
@@ -1579,6 +1586,28 @@
     "pnl_pct": -7.45,
     "hold_days": 5,
     "gap": false
+   },
+   {
+    "code": "010470",
+    "name": "ORICOM, Inc.",
+    "group": "Advertising/Marketing Services",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": null,
+    "signal_date": "2026-11-17",
+    "entry_date": "2026-11-18",
+    "entry": 5486.41,
+    "stop": 5102.36,
+    "exit_date": "2026-11-18",
+    "exit": 5087.05,
+    "why": "stop",
+    "shares": 208,
+    "pnl_krw": -84983,
+    "pnl_pct": -7.45,
+    "hold_days": 1,
+    "gap": false
    }
   ],
   "hold_10": [
@@ -1893,6 +1922,28 @@
     "pnl_krw": -99081,
     "pnl_pct": -7.45,
     "hold_days": 5,
+    "gap": false
+   },
+   {
+    "code": "267850",
+    "name": "Asiana IDT Inc.",
+    "group": "Information Technology Services",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-11-03",
+    "entry_date": "2026-11-04",
+    "entry": 9638.83,
+    "stop": 8964.11,
+    "exit_date": "2026-11-18",
+    "exit": 11615.05,
+    "why": "hold10",
+    "shares": 134,
+    "pnl_krw": 262052,
+    "pnl_pct": 20.29,
+    "hold_days": 10,
     "gap": false
    }
   ],
