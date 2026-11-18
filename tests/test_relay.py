@@ -99,6 +99,22 @@ class CoinGecko(unittest.TestCase):
         old = snaps + [{"t_ms": now - 9 * day, "venue": "binance", "coin": "BTC", "rate": 1.0}]   # 9일 전은 창 밖
         self.assertEqual(funding.cg_avg7(old, "binance", "BTC", now)[1], 4)
 
+    def test_same_day_rerun_is_not_counted_twice(self):
+        # 2026-11-18 검토: 같은 날 두 번 돌리면 표본이 두 번 세어져 "7일 평균 없이 진입 판정 금지"(최소 5일)가 4일로 뚫렸다.
+        now = 1_800_000_000_000
+        day = 86400_000
+        snaps = [{"t_ms": now - k * day, "venue": "binance", "coin": "BTC", "rate": 0.0001} for k in range(1, 4)]   # 서로 다른 3일
+        snaps.append({"t_ms": now - 3600_000, "venue": "binance", "coin": "BTC", "rate": 0.0009})                  # 오늘 먼저 돈 실행
+        rows, _ = funding.cg_parse("binance", self._payload(), snaps, now)                                          # 오늘 두 번째 실행
+        self.assertEqual(rows["BTC"]["avg_samples"], 4)            # 서로 다른 날은 4일뿐
+        self.assertIsNone(rows["BTC"]["funding_rate_avg7d"])
+        # 같은 날은 가장 늦은 표본 하나만 쓴다
+        five = snaps + [{"t_ms": now - 4 * day, "venue": "binance", "coin": "BTC", "rate": 0.0001},
+                        {"t_ms": now, "venue": "binance", "coin": "BTC", "rate": 0.0005}]
+        avg, n = funding.cg_avg7(five, "binance", "BTC", now)
+        self.assertEqual(n, 5)
+        self.assertAlmostEqual(avg, (0.0001 * 4 + 0.0005) / 5)
+
     def test_snapshot_save_dedupes_same_day_and_prunes(self):
         now = 1_800_000_000_000
         day = 86400_000

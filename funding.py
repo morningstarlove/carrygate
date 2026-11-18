@@ -387,8 +387,16 @@ def cg_avg7(rows, venue, coin, now_ms=None, days=AVG_DAYS, min_samples=CG_MIN_SA
     """일별 표본에서 최근 N일 평균. (평균 또는 None, 표본 수)"""
     now_ms = now_ms or time.time() * 1000.0
     cutoff = now_ms - days * 86400e3
-    vals = [r["rate"] for r in rows if r.get("venue") == venue and r.get("coin") == coin
-            and r.get("rate") is not None and (r.get("t_ms") or 0) >= cutoff]
+    # 같은 UTC 날짜의 표본은 가장 늦은 것 하나만 센다 — 같은 날 다시 돌리면 표본 수가 부풀어
+    # "7일 평균 없이 진입 판정 금지"(min_samples)가 뚫렸다 (2026-11-18 수정).
+    by_day = {}
+    for r in rows:
+        if (r.get("venue") == venue and r.get("coin") == coin and r.get("rate") is not None
+                and (r.get("t_ms") or 0) >= cutoff):
+            d = int(r["t_ms"] // 86400e3)
+            if d not in by_day or r["t_ms"] >= by_day[d]["t_ms"]:
+                by_day[d] = r
+    vals = [by_day[d]["rate"] for d in sorted(by_day)]
     if len(vals) < min_samples:
         return None, len(vals)
     return sum(vals) / len(vals), len(vals)
