@@ -597,6 +597,28 @@ class RegimeRotate(unittest.TestCase):
         self.assertEqual(a["forward"]["rev_only_pct"], 8.0)
         self.assertIn("aux60", out)                          # P34 그대로
 
+    def test_offshore_after_loss_ignores_upbit(self):
+        """P39 보조: P35 를 OKX·하이퍼리퀴드만으로. 업비트 행은 전날 판단에도 오늘 합에도 들어가지 않는다."""
+        import scalp_rotate as R
+        self.assertEqual(R.AUX3_FORWARD_FROM, "2026-11-18")
+        def rec(day, okx, upbit):
+            return {"date": day, "eval_day_utc": day,
+                    "rows": {"okx:XRP:30m:vwap_fade_lim": {"nt": okx}, "upbit:XRP:60m:mr_z20_lim": {"nt": upbit},
+                             "okx:XRP:60m:brk_20": {"nt": 0.0}}}
+        rows = [rec("2026-11-17", -2.0, 50.0), rec("2026-11-18", 3.0, -40.0), rec("2026-11-19", 1.0, 0.0)]
+        seq, nxt = R.rev_after_loss(rows, "rev_off")
+        self.assertEqual([d["active"] for d in seq], [True, False])     # 전날 OKX −2 → 씀(18시장이면 +48 이라 쉼), +3 → 쉼
+        self.assertEqual([d["net_pct"] for d in seq], [3.0, 0.0])
+        self.assertTrue(nxt is False)
+        allseq, _ = R.rev_after_loss(rows)                               # P35(전체)는 다르게 움직인다
+        self.assertEqual([d["active"] for d in allseq], [False, True])
+        out = R.build(rows)
+        a = out["aux_after_loss_offshore"]
+        self.assertEqual(a["forward"]["days"], 2)
+        self.assertEqual(a["forward"]["net_pct"], 3.0)
+        self.assertEqual(a["venues"], ["okx", "hyperliquid"])
+        self.assertIn("aux_after_loss", out)                             # P35 그대로
+
 
 if __name__ == "__main__":
     unittest.main()
