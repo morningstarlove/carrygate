@@ -209,6 +209,14 @@ class RealData(unittest.TestCase):
         fl = [p for p in h["2026-10-02"]["patterns"] if p["pattern"] == "flag"][0]
         self.assertGreaterEqual(fl["pole_rise_pct"], 20)
 
+    def test_scan_never_reads_bars_after_i(self):
+        # 2026-11-18 검토(미래참조): i 번째 봉 판정은 그날까지의 봉만 써야 한다 — 뒤 봉이 있든 없든 결과가 같아야 한다.
+        # (삼각수렴의 피벗 확정이 i+1, i+2 봉을 읽어 백테스트 신호가 실시간과 달랐다.)
+        for code in ("058470", "080220", "043260", "005930"):
+            bars = kr_ohlcv.load_csv(os.path.join(OHLCV, code + ".csv"))
+            for i in range(P.MIN_BARS - 1, len(bars) - 1):
+                self.assertEqual(P.scan(bars, i, detect_all=True), P.scan(bars[:i + 1], detect_all=True), (code, bars[i]["date"]))
+
     def test_samsung_no_signal(self):
         # 삼성전자는 같은 기간 패턴은 보여도 거래량 1.5배를 못 넘어 신호가 없어야 한다
         self.assertEqual(len(self._hits("005930")), 0)

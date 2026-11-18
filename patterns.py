@@ -223,6 +223,8 @@ def scan(bars, i=None, detect_all=False):
     필터에서 떨어진 날은 패턴을 보지 않는다(속도). detect_all=True 면 그래도 본다(디버그·시험)."""
     if i is None:
         i = len(bars) - 1
+    elif i < len(bars) - 1:
+        bars = bars[:i + 1]      # 미래참조 방지(2026-11-18): i 뒤의 봉은 판정기에 아예 넘기지 않는다 (피벗 확정이 i+1, i+2 를 읽었다)
     res = {"date": bars[i]["date"] if bars else None, "ok": False, "filters": {}, "patterns": [], "reason": None}
     if i + 1 < MIN_BARS:
         res["reason"] = "봉 부족(%d<%d)" % (i + 1, MIN_BARS)

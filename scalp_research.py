@@ -99,7 +99,8 @@ def funding_event_study(bars, events, venue, coin, eval_t0):
         t0 = t_ev - t_ev % 60          # 분 경계로 내림
         if t0 < eval_t0:
             continue
-        c0, cpre, c15, c60 = by_t.get(t0), by_t.get(t0 - w), by_t.get(t0 + w), by_t.get(t0 + 3600)
+        # 봉 키 t 는 시작 시각이고 종가는 t+60초 시점 가격 → 시각 X 의 가격 = (X-60) 봉의 종가 (2026-11-18 1분 어긋남 수정)
+        c0, cpre, c15, c60 = by_t.get(t0 - 60), by_t.get(t0 - w - 60), by_t.get(t0 + w - 60), by_t.get(t0 + 3600 - 60)
         if not c0 or not cpre or not c15:
             continue
         out.append({"venue": venue, "coin": coin, "t": t0, "rate_pct": round(rate * 100.0, 5),
@@ -169,7 +170,7 @@ def lead_lag(lead_bars, follow_bars, eval_t0):
 def follow_rule(lead_bars, follow_bars, eval_t0, fees, short_ok):
     """C. 따라가기 지정가 규칙(종이매매, 2026-10-13 추가, 제안함 P16).
 
-    선행 거래소 1분 수익률이 |r| > BIG_SIGMA·σ 이면 그 분 종가에 후행 거래소에 같은 방향 지정가.
+    선행 거래소 1분 수익률이 |r| > BIG_SIGMA·σ(σ = 평가일 이전 준비 구간의 표준편차) 이면 그 분 종가에 후행 거래소에 같은 방향 지정가.
     다음 FOLLOW_TTL 봉 안에 가격이 주문가를 지나쳐야 체결(scalp.limit_filled 와 같은 가정), 못 하면 취소.
     체결 뒤 FOLLOW_HOLD 봉 보유 → 그 봉 종가에 지정가 청산, FOLLOW_TTL 봉 안에 안 되면 다음 봉 시가 시장가.
     비용: 지정가 체결 = 메이커 수수료, 시장가 = 테이커 수수료 + 호가 1틱의 절반. 포지션은 한 번에 하나."""
@@ -179,7 +180,12 @@ def follow_rule(lead_bars, follow_bars, eval_t0, fees, short_ok):
     if len(ts) < 30:
         return {"signals": 0, "n": len(ts)}
     rl = {t: L[t] / L[t - 60] - 1.0 for t in ts}
-    sd = std(list(rl.values())) or 0.0
+    # 문턱 σ 는 평가일 이전(준비 구간) 수익률로만 정한다 — 평가일 전체로 계산하면 아침 신호가 그날 밤 변동성으로 걸러진다
+    # (미래참조, 2026-11-18 수정). 준비 구간 표본이 30개 미만이면 신호를 내지 않는다.
+    prior = [L[t] / L[t - 60] - 1.0 for t in L if t < eval_t0 and t - 60 in L]
+    if len(prior) < 30:
+        return {"signals": 0, "n": len(ts), "reason": "no_prep_window"}
+    sd = std(prior) or 0.0
     tick = scalp.tick_estimate(follow_bars)
     mid = F[ts[0]]["c"]
     spread_pct = (scalp.SPREAD_TICKS * tick / mid * 100.0) if (tick and mid) else 0.0

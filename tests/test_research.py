@@ -43,12 +43,13 @@ class HourlyHurdle(unittest.TestCase):
 class FundingEvents(unittest.TestCase):
     def test_event_windows_and_sign(self):
         # 정산(t=3600) 직전 15분간 -1%, 직후 15분간 +1% 인 가격. 펀딩 +면 signed 값이 pre<0, post>0
+        # 봉의 t 는 시작 시각, 종가는 t+60초 시점 가격이다. closes[i] = (i+1)분 시점 가격 → 정산 시각(60분) 가격 = closes[59]
         closes = [100.0] * 121
-        for i in range(45, 61):
-            closes[i] = 100.0 - (i - 45) / 15.0
-        for i in range(61, 76):
-            closes[i] = 99.0 + (i - 60) / 15.0
-        for i in range(76, 121):
+        for i in range(44, 60):
+            closes[i] = 100.0 - (i - 44) / 15.0
+        for i in range(60, 75):
+            closes[i] = 99.0 + (i - 59) / 15.0
+        for i in range(75, 121):
             closes[i] = 100.0
         bars = bars_from(closes)
         ev = sr.funding_event_study(bars, [(3600, 0.0001)], "hyperliquid", "BTC", 0)
@@ -61,6 +62,15 @@ class FundingEvents(unittest.TestCase):
         # 펀딩이 음수면 부호가 뒤집힌다
         ev2 = sr.funding_event_study(bars, [(3600, -0.0001)], "hyperliquid", "BTC", 0)
         self.assertLess(sr.summarize_events(ev2)["signed_post15_bp"], 0)
+
+    def test_first_minute_after_settlement_is_post_not_pre(self):
+        # 2026-11-18 검토: 정산 직후 첫 1분(시작 시각 = 정산 시각인 봉)의 움직임은 '직후'에 들어가야 한다.
+        closes = [100.0] * 60 + [101.0] * 61          # 60분~61분 사이에 +1%
+        ev = sr.funding_event_study(bars_from(closes), [(3600, 0.0001)], "okx", "BTC", 0)
+        self.assertEqual(len(ev), 1)
+        self.assertAlmostEqual(ev[0]["pre15_bp"], 0.0, places=2)
+        self.assertAlmostEqual(ev[0]["post15_bp"], 100.0, places=2)
+        self.assertAlmostEqual(ev[0]["post60_bp"], 100.0, places=2)
 
     def test_event_before_eval_window_ignored(self):
         bars = bars_from([100.0] * 200)
@@ -268,6 +278,8 @@ class ResearchHistory(unittest.TestCase):
 class FollowRule(unittest.TestCase):
     """C. 따라가기 지정가 규칙: 선행 급등 뒤 후행이 한 번 눌렸다가(체결) 올라오면 지정가 청산으로 플러스."""
 
+    EVAL_T0 = 40 * 60     # 앞 40분은 준비 구간(문턱 σ 계산용), 그 뒤가 평가 구간
+
     def _bars(self, lead_jump_at, follow_dip):
         n = 120
         lead = [100.0] * n
@@ -289,7 +301,7 @@ class FollowRule(unittest.TestCase):
     def test_filled_and_profitable(self):
         lead, fol = self._bars(60, True)
         fees = {"maker_pct": 0.05, "taker_pct": 0.05}
-        r = sr.follow_rule(lead, fol, 0, fees, short_ok=False)
+        r = sr.follow_rule(lead, fol, self.EVAL_T0, fees, short_ok=False)
         self.assertEqual(r["signals"], 1)
         self.assertEqual(r["filled"], 1)
         self.assertEqual(r["trades"], 1)
@@ -300,7 +312,7 @@ class FollowRule(unittest.TestCase):
 
     def test_unfilled_when_price_runs_away(self):
         lead, fol = self._bars(60, False)
-        r = sr.follow_rule(lead, fol, 0, {"maker_pct": 0.05, "taker_pct": 0.05}, short_ok=False)
+        r = sr.follow_rule(lead, fol, self.EVAL_T0, {"maker_pct": 0.05, "taker_pct": 0.05}, short_ok=False)
         self.assertEqual(r["signals"], 1)
         self.assertEqual(r["filled"], 0)
         self.assertEqual(r["trades"], 0)
@@ -309,6 +321,22 @@ class FollowRule(unittest.TestCase):
         lead, fol = self._bars(60, True)
         for b in lead[60:]:
             b["c"] = 99.0                          # 급락 → 숏 신호
+        r = sr.follow_rule(lead, fol, self.EVAL_T0, {"maker_pct": 0.05, "taker_pct": 0.05}, short_ok=False)
+        self.assertEqual(r["signals"], 0)
+
+    def test_threshold_uses_only_bars_before_eval_window(self):
+        # 2026-11-18 검토(미래참조): '큰 움직임' 문턱 σ 는 평가일 이전(준비 구간) 수익률로만 정한다.
+        # 평가일 뒤쪽에 −10% 급락이 있어도, 그 전에 난 +1% 신호가 사후적으로 지워지면 안 된다.
+        lead, fol = self._bars(60, True)
+        for b in lead[110:]:
+            b["c"] = 90.9
+        r = sr.follow_rule(lead, fol, self.EVAL_T0, {"maker_pct": 0.05, "taker_pct": 0.05}, short_ok=False)
+        self.assertEqual(r["signals"], 1)
+        self.assertEqual(r["trades"], 1)
+
+    def test_no_signal_without_prep_window(self):
+        # 준비 구간이 없으면 문턱을 정할 수 없다 → 신호를 내지 않는다(평가일 자료로 대신하지 않는다).
+        lead, fol = self._bars(60, True)
         r = sr.follow_rule(lead, fol, 0, {"maker_pct": 0.05, "taker_pct": 0.05}, short_ok=False)
         self.assertEqual(r["signals"], 0)
 

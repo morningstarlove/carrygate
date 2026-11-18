@@ -83,5 +83,6 @@ Agno 가 파는 "메모리"는 우리에겐 문서다. 진짜 문제는 **`HANDO
 | Agency Agents (페르소나) | 세션마다 재설치 | ② 역할 분담의 하위 에이전트로 쓴다 |
 | Codebase Memory MCP | 세션마다 재설치 | 그대로 |
 | OpenMontage (영상) | 매매와 무관 | 그대로 (영상 홍보 때만) |
+| ECC (affaan-m/ECC, 2026-11-18) | **플러그인 전체는 설치 안 함**(에이전트 72·스킬 327·훅 — 클라우드 세션은 `/plugin` 명령도 없다). 검토자 정의 `.claude/agents/mle-reviewer.md` **한 파일만** 저장소에 둠(MIT, v2.2.3). AgentShield 는 설치 없이 `npx -y ecc-agentshield scan --path .` | 4절 조건에 해당 없음 — "AI 가 매매를 판단"하는 도구가 아니라 코드 검토·설정 점검 보조(②역할 분담의 하위 에이전트). 기록: `docs/sessions/2026-11-18_ecc_review.md` |
 
 이번 다섯 개는 위 표에 **추가하지 않는다.**
