@@ -1,7 +1,7 @@
 {
  "schema": "carrygate-reversal/1",
  "date": "2026-11-18",
- "generated_at_kst": "2026-11-18 08:28:16",
+ "generated_at_kst": "2026-11-18 16:14:45",
  "rules": {
   "bar_minutes": 240,
   "pivot_k": 3,
@@ -44,7 +44,7 @@
     "BTC": {
      "bars": 6600,
      "stats": {
-      "period": "2023-11-13 16:00 ~ 2026-11-17 16:00",
+      "period": "2023-11-14 00:00 ~ 2026-11-18 00:00",
       "days": 1100,
       "trades": 27,
       "wins": 11,
@@ -79,7 +79,7 @@
        "wins": 0,
        "net_pct": -1.056
       },
-      "buy_hold_pct": 75.4418
+      "buy_hold_pct": 78.1561
      },
      "returns_pct": [
       -1.0195056573885495,
@@ -265,9 +265,9 @@
       }
      ],
      "signal": {
-      "last_bar": "2026-11-17 16:00",
-      "close": 86970000.0,
-      "atr": 1491879.26417668,
+      "last_bar": "2026-11-18 00:00",
+      "close": 87423000.0,
+      "atr": 1504378.53591945,
       "phase": "scan",
       "position": "flat",
       "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
@@ -276,7 +276,7 @@
     "ETH": {
      "bars": 6600,
      "stats": {
-      "period": "2023-11-13 16:00 ~ 2026-11-17 16:00",
+      "period": "2023-11-14 00:00 ~ 2026-11-18 00:00",
       "days": 1100,
       "trades": 27,
       "wins": 8,
@@ -293,7 +293,7 @@
       "avg_mfe_pct": 6.7266,
       "avg_giveback_pct": 5.538,
       "counts": {
-       "setups": 198,
+       "setups": 199,
        "fake_breaks": 30,
        "no_pullback": 16,
        "stopped_before_entry": 120,
@@ -311,7 +311,7 @@
        "wins": 0,
        "net_pct": -0.73
       },
-      "buy_hold_pct": -13.3948
+      "buy_hold_pct": -11.4565
      },
      "returns_pct": [
       -0.5302182827004219,
@@ -497,18 +497,24 @@
       }
      ],
      "signal": {
-      "last_bar": "2026-11-17 16:00",
-      "close": 2444000.0,
-      "atr": 57172.04304441,
-      "phase": "scan",
+      "last_bar": "2026-11-18 00:00",
+      "close": 2450000.0,
+      "atr": 56510.26884758,
+      "phase": "armed",
       "position": "flat",
-      "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
+      "neckline": 2548000.0,
+      "stop": 2398000.0,
+      "pattern_low_date": "2026-11-17 12:00",
+      "bottom_date": "2026-11-15 00:00",
+      "neckline_distance_pct": 4.0,
+      "bars_left": 30,
+      "action": "구조 확인 — 종가 2,548,000 위 + 거래량 2배면 돌파 (남은 30봉)"
      }
     },
     "XRP": {
      "bars": 6600,
      "stats": {
-      "period": "2023-11-13 16:00 ~ 2026-11-17 16:00",
+      "period": "2023-11-14 00:00 ~ 2026-11-18 00:00",
       "days": 1100,
       "trades": 25,
       "wins": 8,
@@ -543,7 +549,7 @@
        "wins": 0,
        "net_pct": -1.7177
       },
-      "buy_hold_pct": 50.2283
+      "buy_hold_pct": 49.4927
      },
      "returns_pct": [
       -1.0379468828124996,
@@ -752,24 +758,24 @@
       }
      ],
      "signal": {
-      "last_bar": "2026-11-17 16:00",
-      "close": 1316.0,
-      "atr": 30.94967852,
+      "last_bar": "2026-11-18 00:00",
+      "close": 1326.0,
+      "atr": 30.79458487,
       "phase": "armed",
       "position": "flat",
       "neckline": 1349.0,
       "stop": 1288.0,
       "pattern_low_date": "2026-11-16 08:00",
       "bottom_date": "2026-11-14 20:00",
-      "neckline_distance_pct": 2.5076,
-      "bars_left": 25,
-      "action": "구조 확인 — 종가 1,349 위 + 거래량 2배면 돌파 (남은 25봉)"
+      "neckline_distance_pct": 1.7345,
+      "bars_left": 23,
+      "action": "구조 확인 — 종가 1,349 위 + 거래량 2배면 돌파 (남은 23봉)"
      }
     },
     "TRX": {
      "bars": 6600,
      "stats": {
-      "period": "2023-11-13 16:00 ~ 2026-11-17 16:00",
+      "period": "2023-11-14 00:00 ~ 2026-11-18 00:00",
       "days": 1100,
       "trades": 9,
       "wins": 5,
@@ -804,7 +810,7 @@
        "wins": 0,
        "net_pct": -1.0948
       },
-      "buy_hold_pct": 183.7838
+      "buy_hold_pct": 193.007
      },
      "returns_pct": [
       9.157240000000037,
@@ -972,24 +978,24 @@
       }
      ],
      "signal": {
-      "last_bar": "2026-11-17 16:00",
-      "close": 420.0,
-      "atr": 4.03017815,
+      "last_bar": "2026-11-18 00:00",
+      "close": 419.0,
+      "atr": 3.93223578,
       "phase": "armed",
       "position": "flat",
       "neckline": 420.0,
       "stop": 414.0,
       "pattern_low_date": "2026-11-17 04:00",
       "bottom_date": "2026-11-16 08:00",
-      "neckline_distance_pct": 0.0,
-      "bars_left": 30,
-      "action": "구조 확인 — 종가 420 위 + 거래량 2배면 돌파 (남은 30봉)"
+      "neckline_distance_pct": 0.2387,
+      "bars_left": 28,
+      "action": "구조 확인 — 종가 420 위 + 거래량 2배면 돌파 (남은 28봉)"
      }
     },
     "LINK": {
      "bars": 6600,
      "stats": {
-      "period": "2023-11-13 16:00 ~ 2026-11-17 16:00",
+      "period": "2023-11-14 00:00 ~ 2026-11-18 00:00",
       "days": 1100,
       "trades": 37,
       "wins": 12,
@@ -1006,7 +1012,7 @@
       "avg_mfe_pct": 7.7607,
       "avg_giveback_pct": 8.4255,
       "counts": {
-       "setups": 210,
+       "setups": 211,
        "fake_breaks": 39,
        "no_pullback": 18,
        "stopped_before_entry": 129,
@@ -1024,7 +1030,7 @@
        "wins": 0,
        "net_pct": null
       },
-      "buy_hold_pct": -39.0088
+      "buy_hold_pct": -36.516
      },
      "returns_pct": [
       0.1964139162561576,
@@ -1194,18 +1200,24 @@
       }
      ],
      "signal": {
-      "last_bar": "2026-11-17 16:00",
-      "close": 12430.0,
-      "atr": 302.53718643,
-      "phase": "scan",
+      "last_bar": "2026-11-18 00:00",
+      "close": 12500.0,
+      "atr": 305.56481076,
+      "phase": "armed",
       "position": "flat",
-      "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
+      "neckline": 12920.0,
+      "stop": 12210.0,
+      "pattern_low_date": "2026-11-17 12:00",
+      "bottom_date": "2026-11-15 00:00",
+      "neckline_distance_pct": 3.36,
+      "bars_left": 30,
+      "action": "구조 확인 — 종가 12,920 위 + 거래량 2배면 돌파 (남은 30봉)"
      }
     },
     "DOGE": {
      "bars": 6600,
      "stats": {
-      "period": "2023-11-13 16:00 ~ 2026-11-17 16:00",
+      "period": "2023-11-14 00:00 ~ 2026-11-18 00:00",
       "days": 1100,
       "trades": 23,
       "wins": 8,
@@ -1222,7 +1234,7 @@
       "avg_mfe_pct": 12.605,
       "avg_giveback_pct": 10.3516,
       "counts": {
-       "setups": 157,
+       "setups": 158,
        "fake_breaks": 20,
        "no_pullback": 10,
        "stopped_before_entry": 104,
@@ -1240,7 +1252,7 @@
        "wins": 0,
        "net_pct": null
       },
-      "buy_hold_pct": -21.8447
+      "buy_hold_pct": -19.5
      },
      "returns_pct": [
       -0.616347325,
@@ -1396,12 +1408,18 @@
       }
      ],
      "signal": {
-      "last_bar": "2026-11-17 16:00",
+      "last_bar": "2026-11-18 00:00",
       "close": 80.5,
-      "atr": 2.01005538,
-      "phase": "scan",
+      "atr": 1.99432498,
+      "phase": "armed",
       "position": "flat",
-      "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
+      "neckline": 82.7,
+      "stop": 78.5,
+      "pattern_low_date": "2026-11-17 12:00",
+      "bottom_date": "2026-11-15 00:00",
+      "neckline_distance_pct": 2.7329,
+      "bars_left": 30,
+      "action": "구조 확인 — 종가 82.7 위 + 거래량 2배면 돌파 (남은 30봉)"
      }
     }
    },
@@ -1415,7 +1433,7 @@
      "XRP"
     ],
     "stats": {
-     "period": "2023-11-13 16:00 ~ 2026-11-17 16:00",
+     "period": "2023-11-14 00:00 ~ 2026-11-18 00:00",
      "days": 1100,
      "trades": 146,
      "wins": 51,
@@ -1432,7 +1450,7 @@
      "avg_mfe_pct": 8.7079,
      "avg_giveback_pct": 6.7457,
      "counts": {
-      "setups": 1034,
+      "setups": 1037,
       "fake_breaks": 179,
       "no_pullback": 78,
       "stopped_before_entry": 645,
@@ -1735,7 +1753,7 @@
       "BTC": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-13 16:00 ~ 2026-11-17 16:00",
+        "period": "2023-11-14 00:00 ~ 2026-11-18 00:00",
         "days": 1100,
         "trades": 45,
         "wins": 19,
@@ -1770,7 +1788,7 @@
          "wins": 0,
          "net_pct": -2.6478
         },
-        "buy_hold_pct": 75.4418
+        "buy_hold_pct": 78.1561
        },
        "returns_pct": [
         -1.0195056573885495,
@@ -2024,9 +2042,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-17 16:00",
-        "close": 86970000.0,
-        "atr": 1491879.26417668,
+        "last_bar": "2026-11-18 00:00",
+        "close": 87423000.0,
+        "atr": 1504378.53591945,
         "phase": "scan",
         "position": "flat",
         "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
@@ -2035,7 +2053,7 @@
       "ETH": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-13 16:00 ~ 2026-11-17 16:00",
+        "period": "2023-11-14 00:00 ~ 2026-11-18 00:00",
         "days": 1100,
         "trades": 48,
         "wins": 13,
@@ -2052,7 +2070,7 @@
         "avg_mfe_pct": 5.2981,
         "avg_giveback_pct": 5.1802,
         "counts": {
-         "setups": 207,
+         "setups": 208,
          "fake_breaks": 0,
          "no_pullback": 17,
          "stopped_before_entry": 113,
@@ -2070,7 +2088,7 @@
          "wins": 0,
          "net_pct": -3.6795
         },
-        "buy_hold_pct": -13.3948
+        "buy_hold_pct": -11.4565
        },
        "returns_pct": [
         0.1074588468992248,
@@ -2352,18 +2370,24 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-17 16:00",
-        "close": 2444000.0,
-        "atr": 57172.04304441,
-        "phase": "scan",
+        "last_bar": "2026-11-18 00:00",
+        "close": 2450000.0,
+        "atr": 56510.26884758,
+        "phase": "armed",
         "position": "flat",
-        "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
+        "neckline": 2548000.0,
+        "stop": 2398000.0,
+        "pattern_low_date": "2026-11-17 12:00",
+        "bottom_date": "2026-11-15 00:00",
+        "neckline_distance_pct": 4.0,
+        "bars_left": 30,
+        "action": "구조 확인 — 종가 2,548,000 위 + 거래량 2배면 돌파 (남은 30봉)"
        }
       },
       "XRP": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-13 16:00 ~ 2026-11-17 16:00",
+        "period": "2023-11-14 00:00 ~ 2026-11-18 00:00",
         "days": 1100,
         "trades": 41,
         "wins": 16,
@@ -2398,7 +2422,7 @@
          "wins": 0,
          "net_pct": -3.7768
         },
-        "buy_hold_pct": 50.2283
+        "buy_hold_pct": 49.4927
        },
        "returns_pct": [
         -1.0379468828124996,
@@ -2673,24 +2697,24 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-17 16:00",
-        "close": 1316.0,
-        "atr": 30.94967852,
+        "last_bar": "2026-11-18 00:00",
+        "close": 1326.0,
+        "atr": 30.79458487,
         "phase": "armed",
         "position": "flat",
         "neckline": 1349.0,
         "stop": 1288.0,
         "pattern_low_date": "2026-11-16 08:00",
         "bottom_date": "2026-11-14 20:00",
-        "neckline_distance_pct": 2.5076,
-        "bars_left": 25,
-        "action": "구조 확인 — 종가 1,349 위 + 거래량 2배면 돌파 (남은 25봉)"
+        "neckline_distance_pct": 1.7345,
+        "bars_left": 23,
+        "action": "구조 확인 — 종가 1,349 위 + 거래량 2배면 돌파 (남은 23봉)"
        }
       },
       "TRX": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-13 16:00 ~ 2026-11-17 16:00",
+        "period": "2023-11-14 00:00 ~ 2026-11-18 00:00",
         "days": 1100,
         "trades": 29,
         "wins": 12,
@@ -2725,7 +2749,7 @@
          "wins": 0,
          "net_pct": -1.0948
         },
-        "buy_hold_pct": 183.7838
+        "buy_hold_pct": 193.007
        },
        "returns_pct": [
         -0.06948841666666834,
@@ -2913,24 +2937,24 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-17 16:00",
-        "close": 420.0,
-        "atr": 4.03017815,
+        "last_bar": "2026-11-18 00:00",
+        "close": 419.0,
+        "atr": 3.93223578,
         "phase": "armed",
         "position": "flat",
         "neckline": 420.0,
         "stop": 414.0,
         "pattern_low_date": "2026-11-17 04:00",
         "bottom_date": "2026-11-16 08:00",
-        "neckline_distance_pct": 0.0,
-        "bars_left": 30,
-        "action": "구조 확인 — 종가 420 위 + 거래량 2배면 돌파 (남은 30봉)"
+        "neckline_distance_pct": 0.2387,
+        "bars_left": 28,
+        "action": "구조 확인 — 종가 420 위 + 거래량 2배면 돌파 (남은 28봉)"
        }
       },
       "LINK": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-13 16:00 ~ 2026-11-17 16:00",
+        "period": "2023-11-14 00:00 ~ 2026-11-18 00:00",
         "days": 1100,
         "trades": 60,
         "wins": 21,
@@ -2947,7 +2971,7 @@
         "avg_mfe_pct": 7.446,
         "avg_giveback_pct": 7.7302,
         "counts": {
-         "setups": 208,
+         "setups": 209,
          "fake_breaks": 0,
          "no_pullback": 13,
          "stopped_before_entry": 118,
@@ -2965,7 +2989,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": -39.0088
+        "buy_hold_pct": -36.516
        },
        "returns_pct": [
         0.1964139162561576,
@@ -3158,18 +3182,24 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-17 16:00",
-        "close": 12430.0,
-        "atr": 302.53718643,
-        "phase": "scan",
+        "last_bar": "2026-11-18 00:00",
+        "close": 12500.0,
+        "atr": 305.56481076,
+        "phase": "armed",
         "position": "flat",
-        "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
+        "neckline": 12920.0,
+        "stop": 12210.0,
+        "pattern_low_date": "2026-11-17 12:00",
+        "bottom_date": "2026-11-15 00:00",
+        "neckline_distance_pct": 3.36,
+        "bars_left": 30,
+        "action": "구조 확인 — 종가 12,920 위 + 거래량 2배면 돌파 (남은 30봉)"
        }
       },
       "DOGE": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-13 16:00 ~ 2026-11-17 16:00",
+        "period": "2023-11-14 00:00 ~ 2026-11-18 00:00",
         "days": 1100,
         "trades": 34,
         "wins": 11,
@@ -3186,7 +3216,7 @@
         "avg_mfe_pct": 12.934,
         "avg_giveback_pct": 10.0883,
         "counts": {
-         "setups": 161,
+         "setups": 162,
          "fake_breaks": 0,
          "no_pullback": 6,
          "stopped_before_entry": 101,
@@ -3204,7 +3234,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": -21.8447
+        "buy_hold_pct": -19.5
        },
        "returns_pct": [
         -0.616347325,
@@ -3371,12 +3401,18 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-17 16:00",
+        "last_bar": "2026-11-18 00:00",
         "close": 80.5,
-        "atr": 2.01005538,
-        "phase": "scan",
+        "atr": 1.99432498,
+        "phase": "armed",
         "position": "flat",
-        "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
+        "neckline": 82.7,
+        "stop": 78.5,
+        "pattern_low_date": "2026-11-17 12:00",
+        "bottom_date": "2026-11-15 00:00",
+        "neckline_distance_pct": 2.7329,
+        "bars_left": 30,
+        "action": "구조 확인 — 종가 82.7 위 + 거래량 2배면 돌파 (남은 30봉)"
        }
       }
      },
@@ -3390,7 +3426,7 @@
        "XRP"
       ],
       "stats": {
-       "period": "2023-11-13 16:00 ~ 2026-11-17 16:00",
+       "period": "2023-11-14 00:00 ~ 2026-11-18 00:00",
        "days": 1100,
        "trades": 250,
        "wins": 90,
@@ -3407,7 +3443,7 @@
        "avg_mfe_pct": 7.6648,
        "avg_giveback_pct": 6.1661,
        "counts": {
-        "setups": 1041,
+        "setups": 1044,
         "fake_breaks": 0,
         "no_pullback": 57,
         "stopped_before_entry": 599,
@@ -3990,7 +4026,7 @@
       "BTC": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-13 16:00 ~ 2026-11-17 16:00",
+        "period": "2023-11-14 00:00 ~ 2026-11-18 00:00",
         "days": 1100,
         "trades": 42,
         "wins": 20,
@@ -4025,7 +4061,7 @@
          "wins": 0,
          "net_pct": -1.0429
         },
-        "buy_hold_pct": 75.4418
+        "buy_hold_pct": 78.1561
        },
        "returns_pct": [
         -1.0188164486773155,
@@ -4226,9 +4262,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-17 16:00",
-        "close": 86970000.0,
-        "atr": 1491879.26417668,
+        "last_bar": "2026-11-18 00:00",
+        "close": 87423000.0,
+        "atr": 1504378.53591945,
         "phase": "scan",
         "position": "flat",
         "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
@@ -4237,7 +4273,7 @@
       "ETH": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-13 16:00 ~ 2026-11-17 16:00",
+        "period": "2023-11-14 00:00 ~ 2026-11-18 00:00",
         "days": 1100,
         "trades": 41,
         "wins": 17,
@@ -4254,7 +4290,7 @@
         "avg_mfe_pct": 8.1189,
         "avg_giveback_pct": 6.2446,
         "counts": {
-         "setups": 194,
+         "setups": 195,
          "fake_breaks": 27,
          "no_pullback": 0,
          "stopped_before_entry": 119,
@@ -4272,7 +4308,7 @@
          "wins": 0,
          "net_pct": -1.9171
         },
-        "buy_hold_pct": -13.3948
+        "buy_hold_pct": -11.4565
        },
        "returns_pct": [
         -0.28013060242178345,
@@ -4497,18 +4533,24 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-17 16:00",
-        "close": 2444000.0,
-        "atr": 57172.04304441,
-        "phase": "scan",
+        "last_bar": "2026-11-18 00:00",
+        "close": 2450000.0,
+        "atr": 56510.26884758,
+        "phase": "armed",
         "position": "flat",
-        "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
+        "neckline": 2548000.0,
+        "stop": 2398000.0,
+        "pattern_low_date": "2026-11-17 12:00",
+        "bottom_date": "2026-11-15 00:00",
+        "neckline_distance_pct": 4.0,
+        "bars_left": 30,
+        "action": "구조 확인 — 종가 2,548,000 위 + 거래량 2배면 돌파 (남은 30봉)"
        }
       },
       "XRP": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-13 16:00 ~ 2026-11-17 16:00",
+        "period": "2023-11-14 00:00 ~ 2026-11-18 00:00",
         "days": 1100,
         "trades": 36,
         "wins": 13,
@@ -4543,7 +4585,7 @@
          "wins": 0,
          "net_pct": -1.8161
         },
-        "buy_hold_pct": 50.2283
+        "buy_hold_pct": 49.4927
        },
        "returns_pct": [
         -1.0353176092862433,
@@ -4763,24 +4805,24 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-17 16:00",
-        "close": 1316.0,
-        "atr": 30.94967852,
+        "last_bar": "2026-11-18 00:00",
+        "close": 1326.0,
+        "atr": 30.79458487,
         "phase": "armed",
         "position": "flat",
         "neckline": 1349.0,
         "stop": 1288.0,
         "pattern_low_date": "2026-11-16 08:00",
         "bottom_date": "2026-11-14 20:00",
-        "neckline_distance_pct": 2.5076,
-        "bars_left": 25,
-        "action": "구조 확인 — 종가 1,349 위 + 거래량 2배면 돌파 (남은 25봉)"
+        "neckline_distance_pct": 1.7345,
+        "bars_left": 23,
+        "action": "구조 확인 — 종가 1,349 위 + 거래량 2배면 돌파 (남은 23봉)"
        }
       },
       "TRX": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-13 16:00 ~ 2026-11-17 16:00",
+        "period": "2023-11-14 00:00 ~ 2026-11-18 00:00",
         "days": 1100,
         "trades": 12,
         "wins": 6,
@@ -4815,7 +4857,7 @@
          "wins": 0,
          "net_pct": -1.0122
         },
-        "buy_hold_pct": 183.7838
+        "buy_hold_pct": 193.007
        },
        "returns_pct": [
         -0.8397727252211588,
@@ -4986,24 +5028,24 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-17 16:00",
-        "close": 420.0,
-        "atr": 4.03017815,
+        "last_bar": "2026-11-18 00:00",
+        "close": 419.0,
+        "atr": 3.93223578,
         "phase": "armed",
         "position": "flat",
         "neckline": 420.0,
         "stop": 414.0,
         "pattern_low_date": "2026-11-17 04:00",
         "bottom_date": "2026-11-16 08:00",
-        "neckline_distance_pct": 0.0,
-        "bars_left": 30,
-        "action": "구조 확인 — 종가 420 위 + 거래량 2배면 돌파 (남은 30봉)"
+        "neckline_distance_pct": 0.2387,
+        "bars_left": 28,
+        "action": "구조 확인 — 종가 420 위 + 거래량 2배면 돌파 (남은 28봉)"
        }
       },
       "LINK": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-13 16:00 ~ 2026-11-17 16:00",
+        "period": "2023-11-14 00:00 ~ 2026-11-18 00:00",
         "days": 1100,
         "trades": 55,
         "wins": 19,
@@ -5020,7 +5062,7 @@
         "avg_mfe_pct": 7.3139,
         "avg_giveback_pct": 8.5604,
         "counts": {
-         "setups": 203,
+         "setups": 204,
          "fake_breaks": 39,
          "no_pullback": 0,
          "stopped_before_entry": 122,
@@ -5038,7 +5080,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": -39.0088
+        "buy_hold_pct": -36.516
        },
        "returns_pct": [
         -0.024902532011515086,
@@ -5226,18 +5268,24 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-17 16:00",
-        "close": 12430.0,
-        "atr": 302.53718643,
-        "phase": "scan",
+        "last_bar": "2026-11-18 00:00",
+        "close": 12500.0,
+        "atr": 305.56481076,
+        "phase": "armed",
         "position": "flat",
-        "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
+        "neckline": 12920.0,
+        "stop": 12210.0,
+        "pattern_low_date": "2026-11-17 12:00",
+        "bottom_date": "2026-11-15 00:00",
+        "neckline_distance_pct": 3.36,
+        "bars_left": 30,
+        "action": "구조 확인 — 종가 12,920 위 + 거래량 2배면 돌파 (남은 30봉)"
        }
       },
       "DOGE": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-13 16:00 ~ 2026-11-17 16:00",
+        "period": "2023-11-14 00:00 ~ 2026-11-18 00:00",
         "days": 1100,
         "trades": 32,
         "wins": 14,
@@ -5254,7 +5302,7 @@
         "avg_mfe_pct": 13.6227,
         "avg_giveback_pct": 10.8896,
         "counts": {
-         "setups": 152,
+         "setups": 153,
          "fake_breaks": 20,
          "no_pullback": 0,
          "stopped_before_entry": 100,
@@ -5272,7 +5320,7 @@
          "wins": 0,
          "net_pct": null
         },
-        "buy_hold_pct": -21.8447
+        "buy_hold_pct": -19.5
        },
        "returns_pct": [
         -0.6530706113774076,
@@ -5437,12 +5485,18 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-17 16:00",
+        "last_bar": "2026-11-18 00:00",
         "close": 80.5,
-        "atr": 2.01005538,
-        "phase": "scan",
+        "atr": 1.99432498,
+        "phase": "armed",
         "position": "flat",
-        "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
+        "neckline": 82.7,
+        "stop": 78.5,
+        "pattern_low_date": "2026-11-17 12:00",
+        "bottom_date": "2026-11-15 00:00",
+        "neckline_distance_pct": 2.7329,
+        "bars_left": 30,
+        "action": "구조 확인 — 종가 82.7 위 + 거래량 2배면 돌파 (남은 30봉)"
        }
       }
      },
@@ -5456,7 +5510,7 @@
        "XRP"
       ],
       "stats": {
-       "period": "2023-11-13 16:00 ~ 2026-11-17 16:00",
+       "period": "2023-11-14 00:00 ~ 2026-11-18 00:00",
        "days": 1100,
        "trades": 217,
        "wins": 88,
@@ -5473,7 +5527,7 @@
        "avg_mfe_pct": 8.7323,
        "avg_giveback_pct": 7.1623,
        "counts": {
-        "setups": 1003,
+        "setups": 1006,
         "fake_breaks": 172,
         "no_pullback": 0,
         "stopped_before_entry": 625,
@@ -5880,7 +5934,7 @@
     "BTC": {
      "bars": 6600,
      "stats": {
-      "period": "2023-11-13 20:00 ~ 2026-11-17 16:00",
+      "period": "2023-11-14 04:00 ~ 2026-11-18 00:00",
       "days": 1099,
       "trades": 33,
       "wins": 15,
@@ -5897,7 +5951,7 @@
       "avg_mfe_pct": 4.4726,
       "avg_giveback_pct": 3.9785,
       "counts": {
-       "setups": 190,
+       "setups": 191,
        "fake_breaks": 46,
        "no_pullback": 16,
        "stopped_before_entry": 118,
@@ -5915,7 +5969,7 @@
        "wins": 0,
        "net_pct": -1.9925
       },
-      "buy_hold_pct": 74.7417
+      "buy_hold_pct": 75.6253
      },
      "returns_pct": [
       -0.03732535481126847,
@@ -6132,18 +6186,24 @@
       }
      ],
      "signal": {
-      "last_bar": "2026-11-17 16:00",
-      "close": 63721.5,
-      "atr": 1243.98785003,
-      "phase": "scan",
+      "last_bar": "2026-11-18 00:00",
+      "close": 64426.9,
+      "atr": 1242.63528465,
+      "phase": "armed",
       "position": "flat",
-      "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
+      "neckline": 66122.7,
+      "stop": 63300.0,
+      "pattern_low_date": "2026-11-17 12:00",
+      "bottom_date": "2026-11-15 00:00",
+      "neckline_distance_pct": 2.6321,
+      "bars_left": 30,
+      "action": "구조 확인 — 종가 66,123 위 + 거래량 2배면 돌파 (남은 30봉)"
      }
     },
     "ETH": {
      "bars": 6600,
      "stats": {
-      "period": "2023-11-13 20:00 ~ 2026-11-17 16:00",
+      "period": "2023-11-14 04:00 ~ 2026-11-18 00:00",
       "days": 1099,
       "trades": 35,
       "wins": 13,
@@ -6160,7 +6220,7 @@
       "avg_mfe_pct": 6.2846,
       "avg_giveback_pct": 5.4241,
       "counts": {
-       "setups": 233,
+       "setups": 234,
        "fake_breaks": 37,
        "no_pullback": 16,
        "stopped_before_entry": 142,
@@ -6178,7 +6238,7 @@
        "wins": 0,
        "net_pct": -2.9256
       },
-      "buy_hold_pct": -12.836
+      "buy_hold_pct": -12.4191
      },
      "returns_pct": [
       1.89749341864224,
@@ -6422,18 +6482,24 @@
       }
      ],
      "signal": {
-      "last_bar": "2026-11-17 16:00",
-      "close": 1790.2,
-      "atr": 45.9948727,
-      "phase": "scan",
+      "last_bar": "2026-11-18 00:00",
+      "close": 1804.29,
+      "atr": 45.25129762,
+      "phase": "armed",
       "position": "flat",
-      "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
+      "neckline": 1866.83,
+      "stop": 1750.05,
+      "pattern_low_date": "2026-11-17 12:00",
+      "bottom_date": "2026-11-15 00:00",
+      "neckline_distance_pct": 3.4662,
+      "bars_left": 30,
+      "action": "구조 확인 — 종가 1,867 위 + 거래량 2배면 돌파 (남은 30봉)"
      }
     },
     "XRP": {
      "bars": 6600,
      "stats": {
-      "period": "2023-11-13 20:00 ~ 2026-11-17 16:00",
+      "period": "2023-11-14 04:00 ~ 2026-11-18 00:00",
       "days": 1099,
       "trades": 25,
       "wins": 6,
@@ -6451,7 +6517,7 @@
       "avg_giveback_pct": 7.6777,
       "counts": {
        "setups": 207,
-       "fake_breaks": 26,
+       "fake_breaks": 27,
        "no_pullback": 17,
        "stopped_before_entry": 127,
        "expired": 37,
@@ -6468,7 +6534,7 @@
        "wins": 0,
        "net_pct": -1.6713
       },
-      "buy_hold_pct": 43.9719
+      "buy_hold_pct": 47.0712
      },
      "returns_pct": [
       -1.085173958715588,
@@ -6677,24 +6743,24 @@
       }
      ],
      "signal": {
-      "last_bar": "2026-11-17 16:00",
-      "close": 0.9649,
-      "atr": 0.02464346,
+      "last_bar": "2026-11-18 00:00",
+      "close": 0.9767,
+      "atr": 0.02441597,
       "phase": "armed",
       "position": "flat",
       "neckline": 0.9789,
       "stop": 0.9413,
       "pattern_low_date": "2026-11-16 08:00",
       "bottom_date": "2026-11-14 20:00",
-      "neckline_distance_pct": 1.4509,
-      "bars_left": 25,
-      "action": "구조 확인 — 종가 0.9789 위 + 거래량 2배면 돌파 (남은 25봉)"
+      "neckline_distance_pct": 0.2252,
+      "bars_left": 23,
+      "action": "구조 확인 — 종가 0.9789 위 + 거래량 2배면 돌파 (남은 23봉)"
      }
     },
     "TRX": {
      "bars": 6600,
      "stats": {
-      "period": "2023-11-13 20:00 ~ 2026-11-17 16:00",
+      "period": "2023-11-14 04:00 ~ 2026-11-18 00:00",
       "days": 1099,
       "trades": 13,
       "wins": 3,
@@ -6729,7 +6795,7 @@
        "wins": 0,
        "net_pct": -1.0488
       },
-      "buy_hold_pct": 187.5772
+      "buy_hold_pct": 188.3251
      },
      "returns_pct": [
       -1.0957716187499955,
@@ -6901,9 +6967,9 @@
       }
      ],
      "signal": {
-      "last_bar": "2026-11-17 16:00",
-      "close": 0.30719,
-      "atr": 0.00223929,
+      "last_bar": "2026-11-18 00:00",
+      "close": 0.30796,
+      "atr": 0.00217038,
       "phase": "scan",
       "position": "flat",
       "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
@@ -6912,7 +6978,7 @@
     "LINK": {
      "bars": 6600,
      "stats": {
-      "period": "2023-11-13 20:00 ~ 2026-11-17 16:00",
+      "period": "2023-11-14 04:00 ~ 2026-11-18 00:00",
       "days": 1099,
       "trades": 33,
       "wins": 8,
@@ -6929,7 +6995,7 @@
       "avg_mfe_pct": 8.0592,
       "avg_giveback_pct": 8.3157,
       "counts": {
-       "setups": 220,
+       "setups": 221,
        "fake_breaks": 49,
        "no_pullback": 19,
        "stopped_before_entry": 139,
@@ -6947,7 +7013,7 @@
        "wins": 0,
        "net_pct": -1.0415
       },
-      "buy_hold_pct": -36.5257
+      "buy_hold_pct": -37.7365
      },
      "returns_pct": [
       -0.15641725677757118,
@@ -7139,18 +7205,24 @@
       }
      ],
      "signal": {
-      "last_bar": "2026-11-17 16:00",
-      "close": 9.113,
-      "atr": 0.24340879,
-      "phase": "scan",
+      "last_bar": "2026-11-18 00:00",
+      "close": 9.215,
+      "atr": 0.24446643,
+      "phase": "armed",
       "position": "flat",
-      "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
+      "neckline": 9.375,
+      "stop": 8.93,
+      "pattern_low_date": "2026-11-17 12:00",
+      "bottom_date": "2026-11-14 20:00",
+      "neckline_distance_pct": 1.7363,
+      "bars_left": 30,
+      "action": "구조 확인 — 종가 9.375 위 + 거래량 2배면 돌파 (남은 30봉)"
      }
     },
     "DOGE": {
      "bars": 6600,
      "stats": {
-      "period": "2023-11-13 20:00 ~ 2026-11-17 16:00",
+      "period": "2023-11-14 04:00 ~ 2026-11-18 00:00",
       "days": 1099,
       "trades": 19,
       "wins": 3,
@@ -7167,7 +7239,7 @@
       "avg_mfe_pct": 5.7031,
       "avg_giveback_pct": 7.7446,
       "counts": {
-       "setups": 225,
+       "setups": 226,
        "fake_breaks": 37,
        "no_pullback": 16,
        "stopped_before_entry": 151,
@@ -7185,7 +7257,7 @@
        "wins": 0,
        "net_pct": -2.078
       },
-      "buy_hold_pct": -20.8345
+      "buy_hold_pct": -21.1226
      },
      "returns_pct": [
       0.7197603711685819,
@@ -7388,12 +7460,18 @@
       }
      ],
      "signal": {
-      "last_bar": "2026-11-17 16:00",
-      "close": 0.05901,
-      "atr": 0.00158409,
-      "phase": "scan",
+      "last_bar": "2026-11-18 00:00",
+      "close": 0.0593,
+      "atr": 0.00156021,
+      "phase": "armed",
       "position": "flat",
-      "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
+      "neckline": 0.06008,
+      "stop": 0.05738,
+      "pattern_low_date": "2026-11-17 12:00",
+      "bottom_date": "2026-11-14 20:00",
+      "neckline_distance_pct": 1.3153,
+      "bars_left": 30,
+      "action": "구조 확인 — 종가 0.06008 위 + 거래량 2배면 돌파 (남은 30봉)"
      }
     }
    },
@@ -7407,7 +7485,7 @@
      "XRP"
     ],
     "stats": {
-     "period": "2023-11-13 20:00 ~ 2026-11-17 16:00",
+     "period": "2023-11-14 04:00 ~ 2026-11-18 00:00",
      "days": 1099,
      "trades": 158,
      "wins": 48,
@@ -7424,8 +7502,8 @@
      "avg_mfe_pct": 6.5876,
      "avg_giveback_pct": 6.2411,
      "counts": {
-      "setups": 1265,
-      "fake_breaks": 250,
+      "setups": 1269,
+      "fake_breaks": 251,
       "no_pullback": 107,
       "stopped_before_entry": 793,
       "expired": 206,
@@ -7889,7 +7967,7 @@
       "BTC": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-13 20:00 ~ 2026-11-17 16:00",
+        "period": "2023-11-14 04:00 ~ 2026-11-18 00:00",
         "days": 1099,
         "trades": 64,
         "wins": 24,
@@ -7906,7 +7984,7 @@
         "avg_mfe_pct": 3.7593,
         "avg_giveback_pct": 3.457,
         "counts": {
-         "setups": 191,
+         "setups": 192,
          "fake_breaks": 0,
          "no_pullback": 10,
          "stopped_before_entry": 102,
@@ -7924,7 +8002,7 @@
          "wins": 0,
          "net_pct": -2.816
         },
-        "buy_hold_pct": 74.7417
+        "buy_hold_pct": 75.6253
        },
        "returns_pct": [
         -0.03732535481126847,
@@ -8197,18 +8275,24 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-17 16:00",
-        "close": 63721.5,
-        "atr": 1243.98785003,
-        "phase": "scan",
+        "last_bar": "2026-11-18 00:00",
+        "close": 64426.9,
+        "atr": 1242.63528465,
+        "phase": "armed",
         "position": "flat",
-        "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
+        "neckline": 66122.7,
+        "stop": 63300.0,
+        "pattern_low_date": "2026-11-17 12:00",
+        "bottom_date": "2026-11-15 00:00",
+        "neckline_distance_pct": 2.6321,
+        "bars_left": 30,
+        "action": "구조 확인 — 종가 66,123 위 + 거래량 2배면 돌파 (남은 30봉)"
        }
       },
       "ETH": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-13 20:00 ~ 2026-11-17 16:00",
+        "period": "2023-11-14 04:00 ~ 2026-11-18 00:00",
         "days": 1099,
         "trades": 56,
         "wins": 14,
@@ -8225,7 +8309,7 @@
         "avg_mfe_pct": 4.5053,
         "avg_giveback_pct": 5.423,
         "counts": {
-         "setups": 239,
+         "setups": 240,
          "fake_breaks": 0,
          "no_pullback": 18,
          "stopped_before_entry": 136,
@@ -8243,7 +8327,7 @@
          "wins": 0,
          "net_pct": -4.0014
         },
-        "buy_hold_pct": -12.836
+        "buy_hold_pct": -12.4191
        },
        "returns_pct": [
         -0.1361036419899426,
@@ -8533,26 +8617,32 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-17 16:00",
-        "close": 1790.2,
-        "atr": 45.9948727,
-        "phase": "scan",
+        "last_bar": "2026-11-18 00:00",
+        "close": 1804.29,
+        "atr": 45.25129762,
+        "phase": "armed",
         "position": "flat",
-        "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
+        "neckline": 1866.83,
+        "stop": 1750.05,
+        "pattern_low_date": "2026-11-17 12:00",
+        "bottom_date": "2026-11-15 00:00",
+        "neckline_distance_pct": 3.4662,
+        "bars_left": 30,
+        "action": "구조 확인 — 종가 1,867 위 + 거래량 2배면 돌파 (남은 30봉)"
        }
       },
       "XRP": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-13 20:00 ~ 2026-11-17 16:00",
+        "period": "2023-11-14 04:00 ~ 2026-11-18 00:00",
         "days": 1099,
         "trades": 41,
         "wins": 16,
         "win_rate_pct": 39.0244,
-        "net_pct": 23.116,
+        "net_pct": 23.044,
         "realized_net_pct": 23.116,
-        "cagr_pct": 7.1508,
-        "max_drawdown_pct": -6.5753,
+        "cagr_pct": 7.1299,
+        "max_drawdown_pct": -6.63,
         "profit_factor": 2.1741,
         "avg_r": 0.5431,
         "avg_hold_bars": 26.1951,
@@ -8572,14 +8662,14 @@
          "2023": -2.0807,
          "2024": 20.3906,
          "2025": 5.5939,
-         "2026": -1.0957
+         "2026": -1.1536
         },
         "forward": {
          "trades": 4,
          "wins": 0,
          "net_pct": -3.3432
         },
-        "buy_hold_pct": 43.9719
+        "buy_hold_pct": 47.0712
        },
        "returns_pct": [
         -1.085173958715588,
@@ -8854,24 +8944,27 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-17 16:00",
-        "close": 0.9649,
-        "atr": 0.02464346,
-        "phase": "armed",
-        "position": "flat",
-        "neckline": 0.9789,
+        "last_bar": "2026-11-18 00:00",
+        "close": 0.9767,
+        "atr": 0.02441597,
+        "phase": "long",
+        "position": "long",
+        "entry": 0.9789,
+        "entry_date": "2026-11-18 00:00",
+        "units": 3274.362152733742,
         "stop": 0.9413,
-        "pattern_low_date": "2026-11-16 08:00",
-        "bottom_date": "2026-11-14 20:00",
-        "neckline_distance_pct": 1.4509,
-        "bars_left": 25,
-        "action": "구조 확인 — 종가 0.9789 위 + 거래량 2배면 돌파 (남은 25봉)"
+        "stop0": 0.9413,
+        "neckline": 0.9789,
+        "stop_distance_pct": -3.6244,
+        "unrealized_pct": -0.2247,
+        "stop_raises": 0,
+        "action": "보유 — 저가가 0.9413 아래로 내려오면 청산"
        }
       },
       "TRX": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-13 20:00 ~ 2026-11-17 16:00",
+        "period": "2023-11-14 04:00 ~ 2026-11-18 00:00",
         "days": 1099,
         "trades": 51,
         "wins": 20,
@@ -8906,7 +8999,7 @@
          "wins": 0,
          "net_pct": -2.745
         },
-        "buy_hold_pct": 187.5772
+        "buy_hold_pct": 188.3251
        },
        "returns_pct": [
         -1.0957716187499955,
@@ -9166,9 +9259,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-17 16:00",
-        "close": 0.30719,
-        "atr": 0.00223929,
+        "last_bar": "2026-11-18 00:00",
+        "close": 0.30796,
+        "atr": 0.00217038,
         "phase": "scan",
         "position": "flat",
         "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
@@ -9177,7 +9270,7 @@
       "LINK": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-13 20:00 ~ 2026-11-17 16:00",
+        "period": "2023-11-14 04:00 ~ 2026-11-18 00:00",
         "days": 1099,
         "trades": 57,
         "wins": 19,
@@ -9194,7 +9287,7 @@
         "avg_mfe_pct": 7.8436,
         "avg_giveback_pct": 7.6475,
         "counts": {
-         "setups": 214,
+         "setups": 215,
          "fake_breaks": 0,
          "no_pullback": 14,
          "stopped_before_entry": 127,
@@ -9212,7 +9305,7 @@
          "wins": 0,
          "net_pct": -2.0773
         },
-        "buy_hold_pct": -36.5257
+        "buy_hold_pct": -37.7365
        },
        "returns_pct": [
         -0.15641725677757118,
@@ -9453,18 +9546,24 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-17 16:00",
-        "close": 9.113,
-        "atr": 0.24340879,
-        "phase": "scan",
+        "last_bar": "2026-11-18 00:00",
+        "close": 9.215,
+        "atr": 0.24446643,
+        "phase": "armed",
         "position": "flat",
-        "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
+        "neckline": 9.375,
+        "stop": 8.93,
+        "pattern_low_date": "2026-11-17 12:00",
+        "bottom_date": "2026-11-14 20:00",
+        "neckline_distance_pct": 1.7363,
+        "bars_left": 30,
+        "action": "구조 확인 — 종가 9.375 위 + 거래량 2배면 돌파 (남은 30봉)"
        }
       },
       "DOGE": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-13 20:00 ~ 2026-11-17 16:00",
+        "period": "2023-11-14 04:00 ~ 2026-11-18 00:00",
         "days": 1099,
         "trades": 47,
         "wins": 13,
@@ -9481,7 +9580,7 @@
         "avg_mfe_pct": 7.638,
         "avg_giveback_pct": 7.8188,
         "counts": {
-         "setups": 225,
+         "setups": 226,
          "fake_breaks": 0,
          "no_pullback": 10,
          "stopped_before_entry": 138,
@@ -9499,7 +9598,7 @@
          "wins": 0,
          "net_pct": -3.4777
         },
-        "buy_hold_pct": -20.8345
+        "buy_hold_pct": -21.1226
        },
        "returns_pct": [
         0.7197603711685819,
@@ -9780,12 +9879,18 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-17 16:00",
-        "close": 0.05901,
-        "atr": 0.00158409,
-        "phase": "scan",
+        "last_bar": "2026-11-18 00:00",
+        "close": 0.0593,
+        "atr": 0.00156021,
+        "phase": "armed",
         "position": "flat",
-        "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
+        "neckline": 0.06008,
+        "stop": 0.05738,
+        "pattern_low_date": "2026-11-17 12:00",
+        "bottom_date": "2026-11-14 20:00",
+        "neckline_distance_pct": 1.3153,
+        "bars_left": 30,
+        "action": "구조 확인 — 종가 0.06008 위 + 거래량 2배면 돌파 (남은 30봉)"
        }
       }
      },
@@ -9799,15 +9904,15 @@
        "XRP"
       ],
       "stats": {
-       "period": "2023-11-13 20:00 ~ 2026-11-17 16:00",
+       "period": "2023-11-14 04:00 ~ 2026-11-18 00:00",
        "days": 1099,
        "trades": 307,
        "wins": 102,
        "win_rate_pct": 33.2248,
-       "net_pct": 16.7344,
+       "net_pct": 16.6661,
        "realized_net_pct": 16.7344,
-       "cagr_pct": 5.2733,
-       "max_drawdown_pct": -19.9839,
+       "cagr_pct": 5.2528,
+       "max_drawdown_pct": -20.0307,
        "profit_factor": 1.1172,
        "avg_r": 0.0628,
        "avg_hold_bars": 19.329,
@@ -9816,7 +9921,7 @@
        "avg_mfe_pct": 6.2077,
        "avg_giveback_pct": 5.7425,
        "counts": {
-        "setups": 1273,
+        "setups": 1277,
         "fake_breaks": 0,
         "no_pullback": 75,
         "stopped_before_entry": 730,
@@ -9827,7 +9932,7 @@
         "2023": -2.6474,
         "2024": 25.4283,
         "2025": 11.5197,
-        "2026": -14.2756
+        "2026": -14.3258
        },
        "forward": {
         "trades": 17,
@@ -10144,7 +10249,15 @@
        -1.033117456828442,
        -1.056335694140152
       ],
-      "open_positions": {},
+      "open_positions": {
+       "XRP": {
+        "entry": 0.9789,
+        "entry_date": "2026-11-18 00:00",
+        "stop": 0.9413,
+        "units": 3104.6388427931156,
+        "capped": false
+       }
+      },
       "forward_trades": [
        {
         "market": "XRP",
@@ -10572,7 +10685,7 @@
         "forward": true
        }
       ],
-      "equity_now": 11673.442
+      "equity_now": 11666.6118
      },
      "label": "거래량 조건 없음 (돌파만)"
     },
@@ -10581,7 +10694,7 @@
       "BTC": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-13 20:00 ~ 2026-11-17 16:00",
+        "period": "2023-11-14 04:00 ~ 2026-11-18 00:00",
         "days": 1099,
         "trades": 46,
         "wins": 22,
@@ -10598,7 +10711,7 @@
         "avg_mfe_pct": 4.958,
         "avg_giveback_pct": 4.0473,
         "counts": {
-         "setups": 184,
+         "setups": 185,
          "fake_breaks": 43,
          "no_pullback": 0,
          "stopped_before_entry": 115,
@@ -10616,7 +10729,7 @@
          "wins": 0,
          "net_pct": -1.9991
         },
-        "buy_hold_pct": 74.7417
+        "buy_hold_pct": 75.6253
        },
        "returns_pct": [
         0.83174392873751,
@@ -10846,18 +10959,24 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-17 16:00",
-        "close": 63721.5,
-        "atr": 1243.98785003,
-        "phase": "scan",
+        "last_bar": "2026-11-18 00:00",
+        "close": 64426.9,
+        "atr": 1242.63528465,
+        "phase": "armed",
         "position": "flat",
-        "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
+        "neckline": 66122.7,
+        "stop": 63300.0,
+        "pattern_low_date": "2026-11-17 12:00",
+        "bottom_date": "2026-11-15 00:00",
+        "neckline_distance_pct": 2.6321,
+        "bars_left": 30,
+        "action": "구조 확인 — 종가 66,123 위 + 거래량 2배면 돌파 (남은 30봉)"
        }
       },
       "ETH": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-13 20:00 ~ 2026-11-17 16:00",
+        "period": "2023-11-14 04:00 ~ 2026-11-18 00:00",
         "days": 1099,
         "trades": 48,
         "wins": 23,
@@ -10874,7 +10993,7 @@
         "avg_mfe_pct": 7.3926,
         "avg_giveback_pct": 6.3049,
         "counts": {
-         "setups": 225,
+         "setups": 226,
          "fake_breaks": 34,
          "no_pullback": 0,
          "stopped_before_entry": 138,
@@ -10892,7 +11011,7 @@
          "wins": 0,
          "net_pct": -2.8868
         },
-        "buy_hold_pct": -12.836
+        "buy_hold_pct": -12.4191
        },
        "returns_pct": [
         -0.29078586352686653,
@@ -11149,18 +11268,24 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-17 16:00",
-        "close": 1790.2,
-        "atr": 45.9948727,
-        "phase": "scan",
+        "last_bar": "2026-11-18 00:00",
+        "close": 1804.29,
+        "atr": 45.25129762,
+        "phase": "armed",
         "position": "flat",
-        "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
+        "neckline": 1866.83,
+        "stop": 1750.05,
+        "pattern_low_date": "2026-11-17 12:00",
+        "bottom_date": "2026-11-15 00:00",
+        "neckline_distance_pct": 3.4662,
+        "bars_left": 30,
+        "action": "구조 확인 — 종가 1,867 위 + 거래량 2배면 돌파 (남은 30봉)"
        }
       },
       "XRP": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-13 20:00 ~ 2026-11-17 16:00",
+        "period": "2023-11-14 04:00 ~ 2026-11-18 00:00",
         "days": 1099,
         "trades": 43,
         "wins": 13,
@@ -11178,7 +11303,7 @@
         "avg_giveback_pct": 8.896,
         "counts": {
          "setups": 202,
-         "fake_breaks": 26,
+         "fake_breaks": 27,
          "no_pullback": 0,
          "stopped_before_entry": 124,
          "expired": 34,
@@ -11195,7 +11320,7 @@
          "wins": 0,
          "net_pct": -1.6956
         },
-        "buy_hold_pct": 43.9719
+        "buy_hold_pct": 47.0712
        },
        "returns_pct": [
         -1.0627982966530372,
@@ -11422,24 +11547,24 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-17 16:00",
-        "close": 0.9649,
-        "atr": 0.02464346,
+        "last_bar": "2026-11-18 00:00",
+        "close": 0.9767,
+        "atr": 0.02441597,
         "phase": "armed",
         "position": "flat",
         "neckline": 0.9789,
         "stop": 0.9413,
         "pattern_low_date": "2026-11-16 08:00",
         "bottom_date": "2026-11-14 20:00",
-        "neckline_distance_pct": 1.4509,
-        "bars_left": 25,
-        "action": "구조 확인 — 종가 0.9789 위 + 거래량 2배면 돌파 (남은 25봉)"
+        "neckline_distance_pct": 0.2252,
+        "bars_left": 23,
+        "action": "구조 확인 — 종가 0.9789 위 + 거래량 2배면 돌파 (남은 23봉)"
        }
       },
       "TRX": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-13 20:00 ~ 2026-11-17 16:00",
+        "period": "2023-11-14 04:00 ~ 2026-11-18 00:00",
         "days": 1099,
         "trades": 35,
         "wins": 14,
@@ -11474,7 +11599,7 @@
          "wins": 0,
          "net_pct": -1.0178
         },
-        "buy_hold_pct": 187.5772
+        "buy_hold_pct": 188.3251
        },
        "returns_pct": [
         -1.0488555515374125,
@@ -11668,9 +11793,9 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-17 16:00",
-        "close": 0.30719,
-        "atr": 0.00223929,
+        "last_bar": "2026-11-18 00:00",
+        "close": 0.30796,
+        "atr": 0.00217038,
         "phase": "scan",
         "position": "flat",
         "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
@@ -11679,7 +11804,7 @@
       "LINK": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-13 20:00 ~ 2026-11-17 16:00",
+        "period": "2023-11-14 04:00 ~ 2026-11-18 00:00",
         "days": 1099,
         "trades": 48,
         "wins": 16,
@@ -11696,7 +11821,7 @@
         "avg_mfe_pct": 8.7787,
         "avg_giveback_pct": 8.918,
         "counts": {
-         "setups": 209,
+         "setups": 210,
          "fake_breaks": 43,
          "no_pullback": 0,
          "stopped_before_entry": 133,
@@ -11714,7 +11839,7 @@
          "wins": 0,
          "net_pct": -1.021
         },
-        "buy_hold_pct": -36.5257
+        "buy_hold_pct": -37.7365
        },
        "returns_pct": [
         -0.4153166992018541,
@@ -11921,18 +12046,24 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-17 16:00",
-        "close": 9.113,
-        "atr": 0.24340879,
-        "phase": "scan",
+        "last_bar": "2026-11-18 00:00",
+        "close": 9.215,
+        "atr": 0.24446643,
+        "phase": "armed",
         "position": "flat",
-        "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
+        "neckline": 9.375,
+        "stop": 8.93,
+        "pattern_low_date": "2026-11-17 12:00",
+        "bottom_date": "2026-11-14 20:00",
+        "neckline_distance_pct": 1.7363,
+        "bars_left": 30,
+        "action": "구조 확인 — 종가 9.375 위 + 거래량 2배면 돌파 (남은 30봉)"
        }
       },
       "DOGE": {
        "bars": 6600,
        "stats": {
-        "period": "2023-11-13 20:00 ~ 2026-11-17 16:00",
+        "period": "2023-11-14 04:00 ~ 2026-11-18 00:00",
         "days": 1099,
         "trades": 34,
         "wins": 16,
@@ -11949,7 +12080,7 @@
         "avg_mfe_pct": 12.4693,
         "avg_giveback_pct": 10.9168,
         "counts": {
-         "setups": 223,
+         "setups": 224,
          "fake_breaks": 35,
          "no_pullback": 0,
          "stopped_before_entry": 151,
@@ -11967,7 +12098,7 @@
          "wins": 0,
          "net_pct": -3.069
         },
-        "buy_hold_pct": -20.8345
+        "buy_hold_pct": -21.1226
        },
        "returns_pct": [
         0.20687718338776484,
@@ -12210,12 +12341,18 @@
         }
        ],
        "signal": {
-        "last_bar": "2026-11-17 16:00",
-        "close": 0.05901,
-        "atr": 0.00158409,
-        "phase": "scan",
+        "last_bar": "2026-11-18 00:00",
+        "close": 0.0593,
+        "atr": 0.00156021,
+        "phase": "armed",
         "position": "flat",
-        "action": "대기 — 하락추세 뒤 저점 유지 구조 없음"
+        "neckline": 0.06008,
+        "stop": 0.05738,
+        "pattern_low_date": "2026-11-17 12:00",
+        "bottom_date": "2026-11-14 20:00",
+        "neckline_distance_pct": 1.3153,
+        "bars_left": 30,
+        "action": "구조 확인 — 종가 0.06008 위 + 거래량 2배면 돌파 (남은 30봉)"
        }
       }
      },
@@ -12229,7 +12366,7 @@
        "XRP"
       ],
       "stats": {
-       "period": "2023-11-13 20:00 ~ 2026-11-17 16:00",
+       "period": "2023-11-14 04:00 ~ 2026-11-18 00:00",
        "days": 1099,
        "trades": 253,
        "wins": 103,
@@ -12246,8 +12383,8 @@
        "avg_mfe_pct": 8.2796,
        "avg_giveback_pct": 7.1887,
        "counts": {
-        "setups": 1223,
-        "fake_breaks": 232,
+        "setups": 1227,
+        "fake_breaks": 233,
         "no_pullback": 0,
         "stopped_before_entry": 770,
         "expired": 197,
@@ -12843,11 +12980,11 @@
    "profit_factor": 2.3089,
    "phases": {
     "BTC": "scan",
-    "ETH": "scan",
+    "ETH": "armed",
     "XRP": "armed",
     "TRX": "armed",
-    "LINK": "scan",
-    "DOGE": "scan"
+    "LINK": "armed",
+    "DOGE": "armed"
    },
    "open": [],
    "forward_trades": 5,
@@ -12881,21 +13018,21 @@
    "win_rate_pct": 30.3797,
    "profit_factor": 0.9919,
    "phases": {
-    "BTC": "scan",
-    "ETH": "scan",
+    "BTC": "armed",
+    "ETH": "armed",
     "XRP": "armed",
     "TRX": "scan",
-    "LINK": "scan",
-    "DOGE": "scan"
+    "LINK": "armed",
+    "DOGE": "armed"
    },
    "open": [],
    "forward_trades": 11,
    "forward_net_pct": -8.8068,
    "variants": {
     "no_vol": {
-     "portfolio_net_pct": 16.7344,
-     "cagr_pct": 5.2733,
-     "max_drawdown_pct": -19.9839,
+     "portfolio_net_pct": 16.6661,
+     "cagr_pct": 5.2528,
+     "max_drawdown_pct": -20.0307,
      "trades": 307,
      "win_rate_pct": 33.2248,
      "forward_trades": 17,
