@@ -16,12 +16,12 @@
    "picked_rev": 17
   },
   "forward": {
-   "days": 9,
-   "net_pct": -317.943,
-   "plus_days": 1,
-   "rev_only_pct": -185.476,
-   "brk_only_pct": 2.834,
-   "picked_rev": 5
+   "days": 10,
+   "net_pct": -268.943,
+   "plus_days": 2,
+   "rev_only_pct": -136.477,
+   "brk_only_pct": 2.597,
+   "picked_rev": 6
   },
   "forward_days": [
    {
@@ -86,6 +86,13 @@
     "net_pct": 24.6038,
     "rev_pct": 24.6038,
     "brk_pct": -17.0537
+   },
+   {
+    "eval_day": "2026-11-17",
+    "pick": "rev",
+    "net_pct": 48.9997,
+    "rev_pct": 48.9997,
+    "brk_pct": -0.237
    }
   ]
  },
@@ -103,12 +110,12 @@
    "skipped_rev_pct": -310.708
   },
   "forward": {
-   "days": 5,
+   "days": 6,
    "active_days": 2,
    "net_pct": 90.015,
    "plus_days": 2,
-   "rev_only_pct": -232.215,
-   "skipped_rev_pct": -322.23
+   "rev_only_pct": -135.474,
+   "skipped_rev_pct": -225.489
   },
   "forward_days": [
    {
@@ -145,11 +152,18 @@
     "net_pct": 0.0,
     "rev_pct": 111.041,
     "prev_rev_pct": 84.8408
+   },
+   {
+    "eval_day": "2026-11-17",
+    "active": false,
+    "net_pct": 0.0,
+    "rev_pct": 96.7405,
+    "prev_rev_pct": 111.041
    }
   ]
  },
  "method": "전날 18시장 합계가 큰 묶음(되돌림=30·60분 VWAP 지정가+평균회귀 지정가, 돌파=30·60분 20봉 돌파; 같으면 되돌림)의 오늘 합계",
- "date": "2026-11-17",
+ "date": "2026-11-18",
  "next_pick": "rev",
  "backtest": {
   "days": 23,
@@ -160,12 +174,12 @@
   "picked_rev": 16
  },
  "forward": {
-  "days": 11,
-  "net_pct": -623.046,
-  "plus_days": 2,
-  "rev_only_pct": -294.031,
-  "brk_only_pct": -42.493,
-  "picked_rev": 6
+  "days": 12,
+  "net_pct": -526.305,
+  "plus_days": 3,
+  "rev_only_pct": -197.29,
+  "brk_only_pct": -51.129,
+  "picked_rev": 7
  },
  "forward_days": [
   {
@@ -244,6 +258,13 @@
    "net_pct": 111.041,
    "rev_pct": 111.041,
    "brk_pct": -52.0527
+  },
+  {
+   "eval_day": "2026-11-17",
+   "pick": "rev",
+   "net_pct": 96.7405,
+   "rev_pct": 96.7405,
+   "brk_pct": -8.6355
   }
  ],
  "min_forward_days": 14
