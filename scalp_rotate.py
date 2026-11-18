@@ -31,6 +31,7 @@ MIN_FORWARD_DAYS = 14          # 첫 판단까지 순방향 일수 (판단은 �
 AUX_FIXED = "2026-11-08"
 AUX_FORWARD_FROM = "2026-11-08"     # 이 평가일부터 순방향 (규칙은 평가일 11/7 까지 보고 만듦)
 FAMILIES.update({
+    "rev_off": {"tfs": ("30m", "60m"), "strategies": ("vwap_fade_lim", "mr_z20_lim"), "venues": ("okx", "hyperliquid")},
     "rev60": {"tfs": ("60m",), "strategies": ("vwap_fade_lim", "mr_z20_lim")},
     "brk60": {"tfs": ("60m",), "strategies": ("brk_20",)},
 })
@@ -41,6 +42,13 @@ FAMILIES.update({
 # 순방향은 평가일 2026-11-12 부터(11/12 결과를 보기 전에 규칙을 고정). P30·P34 계산은 건드리지 않는다.
 AUX2_FIXED = "2026-11-13"
 AUX2_FORWARD_FROM = "2026-11-12"
+
+# 보조 기록 3(제안함 P39, 2026-11-18 추가): P35 를 해외 선물(OKX·하이퍼리퀴드) 12시장만으로.
+# 11/18 보고에서 P35 쓰는 날(사후 12일) 18시장 중 16곳 플러스, 약한 곳은 업비트(현물·매수만)였다 → 실거래 후보를 해외 선물로 좁힐 근거를 순방향으로 확인.
+# 전날·오늘 모두 같은 12시장 합으로 본다(부호만, 새 숫자 문턱 없음). P35·P34·P30 계산은 그대로.
+AUX3_FIXED = "2026-11-18"
+AUX3_FORWARD_FROM = "2026-11-18"
+OFFSHORE = ("okx", "hyperliquid")
 
 
 def load_history(path="scalp_history.jsonl"):
@@ -64,8 +72,8 @@ def family_sum(rec, fam):
         parts = k.split(":")
         if len(parts) != 4:
             continue
-        _, _, tf, st = parts
-        if tf in f["tfs"] and st in f["strategies"]:
+        venue, _, tf, st = parts
+        if tf in f["tfs"] and st in f["strategies"] and (not f.get("venues") or venue in f["venues"]):
             tot += v.get("nt", 0.0)
             n += 1
     return (round(tot, 4), n)
@@ -151,7 +159,15 @@ def build(rows):
             "backtest": summarize_after_loss([d for d in seqL if d["eval_day"] < AUX2_FORWARD_FROM]),
             "forward": summarize_after_loss([d for d in seqL if d["eval_day"] >= AUX2_FORWARD_FROM]),
             "forward_days": [d for d in seqL if d["eval_day"] >= AUX2_FORWARD_FROM][-30:]}
-    return {"schema": "carrygate-scalp-rotate/3", "rule_fixed": RULE_FIXED, "forward_from": FORWARD_FROM, "aux60": aux, "aux_after_loss": aux2,
+    seqO, nxtO = rev_after_loss(rows, "rev_off")
+    aux3 = {"fixed": AUX3_FIXED, "forward_from": AUX3_FORWARD_FROM, "venues": list(OFFSHORE),
+            "method": "P39 보조: P35 를 OKX·하이퍼리퀴드 12시장 합만으로(전날 12시장 되돌림 합 < 0 이면 오늘 12시장 되돌림을 씀)",
+            "next_active": nxtO,
+            "backtest": summarize_after_loss([d for d in seqO if d["eval_day"] < AUX3_FORWARD_FROM]),
+            "forward": summarize_after_loss([d for d in seqO if d["eval_day"] >= AUX3_FORWARD_FROM]),
+            "forward_days": [d for d in seqO if d["eval_day"] >= AUX3_FORWARD_FROM][-30:]}
+    return {"schema": "carrygate-scalp-rotate/4", "rule_fixed": RULE_FIXED, "forward_from": FORWARD_FROM, "aux60": aux, "aux_after_loss": aux2,
+            "aux_after_loss_offshore": aux3,
             "method": "전날 18시장 합계가 큰 묶음(되돌림=30·60분 VWAP 지정가+평균회귀 지정가, 돌파=30·60분 20봉 돌파; 같으면 되돌림)의 오늘 합계",
             "date": rows[-1].get("date") if rows else None,
             "next_pick": nxt,
@@ -188,6 +204,13 @@ def print_summary(out):
                   % ("---" if label == "사후" else "   ", x.get("days", 0), x.get("active_days", 0), x.get("net_pct", 0),
                      x.get("plus_days", 0), x.get("active_days", 0), x.get("rev_only_pct", 0), x.get("skipped_rev_pct", 0)) + "  [" + label + "]")
         print("    내일: %s" % ({True: "되돌림 씀(오늘 되돌림이 마이너스)", False: "쉼(오늘 되돌림이 플러스)"}.get(a2["next_active"], "-")))
+    a3 = out.get("aux_after_loss_offshore")
+    if a3:
+        for label, x in (("사후", a3["backtest"]), ("순방향(평가일 %s~)" % a3["forward_from"], a3["forward"])):
+            print("%s P39 같은 규칙, OKX·하이퍼리퀴드 12시장만: %s일 중 %s일 씀  합 %+.1f%%  플러스 %s/%s  | 12시장 되돌림 고정 %+.1f%%  쉰 날 %+.1f%%"
+                  % ("---" if label == "사후" else "   ", x.get("days", 0), x.get("active_days", 0), x.get("net_pct", 0),
+                     x.get("plus_days", 0), x.get("active_days", 0), x.get("rev_only_pct", 0), x.get("skipped_rev_pct", 0)) + "  [" + label + "]")
+        print("    내일(12시장 기준): %s" % ({True: "씀", False: "쉼"}.get(a3["next_active"], "-")))
 
 
 def main(argv=None):
