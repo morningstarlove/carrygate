@@ -171,16 +171,46 @@ class Backtest(unittest.TestCase):
         self.assertIsNone(res["state"]["X"]["pos"])
         self.assertEqual(res["counts"]["stopped_before_entry"], 1)
 
-    def test_breakout_before_pivot_confirmation_is_replayed(self):
-        """유지 저점이 확정(3봉 뒤)되기 전에 돌파가 나와도 놓치지 않는다."""
+    def test_no_entry_at_prices_before_pivot_confirmation(self):
+        """유지 저점은 3봉 뒤에야 확정된다. 확정 전에 나온 돌파는 인정하되(단계는 '돌파 뒤 눌림 대기'),
+        확정 전 봉의 가격으로는 체결하지 않는다 — 그때는 주문을 낼 근거가 없었다 (2026-11-18, 제안함 P40 b)."""
         p = Path(200).leg(150, 10).leg(170, 6).leg(130, 10).leg(150, 6).leg(135, 5)
         p.add(135, 160, 134.5, 158, 400)                                  # 저점 다음 봉에 바로 거래량 돌파
-        p.add(158, 159, 150, 152).add(152, 153, 151.5, 152.5)             # 눌림(저가 150 ≤ 151) → 151 체결 ... 확정 봉
+        p.add(158, 159, 150, 152).add(152, 153, 151.5, 152.5)             # 확정 전 눌림(저가 150 ≤ 151) ... 확정 봉
+        res = reversal.run({"X": p.bars}, 0.0, 10_000.0)
+        self.assertIsNone(res["state"]["X"]["pos"])                       # 과거 봉 가격으로 소급 체결하지 않는다
+        self.assertEqual(res["state"]["X"]["phase"], "broken")            # 돌파는 인정 → 눌림 지정가 대기
+        p.add(152.5, 153, 150.5, 152)                                     # 확정 뒤 봉에서 목선(151) 터치 → 이제 체결
         res = reversal.run({"X": p.bars}, 0.0, 10_000.0)
         pos = res["state"]["X"]["pos"]
         self.assertIsNotNone(pos)
         self.assertAlmostEqual(pos["entry"], 151.0)
-        self.assertEqual(pos["entry_date"], p.bars[-2]["date"])
+        self.assertEqual(pos["entry_date"], p.bars[-1]["date"])
+
+    def test_break_entry_variant_drops_breakout_seen_too_late(self):
+        """변형(돌파 종가 진입): 돌파 봉이 저점 확정보다 앞이면 그 종가는 이미 지난 가격 → 진입하지 않고 건너뛴다."""
+        p = Path(200).leg(150, 10).leg(170, 6).leg(130, 10).leg(150, 6).leg(135, 5)
+        p.add(135, 160, 134.5, 158, 400).add(158, 159, 155, 157).add(157, 158, 156, 157.5)
+        res = reversal.run({"X": p.bars}, 0.0, 10_000.0, pullback=False)
+        self.assertIsNone(res["state"]["X"]["pos"])
+        self.assertEqual(res["trades"], [])
+        self.assertEqual(res["counts"]["late_break"], 1)
+
+    def test_bar_through_neckline_and_stop_is_a_loss_not_a_cancel(self):
+        """눌림 지정가 대기 중 한 봉이 목선(151)을 지나 손절선(134) 아래까지 내려가면: 지정가 체결 → 손절이 확정이다.
+        전에는 '진입 전 이탈'로 취소해 손실을 세지 않았다 (2026-11-18, 제안함 P40 c)."""
+        p = setup_path()
+        breakout(p)
+        p.add(156, 157, 130, 140)
+        res = reversal.run({"X": p.bars}, 0.0, 10_000.0, slip_pct=0.0)
+        self.assertEqual(len(res["trades"]), 1)
+        t = res["trades"][0]
+        self.assertAlmostEqual(t["entry"], 151.0)
+        self.assertAlmostEqual(t["exit"], 134.0)
+        self.assertEqual(t["reason"], "stop")
+        self.assertAlmostEqual(t["r_multiple"], -1.0, places=3)
+        self.assertEqual(res["counts"]["stopped_before_entry"], 0)
+        self.assertEqual(res["counts"]["entry_bar_stops"], 1)
 
     def test_shared_account_cap(self):
         bars = self._full()

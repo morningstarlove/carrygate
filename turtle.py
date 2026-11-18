@@ -27,7 +27,7 @@ import os, sys, json, math, csv, time, argparse
 from datetime import datetime, timezone, timedelta
 
 from scalp import COINS
-from common import http_json, f, KST, r4
+from common import http_json, f, KST, r4, backtest_block
 
 # ----------------------------------------------------------------- 고정 규칙 (사후 조정 금지)
 ENTRY_N = 20            # 진입 돌파 구간(일)
@@ -37,7 +37,7 @@ STOP_MULT = 2.0         # 손절 = 진입가 ∓ N × 2
 RISK_PCT = 1.0          # 한 번에 계좌의 1% 만 흔들리게
 MAX_NOTIONAL_PCT = 100.0  # 포지션 명목가 합계 ≤ 계좌 100% (레버리지 1배, 현물 기준)
 SLIPPAGE_PCT = 0.05     # 돌파가 체결 시 불리하게 밀리는 가정
-RULE_FIXED = "2026-10-02"   # 이 날 이후 진입한 매매만 순방향 시험
+RULE_FIXED = "2026-11-19"   # 이 날 이후 진입한 매매만 순방향 시험. 처음 고정 2026-10-02 → 2026-11-18 체결 계산 수정(제안함 P40)으로 다시 센다
 # 변형: 기본(20/10)과 나란히 기록만 한다. 손절·수량은 같다.
 #  - s2_55_20: 원래 터틀 System 2 (55일 돌파 진입 / 20일 이탈 청산)
 #  - ch_22_3 : Chandelier Exit — 10일 최저가 대신 "진입 후 최고가 − 3×ATR(22일)" 를 청산선으로 쓴다 (숏은 최저가 + 3×ATR).
@@ -178,8 +178,29 @@ def run(markets, short_ok, fee_pct, equity0, slip_pct=SLIPPAGE_PCT, max_notional
     dates = sorted(set(d for bars in markets.values() for d in (b["date"] for b in bars)))
     equity = float(equity0)
     pos, trades, curve, skipped = {m: None for m in markets}, [], [], 0
+    entry_day_stops = 0
     fee = fee_pct / 100.0
     slip = slip_pct / 100.0
+
+    def close(m, p, fill, d, reason):
+        nonlocal equity
+        gross = (fill - p["entry"]) * p["units"] * p["dir"]
+        fees = (p["entry"] + fill) * p["units"] * fee
+        pnl = gross - fees
+        eq_before = equity
+        equity += pnl
+        trades.append({
+            "market": m, "dir": "long" if p["dir"] > 0 else "short",
+            "entry_date": p["entry_date"], "exit_date": d, "days": p["days"],
+            "entry": rp(p["entry"]), "exit": rp(fill), "units": p["units"], "n_at_entry": rp(p["n"]),
+            "stop": rp(p["stop"]), "reason": reason,
+            "pnl": r4(pnl), "fees": r4(fees),
+            "mfe_pct": r4((p["best"] / p["entry"] - 1.0) * 100.0 * p["dir"]),        # 보유 중 최대 유리 가격 (반납 계산용)
+            "price_ret_pct": r4((fill / p["entry"] - 1.0) * 100.0 * p["dir"]),
+            "ret_pct": pnl / eq_before * 100.0,            # 계좌 대비 수익률 (복리 재계산용, 반올림 안 함)
+            "r_multiple": r4(pnl / (eq_before * RISK_PCT / 100.0)),
+            "forward": p["entry_date"] >= RULE_FIXED,
+        })
 
     for d in dates:
         exited_today = set()
@@ -202,23 +223,7 @@ def run(markets, short_ok, fee_pct, equity0, slip_pct=SLIPPAGE_PCT, max_notional
                 fill = max(b["o"], lvl) * (1 + slip) if hit else None
             if not hit:
                 continue
-            gross = (fill - p["entry"]) * p["units"] * p["dir"]
-            fees = (p["entry"] + fill) * p["units"] * fee
-            pnl = gross - fees
-            eq_before = equity
-            equity += pnl
-            trades.append({
-                "market": m, "dir": "long" if p["dir"] > 0 else "short",
-                "entry_date": p["entry_date"], "exit_date": d, "days": p["days"],
-                "entry": rp(p["entry"]), "exit": rp(fill), "units": p["units"], "n_at_entry": rp(p["n"]),
-                "stop": rp(p["stop"]), "reason": "stop" if lvl == p["stop"] else ("chandelier" if chandelier else "channel"),
-                "pnl": r4(pnl), "fees": r4(fees),
-                "mfe_pct": r4((p["best"] / p["entry"] - 1.0) * 100.0 * p["dir"]),        # 보유 중 최대 유리 가격 (반납 계산용)
-                "price_ret_pct": r4((fill / p["entry"] - 1.0) * 100.0 * p["dir"]),
-                "ret_pct": pnl / eq_before * 100.0,            # 계좌 대비 수익률 (복리 재계산용, 반올림 안 함)
-                "r_multiple": r4(pnl / (eq_before * RISK_PCT / 100.0)),
-                "forward": p["entry_date"] >= RULE_FIXED,
-            })
+            close(m, p, fill, d, "stop" if lvl == p["stop"] else ("chandelier" if chandelier else "channel"))
             pos[m] = None
             exited_today.add(m)
 
@@ -253,9 +258,17 @@ def run(markets, short_ok, fee_pct, equity0, slip_pct=SLIPPAGE_PCT, max_notional
             if units <= 0:
                 continue
             stop = fill - direction * STOP_MULT * n
-            pos[m] = {"dir": direction, "units": units, "entry": fill, "n": n, "stop": stop,
-                      "best": fill, "trail": stop,          # best: 진입 후 최고가(숏은 최저가), trail: Chandelier 청산선 (래칫)
-                      "entry_date": d, "days": 0, "capped": capped}
+            p = {"dir": direction, "units": units, "entry": fill, "n": n, "stop": stop,
+                 "best": fill, "trail": stop,          # best: 진입 후 최고가(숏은 최저가), trail: Chandelier 청산선 (래칫)
+                 "entry_date": d, "days": 0, "capped": capped}
+            # 진입한 날에도 2N 손절을 본다 (2026-11-18, 제안함 P40 d). 일봉 안에서 돌파와 저가 중 무엇이 먼저였는지는
+            # 알 수 없으므로 불리한 쪽(진입 뒤 손절선까지 내려갔다)으로 가정한다. 전에는 진입일 손절을 확인하지 않았다.
+            if (b["l"] <= stop) if direction > 0 else (b["h"] >= stop):
+                close(m, p, stop * (1 - direction * slip), d, "stop_entry_day")
+                entry_day_stops += 1
+                exited_today.add(m)
+                continue
+            pos[m] = p
             used += units * fill
 
         # 3) 일별 계좌 가치 (미실현 포함)
@@ -276,7 +289,9 @@ def run(markets, short_ok, fee_pct, equity0, slip_pct=SLIPPAGE_PCT, max_notional
                         p["trail"] = min(p["trail"], p["best"] + chandelier["mult"] * catr[m][i])
         curve.append((d, equity + unreal))
 
-    return {"trades": trades, "curve": curve, "equity": equity, "state": pos, "skipped": skipped}
+    return {"trades": trades, "curve": curve, "equity": equity, "state": pos, "skipped": skipped,
+            "entry_day_stops": entry_day_stops}
+
 
 
 def stats(res, equity0, bars_by_market=None):
@@ -314,13 +329,17 @@ def stats(res, equity0, bars_by_market=None):
         "profit_factor": r4(gp / gl) if gl > 0 else None,
         "avg_r": r4(sum(t["r_multiple"] for t in tr) / len(tr)) if tr else None,
         "avg_hold_days": r4(sum(t["days"] for t in tr) / len(tr)) if tr else None,
-        "stops": sum(1 for t in tr if t["reason"] == "stop"),
+        "stops": sum(1 for t in tr if t["reason"] in ("stop", "stop_entry_day")),
         "avg_mfe_pct": r4(sum(t["mfe_pct"] for t in tr) / len(tr)) if tr else None,            # 보유 중 평균 최대 유리폭
         "avg_giveback_pct": r4(sum(t["mfe_pct"] - t["price_ret_pct"] for t in tr) / len(tr)) if tr else None,   # 최고점에서 청산가까지 평균 반납
         "skipped_ambiguous_days": res["skipped"],
+        "entry_day_stops": res.get("entry_day_stops", 0),
         "by_year": by_year,
         "forward": {"trades": len(fwd), "wins": sum(1 for t in fwd if t["pnl"] > 0),
                     "net_pct": r4((math.prod(1 + t["ret_pct"] / 100.0 for t in fwd) - 1.0) * 100.0) if fwd else None},
+        # 규칙 고정일 이전 매매만의 성적 — 판정기의 운 보정 기준선은 이것을 쓴다. 위 win_rate_pct·profit_factor 는
+        # 순방향 매매까지 섞인 전체 값이라 기준선으로 쓰면 순방향 결과가 자기 기준을 끌고 간다 (2026-11-18, 제안함 P40 e).
+        "backtest": backtest_block([t for t in tr if not t["forward"]]),
     }
     if bars_by_market and len(bars_by_market) == 1:
         bars = list(bars_by_market.values())[0]

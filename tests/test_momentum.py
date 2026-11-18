@@ -46,6 +46,30 @@ class TestResample(unittest.TestCase):
             self.assertNotIn("XXX", m)       # 없는 파일은 건너뜀
 
 
+class TestPartialMonth(unittest.TestCase):
+    def test_month_in_progress_is_not_a_month_end(self):
+        # 2026-11-18 검토(제안함 P40 f): 규칙은 "월말 종가로 판단". 진행 중인 달의 최신 일봉을 월말처럼 쓰면
+        # 신호가 달 중간에 매일 바뀐다(11/3~17 사이 11번). 진행 중인 달은 판단·백테스트에서 뺀다.
+        with tempfile.TemporaryDirectory() as d:
+            write_csv(d, "SPY", [("2026-09-30", 100), ("2026-10-30", 110), ("2026-11-17", 90)])
+            m, dt, rg = momentum.load_all(d, ["SPY"], today="2026-11-18")
+            self.assertEqual(sorted(m["SPY"]), ["2026-09", "2026-10"])
+            self.assertEqual(rg["SPY"]["last_month"], "2026-10")
+            self.assertEqual(rg["SPY"]["partial_month_dropped"], "2026-11")
+            # 달이 바뀌어도 자료가 11/17 에서 멈춰 있으면(갱신 실패) 11월은 아직 월말이 아니다
+            m2, _, rg2 = momentum.load_all(d, ["SPY"], today="2026-12-01")
+            self.assertEqual(sorted(m2["SPY"]), ["2026-09", "2026-10"])
+            self.assertEqual(rg2["SPY"]["partial_month_dropped"], "2026-11")
+            # 자료가 11월 마지막 거래일(11/30 월요일)까지 오면 11월이 월말로 확정된다
+            write_csv(d, "SPY", [("2026-09-30", 100), ("2026-10-30", 110), ("2026-11-17", 90), ("2026-11-30", 95)])
+            m3, _, rg3 = momentum.load_all(d, ["SPY"], today="2026-12-01")
+            self.assertEqual(sorted(m3["SPY"]), ["2026-09", "2026-10", "2026-11"])
+            self.assertEqual(m3["SPY"]["2026-11"], 95)
+            self.assertIsNone(rg3["SPY"]["partial_month_dropped"])
+            m4, _, _ = momentum.load_all(d, ["SPY"], today="2026-11-30")      # 11/30 당일은 아직 11월 진행 중
+            self.assertEqual(sorted(m4["SPY"]), ["2026-09", "2026-10"])
+
+
 class TestLookback(unittest.TestCase):
     def test_lookback_value(self):
         mc = series("2020-01", [100.0] * 12 + [150.0])

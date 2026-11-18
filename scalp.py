@@ -35,6 +35,8 @@ VB_K = 0.5            # 변동성 돌파 계수: 당일 시가 + 전날 폭 × K
 TIMEFRAMES = [1, 5, 15, 30, 60]   # 같은 규칙을 적용해 보는 봉 길이(분). 30·60 은 2026-10-13 추가(15일 탈락 뒤 대안, 제안함 P16)
 NIGHT_KST = (21, 22, 23, 0, 1, 2)   # '밤' 필터: 보조 연구 A1 에서 15분 본전 승률이 100% 아래였던 유일한 시간대(미국 장)
 SPREAD_TICKS = 1.0    # 시장가 체결 시 왕복으로 잃는 호가 폭 (틱 단위). 1틱 = 매수호가·매도호가 차이가 최소일 때
+CALC_REV = 2          # 체결 계산 판 번호. 기록 줄마다 남긴다. 1 = 2026-11-18 전(청산 지정가를 4봉째까지 봤다), 2 = 그 뒤(제안함 P40 a).
+                      # 이 기록을 날짜별로 이어 쓰는 쪽(scalp_rotate 순방향)이 옛 계산과 새 계산을 섞지 않게 하려는 표시다.
 LIMIT_TTL = 3         # 지정가 주문을 기다리는 최대 봉 수. 넘으면 진입은 취소, 청산은 시장가
 
 # --- 거래소별 수수료 (1회 체결, %) ------------------------------------------
@@ -501,12 +503,14 @@ def backtest(ctx, strat, short_ok):
         if pos is not None:
             held = i - pos["entry_i"]
             if exit_order is not None:
-                # 청산 지정가가 걸려 있다. 이 봉에서 체결되나?
-                if limit_filled(ctx, i, -pos["side"], exit_order["px"]):
-                    trades.append(close_trade(pos, exit_order["px"], i, True, False))
-                    pos, exit_order = None, None
-                elif held >= strat["max_hold"] or i - exit_order["placed_i"] >= LIMIT_TTL:
+                # 청산 지정가가 걸려 있다. 기한(LIMIT_TTL 봉)이나 최대 보유가 찼으면 이 봉 시가에 시장가 — 시가는 봉이
+                # 시작할 때 정해지므로 그 봉의 고저를 보기 전에 결정한다 (2026-11-18, 제안함 P40 a. 전에는 이 봉에서
+                # 지정가 체결을 먼저 보고, 안 됐으면 같은 봉 시가에 판 것으로 쳐서 4봉째를 공짜로 기다렸다).
+                if held >= strat["max_hold"] or i - exit_order["placed_i"] >= LIMIT_TTL:
                     trades.append(close_trade(pos, ctx.o[i], i, False, False))
+                    pos, exit_order = None, None
+                elif limit_filled(ctx, i, -pos["side"], exit_order["px"]):
+                    trades.append(close_trade(pos, exit_order["px"], i, True, False))
                     pos, exit_order = None, None
             elif held >= strat["max_hold"]:
                 trades.append(close_trade(pos, ctx.o[i], i, False, False))
@@ -688,7 +692,7 @@ def write_history(out, path):
     # 요약은 숫자만 남긴다 (상위 조합 목록 같은 덩어리는 scalp.json 에 있다)
     s = out["summary"]
     slim = {k: s[k] for k in ("rows_total", "rows_positive", "rows_robust", "markets", "verdict") if k in s}
-    rec = {"date": out["date"], "eval_day_utc": out["eval_day_utc"], "summary": slim,
+    rec = {"date": out["date"], "eval_day_utc": out["eval_day_utc"], "calc_rev": CALC_REV, "summary": slim,
            "rows": {history_key(r): {"n": r["trades"], "g": r["gross_pct"], "f": r["fee_pct"],
                                      "nt": r["net_pct"], "rb": r["robust"]} for r in out["rows"]},
            "hurdle": {k: dict([("h%d_needed_win_rate_pct" % h,

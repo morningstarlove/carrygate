@@ -68,6 +68,21 @@ class KrBreakout(unittest.TestCase):
         self.assertTrue(out["checks"]["stop_loss_depth"]["ok"])
         self.assertGreater(out["luck"]["z"], -2.0)
 
+    def test_no_pass_when_net_return_is_not_positive(self):
+        # 2026-11-18 검토(제안함 P41-4): 승률·손절 깊이가 기준을 넘어도 수수료 뒤 누적 수익이 0 이하면 PASS 가 아니다
+        # ("수익률은 수수료를 뺀 뒤 말한다"). 승률 25%: 손절 15건(−7%), 20일 보유 5건(+5% — 이겨도 작다) → 합계 −80%
+        trades = [kb_trade("stop", -7.0)] * 15 + [kb_trade("hold20", 5.0)] * 5
+        out = V.judge_kr_breakout(kb_forward(trades), BT, CRIT["kr_breakout"])
+        self.assertTrue(CRIT["kr_breakout"]["pass_requires_total_return_positive"])
+        self.assertTrue(out["checks"]["win_rate"]["ok"])
+        self.assertFalse(out["checks"]["net_return"]["ok"])
+        self.assertEqual(out["status"], V.NOT_YET)
+        self.assertIn("수수료", out["reason"])
+        # 보유 중 종목의 평가익으로 계좌 수익률(total_return_pct)이 플러스여도, 닫힌 매매의 실현 손익이 마이너스면 PASS 가 아니다
+        fwd = kb_forward(trades)
+        fwd["variants"]["base"]["total_return_pct"] = 3.0
+        self.assertEqual(V.judge_kr_breakout(fwd, BT, CRIT["kr_breakout"])["status"], V.NOT_YET)
+
     def test_fail_when_win_rate_collapses(self):
         trades = [kb_trade("stop", -7.0)] * 19 + [kb_trade("hold20", 20.0)]  # 승률 5%
         out = V.judge_kr_breakout(kb_forward(trades), BT, CRIT["kr_breakout"])
@@ -120,6 +135,20 @@ class VenueTracks(unittest.TestCase):
         out = V.judge_venue_track(d, CRIT["reversal"], "reversal")
         self.assertEqual(out["status"], V.FAIL)
         self.assertEqual(out["venues"]["okx"]["status"], V.FAIL)
+
+    def test_baseline_is_pre_rule_fixed_trades_only(self):
+        # 2026-11-18 검토(제안함 P40 e): 운 보정 기준 승률은 규칙 고정일 이전 매매만의 값(stats.backtest)을 쓴다.
+        # 전체 값(stats.win_rate_pct)은 순방향 매매가 섞여, 순방향이 지면 기준이 같이 내려가 FAIL 이 덜 걸렸다.
+        vd = venue([vt(-1)] * 18 + [vt(5)] * 2, bt_wr=30.0)             # 전체(순방향 포함) 승률 30%
+        vd["portfolio"]["stats"]["backtest"] = {"trades": 91, "wins": 46, "win_rate_pct": 50.5495, "profit_factor": 2.1}
+        f = V._venue_forward(vd)
+        self.assertAlmostEqual(f["backtest_win_rate_pct"], 50.5495)
+        self.assertAlmostEqual(f["backtest_profit_factor"], 2.1)
+        self.assertEqual(f["backtest_trades"], 91)
+        self.assertAlmostEqual(f["luck"]["expected_wins"], 20 * 0.505495, places=1)
+        self.assertEqual(f["backtest_basis"], "pre_rule_fixed")
+        old = V._venue_forward(venue([vt(5)] * 3))                       # 옛 파일(backtest 칸 없음)은 전체 값으로, 표시를 남긴다
+        self.assertEqual(old["backtest_basis"], "all_trades")
 
     def test_turtle_fail_on_luck_z(self):
         # 손익비는 1.3 으로 통과권이지만 승률 10% (백테스트 37%) → z 가 −2 아래

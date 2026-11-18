@@ -66,6 +66,9 @@ BLOG_CLAIMS = {
     },
 }
 
+EXECUTABLE_NOTE = ("원문 규칙 '그날 매도가 있었으면 매수 없음'은 익절 매도의 경우 종가를 미리 알아야 지킬 수 있다(종가 매수 주문은 마감 전에 낸다). "
+                   "여기는 만기 매도가 있는 날만 매수를 쉬고 익절한 날에도 사며, 그날 매도 대금은 그날 매수에 쓰지 않는 계산이다. 낙폭(mdd_pct)은 이 값을 기준으로 봐야 한다. 제안함 P41-1")
+
 METHOD = ("일봉 종가만 사용. 매일 종가에 한 티어 매수(그날 매도가 있었으면 매수 없음). 티어별 종가 ≥ 매수가×(1+익절률)이면 그 종가에 매도, "
           "매수 후 HOLD_DAYS 거래일째 종가에는 무조건 매도. 체결마다 FEE_PCT(편도) 차감, 주식 수 소수점 허용. "
           "v4 하루 매수 금액 = 투자금/N_TIERS 에서 시작해 2사이클(=HOLD_DAYS 거래일) 전에 산 티어들의 실현 손익이 +면 그 REINVEST 만큼을 N_TIERS 로 나눠 더함(래칫, 줄이지 않음), 보유 티어 N_TIERS 개면 매수 없음. "
@@ -74,8 +77,12 @@ METHOD = ("일봉 종가만 사용. 매일 종가에 한 티어 매수(그날 �
 
 
 # ----------------------------------------------------------------- 시뮬레이션
-def simulate(bars, version, start=None, end=None, fee_pct=FEE_PCT, capital=CAPITAL, hold_days=HOLD_DAYS):
-    """bars: [(date, close)] 오름차순. start~end(포함) 구간만 돈다. 결과: dict(equity 곡선, 매매 목록, 상태)."""
+def simulate(bars, version, start=None, end=None, fee_pct=FEE_PCT, capital=CAPITAL, hold_days=HOLD_DAYS, buy_skip="any_sale"):
+    """bars: [(date, close)] 오름차순. start~end(포함) 구간만 돈다. 결과: dict(equity 곡선, 매매 목록, 상태).
+
+    buy_skip: "any_sale"(기본, 원문 규칙) = 그날 매도가 하나라도 있었으면 매수 없음.
+              "expiry_only"(실행 가능 계산, 2026-11-18 제안함 P41-1) = 만기 매도가 있는 날만 매수를 쉰다. 익절 매도는
+              종가가 나와야 알 수 있는데 종가 매수 주문은 마감 전에 내야 하므로, 원문 규칙은 그날 종가를 미리 아는 셈이다."""
     cfg = VERSIONS[version]
     fee = fee_pct / 100.0
     target = cfg["target_pct"] / 100.0
@@ -97,6 +104,8 @@ def simulate(bars, version, start=None, end=None, fee_pct=FEE_PCT, capital=CAPIT
         d, c = bars[i]
         # --- 매도 (종가)
         sold_today = False
+        expired_today = False
+        cash_open = cash                       # 그날 종가 매도 대금이 들어오기 전 현금
         keep = []
         for t in tiers:
             days_held = k - t["k"]
@@ -112,6 +121,7 @@ def simulate(bars, version, start=None, end=None, fee_pct=FEE_PCT, capital=CAPIT
                 if version == "v4":
                     cycle_pnl[t["cycle"]] = cycle_pnl.get(t["cycle"], 0.0) + pnl
                 sold_today = True
+                expired_today = expired_today or expired
             else:
                 keep.append(t)
         tiers = keep
@@ -130,8 +140,10 @@ def simulate(bars, version, start=None, end=None, fee_pct=FEE_PCT, capital=CAPIT
             cycle = None
         # --- 매수 (종가). 그날 매도가 있었으면 안 산다. v4 는 보유 티어가 N_TIERS 개면 안 산다(원문 코드와 같음)
         tier_full = version == "v4" and len(tiers) >= cfg["n_tiers"]
-        if not sold_today and not tier_full and amt > 0 and c > 0:
-            spend = min(amt, cash)
+        skip = sold_today if buy_skip == "any_sale" else expired_today
+        if not skip and not tier_full and amt > 0 and c > 0:
+            # 실행 가능 계산: 그날 종가에 판 대금은 종가가 나와야 생기므로 그날 종가 매수에는 못 쓴다
+            spend = min(amt, cash if buy_skip == "any_sale" else cash_open)
             if spend < amt - 1e-9:
                 cash_short_days += 1
             if spend > 1e-9:
@@ -239,6 +251,18 @@ def run_symbol(bars):
     for v in VERSIONS:
         sim = simulate(bars, v, RULE_FIXED, None)
         out["forward"][v] = forward_state(sim, v) if sim else {"note": "규칙 고정일 이후 자료 없음"}
+    # 실행 가능 계산(익절한 날에도 종가 매수) — 원문 규칙 옆에 나란히 둔다. 위 windows·forward 는 원문 규칙 그대로다.
+    out["executable"] = {"note": EXECUTABLE_NOTE}
+    for v in VERSIONS:
+        full = simulate(bars, v, START, None, buy_skip="expiry_only")
+        fwd = simulate(bars, v, RULE_FIXED, None, buy_skip="expiry_only")
+        e = {}
+        if full:
+            m = metrics(full)
+            e.update({"start": START, "cagr_pct": m["cagr_pct"], "mdd_pct": m["max_drawdown_pct"], "end_equity": m["end_equity"]})
+        if fwd:
+            e["forward_equity"] = fwd["equity"][-1]
+        out["executable"][v] = e
     return out
 
 

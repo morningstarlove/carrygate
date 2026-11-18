@@ -18,7 +18,8 @@ CARRYGATE — 초단타 국면 교대 규칙 (제안함 P30, 2026-11-07 추가)
 """
 import json, sys, argparse
 
-RULE_FIXED = "2026-11-07"
+RULE_FIXED = "2026-11-18"       # 처음 고정 2026-11-07. 11/18 초단타 청산 지정가 계산 수정(제안함 P40 a)으로 순방향을 다시 센다
+MIN_CALC_REV = 2                # 순방향은 scalp.CALC_REV ≥ 이 값으로 계산된 날만 센다. 그 전 날(옛 계산)은 사후 쪽으로 간다
 FORWARD_FROM = "2026-11-06"     # 이 평가일부터 순방향
 FAMILIES = {
     "rev": {"tfs": ("30m", "60m"), "strategies": ("vwap_fade_lim", "mr_z20_lim")},
@@ -81,14 +82,14 @@ def rotate(rows, rev_fam="rev", brk_fam="brk"):
         brk, nb = family_sum(r, brk_fam)
         if nr == 0 or nb == 0:
             continue
-        days.append((r.get("eval_day_utc") or r.get("date"), rev, brk))
+        days.append((r.get("eval_day_utc") or r.get("date"), rev, brk, r.get("calc_rev", 1)))
     out = []
     for i in range(1, len(days)):
         prev_rev, prev_brk = days[i - 1][1], days[i - 1][2]
         pick = "rev" if prev_rev >= prev_brk else "brk"
-        day, rev, brk = days[i]
+        day, rev, brk, cr = days[i]
         out.append({"eval_day": day, "pick": pick, "net_pct": rev if pick == "rev" else brk,
-                    "rev_pct": rev, "brk_pct": brk})
+                    "rev_pct": rev, "brk_pct": brk, "calc_rev": cr})
     nxt = None
     if days:
         nxt = "rev" if days[-1][1] >= days[-1][2] else "brk"
@@ -102,13 +103,14 @@ def rev_after_loss(rows, fam="rev"):
         rev, nr = family_sum(r, fam)
         if nr == 0:
             continue
-        days.append((r.get("eval_day_utc") or r.get("date"), rev))
+        days.append((r.get("eval_day_utc") or r.get("date"), rev, r.get("calc_rev", 1)))
     out = []
     for i in range(1, len(days)):
         prev = days[i - 1][1]
-        day, rev = days[i]
+        day, rev, cr = days[i]
         active = prev < 0
-        out.append({"eval_day": day, "active": active, "net_pct": rev if active else 0.0, "rev_pct": rev, "prev_rev_pct": prev})
+        out.append({"eval_day": day, "active": active, "net_pct": rev if active else 0.0, "rev_pct": rev, "prev_rev_pct": prev,
+                    "calc_rev": cr})
     nxt = (days[-1][1] < 0) if days else None
     return out, nxt
 
@@ -134,13 +136,18 @@ def summarize(seq):
             "picked_rev": sum(1 for d in seq if d["pick"] == "rev")}
 
 
+def is_forward(d, start):
+    """순방향 = 시작 평가일 이후이고, 새 체결 계산(MIN_CALC_REV)으로 기록된 날."""
+    return d["eval_day"] >= start and d.get("calc_rev", 1) >= MIN_CALC_REV
+
+
 def build(rows):
     seq, nxt = rotate(rows)
-    back = [d for d in seq if d["eval_day"] < FORWARD_FROM]
-    fwd = [d for d in seq if d["eval_day"] >= FORWARD_FROM]
+    back = [d for d in seq if not is_forward(d, FORWARD_FROM)]
+    fwd = [d for d in seq if is_forward(d, FORWARD_FROM)]
     seq60, nxt60 = rotate(rows, "rev60", "brk60")
-    back60 = [d for d in seq60 if d["eval_day"] < AUX_FORWARD_FROM]
-    fwd60 = [d for d in seq60 if d["eval_day"] >= AUX_FORWARD_FROM]
+    back60 = [d for d in seq60 if not is_forward(d, AUX_FORWARD_FROM)]
+    fwd60 = [d for d in seq60 if is_forward(d, AUX_FORWARD_FROM)]
     aux = {"fixed": AUX_FIXED, "forward_from": AUX_FORWARD_FROM,
            "method": "P34 보조: 60분봉만(되돌림=60분 VWAP 지정가+평균회귀 지정가, 돌파=60분 20봉 돌파) 같은 교대. rev_only_pct 가 '60분 되돌림 고정'",
            "next_pick": nxt60, "backtest": summarize(back60), "forward": summarize(fwd60), "forward_days": fwd60[-30:]}
@@ -148,9 +155,9 @@ def build(rows):
     aux2 = {"fixed": AUX2_FIXED, "forward_from": AUX2_FORWARD_FROM,
             "method": "P35 보조: 전날 30·60분 되돌림 묶음 합 < 0 인 날만 오늘 되돌림 묶음을 쓴다(아니면 쉼). skipped_rev_pct = 쉰 날 되돌림이 냈을 합",
             "next_active": nxtL,
-            "backtest": summarize_after_loss([d for d in seqL if d["eval_day"] < AUX2_FORWARD_FROM]),
-            "forward": summarize_after_loss([d for d in seqL if d["eval_day"] >= AUX2_FORWARD_FROM]),
-            "forward_days": [d for d in seqL if d["eval_day"] >= AUX2_FORWARD_FROM][-30:]}
+            "backtest": summarize_after_loss([d for d in seqL if not is_forward(d, AUX2_FORWARD_FROM)]),
+            "forward": summarize_after_loss([d for d in seqL if is_forward(d, AUX2_FORWARD_FROM)]),
+            "forward_days": [d for d in seqL if is_forward(d, AUX2_FORWARD_FROM)][-30:]}
     return {"schema": "carrygate-scalp-rotate/3", "rule_fixed": RULE_FIXED, "forward_from": FORWARD_FROM, "aux60": aux, "aux_after_loss": aux2,
             "method": "전날 18시장 합계가 큰 묶음(되돌림=30·60분 VWAP 지정가+평균회귀 지정가, 돌파=30·60분 20봉 돌파; 같으면 되돌림)의 오늘 합계",
             "date": rows[-1].get("date") if rows else None,

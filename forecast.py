@@ -325,6 +325,22 @@ def write_history(rows, path=HISTORY_PATH):
             fh.write(json.dumps(by[d], ensure_ascii=False) + "\n")
 
 
+def merge_today(rows, today):
+    """기록에 오늘 줄을 넣는다. 같은 날짜 줄이 이미 예측을 담고 있으면(t_bar 있음) 그 줄을 그대로 둔다.
+
+    순방향 기록은 사후에 고치지 않는다: 같은 날 다시 돌려도 그날 처음 남긴 예측과 그 채점이 남아야 한다
+    (2026-11-18, 제안함 P41-2. 전에는 뒤 실행이 통째로 덮어써, 이미 채점된 예측이 새 예측으로 바뀔 수 있었다)."""
+    first = next((r for r in rows if r["date"] == today["date"] and r.get("t_bar")), None)
+    if first is None:
+        return [r for r in rows if r["date"] != today["date"]] + [today]
+    # 먼저 돈 실행에서 수집에 실패해 예측이 없는 코인만 이번 실행 값으로 채운다 (이미 있는 예측은 건드리지 않는다)
+    coins = first.setdefault("coins", {})
+    for c, p in (today.get("coins") or {}).items():
+        if not (coins.get(c) or {}).get("ok") and p.get("ok"):
+            coins[c] = p
+    return list(rows)
+
+
 def build(fixture=None, save_to=None, history_rows=None, now_utc=None):
     now = datetime.now(KST)
     out = {"schema": "carrygate-forecast/1", "date": now.strftime("%Y-%m-%d"),
@@ -363,7 +379,8 @@ def build(fixture=None, save_to=None, history_rows=None, now_utc=None):
     # 오늘 줄
     today = {"date": out["date"], "t_bar": out["coins"]["BTC"].get("t_bar"), "rule_fixed": RULE_FIXED,
              "coins": {c: {k: v for k, v in p.items() if k not in ("features",)} for c, p in out["coins"].items()}}
-    rows = [r for r in rows if r["date"] != out["date"]] + [today]
+    rows = merge_today(rows, today)
+    out["history_row_kept"] = not any(r is today for r in rows)     # True 면 오늘 줄은 먼저 돈 실행의 예측 그대로(빠진 코인만 채움)
     summ = score_summary(rows)
     summ.pop("_points", None)
     out["cumulative"] = summ

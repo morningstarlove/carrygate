@@ -158,6 +158,31 @@ class Scoring(unittest.TestCase):
         rows2 = self.make_rows(2, start="2026-11-06") + self.make_rows(1, start="2026-11-10")
         self.assertEqual(F.score_summary(rows2)["missing_days"], 2)
 
+    def test_rerun_same_day_keeps_first_prediction(self):
+        # 2026-11-18 검토(제안함 P41-2): 같은 날짜에 다시 돌려도 그날 처음 남긴 예측(그리고 그 채점)을 덮어쓰지 않는다.
+        # 전에는 12시간 뒤 다시 돌리면 이미 채점된 예측이 새 예측으로 바뀌었다 — 순방향 기록은 사후에 고치지 않는다.
+        first = {"date": "2026-11-18", "t_bar": 1000, "coins": {"BTC": {"ok": True, "c0": 100.0, "scored": True, "hit": 0}}}
+        again = {"date": "2026-11-18", "t_bar": 2000, "coins": {"BTC": {"ok": True, "c0": 105.0}}}
+        other = {"date": "2026-11-17", "t_bar": 500, "coins": {}}
+        rows = F.merge_today([other, first], again)
+        self.assertEqual(len(rows), 2)
+        kept = [r for r in rows if r["date"] == "2026-11-18"][0]
+        self.assertEqual(kept["t_bar"], 1000)
+        self.assertTrue(kept["coins"]["BTC"]["scored"])
+        # 첫 실행에서 수집 실패로 빠진 코인은 다시 돌린 값으로 채운다 (있던 예측은 그대로)
+        again["coins"]["ETH"] = {"ok": True, "c0": 50.0}
+        first["coins"]["SOL"] = {"ok": False}
+        again["coins"]["SOL"] = {"ok": True, "c0": 9.0}
+        rows = F.merge_today([other, first], again)
+        kept = [r for r in rows if r["date"] == "2026-11-18"][0]
+        self.assertEqual(kept["coins"]["ETH"]["c0"], 50.0)
+        self.assertEqual(kept["coins"]["SOL"]["c0"], 9.0)
+        self.assertEqual(kept["coins"]["BTC"]["c0"], 100.0)
+        # 그날 줄이 없거나, 있어도 예측이 비어 있으면(t_bar 없음 = 수집 실패) 새 줄을 쓴다
+        self.assertEqual(F.merge_today([other], again)[-1]["t_bar"], 2000)
+        broken = {"date": "2026-11-18", "t_bar": None, "coins": {}}
+        self.assertEqual(F.merge_today([other, broken], again)[-1]["t_bar"], 2000)
+
     def test_write_history_dedupes_and_sorts(self):
         with tempfile.TemporaryDirectory() as d:
             p = os.path.join(d, "h.jsonl")
@@ -186,6 +211,22 @@ class Judge(unittest.TestCase):
     def test_fail_when_ratio_collapses(self):
         j = V.judge_forecast(self.rows(60, 1.0), CRIT["forecast"])
         self.assertEqual(j["status"], V.FAIL)
+
+    def test_noise_floor_shuffles_whole_days_not_single_coins(self):
+        # 2026-11-18 검토(제안함 P41-3): 같은 날 코인들은 같이 움직인다. 결과를 (날짜×코인) 낱개로 섞으면 독립 표본이
+        # 480개인 것처럼 계산돼 잡음 95% 선이 너무 낮게 나온다(실력 0 예측기가 21% 통과). 날짜 단위로 통째로 섞는다.
+        import random
+        rng = random.Random(1)
+        pts = []
+        for d in range(40):
+            up = rng.random() < 0.5                       # 그날 12코인이 모두 같은 방향
+            q = 0.7 if rng.random() < 0.5 else 0.3        # 예측도 그날 12코인 모두 같음 (실력 0)
+            for c in range(12):
+                pts.append(("2026-%02d-%02d" % (1 + d // 28, 1 + d % 28), "C%d" % c, "mid", 1.0, up, {"D1": (q, None, None)}))
+        nf = V.direction_noise_floor(pts, ["D1"], sims=500, seed=7)
+        # 독립 표본은 사실상 40일뿐 → 95% 선은 0.5 + 1.645×√(0.25/40) ≈ 0.63 근처여야 한다 (낱개로 섞으면 ≈ 0.54)
+        self.assertGreater(nf["hit_rate_p95"]["D1"], 0.58)
+        self.assertEqual(nf, V.direction_noise_floor(pts, ["D1"], sims=500, seed=7))     # 결정적
 
     def test_noise_floor_deterministic(self):
         a = V.judge_forecast(self.rows(60, 1.5), CRIT["forecast"])["noise_floor"]

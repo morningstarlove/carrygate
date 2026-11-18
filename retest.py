@@ -33,7 +33,7 @@ import os, sys, json, math, csv, time, argparse
 from datetime import datetime, timezone
 
 from scalp import COINS
-from common import http_json, f, KST, r4
+from common import http_json, f, KST, r4, backtest_block
 
 # ----------------------------------------------------------------- 고정 규칙 (사후 조정 금지)
 BAR_MIN = 60                # 1시간봉 (카드는 15·30분봉 미국 주식. 코인 15분봉은 초단타 트랙에서 잡음으로 확인돼 1시간봉으로 고정)
@@ -54,7 +54,7 @@ PULL_VOL_RATIO_MAX = 0.8    # 조정 구간 평균 거래량 ≤ 2차 상승 평
 RISK_PCT = 1.0              # 한 번에 계좌의 1% 만 흔들리게
 MAX_NOTIONAL_PCT = 100.0    # 포지션 명목가 합계 ≤ 계좌 100% (레버리지 1배)
 SLIPPAGE_PCT = 0.05         # 종가 진입·손절 체결 시 불리하게 밀리는 가정
-RULE_FIXED = "2026-10-22"   # 이 날 이후 진입한 매매만 순방향 시험
+RULE_FIXED = "2026-11-19"   # 이 날 이후 진입한 매매만 순방향 시험. 처음 고정 2026-10-22 → 2026-11-18 체결 계산 수정(제안함 P40)으로 다시 센다
 # 변형: 기본과 나란히 기록만 한다.
 VARIANTS = {
     "no_vol":     {"vol": False, "label": "거래량 조건 3개 전부 없음 (모양만)"},
@@ -264,7 +264,7 @@ def run(markets, fee_pct, equity0, slip_pct=SLIPPAGE_PCT, max_notional_pct=MAX_N
     fee, slip = fee_pct / 100.0, slip_pct / 100.0
     trades, curve = [], []
     counts = {"poles": 0, "box_failed": 0, "breakouts": 0, "rise2_failed": 0, "no_pullback": 0,
-              "zone_lost": 0, "entries": 0, "ambiguous": 0}
+              "zone_lost": 0, "entries": 0, "ambiguous": 0, "entry_bar_stops": 0}
     st = {m: {"phase": "scan", "pos": None, "setup": None} for m in mk}
 
     def real(m, x):
@@ -362,8 +362,9 @@ def run(markets, fee_pct, equity0, slip_pct=SLIPPAGE_PCT, max_notional_pct=MAX_N
                 su["c"] = j
                 su["rise2_vol"] = mean_vol(bars, su["bo"], j)
                 su["pb_deadline"] = j + PULLBACK_WAIT
+                su["confirm_idx"] = i                                       # C 가 확정된 봉. 이 봉 종가 전에는 주문을 낼 근거가 없다
                 s["phase"] = "pullback"
-                for x in range(j + 1, i + 1):                               # 확정 전 봉(C+1..i)에 이미 조정·확인이 있었으면 되돌려 적용
+                for x in range(j + 1, i + 1):                               # 확정 전 봉(C+1..i)은 무효·기한만 본다 (체결은 없음, 2026-11-18 P40 b)
                     if step(m, bars, x):
                         return True
                     if s["phase"] != "pullback":
@@ -374,6 +375,14 @@ def run(markets, fee_pct, equity0, slip_pct=SLIPPAGE_PCT, max_notional_pct=MAX_N
                 s["phase"], s["setup"] = "scan", None
             return False
         if s["phase"] == "pullback":
+            # 지정가 변형: 주문이 걸려 있는 동안(C 확정 뒤) 한 봉이 지지 상단을 지나면 체결이 먼저다 — 그 봉이 지지 하단까지
+            # 깨도 '체결 뒤 손절'이지 '진입 전 무효'가 아니다 (2026-11-18 P40 c). 손절은 아래 진입 뒤 확인에서 센다.
+            if (entry == "limit" and su["confirm_idx"] < i <= su["pb_deadline"]
+                    and b["l"] <= su["zone_hi"] and b["o"] > su["zone_lo"]):
+                fill = min(b["o"], su["zone_hi"])
+                ok = enter(m, bars, i, fill, su, "zone_limit")
+                s["phase"], s["setup"] = ("long" if ok else "scan"), None
+                return ok
             if b["c"] < su["zone_lo"]:                                       # 지지 깨짐 → 무효
                 counts["zone_lost"] += 1
                 s["phase"], s["setup"] = "scan", None
@@ -382,14 +391,13 @@ def run(markets, fee_pct, equity0, slip_pct=SLIPPAGE_PCT, max_notional_pct=MAX_N
                 counts["no_pullback"] += 1
                 s["phase"], s["setup"] = "scan", None
                 return False
-            if entry == "limit":
-                if b["l"] <= su["zone_hi"]:                                  # 변형: 지지 상단 지정가 (갭이면 시가)
-                    fill = min(b["o"], su["zone_hi"])
-                    ok = enter(m, bars, i, fill, su, "zone_limit")
+            if entry == "limit":                                             # 변형: 지지 상단 지정가 — 보통은 위에서 처리.
+                if i > su["confirm_idx"] and b["l"] <= su["zone_hi"]:        # 여기 오는 것은 시가가 지지 하단 아래로 갭 난 봉뿐
+                    ok = enter(m, bars, i, min(b["o"], su["zone_hi"]), su, "zone_limit")   # 체결가 ≤ 손절선 → enter 가 거절
                     s["phase"], s["setup"] = ("long" if ok else "scan"), None
                     return ok
                 return False
-            if is_confirm_bar(b, su["zone_lo"], su["zone_hi"]):
+            if i >= su["confirm_idx"] and is_confirm_bar(b, su["zone_lo"], su["zone_hi"]):   # 확정 전 봉의 종가는 지난 가격
                 ok = True
                 if vol:
                     pv = mean_vol(bars, su["c"] + 1, i)
@@ -461,8 +469,11 @@ def run(markets, fee_pct, equity0, slip_pct=SLIPPAGE_PCT, max_notional_pct=MAX_N
                 if entered_now:
                     p = s["pos"]
                     if p["how"] == "zone_limit" and bars[p["entry_idx"]]["l"] < p["stop"]:
-                        counts["ambiguous"] += 1                             # 지정가 체결 봉에서 바로 깨짐: 순서를 몰라 건너뛴다
-                        s["pos"], s["phase"] = None, "scan"
+                        # 지정가(지지 상단)가 손절선(지지 하단)보다 위라 순서가 분명하다: 체결 → 손절
+                        counts["entry_bar_stops"] += 1
+                        fill = min(bars[p["entry_idx"]]["o"], p["stop"])
+                        close_pos(m, bars, p["entry_idx"], fill - abs(fill) * slip, "stop")
+                        s["phase"] = "scan"
                     else:
                         for y in range(p["entry_idx"] + 1, i + 1):           # 체결 봉 다음부터 지금 봉까지 손절·익절 확인
                             if check_exit(m, bars, y):
@@ -502,6 +513,7 @@ def run(markets, fee_pct, equity0, slip_pct=SLIPPAGE_PCT, max_notional_pct=MAX_N
                 setup["pb_deadline"] = su["pb_deadline"]
         state[m] = {"phase": s["phase"], "dir": mk[m]["dir"], "pos": pos, "setup": setup}
     return {"trades": trades, "curve": curve, "equity": equity, "state": state, "counts": counts}
+
 
 
 def stats(res, equity0, bars_by_market=None):
@@ -550,6 +562,9 @@ def stats(res, equity0, bars_by_market=None):
         "by_year": by_year,
         "forward": {"trades": len(fwd), "wins": sum(1 for t in fwd if t["pnl"] > 0),
                     "net_pct": r4((math.prod(1 + t["ret_pct"] / 100.0 for t in fwd) - 1.0) * 100.0) if fwd else None},
+        # 규칙 고정일 이전 매매만의 성적 — 판정기의 운 보정 기준선은 이것을 쓴다. 위 win_rate_pct·profit_factor 는
+        # 순방향 매매까지 섞인 전체 값이라 기준선으로 쓰면 순방향 결과가 자기 기준을 끌고 간다 (2026-11-18, 제안함 P40 e).
+        "backtest": backtest_block([t for t in tr if not t["forward"]]),
     }
     if bars_by_market and len(bars_by_market) == 1:
         bars = list(bars_by_market.values())[0]

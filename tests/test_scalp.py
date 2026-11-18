@@ -232,6 +232,33 @@ class LimitOrders(unittest.TestCase):
         self.assertGreater(b["maker_sides"], 0)
         self.assertLess(b["fee_pct"] / max(b["trades"], 1), a["fee_pct"] / max(a["trades"], 1))
 
+    def _exit_case(self, fill_bar):
+        """6번 봉에 매수 지정가 체결, 7번 봉에 청산 신호 → 8번 봉부터 100 에 매도 지정가. fill_bar 봉만 고가 101."""
+        bars = mk([100.0] * 20)
+        ctx = scalp.Ctx(bars, 0)
+        ctx.l[6] = 99.0
+        ctx.o[11] = 99.0                      # 11번 봉(주문 뒤 4번째 봉)은 갭 하락으로 시작
+        ctx.h[fill_bar] = 101.0
+        strat = {"key": "t", "exec": "limit", "max_hold": 60,
+                 "entry": lambda c, i: 1 if i == 5 else 0, "exit": lambda c, i, pos: i == 7}
+        return scalp.backtest(ctx, strat, True)[0]
+
+    def test_exit_limit_waits_exactly_ttl_bars(self):
+        # 2026-11-18 검토(제안함 P40 a): 청산 지정가도 LIMIT_TTL(3)봉만 기다린다 — 8·9·10번 봉.
+        self.assertEqual(scalp.LIMIT_TTL, 3)
+        t = self._exit_case(10)               # 3번째 봉에서 지나침 → 지정가 체결
+        self.assertTrue(t["exit_maker"])
+        self.assertEqual(t["exit_i"], 10)
+        self.assertAlmostEqual(t["gross_pct"], 0.0)
+
+    def test_exit_limit_expired_sells_at_open_without_peeking_at_high(self):
+        # 4번째 봉(11번)은 시가에 시장가 청산이다. 전에는 그 봉 고가를 먼저 보고 지나쳤으면 지정가 체결(100),
+        # 아니면 같은 봉 시가(이미 지난 가격)에 팔았다 — 결과를 보고 고르는 셈이었다.
+        t = self._exit_case(11)
+        self.assertFalse(t["exit_maker"])
+        self.assertEqual(t["exit_i"], 11)
+        self.assertAlmostEqual(t["gross_pct"], -1.0)          # 100 → 시가 99
+
     def test_no_fill_in_flat_market(self):
         # 가격이 전혀 움직이지 않으면 지정가는 절대 체결되지 않는다
         px = [100.0 + (0.01 if i % 2 else -0.01) for i in range(400)]
@@ -525,8 +552,8 @@ class OutOfSample(unittest.TestCase):
 class RegimeRotate(unittest.TestCase):
     """국면 교대(P30): 전날 큰 묶음의 오늘 성적. 순방향은 FORWARD_FROM 부터."""
 
-    def _rec(self, day, rev, brk):
-        return {"date": day, "eval_day_utc": day,
+    def _rec(self, day, rev, brk, calc_rev=2):
+        return {"date": day, "eval_day_utc": day, "calc_rev": calc_rev,
                 "rows": {"okx:XRP:30m:vwap_fade_lim": {"nt": rev}, "okx:XRP:60m:brk_20": {"nt": brk},
                          "okx:XRP:15m:vwap_fade_lim": {"nt": 99.0}}}   # 15분봉은 묶음 밖
 
@@ -554,12 +581,26 @@ class RegimeRotate(unittest.TestCase):
         self.assertEqual(out["backtest"]["days"], 1)    # 11/5
         self.assertEqual(out["forward"]["days"], 2)     # 11/6(rev −1), 11/7(brk 0)
 
+    def test_forward_counts_only_days_recorded_with_new_fill_calc(self):
+        """2026-11-18(제안함 P40 a): 청산 지정가 계산이 바뀌었다. 옛 계산으로 기록된 날(calc_rev 없음 = 1)은 날짜가
+        순방향 시작일 뒤여도 순방향에 넣지 않는다 — 옛 값과 새 값을 한 기록으로 더하지 않는다."""
+        import scalp, scalp_rotate as R
+        self.assertEqual(scalp.CALC_REV, 2)
+        self.assertEqual(R.MIN_CALC_REV, 2)
+        rows = [self._rec("2026-11-16", 1.0, 0.0, calc_rev=1), self._rec("2026-11-17", 2.0, 0.0, calc_rev=1),
+                self._rec("2026-11-20", -1.0, 3.0), self._rec("2026-11-21", 4.0, 0.0)]
+        del rows[0]["calc_rev"]                         # 옛 기록 줄에는 이 칸이 없다
+        out = R.build(rows)
+        self.assertEqual(out["forward"]["days"], 2)     # 11/20, 11/21 만
+        self.assertEqual(out["backtest"]["days"], 1)    # 11/17 (옛 계산) 은 사후 쪽
+        self.assertEqual(out["aux_after_loss"]["forward"]["days"], 2)
+
     def test_aux60_uses_only_60m_and_leaves_p30_unchanged(self):
         """P34 보조: 60분봉만의 교대와 60분 되돌림 고정. P30 결과는 그대로."""
         import scalp_rotate as R
         self.assertEqual(R.AUX_FORWARD_FROM, "2026-11-08")
         def rec(day, rev30, rev60, brk60):
-            return {"date": day, "eval_day_utc": day,
+            return {"date": day, "eval_day_utc": day, "calc_rev": 2,
                     "rows": {"okx:XRP:30m:vwap_fade_lim": {"nt": rev30}, "okx:XRP:60m:mr_z20_lim": {"nt": rev60},
                              "okx:XRP:60m:brk_20": {"nt": brk60}}}
         rows = [rec("2026-11-06", -10.0, 2.0, 1.0), rec("2026-11-07", -10.0, 3.0, 5.0), rec("2026-11-08", -10.0, 4.0, -1.0)]

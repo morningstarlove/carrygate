@@ -35,6 +35,25 @@ class TestRules(unittest.TestCase):
         self.assertEqual(len(sim["tiers"]), 2)
         self.assertEqual([x["buy_date"] for x in sim["tiers"]], ["2024-01-03", "2024-01-04"])
 
+    def test_executable_variant_buys_on_take_profit_day(self):
+        # 2026-11-18 검토(제안함 P41-1): 원문 규칙 "그날 매도가 있었으면 매수 없음"은 익절 매도의 경우 종가를 알아야
+        # 성립한다 — 종가 매수 주문은 마감 전에 내야 하므로 실제로는 그날도 산다. 원문 규칙은 그대로 두고,
+        # 실행 가능한 계산(buy_skip="expiry_only": 만기 매도처럼 미리 아는 날만 매수를 쉰다)을 나란히 둔다.
+        bars = bars_from([100, 103, 103, 103])
+        orig = grid.simulate(bars, "v5", fee_pct=0.0)
+        self.assertNotIn("2024-01-02", [t["buy_date"] for t in orig["tiers"]])      # 원문: 익절한 날은 안 산다
+        ex = grid.simulate(bars, "v5", fee_pct=0.0, buy_skip="expiry_only")
+        self.assertIn("2024-01-02", [t["buy_date"] for t in ex["tiers"]])           # 실행 가능: 그날도 산다
+        self.assertEqual(len(ex["trades"]), 1)
+
+    def test_executable_variant_still_skips_buy_on_expiry_day(self):
+        # 만기 매도는 날짜만으로 미리 알 수 있다 → 실행 가능 계산에서도 그날 매수는 쉰다 (v5, 만기 10일, 계속 하락)
+        closes = [100 - k for k in range(13)]
+        ex = grid.simulate(bars_from(closes), "v5", fee_pct=0.0, buy_skip="expiry_only")
+        exp_days = {t["sell_date"] for t in ex["trades"] if t["reason"] == "expire"}
+        self.assertTrue(exp_days)
+        self.assertFalse(exp_days & {t["buy_date"] for t in ex["tiers"]})
+
     def test_forced_sell_after_hold_days(self):
         # 가격이 계속 같으면 익절은 없고, 산 지 10거래일째 종가에 강제 매도된다.
         bars = bars_from([100.0] * 12)

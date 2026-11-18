@@ -91,6 +91,17 @@ def resample_month_end(rows):
     return [(ym, last[ym][0], last[ym][1]) for ym in sorted(last)]
 
 
+def reaches_month_end(date_str, slack_days=3):
+    """자료의 마지막 일봉이 그 달의 끝(마지막 평일)까지 왔나. 휴장일을 감안해 slack_days 일의 여유를 둔다.
+    달이 바뀌었어도 자료 갱신이 실패해 달 중간에서 멈춰 있으면 그 달은 아직 월말이 아니다."""
+    d = datetime.strptime(date_str, "%Y-%m-%d")
+    nxt = datetime(d.year + (d.month == 12), d.month % 12 + 1, 1)
+    last = nxt - timedelta(days=1)
+    while last.weekday() >= 5:
+        last -= timedelta(days=1)
+    return d >= last - timedelta(days=slack_days)
+
+
 def all_tickers():
     t = set([CASH])
     for s in STRATEGIES.values():
@@ -101,18 +112,27 @@ def all_tickers():
     return sorted(t)
 
 
-def load_all(data_dir, tickers=None):
-    """-> (monthly, dates, ranges). monthly[t][ym] = 월말 종가, dates[t][ym] = 그 날짜."""
+def load_all(data_dir, tickers=None, today=None):
+    """-> (monthly, dates, ranges). monthly[t][ym] = 월말 종가, dates[t][ym] = 그 날짜.
+
+    진행 중인 달(today 가 속한 달과 그 뒤)은 뺀다 — 그 달의 "마지막 거래일"은 아직 월말이 아니다.
+    지난달이라도 자료가 그 달 끝까지 오지 않았으면(갱신 실패 등, reaches_month_end) 뺀다.
+    전에는 최신 일봉을 월말처럼 써서 현재 신호가 달 중간에 매일 바뀌었다 (2026-11-18, 제안함 P40 f)."""
+    cur = (today or datetime.now(KST).strftime("%Y-%m-%d"))[:7]
     monthly, dates, ranges = {}, {}, {}
     for t in (tickers or all_tickers()):
         rows = load_ticker(data_dir, t)
         if rows is None:
             continue
-        ms = resample_month_end(rows)
+        ms_all = resample_month_end(rows)
+        ms = [x for k, x in enumerate(ms_all) if x[0] < cur and (k < len(ms_all) - 1 or reaches_month_end(x[1]))]
+        if not ms:
+            continue
         monthly[t] = dict((ym, c) for ym, d, c in ms)
         dates[t] = dict((ym, d) for ym, d, c in ms)
         ranges[t] = {"first_date": rows[0][0], "last_date": rows[-1][0], "bars": len(rows),
-                     "first_month": ms[0][0], "last_month": ms[-1][0], "months": len(ms)}
+                     "first_month": ms[0][0], "last_month": ms[-1][0], "months": len(ms),
+                     "partial_month_dropped": ms_all[-1][0] if ms_all[-1][0] != ms[-1][0] else None}
     return monthly, dates, ranges
 
 

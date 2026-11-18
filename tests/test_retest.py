@@ -197,6 +197,55 @@ class Backtest(unittest.TestCase):
         self.assertAlmostEqual(pos["entry"], zone_hi)       # 지지 상단 지정가
         self.assertEqual(pos["how"], "zone_limit")
 
+    def test_no_entry_at_prices_before_peak_confirmation(self):
+        """2차 고점 C 는 3봉 뒤에야 확정된다. 그 전에 나온 확인 양봉의 종가는 이미 지난 가격이라 진입하지 않는다
+        (2026-11-18, 제안함 P40 b). 확정 뒤에 다시 확인 봉이 나오면 그때 들어간다."""
+        p = card_path()
+        p.leg(140, 6, v=120)                                # 2차 상승, 고점 C
+        p.add(140, 140.5, 126, 127, 50)                     # C+1: 한 봉에 조정
+        p.add(127, 130, 126.5, 129.5, 40)                   # C+2: 확인 양봉 (아직 C 확정 전)
+        p.add(129.5, 130, 128.5, 129, 40)                   # C+3: C 확정 봉 (음봉)
+        res = retest.run({"X": p.bars}, 0.0, 10_000.0)
+        self.assertIsNone(res["state"]["X"]["pos"])
+        self.assertEqual(res["state"]["X"]["phase"], "pullback")
+        p.add(129, 130.5, 128.5, 130.2, 40)                 # 확정 뒤 확인 양봉 → 이 봉 종가에 진입
+        res = retest.run({"X": p.bars}, 0.0, 10_000.0, slip_pct=0.0)
+        pos = res["state"]["X"]["pos"]
+        self.assertIsNotNone(pos)
+        self.assertAlmostEqual(pos["entry"], 130.2)
+        self.assertEqual(pos["entry_date"], p.bars[-1]["date"])
+
+    def test_zone_limit_bar_through_zone_and_stop_is_a_loss(self):
+        """변형(지지 상단 지정가): 한 봉이 지지 상단을 지나 지지 하단 아래까지 내려가면 체결 → 손절이 확정이다.
+        전에는 '지지 깨짐'으로 취소하거나 '순서 모름'으로 버려 손실을 세지 않았다 (2026-11-18, 제안함 P40 c)."""
+        p = card_path()
+        p.leg(140, 6, v=120)
+        p.add(140, 140.5, 137, 138, 50).add(138, 138.5, 136, 137, 50).add(137, 137.5, 135.5, 136, 50)   # C 확정까지 지지 구간 위
+        p.add(136, 136.5, 120, 121, 50)                     # 한 봉에 지지 상단(131)과 하단(123.5)을 모두 지남
+        zone_lo, zone_hi = zone_of(p.bars)
+        lim = retest.run({"X": p.bars}, 0.0, 10_000.0, entry="limit", slip_pct=0.0)
+        self.assertEqual(len(lim["trades"]), 1)
+        t = lim["trades"][0]
+        self.assertAlmostEqual(t["entry"], zone_hi)
+        self.assertAlmostEqual(t["exit"], zone_lo)
+        self.assertEqual(t["reason"], "stop")
+        self.assertEqual(lim["counts"]["entry_bar_stops"], 1)
+        base = retest.run({"X": p.bars}, 0.0, 10_000.0)     # 기본 규칙(확인 봉 종가 진입)은 그대로: 지지 깨짐
+        self.assertEqual(base["trades"], [])
+        self.assertEqual(base["counts"]["zone_lost"], 1)
+
+    def test_zone_limit_does_not_fill_after_pullback_deadline(self):
+        # 지정가 변형의 주문 기한(고점 C 뒤 PULLBACK_WAIT 봉)은 그대로다 — 기한이 지난 봉에서는 닿아도 체결하지 않는다.
+        p = card_path()
+        p.leg(140, 6, v=120)
+        for _ in range(retest.PULLBACK_WAIT):                # 기한 내내 지지 구간 위에서 논다
+            p.add(138, 138.5, 137, 138, 50)
+        p.add(138, 138.5, 130, 131.5, 50)                   # 기한 다음 봉에서야 지지 상단(131) 터치
+        lim = retest.run({"X": p.bars}, 0.0, 10_000.0, entry="limit")
+        self.assertIsNone(lim["state"]["X"]["pos"])
+        self.assertEqual(lim["trades"], [])
+        self.assertEqual(lim["counts"]["no_pullback"], 1)
+
     def test_volume_rules_block_and_no_vol_variant_allows(self):
         p = Path(100).flat(30).leg(130, 8, v=100)           # 1차 상승 거래량 평소와 같음 → 기본은 구조 없음
         for k in range(10):

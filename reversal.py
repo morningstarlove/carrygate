@@ -33,7 +33,7 @@ import os, sys, json, math, csv, time, argparse
 from datetime import datetime, timezone, timedelta
 
 from scalp import COINS
-from common import http_json, f, KST, r4
+from common import http_json, f, KST, r4, backtest_block
 
 # ----------------------------------------------------------------- 고정 규칙 (사후 조정 금지)
 BAR_MIN = 240               # 4시간봉
@@ -48,7 +48,7 @@ PULLBACK_WAIT = 12          # 돌파 뒤 이 봉 수(2일) 안에 목선까지 �
 RISK_PCT = 1.0              # 한 번에 계좌의 1% 만 흔들리게
 MAX_NOTIONAL_PCT = 100.0    # 포지션 명목가 합계 ≤ 계좌 100% (레버리지 1배)
 SLIPPAGE_PCT = 0.05         # 손절(스톱) 체결 시 불리하게 밀리는 가정. 진입은 지정가라 0
-RULE_FIXED = "2026-10-05"   # 이 날 이후 진입한 매매만 순방향 시험
+RULE_FIXED = "2026-11-19"   # 이 날 이후 진입한 매매만 순방향 시험. 처음 고정 2026-10-05 → 2026-11-18 체결 계산 수정(제안함 P40)으로 다시 센다
 # 변형: 기본과 나란히 기록만 한다. 카드의 두 주장("거래량 없는 돌파는 가짜", "눌림을 기다려라")을 각각 끈 것.
 VARIANTS = {
     "no_vol":      {"vol_mult": 0.0, "label": "거래량 조건 없음 (돌파만)"},
@@ -245,7 +245,8 @@ def run(markets, fee_pct, equity0, slip_pct=SLIPPAGE_PCT, max_notional_pct=MAX_N
     equity = float(equity0)
     fee, slip = fee_pct / 100.0, slip_pct / 100.0
     trades, curve = [], []
-    counts = {"setups": 0, "fake_breaks": 0, "no_pullback": 0, "stopped_before_entry": 0, "expired": 0, "ambiguous": 0}
+    counts = {"setups": 0, "fake_breaks": 0, "no_pullback": 0, "stopped_before_entry": 0, "expired": 0, "ambiguous": 0,
+              "late_break": 0, "entry_bar_stops": 0}
     st = {m: {"phase": "scan", "lows": [], "pos": None, "setup": None, "breakout": None} for m in markets}
 
     def enter(m, bars, i, fill, setup, how):
@@ -298,7 +299,11 @@ def run(markets, fee_pct, equity0, slip_pct=SLIPPAGE_PCT, max_notional_pct=MAX_N
         s = st[m]
         b = bars[i]
         su = s["setup"]
-        if b["l"] < su["stop"]:                                # 저점이 깨졌다 → 신호 무효
+        # 확정 봉(confirm_idx) 까지는 주문을 낼 수 없었다 — 그 봉들의 가격으로는 체결하지 않는다 (2026-11-18, P40 b)
+        can_fill = i > su["confirm_idx"]
+        if b["l"] < su["stop"] and not (s["phase"] == "broken" and can_fill and b["o"] > su["stop"]):   # 저점이 깨졌다 → 신호 무효
+            # (눌림 지정가가 걸려 있고 시가가 손절선 위면 목선을 먼저 지나므로 '체결 뒤 손절'이다 — 아래 broken 에서 처리, P40 c.
+            #  시가부터 손절선 아래로 갭 난 봉은 체결가가 손절선 밑이라 수량을 정할 수 없어 예전처럼 무효로 센다.)
             counts["stopped_before_entry"] += 1
             s["phase"], s["setup"], s["breakout"] = "scan", None, None
             return False
@@ -316,6 +321,10 @@ def run(markets, fee_pct, equity0, slip_pct=SLIPPAGE_PCT, max_notional_pct=MAX_N
                     return False
                 s["breakout"] = {"idx": i, "date": b["date"], "vol_ratio": r4(b["v"] / va) if va else None, "close": b["c"]}
                 if not pullback:
+                    if i < su["confirm_idx"]:                  # 돌파 종가는 이미 지난 가격 → 건너뛴다
+                        counts["late_break"] += 1
+                        s["phase"], s["setup"], s["breakout"] = "scan", None, None
+                        return False
                     fill = b["c"] * (1 + slip)
                     ok = enter(m, bars, i, fill, su, "breakout_close")
                     s["phase"], s["setup"] = ("long" if ok else "scan"), None
@@ -324,7 +333,7 @@ def run(markets, fee_pct, equity0, slip_pct=SLIPPAGE_PCT, max_notional_pct=MAX_N
                 su["pb_deadline"] = i + pullback_wait
             return False
         if s["phase"] == "broken":
-            if b["l"] <= su["neckline"]:                       # 눌림: 목선 지정가 체결 (갭이면 시가)
+            if can_fill and b["l"] <= su["neckline"]:          # 눌림: 목선 지정가 체결 (갭이면 시가)
                 fill = min(b["o"], su["neckline"])
                 ok = enter(m, bars, i, fill, su, "pullback_limit")
                 s["phase"], s["setup"] = ("long" if ok else "scan"), None
@@ -371,8 +380,9 @@ def run(markets, fee_pct, equity0, slip_pct=SLIPPAGE_PCT, max_notional_pct=MAX_N
                     if su:
                         counts["setups"] += 1
                         su["deadline"] = i + break_wait
+                        su["confirm_idx"] = i
                         s["setup"], s["phase"] = su, "armed"
-                        for x in range(j + 1, i + 1):            # 확정 전 봉(j+1..i)에 이미 돌파·눌림이 있었으면 되돌려 적용
+                        for x in range(j + 1, i + 1):            # 확정 전 봉(j+1..i)의 돌파는 인정한다(단계만 진행, 체결은 없음)
                             if step_setup(m, bars, x):
                                 entered_now = True
                                 break
@@ -382,15 +392,15 @@ def run(markets, fee_pct, equity0, slip_pct=SLIPPAGE_PCT, max_notional_pct=MAX_N
                     entered_now = step_setup(m, bars, i)
                 if entered_now:
                     p = s["pos"]
-                    # 체결 봉(x)부터 지금 봉(i)까지 손절 확인. 체결 봉에서 바로 깨졌으면 순서를 몰라 건너뛴다.
+                    # 체결 봉에서 손절선까지 내려갔는지 확인. 눌림 지정가는 목선(위)을 먼저 지나야 손절선(아래)에 닿으므로
+                    # 순서가 분명하다 → 손절로 센다. (돌파 종가 진입은 그 봉 저가가 손절선 아래면 위에서 이미 무효라 여기 안 온다.
+                    #  counts["ambiguous"] 는 예전 기록과 칸을 맞추려고 0 으로 남긴다.)
                     for y in range(p["entry_idx"], i + 1):
                         by = bars[y]
                         if by["l"] < p["stop"]:
                             if y == p["entry_idx"]:
-                                counts["ambiguous"] += 1
-                                s["pos"] = None
-                            else:
-                                close_pos(m, bars, y, min(by["o"], p["stop"]) * (1 - slip), "stop")
+                                counts["entry_bar_stops"] += 1
+                            close_pos(m, bars, y, min(by["o"], p["stop"]) * (1 - slip), "stop")
                             s["phase"] = "scan"
                             break
                         p["best"] = max(p["best"], by["h"])
@@ -409,6 +419,7 @@ def run(markets, fee_pct, equity0, slip_pct=SLIPPAGE_PCT, max_notional_pct=MAX_N
     for m, s in st.items():
         state[m] = {"phase": s["phase"], "pos": s["pos"], "setup": s["setup"], "breakout": s["breakout"]}
     return {"trades": trades, "curve": curve, "equity": equity, "state": state, "counts": counts}
+
 
 
 def stats(res, equity0, bars_by_market=None):
@@ -454,6 +465,9 @@ def stats(res, equity0, bars_by_market=None):
         "by_year": by_year,
         "forward": {"trades": len(fwd), "wins": sum(1 for t in fwd if t["pnl"] > 0),
                     "net_pct": r4((math.prod(1 + t["ret_pct"] / 100.0 for t in fwd) - 1.0) * 100.0) if fwd else None},
+        # 규칙 고정일 이전 매매만의 성적 — 판정기의 운 보정 기준선은 이것을 쓴다. 위 win_rate_pct·profit_factor 는
+        # 순방향 매매까지 섞인 전체 값이라 기준선으로 쓰면 순방향 결과가 자기 기준을 끌고 간다 (2026-11-18, 제안함 P40 e).
+        "backtest": backtest_block([t for t in tr if not t["forward"]]),
     }
     if bars_by_market and len(bars_by_market) == 1:
         bars = list(bars_by_market.values())[0]

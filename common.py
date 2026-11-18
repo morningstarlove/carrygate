@@ -60,6 +60,17 @@ def r4(x):
     return None if x is None else round(x, 4)
 
 
+def backtest_block(trades):
+    """규칙 고정일 이전 매매({"pnl": ...} 목록)만의 건수·승·승률·손익비. 터틀·추세전환·급상승 패턴이 같이 쓴다.
+    판정기(verdict)의 운 보정 기준선은 이 값이다 — 순방향 매매가 섞인 전체 값이 아니다 (2026-11-18, 제안함 P40 e)."""
+    w = [t for t in trades if t["pnl"] > 0]
+    gp = sum(t["pnl"] for t in w)
+    gl = -sum(t["pnl"] for t in trades if t["pnl"] <= 0)
+    return {"trades": len(trades), "wins": len(w),
+            "win_rate_pct": r4(len(w) / len(trades) * 100.0) if trades else None,
+            "profit_factor": r4(gp / gl) if gl > 0 else None}
+
+
 def mean(xs):
     return sum(xs) / len(xs) if xs else None
 

@@ -1,7 +1,16 @@
 {
   "_comment": "규칙 잠금. 트랙 코드의 규칙 상수와 criteria.json 지문을 적어 둔다. tests/test_verdict.py 가 매번 대조하므로, 규칙을 바꾸면 반드시 (1) proposals.md 에 근거 (2) 그 트랙의 RULE_FIXED 를 새 날짜로 (3) `python verdict.py --lock` 순서로 간다.",
-  "_locked_at": "2026-11-13T06:34:45Z",
-  "criteria_sha256": "254a70b4d59ce02db2ee29edb8fc70a2ea6b6cfe91072cc41a0f60d539b8b23a",
+  "_locked_at": "2026-11-18T03:31:36Z",
+  "basis": {
+    "rules": {
+      "delivery_fee_pct": 0.05,
+      "enter_apr": 8.0,
+      "fut_taker_pct": 0.05,
+      "min_days": 7,
+      "spot_taker_pct": 0.1
+    }
+  },
+  "criteria_sha256": "6f1c34a98f46a770413fa6f06e4832cd320a5e9b1c77217d7110ee253908fe1d",
   "cycle": {
     "rule_fixed": "2026-11-13",
     "rules": {
@@ -74,6 +83,42 @@
         33.3,
         66.7
       ]
+    }
+  },
+  "funding": {
+    "rules": {
+      "avg_days": 7,
+      "cg_min_samples": 5,
+      "enter_apr": 8.0,
+      "exit_apr": 2.0,
+      "taker_fee_perp_pct": 0.05,
+      "taker_fee_spot_pct": 0.1
+    }
+  },
+  "grid": {
+    "rule_fixed": "2026-10-03",
+    "rules": {
+      "capital_usd": 10000.0,
+      "fee_pct_one_way": 0.09,
+      "hold_days": 10,
+      "start": "2010-04-05",
+      "symbols": [
+        "SOXL",
+        "TQQQ"
+      ],
+      "versions": {
+        "v4": {
+          "label": "종사종팔 v4",
+          "n_tiers": 10,
+          "reinvest": 0.7,
+          "target_pct": 2.7
+        },
+        "v5": {
+          "daily_buy_pct": 10.0,
+          "label": "종사종팔 v5",
+          "target_pct": 2.75
+        }
+      }
     }
   },
   "index_event": {
@@ -170,7 +215,7 @@
     }
   },
   "retest": {
-    "rule_fixed": "2026-10-22",
+    "rule_fixed": "2026-11-19",
     "rules": {
       "atr_bars": 20,
       "bar_minutes": 60,
@@ -226,7 +271,7 @@
     }
   },
   "reversal": {
-    "rule_fixed": "2026-10-05",
+    "rule_fixed": "2026-11-19",
     "rules": {
       "atr_bars": 20,
       "bar_minutes": 240,
@@ -259,6 +304,7 @@
   "scalp": {
     "rules": {
       "baseline": "baseline_hold5",
+      "calc_rev": 2,
       "fees": {
         "binance": {
           "maker_pct": 0.02,
@@ -333,8 +379,56 @@
       ]
     }
   },
+  "scalp_rotate": {
+    "rule_fixed": "2026-11-18",
+    "rules": {
+      "aux2_forward_from": "2026-11-12",
+      "aux_forward_from": "2026-11-08",
+      "families": {
+        "brk": {
+          "strategies": [
+            "brk_20"
+          ],
+          "tfs": [
+            "30m",
+            "60m"
+          ]
+        },
+        "brk60": {
+          "strategies": [
+            "brk_20"
+          ],
+          "tfs": [
+            "60m"
+          ]
+        },
+        "rev": {
+          "strategies": [
+            "vwap_fade_lim",
+            "mr_z20_lim"
+          ],
+          "tfs": [
+            "30m",
+            "60m"
+          ]
+        },
+        "rev60": {
+          "strategies": [
+            "vwap_fade_lim",
+            "mr_z20_lim"
+          ],
+          "tfs": [
+            "60m"
+          ]
+        }
+      },
+      "forward_from": "2026-11-06",
+      "min_calc_rev": 2,
+      "min_forward_days": 14
+    }
+  },
   "turtle": {
-    "rule_fixed": "2026-10-02",
+    "rule_fixed": "2026-11-19",
     "rules": {
       "atr_days": 20,
       "entry_breakout_days": 20,

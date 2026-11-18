@@ -87,8 +87,31 @@ class Backtest(unittest.TestCase):
         bars3.append(bar(41, 108, 109, 93.0, 95))                      # 10일 최저가 90 < 손절 94 → 94 에서 손절
         res3 = turtle.run({"X": bars3}, False, 0.0, 10_000.0, slip_pct=0.0)
         self.assertEqual(len(res3["trades"]), 1)
-        self.assertEqual(res3["trades"][0]["reason"], "stop")
+        # 2026-11-18(P40 d)부터 이 경우는 다음 날이 아니라 진입한 그날 손절로 센다 (가격은 같은 94)
+        self.assertEqual(res3["trades"][0]["reason"], "stop_entry_day")
+        self.assertEqual(res3["trades"][0]["exit_date"], res3["trades"][0]["entry_date"])
         self.assertAlmostEqual(res3["trades"][0]["exit"], 94.0)
+
+    def test_stop_checked_on_entry_day(self):
+        # 2026-11-18 검토(P40 d): 돌파로 진입한 날 저가가 진입가−2N 아래면 그날 손절로 본다
+        # (일봉 안의 순서를 알 수 없으므로 불리한 쪽으로 가정). 전에는 진입일 손절을 전혀 확인하지 않았다.
+        bars = flat(40) + [bar(40, 100, 103, 90, 101)] + [bar(41 + k, 101, 103, 99, 101) for k in range(5)]
+        res = turtle.run({"X": bars}, False, 0.0, 10000.0, slip_pct=0.0)
+        self.assertEqual(len(res["trades"]), 1)
+        t = res["trades"][0]
+        self.assertEqual(t["reason"], "stop_entry_day")
+        self.assertEqual(t["entry_date"], t["exit_date"])
+        self.assertAlmostEqual(t["entry"], 102.0)
+        self.assertAlmostEqual(t["exit"], 94.0)              # 102 − 2×ATR(4)
+        self.assertAlmostEqual(t["r_multiple"], -2.0, places=3)   # 위험 = 계좌 1% ÷ N, 손절 폭 2N
+        self.assertEqual(res["entry_day_stops"], 1)
+        self.assertIsNone(res["state"]["X"])
+
+    def test_no_entry_day_stop_when_low_holds(self):
+        bars = flat(40) + [bar(40, 100, 103, 95, 101)] + [bar(41 + k, 101, 103, 99, 101) for k in range(3)]
+        res = turtle.run({"X": bars}, False, 0.0, 10000.0, slip_pct=0.0)
+        self.assertEqual(res["entry_day_stops"], 0)
+        self.assertIsNotNone(res["state"]["X"])
 
     def test_gap_fills_at_open(self):
         bars = flat(40)

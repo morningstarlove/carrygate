@@ -175,11 +175,19 @@ def judge_kr_breakout(fwd, backtest, crit):
                                          "fail_below": crit["hold20_fail_if_win_share_below"],
                                          "applies": len(h20) >= crit["hold20_min_trades"],
                                          "fail": len(h20) >= crit["hold20_min_trades"] and share < crit["hold20_fail_if_win_share_below"]}
+    # 수수료·세금·슬리피지를 뺀 누적 수익이 플러스여야 PASS (2026-11-18, 제안함 P41-4). 기준 파일에 이 칸이 없으면 예전처럼 본다.
+    need_net = bool(crit.get("pass_requires_total_return_positive"))
+    # total_return_pct 는 보유 중 종목의 평가익(매도 비용 전)이 섞이므로 쓰지 않는다 — 닫힌 매매의 실현 손익(비용 뺀 뒤) 합으로 본다.
+    realized = sum(t.get("pnl_krw", 0) for t in trades)
+    out["checks"]["net_return"] = {"realized_pnl_krw": realized, "required": need_net, "ok": (not need_net) or realized > 0}
     if out["checks"]["win_rate"]["fail"]:
         out["status"], out["reason"] = FAIL, "승률 %.1f%% < %.0f%% — 사전 등록 기준 미달" % (wr, crit["fail_if_win_rate_below_pct"])
     elif out["checks"]["hold20_win_share"]["fail"]:
         out["status"], out["reason"] = FAIL, "20일 보유 매매 승 비율 %.0f%% < %.0f%% — 백테스트(약 95%%)와 다른 모양" % (
             share * 100, crit["hold20_fail_if_win_share_below"] * 100)
+    elif out["checks"]["win_rate"]["ok"] and out["checks"]["stop_loss_depth"]["ok"] and not out["checks"]["net_return"]["ok"]:
+        out["status"], out["reason"] = NOT_YET, "승률 %.1f%%·손절 깊이는 기준 안이지만 닫힌 매매의 수수료 뒤 실현 손익 %d원 ≤ 0 — 합격 아님, 더 모은다" % (
+            wr, out["checks"]["net_return"]["realized_pnl_krw"])
     elif out["checks"]["win_rate"]["ok"] and out["checks"]["stop_loss_depth"]["ok"]:
         out["status"], out["reason"] = PASS, "승률 %.1f%%, 손절 깊이 정상 — 백테스트 모양과 맞다. 소액 실전 설계 후보" % wr
     else:
@@ -192,15 +200,19 @@ def _venue_forward(vd):
     pnls = [t.get("pnl", 0.0) for t in trades]
     wins = sum(1 for x in pnls if x > 0)
     st = vd.get("portfolio", {}).get("stats", {})
+    # 기준선 = 규칙 고정일 이전 매매만 (제안함 P40 e). 옛 결과 파일에는 이 칸이 없어 전체 값으로 대신하고 표시를 남긴다.
+    bt = st.get("backtest") if (st.get("backtest") or {}).get("trades") else None
+    basis = "pre_rule_fixed" if bt else "all_trades"
+    bt = bt or {"win_rate_pct": st.get("win_rate_pct"), "profit_factor": st.get("profit_factor"), "trades": st.get("trades")}
     return {
         "trades": len(trades), "wins": wins,
         "win_rate_pct": r2(100.0 * wins / len(trades)) if trades else None,
         "net_pct": (st.get("forward") or {}).get("net_pct"),
         "profit_factor": profit_factor(pnls) if trades else None,
         "avg_r": r2(sum(t.get("r_multiple", 0) for t in trades) / len(trades)) if trades else None,
-        "backtest_win_rate_pct": st.get("win_rate_pct"), "backtest_profit_factor": st.get("profit_factor"),
-        "backtest_trades": st.get("trades"),
-        "luck": luck_z(len(trades), wins, (st.get("win_rate_pct") or 0) / 100.0),
+        "backtest_win_rate_pct": bt.get("win_rate_pct"), "backtest_profit_factor": bt.get("profit_factor"),
+        "backtest_trades": bt.get("trades"), "backtest_basis": basis,
+        "luck": luck_z(len(trades), wins, (bt.get("win_rate_pct") or 0) / 100.0),
     }
 
 
@@ -289,11 +301,33 @@ def judge_scalp(history_rows, crit):
     return out
 
 
+def direction_noise_floor(pts, predictors, sims=500, seed=7):
+    """방향 예측의 잡음 바닥(실력 0 일 때의 적중률 분포). 결과를 **날짜 단위로 통째로** 섞는다.
+
+    같은 날 코인들의 결과는 서로 강하게 묶여 있다(비트코인이 오르면 대부분 오른다). (날짜×코인) 낱개로 섞으면 그 묶임이
+    풀려 독립 표본이 실제보다 많은 것처럼 계산되고 95% 선이 너무 낮아진다 — 2026-11-18 검토 모의에서 실력 0 예측기의
+    통과율이 명목 5% 가 아니라 약 21% 였다(제안함 P41-3). 날짜 d 의 예측을 다른 날짜 d' 의 실제 결과와 짝짓는다."""
+    rng = random.Random(seed)
+    dates = sorted(set(p[0] for p in pts))
+    up = {(p[0], p[1]): p[4] for p in pts}
+    hits_dist = {nm: [] for nm in predictors}
+    for _ in range(int(sims)):
+        perm = dates[:]
+        rng.shuffle(perm)
+        to = dict(zip(dates, perm))
+        for nm in predictors:
+            dec = [(p[5][nm][0], up[(to[p[0]], p[1])]) for p in pts
+                   if nm in p[5] and p[5][nm][0] != 0.5 and (to[p[0]], p[1]) in up]
+            hits_dist[nm].append(sum(1 for q, u in dec if (q > 0.5) == u) / len(dec) if dec else 0.5)
+    return {"sims": int(sims), "seed": seed, "shuffle": "by_date",
+            "hit_rate_median": {nm: round(sorted(v)[len(v) // 2], 4) for nm, v in hits_dist.items()},
+            "hit_rate_p95": {nm: round(sorted(v)[int(len(v) * 0.95)], 4) for nm, v in hits_dist.items()}}
+
+
 def judge_forecast(history_rows, crit):
     """forecast_history.jsonl 의 채점 누적에 criteria.json forecast 를 적용한다 (설계서 docs/FORECAST_PLAN.md 5절).
     핵심 = 크기(변동성) 예측: 예측 상위 3분위의 실제 |12h 수익| ÷ 하위 3분위. 방향 예측기 D1·D2 는 따로 PASS/FAIL 만 표시하고
-    전체 판정에는 넣지 않는다(설계서: 방향 FAIL 이면 기록 중단, 크기만 남긴다). 잡음 바닥 = 예측을 (날짜,코인) 사이에서 무작위로
-    섞었을 때의 적중률 분포(실력 0)."""
+    전체 판정에는 넣지 않는다(설계서: 방향 FAIL 이면 기록 중단, 크기만 남긴다). 잡음 바닥 = direction_noise_floor(날짜 단위 섞기)."""
     sys.path.insert(0, HERE)
     import forecast as F
     summ = F.score_summary(history_rows, crit.get("rule_fixed", F.RULE_FIXED))
@@ -304,18 +338,7 @@ def judge_forecast(history_rows, crit):
     # 방향 잡음 바닥 (결정적)
     nf = crit.get("noise_floor") or {}
     if pts and nf:
-        rng = random.Random(nf.get("seed", 7))
-        ups = [p[4] for p in pts]
-        hits_dist = {nm: [] for nm in F.PREDICTORS}
-        for _ in range(int(nf.get("sims", 500))):
-            perm = ups[:]
-            rng.shuffle(perm)
-            for nm in F.PREDICTORS:
-                dec = [(p[5][nm][0], u) for p, u in zip(pts, perm) if nm in p[5] and p[5][nm][0] != 0.5]
-                hits_dist[nm].append(sum(1 for q, u in dec if (q > 0.5) == u) / len(dec) if dec else 0.5)
-        out["noise_floor"] = {"sims": int(nf.get("sims", 500)), "seed": nf.get("seed", 7),
-                              "hit_rate_median": {nm: round(sorted(v)[len(v) // 2], 4) for nm, v in hits_dist.items()},
-                              "hit_rate_p95": {nm: round(sorted(v)[int(len(v) * 0.95)], 4) for nm, v in hits_dist.items()}}
+        out["noise_floor"] = direction_noise_floor(pts, F.PREDICTORS, int(nf.get("sims", 500)), nf.get("seed", 7))
     # 방향 예측기 판정 (D3 는 기준선)
     d_all, d1, d2 = summ["direction"]["all"], summ["direction"]["first_half"], summ["direction"]["second_half"]
     for nm in ("D1", "D2"):
@@ -393,6 +416,7 @@ def current_rules():
     """세 트랙 + 초단타의 규칙 상수를 소스에서 그대로 읽는다 (저장된 JSON 이 아니라 코드가 기준)."""
     sys.path.insert(0, HERE)
     import kr_breakout as KB, turtle as T, reversal as R, scalp as S, retest as RT, forecast as F, cycle as CY, index_event as IE
+    import grid as G, scalp_rotate as SR, funding as FU, basis as B
     turtle_rules = {"entry_breakout_days": T.ENTRY_N, "exit_breakout_days": T.EXIT_N, "atr_days": T.ATR_N,
                     "stop_n_mult": T.STOP_MULT, "risk_pct_per_trade": T.RISK_PCT, "max_notional_pct": T.MAX_NOTIONAL_PCT,
                     "slippage_pct": T.SLIPPAGE_PCT,
@@ -405,7 +429,7 @@ def current_rules():
                       "variants": {k: R.variant_kwargs(v) for k, v in R.VARIANTS.items()},
                       "fees": {k: v["fee_pct"] for k, v in R.VENUES.items()}}
     scalp_rules = {"strategies": [{"key": s["key"], "max_hold": s["max_hold"], "exec": s["exec"]} for s in S.STRATEGIES],
-                   "baseline": S.BASELINE, "spread_ticks": S.SPREAD_TICKS, "limit_ttl": S.LIMIT_TTL,
+                   "baseline": S.BASELINE, "spread_ticks": S.SPREAD_TICKS, "limit_ttl": S.LIMIT_TTL, "calc_rev": S.CALC_REV,
                    "fees": {k: {"taker_pct": v["taker_pct"], "maker_pct": v["maker_pct"]} for k, v in S.VENUES.items()}}
     return {
         "kr_breakout": {"rule_fixed": KB.RULE_FIXED, "rules": KB.rules_dict()},
@@ -416,6 +440,18 @@ def current_rules():
         "forecast": {"rule_fixed": F.RULE_FIXED, "rules": F.rules_dict()},
         "cycle": {"rule_fixed": CY.RULE_FIXED, "rules": CY.rules_dict()},
         "index_event": {"rule_fixed": IE.RULE_FIXED, "rules": IE.rules_dict()},
+        # 2026-11-18(제안함 P41-9): 아래 네 트랙의 상수도 잠근다 — 전에는 CI 가 지키지 않았다. 값은 그대로.
+        "grid": {"rule_fixed": G.RULE_FIXED, "rules": {"capital_usd": G.CAPITAL, "hold_days": G.HOLD_DAYS, "fee_pct_one_way": G.FEE_PCT,
+                                                       "start": G.START, "symbols": G.SYMBOLS, "versions": G.VERSIONS}},
+        "scalp_rotate": {"rule_fixed": SR.RULE_FIXED,
+                         "rules": {"forward_from": SR.FORWARD_FROM, "families": {k: {"tfs": list(v["tfs"]), "strategies": list(v["strategies"])} for k, v in SR.FAMILIES.items()},
+                                   "min_forward_days": SR.MIN_FORWARD_DAYS, "min_calc_rev": SR.MIN_CALC_REV, "aux_forward_from": SR.AUX_FORWARD_FROM,
+                                   "aux2_forward_from": SR.AUX2_FORWARD_FROM}},
+        "funding": {"rules": {"enter_apr": FU.ENTER_APR, "exit_apr": FU.EXIT_APR, "avg_days": FU.AVG_DAYS,
+                              "cg_min_samples": FU.CG_MIN_SAMPLES, "taker_fee_spot_pct": FU.TAKER_FEE_SPOT_PCT,
+                              "taker_fee_perp_pct": FU.TAKER_FEE_PERP_PCT}},
+        "basis": {"rules": {"enter_apr": B.ENTER_APR, "min_days": B.MIN_DAYS, "spot_taker_pct": B.SPOT_TAKER_PCT,
+                            "fut_taker_pct": B.FUT_TAKER_PCT, "delivery_fee_pct": B.DELIVERY_FEE_PCT}},
         "criteria_sha256": _file_sha(CRITERIA_PATH),
     }
 
