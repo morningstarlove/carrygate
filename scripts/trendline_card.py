@@ -58,7 +58,7 @@ def main():
         "expected": "실데이터 15종목(미국·한국·코인·금·환율, 2010~2026-11) 691건: 건당 +1.13%, 승률 32%, 손익비로 버는 구조(PF 1.40), t +2.17. 단 같은 일수 그냥 보유보다 건당 −0.85% 낮다.",
         "prediction": "10번 중 8번은 하단 이탈 손절(평균 −3.0%), 상단 익절은 14번에 1번(평균 +31.5%). 작게 자주 잃고 드물게 크게 번다. 한국 개별주는 사후 0 근처라 약할 것.",
         "risk": "t 3 미만 — 우연과 구별 안 됨. 2010~2017 은 건당 −0.05%. 갭 하락이면 손절이 선보다 훨씬 아래에서 체결된다. 불합격이면 규칙을 고치지 않고 '안 된다'로 기록.",
-        "next_check": "사용자 결정 대기(제안함 P39): A 순방향 종이 기록 시작 → 20건 쌓이면 첫 판정. 설계서 docs/TRENDLINE_PLAN.md, 규칙 trendline.py, 검증 scripts/trendline_check.py.",
+        "next_check": "매일 09:18 daily 'Trendline channel' 단계 → trendline.json (업비트·OKX·한국 대형주). 진입 2026-11-19 부터 순방향, 시장군별 닫힌 20건에서 첫 판정: 손익비 ≥ 1.3 합격, < 1.0 불합격. 제안함 P39, docs/TRENDLINE_PLAN.md.",
         "markers": markers, "lines": lines,
     }
     with open(SPEC_OUT, "w", encoding="utf-8") as fp:

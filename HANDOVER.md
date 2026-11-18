@@ -9,7 +9,7 @@
 
 ---
 
-## 0. 지금 상태 한눈에 (2026-11-13 갱신)
+## 0. 지금 상태 한눈에 (2026-11-18 갱신)
 
 > 이 절만 읽어도 "지금 무엇이 돌고, 무엇을 기다리고, 누가 결정할 것"을 안다. 자세한 근거는 아래 절과 `docs/sessions/`.
 
@@ -24,6 +24,7 @@
 | 예측 v2 크기 (11/6 신설, P33, **11/8 병합 #95**) | 판단 전 (채점 0일 — 첫 기록 11/9 09:18 daily, 첫 채점 11/10) | 채점 60일(2027-01-05 전후). 크기 비율 ≥1.20·앞뒤 각 ≥1.10 PASS, <1.05 FAIL. 방향 D1·D2 는 따로 PASS/FAIL(매매 아님) |
 | 급상승·급하락 패턴 1H (10/22 신설) | 판단 전 (순방향 1건 — 10/22 PR #76 dry_run 1년 백테스트: 업비트 −10.3%/25건/PF 0.31, OKX +3.5%/82건/PF 1.10) | 거래소별 20건. 백테스트는 약한 근거 — 규칙은 안 고친다 |
 | BTC 사이클 낙폭 분할매수 (11/13 신설, P36, 장기) | 판단 전 (순방향 11/13 봉부터. 11/12 종가 71,374 = 고점 124,728 대비 −42.8%, 402일째, 200일 평균 73,082 아래, 체결 0/4) | 2027-05-12 (180일). 분할 평균단가 ≤ DCA×0.95 · 평가 플러스 PASS, > DCA FAIL, 체결 0건 NOT_YET |
+| 추세선 채널 하단 매수 (11/18 신설, P39, 단기~중기) | 판단 전 (순방향 0건 — 진입 11/19 부터. main 병합 전) | 시장군(업비트·OKX·한국 대형주)별 닫힌 20건. 손익비 ≥ 1.3 PASS, < 1.0 FAIL |
 
 **캐리 (바이낸스·바이비트, 마일스톤 11):** 10/9 첫 7일 평균(표본 5개) 붙음 — 전 코인 문턱 미달, LINK 만 플러스(바이비트 +2.8% / 바이낸스 +1.4%), 나머지 −1.4~−4.7%, TRX −28~−42%. 같은 날 하이퍼리퀴드도 XRP 7.6% 로 내려와 캐리 전체가 17일 만에 "대기"로 바뀜. 현황판 "캐리 이자율" 카드에 코인 × 거래소 표로 보인다. 손댈 것 없음 — 펀딩이 돌아서면 매일 점검 루틴이 알린다.
 
@@ -93,7 +94,9 @@
 
 **2026-11-12 추세 전환 4시간봉 검산 빨간불 수정:** 11/8 16:00 봉에 업비트 BTC·ETH 가 시간 초과로 빠져 `reversal_4h` 가 9회 연속 실패(기록 저장은 정상). 실패 코인 1회 재시도, 빠지면 `missing` 표시, 검산은 표시된 봉을 기록만. 지난 줄엔 로그로 확인된 `missing` 만 덧붙임. `docs/sessions/2026-11-12_reversal_selfcheck_red.md`.
 
-**사용자 결정 대기 (2026-11-17, 제안함 P39): 추세선 채널 하단 매수 — A 순방향 종이 기록 트랙 신설 / B 기록만 / C A + 기존 트랙에 채널 위치 기록.** 강의 자료 "7장 추세선 작도" 4장을 고정 규칙 `trendline.py` 로 옮김(최근 120봉 최저 저가 ①·확정 저점 ② 를 이어 하단, ③고점 평행 상단, 중단, 향후 1배 유효). 실데이터 15종목 691건 수수료 뒤 건당 +1.13%·승률 32%·PF 1.40·t +2.17(기준 3 미달), 같은 일수 매수보유 대비 −0.85%/건, 한국 −0.02%. **지금은 코드·시험(`tests.test_trendline` 10건)·검증(`scripts/trendline_check.py`)·카드(`docs/cards/p39_trendline.svg`)·설계서(`docs/TRENDLINE_PLAN.md`)만 있고 워크플로·판정·잠금·현황판에는 안 넣었다.** A 로 정해지면 할 일: daily 단계 + `trendline.json`/`_history.jsonl` + `criteria.json` 봉인 + `verdict.py --lock` + 현황판 카드·갱신 Routine 파일 목록. 기록 `docs/sessions/2026-11-17_trendline_channel.md`. 그 밖의 대기 없음. 10/29 SNS 글 두 건(이평선 수렴 매매법 P24, CIS 원칙 P25)은 사용자 결정 "A" 로 기록만 — `docs/MA_CONVERGENCE_REVIEW.md`·`docs/CIS_PRINCIPLES_REVIEW.md`, 트랙·규칙 변경 없음. 11/4 SNS 카드 볼린저밴드 하단 재진입(P27)도 기록만 — `docs/BB_REENTRY_REVIEW.md`, 15종목 1,535건 수수료 뒤 매수보유 대비 우위 없음, 트랙·규칙 변경 없음. 다음은 11/4 초단타 재확인과 첫 판정이 뜨는 날. **10/22 신설 급상승 패턴 트랙**: 백테스트 표 기록·현황판 카드(타일·카드·판정 줄, 라이브 버전)까지 끝. 갱신 Routine 파일 목록에 `retest.json` 도 반영 확인(10/24). 남은 것: Actions 에서 오프라인 고정 봉 저장(`--save-fixture`).
+**2026-11-18 추세선 채널 하단 매수 순방향 기록 (제안함 P39, 판정 여덟 번째 트랙) — 사용자 결정 "A":** 강의 자료 "7장 추세선 작도" 4장을 고정 규칙 `trendline.py` 로 옮김(최근 120봉 최저 저가 ①·확정 저점 ② 를 이어 하단, ③고점 평행 상단, 중단, 향후 1배 유효; 하단 터치 다음 날 시가 매수 → 상단 익절 / 종가 하단 이탈 손절 / 만료). 사후 15종목 691건 수수료 뒤 건당 +1.13%·승률 32%·PF 1.40·t +2.17(기준 3 미달)·같은 일수 매수보유 대비 −0.85%/건. `trendline_track.py` 가 매일 daily "Trendline channel" 단계에서 업비트 6·OKX 6(롱만)·한국 대형주 39+KODEX 200 을 돌려 `trendline.json`·`trendline_history.jsonl` 에 기록(진입 2026-11-19 부터 순방향). criteria `trendline` 봉인 2026-11-18: 시장군별 닫힌 20건, 손익비 ≥ 1.3 PASS · < 1.0 FAIL. 잠금 재생성, `selfcheck.check_trendline`, 시험 `tests.test_trendline` 15건. 설계서 `docs/TRENDLINE_PLAN.md`, 카드 `docs/cards/p39_trendline.svg`, 기록 `docs/sessions/2026-11-17_trendline_channel.md`. **남은 것:** ① 이 브랜치(`claude/dazzling-johnson-yz2kih`)를 main 에 병합해야 워크플로가 돈다 ② 병합 뒤 dry_run 으로 한국 40종목 일봉 수신 확인(이 세션은 외부 접속 403 이라 못 함 — 못 받는 코드는 `trendline.json` `errors` 에 남는다) ③ 현황판 타일·카드와 갱신 Routine(trig_015SCRNNwatvAhHFdJF8F9Z9, 세션 session_01UBXi3SEnxJwqCj4dY5q4J5) 파일 목록에 `trendline.json` 추가 — 라이브 현황판은 11/18 확인 결과 `dashboard/index.html` 과 같다. 코인 두 시장군은 한 해 22~24건이라 첫 판정까지 10개월 안팎.
+
+**사용자 결정 대기:** 위 ①(PR·병합). 10/29 SNS 글 두 건(이평선 수렴 매매법 P24, CIS 원칙 P25)은 사용자 결정 "A" 로 기록만 — `docs/MA_CONVERGENCE_REVIEW.md`·`docs/CIS_PRINCIPLES_REVIEW.md`, 트랙·규칙 변경 없음. 11/4 SNS 카드 볼린저밴드 하단 재진입(P27)도 기록만 — `docs/BB_REENTRY_REVIEW.md`, 15종목 1,535건 수수료 뒤 매수보유 대비 우위 없음, 트랙·규칙 변경 없음. 다음은 11/4 초단타 재확인과 첫 판정이 뜨는 날. **10/22 신설 급상승 패턴 트랙**: 백테스트 표 기록·현황판 카드(타일·카드·판정 줄, 라이브 버전)까지 끝. 갱신 Routine 파일 목록에 `retest.json` 도 반영 확인(10/24). 남은 것: Actions 에서 오프라인 고정 봉 저장(`--save-fixture`).
 
 **2026-10-15 백테스트 과적합 논문 검토 → 판정기 보강 (제안함 P17·P18 반영):** 댓글 권고로 Bailey·López de Prado·Harvey·Hansen 등 17편을 읽고 공식을 실데이터에 대입(`docs/BACKTEST_OVERFITTING_REVIEW.md`, `scripts/overfit_check.py`). 발견: 초단타 10/7 PASS(후보 12개)는 실력 0 이어도 뜨는 후보 수(378개 중 42~53개)의 1/4 이었고, 터틀·추세전환 20건 합격선은 실력 0 도 19~40% 확률로 PASS 한다. 반영: ① `criteria.json scalp.noise_floor` — 부호 뒤집기 500회의 후보 수 중앙값보다 실제 후보가 많아야 PASS, 같거나 적으면 NOT_YET(잡음 이하). ② 판정 파일 각 거래소에 `interpretation`(실력 0 PASS 확률·놓칠 확률·필요 건수 MinTRL·t>3). 합격선 숫자·매매 규칙 변경 없음, criteria sealed 2026-10-15, 잠금 재생성. 현황판 카드에는 아직 안 올렸다(판정 파일에만). 작업 기록 `docs/sessions/2026-10-15_backtest_overfitting.md`.
 

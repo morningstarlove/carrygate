@@ -126,5 +126,58 @@ class TestRule(unittest.TestCase):
         self.assertLess(s["up"]["mid"], s["up"]["upper"])
 
 
+class TestTrack(unittest.TestCase):
+    """순방향 기록(trendline_track.py): 저장된 실데이터 일봉(tests/fixtures/turtle)으로."""
+
+    @classmethod
+    def setUpClass(cls):
+        import trendline_track as TT
+        cls.TT = TT
+        cls.out = TT.build(os.path.join(ROOT, "tests", "fixtures", "turtle"))
+
+    def test_shape_for_verdict(self):
+        self.assertEqual(sorted(self.out["venues"]), ["okx", "upbit"])          # 고정 봉 시험에는 한국 없음
+        for vd in self.out["venues"].values():
+            self.assertEqual(len(vd["markets"]), 6)
+            st = vd["portfolio"]["stats"]
+            self.assertGreater(st["trades"], 20)
+            self.assertEqual(st["forward"]["trades"], len(vd["portfolio"]["forward_trades"]))
+            self.assertEqual(sorted(vd["variants"]), sorted("%s_%s" % v for v in self.TT.VARIANTS))
+
+    def test_forward_split_by_entry_date(self):
+        TT = self.TT
+        import turtle as TU
+        bars_by = {c: TU.load_fixture(os.path.join(ROOT, "tests", "fixtures", "turtle"), "okx", c) for c in ("BTC", "ETH")}
+        allb = TT.evaluate(bars_by, "중", "base", 0.2, forward_from="2000-01-01")["portfolio"]
+        cut = TT.evaluate(bars_by, "중", "base", 0.2, forward_from="2025-06-01")["portfolio"]
+        self.assertEqual(allb["stats"]["trades"], 0)
+        self.assertEqual(len(allb["forward_trades"]), cut["stats"]["trades"] + len(cut["forward_trades"]))
+        self.assertTrue(cut["forward_trades"])
+        self.assertTrue(all(t["entry_date"] >= "2025-06-01" for t in cut["forward_trades"]))
+        self.assertAlmostEqual(cut["stats"]["forward"]["net_pct"], sum(t["pnl"] for t in cut["forward_trades"]), places=1)
+
+    def test_verdict_reads_it(self):
+        import verdict as V, json
+        with open(os.path.join(ROOT, "criteria.json"), encoding="utf-8") as fp:
+            crit = json.load(fp)["trendline"]
+        j = V.judge_venue_track(self.out, crit, "trendline")
+        self.assertEqual(j["status"], "NOT_YET")                                # 순방향 0건 — 판단하지 않는다
+        self.assertEqual(j["rule_fixed"], self.TT.RULE_FIXED)
+        self.assertEqual((crit["min_trades"], crit["pass_if_profit_factor_at_least"], crit["fail_if_profit_factor_below"]), (20, 1.3, 1.0))
+
+    def test_history_line(self):
+        line = self.TT.history_line(self.out)
+        self.assertEqual(line["okx"]["n"], 0)
+        self.assertIn("signals", line["upbit"])
+
+    def test_fixed_universe(self):
+        TT = self.TT
+        self.assertEqual(len(TT.KR_CODES), 40)
+        self.assertEqual(len(set(TT.KR_CODES)), 40)
+        self.assertTrue(all(len(c) == 6 and c.isdigit() for c in TT.KR_CODES))
+        self.assertEqual(TT.FORWARD_FROM, "2026-11-19")
+        self.assertEqual({k: v["cost_pct"] for k, v in TT.VENUES.items()}, {"upbit": 0.20, "okx": 0.20, "kr": 0.25})
+
+
 if __name__ == "__main__":
     unittest.main()

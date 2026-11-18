@@ -45,6 +45,8 @@ SHAPES = {
                    "rules": "dict", "rules.rule_fixed": "str", "rules.ath_close": "num", "ladder": "dict", "ladder.n": "int", "ladder.fills": "list",
                    "dca": "dict", "dca.n": "int", "pending": "list", "forward_days": "int", "summary": "str"},
     "index_event.json": {"date": "str", "rules": "dict", "rules.rule_fixed": "str", "events": "list", "errors": "dict"},
+    "trendline.json": {"date": "str", "rules": "dict", "rules.rule_fixed": "str", "rules.forward_from": "str", "venues": "dict", "errors": "dict",
+                       "summary": "dict", "summary.markets": "int"},
     "live.json": {"date": "str", "status": "dict", "status.coin": "str", "status.days": "num", "status.warnings": "list"},
     "scalp.json": {"date": "str", "eval_day_utc": "str", "method": "dict", "method.strategies": "list", "summary": "dict",
                    "summary.rows_total": "int", "summary.rows_positive": "int", "summary.rows_robust": "int",
@@ -413,6 +415,35 @@ def check_cycle(problems, notes):
     return checked
 
 
+def check_trendline(problems, notes):
+    """추세선 채널(P39): 순방향 매매가 모두 시작일 이후 진입인지, 저장된 건수·순수익·손익비가 매매 목록에서 다시 나오는지,
+    매매마다 손익이 진입가·청산가·비용에서 다시 나오는지 본다."""
+    d = load_json("trendline.json")
+    if d is None:
+        notes.append("trendline.json 이 없다")
+        return 0
+    import trendline_track as TT
+    checked = 0
+    for v, vd in (d.get("venues") or {}).items():
+        cost = TT.VENUES.get(v, {}).get("cost_pct")
+        if cost is None or abs(cost - vd.get("cost_pct", -1)) > 1e-9:
+            problems.append("추세선 %s: 비용이 고정값과 다르다 (저장 %s)" % (v, vd.get("cost_pct")))
+        for name, ev in [("기본", vd)] + [(k, e) for k, e in (vd.get("variants") or {}).items()]:
+            trades = ev["portfolio"]["forward_trades"]
+            fw = ev["portfolio"]["stats"]["forward"]
+            for t in trades:
+                if t["entry_date"] < TT.FORWARD_FROM:
+                    problems.append("추세선 %s/%s: %s 진입 %s 가 순방향 시작일 전" % (v, name, t["market"], t["entry_date"]))
+                pnl = (t["exit"] / t["entry"] - 1) * 100 - (cost or 0)
+                if abs(pnl - t["pnl"]) > 0.02:
+                    problems.append("추세선 %s/%s: %s %s 손익 불일치 (저장 %s vs 재계산 %.4f)" % (v, name, t["market"], t["entry_date"], t["pnl"], pnl))
+            pn = [t["pnl"] for t in trades]
+            if fw["trades"] != len(pn) or abs((fw["net_pct"] or 0) - sum(pn)) > 0.02 or fw["profit_factor"] != TT.profit_factor(pn):
+                problems.append("추세선 %s/%s: 순방향 합계 불일치 (저장 %s건 %s%% vs 목록 %d건 %.2f%%)" % (v, name, fw["trades"], fw["net_pct"], len(pn), sum(pn)))
+            checked += 1
+    return checked
+
+
 def check_basis(problems, notes):
     """베이시스 캐리: 저장된 연환산을 선물가·현물가·만기일수에서 다시 계산해 대조한다."""
     d = load_json("basis.json")
@@ -733,6 +764,7 @@ def main():
     retest_checked = check_retest(problems, notes)
     grid_checked = check_grid(problems, notes)
     cycle_checked = check_cycle(problems, notes)
+    trendline_checked = check_trendline(problems, notes)
     kr_checked = check_kr(problems, notes)
     shape_checked = check_shapes(problems, notes)
     check_jsonl_dates("kr_sector_history.jsonl", "한국주식 업종", problems, notes)
@@ -741,11 +773,11 @@ def main():
                         ("kimchi_history.jsonl", "김치프리미엄"), ("momentum_history.jsonl", "듀얼 모멘텀"),
                         ("live_history.jsonl", "실전 캐리"), ("turtle_history.jsonl", "터틀"),
                         ("reversal_history.jsonl", "추세 전환"), ("retest_history.jsonl", "급상승 패턴"), ("forecast_history.jsonl", "예측 v2"), ("grid_history.jsonl", "그리드"),
-                        ("cycle_history.jsonl", "BTC 사이클"), ("index_event_history.jsonl", "지수 편출 이벤트")):
+                        ("cycle_history.jsonl", "BTC 사이클"), ("index_event_history.jsonl", "지수 편출 이벤트"), ("trendline_history.jsonl", "추세선 채널")):
         check_jsonl_dates(path, label, problems, notes)
 
     print("=== 검산 ===")
-    print("재계산 대조: 캐리 %d건, 초단타 %d건, 베이시스 %d건, 터틀 %d건, 추세전환 %d건, 급상승패턴 %d건, 그리드 %d건, BTC 사이클 %d건, 한국주식 %d건 통과" % (checked, scalp_checked, basis_checked, turtle_checked, reversal_checked, retest_checked, grid_checked, cycle_checked, kr_checked))
+    print("재계산 대조: 캐리 %d건, 초단타 %d건, 베이시스 %d건, 터틀 %d건, 추세전환 %d건, 급상승패턴 %d건, 그리드 %d건, BTC 사이클 %d건, 추세선 %d건, 한국주식 %d건 통과" % (checked, scalp_checked, basis_checked, turtle_checked, reversal_checked, retest_checked, grid_checked, cycle_checked, trendline_checked, kr_checked))
     print("형식 대조: 현황판 결과 파일 %d개 통과 (키·타입)" % shape_checked)
     for m in notes:
         print("  · %s" % m)
