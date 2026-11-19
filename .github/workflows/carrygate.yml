@@ -120,6 +120,12 @@ jobs:
         continue-on-error: true
         run: python index_event.py
 
+      # 미국 주식 20종목 개장 15분 범위 돌파 종이매매 — 스킬 day-trader-skill 기본 규칙을 고정 코드로 (P40, 2026-11-19)
+      - name: US opening-range breakout (미국 주식 개장 범위 돌파 종이매매, 당일 청산)
+        if: inputs.day == ''
+        continue-on-error: true
+        run: python us_orb.py
+
       - name: Verdict (판정 규율 — 일곱 트랙 순방향 채점, 사전 등록 기준)
         if: inputs.day == ''
         continue-on-error: true
@@ -203,7 +209,7 @@ jobs:
 
       - name: Unit tests (계산 로직)
         if: always()
-        run: python -m unittest tests.test_scalp tests.test_research tests.test_midterm tests.test_momentum tests.test_live tests.test_turtle tests.test_reversal tests.test_retest tests.test_forecast tests.test_cycle tests.test_relay tests.test_verdict tests.test_grid tests.test_selfcheck tests.test_common tests.test_push_results
+        run: python -m unittest tests.test_scalp tests.test_research tests.test_midterm tests.test_momentum tests.test_live tests.test_turtle tests.test_reversal tests.test_retest tests.test_forecast tests.test_cycle tests.test_relay tests.test_verdict tests.test_grid tests.test_selfcheck tests.test_common tests.test_push_results tests.test_us_orb
 
       - name: Commit results
         if: always() && inputs.dry_run != true
@@ -218,7 +224,7 @@ jobs:
           python push_results.py --verdict -m "$MSG" \
             status.json history.jsonl funding.json funding_history.jsonl scalp.json scalp_history.jsonl scalp_binance.json scalp_binance_history.jsonl research.json research_history.jsonl \
             basis.json basis_history.jsonl funding_signal.json funding_signal_history.jsonl kimchi.json kimchi_history.jsonl \
-            macro.json listing.json momentum.json momentum_history.jsonl live.json live_history.jsonl turtle.json turtle_history.jsonl reversal.json reversal_history.jsonl reversal_bars.jsonl retest.json retest_history.jsonl forecast.json forecast_history.jsonl cycle.json cycle_history.jsonl index_event.json index_event_history.jsonl verdict.json verdict_history.jsonl scalp_oos.json scalp_oos_frozen.json scalp_rotate.json \
+            macro.json listing.json momentum.json momentum_history.jsonl live.json live_history.jsonl turtle.json turtle_history.jsonl reversal.json reversal_history.jsonl reversal_bars.jsonl retest.json retest_history.jsonl forecast.json forecast_history.jsonl cycle.json cycle_history.jsonl index_event.json index_event_history.jsonl us_orb.json us_orb_history.jsonl verdict.json verdict_history.jsonl scalp_oos.json scalp_oos_frozen.json scalp_rotate.json \
             grid.json grid_history.jsonl \
             data/kr_funding.json data/binance_1m data/cg_funding_snapshots.jsonl data/etf data/upbit_markets.json
 

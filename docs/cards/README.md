@@ -17,6 +17,7 @@
 | P36 | [p36_cycle_ladder.svg](p36_cycle_ladder.svg) | BTC 사이클 낙폭 분할매수 `cycle.py` (−50·−60·−70% 계단 + 200일선 위로 건넘, DCA 와 비교) | `data/bitstamp_btcusd_1d_all.csv` (Bitstamp BTC/USD 일봉 2013-01-01~2026-11-13 UTC, TradingView 수집 — 그림은 마지막 440봉, 11/13 봉은 그리는 중) | 2026-11-13 | 2027-05-12 (순방향 180일) |
 | P37 | [p37_index_deletion.svg](p37_index_deletion.svg) | 지수 편출 이벤트 기록 `index_event.py` (MSCI 의 MSTR 편출, MSTR − IBIT) | `data/nasdaq_mstr_1d.csv`·`data/nasdaq_ibit_1d.csv` (나스닥 일봉 2026-05-01~11-12, TradingView 수집) | 2026-11-13 | A 2026-11-30 · B 약 2026-12-29 |
 | P33 | [p33_forecast.svg](p33_forecast.svg) | 예측 v2 `forecast.py` (크기 예측 + 방향 채점) | `data/okx_btc_2h.csv` (OKX BTC 무기한선물 2시간봉 — TradingView 1h 실데이터를 2h 로 합침, 2026-10-02~11-04 UTC) | 2026-11-08 | 2027-01-05 전후 (채점 60일) |
+| P40 | [p40_us_orb.svg](p40_us_orb.svg) | 미국 주식 개장 범위 돌파 종이매매 `us_orb.py` (개장 15분 고가 종가 돌파 매수, 손절 범위 중간, 목표 2R, 15:55 정리) | `data/us_nvda_5m.csv` (나스닥 NVDA 정규장 5분봉 2026-11-11·11-12, TradingView 수집) | 2026-11-19 | 2026-12-18 (순방향 20세션) |
 
 ## 만드는 법
 

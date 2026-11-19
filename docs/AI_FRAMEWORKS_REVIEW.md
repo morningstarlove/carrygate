@@ -23,6 +23,7 @@
 | **Agno** (파이썬) | 메모리·지식·외부 도구를 붙여 AI 에이전트 서비스 운영 | 우리 메모리는 `HANDOVER.md`·`docs/sessions/`, 지식은 결과 JSON, 도구는 MCP(TradingView·GitHub). 운영 주체는 Routine. 겹친다 | **불채택** | **메모리 문제의 진짜 해법** — 세션이 자동으로 읽는 짧은 `CLAUDE.md` 를 두고 120KB `HANDOVER.md` 는 0절부터 읽게 한다 (3절 ④, 제안함 P7 과 같은 방향) |
 | **Mastra** (타입스크립트) | 웹앱 안에 AI 에이전트·워크플로 통합 | 현황판은 서버 없는 정적 HTML(Claude 아티팩트). 타입스크립트 서버도 없다 | **불채택** | 없음 |
 | **anthropics/financial-services** (마크다운 플러그인, 2026-10-21 검토) | 실적 리뷰·DCF·comps 등 애널리스트 보고서 초안을 Claude 가 쓰는 Cowork 플러그인. 유료 MCP 12개 의존, 한국 시장 0건 | 매수/매도 등급·목표가를 AI 가 쓴다(원칙 3). 유료 데이터 없이는 추정(원칙 4). 매매 코드 없음 | **불채택** | 실적 달력은 이미 있는 트레이딩뷰 MCP 로 무료 대체. 가드레일 문구 2개만 참고 (`docs/sessions/2026-10-21_financial_services_review.md`) |
+| **Jakeschincariol/day-trader-skill** (Claude 스킬 11개, 2026-11-19 검토) | 미국 주식 데이트레이딩: 스캔·뉴스·진입·청산·시뮬레이션·리스크·수량·브로커(Alpaca)·알림. 표준 라이브러리 파이썬, 키 없음, 야후·SEC 무료 자료 | 단계마다 AI 가 판단(원칙 3), `trader-broker` 는 주문(원칙 1). 커밋 1개, 성과 근거 없음(자체 예시 "동전 던지기") | **설치 안 함, 규칙만 차용** | 진입·청산 기본값만 고정 코드 `us_orb.py` 로 옮겨 순방향 종이 기록(P40). 저장소 연결 권한이 막혀 README·SKILL.md 만 읽음(코드 미검증) (`docs/sessions/2026-11-19_us_orb_paper.md`) |
 
 ## 2. 왜 "AI 가 매매를 판단하는 구조"로 가지 않는가 (사실 근거)
 

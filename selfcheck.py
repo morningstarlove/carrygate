@@ -45,6 +45,8 @@ SHAPES = {
                    "rules": "dict", "rules.rule_fixed": "str", "rules.ath_close": "num", "ladder": "dict", "ladder.n": "int", "ladder.fills": "list",
                    "dca": "dict", "dca.n": "int", "pending": "list", "forward_days": "int", "summary": "str"},
     "index_event.json": {"date": "str", "rules": "dict", "rules.rule_fixed": "str", "events": "list", "errors": "dict"},
+    "us_orb.json": {"date": "str", "rules": "dict", "rules.rule_fixed": "str", "forward": "dict", "forward.sessions": "int",
+                    "forward.trades": "int", "verdict": "str", "recent": "list", "errors": "dict", "summary": "str"},
     "live.json": {"date": "str", "status": "dict", "status.coin": "str", "status.days": "num", "status.warnings": "list"},
     "scalp.json": {"date": "str", "eval_day_utc": "str", "method": "dict", "method.strategies": "list", "summary": "dict",
                    "summary.rows_total": "int", "summary.rows_positive": "int", "summary.rows_robust": "int",
@@ -413,6 +415,34 @@ def check_cycle(problems, notes):
     return checked
 
 
+def check_us_orb(problems, notes):
+    """미국 주식 개장 범위 돌파(P40): 기록된 거래마다 순수익을 진입·청산가에서 다시 계산하고, 손절 < 진입 < 목표,
+    청산 사유와 청산가가 맞는지, 세션 합계가 거래 합과 같은지 본다."""
+    rows = [r for _, r in load_rows("us_orb_history.jsonl") if r]
+    if not rows:
+        return 0
+    import us_orb as U
+    checked = 0
+    for r in rows:
+        ts = r.get("trades") or []
+        if r.get("n") != len(ts):
+            problems.append("미국 ORB %s: 거래 수 불일치 (n %s vs 목록 %d)" % (r.get("date"), r.get("n"), len(ts)))
+        if abs((r.get("sum_net_pct") or 0) - sum(t["net_pct"] for t in ts)) > 0.01:
+            problems.append("미국 ORB %s: 세션 합 불일치 (저장 %s)" % (r.get("date"), r.get("sum_net_pct")))
+        for t in ts:
+            net = (t["exit"] / t["entry"] - 1) * 100 - 2 * U.FEE_PCT
+            if abs(net - t["net_pct"]) > 0.01:
+                problems.append("미국 ORB %s %s: 순수익 불일치 (저장 %s vs 재계산 %.4f)" % (r["date"], t["sym"], t["net_pct"], net))
+            if not (t["stop"] < t["entry"] < t["target"]):
+                problems.append("미국 ORB %s %s: 손절 < 진입 < 목표 가 아니다" % (r["date"], t["sym"]))
+            if (t["reason"] == "stop" and abs(t["exit"] - t["stop"]) > 0.011) or (t["reason"] == "target" and abs(t["exit"] - t["target"]) > 0.011) \
+                    or (t["reason"] == "stop_gap" and t["exit"] > t["stop"] + 0.011):
+                problems.append("미국 ORB %s %s: 청산 사유 %s 와 청산가 %s 가 안 맞는다" % (r["date"], t["sym"], t["reason"], t["exit"]))
+            checked += 1
+    notes.append("미국 ORB 거래 재계산 %d건 통과 대상" % checked)
+    return checked
+
+
 def check_basis(problems, notes):
     """베이시스 캐리: 저장된 연환산을 선물가·현물가·만기일수에서 다시 계산해 대조한다."""
     d = load_json("basis.json")
@@ -733,6 +763,7 @@ def main():
     retest_checked = check_retest(problems, notes)
     grid_checked = check_grid(problems, notes)
     cycle_checked = check_cycle(problems, notes)
+    check_us_orb(problems, notes)
     kr_checked = check_kr(problems, notes)
     shape_checked = check_shapes(problems, notes)
     check_jsonl_dates("kr_sector_history.jsonl", "한국주식 업종", problems, notes)
@@ -741,7 +772,8 @@ def main():
                         ("kimchi_history.jsonl", "김치프리미엄"), ("momentum_history.jsonl", "듀얼 모멘텀"),
                         ("live_history.jsonl", "실전 캐리"), ("turtle_history.jsonl", "터틀"),
                         ("reversal_history.jsonl", "추세 전환"), ("retest_history.jsonl", "급상승 패턴"), ("forecast_history.jsonl", "예측 v2"), ("grid_history.jsonl", "그리드"),
-                        ("cycle_history.jsonl", "BTC 사이클"), ("index_event_history.jsonl", "지수 편출 이벤트")):
+                        ("cycle_history.jsonl", "BTC 사이클"), ("index_event_history.jsonl", "지수 편출 이벤트"),
+                        ("us_orb_history.jsonl", "미국 ORB")):
         check_jsonl_dates(path, label, problems, notes)
 
     print("=== 검산 ===")

@@ -1,6 +1,6 @@
 {
   "_comment": "규칙 잠금. 트랙 코드의 규칙 상수와 criteria.json 지문을 적어 둔다. tests/test_verdict.py 가 매번 대조하므로, 규칙을 바꾸면 반드시 (1) proposals.md 에 근거 (2) 그 트랙의 RULE_FIXED 를 새 날짜로 (3) `python verdict.py --lock` 순서로 간다.",
-  "_locked_at": "2026-11-13T06:34:45Z",
+  "_locked_at": "2026-11-19T12:12:11Z",
   "criteria_sha256": "254a70b4d59ce02db2ee29edb8fc70a2ea6b6cfe91072cc41a0f60d539b8b23a",
   "cycle": {
     "rule_fixed": "2026-11-13",
@@ -362,6 +362,53 @@
           "exit_n": 20
         }
       }
+    }
+  },
+  "us_orb": {
+    "rule_fixed": "2026-11-19",
+    "rules": {
+      "bar_minutes": 5,
+      "early_close_shift_min": 180,
+      "early_closes": [
+        "2026-11-27",
+        "2026-12-24",
+        "2027-11-26"
+      ],
+      "entry": "first closed bar after the range with close > range high (strict), one per symbol per day, long only",
+      "fee_pct_per_fill": 0.05,
+      "flat_by": "15:55",
+      "forward_from": "2026-11-19",
+      "judge_sessions": 20,
+      "judge_t": 2.0,
+      "min_risk_pct": 0.05,
+      "no_entry_after": "15:30",
+      "or_minutes": 15,
+      "same_bar": "stop first",
+      "source": "yahoo chart 5m regular session",
+      "stop": "or-mid",
+      "target_r": 2.0,
+      "universe": [
+        "NVDA",
+        "TSLA",
+        "AAPL",
+        "MSFT",
+        "AMZN",
+        "META",
+        "GOOGL",
+        "AMD",
+        "AVGO",
+        "PLTR",
+        "NFLX",
+        "MU",
+        "INTC",
+        "COIN",
+        "MSTR",
+        "ORCL",
+        "JPM",
+        "BAC",
+        "XOM",
+        "UNH"
+      ]
     }
   }
 }
