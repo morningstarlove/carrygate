@@ -25,7 +25,9 @@
 | 급상승·급하락 패턴 1H (10/22 신설) | 판단 전 (순방향 1건 — 10/22 PR #76 dry_run 1년 백테스트: 업비트 −10.3%/25건/PF 0.31, OKX +3.5%/82건/PF 1.10) | 거래소별 20건. 백테스트는 약한 근거 — 규칙은 안 고친다 |
 | BTC 사이클 낙폭 분할매수 (11/13 신설, P36, 장기) | 판단 전 (순방향 11/13 봉부터. 11/12 종가 71,374 = 고점 124,728 대비 −42.8%, 402일째, 200일 평균 73,082 아래, 체결 0/4) | 2027-05-12 (180일). 분할 평균단가 ≤ DCA×0.95 · 평가 플러스 PASS, > DCA FAIL, 체결 0건 NOT_YET |
 
-**미국 주식 개장 범위 돌파 종이매매 (11/19 신설, P40, 판정 트랙 아님·기록만):** 순방향 11/19 뉴욕 세션부터. 사후 60세션 639건 건당 −0.14%(t −2.88) — 탈락 쪽 예상. 첫 판단 **12/18 보고**(20세션): 건당 평균 > 0 · t ≥ 2 후보 / ≤ 0 탈락. `python us_orb.py --report`.
+**★ 사용자 결정 대기 (11/19):** 사용자는 공개 스킬 `Jakeschincariol/day-trader-skill` 11개를 **실제로 가져와 돌리기**를 원한다("이걸 안 가져올 거면 뭐 하러 해"). 이번 세션은 규칙 숫자만 빌린 P40 만 만들었고 원본 설치는 시작 전. 저장소는 `git clone` 으로 읽을 수 있음(코드 본문 미검증). 설치 위치 선택지와 할 일 순서는 `docs/sessions/2026-11-19_us_orb_paper.md` "다음 세션이 할 일". **P40 은 브랜치 `claude/zen-ritchie-a35eox` 에만 있고 `main` 에 없다 — 아직 아무것도 돌지 않는다.**
+
+**미국 주식 개장 범위 돌파 종이매매 (11/19 작성, **미병합**, P40, 판정 트랙 아님·기록만):** 순방향 11/19 뉴욕 세션부터. 사후 60세션 639건 건당 −0.14%(t −2.88) — 탈락 쪽 예상. 첫 판단 **12/18 보고**(20세션): 건당 평균 > 0 · t ≥ 2 후보 / ≤ 0 탈락. `python us_orb.py --report`.
 
 **캐리 (바이낸스·바이비트, 마일스톤 11):** 10/9 첫 7일 평균(표본 5개) 붙음 — 전 코인 문턱 미달, LINK 만 플러스(바이비트 +2.8% / 바이낸스 +1.4%), 나머지 −1.4~−4.7%, TRX −28~−42%. 같은 날 하이퍼리퀴드도 XRP 7.6% 로 내려와 캐리 전체가 17일 만에 "대기"로 바뀜. 현황판 "캐리 이자율" 카드에 코인 × 거래소 표로 보인다. 손댈 것 없음 — 펀딩이 돌아서면 매일 점검 루틴이 알린다.
 
@@ -43,7 +45,7 @@
 | 매크로 달력 갱신 | 매주 월 11:10 | Routine trig_01CBFoNkLZyBHafCjmsAK5Jp |
 | 초단타 전략·가설 일일 보고 (판정·어제 성적·전략 현황·가설 1개; 사용자 요청 11/2) | 매일 17:10 | Routine trig_01Sq7GkfWcgjfZfiRQsfrrhJ → 세션 session_01NW6d8yMKTBLhW7RdeHRgsq |
 | 바이낸스 1분봉 중계 (4일치 → `/var/www/carrygate/binance_1m/`, Caddy `/carrygate/*`) | 매일 09:05 | **사용자 Vultr 서버** cron `/root/carrygate-relay/vps_relay.py`, 로그 `relay.log`. 끄기: `crontab -l \| grep -v vps_relay.py \| crontab -` |
-| (daily 안) 미국 주식 개장 범위 돌파 종이매매 (P40, 11/19~) | 매일 09:18 daily 의 한 단계 — 전날 밤 뉴욕 세션을 센다 | `us_orb.py` → `us_orb.json`·`us_orb_history.jsonl` |
+| (daily 안, **병합 뒤부터**) 미국 주식 개장 범위 돌파 종이매매 (P40) | 매일 09:18 daily 의 한 단계 — 전날 밤 뉴욕 세션을 센다 | `us_orb.py` → `us_orb.json`·`us_orb_history.jsonl` |
 | ~~초단타 표본 밖 재확인 (P19)~~ | 2026-11-04 16:31 — **실행 끝(NO)** | trig_01Lzq3K3xahcKnRc4mbmauQV (1회용) |
 
 세션 session_01WP7a8oLwaHMUj5MimZSF6k 를 보관(archive)하면 그 세션으로 배달되는 Routine 2개가 멈춘다. 세션 session_01UBXi3SEnxJwqCj4dY5q4J5(마일스톤 15 작업 세션)를 보관하면 현황판 갱신 루틴이 멈춘다.
@@ -101,7 +103,7 @@
 
 **2026-11-12 추세 전환 4시간봉 검산 빨간불 수정:** 11/8 16:00 봉에 업비트 BTC·ETH 가 시간 초과로 빠져 `reversal_4h` 가 9회 연속 실패(기록 저장은 정상). 실패 코인 1회 재시도, 빠지면 `missing` 표시, 검산은 표시된 봉을 기록만. 지난 줄엔 로그로 확인된 `missing` 만 덧붙임. `docs/sessions/2026-11-12_reversal_selfcheck_red.md`.
 
-**사용자 결정 대기:** 없음. 10/29 SNS 글 두 건(이평선 수렴 매매법 P24, CIS 원칙 P25)은 사용자 결정 "A" 로 기록만 — `docs/MA_CONVERGENCE_REVIEW.md`·`docs/CIS_PRINCIPLES_REVIEW.md`, 트랙·규칙 변경 없음. 11/4 SNS 카드 볼린저밴드 하단 재진입(P27)도 기록만 — `docs/BB_REENTRY_REVIEW.md`, 15종목 1,535건 수수료 뒤 매수보유 대비 우위 없음, 트랙·규칙 변경 없음. 다음은 11/4 초단타 재확인과 첫 판정이 뜨는 날. **10/22 신설 급상승 패턴 트랙**: 백테스트 표 기록·현황판 카드(타일·카드·판정 줄, 라이브 버전)까지 끝. 갱신 Routine 파일 목록에 `retest.json` 도 반영 확인(10/24). 남은 것: Actions 에서 오프라인 고정 봉 저장(`--save-fixture`).
+**사용자 결정 대기:** 위 ★(11/19 원본 스킬 설치 위치·P40 병합 여부). 10/29 SNS 글 두 건(이평선 수렴 매매법 P24, CIS 원칙 P25)은 사용자 결정 "A" 로 기록만 — `docs/MA_CONVERGENCE_REVIEW.md`·`docs/CIS_PRINCIPLES_REVIEW.md`, 트랙·규칙 변경 없음. 11/4 SNS 카드 볼린저밴드 하단 재진입(P27)도 기록만 — `docs/BB_REENTRY_REVIEW.md`, 15종목 1,535건 수수료 뒤 매수보유 대비 우위 없음, 트랙·규칙 변경 없음. 다음은 11/4 초단타 재확인과 첫 판정이 뜨는 날. **10/22 신설 급상승 패턴 트랙**: 백테스트 표 기록·현황판 카드(타일·카드·판정 줄, 라이브 버전)까지 끝. 갱신 Routine 파일 목록에 `retest.json` 도 반영 확인(10/24). 남은 것: Actions 에서 오프라인 고정 봉 저장(`--save-fixture`).
 
 **2026-10-15 백테스트 과적합 논문 검토 → 판정기 보강 (제안함 P17·P18 반영):** 댓글 권고로 Bailey·López de Prado·Harvey·Hansen 등 17편을 읽고 공식을 실데이터에 대입(`docs/BACKTEST_OVERFITTING_REVIEW.md`, `scripts/overfit_check.py`). 발견: 초단타 10/7 PASS(후보 12개)는 실력 0 이어도 뜨는 후보 수(378개 중 42~53개)의 1/4 이었고, 터틀·추세전환 20건 합격선은 실력 0 도 19~40% 확률로 PASS 한다. 반영: ① `criteria.json scalp.noise_floor` — 부호 뒤집기 500회의 후보 수 중앙값보다 실제 후보가 많아야 PASS, 같거나 적으면 NOT_YET(잡음 이하). ② 판정 파일 각 거래소에 `interpretation`(실력 0 PASS 확률·놓칠 확률·필요 건수 MinTRL·t>3). 합격선 숫자·매매 규칙 변경 없음, criteria sealed 2026-10-15, 잠금 재생성. 현황판 카드에는 아직 안 올렸다(판정 파일에만). 작업 기록 `docs/sessions/2026-10-15_backtest_overfitting.md`.
 
