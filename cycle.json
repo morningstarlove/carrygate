@@ -1,6 +1,6 @@
 {
- "date": "2026-11-19",
- "generated_at_kst": "2026-11-19 16:53",
+ "date": "2026-11-20",
+ "generated_at_kst": "2026-11-20 16:41",
  "source": "bitstamp",
  "rules": {
   "source": "bitstamp btcusd 1d close (fallback okx BTC-USDT 1Dutc)",
@@ -33,37 +33,39 @@
   "exit": "none; cycle ends on close > ath_close",
   "rule_fixed": "2026-11-13"
  },
- "bar_date": "2026-11-18",
- "close": 62976.18,
- "dd_pct": -49.51,
- "days_since_ath": 408,
- "sma200": 72719.98,
+ "bar_date": "2026-11-19",
+ "close": 61914.05,
+ "dd_pct": -50.36,
+ "days_since_ath": 409,
+ "sma200": 72636.73,
  "above_sma200": false,
- "forward_days": 6,
+ "forward_days": 7,
  "ladder": {
-  "n": 0,
-  "invested": 0.0,
-  "avg_cost": null,
-  "mtm_pct": null,
-  "fills": [],
-  "budget_used_pct": 0.0
+  "n": 1,
+  "invested": 0.25,
+  "avg_cost": 62006.92,
+  "mtm_pct": -0.3,
+  "fills": [
+   {
+    "name": "L50",
+    "date": "2026-11-19",
+    "price": 61914.05,
+    "dd_pct": -50.36
+   }
+  ],
+  "budget_used_pct": 25.0
  },
  "dca": {
   "n": 1,
   "invested": 1.0,
   "avg_cost": 68328.24,
-  "mtm_pct": -7.97,
+  "mtm_pct": -9.52,
   "last_buy": {
    "date": "2026-11-13",
    "price": 68225.9
   }
  },
  "pending": [
-  {
-   "name": "L50",
-   "price_at_or_below": 62364.0,
-   "dd_pct": -50.0
-  },
   {
    "name": "L60",
    "price_at_or_below": 49891.2,
@@ -77,14 +79,14 @@
   {
    "name": "T200",
    "rule": "종가가 200일 평균을 위로 건너는 날(낙폭 ≤ −30%)",
-   "sma200": 72719.98
+   "sma200": 72636.73
   }
  ],
  "cycle_end": null,
  "analog": {
   "2013": {
    "ath_date": "2013-11-29",
-   "dd_same_day_pct": -76.47,
+   "dd_same_day_pct": -76.38,
    "min_so_far_pct": -76.68,
    "min_day": 401,
    "cycle_min_pct": -84.86,
@@ -92,7 +94,7 @@
   },
   "2017": {
    "ath_date": "2017-12-16",
-   "dd_same_day_pct": -82.13,
+   "dd_same_day_pct": -82.33,
    "min_so_far_pct": -83.43,
    "min_day": 364,
    "cycle_min_pct": -83.43,
@@ -107,5 +109,5 @@
    "cycle_min_day": 378
   }
  },
- "summary": "2026-11-18 종가 62,976, 고점 대비 -49.51% (408일째). 분할매수 0/4 묶음 | DCA 1회 평균 68,328 평가 -7.97%"
+ "summary": "2026-11-19 종가 61,914, 고점 대비 -50.36% (409일째). 분할매수 1/4 묶음 평균 62,007 평가 -0.3% | DCA 1회 평균 68,328 평가 -9.52%"
 }
