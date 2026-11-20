@@ -1,6 +1,6 @@
 {
  "date": "2026-11-20",
- "generated_at_utc": "2026-11-19T16:11:58Z",
+ "generated_at_utc": "2026-11-20T07:15:30Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -74,198 +74,60 @@
   }
  },
  "forward": {
-  "days": 32,
+  "days": 33,
   "from": "2026-10-05",
-  "to": "2026-11-19",
-  "codes": 344,
+  "to": "2026-11-20",
+  "codes": 350,
   "bar_errors": 0,
   "stale_codes": 0,
   "by_source": {
-   "yahoo+naver_api": 343,
-   "yahoo": 1
+   "yahoo+gapfill": 2,
+   "yahoo+naver_api": 79,
+   "yahoo": 269
   },
   "skipped_days": [
    "2026-10-05"
   ],
-  "gap_filled": 0,
-  "gap_filled_codes": {},
+  "gap_filled": 2,
+  "gap_filled_codes": {
+   "345290": [
+    "2026-11-18",
+    "2026-11-19"
+   ],
+   "493410": [
+    "2026-11-16",
+    "2026-11-17",
+    "2026-11-18",
+    "2026-11-19"
+   ]
+  },
   "gap_unfilled": 0,
   "note": null
  },
  "signals_today": {
-  "base": [
-   {
-    "code": "090430",
-    "name": "Amorepacific Corp.",
-    "group": "Household/Personal Care",
-    "pattern": "triangle",
-    "patterns": [
-     "box",
-     "triangle"
-    ],
-    "signal_close": 141500.0,
-    "pattern_low": 126128.95,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 152820 이상이면 포기)",
-    "stop_plan": "max(126129, 진입가×0.93)"
-   }
-  ],
+  "base": [],
   "no_sector": [
    {
-    "code": "352820",
-    "name": "HYBE Co., Ltd.",
-    "group": "Miscellaneous Commercial Services",
+    "code": "439090",
+    "name": "Manyo Factory Co., Ltd.",
+    "group": "Medical Distributors",
     "pattern": "box",
     "patterns": [
      "box"
     ],
-    "signal_close": 189000.0,
-    "pattern_low": 136500.0,
+    "signal_close": 16990.0,
+    "pattern_low": 13010.0,
     "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 204120 이상이면 포기)",
-    "stop_plan": "max(136500, 진입가×0.93)"
-   },
-   {
-    "code": "089590",
-    "name": "JEJUAIR CO., LTD.",
-    "group": "Airlines",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 8300.0,
-    "pattern_low": 6610.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 8964 이상이면 포기)",
-    "stop_plan": "max(6610, 진입가×0.93)"
-   },
-   {
-    "code": "090430",
-    "name": "Amorepacific Corp.",
-    "group": "Household/Personal Care",
-    "pattern": "triangle",
-    "patterns": [
-     "box",
-     "triangle"
-    ],
-    "signal_close": 141500.0,
-    "pattern_low": 126128.95,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 152820 이상이면 포기)",
-    "stop_plan": "max(126129, 진입가×0.93)"
-   },
-   {
-    "code": "035760",
-    "name": "CJ ENM Co., Ltd.",
-    "group": "Broadcasting",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 53700.0,
-    "pattern_low": 37350.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 57996 이상이면 포기)",
-    "stop_plan": "max(37350, 진입가×0.93)"
-   },
-   {
-    "code": "004170",
-    "name": "Shinsegae Co., Ltd",
-    "group": "Department Stores",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 294500.0,
-    "pattern_low": 230000.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 318060 이상이면 포기)",
-    "stop_plan": "max(230000, 진입가×0.93)"
-   },
-   {
-    "code": "039130",
-    "name": "Hanatour Service, Inc.",
-    "group": "Other Consumer Services",
-    "pattern": "cup_handle",
-    "patterns": [
-     "box",
-     "cup_handle"
-    ],
-    "signal_close": 35950.0,
-    "pattern_low": 29200.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 38826 이상이면 포기)",
-    "stop_plan": "max(29200, 진입가×0.93)"
-   },
-   {
-    "code": "008770",
-    "name": "HOTEL SHILLA CO., LTD.",
-    "group": "Hotels/Resorts/Cruise lines",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 38400.0,
-    "pattern_low": 33800.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 41472 이상이면 포기)",
-    "stop_plan": "max(33800, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 18349 이상이면 포기)",
+    "stop_plan": "max(13010, 진입가×0.93)"
    }
   ],
-  "hold_10": [
-   {
-    "code": "090430",
-    "name": "Amorepacific Corp.",
-    "group": "Household/Personal Care",
-    "pattern": "triangle",
-    "patterns": [
-     "box",
-     "triangle"
-    ],
-    "signal_close": 141500.0,
-    "pattern_low": 126128.95,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 152820 이상이면 포기)",
-    "stop_plan": "max(126129, 진입가×0.93)"
-   }
-  ],
-  "risk_2": [
-   {
-    "code": "090430",
-    "name": "Amorepacific Corp.",
-    "group": "Household/Personal Care",
-    "pattern": "triangle",
-    "patterns": [
-     "box",
-     "triangle"
-    ],
-    "signal_close": 141500.0,
-    "pattern_low": 126128.95,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 152820 이상이면 포기)",
-    "stop_plan": "max(126129, 진입가×0.93)"
-   }
-  ],
-  "no_flag": [
-   {
-    "code": "090430",
-    "name": "Amorepacific Corp.",
-    "group": "Household/Personal Care",
-    "pattern": "triangle",
-    "patterns": [
-     "box",
-     "triangle"
-    ],
-    "signal_close": 141500.0,
-    "pattern_low": 126128.95,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 152820 이상이면 포기)",
-    "stop_plan": "max(126129, 진입가×0.93)"
-   }
-  ]
+  "hold_10": [],
+  "risk_2": [],
+  "no_flag": []
  },
- "signal_date": "2026-11-19",
- "signals_frozen": true,
+ "signal_date": "2026-11-20",
+ "signals_frozen": false,
  "frozen_dates": [
   "2026-10-06",
   "2026-10-07",
@@ -311,8 +173,8 @@
    "avg_loss_pct": -7.32,
    "payoff": 1.32,
    "profit_factor": 0.1,
-   "total_return_pct": -6.16,
-   "equity_final": 9384047,
+   "total_return_pct": -5.55,
+   "equity_final": 9445209,
    "max_drawdown_pct": 10.79,
    "avg_hold_days": 5.79,
    "skipped": {
@@ -372,7 +234,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -6.16
+    "2026": -5.55
    },
    "open_positions": [
     {
@@ -384,9 +246,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 132,
-     "bars_held": 12,
-     "last_close": 13230.0,
-     "unrealized_pct": 37.26
+     "bars_held": 13,
+     "last_close": 13870.0,
+     "unrealized_pct": 43.9
     },
     {
      "code": "326030",
@@ -397,15 +259,28 @@
      "entry": 86759.5,
      "stop": 80686.33,
      "shares": 14,
-     "bars_held": 10,
-     "last_close": 86700.0,
-     "unrealized_pct": -0.07
+     "bars_held": 11,
+     "last_close": 86800.0,
+     "unrealized_pct": 0.05
+    },
+    {
+     "code": "090430",
+     "name": "Amorepacific Corp.",
+     "group": "Household/Personal Care",
+     "pattern": "triangle",
+     "entry_date": "2026-11-20",
+     "entry": 142125.1,
+     "stop": 132176.34,
+     "shares": 9,
+     "bars_held": 1,
+     "last_close": 139400.0,
+     "unrealized_pct": -1.92
     }
    ]
   },
   "no_sector": {
    "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
-   "signals": 98,
+   "signals": 99,
    "trades": 28,
    "wins": 1,
    "win_rate": 3.57,
@@ -414,13 +289,13 @@
    "payoff": 0.92,
    "profit_factor": 0.03,
    "total_return_pct": -18.38,
-   "equity_final": 8162463,
+   "equity_final": 8161637,
    "max_drawdown_pct": 19.66,
    "avg_hold_days": 4.04,
    "skipped": {
     "gap": 0,
-    "limit": 58,
-    "cooldown": 0,
+    "limit": 64,
+    "cooldown": 5,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -491,9 +366,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 125,
-     "bars_held": 12,
-     "last_close": 13230.0,
-     "unrealized_pct": 37.26
+     "bars_held": 13,
+     "last_close": 13870.0,
+     "unrealized_pct": 43.9
     },
     {
      "code": "003490",
@@ -504,9 +379,9 @@
      "entry": 32597.5,
      "stop": 30315.67,
      "shares": 39,
-     "bars_held": 7,
-     "last_close": 32650.0,
-     "unrealized_pct": 0.16
+     "bars_held": 8,
+     "last_close": 31400.0,
+     "unrealized_pct": -3.67
     },
     {
      "code": "035900",
@@ -517,9 +392,9 @@
      "entry": 44332.6,
      "stop": 41229.32,
      "shares": 26,
-     "bars_held": 5,
-     "last_close": 47100.0,
-     "unrealized_pct": 6.24
+     "bars_held": 6,
+     "last_close": 47000.0,
+     "unrealized_pct": 6.02
     },
     {
      "code": "437730",
@@ -530,26 +405,39 @@
      "entry": 52858.1,
      "stop": 49158.03,
      "shares": 22,
+     "bars_held": 2,
+     "last_close": 51900.0,
+     "unrealized_pct": -1.81
+    },
+    {
+     "code": "352820",
+     "name": "HYBE Co., Ltd.",
+     "group": "Miscellaneous Commercial Services",
+     "pattern": "box",
+     "entry_date": "2026-11-20",
+     "entry": 184451.7,
+     "stop": 171540.08,
+     "shares": 6,
      "bars_held": 1,
-     "last_close": 53000.0,
-     "unrealized_pct": 0.27
+     "last_close": 183600.0,
+     "unrealized_pct": -0.46
     }
    ]
   },
   "hold_10": {
    "label": "동조 + 패턴, 보유 10일",
    "signals": 32,
-   "trades": 16,
+   "trades": 17,
    "wins": 2,
-   "win_rate": 12.5,
+   "win_rate": 11.76,
    "avg_win_pct": 12.59,
-   "avg_loss_pct": -6.99,
-   "payoff": 1.76,
+   "avg_loss_pct": -6.69,
+   "payoff": 1.85,
    "profit_factor": 0.25,
-   "total_return_pct": -9.47,
-   "equity_final": 9053328,
-   "max_drawdown_pct": 12.11,
-   "avg_hold_days": 5,
+   "total_return_pct": -10.01,
+   "equity_final": 8998680,
+   "max_drawdown_pct": 12.64,
+   "avg_hold_days": 5.29,
    "skipped": {
     "gap": 0,
     "limit": 13,
@@ -565,9 +453,9 @@
      "pnl_krw": -576681
     },
     "cup_handle": {
-     "n": 1,
+     "n": 2,
      "wins": 0,
-     "pnl_krw": -87356
+     "pnl_krw": -118373
     },
     "box": {
      "n": 7,
@@ -582,9 +470,9 @@
    },
    "by_sync": {
     "day": {
-     "n": 16,
+     "n": 17,
      "wins": 2,
-     "pnl_krw": -945583
+     "pnl_krw": -976600
     }
    },
    "by_exit": {
@@ -594,34 +482,34 @@
      "pnl_krw": -1232550
     },
     "hold10": {
-     "n": 3,
+     "n": 4,
      "wins": 2,
-     "pnl_krw": 286967
+     "pnl_krw": 255950
     }
    },
    "by_year": {
     "2026": {
-     "n": 16,
+     "n": 17,
      "wins": 2,
-     "pnl_krw": -945583
+     "pnl_krw": -976600
     }
    },
    "yearly_return_pct": {
-    "2026": -9.47
+    "2026": -10.01
    },
    "open_positions": [
     {
-     "code": "326030",
-     "name": "SK Biopharmaceuticals Co., Ltd.",
-     "group": "Pharmaceuticals: Major",
-     "pattern": "cup_handle",
-     "entry_date": "2026-11-06",
-     "entry": 86759.5,
-     "stop": 80686.33,
-     "shares": 15,
-     "bars_held": 10,
-     "last_close": 86700.0,
-     "unrealized_pct": -0.07
+     "code": "090430",
+     "name": "Amorepacific Corp.",
+     "group": "Household/Personal Care",
+     "pattern": "triangle",
+     "entry_date": "2026-11-20",
+     "entry": 142125.1,
+     "stop": 132176.34,
+     "shares": 9,
+     "bars_held": 1,
+     "last_close": 139400.0,
+     "unrealized_pct": -1.92
     }
    ]
   },
@@ -635,8 +523,8 @@
    "avg_loss_pct": -7.24,
    "payoff": 1.51,
    "profit_factor": 0.15,
-   "total_return_pct": -6.07,
-   "equity_final": 9392570,
+   "total_return_pct": -4.99,
+   "equity_final": 9501215,
    "max_drawdown_pct": 16.49,
    "avg_hold_days": 4.73,
    "skipped": {
@@ -701,7 +589,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -6.07
+    "2026": -4.99
    },
    "open_positions": [
     {
@@ -713,9 +601,22 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 247,
-     "bars_held": 12,
-     "last_close": 13230.0,
-     "unrealized_pct": 37.26
+     "bars_held": 13,
+     "last_close": 13870.0,
+     "unrealized_pct": 43.9
+    },
+    {
+     "code": "090430",
+     "name": "Amorepacific Corp.",
+     "group": "Household/Personal Care",
+     "pattern": "triangle",
+     "entry_date": "2026-11-20",
+     "entry": 142125.1,
+     "stop": 132176.34,
+     "shares": 18,
+     "bars_held": 1,
+     "last_close": 139400.0,
+     "unrealized_pct": -1.92
     }
    ]
   },
@@ -729,8 +630,8 @@
    "avg_loss_pct": -7.24,
    "payoff": 1.49,
    "profit_factor": 0.19,
-   "total_return_pct": -0.95,
-   "equity_final": 9905429,
+   "total_return_pct": -0.59,
+   "equity_final": 9941391,
    "max_drawdown_pct": 7.63,
    "avg_hold_days": 6.67,
    "skipped": {
@@ -785,7 +686,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -0.95
+    "2026": -0.59
    },
    "open_positions": [
     {
@@ -797,9 +698,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 137,
-     "bars_held": 12,
-     "last_close": 13230.0,
-     "unrealized_pct": 37.26
+     "bars_held": 13,
+     "last_close": 13870.0,
+     "unrealized_pct": 43.9
     },
     {
      "code": "326030",
@@ -810,9 +711,9 @@
      "entry": 86759.5,
      "stop": 80686.33,
      "shares": 15,
-     "bars_held": 10,
-     "last_close": 86700.0,
-     "unrealized_pct": -0.07
+     "bars_held": 11,
+     "last_close": 86800.0,
+     "unrealized_pct": 0.05
     },
     {
      "code": "0126Z0",
@@ -823,9 +724,22 @@
      "entry": 344029.0,
      "stop": 319946.97,
      "shares": 3,
-     "bars_held": 10,
-     "last_close": 358500.0,
-     "unrealized_pct": 4.21
+     "bars_held": 11,
+     "last_close": 349000.0,
+     "unrealized_pct": 1.44
+    },
+    {
+     "code": "090430",
+     "name": "Amorepacific Corp.",
+     "group": "Household/Personal Care",
+     "pattern": "triangle",
+     "entry_date": "2026-11-20",
+     "entry": 142125.1,
+     "stop": 132176.34,
+     "shares": 9,
+     "bars_held": 1,
+     "last_close": 139400.0,
+     "unrealized_pct": -1.92
     }
    ]
   }
@@ -2130,6 +2044,29 @@
     "shares": 2,
     "pnl_krw": -66402,
     "pnl_pct": -7.45,
+    "hold_days": 10,
+    "gap": false
+   },
+   {
+    "code": "326030",
+    "name": "SK Biopharmaceuticals Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "cup_handle",
+    "patterns": [
+     "box",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-11-05",
+    "entry_date": "2026-11-06",
+    "entry": 86759.5,
+    "stop": 80686.33,
+    "exit_date": "2026-11-20",
+    "exit": 84844.7,
+    "why": "hold10",
+    "shares": 15,
+    "pnl_krw": -31017,
+    "pnl_pct": -2.38,
     "hold_days": 10,
     "gap": false
    }
