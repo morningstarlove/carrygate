@@ -120,6 +120,11 @@ jobs:
         continue-on-error: true
         run: python index_event.py
 
+      - name: Liquidation cascade (청산 추종 순방향 기록, P40 — 가상서버 수신 파일)
+        if: inputs.day == ''
+        continue-on-error: true
+        run: python liq_cascade.py
+
       - name: Verdict (판정 규율 — 일곱 트랙 순방향 채점, 사전 등록 기준)
         if: inputs.day == ''
         continue-on-error: true
@@ -203,7 +208,7 @@ jobs:
 
       - name: Unit tests (계산 로직)
         if: always()
-        run: python -m unittest tests.test_scalp tests.test_research tests.test_midterm tests.test_momentum tests.test_live tests.test_turtle tests.test_reversal tests.test_retest tests.test_forecast tests.test_cycle tests.test_relay tests.test_verdict tests.test_grid tests.test_selfcheck tests.test_common tests.test_push_results
+        run: python -m unittest tests.test_scalp tests.test_research tests.test_midterm tests.test_momentum tests.test_live tests.test_turtle tests.test_reversal tests.test_retest tests.test_forecast tests.test_cycle tests.test_relay tests.test_verdict tests.test_grid tests.test_selfcheck tests.test_common tests.test_push_results tests.test_liq_cascade
 
       - name: Commit results
         if: always() && inputs.dry_run != true
@@ -219,7 +224,7 @@ jobs:
             status.json history.jsonl funding.json funding_history.jsonl scalp.json scalp_history.jsonl scalp_binance.json scalp_binance_history.jsonl research.json research_history.jsonl \
             basis.json basis_history.jsonl funding_signal.json funding_signal_history.jsonl kimchi.json kimchi_history.jsonl \
             macro.json listing.json momentum.json momentum_history.jsonl live.json live_history.jsonl turtle.json turtle_history.jsonl reversal.json reversal_history.jsonl reversal_bars.jsonl retest.json retest_history.jsonl forecast.json forecast_history.jsonl cycle.json cycle_history.jsonl index_event.json index_event_history.jsonl verdict.json verdict_history.jsonl scalp_oos.json scalp_oos_frozen.json scalp_rotate.json \
-            grid.json grid_history.jsonl \
+            grid.json grid_history.jsonl liq_cascade.json liq_cascade_history.jsonl \
             data/kr_funding.json data/binance_1m data/cg_funding_snapshots.jsonl data/etf data/upbit_markets.json
 
       # 저장된 값을 다시 계산해 대조한다. 어긋나면 여기서 실패해 빨간불로 알린다.

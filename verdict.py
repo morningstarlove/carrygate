@@ -392,7 +392,7 @@ def _file_sha(path):
 def current_rules():
     """세 트랙 + 초단타의 규칙 상수를 소스에서 그대로 읽는다 (저장된 JSON 이 아니라 코드가 기준)."""
     sys.path.insert(0, HERE)
-    import kr_breakout as KB, turtle as T, reversal as R, scalp as S, retest as RT, forecast as F, cycle as CY, index_event as IE
+    import kr_breakout as KB, turtle as T, reversal as R, scalp as S, retest as RT, forecast as F, cycle as CY, index_event as IE, liq_cascade as LC
     turtle_rules = {"entry_breakout_days": T.ENTRY_N, "exit_breakout_days": T.EXIT_N, "atr_days": T.ATR_N,
                     "stop_n_mult": T.STOP_MULT, "risk_pct_per_trade": T.RISK_PCT, "max_notional_pct": T.MAX_NOTIONAL_PCT,
                     "slippage_pct": T.SLIPPAGE_PCT,
@@ -416,6 +416,7 @@ def current_rules():
         "forecast": {"rule_fixed": F.RULE_FIXED, "rules": F.rules_dict()},
         "cycle": {"rule_fixed": CY.RULE_FIXED, "rules": CY.rules_dict()},
         "index_event": {"rule_fixed": IE.RULE_FIXED, "rules": IE.rules_dict()},
+        "liq_cascade": {"rule_fixed": LC.RULE_FIXED, "rules": LC.rules_dict()},
         "criteria_sha256": _file_sha(CRITERIA_PATH),
     }
 
