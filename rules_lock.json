@@ -1,6 +1,6 @@
 {
   "_comment": "규칙 잠금. 트랙 코드의 규칙 상수와 criteria.json 지문을 적어 둔다. tests/test_verdict.py 가 매번 대조하므로, 규칙을 바꾸면 반드시 (1) proposals.md 에 근거 (2) 그 트랙의 RULE_FIXED 를 새 날짜로 (3) `python verdict.py --lock` 순서로 간다.",
-  "_locked_at": "2026-11-13T06:34:45Z",
+  "_locked_at": "2026-11-18T11:30:43Z",
   "criteria_sha256": "254a70b4d59ce02db2ee29edb8fc70a2ea6b6cfe91072cc41a0f60d539b8b23a",
   "cycle": {
     "rule_fixed": "2026-11-13",
@@ -167,6 +167,39 @@
           "risk_pct": 2.0
         }
       }
+    }
+  },
+  "liq_cascade": {
+    "rule_fixed": "2026-11-18",
+    "rules": {
+      "cooldown_sec": 300,
+      "entry_delay_sec": 1,
+      "fee_round_trip_pct": 0.1,
+      "fill": "short: entry at second low, exit at second high (adverse side)",
+      "holds_sec": [
+        5,
+        30,
+        60,
+        300,
+        900
+      ],
+      "judge": {
+        "avg_net_gt": 0.0,
+        "days": 14,
+        "min_n": 30,
+        "min_win_pct": 50.0
+      },
+      "main_hold_sec": 60,
+      "main_threshold_usdt": 1000000,
+      "min_coverage": 0.9,
+      "px_gap_sec": 5,
+      "signal_symbol": "BTCUSDT",
+      "thresholds_usdt": [
+        500000,
+        1000000,
+        3000000
+      ],
+      "window_sec": 60
     }
   },
   "retest": {

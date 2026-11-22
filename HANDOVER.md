@@ -64,11 +64,14 @@
 | P31 | P29 중 호가폭 ≥ 20bp 시장만(TRX) | 7일 836왕복 **+10.29bp/건, 7/7** (좁은 5시장 전부 마이너스) | **11/15 후보** | ★시장 건당 플러스 + 플러스일 ≥ 60% → 후보. 줄 서기 무시라 P38 로 재확인 |
 | P38 | TRX 호가 제공, 줄 서기 반영(앞 줄이 다 체결돼야 내 체결) | 2일 31왕복 건당 −17.7bp, 양쪽 동시 0 (11/18) | 11/24 | TRX 건당 > 0 · 플러스일 ≥ 60% → 소액 실거래 시험 설계 |
 | P39 | P35 를 OKX·하이퍼리퀴드 12시장만 | 평가일 11/18 부터 | 12/2 | 쓴 날 합 > 0 · 쓴 날 ≥ 60% 플러스 · 쉰 날 < 쓴 날 → 실거래 후보를 해외 선물로 |
+| P40 | **청산 추종**(11/18 신설): 비트 롱 청산 60초 합 ≥ 100만 USDT → 1초 뒤 이더 숏 60초. 사용자 서버 수신기 → `liq_cascade.py` | 서버 설치 대기(0일) | 센 날 14일(빠르면 12/3) | 주 칸 건수 ≥ 30 · 건당 순 > 0 · 순 승률 ≥ 50% → `carrygate-exec` 설계 제안. 건수 < 30 보류 |
 | P30 | 국면 교대(전날 이긴 묶음) | 6일 −223.8%, 플러스 1일 | 11/20 | 교대 > 되돌림만·돌파만 이고 플러스 |
 | P34 | 60분만 교대 vs 60분 되돌림 고정 | 4일: 교대 −97.0 / 고정 −52.6 / 돌파 −15.1 | 11/22 | 고정 > 교대 이고 고정 플러스 |
 | P35 | 되돌림은 전날 되돌림이 진 날만 | 평가일 11/12 부터(첫날 쉼) | 11/26 | 쓴 날 합 > 0 · 쓴 날 ≥ 60% 플러스 · 쉰 날 되돌림 < 쓴 날 |
 
 매일 17:10 보고(Routine trig_01Sq7GkfWcgjfZfiRQsfrrhJ)가 이 표의 숫자를 갱신해 사용자에게 보낸다. 새 트랙·규칙은 한 장 카드 필수(`docs/cards/README.md`, 사용자 지시 11/7).
+
+**2026-11-18 청산 알림 매매법 검토 → 진짜 청산 흐름 순방향 기록 (제안함 P40, 사용자 결정 "b"):** SNS 글(degenunnie)의 "비트 롱 줄청산 → 이더 숏, SOXL 급락 → 반도체 개별주 숏"을 봉 자료(급락+거래량 급증 대용 신호)로 재면 1·5·15분봉 모두 수수료 뒤 우위 없음(t < 2), SOXL→개별주는 반대로 되돌림 — `docs/LIQUIDATION_CASCADE_REVIEW.md`. 남은 가능성은 봉이 닫히기 전 몇 초라, 사용자 서버가 바이낸스 강제청산 흐름과 BTC·ETH 초 단위 체결가를 직접 받는다. 구성: ① `vps_liq_collector.py` — 서버에서 systemd `carrygate-liq` 로 상시 실행, `/var/www/carrygate/liq/` 에 `liq_날짜.jsonl`·`px_날짜.csv.gz`·`status.json`(키 없음, 웹소켓은 표준 라이브러리로 직접 구현, 주소 후보 자동 전환). ② `liq_cascade.py` — 매일 daily 가 최근 4일 중 안 센 날을 받아 `liq_cascade.json`·`liq_cascade_history.jsonl` 에 기록, `python liq_cascade.py --report`. ③ 규칙은 `rules_lock.json` 에 잠금. 판정 7트랙에는 넣지 않음(연구 기록). 확인: `curl -s http://158.247.206.213/carrygate/liq/status.json`. 끄기: 서버에서 `systemctl disable --now carrygate-liq`. **이 세션에서는 바이낸스에 접속할 수 없어 수신기를 실제 흐름에 붙여 보지 못했다** — 로컬 가짜 웹소켓 서버 시험만 통과. 설치 스크립트의 주소 시험(`--probe`) 출력이 첫 실데이터 확인이다. 카드 `docs/cards/p40_liq_cascade.svg`, 기록 `docs/sessions/2026-11-18_liquidation_cascade.md`.
 
 **2026-11-07 초단타 국면 교대 규칙 (제안함 P30):** 전날 이긴 묶음(30·60분 되돌림 vs 돌파)의 오늘 성적을 `scalp_rotate.py` → `scalp_rotate.json` 으로 매일 센다. 사후 23일 +101%(되돌림만 −65%, 돌파만 −142%). 순방향은 평가일 11/6 부터, 14일 뒤(11/20 보고) 첫 판단. `python scalp_rotate.py --report`. 한 장 카드: `docs/cards/p30_rotate.svg`(실데이터 30분봉에 두 규칙의 실제 진입·청산 표시).
 
@@ -96,7 +99,7 @@
 
 **2026-11-12 추세 전환 4시간봉 검산 빨간불 수정:** 11/8 16:00 봉에 업비트 BTC·ETH 가 시간 초과로 빠져 `reversal_4h` 가 9회 연속 실패(기록 저장은 정상). 실패 코인 1회 재시도, 빠지면 `missing` 표시, 검산은 표시된 봉을 기록만. 지난 줄엔 로그로 확인된 `missing` 만 덧붙임. `docs/sessions/2026-11-12_reversal_selfcheck_red.md`.
 
-**사용자 결정 대기:** 없음. 10/29 SNS 글 두 건(이평선 수렴 매매법 P24, CIS 원칙 P25)은 사용자 결정 "A" 로 기록만 — `docs/MA_CONVERGENCE_REVIEW.md`·`docs/CIS_PRINCIPLES_REVIEW.md`, 트랙·규칙 변경 없음. 11/4 SNS 카드 볼린저밴드 하단 재진입(P27)도 기록만 — `docs/BB_REENTRY_REVIEW.md`, 15종목 1,535건 수수료 뒤 매수보유 대비 우위 없음, 트랙·규칙 변경 없음. 다음은 11/4 초단타 재확인과 첫 판정이 뜨는 날. **10/22 신설 급상승 패턴 트랙**: 백테스트 표 기록·현황판 카드(타일·카드·판정 줄, 라이브 버전)까지 끝. 갱신 Routine 파일 목록에 `retest.json` 도 반영 확인(10/24). 남은 것: Actions 에서 오프라인 고정 봉 저장(`--save-fixture`).
+**사용자 결정 대기:** 없음. **사용자 할 일 1개(P40, 11/18):** Vultr 서버에서 `curl -sS https://raw.githubusercontent.com/morningstarlove/carrygate/main/scripts/vps_liq_install.sh | bash` 한 번(PR 병합 뒤). 안 하면 청산 기록이 0일로 남는다. 10/29 SNS 글 두 건(이평선 수렴 매매법 P24, CIS 원칙 P25)은 사용자 결정 "A" 로 기록만 — `docs/MA_CONVERGENCE_REVIEW.md`·`docs/CIS_PRINCIPLES_REVIEW.md`, 트랙·규칙 변경 없음. 11/4 SNS 카드 볼린저밴드 하단 재진입(P27)도 기록만 — `docs/BB_REENTRY_REVIEW.md`, 15종목 1,535건 수수료 뒤 매수보유 대비 우위 없음, 트랙·규칙 변경 없음. 다음은 11/4 초단타 재확인과 첫 판정이 뜨는 날. **10/22 신설 급상승 패턴 트랙**: 백테스트 표 기록·현황판 카드(타일·카드·판정 줄, 라이브 버전)까지 끝. 갱신 Routine 파일 목록에 `retest.json` 도 반영 확인(10/24). 남은 것: Actions 에서 오프라인 고정 봉 저장(`--save-fixture`).
 
 **2026-10-15 백테스트 과적합 논문 검토 → 판정기 보강 (제안함 P17·P18 반영):** 댓글 권고로 Bailey·López de Prado·Harvey·Hansen 등 17편을 읽고 공식을 실데이터에 대입(`docs/BACKTEST_OVERFITTING_REVIEW.md`, `scripts/overfit_check.py`). 발견: 초단타 10/7 PASS(후보 12개)는 실력 0 이어도 뜨는 후보 수(378개 중 42~53개)의 1/4 이었고, 터틀·추세전환 20건 합격선은 실력 0 도 19~40% 확률로 PASS 한다. 반영: ① `criteria.json scalp.noise_floor` — 부호 뒤집기 500회의 후보 수 중앙값보다 실제 후보가 많아야 PASS, 같거나 적으면 NOT_YET(잡음 이하). ② 판정 파일 각 거래소에 `interpretation`(실력 0 PASS 확률·놓칠 확률·필요 건수 MinTRL·t>3). 합격선 숫자·매매 규칙 변경 없음, criteria sealed 2026-10-15, 잠금 재생성. 현황판 카드에는 아직 안 올렸다(판정 파일에만). 작업 기록 `docs/sessions/2026-10-15_backtest_overfitting.md`.
 
