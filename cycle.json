@@ -1,6 +1,6 @@
 {
- "date": "2026-11-22",
- "generated_at_kst": "2026-11-22 16:20",
+ "date": "2026-11-23",
+ "generated_at_kst": "2026-11-23 17:05",
  "source": "bitstamp",
  "rules": {
   "source": "bitstamp btcusd 1d close (fallback okx BTC-USDT 1Dutc)",
@@ -33,18 +33,18 @@
   "exit": "none; cycle ends on close > ath_close",
   "rule_fixed": "2026-11-13"
  },
- "bar_date": "2026-11-21",
- "close": 60078.34,
- "dd_pct": -51.83,
- "days_since_ath": 411,
- "sma200": 72427.4,
+ "bar_date": "2026-11-22",
+ "close": 61169.55,
+ "dd_pct": -50.96,
+ "days_since_ath": 412,
+ "sma200": 72326.02,
  "above_sma200": false,
- "forward_days": 9,
+ "forward_days": 10,
  "ladder": {
   "n": 1,
   "invested": 0.25,
   "avg_cost": 62006.92,
-  "mtm_pct": -3.26,
+  "mtm_pct": -1.5,
   "fills": [
    {
     "name": "L50",
@@ -59,7 +59,7 @@
   "n": 2,
   "invested": 2.0,
   "avg_cost": 63265.96,
-  "mtm_pct": -5.18,
+  "mtm_pct": -3.46,
   "last_buy": {
    "date": "2026-11-20",
    "price": 58813.83
@@ -79,14 +79,14 @@
   {
    "name": "T200",
    "rule": "종가가 200일 평균을 위로 건너는 날(낙폭 ≤ −30%)",
-   "sma200": 72427.4
+   "sma200": 72326.02
   }
  ],
  "cycle_end": null,
  "analog": {
   "2013": {
    "ath_date": "2013-11-29",
-   "dd_same_day_pct": -84.86,
+   "dd_same_day_pct": -81.36,
    "min_so_far_pct": -84.86,
    "min_day": 411,
    "cycle_min_pct": -84.86,
@@ -94,7 +94,7 @@
   },
   "2017": {
    "ath_date": "2017-12-16",
-   "dd_same_day_pct": -82.21,
+   "dd_same_day_pct": -82.1,
    "min_so_far_pct": -83.43,
    "min_day": 364,
    "cycle_min_pct": -83.43,
@@ -102,12 +102,12 @@
   },
   "2021": {
    "ath_date": "2021-11-08",
-   "dd_same_day_pct": -75.08,
+   "dd_same_day_pct": -75.09,
    "min_so_far_pct": -76.66,
    "min_day": 378,
    "cycle_min_pct": -76.66,
    "cycle_min_day": 378
   }
  },
- "summary": "2026-11-21 종가 60,078, 고점 대비 -51.83% (411일째). 분할매수 1/4 묶음 평균 62,007 평가 -3.26% | DCA 2회 평균 63,266 평가 -5.18%"
+ "summary": "2026-11-22 종가 61,170, 고점 대비 -50.96% (412일째). 분할매수 1/4 묶음 평균 62,007 평가 -1.5% | DCA 2회 평균 63,266 평가 -3.46%"
 }
