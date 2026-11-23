@@ -51,6 +51,14 @@ def _f(x):
 
 
 # ----------------------------------------------------------------- 경로별
+def _bad(o, h, l, c, v):
+    """쓸 수 없는 봉: 값이 비었거나, 시가·고가·저가·종가 중 하나라도 0 이하, 또는 고가 < 저가.
+    2026-11-23: 시가 0 인 봉이 종가 검사(c > 0)만 통과해 손절가 대신 0원에 판 것으로 계산 → 3건 −100% (base·no_sector)."""
+    if None in (o, h, l, c, v):
+        return True
+    return min(o, h, l, c) <= 0 or h < l
+
+
 def naver_fchart(code, days):
     raw = _get("https://fchart.stock.naver.com/sise.nhn?symbol=%s&timeframe=day&count=%d&requestType=0" % (code, days))
     # 응답이 <?xml encoding="euc-kr"?> 로 와서 ElementTree 가 바이트 그대로는 못 읽는다 — 문자열로 바꾸고 선언을 뗀다
@@ -64,7 +72,7 @@ def naver_fchart(code, days):
         if len(p) < 6 or not p[0]:
             continue
         o, h, l, c, v = (_f(x) for x in p[1:6])
-        if None in (o, h, l, c, v) or c <= 0:
+        if _bad(o, h, l, c, v):
             continue
         out.append({"date": "%s-%s-%s" % (p[0][:4], p[0][4:6], p[0][6:8]), "o": o, "h": h, "l": l, "c": c, "v": v, "value": None})
     if not out:
@@ -82,7 +90,7 @@ def naver_api(code, days):
     for it in d if isinstance(d, list) else []:
         ld = str(it.get("localDate") or "")
         o, h, l, c, v = (_f(it.get(k)) for k in ("openPrice", "highPrice", "lowPrice", "closePrice", "accumulatedTradingVolume"))
-        if len(ld) != 8 or None in (o, h, l, c, v) or c <= 0:
+        if len(ld) != 8 or _bad(o, h, l, c, v):
             continue
         out.append({"date": "%s-%s-%s" % (ld[:4], ld[4:6], ld[6:8]), "o": o, "h": h, "l": l, "c": c, "v": v,
                     "value": _f(it.get("accumulatedTradingValue"))})
@@ -128,7 +136,7 @@ def yahoo(code, days):
             out = []
             for i, t in enumerate(ts):
                 o, h, l, c, v = (_f((q.get(k) or [None] * len(ts))[i]) for k in ("open", "high", "low", "close", "volume"))
-                if None in (o, h, l, c, v) or c <= 0:
+                if _bad(o, h, l, c, v):
                     continue
                 out.append({"date": datetime.fromtimestamp(t, timezone(timedelta(hours=9))).strftime("%Y-%m-%d"),
                             "o": o, "h": h, "l": l, "c": c, "v": v, "value": None})

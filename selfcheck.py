@@ -647,6 +647,8 @@ def check_kr(problems, notes):
             # 손절 손실은 보통 −7%+비용 이지만, 시가가 손절가 아래로 뜨면(gap) 시가에 팔려 더 잃는다 — 그건 규칙대로다
             if t["why"] == "stop" and t["pnl_pct"] < -(stop_pct + 1.0) and not t.get("gap", "gap" not in t):
                 problems.append("한국주식 %s %s: 손절 매매 손실이 %.1f%% 인데 갭 표시가 없다" % (name, t["code"], t["pnl_pct"])); bad = True; break
+            if (t.get("exit") or 0) <= 0:      # 2026-11-23: 시가 0 봉으로 0원에 판 것으로 계산된 사고
+                problems.append("한국주식 %s %s: 청산가가 %s 원 — 가격이 0 인 봉을 읽었다" % (name, t["code"], t.get("exit"))); bad = True; break
             if t["why"] == "stop" and t.get("gap") and t["exit"] > t["stop"] * (1 - 0.3 / 100) + 1:
                 problems.append("한국주식 %s %s: 갭 손절인데 손절가보다 비싸게 팔렸다" % (name, t["code"])); bad = True; break
         if bad:
