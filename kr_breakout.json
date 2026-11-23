@@ -1,6 +1,6 @@
 {
- "date": "2026-11-21",
- "generated_at_utc": "2026-11-20T15:52:43Z",
+ "date": "2026-11-23",
+ "generated_at_utc": "2026-11-23T07:19:04Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -74,48 +74,47 @@
   }
  },
  "forward": {
-  "days": 33,
+  "days": 34,
   "from": "2026-10-05",
-  "to": "2026-11-20",
-  "codes": 350,
+  "to": "2026-11-23",
+  "codes": 353,
   "bar_errors": 0,
   "stale_codes": 0,
   "by_source": {
-   "yahoo+naver_api": 347,
-   "yahoo": 3
+   "yahoo": 270,
+   "yahoo+gapfill": 2,
+   "yahoo+naver_api": 81
   },
   "skipped_days": [
    "2026-10-05"
   ],
-  "gap_filled": 0,
-  "gap_filled_codes": {},
+  "gap_filled": 2,
+  "gap_filled_codes": {
+   "345290": [
+    "2026-11-18",
+    "2026-11-19",
+    "2026-11-20"
+   ],
+   "493410": [
+    "2026-11-16",
+    "2026-11-17",
+    "2026-11-18",
+    "2026-11-19",
+    "2026-11-20"
+   ]
+  },
   "gap_unfilled": 0,
   "note": null
  },
  "signals_today": {
   "base": [],
-  "no_sector": [
-   {
-    "code": "439090",
-    "name": "Manyo Factory Co., Ltd.",
-    "group": "Medical Distributors",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 16990.0,
-    "pattern_low": 13010.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 18349 이상이면 포기)",
-    "stop_plan": "max(13010, 진입가×0.93)"
-   }
-  ],
+  "no_sector": [],
   "hold_10": [],
   "risk_2": [],
   "no_flag": []
  },
- "signal_date": "2026-11-20",
- "signals_frozen": true,
+ "signal_date": "2026-11-23",
+ "signals_frozen": false,
  "frozen_dates": [
   "2026-10-06",
   "2026-10-07",
@@ -155,17 +154,17 @@
   "base": {
    "label": "동조 업종 + 패턴 돌파 (기본)",
    "signals": 32,
-   "trades": 14,
+   "trades": 15,
    "wins": 1,
-   "win_rate": 7.14,
+   "win_rate": 6.67,
    "avg_win_pct": 10.53,
-   "avg_loss_pct": -7.32,
-   "payoff": 1.32,
-   "profit_factor": 0.1,
-   "total_return_pct": -5.67,
-   "equity_final": 9432509,
-   "max_drawdown_pct": 10.79,
-   "avg_hold_days": 5.79,
+   "avg_loss_pct": -13.94,
+   "payoff": 0.71,
+   "profit_factor": 0.05,
+   "total_return_pct": -19.34,
+   "equity_final": 8065609,
+   "max_drawdown_pct": 21.01,
+   "avg_hold_days": 6.2,
    "skipped": {
     "gap": 0,
     "limit": 14,
@@ -181,9 +180,9 @@
      "pnl_krw": -576681
     },
     "cup_handle": {
-     "n": 1,
+     "n": 2,
      "wins": 0,
-     "pnl_krw": -87356
+     "pnl_krw": -1302171
     },
     "box": {
      "n": 5,
@@ -198,16 +197,16 @@
    },
    "by_sync": {
     "day": {
-     "n": 14,
+     "n": 15,
      "wins": 1,
-     "pnl_krw": -1088781
+     "pnl_krw": -2303596
     }
    },
    "by_exit": {
     "stop": {
-     "n": 13,
+     "n": 14,
      "wins": 0,
-     "pnl_krw": -1211696
+     "pnl_krw": -2426511
     },
     "hold20": {
      "n": 1,
@@ -217,13 +216,13 @@
    },
    "by_year": {
     "2026": {
-     "n": 14,
+     "n": 15,
      "wins": 1,
-     "pnl_krw": -1088781
+     "pnl_krw": -2303596
     }
    },
    "yearly_return_pct": {
-    "2026": -5.67
+    "2026": -19.34
    },
    "open_positions": [
     {
@@ -235,22 +234,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 132,
-     "bars_held": 13,
-     "last_close": 13920.0,
-     "unrealized_pct": 44.42
-    },
-    {
-     "code": "326030",
-     "name": "SK Biopharmaceuticals Co., Ltd.",
-     "group": "Pharmaceuticals: Major",
-     "pattern": "cup_handle",
-     "entry_date": "2026-11-06",
-     "entry": 86759.5,
-     "stop": 80686.33,
-     "shares": 14,
-     "bars_held": 11,
-     "last_close": 86000.0,
-     "unrealized_pct": -0.88
+     "bars_held": 14,
+     "last_close": 12870.0,
+     "unrealized_pct": 33.52
     },
     {
      "code": "090430",
@@ -261,30 +247,30 @@
      "entry": 142125.1,
      "stop": 132176.34,
      "shares": 9,
-     "bars_held": 1,
-     "last_close": 138500.0,
-     "unrealized_pct": -2.55
+     "bars_held": 2,
+     "last_close": 135800.0,
+     "unrealized_pct": -4.45
     }
    ]
   },
   "no_sector": {
    "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
    "signals": 99,
-   "trades": 28,
+   "trades": 30,
    "wins": 1,
-   "win_rate": 3.57,
+   "win_rate": 3.33,
    "avg_win_pct": 6.57,
-   "avg_loss_pct": -7.22,
-   "payoff": 0.92,
-   "profit_factor": 0.03,
-   "total_return_pct": -18.7,
-   "equity_final": 8130087,
-   "max_drawdown_pct": 19.66,
-   "avg_hold_days": 4.04,
+   "avg_loss_pct": -13.62,
+   "payoff": 0.5,
+   "profit_factor": 0.02,
+   "total_return_pct": -42.83,
+   "equity_final": 5716737,
+   "max_drawdown_pct": 42.83,
+   "avg_hold_days": 4.13,
    "skipped": {
     "gap": 0,
-    "limit": 64,
-    "cooldown": 0,
+    "limit": 65,
+    "cooldown": 7,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -306,28 +292,28 @@
      "pnl_krw": -401380
     },
     "box": {
-     "n": 13,
+     "n": 15,
      "wins": 0,
-     "pnl_krw": -1126383
+     "pnl_krw": -3504752
     }
    },
    "by_sync": {
     "day": {
-     "n": 6,
+     "n": 7,
      "wins": 0,
-     "pnl_krw": -548490
+     "pnl_krw": -1819983
     },
     "none": {
-     "n": 22,
+     "n": 23,
      "wins": 1,
-     "pnl_krw": -1814349
+     "pnl_krw": -2921225
     }
    },
    "by_exit": {
     "stop": {
-     "n": 26,
+     "n": 28,
      "wins": 0,
-     "pnl_krw": -2412816
+     "pnl_krw": -4791185
     },
     "low10": {
      "n": 2,
@@ -337,13 +323,13 @@
    },
    "by_year": {
     "2026": {
-     "n": 28,
+     "n": 30,
      "wins": 1,
-     "pnl_krw": -2362839
+     "pnl_krw": -4741208
     }
    },
    "yearly_return_pct": {
-    "2026": -18.7
+    "2026": -42.83
    },
    "open_positions": [
     {
@@ -355,22 +341,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 125,
-     "bars_held": 13,
-     "last_close": 13920.0,
-     "unrealized_pct": 44.42
-    },
-    {
-     "code": "003490",
-     "name": "Korean Air Lines Co., Ltd.",
-     "group": "Airlines",
-     "pattern": "box",
-     "entry_date": "2026-11-11",
-     "entry": 32597.5,
-     "stop": 30315.67,
-     "shares": 39,
-     "bars_held": 8,
-     "last_close": 31300.0,
-     "unrealized_pct": -3.98
+     "bars_held": 14,
+     "last_close": 12870.0,
+     "unrealized_pct": 33.52
     },
     {
      "code": "035900",
@@ -381,9 +354,9 @@
      "entry": 44332.6,
      "stop": 41229.32,
      "shares": 26,
-     "bars_held": 6,
-     "last_close": 46250.0,
-     "unrealized_pct": 4.33
+     "bars_held": 7,
+     "last_close": 45550.0,
+     "unrealized_pct": 2.75
     },
     {
      "code": "437730",
@@ -394,22 +367,9 @@
      "entry": 52858.1,
      "stop": 49158.03,
      "shares": 22,
-     "bars_held": 2,
-     "last_close": 51300.0,
-     "unrealized_pct": -2.95
-    },
-    {
-     "code": "352820",
-     "name": "HYBE Co., Ltd.",
-     "group": "Miscellaneous Commercial Services",
-     "pattern": "box",
-     "entry_date": "2026-11-20",
-     "entry": 184451.7,
-     "stop": 171540.08,
-     "shares": 6,
-     "bars_held": 1,
-     "last_close": 183400.0,
-     "unrealized_pct": -0.57
+     "bars_held": 3,
+     "last_close": 53900.0,
+     "unrealized_pct": 1.97
     }
    ]
   },
@@ -423,9 +383,9 @@
    "avg_loss_pct": -6.69,
    "payoff": 1.85,
    "profit_factor": 0.25,
-   "total_return_pct": -10.09,
-   "equity_final": 8990580,
-   "max_drawdown_pct": 12.72,
+   "total_return_pct": -10.34,
+   "equity_final": 8966280,
+   "max_drawdown_pct": 12.95,
    "avg_hold_days": 5.29,
    "skipped": {
     "gap": 0,
@@ -484,7 +444,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -10.09
+    "2026": -10.34
    },
    "open_positions": [
     {
@@ -496,9 +456,9 @@
      "entry": 142125.1,
      "stop": 132176.34,
      "shares": 9,
-     "bars_held": 1,
-     "last_close": 138500.0,
-     "unrealized_pct": -2.55
+     "bars_held": 2,
+     "last_close": 135800.0,
+     "unrealized_pct": -4.45
     }
    ]
   },
@@ -512,8 +472,8 @@
    "avg_loss_pct": -7.24,
    "payoff": 1.51,
    "profit_factor": 0.15,
-   "total_return_pct": -5.03,
-   "equity_final": 9497365,
+   "total_return_pct": -8.11,
+   "equity_final": 9189415,
    "max_drawdown_pct": 16.49,
    "avg_hold_days": 4.73,
    "skipped": {
@@ -578,7 +538,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -5.03
+    "2026": -8.11
    },
    "open_positions": [
     {
@@ -590,9 +550,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 247,
-     "bars_held": 13,
-     "last_close": 13920.0,
-     "unrealized_pct": 44.42
+     "bars_held": 14,
+     "last_close": 12870.0,
+     "unrealized_pct": 33.52
     },
     {
      "code": "090430",
@@ -603,26 +563,26 @@
      "entry": 142125.1,
      "stop": 132176.34,
      "shares": 18,
-     "bars_held": 1,
-     "last_close": 138500.0,
-     "unrealized_pct": -2.55
+     "bars_held": 2,
+     "last_close": 135800.0,
+     "unrealized_pct": -4.45
     }
    ]
   },
   "no_flag": {
    "label": "동조 + 패턴, 깃발형 제외",
    "signals": 18,
-   "trades": 9,
+   "trades": 11,
    "wins": 1,
-   "win_rate": 11.11,
+   "win_rate": 9.09,
    "avg_win_pct": 10.53,
-   "avg_loss_pct": -7.24,
-   "payoff": 1.49,
-   "profit_factor": 0.19,
-   "total_return_pct": -0.82,
-   "equity_final": 9917641,
-   "max_drawdown_pct": 7.63,
-   "avg_hold_days": 6.67,
+   "avg_loss_pct": -25.8,
+   "payoff": 0.46,
+   "profit_factor": 0.05,
+   "total_return_pct": -25.77,
+   "equity_final": 7422991,
+   "max_drawdown_pct": 29.62,
+   "avg_hold_days": 7.64,
    "skipped": {
     "gap": 0,
     "limit": 5,
@@ -633,9 +593,9 @@
    },
    "by_pattern": {
     "cup_handle": {
-     "n": 1,
+     "n": 2,
      "wins": 0,
-     "pnl_krw": -109195
+     "pnl_krw": -1410783
     },
     "box": {
      "n": 6,
@@ -643,23 +603,23 @@
      "pnl_krw": -576356
     },
     "triangle": {
-     "n": 2,
+     "n": 3,
      "wins": 1,
-     "pnl_krw": 57018
+     "pnl_krw": -975224
     }
    },
    "by_sync": {
     "day": {
-     "n": 9,
+     "n": 11,
      "wins": 1,
-     "pnl_krw": -628533
+     "pnl_krw": -2962363
     }
    },
    "by_exit": {
     "stop": {
-     "n": 8,
+     "n": 10,
      "wins": 0,
-     "pnl_krw": -771934
+     "pnl_krw": -3105764
     },
     "hold20": {
      "n": 1,
@@ -669,13 +629,13 @@
    },
    "by_year": {
     "2026": {
-     "n": 9,
+     "n": 11,
      "wins": 1,
-     "pnl_krw": -628533
+     "pnl_krw": -2962363
     }
    },
    "yearly_return_pct": {
-    "2026": -0.82
+    "2026": -25.77
    },
    "open_positions": [
     {
@@ -687,35 +647,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 137,
-     "bars_held": 13,
-     "last_close": 13920.0,
-     "unrealized_pct": 44.42
-    },
-    {
-     "code": "326030",
-     "name": "SK Biopharmaceuticals Co., Ltd.",
-     "group": "Pharmaceuticals: Major",
-     "pattern": "cup_handle",
-     "entry_date": "2026-11-06",
-     "entry": 86759.5,
-     "stop": 80686.33,
-     "shares": 15,
-     "bars_held": 11,
-     "last_close": 86000.0,
-     "unrealized_pct": -0.88
-    },
-    {
-     "code": "0126Z0",
-     "name": "Samsung Epis Holdings Co., Ltd.",
-     "group": "Pharmaceuticals: Major",
-     "pattern": "triangle",
-     "entry_date": "2026-11-06",
-     "entry": 344029.0,
-     "stop": 319946.97,
-     "shares": 3,
-     "bars_held": 11,
-     "last_close": 345500.0,
-     "unrealized_pct": 0.43
+     "bars_held": 14,
+     "last_close": 12870.0,
+     "unrealized_pct": 33.52
     },
     {
      "code": "090430",
@@ -726,9 +660,9 @@
      "entry": 142125.1,
      "stop": 132176.34,
      "shares": 9,
-     "bars_held": 1,
-     "last_close": 138500.0,
-     "unrealized_pct": -2.55
+     "bars_held": 2,
+     "last_close": 135800.0,
+     "unrealized_pct": -4.45
     }
    ]
   }
@@ -1048,6 +982,29 @@
     "pnl_pct": -7.45,
     "hold_days": 10,
     "gap": false
+   },
+   {
+    "code": "326030",
+    "name": "SK Biopharmaceuticals Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "cup_handle",
+    "patterns": [
+     "box",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-11-05",
+    "entry_date": "2026-11-06",
+    "entry": 86759.5,
+    "stop": 80686.33,
+    "exit_date": "2026-11-23",
+    "exit": 0.0,
+    "why": "stop",
+    "shares": 14,
+    "pnl_krw": -1214815,
+    "pnl_pct": -100.0,
+    "hold_days": 12,
+    "gap": true
    }
   ],
   "no_sector": [
@@ -1675,6 +1632,50 @@
     "pnl_pct": -7.45,
     "hold_days": 1,
     "gap": false
+   },
+   {
+    "code": "003490",
+    "name": "Korean Air Lines Co., Ltd.",
+    "group": "Airlines",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-11-10",
+    "entry_date": "2026-11-11",
+    "entry": 32597.5,
+    "stop": 30315.67,
+    "exit_date": "2026-11-23",
+    "exit": 0.0,
+    "why": "stop",
+    "shares": 39,
+    "pnl_krw": -1271493,
+    "pnl_pct": -100.0,
+    "hold_days": 9,
+    "gap": true
+   },
+   {
+    "code": "352820",
+    "name": "HYBE Co., Ltd.",
+    "group": "Miscellaneous Commercial Services",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": null,
+    "signal_date": "2026-11-19",
+    "entry_date": "2026-11-20",
+    "entry": 184451.7,
+    "stop": 171540.08,
+    "exit_date": "2026-11-23",
+    "exit": 0.0,
+    "why": "stop",
+    "shares": 6,
+    "pnl_krw": -1106876,
+    "pnl_pct": -100.0,
+    "hold_days": 2,
+    "gap": true
    }
   ],
   "hold_10": [
@@ -2510,6 +2511,52 @@
     "pnl_pct": 10.53,
     "hold_days": 20,
     "gap": false
+   },
+   {
+    "code": "326030",
+    "name": "SK Biopharmaceuticals Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "cup_handle",
+    "patterns": [
+     "box",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-11-05",
+    "entry_date": "2026-11-06",
+    "entry": 86759.5,
+    "stop": 80686.33,
+    "exit_date": "2026-11-23",
+    "exit": 0.0,
+    "why": "stop",
+    "shares": 15,
+    "pnl_krw": -1301588,
+    "pnl_pct": -100.0,
+    "hold_days": 12,
+    "gap": true
+   },
+   {
+    "code": "0126Z0",
+    "name": "Samsung Epis Holdings Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-11-05",
+    "entry_date": "2026-11-06",
+    "entry": 344029.0,
+    "stop": 319946.97,
+    "exit_date": "2026-11-23",
+    "exit": 0.0,
+    "why": "stop",
+    "shares": 3,
+    "pnl_krw": -1032242,
+    "pnl_pct": -100.0,
+    "hold_days": 12,
+    "gap": true
    }
   ]
  },
