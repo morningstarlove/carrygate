@@ -1,12 +1,36 @@
 {
- "schema": "carrygate-scalp-rotate/4",
+ "schema": "carrygate-scalp-rotate/5",
+ "aux_late": {
+  "fixed": "2026-11-24",
+  "forward_from": "2026-11-24",
+  "late_start_sec": 7200,
+  "method": "P41 보조: P35·P39 를 하루 UTC 2시간 늦게 시작(그 전 진입 매매 제외). 전날 판단은 그대로. full_day_net_pct = 같은 날 하루 전체로 셌다면",
+  "late": {
+   "all": {
+    "label": "P35(18시장)",
+    "forward": {
+     "days": 0,
+     "full_day_net_pct": 0
+    },
+    "forward_days": []
+   },
+   "offshore": {
+    "label": "P39(OKX·하이퍼리퀴드 12시장)",
+    "forward": {
+     "days": 0,
+     "full_day_net_pct": 0
+    },
+    "forward_days": []
+   }
+  }
+ },
  "rule_fixed": "2026-11-07",
  "forward_from": "2026-11-06",
  "aux60": {
   "fixed": "2026-11-08",
   "forward_from": "2026-11-08",
   "method": "P34 보조: 60분봉만(되돌림=60분 VWAP 지정가+평균회귀 지정가, 돌파=60분 20봉 돌파) 같은 교대. rev_only_pct 가 '60분 되돌림 고정'",
-  "next_pick": "brk",
+  "next_pick": "rev",
   "backtest": {
    "days": 25,
    "net_pct": -45.014,
@@ -16,11 +40,11 @@
    "picked_rev": 17
   },
   "forward": {
-   "days": 15,
-   "net_pct": -416.604,
+   "days": 16,
+   "net_pct": -451.644,
    "plus_days": 4,
-   "rev_only_pct": -110.453,
-   "brk_only_pct": -67.897,
+   "rev_only_pct": -110.403,
+   "brk_only_pct": -102.937,
    "picked_rev": 10
   },
   "forward_days": [
@@ -128,6 +152,13 @@
     "net_pct": -2.6207,
     "rev_pct": -2.6207,
     "brk_pct": 2.6248
+   },
+   {
+    "eval_day": "2026-11-23",
+    "pick": "brk",
+    "net_pct": -35.0399,
+    "rev_pct": 0.0498,
+    "brk_pct": -35.0399
    }
   ]
  },
@@ -135,7 +166,7 @@
   "fixed": "2026-11-13",
   "forward_from": "2026-11-12",
   "method": "P35 보조: 전날 30·60분 되돌림 묶음 합 < 0 인 날만 오늘 되돌림 묶음을 쓴다(아니면 쉼). skipped_rev_pct = 쉰 날 되돌림이 냈을 합",
-  "next_active": true,
+  "next_active": false,
   "backtest": {
    "days": 29,
    "active_days": 10,
@@ -145,11 +176,11 @@
    "skipped_rev_pct": -310.708
   },
   "forward": {
-   "days": 11,
-   "active_days": 3,
-   "net_pct": 286.415,
-   "plus_days": 3,
-   "rev_only_pct": -134.821,
+   "days": 12,
+   "active_days": 4,
+   "net_pct": 324.466,
+   "plus_days": 4,
+   "rev_only_pct": -96.77,
    "skipped_rev_pct": -421.236
   },
   "forward_days": [
@@ -229,6 +260,13 @@
     "net_pct": 0.0,
     "rev_pct": -4.7848,
     "prev_rev_pct": 196.3999
+   },
+   {
+    "eval_day": "2026-11-23",
+    "active": true,
+    "net_pct": 38.0507,
+    "rev_pct": 38.0507,
+    "prev_rev_pct": -4.7848
    }
   ]
  },
@@ -240,7 +278,7 @@
    "hyperliquid"
   ],
   "method": "P39 보조: P35 를 OKX·하이퍼리퀴드 12시장 합만으로(전날 12시장 되돌림 합 < 0 이면 오늘 12시장 되돌림을 씀)",
-  "next_active": true,
+  "next_active": false,
   "backtest": {
    "days": 35,
    "active_days": 14,
@@ -250,11 +288,11 @@
    "skipped_rev_pct": -156.818
   },
   "forward": {
-   "days": 5,
-   "active_days": 1,
-   "net_pct": 140.879,
-   "plus_days": 1,
-   "rev_only_pct": 13.502,
+   "days": 6,
+   "active_days": 2,
+   "net_pct": 172.476,
+   "plus_days": 2,
+   "rev_only_pct": 45.099,
    "skipped_rev_pct": -127.377
   },
   "forward_days": [
@@ -292,11 +330,18 @@
     "net_pct": 0.0,
     "rev_pct": -7.7363,
     "prev_rev_pct": 140.8791
+   },
+   {
+    "eval_day": "2026-11-23",
+    "active": true,
+    "net_pct": 31.5969,
+    "rev_pct": 31.5969,
+    "prev_rev_pct": -7.7363
    }
   ]
  },
  "method": "전날 18시장 합계가 큰 묶음(되돌림=30·60분 VWAP 지정가+평균회귀 지정가, 돌파=30·60분 20봉 돌파; 같으면 되돌림)의 오늘 합계",
- "date": "2026-11-23",
+ "date": "2026-11-24",
  "next_pick": "rev",
  "backtest": {
   "days": 23,
@@ -307,12 +352,12 @@
   "picked_rev": 16
  },
  "forward": {
-  "days": 17,
-  "net_pct": -821.881,
-  "plus_days": 5,
-  "rev_only_pct": -196.637,
-  "brk_only_pct": -122.393,
-  "picked_rev": 11
+  "days": 18,
+  "net_pct": -783.831,
+  "plus_days": 6,
+  "rev_only_pct": -158.586,
+  "brk_only_pct": -169.196,
+  "picked_rev": 12
  },
  "forward_days": [
   {
@@ -433,6 +478,13 @@
    "net_pct": -4.7848,
    "rev_pct": -4.7848,
    "brk_pct": -10.0837
+  },
+  {
+   "eval_day": "2026-11-23",
+   "pick": "rev",
+   "net_pct": 38.0507,
+   "rev_pct": 38.0507,
+   "brk_pct": -46.8024
   }
  ],
  "min_forward_days": 14

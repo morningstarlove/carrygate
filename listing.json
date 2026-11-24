@@ -1,16 +1,16 @@
 {
  "schema": "carrygate-listing/1",
- "date": "2026-11-23",
- "generated_at_kst": "2026-11-23 16:49:50",
+ "date": "2026-11-24",
+ "generated_at_kst": "2026-11-24 19:05:10",
  "method": {
   "notice": "업비트 공지(category=trade) 중 제목에 ('신규 거래지원', '거래지원 안내', '디지털 자산 추가', '원화 마켓 추가', '마켓 추가') 가 있고 ('종료', '유의', '해제', '변경', '이벤트', '입출금', '지연') 가 없는 것. 괄호 안 티커 추출",
   "reaction": "공지 시각(분)의 해외 선물 시가 대비 (5, 15, 60, 240)분 뒤 시가 수익률(%), 60분 내 최고가 상승폭"
  },
  "notices_seen": 0,
- "markets_krw": 300,
+ "markets_krw": 301,
  "market_snapshot_existed": true,
- "listings_seen": 0,
- "new_today": 0,
+ "listings_seen": 1,
+ "new_today": 3,
  "events": [
   {
    "id": "mkt:KRW-POD:1790924700",
@@ -282,15 +282,52 @@
    "post60_pct": -17.61,
    "post240_pct": -20.126,
    "maxup60_pct": 6.918
+  },
+  {
+   "id": "mkt:KRW-ON:1795496700",
+   "title": "업비트 마켓 목록에 새로 등장: KRW-ON",
+   "time_utc": "2026-11-24T05:05:00Z",
+   "ts": 1795496700,
+   "ticker": "ON",
+   "venue": "hyperliquid",
+   "listed_abroad": false
+  },
+  {
+   "id": "mkt:KRW-ON:1795496700",
+   "title": "업비트 마켓 목록에 새로 등장: KRW-ON",
+   "time_utc": "2026-11-24T05:05:00Z",
+   "ts": 1795496700,
+   "ticker": "ON",
+   "venue": "okx",
+   "listed_abroad": true,
+   "post5_pct": 0.0,
+   "post15_pct": -0.059,
+   "post60_pct": -1.704,
+   "post240_pct": -3.334,
+   "maxup60_pct": 0.0
+  },
+  {
+   "id": "mkt:KRW-ON:1795496700",
+   "title": "업비트 마켓 목록에 새로 등장: KRW-ON",
+   "time_utc": "2026-11-24T05:05:00Z",
+   "ts": 1795496700,
+   "ticker": "ON",
+   "venue": "upbit",
+   "listed_abroad": true,
+   "post5_pct": -0.532,
+   "post15_pct": 1.064,
+   "post60_pct": -7.979,
+   "post240_pct": -7.447,
+   "maxup60_pct": 8.511
   }
  ],
  "errors": {
   "notices": "fetch failed https://api-manager.upbit.com/api/v1/announcements?os=web&page=1&per_page=20&category=trade : HTTP Error 403: Forbidden"
  },
  "summary": {
-  "notices": 8,
-  "pairs": 24,
-  "with_price": 11,
+  "notices": 9,
+  "pairs": 27,
+  "with_price": 13,
   "by_venue": {
    "hyperliquid": {
     "n": 1,
@@ -305,28 +342,28 @@
     "maxup60_pct": 1.71
    },
    "okx": {
-    "n": 2,
-    "post5_pct": 0.12,
-    "post5_pos_pct": 50.0,
-    "post15_pct": 0.02,
-    "post15_pos_pct": 50.0,
-    "post60_pct": 5.36,
-    "post60_pos_pct": 100.0,
-    "post240_pct": 0.39,
-    "post240_pos_pct": 50.0,
-    "maxup60_pct": 6.8
+    "n": 3,
+    "post5_pct": 0.08,
+    "post5_pos_pct": 33.3,
+    "post15_pct": -0.01,
+    "post15_pos_pct": 33.3,
+    "post60_pct": 3.0,
+    "post60_pos_pct": 66.7,
+    "post240_pct": -0.85,
+    "post240_pos_pct": 33.3,
+    "maxup60_pct": 4.53
    },
    "upbit": {
-    "n": 8,
-    "post5_pct": 28.86,
-    "post5_pos_pct": 75.0,
-    "post15_pct": 23.38,
-    "post15_pos_pct": 75.0,
-    "post60_pct": 24.71,
-    "post60_pos_pct": 75.0,
-    "post240_pct": 14.72,
-    "post240_pos_pct": 50.0,
-    "maxup60_pct": 45.46
+    "n": 9,
+    "post5_pct": 25.59,
+    "post5_pos_pct": 66.7,
+    "post15_pct": 20.9,
+    "post15_pos_pct": 77.8,
+    "post60_pct": 21.08,
+    "post60_pos_pct": 66.7,
+    "post240_pct": 12.26,
+    "post240_pos_pct": 44.4,
+    "maxup60_pct": 41.35
    }
   }
  }
