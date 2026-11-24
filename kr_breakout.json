@@ -1,6 +1,6 @@
 {
  "date": "2026-11-24",
- "generated_at_utc": "2026-11-23T18:53:01Z",
+ "generated_at_utc": "2026-11-24T07:15:31Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -74,34 +74,320 @@
   }
  },
  "forward": {
-  "days": 34,
+  "days": 35,
   "from": "2026-10-05",
-  "to": "2026-11-23",
-  "codes": 353,
+  "to": "2026-11-24",
+  "codes": 359,
   "bar_errors": 0,
   "stale_codes": 1,
   "by_source": {
-   "yahoo+naver_api": 350,
-   "yahoo": 2,
-   "naver_api": 1
+   "yahoo+gapfill": 2,
+   "yahoo+naver_api": 82,
+   "yahoo": 275
   },
   "skipped_days": [
    "2026-10-05"
   ],
-  "gap_filled": 0,
-  "gap_filled_codes": {},
+  "gap_filled": 2,
+  "gap_filled_codes": {
+   "345290": [
+    "2026-11-18",
+    "2026-11-19",
+    "2026-11-20",
+    "2026-11-23"
+   ],
+   "493410": [
+    "2026-11-16",
+    "2026-11-17",
+    "2026-11-18",
+    "2026-11-19",
+    "2026-11-20",
+    "2026-11-23"
+   ]
+  },
   "gap_unfilled": 1,
   "note": null
  },
  "signals_today": {
-  "base": [],
-  "no_sector": [],
-  "hold_10": [],
-  "risk_2": [],
-  "no_flag": []
+  "base": [
+   {
+    "code": "403870",
+    "name": "HPSP Co., Ltd.",
+    "group": "Semiconductors",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 43300.0,
+    "pattern_low": 32050.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 46764 이상이면 포기)",
+    "stop_plan": "max(32050, 진입가×0.93)"
+   },
+   {
+    "code": "232140",
+    "name": "YC Corporation",
+    "group": "Electronic Equipment/Instruments",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 16350.0,
+    "pattern_low": 14200.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 17658 이상이면 포기)",
+    "stop_plan": "max(14200, 진입가×0.93)"
+   },
+   {
+    "code": "319400",
+    "name": "HUYNDAI MOVEX Co. Ltd.",
+    "group": "Industrial Machinery",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 17370.0,
+    "pattern_low": 14350.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 18760 이상이면 포기)",
+    "stop_plan": "max(14350, 진입가×0.93)"
+   },
+   {
+    "code": "125490",
+    "name": "Hallacast Co., Ltd.",
+    "group": "Industrial Machinery",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 11490.0,
+    "pattern_low": 7800.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 12409 이상이면 포기)",
+    "stop_plan": "max(7800, 진입가×0.93)"
+   }
+  ],
+  "no_sector": [
+   {
+    "code": "403870",
+    "name": "HPSP Co., Ltd.",
+    "group": "Semiconductors",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 43300.0,
+    "pattern_low": 32050.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 46764 이상이면 포기)",
+    "stop_plan": "max(32050, 진입가×0.93)"
+   },
+   {
+    "code": "232140",
+    "name": "YC Corporation",
+    "group": "Electronic Equipment/Instruments",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 16350.0,
+    "pattern_low": 14200.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 17658 이상이면 포기)",
+    "stop_plan": "max(14200, 진입가×0.93)"
+   },
+   {
+    "code": "319400",
+    "name": "HUYNDAI MOVEX Co. Ltd.",
+    "group": "Industrial Machinery",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 17370.0,
+    "pattern_low": 14350.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 18760 이상이면 포기)",
+    "stop_plan": "max(14350, 진입가×0.93)"
+   },
+   {
+    "code": "125490",
+    "name": "Hallacast Co., Ltd.",
+    "group": "Industrial Machinery",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 11490.0,
+    "pattern_low": 7800.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 12409 이상이면 포기)",
+    "stop_plan": "max(7800, 진입가×0.93)"
+   }
+  ],
+  "hold_10": [
+   {
+    "code": "403870",
+    "name": "HPSP Co., Ltd.",
+    "group": "Semiconductors",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 43300.0,
+    "pattern_low": 32050.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 46764 이상이면 포기)",
+    "stop_plan": "max(32050, 진입가×0.93)"
+   },
+   {
+    "code": "232140",
+    "name": "YC Corporation",
+    "group": "Electronic Equipment/Instruments",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 16350.0,
+    "pattern_low": 14200.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 17658 이상이면 포기)",
+    "stop_plan": "max(14200, 진입가×0.93)"
+   },
+   {
+    "code": "319400",
+    "name": "HUYNDAI MOVEX Co. Ltd.",
+    "group": "Industrial Machinery",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 17370.0,
+    "pattern_low": 14350.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 18760 이상이면 포기)",
+    "stop_plan": "max(14350, 진입가×0.93)"
+   },
+   {
+    "code": "125490",
+    "name": "Hallacast Co., Ltd.",
+    "group": "Industrial Machinery",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 11490.0,
+    "pattern_low": 7800.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 12409 이상이면 포기)",
+    "stop_plan": "max(7800, 진입가×0.93)"
+   }
+  ],
+  "risk_2": [
+   {
+    "code": "403870",
+    "name": "HPSP Co., Ltd.",
+    "group": "Semiconductors",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 43300.0,
+    "pattern_low": 32050.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 46764 이상이면 포기)",
+    "stop_plan": "max(32050, 진입가×0.93)"
+   },
+   {
+    "code": "232140",
+    "name": "YC Corporation",
+    "group": "Electronic Equipment/Instruments",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 16350.0,
+    "pattern_low": 14200.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 17658 이상이면 포기)",
+    "stop_plan": "max(14200, 진입가×0.93)"
+   },
+   {
+    "code": "319400",
+    "name": "HUYNDAI MOVEX Co. Ltd.",
+    "group": "Industrial Machinery",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 17370.0,
+    "pattern_low": 14350.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 18760 이상이면 포기)",
+    "stop_plan": "max(14350, 진입가×0.93)"
+   },
+   {
+    "code": "125490",
+    "name": "Hallacast Co., Ltd.",
+    "group": "Industrial Machinery",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 11490.0,
+    "pattern_low": 7800.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 12409 이상이면 포기)",
+    "stop_plan": "max(7800, 진입가×0.93)"
+   }
+  ],
+  "no_flag": [
+   {
+    "code": "403870",
+    "name": "HPSP Co., Ltd.",
+    "group": "Semiconductors",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 43300.0,
+    "pattern_low": 32050.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 46764 이상이면 포기)",
+    "stop_plan": "max(32050, 진입가×0.93)"
+   },
+   {
+    "code": "319400",
+    "name": "HUYNDAI MOVEX Co. Ltd.",
+    "group": "Industrial Machinery",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 17370.0,
+    "pattern_low": 14350.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 18760 이상이면 포기)",
+    "stop_plan": "max(14350, 진입가×0.93)"
+   },
+   {
+    "code": "125490",
+    "name": "Hallacast Co., Ltd.",
+    "group": "Industrial Machinery",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 11490.0,
+    "pattern_low": 7800.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 12409 이상이면 포기)",
+    "stop_plan": "max(7800, 진입가×0.93)"
+   }
+  ]
  },
- "signal_date": "2026-11-23",
- "signals_frozen": true,
+ "signal_date": "2026-11-24",
+ "signals_frozen": false,
  "frozen_dates": [
   "2026-10-06",
   "2026-10-07",
@@ -141,7 +427,7 @@
  "variants": {
   "base": {
    "label": "동조 업종 + 패턴 돌파 (기본)",
-   "signals": 32,
+   "signals": 36,
    "trades": 15,
    "wins": 1,
    "win_rate": 6.67,
@@ -149,8 +435,8 @@
    "avg_loss_pct": -7.33,
    "payoff": 1.32,
    "profit_factor": 0.09,
-   "total_return_pct": -8.41,
-   "equity_final": 9159430,
+   "total_return_pct": -7.94,
+   "equity_final": 9206170,
    "max_drawdown_pct": 10.79,
    "avg_hold_days": 6.2,
    "skipped": {
@@ -210,7 +496,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -8.41
+    "2026": -7.94
    },
    "open_positions": [
     {
@@ -222,9 +508,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 132,
-     "bars_held": 14,
-     "last_close": 12700.0,
-     "unrealized_pct": 31.76
+     "bars_held": 15,
+     "last_close": 12720.0,
+     "unrealized_pct": 31.97
     },
     {
      "code": "090430",
@@ -235,15 +521,15 @@
      "entry": 142125.1,
      "stop": 132176.34,
      "shares": 9,
-     "bars_held": 2,
-     "last_close": 134900.0,
-     "unrealized_pct": -5.08
+     "bars_held": 3,
+     "last_close": 139800.0,
+     "unrealized_pct": -1.64
     }
    ]
   },
   "no_sector": {
    "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
-   "signals": 99,
+   "signals": 103,
    "trades": 30,
    "wins": 1,
    "win_rate": 3.33,
@@ -251,14 +537,14 @@
    "avg_loss_pct": -7.24,
    "payoff": 0.92,
    "profit_factor": 0.03,
-   "total_return_pct": -21.06,
-   "equity_final": 7893566,
-   "max_drawdown_pct": 21.06,
+   "total_return_pct": -18.75,
+   "equity_final": 8124966,
+   "max_drawdown_pct": 20.82,
    "avg_hold_days": 4.13,
    "skipped": {
     "gap": 0,
     "limit": 65,
-    "cooldown": 0,
+    "cooldown": 6,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -317,7 +603,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -21.06
+    "2026": -18.75
    },
    "open_positions": [
     {
@@ -329,9 +615,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 125,
-     "bars_held": 14,
-     "last_close": 12700.0,
-     "unrealized_pct": 31.76
+     "bars_held": 15,
+     "last_close": 12720.0,
+     "unrealized_pct": 31.97
     },
     {
      "code": "035900",
@@ -342,9 +628,9 @@
      "entry": 44332.6,
      "stop": 41229.32,
      "shares": 26,
-     "bars_held": 7,
-     "last_close": 44750.0,
-     "unrealized_pct": 0.94
+     "bars_held": 8,
+     "last_close": 46700.0,
+     "unrealized_pct": 5.34
     },
     {
      "code": "437730",
@@ -355,15 +641,15 @@
      "entry": 52858.1,
      "stop": 49158.03,
      "shares": 22,
-     "bars_held": 3,
-     "last_close": 54700.0,
-     "unrealized_pct": 3.48
+     "bars_held": 4,
+     "last_close": 62800.0,
+     "unrealized_pct": 18.81
     }
    ]
   },
   "hold_10": {
    "label": "동조 + 패턴, 보유 10일",
-   "signals": 32,
+   "signals": 36,
    "trades": 17,
    "wins": 2,
    "win_rate": 11.76,
@@ -371,14 +657,14 @@
    "avg_loss_pct": -6.69,
    "payoff": 1.85,
    "profit_factor": 0.25,
-   "total_return_pct": -10.42,
-   "equity_final": 8958180,
-   "max_drawdown_pct": 13.03,
+   "total_return_pct": -9.98,
+   "equity_final": 9002280,
+   "max_drawdown_pct": 12.95,
    "avg_hold_days": 5.29,
    "skipped": {
     "gap": 0,
     "limit": 13,
-    "cooldown": 0,
+    "cooldown": 1,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -432,7 +718,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -10.42
+    "2026": -9.98
    },
    "open_positions": [
     {
@@ -444,15 +730,15 @@
      "entry": 142125.1,
      "stop": 132176.34,
      "shares": 9,
-     "bars_held": 2,
-     "last_close": 134900.0,
-     "unrealized_pct": -5.08
+     "bars_held": 3,
+     "last_close": 139800.0,
+     "unrealized_pct": -1.64
     }
    ]
   },
   "risk_2": {
    "label": "동조 + 패턴, 위험 2% (명목 상한 30%)",
-   "signals": 33,
+   "signals": 37,
    "trades": 11,
    "wins": 1,
    "win_rate": 9.09,
@@ -460,8 +746,8 @@
    "avg_loss_pct": -7.24,
    "payoff": 1.51,
    "profit_factor": 0.15,
-   "total_return_pct": -8.69,
-   "equity_final": 9131225,
+   "total_return_pct": -7.76,
+   "equity_final": 9224365,
    "max_drawdown_pct": 16.49,
    "avg_hold_days": 4.73,
    "skipped": {
@@ -526,7 +812,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -8.69
+    "2026": -7.76
    },
    "open_positions": [
     {
@@ -538,9 +824,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 247,
-     "bars_held": 14,
-     "last_close": 12700.0,
-     "unrealized_pct": 31.76
+     "bars_held": 15,
+     "last_close": 12720.0,
+     "unrealized_pct": 31.97
     },
     {
      "code": "090430",
@@ -551,15 +837,15 @@
      "entry": 142125.1,
      "stop": 132176.34,
      "shares": 18,
-     "bars_held": 2,
-     "last_close": 134900.0,
-     "unrealized_pct": -5.08
+     "bars_held": 3,
+     "last_close": 139800.0,
+     "unrealized_pct": -1.64
     }
    ]
   },
   "no_flag": {
    "label": "동조 + 패턴, 깃발형 제외",
-   "signals": 18,
+   "signals": 21,
    "trades": 11,
    "wins": 1,
    "win_rate": 9.09,
@@ -567,9 +853,9 @@
    "avg_loss_pct": -7.29,
    "payoff": 1.52,
    "profit_factor": 0.15,
-   "total_return_pct": -4.48,
-   "equity_final": 9551657,
-   "max_drawdown_pct": 9.44,
+   "total_return_pct": -4.02,
+   "equity_final": 9598497,
+   "max_drawdown_pct": 9.14,
    "avg_hold_days": 7.64,
    "skipped": {
     "gap": 0,
@@ -577,7 +863,7 @@
     "cooldown": 0,
     "size": 0,
     "no_bar": 0,
-    "pattern": 0
+    "pattern": 1
    },
    "by_pattern": {
     "cup_handle": {
@@ -623,7 +909,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -4.48
+    "2026": -4.02
    },
    "open_positions": [
     {
@@ -635,9 +921,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 137,
-     "bars_held": 14,
-     "last_close": 12700.0,
-     "unrealized_pct": 31.76
+     "bars_held": 15,
+     "last_close": 12720.0,
+     "unrealized_pct": 31.97
     },
     {
      "code": "090430",
@@ -648,9 +934,9 @@
      "entry": 142125.1,
      "stop": 132176.34,
      "shares": 9,
-     "bars_held": 2,
-     "last_close": 134900.0,
-     "unrealized_pct": -5.08
+     "bars_held": 3,
+     "last_close": 139800.0,
+     "unrealized_pct": -1.64
     }
    ]
   }
