@@ -34,6 +34,7 @@ WARMUP_MIN = 3600     # 지표 계산용 준비 구간(분) = 60시간. 60분봉
 VB_K = 0.5            # 변동성 돌파 계수: 당일 시가 + 전날 폭 × K 를 넘으면 진입
 TIMEFRAMES = [1, 5, 15, 30, 60]   # 같은 규칙을 적용해 보는 봉 길이(분). 30·60 은 2026-10-13 추가(15일 탈락 뒤 대안, 제안함 P16)
 NIGHT_KST = (21, 22, 23, 0, 1, 2)   # '밤' 필터: 보조 연구 A1 에서 15분 본전 승률이 100% 아래였던 유일한 시간대(미국 장)
+LATE_START_SEC = 7200  # P41(2026-11-24 고정): '늦게 시작' 기록 — 평가일 UTC 0시 + 2시간 이후 진입한 매매만 따로 합산(late_net_pct). 판단·규칙엔 안 쓰고 기록만
 SPREAD_TICKS = 1.0    # 시장가 체결 시 왕복으로 잃는 호가 폭 (틱 단위). 1틱 = 매수호가·매도호가 차이가 최소일 때
 LIMIT_TTL = 3         # 지정가 주문을 기다리는 최대 봉 수. 넘으면 진입은 취소, 청산은 시장가
 
@@ -563,7 +564,7 @@ def side_cost(maker, fees, spread_pct):
     return fees["maker_pct"] if maker else fees["taker_pct"] + spread_pct / 2.0
 
 
-def summarize(trades, fees, spread_pct, mid_i):
+def summarize(trades, fees, spread_pct, mid_i, late_i=None):
     """체결 목록 -> 하루 성적. 수익률은 매매 1건당 투입금 대비 %, 단순 합산."""
     n = len(trades)
     costs = [side_cost(t["entry_maker"], fees, spread_pct) + side_cost(t["exit_maker"], fees, spread_pct)
@@ -573,6 +574,7 @@ def summarize(trades, fees, spread_pct, mid_i):
     fee = sum(costs)
     first = sum(x for t, x in zip(trades, nets) if t["entry_i"] < mid_i)
     second = sum(x for t, x in zip(trades, nets) if t["entry_i"] >= mid_i)
+    late = sum(x for t, x in zip(trades, nets) if late_i is not None and t["entry_i"] >= late_i)
     wins = sum(1 for x in nets if x > 0)
     gain = sum(x for x in nets if x > 0)
     loss = -sum(x for x in nets if x < 0)
@@ -599,6 +601,8 @@ def summarize(trades, fees, spread_pct, mid_i):
         "median_hold_bars": holds[len(holds) // 2] if holds else None,
         "first_half_net_pct": round(first, 4),
         "second_half_net_pct": round(second, 4),
+        "late_net_pct": round(late, 4) if late_i is not None else None,
+        "late_trades": sum(1 for t in trades if late_i is not None and t["entry_i"] >= late_i) if late_i is not None else None,
     }
 
 
@@ -649,12 +653,13 @@ def evaluate(venue, coin, bars, eval_start, fees):
         if tf == 1:
             hz = hurdle(ctx, rt_taker)
         mid_i = es + (len(tb) - es) // 2
+        late_i = next((i for i, b in enumerate(tb) if b["t"] >= eval_t0 + LATE_START_SEC), len(tb))
         tf_rows = []
         for st in STRATEGIES:
             tr = backtest(ctx, st, fees["short_ok"])
             r = {"venue": venue, "coin": coin, "tf": "%dm" % tf, "strategy": st["key"],
                  "strategy_name": st["name"], "exec": st["exec"]}
-            r.update(summarize(tr, fees, spread_pct, mid_i))
+            r.update(summarize(tr, fees, spread_pct, mid_i, late_i))
             tf_rows.append(r)
         base = next(r for r in tf_rows if r["strategy"] == BASELINE)
         for r in tf_rows:
@@ -690,7 +695,7 @@ def write_history(out, path):
     slim = {k: s[k] for k in ("rows_total", "rows_positive", "rows_robust", "markets", "verdict") if k in s}
     rec = {"date": out["date"], "eval_day_utc": out["eval_day_utc"], "summary": slim,
            "rows": {history_key(r): {"n": r["trades"], "g": r["gross_pct"], "f": r["fee_pct"],
-                                     "nt": r["net_pct"], "rb": r["robust"]} for r in out["rows"]},
+                                     "nt": r["net_pct"], "rb": r["robust"], "ntl": r.get("late_net_pct")} for r in out["rows"]},
            "hurdle": {k: dict([("h%d_needed_win_rate_pct" % h,
                                 v["hurdle"].get("h%d" % h, {}).get("needed_win_rate_pct")) for h in (1, 5, 15, 30, 60)]
                               + [("round_trip_taker_pct", v["cost"]["round_trip_taker_pct"])])
