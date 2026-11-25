@@ -1,6 +1,6 @@
 {
  "date": "2026-11-25",
- "generated_at_utc": "2026-11-24T18:29:09Z",
+ "generated_at_utc": "2026-11-25T07:14:40Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -74,183 +74,352 @@
   }
  },
  "forward": {
-  "days": 35,
+  "days": 36,
   "from": "2026-10-05",
-  "to": "2026-11-24",
-  "codes": 359,
+  "to": "2026-11-25",
+  "codes": 360,
   "bar_errors": 0,
   "stale_codes": 1,
   "by_source": {
-   "yahoo+naver_api": 355,
-   "naver_api": 2,
-   "yahoo": 2
+   "yahoo": 275,
+   "yahoo+gapfill": 3,
+   "yahoo+naver_api": 82
   },
   "skipped_days": [
    "2026-10-05"
   ],
-  "gap_filled": 0,
-  "gap_filled_codes": {},
+  "gap_filled": 3,
+  "gap_filled_codes": {
+   "271160": [
+    "2026-11-24"
+   ],
+   "345290": [
+    "2026-11-18",
+    "2026-11-19",
+    "2026-11-20",
+    "2026-11-23",
+    "2026-11-24"
+   ],
+   "493410": [
+    "2026-11-16",
+    "2026-11-17",
+    "2026-11-18",
+    "2026-11-19",
+    "2026-11-20",
+    "2026-11-23",
+    "2026-11-24"
+   ]
+  },
   "gap_unfilled": 1,
   "note": null
  },
  "signals_today": {
   "base": [
    {
-    "code": "307950",
-    "name": "Hyundai Autoever Corp.",
-    "group": "Information Technology Services",
-    "pattern": "triangle",
+    "code": "263860",
+    "name": "GENIANS, INC.",
+    "group": "Packaged Software",
+    "pattern": "flag",
     "patterns": [
-     "box",
-     "triangle"
+     "flag"
     ],
-    "signal_close": 347000.0,
-    "pattern_low": 273620.97,
+    "signal_close": 42650.0,
+    "pattern_low": 33100.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 374760 이상이면 포기)",
-    "stop_plan": "max(273621, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 46062 이상이면 포기)",
+    "stop_plan": "max(33100, 진입가×0.93)"
    },
    {
-    "code": "125490",
-    "name": "Hallacast Co., Ltd.",
-    "group": "Industrial Machinery",
-    "pattern": "box",
+    "code": "192820",
+    "name": "COSMAX, Inc.",
+    "group": "Household/Personal Care",
+    "pattern": "flag",
     "patterns": [
-     "box"
+     "flag"
     ],
-    "signal_close": 10970.0,
-    "pattern_low": 7800.0,
+    "signal_close": 327000.0,
+    "pattern_low": 273500.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 11848 이상이면 포기)",
-    "stop_plan": "max(7800, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 353160 이상이면 포기)",
+    "stop_plan": "max(273500, 진입가×0.93)"
+   },
+   {
+    "code": "000100",
+    "name": "Yuhan Corporation",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "triangle",
+    "patterns": [
+     "triangle"
+    ],
+    "signal_close": 83500.0,
+    "pattern_low": 79015.38,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 90180 이상이면 포기)",
+    "stop_plan": "max(79015, 진입가×0.93)"
+   },
+   {
+    "code": "430690",
+    "name": "Hanssak Co., Ltd.",
+    "group": "Information Technology Services",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 4055.0,
+    "pattern_low": 3380.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 4379 이상이면 포기)",
+    "stop_plan": "max(3380, 진입가×0.93)"
    }
   ],
   "no_sector": [
    {
-    "code": "307950",
-    "name": "Hyundai Autoever Corp.",
-    "group": "Information Technology Services",
-    "pattern": "triangle",
+    "code": "263860",
+    "name": "GENIANS, INC.",
+    "group": "Packaged Software",
+    "pattern": "flag",
     "patterns": [
-     "box",
-     "triangle"
+     "flag"
     ],
-    "signal_close": 347000.0,
-    "pattern_low": 273620.97,
+    "signal_close": 42650.0,
+    "pattern_low": 33100.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 374760 이상이면 포기)",
-    "stop_plan": "max(273621, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 46062 이상이면 포기)",
+    "stop_plan": "max(33100, 진입가×0.93)"
    },
    {
-    "code": "125490",
-    "name": "Hallacast Co., Ltd.",
-    "group": "Industrial Machinery",
+    "code": "18064K",
+    "name": "HANJIN KAL Corp. Pfd Registered Shs 1 Non-Voting",
+    "group": "Hotels/Resorts/Cruise lines",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 110000.0,
+    "pattern_low": 76000.0,
+    "sync_by": null,
+    "entry_plan": "내일 시가 (시가가 118800 이상이면 포기)",
+    "stop_plan": "max(76000, 진입가×0.93)"
+   },
+   {
+    "code": "003230",
+    "name": "Samyang Foods Co., Ltd",
+    "group": "Food: Major Diversified",
     "pattern": "box",
     "patterns": [
      "box"
     ],
-    "signal_close": 10970.0,
-    "pattern_low": 7800.0,
+    "signal_close": 1309000.0,
+    "pattern_low": 1078000.0,
+    "sync_by": null,
+    "entry_plan": "내일 시가 (시가가 1413720 이상이면 포기)",
+    "stop_plan": "max(1078000, 진입가×0.93)"
+   },
+   {
+    "code": "090430",
+    "name": "Amorepacific Corp.",
+    "group": "Household/Personal Care",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 147800.0,
+    "pattern_low": 120500.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 11848 이상이면 포기)",
-    "stop_plan": "max(7800, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 159624 이상이면 포기)",
+    "stop_plan": "max(120500, 진입가×0.93)"
+   },
+   {
+    "code": "192820",
+    "name": "COSMAX, Inc.",
+    "group": "Household/Personal Care",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 327000.0,
+    "pattern_low": 273500.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 353160 이상이면 포기)",
+    "stop_plan": "max(273500, 진입가×0.93)"
+   },
+   {
+    "code": "000100",
+    "name": "Yuhan Corporation",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "triangle",
+    "patterns": [
+     "triangle"
+    ],
+    "signal_close": 83500.0,
+    "pattern_low": 79015.38,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 90180 이상이면 포기)",
+    "stop_plan": "max(79015, 진입가×0.93)"
+   },
+   {
+    "code": "430690",
+    "name": "Hanssak Co., Ltd.",
+    "group": "Information Technology Services",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 4055.0,
+    "pattern_low": 3380.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 4379 이상이면 포기)",
+    "stop_plan": "max(3380, 진입가×0.93)"
+   },
+   {
+    "code": "069510",
+    "name": "Estec Corporation",
+    "group": "Electronics/Appliances",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 24100.0,
+    "pattern_low": 23800.0,
+    "sync_by": null,
+    "entry_plan": "내일 시가 (시가가 26028 이상이면 포기)",
+    "stop_plan": "max(23800, 진입가×0.93)"
    }
   ],
   "hold_10": [
    {
-    "code": "307950",
-    "name": "Hyundai Autoever Corp.",
-    "group": "Information Technology Services",
-    "pattern": "triangle",
+    "code": "263860",
+    "name": "GENIANS, INC.",
+    "group": "Packaged Software",
+    "pattern": "flag",
     "patterns": [
-     "box",
-     "triangle"
+     "flag"
     ],
-    "signal_close": 347000.0,
-    "pattern_low": 273620.97,
+    "signal_close": 42650.0,
+    "pattern_low": 33100.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 374760 이상이면 포기)",
-    "stop_plan": "max(273621, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 46062 이상이면 포기)",
+    "stop_plan": "max(33100, 진입가×0.93)"
    },
    {
-    "code": "125490",
-    "name": "Hallacast Co., Ltd.",
-    "group": "Industrial Machinery",
-    "pattern": "box",
+    "code": "192820",
+    "name": "COSMAX, Inc.",
+    "group": "Household/Personal Care",
+    "pattern": "flag",
     "patterns": [
-     "box"
+     "flag"
     ],
-    "signal_close": 10970.0,
-    "pattern_low": 7800.0,
+    "signal_close": 327000.0,
+    "pattern_low": 273500.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 11848 이상이면 포기)",
-    "stop_plan": "max(7800, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 353160 이상이면 포기)",
+    "stop_plan": "max(273500, 진입가×0.93)"
+   },
+   {
+    "code": "000100",
+    "name": "Yuhan Corporation",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "triangle",
+    "patterns": [
+     "triangle"
+    ],
+    "signal_close": 83500.0,
+    "pattern_low": 79015.38,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 90180 이상이면 포기)",
+    "stop_plan": "max(79015, 진입가×0.93)"
+   },
+   {
+    "code": "430690",
+    "name": "Hanssak Co., Ltd.",
+    "group": "Information Technology Services",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 4055.0,
+    "pattern_low": 3380.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 4379 이상이면 포기)",
+    "stop_plan": "max(3380, 진입가×0.93)"
    }
   ],
   "risk_2": [
    {
-    "code": "307950",
-    "name": "Hyundai Autoever Corp.",
-    "group": "Information Technology Services",
-    "pattern": "triangle",
+    "code": "263860",
+    "name": "GENIANS, INC.",
+    "group": "Packaged Software",
+    "pattern": "flag",
     "patterns": [
-     "box",
-     "triangle"
+     "flag"
     ],
-    "signal_close": 347000.0,
-    "pattern_low": 273620.97,
+    "signal_close": 42650.0,
+    "pattern_low": 33100.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 374760 이상이면 포기)",
-    "stop_plan": "max(273621, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 46062 이상이면 포기)",
+    "stop_plan": "max(33100, 진입가×0.93)"
    },
    {
-    "code": "125490",
-    "name": "Hallacast Co., Ltd.",
-    "group": "Industrial Machinery",
-    "pattern": "box",
+    "code": "192820",
+    "name": "COSMAX, Inc.",
+    "group": "Household/Personal Care",
+    "pattern": "flag",
     "patterns": [
-     "box"
+     "flag"
     ],
-    "signal_close": 10970.0,
-    "pattern_low": 7800.0,
+    "signal_close": 327000.0,
+    "pattern_low": 273500.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 11848 이상이면 포기)",
-    "stop_plan": "max(7800, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 353160 이상이면 포기)",
+    "stop_plan": "max(273500, 진입가×0.93)"
+   },
+   {
+    "code": "000100",
+    "name": "Yuhan Corporation",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "triangle",
+    "patterns": [
+     "triangle"
+    ],
+    "signal_close": 83500.0,
+    "pattern_low": 79015.38,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 90180 이상이면 포기)",
+    "stop_plan": "max(79015, 진입가×0.93)"
+   },
+   {
+    "code": "430690",
+    "name": "Hanssak Co., Ltd.",
+    "group": "Information Technology Services",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 4055.0,
+    "pattern_low": 3380.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 4379 이상이면 포기)",
+    "stop_plan": "max(3380, 진입가×0.93)"
    }
   ],
   "no_flag": [
    {
-    "code": "307950",
-    "name": "Hyundai Autoever Corp.",
-    "group": "Information Technology Services",
+    "code": "000100",
+    "name": "Yuhan Corporation",
+    "group": "Pharmaceuticals: Major",
     "pattern": "triangle",
     "patterns": [
-     "box",
      "triangle"
     ],
-    "signal_close": 347000.0,
-    "pattern_low": 273620.97,
+    "signal_close": 83500.0,
+    "pattern_low": 79015.38,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 374760 이상이면 포기)",
-    "stop_plan": "max(273621, 진입가×0.93)"
-   },
-   {
-    "code": "125490",
-    "name": "Hallacast Co., Ltd.",
-    "group": "Industrial Machinery",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 10970.0,
-    "pattern_low": 7800.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 11848 이상이면 포기)",
-    "stop_plan": "max(7800, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 90180 이상이면 포기)",
+    "stop_plan": "max(79015, 진입가×0.93)"
    }
   ]
  },
- "signal_date": "2026-11-24",
+ "signal_date": "2026-11-25",
  "signals_frozen": false,
  "frozen_dates": [
   "2026-10-06",
@@ -291,31 +460,31 @@
  "variants": {
   "base": {
    "label": "동조 업종 + 패턴 돌파 (기본)",
-   "signals": 34,
-   "trades": 15,
+   "signals": 39,
+   "trades": 16,
    "wins": 1,
-   "win_rate": 6.67,
+   "win_rate": 6.25,
    "avg_win_pct": 10.53,
-   "avg_loss_pct": -7.33,
+   "avg_loss_pct": -7.34,
    "payoff": 1.32,
    "profit_factor": 0.09,
-   "total_return_pct": -8.57,
-   "equity_final": 9142990,
+   "total_return_pct": -7.32,
+   "equity_final": 9268192,
    "max_drawdown_pct": 10.79,
-   "avg_hold_days": 6.2,
+   "avg_hold_days": 5.88,
    "skipped": {
     "gap": 0,
     "limit": 14,
-    "cooldown": 0,
+    "cooldown": 2,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
    },
    "by_pattern": {
     "flag": {
-     "n": 6,
+     "n": 7,
      "wins": 0,
-     "pnl_krw": -576681
+     "pnl_krw": -674014
     },
     "cup_handle": {
      "n": 2,
@@ -335,16 +504,16 @@
    },
    "by_sync": {
     "day": {
-     "n": 15,
+     "n": 16,
      "wins": 1,
-     "pnl_krw": -1179235
+     "pnl_krw": -1276568
     }
    },
    "by_exit": {
     "stop": {
-     "n": 14,
+     "n": 15,
      "wins": 0,
-     "pnl_krw": -1302150
+     "pnl_krw": -1399483
     },
     "hold20": {
      "n": 1,
@@ -354,13 +523,13 @@
    },
    "by_year": {
     "2026": {
-     "n": 15,
+     "n": 16,
      "wins": 1,
-     "pnl_krw": -1179235
+     "pnl_krw": -1276568
     }
    },
    "yearly_return_pct": {
-    "2026": -8.57
+    "2026": -7.32
    },
    "open_positions": [
     {
@@ -372,9 +541,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 132,
-     "bars_held": 15,
-     "last_close": 12330.0,
-     "unrealized_pct": 27.92
+     "bars_held": 16,
+     "last_close": 13460.0,
+     "unrealized_pct": 39.64
     },
     {
      "code": "090430",
@@ -385,39 +554,65 @@
      "entry": 142125.1,
      "stop": 132176.34,
      "shares": 9,
-     "bars_held": 3,
-     "last_close": 138500.0,
-     "unrealized_pct": -2.55
+     "bars_held": 4,
+     "last_close": 147800.0,
+     "unrealized_pct": 3.99
+    },
+    {
+     "code": "319400",
+     "name": null,
+     "group": "Industrial Machinery",
+     "pattern": "box",
+     "entry_date": "2026-11-25",
+     "entry": 16850.4,
+     "stop": 15670.87,
+     "shares": 78,
+     "bars_held": 1,
+     "last_close": 16550.0,
+     "unrealized_pct": -1.78
+    },
+    {
+     "code": "125490",
+     "name": "Hallacast Co., Ltd.",
+     "group": "Industrial Machinery",
+     "pattern": "box",
+     "entry_date": "2026-11-25",
+     "entry": 11243.63,
+     "stop": 10456.58,
+     "shares": 116,
+     "bars_held": 1,
+     "last_close": 11360.0,
+     "unrealized_pct": 1.03
     }
    ]
   },
   "no_sector": {
    "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
-   "signals": 101,
-   "trades": 30,
+   "signals": 110,
+   "trades": 31,
    "wins": 1,
-   "win_rate": 3.33,
+   "win_rate": 3.23,
    "avg_win_pct": 6.57,
-   "avg_loss_pct": -7.24,
+   "avg_loss_pct": -7.25,
    "payoff": 0.92,
    "profit_factor": 0.03,
-   "total_return_pct": -20.0,
-   "equity_final": 8000416,
+   "total_return_pct": -19.59,
+   "equity_final": 8041361,
    "max_drawdown_pct": 20.82,
-   "avg_hold_days": 4.13,
+   "avg_hold_days": 4.03,
    "skipped": {
     "gap": 0,
-    "limit": 65,
-    "cooldown": 6,
+    "limit": 66,
+    "cooldown": 11,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
    },
    "by_pattern": {
     "flag": {
-     "n": 8,
+     "n": 9,
      "wins": 1,
-     "pnl_krw": -588882
+     "pnl_krw": -674488
     },
     "cup_handle": {
      "n": 3,
@@ -437,9 +632,9 @@
    },
    "by_sync": {
     "day": {
-     "n": 7,
+     "n": 8,
      "wins": 0,
-     "pnl_krw": -643164
+     "pnl_krw": -728770
     },
     "none": {
      "n": 23,
@@ -449,9 +644,9 @@
    },
    "by_exit": {
     "stop": {
-     "n": 28,
+     "n": 29,
      "wins": 0,
-     "pnl_krw": -2589907
+     "pnl_krw": -2675513
     },
     "low10": {
      "n": 2,
@@ -461,13 +656,13 @@
    },
    "by_year": {
     "2026": {
-     "n": 30,
+     "n": 31,
      "wins": 1,
-     "pnl_krw": -2539930
+     "pnl_krw": -2625536
     }
    },
    "yearly_return_pct": {
-    "2026": -20.0
+    "2026": -19.59
    },
    "open_positions": [
     {
@@ -479,9 +674,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 125,
-     "bars_held": 15,
-     "last_close": 12330.0,
-     "unrealized_pct": 27.92
+     "bars_held": 16,
+     "last_close": 13460.0,
+     "unrealized_pct": 39.64
     },
     {
      "code": "035900",
@@ -492,9 +687,9 @@
      "entry": 44332.6,
      "stop": 41229.32,
      "shares": 26,
-     "bars_held": 8,
-     "last_close": 45900.0,
-     "unrealized_pct": 3.54
+     "bars_held": 9,
+     "last_close": 46550.0,
+     "unrealized_pct": 5.0
     },
     {
      "code": "437730",
@@ -505,39 +700,52 @@
      "entry": 52858.1,
      "stop": 49158.03,
      "shares": 22,
-     "bars_held": 4,
-     "last_close": 60300.0,
-     "unrealized_pct": 14.08
+     "bars_held": 5,
+     "last_close": 59800.0,
+     "unrealized_pct": 13.13
+    },
+    {
+     "code": "319400",
+     "name": null,
+     "group": "Industrial Machinery",
+     "pattern": "box",
+     "entry_date": "2026-11-25",
+     "entry": 16850.4,
+     "stop": 15670.87,
+     "shares": 68,
+     "bars_held": 1,
+     "last_close": 16550.0,
+     "unrealized_pct": -1.78
     }
    ]
   },
   "hold_10": {
    "label": "동조 + 패턴, 보유 10일",
-   "signals": 34,
-   "trades": 17,
+   "signals": 39,
+   "trades": 18,
    "wins": 2,
-   "win_rate": 11.76,
+   "win_rate": 11.11,
    "avg_win_pct": 12.59,
-   "avg_loss_pct": -6.69,
-   "payoff": 1.85,
-   "profit_factor": 0.25,
-   "total_return_pct": -10.09,
-   "equity_final": 8990580,
+   "avg_loss_pct": -6.73,
+   "payoff": 1.83,
+   "profit_factor": 0.23,
+   "total_return_pct": -10.31,
+   "equity_final": 8969344,
    "max_drawdown_pct": 12.95,
-   "avg_hold_days": 5.29,
+   "avg_hold_days": 5.06,
    "skipped": {
     "gap": 0,
     "limit": 13,
-    "cooldown": 1,
+    "cooldown": 4,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
    },
    "by_pattern": {
     "flag": {
-     "n": 6,
+     "n": 7,
      "wins": 0,
-     "pnl_krw": -576681
+     "pnl_krw": -671668
     },
     "cup_handle": {
      "n": 2,
@@ -557,16 +765,16 @@
    },
    "by_sync": {
     "day": {
-     "n": 17,
+     "n": 18,
      "wins": 2,
-     "pnl_krw": -976600
+     "pnl_krw": -1071587
     }
    },
    "by_exit": {
     "stop": {
-     "n": 13,
+     "n": 14,
      "wins": 0,
-     "pnl_krw": -1232550
+     "pnl_krw": -1327537
     },
     "hold10": {
      "n": 4,
@@ -576,13 +784,13 @@
    },
    "by_year": {
     "2026": {
-     "n": 17,
+     "n": 18,
      "wins": 2,
-     "pnl_krw": -976600
+     "pnl_krw": -1071587
     }
    },
    "yearly_return_pct": {
-    "2026": -10.09
+    "2026": -10.31
    },
    "open_positions": [
     {
@@ -594,39 +802,65 @@
      "entry": 142125.1,
      "stop": 132176.34,
      "shares": 9,
-     "bars_held": 3,
-     "last_close": 138500.0,
-     "unrealized_pct": -2.55
+     "bars_held": 4,
+     "last_close": 147800.0,
+     "unrealized_pct": 3.99
+    },
+    {
+     "code": "319400",
+     "name": null,
+     "group": "Industrial Machinery",
+     "pattern": "box",
+     "entry_date": "2026-11-25",
+     "entry": 16850.4,
+     "stop": 15670.87,
+     "shares": 76,
+     "bars_held": 1,
+     "last_close": 16550.0,
+     "unrealized_pct": -1.78
+    },
+    {
+     "code": "125490",
+     "name": "Hallacast Co., Ltd.",
+     "group": "Industrial Machinery",
+     "pattern": "box",
+     "entry_date": "2026-11-25",
+     "entry": 11243.63,
+     "stop": 10456.58,
+     "shares": 114,
+     "bars_held": 1,
+     "last_close": 11360.0,
+     "unrealized_pct": 1.03
     }
    ]
   },
   "risk_2": {
    "label": "동조 + 패턴, 위험 2% (명목 상한 30%)",
-   "signals": 35,
-   "trades": 11,
+   "signals": 40,
+   "trades": 12,
    "wins": 1,
-   "win_rate": 9.09,
+   "win_rate": 8.33,
    "avg_win_pct": 10.53,
-   "avg_loss_pct": -7.24,
-   "payoff": 1.51,
-   "profit_factor": 0.15,
-   "total_return_pct": -8.95,
-   "equity_final": 9104635,
+   "avg_loss_pct": -7.26,
+   "payoff": 1.5,
+   "profit_factor": 0.14,
+   "total_return_pct": -6.45,
+   "equity_final": 9355306,
    "max_drawdown_pct": 16.49,
-   "avg_hold_days": 4.73,
+   "avg_hold_days": 4.42,
    "skipped": {
     "gap": 0,
     "limit": 0,
-    "cooldown": 0,
-    "size": 20,
+    "cooldown": 1,
+    "size": 22,
     "no_bar": 0,
     "pattern": 0
    },
    "by_pattern": {
     "flag": {
-     "n": 4,
+     "n": 5,
      "wins": 0,
-     "pnl_krw": -706823
+     "pnl_krw": -902661
     },
     "cup_handle": {
      "n": 1,
@@ -646,9 +880,9 @@
    },
    "by_sync": {
     "day": {
-     "n": 10,
+     "n": 11,
      "wins": 1,
-     "pnl_krw": -1392243
+     "pnl_krw": -1588081
     },
     "week": {
      "n": 1,
@@ -658,9 +892,9 @@
    },
    "by_exit": {
     "stop": {
-     "n": 10,
+     "n": 11,
      "wins": 0,
-     "pnl_krw": -1760408
+     "pnl_krw": -1956246
     },
     "hold20": {
      "n": 1,
@@ -670,13 +904,13 @@
    },
    "by_year": {
     "2026": {
-     "n": 11,
+     "n": 12,
      "wins": 1,
-     "pnl_krw": -1494093
+     "pnl_krw": -1689931
     }
    },
    "yearly_return_pct": {
-    "2026": -8.95
+    "2026": -6.45
    },
    "open_positions": [
     {
@@ -688,9 +922,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 247,
-     "bars_held": 15,
-     "last_close": 12330.0,
-     "unrealized_pct": 27.92
+     "bars_held": 16,
+     "last_close": 13460.0,
+     "unrealized_pct": 39.64
     },
     {
      "code": "090430",
@@ -701,15 +935,15 @@
      "entry": 142125.1,
      "stop": 132176.34,
      "shares": 18,
-     "bars_held": 3,
-     "last_close": 138500.0,
-     "unrealized_pct": -2.55
+     "bars_held": 4,
+     "last_close": 147800.0,
+     "unrealized_pct": 3.99
     }
    ]
   },
   "no_flag": {
    "label": "동조 + 패턴, 깃발형 제외",
-   "signals": 20,
+   "signals": 21,
    "trades": 11,
    "wins": 1,
    "win_rate": 9.09,
@@ -717,17 +951,17 @@
    "avg_loss_pct": -7.29,
    "payoff": 1.52,
    "profit_factor": 0.15,
-   "total_return_pct": -4.67,
-   "equity_final": 9533367,
-   "max_drawdown_pct": 9.61,
+   "total_return_pct": -2.39,
+   "equity_final": 9761216,
+   "max_drawdown_pct": 9.14,
    "avg_hold_days": 7.64,
    "skipped": {
     "gap": 0,
     "limit": 5,
-    "cooldown": 0,
+    "cooldown": 2,
     "size": 0,
     "no_bar": 0,
-    "pattern": 0
+    "pattern": 4
    },
    "by_pattern": {
     "cup_handle": {
@@ -773,7 +1007,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -4.67
+    "2026": -2.39
    },
    "open_positions": [
     {
@@ -785,9 +1019,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 137,
-     "bars_held": 15,
-     "last_close": 12330.0,
-     "unrealized_pct": 27.92
+     "bars_held": 16,
+     "last_close": 13460.0,
+     "unrealized_pct": 39.64
     },
     {
      "code": "090430",
@@ -798,9 +1032,35 @@
      "entry": 142125.1,
      "stop": 132176.34,
      "shares": 9,
-     "bars_held": 3,
-     "last_close": 138500.0,
-     "unrealized_pct": -2.55
+     "bars_held": 4,
+     "last_close": 147800.0,
+     "unrealized_pct": 3.99
+    },
+    {
+     "code": "319400",
+     "name": null,
+     "group": "Industrial Machinery",
+     "pattern": "box",
+     "entry_date": "2026-11-25",
+     "entry": 16850.4,
+     "stop": 15670.87,
+     "shares": 81,
+     "bars_held": 1,
+     "last_close": 16550.0,
+     "unrealized_pct": -1.78
+    },
+    {
+     "code": "125490",
+     "name": "Hallacast Co., Ltd.",
+     "group": "Industrial Machinery",
+     "pattern": "box",
+     "entry_date": "2026-11-25",
+     "entry": 11243.63,
+     "stop": 10456.58,
+     "shares": 121,
+     "bars_held": 1,
+     "last_close": 11360.0,
+     "unrealized_pct": 1.03
     }
    ]
   }
@@ -1142,6 +1402,28 @@
     "pnl_krw": -90454,
     "pnl_pct": -7.45,
     "hold_days": 12,
+    "gap": false
+   },
+   {
+    "code": "232140",
+    "name": null,
+    "group": "Electronic Equipment/Instruments",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-11-24",
+    "entry_date": "2026-11-25",
+    "entry": 15747.1,
+    "stop": 14644.8,
+    "exit_date": "2026-11-25",
+    "exit": 14600.87,
+    "why": "stop",
+    "shares": 83,
+    "pnl_krw": -97333,
+    "pnl_pct": -7.45,
+    "hold_days": 1,
     "gap": false
    }
   ],
@@ -1814,6 +2096,28 @@
     "pnl_pct": -7.45,
     "hold_days": 2,
     "gap": false
+   },
+   {
+    "code": "232140",
+    "name": null,
+    "group": "Electronic Equipment/Instruments",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-11-24",
+    "entry_date": "2026-11-25",
+    "entry": 15747.1,
+    "stop": 14644.8,
+    "exit_date": "2026-11-25",
+    "exit": 14600.87,
+    "why": "stop",
+    "shares": 73,
+    "pnl_krw": -85606,
+    "pnl_pct": -7.45,
+    "hold_days": 1,
+    "gap": false
    }
   ],
   "hold_10": [
@@ -2197,6 +2501,28 @@
     "pnl_pct": -2.38,
     "hold_days": 10,
     "gap": false
+   },
+   {
+    "code": "232140",
+    "name": null,
+    "group": "Electronic Equipment/Instruments",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-11-24",
+    "entry_date": "2026-11-25",
+    "entry": 15747.1,
+    "stop": 14644.8,
+    "exit_date": "2026-11-25",
+    "exit": 14600.87,
+    "why": "stop",
+    "shares": 81,
+    "pnl_krw": -94987,
+    "pnl_pct": -7.45,
+    "hold_days": 1,
+    "gap": false
    }
   ],
   "risk_2": [
@@ -2444,6 +2770,28 @@
     "pnl_krw": 266315,
     "pnl_pct": 10.53,
     "hold_days": 20,
+    "gap": false
+   },
+   {
+    "code": "232140",
+    "name": null,
+    "group": "Electronic Equipment/Instruments",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-11-24",
+    "entry_date": "2026-11-25",
+    "entry": 15747.1,
+    "stop": 14644.8,
+    "exit_date": "2026-11-25",
+    "exit": 14600.87,
+    "why": "stop",
+    "shares": 167,
+    "pnl_krw": -195838,
+    "pnl_pct": -7.45,
+    "hold_days": 1,
     "gap": false
    }
   ],
