@@ -1,6 +1,6 @@
 {
- "date": "2026-11-25",
- "generated_at_utc": "2026-11-25T07:14:40Z",
+ "date": "2026-11-26",
+ "generated_at_utc": "2026-11-25T17:44:52Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -81,35 +81,15 @@
   "bar_errors": 0,
   "stale_codes": 1,
   "by_source": {
-   "yahoo": 275,
-   "yahoo+gapfill": 3,
-   "yahoo+naver_api": 82
+   "naver_api": 1,
+   "yahoo+naver_api": 358,
+   "yahoo": 1
   },
   "skipped_days": [
    "2026-10-05"
   ],
-  "gap_filled": 3,
-  "gap_filled_codes": {
-   "271160": [
-    "2026-11-24"
-   ],
-   "345290": [
-    "2026-11-18",
-    "2026-11-19",
-    "2026-11-20",
-    "2026-11-23",
-    "2026-11-24"
-   ],
-   "493410": [
-    "2026-11-16",
-    "2026-11-17",
-    "2026-11-18",
-    "2026-11-19",
-    "2026-11-20",
-    "2026-11-23",
-    "2026-11-24"
-   ]
-  },
+  "gap_filled": 0,
+  "gap_filled_codes": {},
   "gap_unfilled": 1,
   "note": null
  },
@@ -123,10 +103,10 @@
     "patterns": [
      "flag"
     ],
-    "signal_close": 42650.0,
+    "signal_close": 41750.0,
     "pattern_low": 33100.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 46062 이상이면 포기)",
+    "entry_plan": "내일 시가 (시가가 45090 이상이면 포기)",
     "stop_plan": "max(33100, 진입가×0.93)"
    },
    {
@@ -137,10 +117,10 @@
     "patterns": [
      "flag"
     ],
-    "signal_close": 327000.0,
+    "signal_close": 329500.0,
     "pattern_low": 273500.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 353160 이상이면 포기)",
+    "entry_plan": "내일 시가 (시가가 355860 이상이면 포기)",
     "stop_plan": "max(273500, 진입가×0.93)"
    },
    {
@@ -151,10 +131,10 @@
     "patterns": [
      "triangle"
     ],
-    "signal_close": 83500.0,
+    "signal_close": 82500.0,
     "pattern_low": 79015.38,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 90180 이상이면 포기)",
+    "entry_plan": "내일 시가 (시가가 89100 이상이면 포기)",
     "stop_plan": "max(79015, 진입가×0.93)"
    },
    {
@@ -165,10 +145,10 @@
     "patterns": [
      "flag"
     ],
-    "signal_close": 4055.0,
+    "signal_close": 4045.0,
     "pattern_low": 3380.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 4379 이상이면 포기)",
+    "entry_plan": "내일 시가 (시가가 4369 이상이면 포기)",
     "stop_plan": "max(3380, 진입가×0.93)"
    }
   ],
@@ -181,10 +161,10 @@
     "patterns": [
      "flag"
     ],
-    "signal_close": 42650.0,
+    "signal_close": 41750.0,
     "pattern_low": 33100.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 46062 이상이면 포기)",
+    "entry_plan": "내일 시가 (시가가 45090 이상이면 포기)",
     "stop_plan": "max(33100, 진입가×0.93)"
    },
    {
@@ -202,20 +182,6 @@
     "stop_plan": "max(76000, 진입가×0.93)"
    },
    {
-    "code": "003230",
-    "name": "Samyang Foods Co., Ltd",
-    "group": "Food: Major Diversified",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 1309000.0,
-    "pattern_low": 1078000.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 1413720 이상이면 포기)",
-    "stop_plan": "max(1078000, 진입가×0.93)"
-   },
-   {
     "code": "090430",
     "name": "Amorepacific Corp.",
     "group": "Household/Personal Care",
@@ -223,10 +189,10 @@
     "patterns": [
      "box"
     ],
-    "signal_close": 147800.0,
+    "signal_close": 146700.0,
     "pattern_low": 120500.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 159624 이상이면 포기)",
+    "entry_plan": "내일 시가 (시가가 158436 이상이면 포기)",
     "stop_plan": "max(120500, 진입가×0.93)"
    },
    {
@@ -237,10 +203,10 @@
     "patterns": [
      "flag"
     ],
-    "signal_close": 327000.0,
+    "signal_close": 329500.0,
     "pattern_low": 273500.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 353160 이상이면 포기)",
+    "entry_plan": "내일 시가 (시가가 355860 이상이면 포기)",
     "stop_plan": "max(273500, 진입가×0.93)"
    },
    {
@@ -251,10 +217,10 @@
     "patterns": [
      "triangle"
     ],
-    "signal_close": 83500.0,
+    "signal_close": 82500.0,
     "pattern_low": 79015.38,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 90180 이상이면 포기)",
+    "entry_plan": "내일 시가 (시가가 89100 이상이면 포기)",
     "stop_plan": "max(79015, 진입가×0.93)"
    },
    {
@@ -265,25 +231,11 @@
     "patterns": [
      "flag"
     ],
-    "signal_close": 4055.0,
+    "signal_close": 4045.0,
     "pattern_low": 3380.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 4379 이상이면 포기)",
+    "entry_plan": "내일 시가 (시가가 4369 이상이면 포기)",
     "stop_plan": "max(3380, 진입가×0.93)"
-   },
-   {
-    "code": "069510",
-    "name": "Estec Corporation",
-    "group": "Electronics/Appliances",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 24100.0,
-    "pattern_low": 23800.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 26028 이상이면 포기)",
-    "stop_plan": "max(23800, 진입가×0.93)"
    }
   ],
   "hold_10": [
@@ -295,10 +247,10 @@
     "patterns": [
      "flag"
     ],
-    "signal_close": 42650.0,
+    "signal_close": 41750.0,
     "pattern_low": 33100.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 46062 이상이면 포기)",
+    "entry_plan": "내일 시가 (시가가 45090 이상이면 포기)",
     "stop_plan": "max(33100, 진입가×0.93)"
    },
    {
@@ -309,10 +261,10 @@
     "patterns": [
      "flag"
     ],
-    "signal_close": 327000.0,
+    "signal_close": 329500.0,
     "pattern_low": 273500.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 353160 이상이면 포기)",
+    "entry_plan": "내일 시가 (시가가 355860 이상이면 포기)",
     "stop_plan": "max(273500, 진입가×0.93)"
    },
    {
@@ -323,10 +275,10 @@
     "patterns": [
      "triangle"
     ],
-    "signal_close": 83500.0,
+    "signal_close": 82500.0,
     "pattern_low": 79015.38,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 90180 이상이면 포기)",
+    "entry_plan": "내일 시가 (시가가 89100 이상이면 포기)",
     "stop_plan": "max(79015, 진입가×0.93)"
    },
    {
@@ -337,10 +289,10 @@
     "patterns": [
      "flag"
     ],
-    "signal_close": 4055.0,
+    "signal_close": 4045.0,
     "pattern_low": 3380.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 4379 이상이면 포기)",
+    "entry_plan": "내일 시가 (시가가 4369 이상이면 포기)",
     "stop_plan": "max(3380, 진입가×0.93)"
    }
   ],
@@ -353,10 +305,10 @@
     "patterns": [
      "flag"
     ],
-    "signal_close": 42650.0,
+    "signal_close": 41750.0,
     "pattern_low": 33100.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 46062 이상이면 포기)",
+    "entry_plan": "내일 시가 (시가가 45090 이상이면 포기)",
     "stop_plan": "max(33100, 진입가×0.93)"
    },
    {
@@ -367,10 +319,10 @@
     "patterns": [
      "flag"
     ],
-    "signal_close": 327000.0,
+    "signal_close": 329500.0,
     "pattern_low": 273500.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 353160 이상이면 포기)",
+    "entry_plan": "내일 시가 (시가가 355860 이상이면 포기)",
     "stop_plan": "max(273500, 진입가×0.93)"
    },
    {
@@ -381,10 +333,10 @@
     "patterns": [
      "triangle"
     ],
-    "signal_close": 83500.0,
+    "signal_close": 82500.0,
     "pattern_low": 79015.38,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 90180 이상이면 포기)",
+    "entry_plan": "내일 시가 (시가가 89100 이상이면 포기)",
     "stop_plan": "max(79015, 진입가×0.93)"
    },
    {
@@ -395,10 +347,10 @@
     "patterns": [
      "flag"
     ],
-    "signal_close": 4055.0,
+    "signal_close": 4045.0,
     "pattern_low": 3380.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 4379 이상이면 포기)",
+    "entry_plan": "내일 시가 (시가가 4369 이상이면 포기)",
     "stop_plan": "max(3380, 진입가×0.93)"
    }
   ],
@@ -411,10 +363,10 @@
     "patterns": [
      "triangle"
     ],
-    "signal_close": 83500.0,
+    "signal_close": 82500.0,
     "pattern_low": 79015.38,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 90180 이상이면 포기)",
+    "entry_plan": "내일 시가 (시가가 89100 이상이면 포기)",
     "stop_plan": "max(79015, 진입가×0.93)"
    }
   ]
@@ -468,8 +420,8 @@
    "avg_loss_pct": -7.34,
    "payoff": 1.32,
    "profit_factor": 0.09,
-   "total_return_pct": -7.32,
-   "equity_final": 9268192,
+   "total_return_pct": -8.07,
+   "equity_final": 9193332,
    "max_drawdown_pct": 10.79,
    "avg_hold_days": 5.88,
    "skipped": {
@@ -529,7 +481,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -7.32
+    "2026": -8.07
    },
    "open_positions": [
     {
@@ -542,8 +494,8 @@
      "stop": 8964.11,
      "shares": 132,
      "bars_held": 16,
-     "last_close": 13460.0,
-     "unrealized_pct": 39.64
+     "last_close": 13380.0,
+     "unrealized_pct": 38.81
     },
     {
      "code": "090430",
@@ -555,8 +507,8 @@
      "stop": 132176.34,
      "shares": 9,
      "bars_held": 4,
-     "last_close": 147800.0,
-     "unrealized_pct": 3.99
+     "last_close": 146700.0,
+     "unrealized_pct": 3.22
     },
     {
      "code": "319400",
@@ -568,8 +520,8 @@
      "stop": 15670.87,
      "shares": 78,
      "bars_held": 1,
-     "last_close": 16550.0,
-     "unrealized_pct": -1.78
+     "last_close": 16150.0,
+     "unrealized_pct": -4.16
     },
     {
      "code": "125490",
@@ -581,14 +533,14 @@
      "stop": 10456.58,
      "shares": 116,
      "bars_held": 1,
-     "last_close": 11360.0,
-     "unrealized_pct": 1.03
+     "last_close": 11160.0,
+     "unrealized_pct": -0.74
     }
    ]
   },
   "no_sector": {
    "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
-   "signals": 110,
+   "signals": 108,
    "trades": 31,
    "wins": 1,
    "win_rate": 3.23,
@@ -596,8 +548,8 @@
    "avg_loss_pct": -7.25,
    "payoff": 0.92,
    "profit_factor": 0.03,
-   "total_return_pct": -19.59,
-   "equity_final": 8041361,
+   "total_return_pct": -20.44,
+   "equity_final": 7956461,
    "max_drawdown_pct": 20.82,
    "avg_hold_days": 4.03,
    "skipped": {
@@ -662,7 +614,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -19.59
+    "2026": -20.44
    },
    "open_positions": [
     {
@@ -675,8 +627,8 @@
      "stop": 8964.11,
      "shares": 125,
      "bars_held": 16,
-     "last_close": 13460.0,
-     "unrealized_pct": 39.64
+     "last_close": 13380.0,
+     "unrealized_pct": 38.81
     },
     {
      "code": "035900",
@@ -688,8 +640,8 @@
      "stop": 41229.32,
      "shares": 26,
      "bars_held": 9,
-     "last_close": 46550.0,
-     "unrealized_pct": 5.0
+     "last_close": 45900.0,
+     "unrealized_pct": 3.54
     },
     {
      "code": "437730",
@@ -701,8 +653,8 @@
      "stop": 49158.03,
      "shares": 22,
      "bars_held": 5,
-     "last_close": 59800.0,
-     "unrealized_pct": 13.13
+     "last_close": 58400.0,
+     "unrealized_pct": 10.48
     },
     {
      "code": "319400",
@@ -714,8 +666,8 @@
      "stop": 15670.87,
      "shares": 68,
      "bars_held": 1,
-     "last_close": 16550.0,
-     "unrealized_pct": -1.78
+     "last_close": 16150.0,
+     "unrealized_pct": -4.16
     }
    ]
   },
@@ -729,9 +681,9 @@
    "avg_loss_pct": -6.73,
    "payoff": 1.83,
    "profit_factor": 0.23,
-   "total_return_pct": -10.31,
-   "equity_final": 8969344,
-   "max_drawdown_pct": 12.95,
+   "total_return_pct": -10.94,
+   "equity_final": 8906244,
+   "max_drawdown_pct": 13.53,
    "avg_hold_days": 5.06,
    "skipped": {
     "gap": 0,
@@ -790,7 +742,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -10.31
+    "2026": -10.94
    },
    "open_positions": [
     {
@@ -803,8 +755,8 @@
      "stop": 132176.34,
      "shares": 9,
      "bars_held": 4,
-     "last_close": 147800.0,
-     "unrealized_pct": 3.99
+     "last_close": 146700.0,
+     "unrealized_pct": 3.22
     },
     {
      "code": "319400",
@@ -816,8 +768,8 @@
      "stop": 15670.87,
      "shares": 76,
      "bars_held": 1,
-     "last_close": 16550.0,
-     "unrealized_pct": -1.78
+     "last_close": 16150.0,
+     "unrealized_pct": -4.16
     },
     {
      "code": "125490",
@@ -829,8 +781,8 @@
      "stop": 10456.58,
      "shares": 114,
      "bars_held": 1,
-     "last_close": 11360.0,
-     "unrealized_pct": 1.03
+     "last_close": 11160.0,
+     "unrealized_pct": -0.74
     }
    ]
   },
@@ -844,8 +796,8 @@
    "avg_loss_pct": -7.26,
    "payoff": 1.5,
    "profit_factor": 0.14,
-   "total_return_pct": -6.45,
-   "equity_final": 9355306,
+   "total_return_pct": -6.84,
+   "equity_final": 9315746,
    "max_drawdown_pct": 16.49,
    "avg_hold_days": 4.42,
    "skipped": {
@@ -910,7 +862,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -6.45
+    "2026": -6.84
    },
    "open_positions": [
     {
@@ -923,8 +875,8 @@
      "stop": 8964.11,
      "shares": 247,
      "bars_held": 16,
-     "last_close": 13460.0,
-     "unrealized_pct": 39.64
+     "last_close": 13380.0,
+     "unrealized_pct": 38.81
     },
     {
      "code": "090430",
@@ -936,8 +888,8 @@
      "stop": 132176.34,
      "shares": 18,
      "bars_held": 4,
-     "last_close": 147800.0,
-     "unrealized_pct": 3.99
+     "last_close": 146700.0,
+     "unrealized_pct": 3.22
     }
    ]
   },
@@ -951,8 +903,8 @@
    "avg_loss_pct": -7.29,
    "payoff": 1.52,
    "profit_factor": 0.15,
-   "total_return_pct": -2.39,
-   "equity_final": 9761216,
+   "total_return_pct": -3.16,
+   "equity_final": 9683756,
    "max_drawdown_pct": 9.14,
    "avg_hold_days": 7.64,
    "skipped": {
@@ -1007,7 +959,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -2.39
+    "2026": -3.16
    },
    "open_positions": [
     {
@@ -1020,8 +972,8 @@
      "stop": 8964.11,
      "shares": 137,
      "bars_held": 16,
-     "last_close": 13460.0,
-     "unrealized_pct": 39.64
+     "last_close": 13380.0,
+     "unrealized_pct": 38.81
     },
     {
      "code": "090430",
@@ -1033,8 +985,8 @@
      "stop": 132176.34,
      "shares": 9,
      "bars_held": 4,
-     "last_close": 147800.0,
-     "unrealized_pct": 3.99
+     "last_close": 146700.0,
+     "unrealized_pct": 3.22
     },
     {
      "code": "319400",
@@ -1046,8 +998,8 @@
      "stop": 15670.87,
      "shares": 81,
      "bars_held": 1,
-     "last_close": 16550.0,
-     "unrealized_pct": -1.78
+     "last_close": 16150.0,
+     "unrealized_pct": -4.16
     },
     {
      "code": "125490",
@@ -1059,8 +1011,8 @@
      "stop": 10456.58,
      "shares": 121,
      "bars_held": 1,
-     "last_close": 11360.0,
-     "unrealized_pct": 1.03
+     "last_close": 11160.0,
+     "unrealized_pct": -0.74
     }
    ]
   }
