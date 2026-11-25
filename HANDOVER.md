@@ -36,7 +36,7 @@
 | 호가창 표본 | 매일 22:00 | GitHub Actions `orderbook.yml` |
 | 한국 주식 돌파 + 판정 | 평일 15:50 (예약이 자주 안 뜸) | GitHub Actions `kr_breakout.yml` |
 | 한국 주식 대신 실행 (그날 안 돌았으면) | 평일 16:10 | Routine trig_01XXMiN7QmGH5EgE9SiYrxZt → 세션 session_01WP7a8oLwaHMUj5MimZSF6k |
-| 현황판 결과 파일 갱신 | 매일 17:37 | Routine trig_015SCRNNwatvAhHFdJF8F9Z9 → 세션 session_01UBXi3SEnxJwqCj4dY5q4J5 (10/10 부터. 이전 새-세션 루틴 trig_01NtBpUqqUuZxogBQxRWurDj 는 꺼 둠). 11/14 부터 결과 22개 + `_meta.json`(forecast·cycle·index_event 포함). 운영 기록 `docs/sessions/2026-11-16_dashboard_routine_log.md` |
+| 현황판 결과 파일 갱신 | 매일 20:07 (11/25 사용자 결정 "1", 이전 17:37 — daily 가 GitHub 예약 지연으로 17~19시에 끝나는 날이 잦음) | Routine trig_015SCRNNwatvAhHFdJF8F9Z9 → 세션 session_01UBXi3SEnxJwqCj4dY5q4J5 (10/10 부터. 이전 새-세션 루틴 trig_01NtBpUqqUuZxogBQxRWurDj 는 꺼 둠). 11/14 부터 결과 22개 + `_meta.json`(forecast·cycle·index_event 포함). 운영 기록 `docs/sessions/2026-11-16_dashboard_routine_log.md` |
 | 매일 점검·이상 보고 (10/7부터 판정 변화·규칙 잠금 불일치·운 보정 경고도 보고, 보고 끝에 판정 한 줄) | 매일 10:00 | Routine trig_01T529xQcka6vj6YYZFAnuyL (새 세션) |
 | 매크로 달력 갱신 | 매주 월 11:10 | Routine trig_01CBFoNkLZyBHafCjmsAK5Jp |
 | 초단타 전략·가설 일일 보고 (판정·어제 성적·전략 현황·가설 1개; 사용자 요청 11/2) | 매일 17:10 | Routine trig_01Sq7GkfWcgjfZfiRQsfrrhJ → 세션 session_01NW6d8yMKTBLhW7RdeHRgsq |
