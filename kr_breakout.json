@@ -1,6 +1,6 @@
 {
  "date": "2026-11-26",
- "generated_at_utc": "2026-11-25T17:44:52Z",
+ "generated_at_utc": "2026-11-26T07:14:11Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -74,304 +74,148 @@
   }
  },
  "forward": {
-  "days": 36,
+  "days": 37,
   "from": "2026-10-05",
-  "to": "2026-11-25",
-  "codes": 360,
+  "to": "2026-11-26",
+  "codes": 363,
   "bar_errors": 0,
   "stale_codes": 1,
   "by_source": {
-   "naver_api": 1,
-   "yahoo+naver_api": 358,
-   "yahoo": 1
+   "yahoo+gapfill": 4,
+   "yahoo+naver_api": 85,
+   "yahoo": 274
   },
   "skipped_days": [
    "2026-10-05"
   ],
-  "gap_filled": 0,
-  "gap_filled_codes": {},
+  "gap_filled": 4,
+  "gap_filled_codes": {
+   "271160": [
+    "2026-11-24",
+    "2026-11-25"
+   ],
+   "345290": [
+    "2026-11-18",
+    "2026-11-19",
+    "2026-11-20",
+    "2026-11-23",
+    "2026-11-24",
+    "2026-11-25"
+   ],
+   "493410": [
+    "2026-11-16",
+    "2026-11-17",
+    "2026-11-18",
+    "2026-11-19",
+    "2026-11-20",
+    "2026-11-23",
+    "2026-11-24",
+    "2026-11-25"
+   ],
+   "498150": [
+    "2026-11-25"
+   ]
+  },
   "gap_unfilled": 1,
   "note": null
  },
  "signals_today": {
   "base": [
    {
-    "code": "263860",
-    "name": "GENIANS, INC.",
-    "group": "Packaged Software",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 41750.0,
-    "pattern_low": 33100.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 45090 이상이면 포기)",
-    "stop_plan": "max(33100, 진입가×0.93)"
-   },
-   {
-    "code": "192820",
-    "name": "COSMAX, Inc.",
-    "group": "Household/Personal Care",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 329500.0,
-    "pattern_low": 273500.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 355860 이상이면 포기)",
-    "stop_plan": "max(273500, 진입가×0.93)"
-   },
-   {
-    "code": "000100",
-    "name": "Yuhan Corporation",
+    "code": "310210",
+    "name": "Voronoi, Inc.",
     "group": "Pharmaceuticals: Major",
-    "pattern": "triangle",
-    "patterns": [
-     "triangle"
-    ],
-    "signal_close": 82500.0,
-    "pattern_low": 79015.38,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 89100 이상이면 포기)",
-    "stop_plan": "max(79015, 진입가×0.93)"
-   },
-   {
-    "code": "430690",
-    "name": "Hanssak Co., Ltd.",
-    "group": "Information Technology Services",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 4045.0,
-    "pattern_low": 3380.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 4369 이상이면 포기)",
-    "stop_plan": "max(3380, 진입가×0.93)"
-   }
-  ],
-  "no_sector": [
-   {
-    "code": "263860",
-    "name": "GENIANS, INC.",
-    "group": "Packaged Software",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 41750.0,
-    "pattern_low": 33100.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 45090 이상이면 포기)",
-    "stop_plan": "max(33100, 진입가×0.93)"
-   },
-   {
-    "code": "18064K",
-    "name": "HANJIN KAL Corp. Pfd Registered Shs 1 Non-Voting",
-    "group": "Hotels/Resorts/Cruise lines",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 110000.0,
-    "pattern_low": 76000.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 118800 이상이면 포기)",
-    "stop_plan": "max(76000, 진입가×0.93)"
-   },
-   {
-    "code": "090430",
-    "name": "Amorepacific Corp.",
-    "group": "Household/Personal Care",
     "pattern": "box",
     "patterns": [
      "box"
     ],
-    "signal_close": 146700.0,
-    "pattern_low": 120500.0,
+    "signal_close": 138400.0,
+    "pattern_low": 90000.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 158436 이상이면 포기)",
-    "stop_plan": "max(120500, 진입가×0.93)"
-   },
+    "entry_plan": "내일 시가 (시가가 149472 이상이면 포기)",
+    "stop_plan": "max(90000, 진입가×0.93)"
+   }
+  ],
+  "no_sector": [
    {
-    "code": "192820",
-    "name": "COSMAX, Inc.",
-    "group": "Household/Personal Care",
+    "code": "218410",
+    "name": "RFHIC Corp.",
+    "group": "Semiconductors",
     "pattern": "flag",
     "patterns": [
      "flag"
     ],
-    "signal_close": 329500.0,
-    "pattern_low": 273500.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 355860 이상이면 포기)",
-    "stop_plan": "max(273500, 진입가×0.93)"
+    "signal_close": 60900.0,
+    "pattern_low": 50300.0,
+    "sync_by": null,
+    "entry_plan": "내일 시가 (시가가 65772 이상이면 포기)",
+    "stop_plan": "max(50300, 진입가×0.93)"
    },
    {
-    "code": "000100",
-    "name": "Yuhan Corporation",
+    "code": "310210",
+    "name": "Voronoi, Inc.",
     "group": "Pharmaceuticals: Major",
-    "pattern": "triangle",
+    "pattern": "box",
     "patterns": [
-     "triangle"
+     "box"
     ],
-    "signal_close": 82500.0,
-    "pattern_low": 79015.38,
+    "signal_close": 138400.0,
+    "pattern_low": 90000.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 89100 이상이면 포기)",
-    "stop_plan": "max(79015, 진입가×0.93)"
-   },
-   {
-    "code": "430690",
-    "name": "Hanssak Co., Ltd.",
-    "group": "Information Technology Services",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 4045.0,
-    "pattern_low": 3380.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 4369 이상이면 포기)",
-    "stop_plan": "max(3380, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 149472 이상이면 포기)",
+    "stop_plan": "max(90000, 진입가×0.93)"
    }
   ],
   "hold_10": [
    {
-    "code": "263860",
-    "name": "GENIANS, INC.",
-    "group": "Packaged Software",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 41750.0,
-    "pattern_low": 33100.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 45090 이상이면 포기)",
-    "stop_plan": "max(33100, 진입가×0.93)"
-   },
-   {
-    "code": "192820",
-    "name": "COSMAX, Inc.",
-    "group": "Household/Personal Care",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 329500.0,
-    "pattern_low": 273500.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 355860 이상이면 포기)",
-    "stop_plan": "max(273500, 진입가×0.93)"
-   },
-   {
-    "code": "000100",
-    "name": "Yuhan Corporation",
+    "code": "310210",
+    "name": "Voronoi, Inc.",
     "group": "Pharmaceuticals: Major",
-    "pattern": "triangle",
+    "pattern": "box",
     "patterns": [
-     "triangle"
+     "box"
     ],
-    "signal_close": 82500.0,
-    "pattern_low": 79015.38,
+    "signal_close": 138400.0,
+    "pattern_low": 90000.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 89100 이상이면 포기)",
-    "stop_plan": "max(79015, 진입가×0.93)"
-   },
-   {
-    "code": "430690",
-    "name": "Hanssak Co., Ltd.",
-    "group": "Information Technology Services",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 4045.0,
-    "pattern_low": 3380.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 4369 이상이면 포기)",
-    "stop_plan": "max(3380, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 149472 이상이면 포기)",
+    "stop_plan": "max(90000, 진입가×0.93)"
    }
   ],
   "risk_2": [
    {
-    "code": "263860",
-    "name": "GENIANS, INC.",
-    "group": "Packaged Software",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 41750.0,
-    "pattern_low": 33100.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 45090 이상이면 포기)",
-    "stop_plan": "max(33100, 진입가×0.93)"
-   },
-   {
-    "code": "192820",
-    "name": "COSMAX, Inc.",
-    "group": "Household/Personal Care",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 329500.0,
-    "pattern_low": 273500.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 355860 이상이면 포기)",
-    "stop_plan": "max(273500, 진입가×0.93)"
-   },
-   {
-    "code": "000100",
-    "name": "Yuhan Corporation",
+    "code": "310210",
+    "name": "Voronoi, Inc.",
     "group": "Pharmaceuticals: Major",
-    "pattern": "triangle",
+    "pattern": "box",
     "patterns": [
-     "triangle"
+     "box"
     ],
-    "signal_close": 82500.0,
-    "pattern_low": 79015.38,
+    "signal_close": 138400.0,
+    "pattern_low": 90000.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 89100 이상이면 포기)",
-    "stop_plan": "max(79015, 진입가×0.93)"
-   },
-   {
-    "code": "430690",
-    "name": "Hanssak Co., Ltd.",
-    "group": "Information Technology Services",
-    "pattern": "flag",
-    "patterns": [
-     "flag"
-    ],
-    "signal_close": 4045.0,
-    "pattern_low": 3380.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 4369 이상이면 포기)",
-    "stop_plan": "max(3380, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 149472 이상이면 포기)",
+    "stop_plan": "max(90000, 진입가×0.93)"
    }
   ],
   "no_flag": [
    {
-    "code": "000100",
-    "name": "Yuhan Corporation",
+    "code": "310210",
+    "name": "Voronoi, Inc.",
     "group": "Pharmaceuticals: Major",
-    "pattern": "triangle",
+    "pattern": "box",
     "patterns": [
-     "triangle"
+     "box"
     ],
-    "signal_close": 82500.0,
-    "pattern_low": 79015.38,
+    "signal_close": 138400.0,
+    "pattern_low": 90000.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 89100 이상이면 포기)",
-    "stop_plan": "max(79015, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 149472 이상이면 포기)",
+    "stop_plan": "max(90000, 진입가×0.93)"
    }
   ]
  },
- "signal_date": "2026-11-25",
+ "signal_date": "2026-11-26",
  "signals_frozen": false,
  "frozen_dates": [
   "2026-10-06",
@@ -412,7 +256,7 @@
  "variants": {
   "base": {
    "label": "동조 업종 + 패턴 돌파 (기본)",
-   "signals": 39,
+   "signals": 40,
    "trades": 16,
    "wins": 1,
    "win_rate": 6.25,
@@ -420,14 +264,14 @@
    "avg_loss_pct": -7.34,
    "payoff": 1.32,
    "profit_factor": 0.09,
-   "total_return_pct": -8.07,
-   "equity_final": 9193332,
+   "total_return_pct": -7.58,
+   "equity_final": 9242230,
    "max_drawdown_pct": 10.79,
    "avg_hold_days": 5.88,
    "skipped": {
     "gap": 0,
-    "limit": 14,
-    "cooldown": 2,
+    "limit": 17,
+    "cooldown": 3,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -481,7 +325,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -8.07
+    "2026": -7.58
    },
    "open_positions": [
     {
@@ -493,9 +337,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 132,
-     "bars_held": 16,
-     "last_close": 13380.0,
-     "unrealized_pct": 38.81
+     "bars_held": 17,
+     "last_close": 13110.0,
+     "unrealized_pct": 36.01
     },
     {
      "code": "090430",
@@ -506,9 +350,9 @@
      "entry": 142125.1,
      "stop": 132176.34,
      "shares": 9,
-     "bars_held": 4,
-     "last_close": 146700.0,
-     "unrealized_pct": 3.22
+     "bars_held": 5,
+     "last_close": 146100.0,
+     "unrealized_pct": 2.8
     },
     {
      "code": "319400",
@@ -519,28 +363,41 @@
      "entry": 16850.4,
      "stop": 15670.87,
      "shares": 78,
-     "bars_held": 1,
-     "last_close": 16150.0,
-     "unrealized_pct": -4.16
+     "bars_held": 2,
+     "last_close": 16950.0,
+     "unrealized_pct": 0.59
     },
     {
      "code": "125490",
-     "name": "Hallacast Co., Ltd.",
+     "name": null,
      "group": "Industrial Machinery",
      "pattern": "box",
      "entry_date": "2026-11-25",
      "entry": 11243.63,
      "stop": 10456.58,
      "shares": 116,
+     "bars_held": 2,
+     "last_close": 11460.0,
+     "unrealized_pct": 1.92
+    },
+    {
+     "code": "263860",
+     "name": "GENIANS, INC.",
+     "group": "Packaged Software",
+     "pattern": "flag",
+     "entry_date": "2026-11-26",
+     "entry": 40420.9,
+     "stop": 37591.44,
+     "shares": 32,
      "bars_held": 1,
-     "last_close": 11160.0,
-     "unrealized_pct": -0.74
+     "last_close": 40200.0,
+     "unrealized_pct": -0.55
     }
    ]
   },
   "no_sector": {
    "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
-   "signals": 108,
+   "signals": 112,
    "trades": 31,
    "wins": 1,
    "win_rate": 3.23,
@@ -548,14 +405,14 @@
    "avg_loss_pct": -7.25,
    "payoff": 0.92,
    "profit_factor": 0.03,
-   "total_return_pct": -20.44,
-   "equity_final": 7956461,
+   "total_return_pct": -19.01,
+   "equity_final": 8098556,
    "max_drawdown_pct": 20.82,
    "avg_hold_days": 4.03,
    "skipped": {
     "gap": 0,
-    "limit": 66,
-    "cooldown": 11,
+    "limit": 73,
+    "cooldown": 15,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -614,7 +471,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -20.44
+    "2026": -19.01
    },
    "open_positions": [
     {
@@ -626,9 +483,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 125,
-     "bars_held": 16,
-     "last_close": 13380.0,
-     "unrealized_pct": 38.81
+     "bars_held": 17,
+     "last_close": 13110.0,
+     "unrealized_pct": 36.01
     },
     {
      "code": "035900",
@@ -639,9 +496,9 @@
      "entry": 44332.6,
      "stop": 41229.32,
      "shares": 26,
-     "bars_held": 9,
-     "last_close": 45900.0,
-     "unrealized_pct": 3.54
+     "bars_held": 10,
+     "last_close": 48700.0,
+     "unrealized_pct": 9.85
     },
     {
      "code": "437730",
@@ -652,9 +509,9 @@
      "entry": 52858.1,
      "stop": 49158.03,
      "shares": 22,
-     "bars_held": 5,
-     "last_close": 58400.0,
-     "unrealized_pct": 10.48
+     "bars_held": 6,
+     "last_close": 60900.0,
+     "unrealized_pct": 15.21
     },
     {
      "code": "319400",
@@ -665,15 +522,28 @@
      "entry": 16850.4,
      "stop": 15670.87,
      "shares": 68,
+     "bars_held": 2,
+     "last_close": 16950.0,
+     "unrealized_pct": 0.59
+    },
+    {
+     "code": "263860",
+     "name": "GENIANS, INC.",
+     "group": "Packaged Software",
+     "pattern": "flag",
+     "entry_date": "2026-11-26",
+     "entry": 40420.9,
+     "stop": 37591.44,
+     "shares": 28,
      "bars_held": 1,
-     "last_close": 16150.0,
-     "unrealized_pct": -4.16
+     "last_close": 40200.0,
+     "unrealized_pct": -0.55
     }
    ]
   },
   "hold_10": {
    "label": "동조 + 패턴, 보유 10일",
-   "signals": 39,
+   "signals": 40,
    "trades": 18,
    "wins": 2,
    "win_rate": 11.11,
@@ -681,14 +551,14 @@
    "avg_loss_pct": -6.73,
    "payoff": 1.83,
    "profit_factor": 0.23,
-   "total_return_pct": -10.94,
-   "equity_final": 8906244,
-   "max_drawdown_pct": 13.53,
+   "total_return_pct": -9.86,
+   "equity_final": 9014218,
+   "max_drawdown_pct": 12.95,
    "avg_hold_days": 5.06,
    "skipped": {
     "gap": 0,
-    "limit": 13,
-    "cooldown": 4,
+    "limit": 15,
+    "cooldown": 6,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -742,7 +612,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -10.94
+    "2026": -9.86
    },
    "open_positions": [
     {
@@ -754,9 +624,9 @@
      "entry": 142125.1,
      "stop": 132176.34,
      "shares": 9,
-     "bars_held": 4,
-     "last_close": 146700.0,
-     "unrealized_pct": 3.22
+     "bars_held": 5,
+     "last_close": 146100.0,
+     "unrealized_pct": 2.8
     },
     {
      "code": "319400",
@@ -767,28 +637,54 @@
      "entry": 16850.4,
      "stop": 15670.87,
      "shares": 76,
-     "bars_held": 1,
-     "last_close": 16150.0,
-     "unrealized_pct": -4.16
+     "bars_held": 2,
+     "last_close": 16950.0,
+     "unrealized_pct": 0.59
     },
     {
      "code": "125490",
-     "name": "Hallacast Co., Ltd.",
+     "name": null,
      "group": "Industrial Machinery",
      "pattern": "box",
      "entry_date": "2026-11-25",
      "entry": 11243.63,
      "stop": 10456.58,
      "shares": 114,
+     "bars_held": 2,
+     "last_close": 11460.0,
+     "unrealized_pct": 1.92
+    },
+    {
+     "code": "263860",
+     "name": "GENIANS, INC.",
+     "group": "Packaged Software",
+     "pattern": "flag",
+     "entry_date": "2026-11-26",
+     "entry": 40420.9,
+     "stop": 37591.44,
+     "shares": 31,
      "bars_held": 1,
-     "last_close": 11160.0,
-     "unrealized_pct": -0.74
+     "last_close": 40200.0,
+     "unrealized_pct": -0.55
+    },
+    {
+     "code": "192820",
+     "name": "COSMAX, Inc.",
+     "group": "Household/Personal Care",
+     "pattern": "flag",
+     "entry_date": "2026-11-26",
+     "entry": 327981.0,
+     "stop": 305022.33,
+     "shares": 3,
+     "bars_held": 1,
+     "last_close": 336500.0,
+     "unrealized_pct": 2.6
     }
    ]
   },
   "risk_2": {
    "label": "동조 + 패턴, 위험 2% (명목 상한 30%)",
-   "signals": 40,
+   "signals": 41,
    "trades": 12,
    "wins": 1,
    "win_rate": 8.33,
@@ -796,15 +692,15 @@
    "avg_loss_pct": -7.26,
    "payoff": 1.5,
    "profit_factor": 0.14,
-   "total_return_pct": -6.84,
-   "equity_final": 9315746,
+   "total_return_pct": -7.76,
+   "equity_final": 9223504,
    "max_drawdown_pct": 16.49,
    "avg_hold_days": 4.42,
    "skipped": {
     "gap": 0,
     "limit": 0,
     "cooldown": 1,
-    "size": 22,
+    "size": 25,
     "no_bar": 0,
     "pattern": 0
    },
@@ -862,7 +758,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -6.84
+    "2026": -7.76
    },
    "open_positions": [
     {
@@ -874,9 +770,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 247,
-     "bars_held": 16,
-     "last_close": 13380.0,
-     "unrealized_pct": 38.81
+     "bars_held": 17,
+     "last_close": 13110.0,
+     "unrealized_pct": 36.01
     },
     {
      "code": "090430",
@@ -887,15 +783,28 @@
      "entry": 142125.1,
      "stop": 132176.34,
      "shares": 18,
-     "bars_held": 4,
-     "last_close": 146700.0,
-     "unrealized_pct": 3.22
+     "bars_held": 5,
+     "last_close": 146100.0,
+     "unrealized_pct": 2.8
+    },
+    {
+     "code": "263860",
+     "name": "GENIANS, INC.",
+     "group": "Packaged Software",
+     "pattern": "flag",
+     "entry_date": "2026-11-26",
+     "entry": 40420.9,
+     "stop": 37591.44,
+     "shares": 65,
+     "bars_held": 1,
+     "last_close": 40200.0,
+     "unrealized_pct": -0.55
     }
    ]
   },
   "no_flag": {
    "label": "동조 + 패턴, 깃발형 제외",
-   "signals": 21,
+   "signals": 22,
    "trades": 11,
    "wins": 1,
    "win_rate": 9.09,
@@ -903,8 +812,8 @@
    "avg_loss_pct": -7.29,
    "payoff": 1.52,
    "profit_factor": 0.15,
-   "total_return_pct": -3.16,
-   "equity_final": 9683756,
+   "total_return_pct": -2.65,
+   "equity_final": 9735118,
    "max_drawdown_pct": 9.14,
    "avg_hold_days": 7.64,
    "skipped": {
@@ -959,7 +868,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -3.16
+    "2026": -2.65
    },
    "open_positions": [
     {
@@ -971,9 +880,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 137,
-     "bars_held": 16,
-     "last_close": 13380.0,
-     "unrealized_pct": 38.81
+     "bars_held": 17,
+     "last_close": 13110.0,
+     "unrealized_pct": 36.01
     },
     {
      "code": "090430",
@@ -984,9 +893,9 @@
      "entry": 142125.1,
      "stop": 132176.34,
      "shares": 9,
-     "bars_held": 4,
-     "last_close": 146700.0,
-     "unrealized_pct": 3.22
+     "bars_held": 5,
+     "last_close": 146100.0,
+     "unrealized_pct": 2.8
     },
     {
      "code": "319400",
@@ -997,22 +906,35 @@
      "entry": 16850.4,
      "stop": 15670.87,
      "shares": 81,
-     "bars_held": 1,
-     "last_close": 16150.0,
-     "unrealized_pct": -4.16
+     "bars_held": 2,
+     "last_close": 16950.0,
+     "unrealized_pct": 0.59
     },
     {
      "code": "125490",
-     "name": "Hallacast Co., Ltd.",
+     "name": null,
      "group": "Industrial Machinery",
      "pattern": "box",
      "entry_date": "2026-11-25",
      "entry": 11243.63,
      "stop": 10456.58,
      "shares": 121,
+     "bars_held": 2,
+     "last_close": 11460.0,
+     "unrealized_pct": 1.92
+    },
+    {
+     "code": "000100",
+     "name": null,
+     "group": "Pharmaceuticals: Major",
+     "pattern": "triangle",
+     "entry_date": "2026-11-26",
+     "entry": 82546.9,
+     "stop": 76768.62,
+     "shares": 16,
      "bars_held": 1,
-     "last_close": 11160.0,
-     "unrealized_pct": -0.74
+     "last_close": 82100.0,
+     "unrealized_pct": -0.54
     }
    ]
   }
