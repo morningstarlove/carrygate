@@ -39,10 +39,10 @@
 - 최근 600봉 사후(참고): 업비트 35건 건당 −2.33% PF 0.52 / OKX 39건 −3.15% PF 0.46 / 한국 235건 +0.42% PF 1.09.
 - 보유: OKX LINK(11/20 진입, 순방향) 1건, 한국 5건(순방향 전 진입 — 판정에 안 셈).
 - 현황판 라이브 버전 79: 타일·카드·판정 줄 추가(하위 작업자가 라이브 전체를 읽고 그 위에 고침, 백업 동일). 실데이터 보유·신호 표는 아직 눈으로 못 봄.
-- 갱신 Routine 파일 목록에 `trendline.json` 추가를 배달 세션에 요청(반영 미확인).
+- 갱신 Routine 파일 목록에 `trendline.json` 추가를 배달 세션에 요청 → 같은 날 반영(get_trigger 로 프롬프트 확인, 매일 20:07 KST).
 
 ## 사용자 결정 대기
 없음.
 
 ## Routine
-변경 요청만 함: trig_015SCRNNwatvAhHFdJF8F9Z9 파일 목록 `trendline.json` 추가(세션 session_01UBXi3SEnxJwqCj4dY5q4J5).
+trig_015SCRNNwatvAhHFdJF8F9Z9 파일 목록에 `trendline.json` 추가됨(세션 session_01UBXi3SEnxJwqCj4dY5q4J5).
