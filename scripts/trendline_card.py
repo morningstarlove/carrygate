@@ -1,6 +1,6 @@
-"""P39 추세선 채널 카드 재료 만들기: 실데이터 일봉 → 카드용 봉 CSV + 설명 JSON(선·진입·청산은 trendline.py 가 실제로 낸 것).
+"""P42 추세선 채널 카드 재료 만들기: 실데이터 일봉 → 카드용 봉 CSV + 설명 JSON(선·진입·청산은 trendline.py 가 실제로 낸 것).
 재현: python scripts/trendline_card.py
-      python track_card.py --bars docs/cards/data/krx_069500_1d.csv --spec docs/cards/p39_trendline.json --out docs/cards/p39_trendline.svg
+      python track_card.py --bars docs/cards/data/krx_069500_1d.csv --spec docs/cards/p42_trendline.json --out docs/cards/p42_trendline.svg
 표준 라이브러리만, 인터넷 불필요. 규칙은 바꾸지 않는다.
 """
 import csv, os, sys, json
@@ -13,7 +13,7 @@ import trendline as T
 SYM, LAST, COST = "KRX_069500", 330, 0.05
 SRC = os.path.join(ROOT, "data", "bb_reentry", SYM + ".csv")
 BARS_OUT = os.path.join(ROOT, "docs", "cards", "data", "krx_069500_1d.csv")
-SPEC_OUT = os.path.join(ROOT, "docs", "cards", "p39_trendline.json")
+SPEC_OUT = os.path.join(ROOT, "docs", "cards", "p42_trendline.json")
 
 
 def ts(d):
@@ -45,7 +45,7 @@ def main():
         why = {"target": "상단 익절", "stop": "하단 이탈 손절", "expire": "유효 기간 만료", "open": "보유 중(자료 끝)"}[t["why"]]
         notes.append("%d) %s 매수 → %s %s %+.1f%%" % (n, t["date_in"][2:], t["date_out"][2:], why, t["net_pct"]))
     spec = {
-        "title": "P39 추세선 채널 — 하단에서 잡고 상단에서 놓는다 (KODEX 200 일봉, 실데이터)",
+        "title": "P42 추세선 채널 — 하단에서 잡고 상단에서 놓는다 (KODEX 200 일봉, 실데이터)",
         "subtitle": "%s ~ %s. 빨간 점선 = 코드가 그은 하단·상단(저점①-②를 잇고 ③고점에 평행), 회색 점선 = 중단. 회색 원 = ①②③, 초록 세모 = 매수, 초록 원 = 청산. 주문 없음."
                     % (bars[a]["date"], bars[-1]["date"]),
         "venue": "krx",
@@ -58,7 +58,7 @@ def main():
         "expected": "실데이터 15종목(미국·한국·코인·금·환율, 2010~2026-11) 691건: 건당 +1.13%, 승률 32%, 손익비로 버는 구조(PF 1.40), t +2.17. 단 같은 일수 그냥 보유보다 건당 −0.85% 낮다.",
         "prediction": "10번 중 8번은 하단 이탈 손절(평균 −3.0%), 상단 익절은 14번에 1번(평균 +31.5%). 작게 자주 잃고 드물게 크게 번다. 한국 개별주는 사후 0 근처라 약할 것.",
         "risk": "t 3 미만 — 우연과 구별 안 됨. 2010~2017 은 건당 −0.05%. 갭 하락이면 손절이 선보다 훨씬 아래에서 체결된다. 불합격이면 규칙을 고치지 않고 '안 된다'로 기록.",
-        "next_check": "매일 09:18 daily 'Trendline channel' 단계 → trendline.json (업비트·OKX·한국 대형주). 진입 2026-11-19 부터 순방향, 시장군별 닫힌 20건에서 첫 판정: 손익비 ≥ 1.3 합격, < 1.0 불합격. 제안함 P39, docs/TRENDLINE_PLAN.md.",
+        "next_check": "매일 09:18 daily 'Trendline channel' 단계 → trendline.json (업비트·OKX·한국 대형주). 진입 2026-11-19 부터 순방향, 시장군별 닫힌 20건에서 첫 판정: 손익비 ≥ 1.3 합격, < 1.0 불합격. 제안함 P42, docs/TRENDLINE_PLAN.md.",
         "markers": markers, "lines": lines,
     }
     with open(SPEC_OUT, "w", encoding="utf-8") as fp:

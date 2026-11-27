@@ -114,7 +114,7 @@ jobs:
         continue-on-error: true
         run: python cycle.py
 
-      # 강의 자료 "추세선 작도"를 고정 규칙으로 — 채널 하단 터치 매수 종이 기록, 업비트·OKX·한국 대형주 일봉 (P39, 2026-11-18)
+      # 강의 자료 "추세선 작도"를 고정 규칙으로 — 채널 하단 터치 매수 종이 기록, 업비트·OKX·한국 대형주 일봉 (P42, 2026-11-18)
       - name: Trendline channel (추세선 채널 하단 매수, 단기~중기)
         if: inputs.day == ''
         continue-on-error: true

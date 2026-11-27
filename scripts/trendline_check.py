@@ -1,4 +1,4 @@
-"""추세선 채널 하단 매수(제안함 P39) 실데이터 측정. 트랙 아님, 주문 없음, 표준 라이브러리만, 인터넷 불필요.
+"""추세선 채널 하단 매수(제안함 P42) 실데이터 측정. 트랙 아님, 주문 없음, 표준 라이브러리만, 인터넷 불필요.
 자료: data/bb_reentry/*.csv (TradingView 일봉 15종목, 2026-11-04 받음 — P27 과 같은 자료).
 재현: python scripts/trendline_check.py            (표)
       python scripts/trendline_check.py --json out.json

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-CARRYGATE — 추세선 채널 하단 매수 순방향 종이 기록 (제안함 P39, 사용자 결정 2026-11-18 "A"). 판정 여덟 번째 트랙.
+CARRYGATE — 추세선 채널 하단 매수 순방향 종이 기록 (제안함 P42, 사용자 결정 2026-11-18 "A"). 판정 여덟 번째 트랙.
 
 무엇을 하나
   매일 닫힌 일봉으로 trendline.py 의 고정 규칙(저점①-② 하단, ③고점 평행 상단, 하단 터치 매수 → 상단 익절/하단 이탈 손절/만료)을
@@ -194,7 +194,7 @@ def write_history(out, path=HISTORY_PATH):
 
 
 def print_summary(out):
-    print("=== 추세선 채널 하단 매수 (P39, 작도 규칙 고정 %s, 순방향 진입 %s~) ===" % (T.RULE_FIXED, FORWARD_FROM))
+    print("=== 추세선 채널 하단 매수 (P42, 작도 규칙 고정 %s, 순방향 진입 %s~) ===" % (T.RULE_FIXED, FORWARD_FROM))
     for v, vd in out["venues"].items():
         st = vd["portfolio"]["stats"]
         f = st["forward"]

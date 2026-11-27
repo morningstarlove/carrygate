@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""추세선 채널(trendline.py, 제안함 P39) 단위시험. 인터넷 불필요."""
+"""추세선 채널(trendline.py, 제안함 P42) 단위시험. 인터넷 불필요."""
 import os, sys, csv, unittest
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 import trendline as T

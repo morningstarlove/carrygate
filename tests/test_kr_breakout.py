@@ -201,6 +201,15 @@ class Engine(unittest.TestCase):
 
 
 class FetchMerge(unittest.TestCase):
+    def test_zero_price_bar_is_dropped(self):
+        """2026-11-23 사고: 시가 0 봉이 종가 검사만 통과해 0원 청산(−100%)으로 계산됐다. 0 이하 값·고가<저가 봉은 버린다."""
+        import kr_ohlcv as KO
+        self.assertTrue(KO._bad(0.0, 100.0, 90.0, 95.0, 1000.0))       # 시가 0
+        self.assertTrue(KO._bad(95.0, 100.0, 0.0, 95.0, 1000.0))       # 저가 0
+        self.assertTrue(KO._bad(95.0, 90.0, 100.0, 95.0, 1000.0))      # 고가 < 저가
+        self.assertTrue(KO._bad(None, 100.0, 90.0, 95.0, 1000.0))
+        self.assertFalse(KO._bad(95.0, 100.0, 90.0, 97.0, 0.0))       # 거래량 0 은 정상(거래정지 등)
+
     def test_fill_missing_days_from_next_source(self):
         import kr_ohlcv as KO
         def yahoo(code, days):      # 10/2 까지만

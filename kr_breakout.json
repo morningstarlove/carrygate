@@ -1,6 +1,6 @@
 {
- "date": "2026-11-18",
- "generated_at_utc": "2026-11-17T16:36:10Z",
+ "date": "2026-11-27",
+ "generated_at_utc": "2026-11-27T07:14:38Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -74,48 +74,278 @@
   }
  },
  "forward": {
-  "days": 30,
+  "days": 38,
   "from": "2026-10-05",
-  "to": "2026-11-17",
-  "codes": 333,
+  "to": "2026-11-27",
+  "codes": 366,
   "bar_errors": 0,
-  "stale_codes": 0,
+  "stale_codes": 1,
   "by_source": {
-   "yahoo": 2,
-   "yahoo+naver_api": 331
+   "yahoo+gapfill": 4,
+   "yahoo": 276,
+   "yahoo+naver_api": 86
   },
   "skipped_days": [
    "2026-10-05"
   ],
-  "gap_filled": 0,
-  "gap_filled_codes": {},
-  "gap_unfilled": 0,
+  "gap_filled": 4,
+  "gap_filled_codes": {
+   "271160": [
+    "2026-11-24",
+    "2026-11-25",
+    "2026-11-26"
+   ],
+   "345290": [
+    "2026-11-18",
+    "2026-11-19",
+    "2026-11-20",
+    "2026-11-23",
+    "2026-11-24",
+    "2026-11-25",
+    "2026-11-26"
+   ],
+   "493410": [
+    "2026-11-16",
+    "2026-11-17",
+    "2026-11-18",
+    "2026-11-19",
+    "2026-11-20",
+    "2026-11-23",
+    "2026-11-24",
+    "2026-11-25",
+    "2026-11-26"
+   ],
+   "498150": [
+    "2026-11-25",
+    "2026-11-26"
+   ]
+  },
+  "gap_unfilled": 1,
   "note": null
  },
  "signals_today": {
-  "base": [],
+  "base": [
+   {
+    "code": "218410",
+    "name": "RFHIC Corp.",
+    "group": "Semiconductors",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 66100.0,
+    "pattern_low": 50300.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 71388 이상이면 포기)",
+    "stop_plan": "max(50300, 진입가×0.93)"
+   },
+   {
+    "code": "232680",
+    "name": "RAON ROBOTICS Inc.",
+    "group": "Industrial Machinery",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 15220.0,
+    "pattern_low": 10990.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 16438 이상이면 포기)",
+    "stop_plan": "max(10990, 진입가×0.93)"
+   }
+  ],
   "no_sector": [
    {
-    "code": "010470",
-    "name": "ORICOM, Inc.",
-    "group": "Advertising/Marketing Services",
+    "code": "084670",
+    "name": "DONGYANG EXPRESS Corporation",
+    "group": "Other Transportation",
+    "pattern": "triangle",
+    "patterns": [
+     "triangle"
+    ],
+    "signal_close": 36550.0,
+    "pattern_low": 26173.07,
+    "sync_by": null,
+    "entry_plan": "내일 시가 (시가가 39474 이상이면 포기)",
+    "stop_plan": "max(26173, 진입가×0.93)"
+   },
+   {
+    "code": "042510",
+    "name": "RaonSecure Co., Ltd.",
+    "group": "Computer Communications",
+    "pattern": "triangle",
+    "patterns": [
+     "triangle"
+    ],
+    "signal_close": 18870.0,
+    "pattern_low": 14993.77,
+    "sync_by": null,
+    "entry_plan": "내일 시가 (시가가 20380 이상이면 포기)",
+    "stop_plan": "max(14994, 진입가×0.93)"
+   },
+   {
+    "code": "218410",
+    "name": "RFHIC Corp.",
+    "group": "Semiconductors",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 66100.0,
+    "pattern_low": 50300.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 71388 이상이면 포기)",
+    "stop_plan": "max(50300, 진입가×0.93)"
+   },
+   {
+    "code": "232680",
+    "name": "RAON ROBOTICS Inc.",
+    "group": "Industrial Machinery",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 15220.0,
+    "pattern_low": 10990.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 16438 이상이면 포기)",
+    "stop_plan": "max(10990, 진입가×0.93)"
+   },
+   {
+    "code": "326030",
+    "name": "SK Biopharmaceuticals Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
     "pattern": "box",
     "patterns": [
      "box"
     ],
-    "signal_close": 5510.0,
-    "pattern_low": 4480.0,
+    "signal_close": 97500.0,
+    "pattern_low": 72400.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 105300 이상이면 포기)",
+    "stop_plan": "max(72400, 진입가×0.93)"
+   },
+   {
+    "code": "006800",
+    "name": "MIRAE ASSET SECURITIES CO., LTD.",
+    "group": "Investment Banks/Brokers",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 23150.0,
+    "pattern_low": 17850.0,
     "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 5951 이상이면 포기)",
-    "stop_plan": "max(4480, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 25002 이상이면 포기)",
+    "stop_plan": "max(17850, 진입가×0.93)"
+   },
+   {
+    "code": "039490",
+    "name": "Kiwoom Securities Co., Ltd",
+    "group": "Investment Banks/Brokers",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 233000.0,
+    "pattern_low": 178400.0,
+    "sync_by": null,
+    "entry_plan": "내일 시가 (시가가 251640 이상이면 포기)",
+    "stop_plan": "max(178400, 진입가×0.93)"
    }
   ],
-  "hold_10": [],
-  "risk_2": [],
+  "hold_10": [
+   {
+    "code": "218410",
+    "name": "RFHIC Corp.",
+    "group": "Semiconductors",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 66100.0,
+    "pattern_low": 50300.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 71388 이상이면 포기)",
+    "stop_plan": "max(50300, 진입가×0.93)"
+   },
+   {
+    "code": "232680",
+    "name": "RAON ROBOTICS Inc.",
+    "group": "Industrial Machinery",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 15220.0,
+    "pattern_low": 10990.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 16438 이상이면 포기)",
+    "stop_plan": "max(10990, 진입가×0.93)"
+   }
+  ],
+  "risk_2": [
+   {
+    "code": "218410",
+    "name": "RFHIC Corp.",
+    "group": "Semiconductors",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 66100.0,
+    "pattern_low": 50300.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 71388 이상이면 포기)",
+    "stop_plan": "max(50300, 진입가×0.93)"
+   },
+   {
+    "code": "232680",
+    "name": "RAON ROBOTICS Inc.",
+    "group": "Industrial Machinery",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 15220.0,
+    "pattern_low": 10990.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 16438 이상이면 포기)",
+    "stop_plan": "max(10990, 진입가×0.93)"
+   },
+   {
+    "code": "319400",
+    "name": "HUYNDAI MOVEX Co. Ltd.",
+    "group": "Industrial Machinery",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 19220.0,
+    "pattern_low": 14350.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 20758 이상이면 포기)",
+    "stop_plan": "max(14350, 진입가×0.93)"
+   },
+   {
+    "code": "326030",
+    "name": "SK Biopharmaceuticals Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 97500.0,
+    "pattern_low": 72400.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 105300 이상이면 포기)",
+    "stop_plan": "max(72400, 진입가×0.93)"
+   }
+  ],
   "no_flag": []
  },
- "signal_date": "2026-11-17",
- "signals_frozen": true,
+ "signal_date": "2026-11-27",
+ "signals_frozen": false,
  "frozen_dates": [
   "2026-10-06",
   "2026-10-07",
@@ -146,41 +376,45 @@
   "2026-11-12",
   "2026-11-13",
   "2026-11-16",
-  "2026-11-17"
+  "2026-11-17",
+  "2026-11-18",
+  "2026-11-19",
+  "2026-11-20",
+  "2026-11-23"
  ],
  "variants": {
   "base": {
    "label": "동조 업종 + 패턴 돌파 (기본)",
-   "signals": 31,
-   "trades": 13,
+   "signals": 42,
+   "trades": 16,
    "wins": 1,
-   "win_rate": 7.69,
+   "win_rate": 6.25,
    "avg_win_pct": 10.53,
-   "avg_loss_pct": -7.31,
-   "payoff": 1.29,
-   "profit_factor": 0.11,
-   "total_return_pct": -7.31,
-   "equity_final": 9268968,
+   "avg_loss_pct": -7.34,
+   "payoff": 1.32,
+   "profit_factor": 0.09,
+   "total_return_pct": -4.87,
+   "equity_final": 9512570,
    "max_drawdown_pct": 10.79,
-   "avg_hold_days": 5.46,
+   "avg_hold_days": 5.88,
    "skipped": {
     "gap": 0,
-    "limit": 14,
-    "cooldown": 0,
+    "limit": 18,
+    "cooldown": 5,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
    },
    "by_pattern": {
     "flag": {
-     "n": 5,
+     "n": 7,
      "wins": 0,
-     "pnl_krw": -510279
+     "pnl_krw": -674014
     },
     "cup_handle": {
-     "n": 1,
+     "n": 2,
      "wins": 0,
-     "pnl_krw": -87356
+     "pnl_krw": -177810
     },
     "box": {
      "n": 5,
@@ -195,16 +429,16 @@
    },
    "by_sync": {
     "day": {
-     "n": 13,
+     "n": 16,
      "wins": 1,
-     "pnl_krw": -1022379
+     "pnl_krw": -1276568
     }
    },
    "by_exit": {
     "stop": {
-     "n": 12,
+     "n": 15,
      "wins": 0,
-     "pnl_krw": -1145294
+     "pnl_krw": -1399483
     },
     "hold20": {
      "n": 1,
@@ -214,13 +448,13 @@
    },
    "by_year": {
     "2026": {
-     "n": 13,
+     "n": 16,
      "wins": 1,
-     "pnl_krw": -1022379
+     "pnl_krw": -1276568
     }
    },
    "yearly_return_pct": {
-    "2026": -7.31
+    "2026": -4.87
    },
    "open_positions": [
     {
@@ -232,65 +466,91 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 132,
-     "bars_held": 10,
-     "last_close": 11540.0,
-     "unrealized_pct": 19.72
+     "bars_held": 18,
+     "last_close": 13040.0,
+     "unrealized_pct": 35.29
     },
     {
-     "code": "128940",
-     "name": "Hanmi Pharmaceutical Co., Ltd.",
-     "group": "Pharmaceuticals: Major",
+     "code": "090430",
+     "name": "Amorepacific Corp.",
+     "group": "Household/Personal Care",
+     "pattern": "triangle",
+     "entry_date": "2026-11-20",
+     "entry": 142125.1,
+     "stop": 132176.34,
+     "shares": 9,
+     "bars_held": 6,
+     "last_close": 142500.0,
+     "unrealized_pct": 0.26
+    },
+    {
+     "code": "319400",
+     "name": "HUYNDAI MOVEX Co. Ltd.",
+     "group": "Industrial Machinery",
+     "pattern": "box",
+     "entry_date": "2026-11-25",
+     "entry": 16850.4,
+     "stop": 15670.87,
+     "shares": 78,
+     "bars_held": 3,
+     "last_close": 19220.0,
+     "unrealized_pct": 14.06
+    },
+    {
+     "code": "125490",
+     "name": null,
+     "group": "Industrial Machinery",
+     "pattern": "box",
+     "entry_date": "2026-11-25",
+     "entry": 11243.63,
+     "stop": 10456.58,
+     "shares": 116,
+     "bars_held": 3,
+     "last_close": 12430.0,
+     "unrealized_pct": 10.55
+    },
+    {
+     "code": "263860",
+     "name": "GENIANS, INC.",
+     "group": "Packaged Software",
      "pattern": "flag",
-     "entry_date": "2026-11-06",
-     "entry": 445833.5,
-     "stop": 414625.15,
-     "shares": 2,
-     "bars_held": 8,
-     "last_close": 448500.0,
-     "unrealized_pct": 0.6
-    },
-    {
-     "code": "326030",
-     "name": "SK Biopharmaceuticals Co., Ltd.",
-     "group": "Pharmaceuticals: Major",
-     "pattern": "cup_handle",
-     "entry_date": "2026-11-06",
-     "entry": 86759.5,
-     "stop": 80686.33,
-     "shares": 14,
-     "bars_held": 8,
-     "last_close": 89300.0,
-     "unrealized_pct": 2.93
+     "entry_date": "2026-11-26",
+     "entry": 40420.9,
+     "stop": 37591.44,
+     "shares": 32,
+     "bars_held": 2,
+     "last_close": 40900.0,
+     "unrealized_pct": 1.19
     }
    ]
   },
   "no_sector": {
    "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
-   "signals": 89,
-   "trades": 26,
+   "signals": 118,
+   "trades": 31,
    "wins": 1,
-   "win_rate": 3.85,
+   "win_rate": 3.23,
    "avg_win_pct": 6.57,
-   "avg_loss_pct": -7.21,
-   "payoff": 0.91,
-   "profit_factor": 0.04,
-   "total_return_pct": -20.33,
-   "equity_final": 7967061,
-   "max_drawdown_pct": 20.33,
-   "avg_hold_days": 4.27,
+   "avg_loss_pct": -7.25,
+   "payoff": 0.92,
+   "profit_factor": 0.03,
+   "total_return_pct": -17.09,
+   "equity_final": 8291366,
+   "max_drawdown_pct": 20.82,
+   "avg_hold_days": 4.03,
    "skipped": {
     "gap": 0,
-    "limit": 58,
-    "cooldown": 0,
+    "limit": 74,
+    "cooldown": 18,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
    },
    "by_pattern": {
     "flag": {
-     "n": 7,
+     "n": 9,
      "wins": 1,
-     "pnl_krw": -504269
+     "pnl_krw": -674488
     },
     "cup_handle": {
      "n": 3,
@@ -303,28 +563,28 @@
      "pnl_krw": -401380
     },
     "box": {
-     "n": 12,
+     "n": 15,
      "wins": 0,
-     "pnl_krw": -1041400
+     "pnl_krw": -1303474
     }
    },
    "by_sync": {
     "day": {
-     "n": 6,
+     "n": 8,
      "wins": 0,
-     "pnl_krw": -548490
+     "pnl_krw": -728770
     },
     "none": {
-     "n": 20,
+     "n": 23,
      "wins": 1,
-     "pnl_krw": -1644753
+     "pnl_krw": -1896766
     }
    },
    "by_exit": {
     "stop": {
-     "n": 24,
+     "n": 29,
      "wins": 0,
-     "pnl_krw": -2243220
+     "pnl_krw": -2675513
     },
     "low10": {
      "n": 2,
@@ -334,13 +594,13 @@
    },
    "by_year": {
     "2026": {
-     "n": 26,
+     "n": 31,
      "wins": 1,
-     "pnl_krw": -2193243
+     "pnl_krw": -2625536
     }
    },
    "yearly_return_pct": {
-    "2026": -20.33
+    "2026": -17.09
    },
    "open_positions": [
     {
@@ -352,22 +612,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 125,
-     "bars_held": 10,
-     "last_close": 11540.0,
-     "unrealized_pct": 19.72
-    },
-    {
-     "code": "003490",
-     "name": "Korean Air Lines Co., Ltd.",
-     "group": "Airlines",
-     "pattern": "box",
-     "entry_date": "2026-11-11",
-     "entry": 32597.5,
-     "stop": 30315.67,
-     "shares": 39,
-     "bars_held": 5,
-     "last_close": 31750.0,
-     "unrealized_pct": -2.6
+     "bars_held": 18,
+     "last_close": 13040.0,
+     "unrealized_pct": 35.29
     },
     {
      "code": "035900",
@@ -378,49 +625,88 @@
      "entry": 44332.6,
      "stop": 41229.32,
      "shares": 26,
+     "bars_held": 11,
+     "last_close": 50100.0,
+     "unrealized_pct": 13.01
+    },
+    {
+     "code": "437730",
+     "name": "Samhyun Co., Ltd.",
+     "group": "Building Products",
+     "pattern": "flag",
+     "entry_date": "2026-11-19",
+     "entry": 52858.1,
+     "stop": 49158.03,
+     "shares": 22,
+     "bars_held": 7,
+     "last_close": 60500.0,
+     "unrealized_pct": 14.46
+    },
+    {
+     "code": "319400",
+     "name": "HUYNDAI MOVEX Co. Ltd.",
+     "group": "Industrial Machinery",
+     "pattern": "box",
+     "entry_date": "2026-11-25",
+     "entry": 16850.4,
+     "stop": 15670.87,
+     "shares": 68,
      "bars_held": 3,
-     "last_close": 42650.0,
-     "unrealized_pct": -3.8
+     "last_close": 19220.0,
+     "unrealized_pct": 14.06
+    },
+    {
+     "code": "263860",
+     "name": "GENIANS, INC.",
+     "group": "Packaged Software",
+     "pattern": "flag",
+     "entry_date": "2026-11-26",
+     "entry": 40420.9,
+     "stop": 37591.44,
+     "shares": 28,
+     "bars_held": 2,
+     "last_close": 40900.0,
+     "unrealized_pct": 1.19
     }
    ]
   },
   "hold_10": {
    "label": "동조 + 패턴, 보유 10일",
-   "signals": 31,
-   "trades": 14,
-   "wins": 1,
-   "win_rate": 7.14,
-   "avg_win_pct": 4.89,
-   "avg_loss_pct": -6.96,
-   "payoff": 0.62,
-   "profit_factor": 0.05,
-   "total_return_pct": -8.44,
-   "equity_final": 9156441,
-   "max_drawdown_pct": 11.1,
-   "avg_hold_days": 4.29,
+   "signals": 42,
+   "trades": 18,
+   "wins": 2,
+   "win_rate": 11.11,
+   "avg_win_pct": 12.59,
+   "avg_loss_pct": -6.73,
+   "payoff": 1.83,
+   "profit_factor": 0.23,
+   "total_return_pct": -7.78,
+   "equity_final": 9222118,
+   "max_drawdown_pct": 12.95,
+   "avg_hold_days": 5.06,
    "skipped": {
     "gap": 0,
-    "limit": 13,
-    "cooldown": 0,
+    "limit": 16,
+    "cooldown": 8,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
    },
    "by_pattern": {
     "flag": {
-     "n": 5,
+     "n": 7,
      "wins": 0,
-     "pnl_krw": -510279
+     "pnl_krw": -671668
     },
     "cup_handle": {
-     "n": 1,
+     "n": 2,
      "wins": 0,
-     "pnl_krw": -87356
+     "pnl_krw": -118373
     },
     "box": {
-     "n": 6,
-     "wins": 0,
-     "pnl_krw": -568513
+     "n": 7,
+     "wins": 1,
+     "pnl_krw": -306461
     },
     "triangle": {
      "n": 2,
@@ -430,102 +716,128 @@
    },
    "by_sync": {
     "day": {
-     "n": 14,
-     "wins": 1,
-     "pnl_krw": -1141233
+     "n": 18,
+     "wins": 2,
+     "pnl_krw": -1071587
     }
    },
    "by_exit": {
     "stop": {
-     "n": 12,
+     "n": 14,
      "wins": 0,
-     "pnl_krw": -1166148
+     "pnl_krw": -1327537
     },
     "hold10": {
-     "n": 2,
-     "wins": 1,
-     "pnl_krw": 24915
+     "n": 4,
+     "wins": 2,
+     "pnl_krw": 255950
     }
    },
    "by_year": {
     "2026": {
-     "n": 14,
-     "wins": 1,
-     "pnl_krw": -1141233
+     "n": 18,
+     "wins": 2,
+     "pnl_krw": -1071587
     }
    },
    "yearly_return_pct": {
-    "2026": -8.44
+    "2026": -7.78
    },
    "open_positions": [
     {
-     "code": "267850",
-     "name": "Asiana IDT Inc.",
-     "group": "Information Technology Services",
+     "code": "090430",
+     "name": "Amorepacific Corp.",
+     "group": "Household/Personal Care",
+     "pattern": "triangle",
+     "entry_date": "2026-11-20",
+     "entry": 142125.1,
+     "stop": 132176.34,
+     "shares": 9,
+     "bars_held": 6,
+     "last_close": 142500.0,
+     "unrealized_pct": 0.26
+    },
+    {
+     "code": "319400",
+     "name": "HUYNDAI MOVEX Co. Ltd.",
+     "group": "Industrial Machinery",
      "pattern": "box",
-     "entry_date": "2026-11-04",
-     "entry": 9638.83,
-     "stop": 8964.11,
-     "shares": 134,
-     "bars_held": 10,
-     "last_close": 11540.0,
-     "unrealized_pct": 19.72
+     "entry_date": "2026-11-25",
+     "entry": 16850.4,
+     "stop": 15670.87,
+     "shares": 76,
+     "bars_held": 3,
+     "last_close": 19220.0,
+     "unrealized_pct": 14.06
     },
     {
-     "code": "128940",
-     "name": "Hanmi Pharmaceutical Co., Ltd.",
-     "group": "Pharmaceuticals: Major",
+     "code": "125490",
+     "name": null,
+     "group": "Industrial Machinery",
+     "pattern": "box",
+     "entry_date": "2026-11-25",
+     "entry": 11243.63,
+     "stop": 10456.58,
+     "shares": 114,
+     "bars_held": 3,
+     "last_close": 12430.0,
+     "unrealized_pct": 10.55
+    },
+    {
+     "code": "263860",
+     "name": "GENIANS, INC.",
+     "group": "Packaged Software",
      "pattern": "flag",
-     "entry_date": "2026-11-06",
-     "entry": 445833.5,
-     "stop": 414625.15,
-     "shares": 2,
-     "bars_held": 8,
-     "last_close": 448500.0,
-     "unrealized_pct": 0.6
+     "entry_date": "2026-11-26",
+     "entry": 40420.9,
+     "stop": 37591.44,
+     "shares": 31,
+     "bars_held": 2,
+     "last_close": 40900.0,
+     "unrealized_pct": 1.19
     },
     {
-     "code": "326030",
-     "name": "SK Biopharmaceuticals Co., Ltd.",
-     "group": "Pharmaceuticals: Major",
-     "pattern": "cup_handle",
-     "entry_date": "2026-11-06",
-     "entry": 86759.5,
-     "stop": 80686.33,
-     "shares": 15,
-     "bars_held": 8,
-     "last_close": 89300.0,
-     "unrealized_pct": 2.93
+     "code": "192820",
+     "name": "COSMAX, Inc.",
+     "group": "Household/Personal Care",
+     "pattern": "flag",
+     "entry_date": "2026-11-26",
+     "entry": 327981.0,
+     "stop": 305022.33,
+     "shares": 3,
+     "bars_held": 2,
+     "last_close": 315000.0,
+     "unrealized_pct": -3.96
     }
    ]
   },
   "risk_2": {
    "label": "동조 + 패턴, 위험 2% (명목 상한 30%)",
-   "signals": 32,
-   "trades": 11,
+   "signals": 45,
+   "trades": 12,
    "wins": 1,
-   "win_rate": 9.09,
+   "win_rate": 8.33,
    "avg_win_pct": 10.53,
-   "avg_loss_pct": -7.24,
-   "payoff": 1.51,
-   "profit_factor": 0.15,
-   "total_return_pct": -10.25,
-   "equity_final": 8975140,
+   "avg_loss_pct": -7.26,
+   "payoff": 1.5,
+   "profit_factor": 0.14,
+   "total_return_pct": -8.13,
+   "equity_final": 9186914,
    "max_drawdown_pct": 16.49,
-   "avg_hold_days": 4.73,
+   "avg_hold_days": 4.42,
    "skipped": {
     "gap": 0,
     "limit": 0,
-    "cooldown": 0,
-    "size": 20,
+    "cooldown": 1,
+    "size": 26,
     "no_bar": 0,
     "pattern": 0
    },
    "by_pattern": {
     "flag": {
-     "n": 4,
+     "n": 5,
      "wins": 0,
-     "pnl_krw": -706823
+     "pnl_krw": -902661
     },
     "cup_handle": {
      "n": 1,
@@ -545,9 +857,9 @@
    },
    "by_sync": {
     "day": {
-     "n": 10,
+     "n": 11,
      "wins": 1,
-     "pnl_krw": -1392243
+     "pnl_krw": -1588081
     },
     "week": {
      "n": 1,
@@ -557,9 +869,9 @@
    },
    "by_exit": {
     "stop": {
-     "n": 10,
+     "n": 11,
      "wins": 0,
-     "pnl_krw": -1760408
+     "pnl_krw": -1956246
     },
     "hold20": {
      "n": 1,
@@ -569,13 +881,13 @@
    },
    "by_year": {
     "2026": {
-     "n": 11,
+     "n": 12,
      "wins": 1,
-     "pnl_krw": -1494093
+     "pnl_krw": -1689931
     }
    },
    "yearly_return_pct": {
-    "2026": -10.25
+    "2026": -8.13
    },
    "open_positions": [
     {
@@ -587,39 +899,65 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 247,
-     "bars_held": 10,
-     "last_close": 11540.0,
-     "unrealized_pct": 19.72
+     "bars_held": 18,
+     "last_close": 13040.0,
+     "unrealized_pct": 35.29
+    },
+    {
+     "code": "090430",
+     "name": "Amorepacific Corp.",
+     "group": "Household/Personal Care",
+     "pattern": "triangle",
+     "entry_date": "2026-11-20",
+     "entry": 142125.1,
+     "stop": 132176.34,
+     "shares": 18,
+     "bars_held": 6,
+     "last_close": 142500.0,
+     "unrealized_pct": 0.26
+    },
+    {
+     "code": "263860",
+     "name": "GENIANS, INC.",
+     "group": "Packaged Software",
+     "pattern": "flag",
+     "entry_date": "2026-11-26",
+     "entry": 40420.9,
+     "stop": 37591.44,
+     "shares": 65,
+     "bars_held": 2,
+     "last_close": 40900.0,
+     "unrealized_pct": 1.19
     }
    ]
   },
   "no_flag": {
    "label": "동조 + 패턴, 깃발형 제외",
-   "signals": 17,
-   "trades": 9,
+   "signals": 22,
+   "trades": 11,
    "wins": 1,
-   "win_rate": 11.11,
+   "win_rate": 9.09,
    "avg_win_pct": 10.53,
-   "avg_loss_pct": -7.24,
-   "payoff": 1.49,
-   "profit_factor": 0.19,
-   "total_return_pct": -2.75,
-   "equity_final": 9724899,
-   "max_drawdown_pct": 7.79,
-   "avg_hold_days": 6.67,
+   "avg_loss_pct": -7.29,
+   "payoff": 1.52,
+   "profit_factor": 0.15,
+   "total_return_pct": 0.12,
+   "equity_final": 10011968,
+   "max_drawdown_pct": 9.14,
+   "avg_hold_days": 7.64,
    "skipped": {
     "gap": 0,
-    "limit": 5,
-    "cooldown": 0,
+    "limit": 6,
+    "cooldown": 3,
     "size": 0,
     "no_bar": 0,
-    "pattern": 0
+    "pattern": 6
    },
    "by_pattern": {
     "cup_handle": {
-     "n": 1,
+     "n": 2,
      "wins": 0,
-     "pnl_krw": -109195
+     "pnl_krw": -206110
     },
     "box": {
      "n": 6,
@@ -627,23 +965,23 @@
      "pnl_krw": -576356
     },
     "triangle": {
-     "n": 2,
+     "n": 3,
      "wins": 1,
-     "pnl_krw": 57018
+     "pnl_krw": -19841
     }
    },
    "by_sync": {
     "day": {
-     "n": 9,
+     "n": 11,
      "wins": 1,
-     "pnl_krw": -628533
+     "pnl_krw": -802307
     }
    },
    "by_exit": {
     "stop": {
-     "n": 8,
+     "n": 10,
      "wins": 0,
-     "pnl_krw": -771934
+     "pnl_krw": -945708
     },
     "hold20": {
      "n": 1,
@@ -653,13 +991,13 @@
    },
    "by_year": {
     "2026": {
-     "n": 9,
+     "n": 11,
      "wins": 1,
-     "pnl_krw": -628533
+     "pnl_krw": -802307
     }
    },
    "yearly_return_pct": {
-    "2026": -2.75
+    "2026": 0.12
    },
    "open_positions": [
     {
@@ -671,35 +1009,61 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 137,
-     "bars_held": 10,
-     "last_close": 11540.0,
-     "unrealized_pct": 19.72
+     "bars_held": 18,
+     "last_close": 13040.0,
+     "unrealized_pct": 35.29
     },
     {
-     "code": "326030",
-     "name": "SK Biopharmaceuticals Co., Ltd.",
-     "group": "Pharmaceuticals: Major",
-     "pattern": "cup_handle",
-     "entry_date": "2026-11-06",
-     "entry": 86759.5,
-     "stop": 80686.33,
-     "shares": 15,
-     "bars_held": 8,
-     "last_close": 89300.0,
-     "unrealized_pct": 2.93
+     "code": "090430",
+     "name": "Amorepacific Corp.",
+     "group": "Household/Personal Care",
+     "pattern": "triangle",
+     "entry_date": "2026-11-20",
+     "entry": 142125.1,
+     "stop": 132176.34,
+     "shares": 9,
+     "bars_held": 6,
+     "last_close": 142500.0,
+     "unrealized_pct": 0.26
     },
     {
-     "code": "0126Z0",
-     "name": "Samsung Epis Holdings Co., Ltd.",
+     "code": "319400",
+     "name": "HUYNDAI MOVEX Co. Ltd.",
+     "group": "Industrial Machinery",
+     "pattern": "box",
+     "entry_date": "2026-11-25",
+     "entry": 16850.4,
+     "stop": 15670.87,
+     "shares": 81,
+     "bars_held": 3,
+     "last_close": 19220.0,
+     "unrealized_pct": 14.06
+    },
+    {
+     "code": "125490",
+     "name": null,
+     "group": "Industrial Machinery",
+     "pattern": "box",
+     "entry_date": "2026-11-25",
+     "entry": 11243.63,
+     "stop": 10456.58,
+     "shares": 121,
+     "bars_held": 3,
+     "last_close": 12430.0,
+     "unrealized_pct": 10.55
+    },
+    {
+     "code": "000100",
+     "name": null,
      "group": "Pharmaceuticals: Major",
      "pattern": "triangle",
-     "entry_date": "2026-11-06",
-     "entry": 344029.0,
-     "stop": 319946.97,
-     "shares": 3,
-     "bars_held": 8,
-     "last_close": 362500.0,
-     "unrealized_pct": 5.37
+     "entry_date": "2026-11-26",
+     "entry": 82546.9,
+     "stop": 76768.62,
+     "shares": 16,
+     "bars_held": 2,
+     "last_close": 83200.0,
+     "unrealized_pct": 0.79
     }
    ]
   }
@@ -995,6 +1359,74 @@
     "pnl_krw": 122915,
     "pnl_pct": 10.53,
     "hold_days": 20,
+    "gap": false
+   },
+   {
+    "code": "128940",
+    "name": "Hanmi Pharmaceutical Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "flag",
+    "patterns": [
+     "box",
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-11-05",
+    "entry_date": "2026-11-06",
+    "entry": 445833.5,
+    "stop": 414625.15,
+    "exit_date": "2026-11-19",
+    "exit": 413381.28,
+    "why": "stop",
+    "shares": 2,
+    "pnl_krw": -66402,
+    "pnl_pct": -7.45,
+    "hold_days": 10,
+    "gap": false
+   },
+   {
+    "code": "326030",
+    "name": "SK Biopharmaceuticals Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "cup_handle",
+    "patterns": [
+     "box",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-11-05",
+    "entry_date": "2026-11-06",
+    "entry": 86759.5,
+    "stop": 80686.33,
+    "exit_date": "2026-11-23",
+    "exit": 80444.28,
+    "why": "stop",
+    "shares": 14,
+    "pnl_krw": -90454,
+    "pnl_pct": -7.45,
+    "hold_days": 12,
+    "gap": false
+   },
+   {
+    "code": "232140",
+    "name": null,
+    "group": "Electronic Equipment/Instruments",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-11-24",
+    "entry_date": "2026-11-25",
+    "entry": 15747.1,
+    "stop": 14644.8,
+    "exit_date": "2026-11-25",
+    "exit": 14600.87,
+    "why": "stop",
+    "shares": 83,
+    "pnl_krw": -97333,
+    "pnl_pct": -7.45,
+    "hold_days": 1,
     "gap": false
    }
   ],
@@ -1579,6 +2011,116 @@
     "pnl_pct": -7.45,
     "hold_days": 5,
     "gap": false
+   },
+   {
+    "code": "010470",
+    "name": "ORICOM, Inc.",
+    "group": "Advertising/Marketing Services",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": null,
+    "signal_date": "2026-11-17",
+    "entry_date": "2026-11-18",
+    "entry": 5486.41,
+    "stop": 5102.36,
+    "exit_date": "2026-11-18",
+    "exit": 5087.05,
+    "why": "stop",
+    "shares": 208,
+    "pnl_krw": -84983,
+    "pnl_pct": -7.45,
+    "hold_days": 1,
+    "gap": false
+   },
+   {
+    "code": "030530",
+    "name": "WONIK HOLDINGS CO., LTD.",
+    "group": "Semiconductors",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": null,
+    "signal_date": "2026-11-18",
+    "entry_date": "2026-11-19",
+    "entry": 35506.2,
+    "stop": 33020.77,
+    "exit_date": "2026-11-19",
+    "exit": 32921.7,
+    "why": "stop",
+    "shares": 32,
+    "pnl_krw": -84613,
+    "pnl_pct": -7.45,
+    "hold_days": 1,
+    "gap": false
+   },
+   {
+    "code": "003490",
+    "name": "Korean Air Lines Co., Ltd.",
+    "group": "Airlines",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-11-10",
+    "entry_date": "2026-11-11",
+    "entry": 32597.5,
+    "stop": 30315.67,
+    "exit_date": "2026-11-23",
+    "exit": 30224.73,
+    "why": "stop",
+    "shares": 39,
+    "pnl_krw": -94674,
+    "pnl_pct": -7.45,
+    "hold_days": 9,
+    "gap": false
+   },
+   {
+    "code": "352820",
+    "name": "HYBE Co., Ltd.",
+    "group": "Miscellaneous Commercial Services",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": null,
+    "signal_date": "2026-11-19",
+    "entry_date": "2026-11-20",
+    "entry": 184451.7,
+    "stop": 171540.08,
+    "exit_date": "2026-11-23",
+    "exit": 171025.46,
+    "why": "stop",
+    "shares": 6,
+    "pnl_krw": -82417,
+    "pnl_pct": -7.45,
+    "hold_days": 2,
+    "gap": false
+   },
+   {
+    "code": "232140",
+    "name": null,
+    "group": "Electronic Equipment/Instruments",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-11-24",
+    "entry_date": "2026-11-25",
+    "entry": 15747.1,
+    "stop": 14644.8,
+    "exit_date": "2026-11-25",
+    "exit": 14600.87,
+    "why": "stop",
+    "shares": 73,
+    "pnl_krw": -85606,
+    "pnl_pct": -7.45,
+    "hold_days": 1,
+    "gap": false
    }
   ],
   "hold_10": [
@@ -1894,6 +2436,96 @@
     "pnl_pct": -7.45,
     "hold_days": 5,
     "gap": false
+   },
+   {
+    "code": "267850",
+    "name": "Asiana IDT Inc.",
+    "group": "Information Technology Services",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-11-03",
+    "entry_date": "2026-11-04",
+    "entry": 9638.83,
+    "stop": 8964.11,
+    "exit_date": "2026-11-18",
+    "exit": 11615.05,
+    "why": "hold10",
+    "shares": 134,
+    "pnl_krw": 262052,
+    "pnl_pct": 20.29,
+    "hold_days": 10,
+    "gap": false
+   },
+   {
+    "code": "128940",
+    "name": "Hanmi Pharmaceutical Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "flag",
+    "patterns": [
+     "box",
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-11-05",
+    "entry_date": "2026-11-06",
+    "entry": 445833.5,
+    "stop": 414625.15,
+    "exit_date": "2026-11-19",
+    "exit": 413381.28,
+    "why": "stop",
+    "shares": 2,
+    "pnl_krw": -66402,
+    "pnl_pct": -7.45,
+    "hold_days": 10,
+    "gap": false
+   },
+   {
+    "code": "326030",
+    "name": "SK Biopharmaceuticals Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "cup_handle",
+    "patterns": [
+     "box",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-11-05",
+    "entry_date": "2026-11-06",
+    "entry": 86759.5,
+    "stop": 80686.33,
+    "exit_date": "2026-11-20",
+    "exit": 84844.7,
+    "why": "hold10",
+    "shares": 15,
+    "pnl_krw": -31017,
+    "pnl_pct": -2.38,
+    "hold_days": 10,
+    "gap": false
+   },
+   {
+    "code": "232140",
+    "name": null,
+    "group": "Electronic Equipment/Instruments",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-11-24",
+    "entry_date": "2026-11-25",
+    "entry": 15747.1,
+    "stop": 14644.8,
+    "exit_date": "2026-11-25",
+    "exit": 14600.87,
+    "why": "stop",
+    "shares": 81,
+    "pnl_krw": -94987,
+    "pnl_pct": -7.45,
+    "hold_days": 1,
+    "gap": false
    }
   ],
   "risk_2": [
@@ -2142,6 +2774,28 @@
     "pnl_pct": 10.53,
     "hold_days": 20,
     "gap": false
+   },
+   {
+    "code": "232140",
+    "name": null,
+    "group": "Electronic Equipment/Instruments",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-11-24",
+    "entry_date": "2026-11-25",
+    "entry": 15747.1,
+    "stop": 14644.8,
+    "exit_date": "2026-11-25",
+    "exit": 14600.87,
+    "why": "stop",
+    "shares": 167,
+    "pnl_krw": -195838,
+    "pnl_pct": -7.45,
+    "hold_days": 1,
+    "gap": false
    }
   ],
   "no_flag": [
@@ -2346,9 +3000,57 @@
     "pnl_pct": 10.53,
     "hold_days": 20,
     "gap": false
+   },
+   {
+    "code": "326030",
+    "name": "SK Biopharmaceuticals Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "cup_handle",
+    "patterns": [
+     "box",
+     "cup_handle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-11-05",
+    "entry_date": "2026-11-06",
+    "entry": 86759.5,
+    "stop": 80686.33,
+    "exit_date": "2026-11-23",
+    "exit": 80444.28,
+    "why": "stop",
+    "shares": 15,
+    "pnl_krw": -96915,
+    "pnl_pct": -7.45,
+    "hold_days": 12,
+    "gap": false
+   },
+   {
+    "code": "0126Z0",
+    "name": "Samsung Epis Holdings Co., Ltd.",
+    "group": "Pharmaceuticals: Major",
+    "pattern": "triangle",
+    "patterns": [
+     "box",
+     "triangle"
+    ],
+    "sync_by": "day",
+    "signal_date": "2026-11-05",
+    "entry_date": "2026-11-06",
+    "entry": 344029.0,
+    "stop": 319946.97,
+    "exit_date": "2026-11-23",
+    "exit": 318987.13,
+    "why": "stop",
+    "shares": 3,
+    "pnl_krw": -76859,
+    "pnl_pct": -7.45,
+    "hold_days": 12,
+    "gap": false
    }
   ]
  },
  "errors": {},
- "stale": []
+ "stale": [
+  "317240"
+ ]
 }

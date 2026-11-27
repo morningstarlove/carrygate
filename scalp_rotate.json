@@ -1,5 +1,89 @@
 {
- "schema": "carrygate-scalp-rotate/3",
+ "schema": "carrygate-scalp-rotate/5",
+ "aux_late": {
+  "fixed": "2026-11-24",
+  "forward_from": "2026-11-24",
+  "late_start_sec": 7200,
+  "method": "P41 보조: P35·P39 를 하루 UTC 2시간 늦게 시작(그 전 진입 매매 제외). 전날 판단은 그대로. full_day_net_pct = 같은 날 하루 전체로 셌다면",
+  "late": {
+   "all": {
+    "label": "P35(18시장)",
+    "forward": {
+     "days": 3,
+     "active_days": 1,
+     "net_pct": -3.975,
+     "plus_days": 0,
+     "rev_only_pct": 5.168,
+     "skipped_rev_pct": 9.143,
+     "full_day_net_pct": 4.505
+    },
+    "forward_days": [
+     {
+      "eval_day": "2026-11-24",
+      "active": false,
+      "net_pct": 0.0,
+      "rev_pct": -14.6381,
+      "rev_full_pct": -20.8384,
+      "prev_rev_pct": 38.0507
+     },
+     {
+      "eval_day": "2026-11-25",
+      "active": true,
+      "net_pct": -3.9749,
+      "rev_pct": -3.9749,
+      "rev_full_pct": 4.5054,
+      "prev_rev_pct": -20.8384
+     },
+     {
+      "eval_day": "2026-11-26",
+      "active": false,
+      "net_pct": 0.0,
+      "rev_pct": 23.7812,
+      "rev_full_pct": 16.4943,
+      "prev_rev_pct": 4.5054
+     }
+    ]
+   },
+   "offshore": {
+    "label": "P39(OKX·하이퍼리퀴드 12시장)",
+    "forward": {
+     "days": 3,
+     "active_days": 2,
+     "net_pct": 14.022,
+     "plus_days": 1,
+     "rev_only_pct": 8.904,
+     "skipped_rev_pct": -5.118,
+     "full_day_net_pct": 14.138
+    },
+    "forward_days": [
+     {
+      "eval_day": "2026-11-24",
+      "active": false,
+      "net_pct": 0.0,
+      "rev_pct": -5.1179,
+      "rev_full_pct": -6.5538,
+      "prev_rev_pct": 31.5969
+     },
+     {
+      "eval_day": "2026-11-25",
+      "active": true,
+      "net_pct": -8.694,
+      "rev_pct": -8.694,
+      "rev_full_pct": -1.7547,
+      "prev_rev_pct": -6.5538
+     },
+     {
+      "eval_day": "2026-11-26",
+      "active": true,
+      "net_pct": 22.7161,
+      "rev_pct": 22.7161,
+      "rev_full_pct": 15.8927,
+      "prev_rev_pct": -1.7547
+     }
+    ]
+   }
+  }
+ },
  "rule_fixed": "2026-11-07",
  "forward_from": "2026-11-06",
  "aux60": {
@@ -16,12 +100,12 @@
    "picked_rev": 17
   },
   "forward": {
-   "days": 9,
-   "net_pct": -317.943,
-   "plus_days": 1,
-   "rev_only_pct": -185.476,
-   "brk_only_pct": 2.834,
-   "picked_rev": 5
+   "days": 19,
+   "net_pct": -402.595,
+   "plus_days": 7,
+   "rev_only_pct": -61.354,
+   "brk_only_pct": -127.765,
+   "picked_rev": 13
   },
   "forward_days": [
    {
@@ -86,6 +170,76 @@
     "net_pct": 24.6038,
     "rev_pct": 24.6038,
     "brk_pct": -17.0537
+   },
+   {
+    "eval_day": "2026-11-17",
+    "pick": "rev",
+    "net_pct": 48.9997,
+    "rev_pct": 48.9997,
+    "brk_pct": -0.237
+   },
+   {
+    "eval_day": "2026-11-18",
+    "pick": "rev",
+    "net_pct": 9.0899,
+    "rev_pct": 9.0899,
+    "brk_pct": -20.6368
+   },
+   {
+    "eval_day": "2026-11-19",
+    "pick": "rev",
+    "net_pct": 21.9588,
+    "rev_pct": 21.9588,
+    "brk_pct": -19.4709
+   },
+   {
+    "eval_day": "2026-11-20",
+    "pick": "rev",
+    "net_pct": -102.2639,
+    "rev_pct": -102.2639,
+    "brk_pct": 40.8133
+   },
+   {
+    "eval_day": "2026-11-21",
+    "pick": "brk",
+    "net_pct": -73.825,
+    "rev_pct": 99.8596,
+    "brk_pct": -73.825
+   },
+   {
+    "eval_day": "2026-11-22",
+    "pick": "rev",
+    "net_pct": -2.6207,
+    "rev_pct": -2.6207,
+    "brk_pct": 2.6248
+   },
+   {
+    "eval_day": "2026-11-23",
+    "pick": "brk",
+    "net_pct": -35.0399,
+    "rev_pct": 0.0498,
+    "brk_pct": -35.0399
+   },
+   {
+    "eval_day": "2026-11-24",
+    "pick": "rev",
+    "net_pct": 3.9404,
+    "rev_pct": 3.9404,
+    "brk_pct": 0.0458
+   },
+   {
+    "eval_day": "2026-11-25",
+    "pick": "rev",
+    "net_pct": 36.0512,
+    "rev_pct": 36.0512,
+    "brk_pct": -15.8409
+   },
+   {
+    "eval_day": "2026-11-26",
+    "pick": "rev",
+    "net_pct": 9.0573,
+    "rev_pct": 9.0573,
+    "brk_pct": -9.033
    }
   ]
  },
@@ -103,12 +257,12 @@
    "skipped_rev_pct": -310.708
   },
   "forward": {
-   "days": 5,
-   "active_days": 2,
-   "net_pct": 90.015,
-   "plus_days": 2,
-   "rev_only_pct": -232.215,
-   "skipped_rev_pct": -322.23
+   "days": 15,
+   "active_days": 5,
+   "net_pct": 328.971,
+   "plus_days": 5,
+   "rev_only_pct": -96.609,
+   "skipped_rev_pct": -425.58
   },
   "forward_days": [
    {
@@ -145,11 +299,172 @@
     "net_pct": 0.0,
     "rev_pct": 111.041,
     "prev_rev_pct": 84.8408
+   },
+   {
+    "eval_day": "2026-11-17",
+    "active": false,
+    "net_pct": 0.0,
+    "rev_pct": 96.7405,
+    "prev_rev_pct": 111.041
+   },
+   {
+    "eval_day": "2026-11-18",
+    "active": false,
+    "net_pct": 0.0,
+    "rev_pct": 7.1381,
+    "prev_rev_pct": 96.7405
+   },
+   {
+    "eval_day": "2026-11-19",
+    "active": false,
+    "net_pct": 0.0,
+    "rev_pct": 14.8343,
+    "prev_rev_pct": 7.1381
+   },
+   {
+    "eval_day": "2026-11-20",
+    "active": false,
+    "net_pct": 0.0,
+    "rev_pct": -212.9344,
+    "prev_rev_pct": 14.8343
+   },
+   {
+    "eval_day": "2026-11-21",
+    "active": true,
+    "net_pct": 196.3999,
+    "rev_pct": 196.3999,
+    "prev_rev_pct": -212.9344
+   },
+   {
+    "eval_day": "2026-11-22",
+    "active": false,
+    "net_pct": 0.0,
+    "rev_pct": -4.7848,
+    "prev_rev_pct": 196.3999
+   },
+   {
+    "eval_day": "2026-11-23",
+    "active": true,
+    "net_pct": 38.0507,
+    "rev_pct": 38.0507,
+    "prev_rev_pct": -4.7848
+   },
+   {
+    "eval_day": "2026-11-24",
+    "active": false,
+    "net_pct": 0.0,
+    "rev_pct": -20.8384,
+    "prev_rev_pct": 38.0507
+   },
+   {
+    "eval_day": "2026-11-25",
+    "active": true,
+    "net_pct": 4.5054,
+    "rev_pct": 4.5054,
+    "prev_rev_pct": -20.8384
+   },
+   {
+    "eval_day": "2026-11-26",
+    "active": false,
+    "net_pct": 0.0,
+    "rev_pct": 16.4943,
+    "prev_rev_pct": 4.5054
+   }
+  ]
+ },
+ "aux_after_loss_offshore": {
+  "fixed": "2026-11-18",
+  "forward_from": "2026-11-18",
+  "venues": [
+   "okx",
+   "hyperliquid"
+  ],
+  "method": "P39 보조: P35 를 OKX·하이퍼리퀴드 12시장 합만으로(전날 12시장 되돌림 합 < 0 이면 오늘 12시장 되돌림을 씀)",
+  "next_active": false,
+  "backtest": {
+   "days": 35,
+   "active_days": 14,
+   "net_pct": 93.73,
+   "plus_days": 11,
+   "rev_only_pct": -63.089,
+   "skipped_rev_pct": -156.818
+  },
+  "forward": {
+   "days": 9,
+   "active_days": 4,
+   "net_pct": 186.614,
+   "plus_days": 3,
+   "rev_only_pct": 52.683,
+   "skipped_rev_pct": -133.931
+  },
+  "forward_days": [
+   {
+    "eval_day": "2026-11-18",
+    "active": false,
+    "net_pct": 0.0,
+    "rev_pct": 13.8185,
+    "prev_rev_pct": 75.1077
+   },
+   {
+    "eval_day": "2026-11-19",
+    "active": false,
+    "net_pct": 0.0,
+    "rev_pct": 14.017,
+    "prev_rev_pct": 13.8185
+   },
+   {
+    "eval_day": "2026-11-20",
+    "active": false,
+    "net_pct": 0.0,
+    "rev_pct": -147.4766,
+    "prev_rev_pct": 14.017
+   },
+   {
+    "eval_day": "2026-11-21",
+    "active": true,
+    "net_pct": 140.8791,
+    "rev_pct": 140.8791,
+    "prev_rev_pct": -147.4766
+   },
+   {
+    "eval_day": "2026-11-22",
+    "active": false,
+    "net_pct": 0.0,
+    "rev_pct": -7.7363,
+    "prev_rev_pct": 140.8791
+   },
+   {
+    "eval_day": "2026-11-23",
+    "active": true,
+    "net_pct": 31.5969,
+    "rev_pct": 31.5969,
+    "prev_rev_pct": -7.7363
+   },
+   {
+    "eval_day": "2026-11-24",
+    "active": false,
+    "net_pct": 0.0,
+    "rev_pct": -6.5538,
+    "prev_rev_pct": 31.5969
+   },
+   {
+    "eval_day": "2026-11-25",
+    "active": true,
+    "net_pct": -1.7547,
+    "rev_pct": -1.7547,
+    "prev_rev_pct": -6.5538
+   },
+   {
+    "eval_day": "2026-11-26",
+    "active": true,
+    "net_pct": 15.8927,
+    "rev_pct": 15.8927,
+    "prev_rev_pct": -1.7547
    }
   ]
  },
  "method": "전날 18시장 합계가 큰 묶음(되돌림=30·60분 VWAP 지정가+평균회귀 지정가, 돌파=30·60분 20봉 돌파; 같으면 되돌림)의 오늘 합계",
- "date": "2026-11-17",
+ "date": "2026-11-27",
  "next_pick": "rev",
  "backtest": {
   "days": 23,
@@ -160,12 +475,12 @@
   "picked_rev": 16
  },
  "forward": {
-  "days": 11,
-  "net_pct": -623.046,
-  "plus_days": 2,
-  "rev_only_pct": -294.031,
-  "brk_only_pct": -42.493,
-  "picked_rev": 6
+  "days": 21,
+  "net_pct": -802.436,
+  "plus_days": 7,
+  "rev_only_pct": -158.425,
+  "brk_only_pct": -219.906,
+  "picked_rev": 14
  },
  "forward_days": [
   {
@@ -244,6 +559,76 @@
    "net_pct": 111.041,
    "rev_pct": 111.041,
    "brk_pct": -52.0527
+  },
+  {
+   "eval_day": "2026-11-17",
+   "pick": "rev",
+   "net_pct": 96.7405,
+   "rev_pct": 96.7405,
+   "brk_pct": -8.6355
+  },
+  {
+   "eval_day": "2026-11-18",
+   "pick": "rev",
+   "net_pct": 7.1381,
+   "rev_pct": 7.1381,
+   "brk_pct": -23.2733
+  },
+  {
+   "eval_day": "2026-11-19",
+   "pick": "rev",
+   "net_pct": 14.8343,
+   "rev_pct": 14.8343,
+   "brk_pct": -17.6548
+  },
+  {
+   "eval_day": "2026-11-20",
+   "pick": "rev",
+   "net_pct": -212.9344,
+   "rev_pct": -212.9344,
+   "brk_pct": 79.5766
+  },
+  {
+   "eval_day": "2026-11-21",
+   "pick": "brk",
+   "net_pct": -99.8291,
+   "rev_pct": 196.3999,
+   "brk_pct": -99.8291
+  },
+  {
+   "eval_day": "2026-11-22",
+   "pick": "rev",
+   "net_pct": -4.7848,
+   "rev_pct": -4.7848,
+   "brk_pct": -10.0837
+  },
+  {
+   "eval_day": "2026-11-23",
+   "pick": "rev",
+   "net_pct": 38.0507,
+   "rev_pct": 38.0507,
+   "brk_pct": -46.8024
+  },
+  {
+   "eval_day": "2026-11-24",
+   "pick": "rev",
+   "net_pct": -20.8384,
+   "rev_pct": -20.8384,
+   "brk_pct": 1.1589
+  },
+  {
+   "eval_day": "2026-11-25",
+   "pick": "brk",
+   "net_pct": -14.2613,
+   "rev_pct": 4.5054,
+   "brk_pct": -14.2613
+  },
+  {
+   "eval_day": "2026-11-26",
+   "pick": "rev",
+   "net_pct": 16.4943,
+   "rev_pct": 16.4943,
+   "brk_pct": -37.6076
   }
  ],
  "min_forward_days": 14

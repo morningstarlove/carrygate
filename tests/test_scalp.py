@@ -94,6 +94,17 @@ class Arithmetic(unittest.TestCase):
         self.assertEqual(s["maker_sides"], 1)
         self.assertEqual(s["taker_sides"], 1)
 
+    def test_late_start_net_only_counts_late_entries(self):
+        """P41: late_i 이후 진입한 매매만 late_net_pct 에. 없으면 None."""
+        mk_t = lambda ei, g: {"side": 1, "entry_i": ei, "exit_i": ei + 2, "hold": 2, "gross_pct": g,
+                              "forced": False, "entry_maker": True, "exit_maker": True}
+        trades = [mk_t(5, 1.0), mk_t(20, -0.5), mk_t(25, 0.3)]
+        s = scalp.summarize(trades, FEE, 0.01, mid_i=30, late_i=20)
+        self.assertEqual(scalp.LATE_START_SEC, 7200)                       # 2026-11-24 고정
+        self.assertEqual(s["late_trades"], 2)
+        self.assertAlmostEqual(s["late_net_pct"], (-0.5 - 0.04) + (0.3 - 0.04))   # 지정가 왕복 0.04
+        self.assertIsNone(scalp.summarize(trades, FEE, 0.01, 30)["late_net_pct"])
+
     def test_empty_trades(self):
         s = scalp.summarize([], FEE, 0.01, 0)
         self.assertEqual(s["trades"], 0)
@@ -596,6 +607,49 @@ class RegimeRotate(unittest.TestCase):
         self.assertEqual(a["forward"]["skipped_rev_pct"], 2.0)   # 11/12 +4, 11/13 −2
         self.assertEqual(a["forward"]["rev_only_pct"], 8.0)
         self.assertIn("aux60", out)                          # P34 그대로
+
+    def test_offshore_after_loss_ignores_upbit(self):
+        """P39 보조: P35 를 OKX·하이퍼리퀴드만으로. 업비트 행은 전날 판단에도 오늘 합에도 들어가지 않는다."""
+        import scalp_rotate as R
+        self.assertEqual(R.AUX3_FORWARD_FROM, "2026-11-18")
+        def rec(day, okx, upbit):
+            return {"date": day, "eval_day_utc": day,
+                    "rows": {"okx:XRP:30m:vwap_fade_lim": {"nt": okx}, "upbit:XRP:60m:mr_z20_lim": {"nt": upbit},
+                             "okx:XRP:60m:brk_20": {"nt": 0.0}}}
+        rows = [rec("2026-11-17", -2.0, 50.0), rec("2026-11-18", 3.0, -40.0), rec("2026-11-19", 1.0, 0.0)]
+        seq, nxt = R.rev_after_loss(rows, "rev_off")
+        self.assertEqual([d["active"] for d in seq], [True, False])     # 전날 OKX −2 → 씀(18시장이면 +48 이라 쉼), +3 → 쉼
+        self.assertEqual([d["net_pct"] for d in seq], [3.0, 0.0])
+        self.assertTrue(nxt is False)
+        allseq, _ = R.rev_after_loss(rows)                               # P35(전체)는 다르게 움직인다
+        self.assertEqual([d["active"] for d in allseq], [False, True])
+        out = R.build(rows)
+        a = out["aux_after_loss_offshore"]
+        self.assertEqual(a["forward"]["days"], 2)
+        self.assertEqual(a["forward"]["net_pct"], 3.0)
+        self.assertEqual(a["venues"], ["okx", "hyperliquid"])
+        self.assertIn("aux_after_loss", out)                             # P35 그대로
+
+    def test_late_start_uses_full_day_gate_and_late_result(self):
+        """P41 보조: 판단은 전날 nt 합(그대로), 오늘 성적은 ntl. ntl 없는 옛 날은 빠진다."""
+        import scalp_rotate as R
+        self.assertEqual(R.AUX4_FORWARD_FROM, "2026-11-24")
+        def rec(day, nt, ntl=None):
+            row = {"nt": nt}
+            if ntl is not None:
+                row["ntl"] = ntl
+            return {"date": day, "eval_day_utc": day, "rows": {"okx:XRP:30m:vwap_fade_lim": row, "okx:XRP:60m:brk_20": {"nt": 0.0, "ntl": 0.0}}}
+        rows = [rec("2026-11-23", -5.0), rec("2026-11-24", 8.0, 3.0), rec("2026-11-25", -2.0, -1.0), rec("2026-11-26", 4.0, 2.5)]
+        seq = R.rev_after_loss_late(rows)
+        self.assertEqual([d["eval_day"] for d in seq], ["2026-11-24", "2026-11-25", "2026-11-26"])   # 11/23 은 ntl 없음
+        self.assertEqual([d["active"] for d in seq], [True, False, True])    # 전날 nt −5 → 씀, +8 → 쉼, −2 → 씀
+        self.assertEqual([d["net_pct"] for d in seq], [3.0, 0.0, 2.5])
+        out = R.build(rows)
+        f = out["aux_late"]["late"]["offshore"]["forward"]
+        self.assertEqual(f["active_days"], 2)
+        self.assertEqual(f["net_pct"], 5.5)
+        self.assertEqual(f["full_day_net_pct"], 12.0)                        # 하루 전체였다면 8 + 4
+        self.assertIn("aux_after_loss", out)                                 # P35 그대로
 
 
 if __name__ == "__main__":

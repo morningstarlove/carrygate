@@ -1,7 +1,7 @@
-# 추세선(평행 채널) 작도 → 수익화 설계 (2026-11-17, 제안함 P39)
+# 추세선(평행 채널) 작도 → 수익화 설계 (2026-11-17, 제안함 P42)
 
 출처: 사용자가 공유한 강의 자료 "7장. 추세선 작도" 4장. 목적: 사람이 눈으로 긋는 선을 **고정 규칙 코드**로 옮기고, 실데이터에 어떤 성적인지 사실만 적고, 돈으로 이어지는 길을 단계로 설계한다.
-재현(인터넷 불필요): `python scripts/trendline_check.py` · 시험 `python -m unittest tests.test_trendline` · 카드 [`docs/cards/p39_trendline.svg`](cards/p39_trendline.svg)
+재현(인터넷 불필요): `python scripts/trendline_check.py` · 시험 `python -m unittest tests.test_trendline` · 카드 [`docs/cards/p42_trendline.svg`](cards/p42_trendline.svg)
 
 ## 0. 한 줄 결론
 

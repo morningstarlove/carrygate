@@ -31,6 +31,7 @@ MIN_FORWARD_DAYS = 14          # 첫 판단까지 순방향 일수 (판단은 �
 AUX_FIXED = "2026-11-08"
 AUX_FORWARD_FROM = "2026-11-08"     # 이 평가일부터 순방향 (규칙은 평가일 11/7 까지 보고 만듦)
 FAMILIES.update({
+    "rev_off": {"tfs": ("30m", "60m"), "strategies": ("vwap_fade_lim", "mr_z20_lim"), "venues": ("okx", "hyperliquid")},
     "rev60": {"tfs": ("60m",), "strategies": ("vwap_fade_lim", "mr_z20_lim")},
     "brk60": {"tfs": ("60m",), "strategies": ("brk_20",)},
 })
@@ -41,6 +42,20 @@ FAMILIES.update({
 # 순방향은 평가일 2026-11-12 부터(11/12 결과를 보기 전에 규칙을 고정). P30·P34 계산은 건드리지 않는다.
 AUX2_FIXED = "2026-11-13"
 AUX2_FORWARD_FROM = "2026-11-12"
+
+# 보조 기록 3(제안함 P39, 2026-11-18 추가): P35 를 해외 선물(OKX·하이퍼리퀴드) 12시장만으로.
+# 11/18 보고에서 P35 쓰는 날(사후 12일) 18시장 중 16곳 플러스, 약한 곳은 업비트(현물·매수만)였다 → 실거래 후보를 해외 선물로 좁힐 근거를 순방향으로 확인.
+# 전날·오늘 모두 같은 12시장 합으로 본다(부호만, 새 숫자 문턱 없음). P35·P34·P30 계산은 그대로.
+AUX3_FIXED = "2026-11-18"
+AUX3_FORWARD_FROM = "2026-11-18"
+OFFSHORE = ("okx", "hyperliquid")
+
+# 보조 기록 4·5(제안함 P41, 2026-11-24 추가): '늦게 시작' — P35·P39 를 하루 UTC 2시간 늦게 시작한 경우.
+# 전날 판단은 그대로(전날 하루 전체 합, UTC 0시에 이미 앎), 오늘 성적만 scalp.py 의 ntl(UTC 02시 이후 진입 매매 합)로 센다.
+# 자동 실행이 늦게 도는 날이 잦아(예: 11/17 7시간 반) 실거래가 늦게 시작해도 이익이 남는지 본다. 새 문턱 없음(2시간은 scalp.LATE_START_SEC 로 고정).
+# ntl 은 2026-11-24 평가일부터 기록되므로 사후 구간이 없다 — 순방향만.
+AUX4_FIXED = "2026-11-24"
+AUX4_FORWARD_FROM = "2026-11-24"
 
 
 def load_history(path="scalp_history.jsonl"):
@@ -57,16 +72,20 @@ def load_history(path="scalp_history.jsonl"):
     return rows
 
 
-def family_sum(rec, fam):
+def family_sum(rec, fam, field="nt"):
+    """묶음 합. field="ntl" 이면 늦게 시작(P41) 합 — 그 값이 없는 행(옛 기록)은 세지 않는다."""
     f = FAMILIES[fam]
     tot, n = 0.0, 0
     for k, v in (rec.get("rows") or {}).items():
         parts = k.split(":")
         if len(parts) != 4:
             continue
-        _, _, tf, st = parts
-        if tf in f["tfs"] and st in f["strategies"]:
-            tot += v.get("nt", 0.0)
+        venue, _, tf, st = parts
+        if tf in f["tfs"] and st in f["strategies"] and (not f.get("venues") or venue in f["venues"]):
+            val = v.get(field)
+            if val is None:
+                continue
+            tot += val
             n += 1
     return (round(tot, 4), n)
 
@@ -113,6 +132,26 @@ def rev_after_loss(rows, fam="rev"):
     return out, nxt
 
 
+def rev_after_loss_late(rows, fam="rev"):
+    """P41: P35 와 같은 판단(전날 fam 의 nt 합 < 0)이지만 오늘 성적은 ntl(UTC 02시 이후 진입) 합. ntl 없는 날은 뺀다."""
+    days = []
+    for r in rows:
+        rev, nr = family_sum(r, fam)
+        if nr == 0:
+            continue
+        late, nl = family_sum(r, fam, "ntl")
+        days.append((r.get("eval_day_utc") or r.get("date"), rev, late if nl else None))
+    out = []
+    for i in range(1, len(days)):
+        day, rev, late = days[i]
+        if late is None:
+            continue
+        active = days[i - 1][1] < 0
+        out.append({"eval_day": day, "active": active, "net_pct": late if active else 0.0, "rev_pct": late,
+                    "rev_full_pct": rev, "prev_rev_pct": days[i - 1][1]})
+    return out
+
+
 def summarize_after_loss(seq):
     if not seq:
         return {"days": 0}
@@ -151,7 +190,23 @@ def build(rows):
             "backtest": summarize_after_loss([d for d in seqL if d["eval_day"] < AUX2_FORWARD_FROM]),
             "forward": summarize_after_loss([d for d in seqL if d["eval_day"] >= AUX2_FORWARD_FROM]),
             "forward_days": [d for d in seqL if d["eval_day"] >= AUX2_FORWARD_FROM][-30:]}
-    return {"schema": "carrygate-scalp-rotate/3", "rule_fixed": RULE_FIXED, "forward_from": FORWARD_FROM, "aux60": aux, "aux_after_loss": aux2,
+    seqO, nxtO = rev_after_loss(rows, "rev_off")
+    aux3 = {"fixed": AUX3_FIXED, "forward_from": AUX3_FORWARD_FROM, "venues": list(OFFSHORE),
+            "method": "P39 보조: P35 를 OKX·하이퍼리퀴드 12시장 합만으로(전날 12시장 되돌림 합 < 0 이면 오늘 12시장 되돌림을 씀)",
+            "next_active": nxtO,
+            "backtest": summarize_after_loss([d for d in seqO if d["eval_day"] < AUX3_FORWARD_FROM]),
+            "forward": summarize_after_loss([d for d in seqO if d["eval_day"] >= AUX3_FORWARD_FROM]),
+            "forward_days": [d for d in seqO if d["eval_day"] >= AUX3_FORWARD_FROM][-30:]}
+    late = {}
+    for key, fam, label in (("all", "rev", "P35(18시장)"), ("offshore", "rev_off", "P39(OKX·하이퍼리퀴드 12시장)")):
+        sq = [d for d in rev_after_loss_late(rows, fam) if d["eval_day"] >= AUX4_FORWARD_FROM]
+        sm = summarize_after_loss(sq)
+        sm["full_day_net_pct"] = round(sum(d["rev_full_pct"] for d in sq if d["active"]), 3)
+        late[key] = {"label": label, "forward": sm, "forward_days": sq[-30:]}
+    aux4 = {"fixed": AUX4_FIXED, "forward_from": AUX4_FORWARD_FROM, "late_start_sec": 7200,
+            "method": "P41 보조: P35·P39 를 하루 UTC 2시간 늦게 시작(그 전 진입 매매 제외). 전날 판단은 그대로. full_day_net_pct = 같은 날 하루 전체로 셌다면", "late": late}
+    return {"schema": "carrygate-scalp-rotate/5", "aux_late": aux4, "rule_fixed": RULE_FIXED, "forward_from": FORWARD_FROM, "aux60": aux, "aux_after_loss": aux2,
+            "aux_after_loss_offshore": aux3,
             "method": "전날 18시장 합계가 큰 묶음(되돌림=30·60분 VWAP 지정가+평균회귀 지정가, 돌파=30·60분 20봉 돌파; 같으면 되돌림)의 오늘 합계",
             "date": rows[-1].get("date") if rows else None,
             "next_pick": nxt,
@@ -188,6 +243,20 @@ def print_summary(out):
                   % ("---" if label == "사후" else "   ", x.get("days", 0), x.get("active_days", 0), x.get("net_pct", 0),
                      x.get("plus_days", 0), x.get("active_days", 0), x.get("rev_only_pct", 0), x.get("skipped_rev_pct", 0)) + "  [" + label + "]")
         print("    내일: %s" % ({True: "되돌림 씀(오늘 되돌림이 마이너스)", False: "쉼(오늘 되돌림이 플러스)"}.get(a2["next_active"], "-")))
+    a3 = out.get("aux_after_loss_offshore")
+    if a3:
+        for label, x in (("사후", a3["backtest"]), ("순방향(평가일 %s~)" % a3["forward_from"], a3["forward"])):
+            print("%s P39 같은 규칙, OKX·하이퍼리퀴드 12시장만: %s일 중 %s일 씀  합 %+.1f%%  플러스 %s/%s  | 12시장 되돌림 고정 %+.1f%%  쉰 날 %+.1f%%"
+                  % ("---" if label == "사후" else "   ", x.get("days", 0), x.get("active_days", 0), x.get("net_pct", 0),
+                     x.get("plus_days", 0), x.get("active_days", 0), x.get("rev_only_pct", 0), x.get("skipped_rev_pct", 0)) + "  [" + label + "]")
+        print("    내일(12시장 기준): %s" % ({True: "씀", False: "쉼"}.get(a3["next_active"], "-")))
+    a4 = out.get("aux_late")
+    if a4:
+        for k in ("all", "offshore"):
+            x = a4["late"][k]["forward"]
+            print("--- P41 늦게 시작(UTC 2시간 뒤) %s: %s일 중 %s일 씀  합 %+.1f%%  플러스 %s/%s  | 같은 날 하루 전체였다면 %+.1f%%  [순방향 평가일 %s~]"
+                  % (a4["late"][k]["label"], x.get("days", 0), x.get("active_days", 0), x.get("net_pct", 0),
+                     x.get("plus_days", 0), x.get("active_days", 0), x.get("full_day_net_pct", 0), a4["forward_from"]))
 
 
 def main(argv=None):
