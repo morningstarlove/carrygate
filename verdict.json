@@ -1,8 +1,8 @@
 {
   "schema": "carrygate-verdict/1",
-  "date": "2026-11-27",
-  "generated_at_utc": "2026-11-27T09:00:52Z",
-  "criteria_sealed": "2026-11-13",
+  "date": "2026-11-28",
+  "generated_at_utc": "2026-11-27T17:06:21Z",
+  "criteria_sealed": "2026-11-18",
   "tracks": {
     "kr_breakout": {
       "variant": "base",
@@ -11,7 +11,7 @@
       "trades": 16,
       "wins": 1,
       "win_rate_pct": 6.25,
-      "total_return_pct": -4.87,
+      "total_return_pct": -4.89,
       "max_drawdown_pct": 10.79,
       "signals": 42,
       "skipped_no_slot": 18,
@@ -56,8 +56,8 @@
         "variant": "no_sector",
         "trades": 31,
         "win_rate_pct": 3.23,
-        "total_return_pct": -17.09,
-        "return_delta_pct": 12.22
+        "total_return_pct": -17.08,
+        "return_delta_pct": 12.19
       },
       "status": "FAIL",
       "reason": "승률 6.2% < 15% — 사전 등록 기준 미달"
@@ -600,7 +600,9 @@
       "reason": "순방향 14일 — 최소 180일 전에는 판단하지 않는다 (분할매수 1/4)"
     }
   },
-  "errors": {},
+  "errors": {
+    "trendline": "trendline.json 없음"
+  },
   "rules_lock": {
     "ok": true,
     "diffs": []

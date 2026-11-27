@@ -1,6 +1,6 @@
 {
- "date": "2026-11-27",
- "generated_at_utc": "2026-11-27T07:14:38Z",
+ "date": "2026-11-28",
+ "generated_at_utc": "2026-11-27T17:06:16Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -81,45 +81,14 @@
   "bar_errors": 0,
   "stale_codes": 1,
   "by_source": {
-   "yahoo+gapfill": 4,
-   "yahoo": 276,
-   "yahoo+naver_api": 86
+   "yahoo": 2,
+   "yahoo+naver_api": 364
   },
   "skipped_days": [
    "2026-10-05"
   ],
-  "gap_filled": 4,
-  "gap_filled_codes": {
-   "271160": [
-    "2026-11-24",
-    "2026-11-25",
-    "2026-11-26"
-   ],
-   "345290": [
-    "2026-11-18",
-    "2026-11-19",
-    "2026-11-20",
-    "2026-11-23",
-    "2026-11-24",
-    "2026-11-25",
-    "2026-11-26"
-   ],
-   "493410": [
-    "2026-11-16",
-    "2026-11-17",
-    "2026-11-18",
-    "2026-11-19",
-    "2026-11-20",
-    "2026-11-23",
-    "2026-11-24",
-    "2026-11-25",
-    "2026-11-26"
-   ],
-   "498150": [
-    "2026-11-25",
-    "2026-11-26"
-   ]
-  },
+  "gap_filled": 0,
+  "gap_filled_codes": {},
   "gap_unfilled": 1,
   "note": null
  },
@@ -133,10 +102,10 @@
     "patterns": [
      "flag"
     ],
-    "signal_close": 66100.0,
+    "signal_close": 66400.0,
     "pattern_low": 50300.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 71388 이상이면 포기)",
+    "entry_plan": "내일 시가 (시가가 71712 이상이면 포기)",
     "stop_plan": "max(50300, 진입가×0.93)"
    },
    {
@@ -163,10 +132,10 @@
     "patterns": [
      "triangle"
     ],
-    "signal_close": 36550.0,
+    "signal_close": 35700.0,
     "pattern_low": 26173.07,
     "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 39474 이상이면 포기)",
+    "entry_plan": "내일 시가 (시가가 38556 이상이면 포기)",
     "stop_plan": "max(26173, 진입가×0.93)"
    },
    {
@@ -177,10 +146,10 @@
     "patterns": [
      "triangle"
     ],
-    "signal_close": 18870.0,
+    "signal_close": 18830.0,
     "pattern_low": 14993.77,
     "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 20380 이상이면 포기)",
+    "entry_plan": "내일 시가 (시가가 20336 이상이면 포기)",
     "stop_plan": "max(14994, 진입가×0.93)"
    },
    {
@@ -191,10 +160,10 @@
     "patterns": [
      "flag"
     ],
-    "signal_close": 66100.0,
+    "signal_close": 66400.0,
     "pattern_low": 50300.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 71388 이상이면 포기)",
+    "entry_plan": "내일 시가 (시가가 71712 이상이면 포기)",
     "stop_plan": "max(50300, 진입가×0.93)"
    },
    {
@@ -219,10 +188,10 @@
     "patterns": [
      "box"
     ],
-    "signal_close": 97500.0,
+    "signal_close": 97600.0,
     "pattern_low": 72400.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 105300 이상이면 포기)",
+    "entry_plan": "내일 시가 (시가가 105408 이상이면 포기)",
     "stop_plan": "max(72400, 진입가×0.93)"
    },
    {
@@ -233,10 +202,10 @@
     "patterns": [
      "box"
     ],
-    "signal_close": 23150.0,
+    "signal_close": 23350.0,
     "pattern_low": 17850.0,
     "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 25002 이상이면 포기)",
+    "entry_plan": "내일 시가 (시가가 25218 이상이면 포기)",
     "stop_plan": "max(17850, 진입가×0.93)"
    },
    {
@@ -247,10 +216,10 @@
     "patterns": [
      "box"
     ],
-    "signal_close": 233000.0,
+    "signal_close": 238500.0,
     "pattern_low": 178400.0,
     "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 251640 이상이면 포기)",
+    "entry_plan": "내일 시가 (시가가 257580 이상이면 포기)",
     "stop_plan": "max(178400, 진입가×0.93)"
    }
   ],
@@ -263,10 +232,10 @@
     "patterns": [
      "flag"
     ],
-    "signal_close": 66100.0,
+    "signal_close": 66400.0,
     "pattern_low": 50300.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 71388 이상이면 포기)",
+    "entry_plan": "내일 시가 (시가가 71712 이상이면 포기)",
     "stop_plan": "max(50300, 진입가×0.93)"
    },
    {
@@ -293,10 +262,10 @@
     "patterns": [
      "flag"
     ],
-    "signal_close": 66100.0,
+    "signal_close": 66400.0,
     "pattern_low": 50300.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 71388 이상이면 포기)",
+    "entry_plan": "내일 시가 (시가가 71712 이상이면 포기)",
     "stop_plan": "max(50300, 진입가×0.93)"
    },
    {
@@ -321,10 +290,10 @@
     "patterns": [
      "box"
     ],
-    "signal_close": 19220.0,
+    "signal_close": 19180.0,
     "pattern_low": 14350.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 20758 이상이면 포기)",
+    "entry_plan": "내일 시가 (시가가 20714 이상이면 포기)",
     "stop_plan": "max(14350, 진입가×0.93)"
    },
    {
@@ -335,10 +304,10 @@
     "patterns": [
      "box"
     ],
-    "signal_close": 97500.0,
+    "signal_close": 97600.0,
     "pattern_low": 72400.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 105300 이상이면 포기)",
+    "entry_plan": "내일 시가 (시가가 105408 이상이면 포기)",
     "stop_plan": "max(72400, 진입가×0.93)"
    }
   ],
@@ -393,8 +362,8 @@
    "avg_loss_pct": -7.34,
    "payoff": 1.32,
    "profit_factor": 0.09,
-   "total_return_pct": -4.87,
-   "equity_final": 9512570,
+   "total_return_pct": -4.89,
+   "equity_final": 9511070,
    "max_drawdown_pct": 10.79,
    "avg_hold_days": 5.88,
    "skipped": {
@@ -454,7 +423,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -4.87
+    "2026": -4.89
    },
    "open_positions": [
     {
@@ -480,8 +449,8 @@
      "stop": 132176.34,
      "shares": 9,
      "bars_held": 6,
-     "last_close": 142500.0,
-     "unrealized_pct": 0.26
+     "last_close": 142600.0,
+     "unrealized_pct": 0.33
     },
     {
      "code": "319400",
@@ -493,8 +462,8 @@
      "stop": 15670.87,
      "shares": 78,
      "bars_held": 3,
-     "last_close": 19220.0,
-     "unrealized_pct": 14.06
+     "last_close": 19180.0,
+     "unrealized_pct": 13.83
     },
     {
      "code": "125490",
@@ -506,8 +475,8 @@
      "stop": 10456.58,
      "shares": 116,
      "bars_held": 3,
-     "last_close": 12430.0,
-     "unrealized_pct": 10.55
+     "last_close": 12450.0,
+     "unrealized_pct": 10.73
     },
     {
      "code": "263860",
@@ -519,8 +488,8 @@
      "stop": 37591.44,
      "shares": 32,
      "bars_held": 2,
-     "last_close": 40900.0,
-     "unrealized_pct": 1.19
+     "last_close": 40850.0,
+     "unrealized_pct": 1.06
     }
    ]
   },
@@ -534,8 +503,8 @@
    "avg_loss_pct": -7.25,
    "payoff": 0.92,
    "profit_factor": 0.03,
-   "total_return_pct": -17.09,
-   "equity_final": 8291366,
+   "total_return_pct": -17.08,
+   "equity_final": 8292046,
    "max_drawdown_pct": 20.82,
    "avg_hold_days": 4.03,
    "skipped": {
@@ -600,7 +569,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -17.09
+    "2026": -17.08
    },
    "open_positions": [
     {
@@ -626,8 +595,8 @@
      "stop": 41229.32,
      "shares": 26,
      "bars_held": 11,
-     "last_close": 50100.0,
-     "unrealized_pct": 13.01
+     "last_close": 50200.0,
+     "unrealized_pct": 13.23
     },
     {
      "code": "437730",
@@ -639,8 +608,8 @@
      "stop": 49158.03,
      "shares": 22,
      "bars_held": 7,
-     "last_close": 60500.0,
-     "unrealized_pct": 14.46
+     "last_close": 60600.0,
+     "unrealized_pct": 14.65
     },
     {
      "code": "319400",
@@ -652,8 +621,8 @@
      "stop": 15670.87,
      "shares": 68,
      "bars_held": 3,
-     "last_close": 19220.0,
-     "unrealized_pct": 14.06
+     "last_close": 19180.0,
+     "unrealized_pct": 13.83
     },
     {
      "code": "263860",
@@ -665,8 +634,8 @@
      "stop": 37591.44,
      "shares": 28,
      "bars_held": 2,
-     "last_close": 40900.0,
-     "unrealized_pct": 1.19
+     "last_close": 40850.0,
+     "unrealized_pct": 1.06
     }
    ]
   },
@@ -680,8 +649,8 @@
    "avg_loss_pct": -6.73,
    "payoff": 1.83,
    "profit_factor": 0.23,
-   "total_return_pct": -7.78,
-   "equity_final": 9222118,
+   "total_return_pct": -7.82,
+   "equity_final": 9217708,
    "max_drawdown_pct": 12.95,
    "avg_hold_days": 5.06,
    "skipped": {
@@ -741,7 +710,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -7.78
+    "2026": -7.82
    },
    "open_positions": [
     {
@@ -754,8 +723,8 @@
      "stop": 132176.34,
      "shares": 9,
      "bars_held": 6,
-     "last_close": 142500.0,
-     "unrealized_pct": 0.26
+     "last_close": 142600.0,
+     "unrealized_pct": 0.33
     },
     {
      "code": "319400",
@@ -767,8 +736,8 @@
      "stop": 15670.87,
      "shares": 76,
      "bars_held": 3,
-     "last_close": 19220.0,
-     "unrealized_pct": 14.06
+     "last_close": 19180.0,
+     "unrealized_pct": 13.83
     },
     {
      "code": "125490",
@@ -780,8 +749,8 @@
      "stop": 10456.58,
      "shares": 114,
      "bars_held": 3,
-     "last_close": 12430.0,
-     "unrealized_pct": 10.55
+     "last_close": 12450.0,
+     "unrealized_pct": 10.73
     },
     {
      "code": "263860",
@@ -793,8 +762,8 @@
      "stop": 37591.44,
      "shares": 31,
      "bars_held": 2,
-     "last_close": 40900.0,
-     "unrealized_pct": 1.19
+     "last_close": 40850.0,
+     "unrealized_pct": 1.06
     },
     {
      "code": "192820",
@@ -806,8 +775,8 @@
      "stop": 305022.33,
      "shares": 3,
      "bars_held": 2,
-     "last_close": 315000.0,
-     "unrealized_pct": -3.96
+     "last_close": 314000.0,
+     "unrealized_pct": -4.26
     }
    ]
   },
@@ -821,8 +790,8 @@
    "avg_loss_pct": -7.26,
    "payoff": 1.5,
    "profit_factor": 0.14,
-   "total_return_pct": -8.13,
-   "equity_final": 9186914,
+   "total_return_pct": -8.15,
+   "equity_final": 9185464,
    "max_drawdown_pct": 16.49,
    "avg_hold_days": 4.42,
    "skipped": {
@@ -887,7 +856,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -8.13
+    "2026": -8.15
    },
    "open_positions": [
     {
@@ -913,8 +882,8 @@
      "stop": 132176.34,
      "shares": 18,
      "bars_held": 6,
-     "last_close": 142500.0,
-     "unrealized_pct": 0.26
+     "last_close": 142600.0,
+     "unrealized_pct": 0.33
     },
     {
      "code": "263860",
@@ -926,8 +895,8 @@
      "stop": 37591.44,
      "shares": 65,
      "bars_held": 2,
-     "last_close": 40900.0,
-     "unrealized_pct": 1.19
+     "last_close": 40850.0,
+     "unrealized_pct": 1.06
     }
    ]
   },
@@ -941,8 +910,8 @@
    "avg_loss_pct": -7.29,
    "payoff": 1.52,
    "profit_factor": 0.15,
-   "total_return_pct": 0.12,
-   "equity_final": 10011968,
+   "total_return_pct": 0.09,
+   "equity_final": 10008848,
    "max_drawdown_pct": 9.14,
    "avg_hold_days": 7.64,
    "skipped": {
@@ -997,7 +966,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": 0.12
+    "2026": 0.09
    },
    "open_positions": [
     {
@@ -1023,8 +992,8 @@
      "stop": 132176.34,
      "shares": 9,
      "bars_held": 6,
-     "last_close": 142500.0,
-     "unrealized_pct": 0.26
+     "last_close": 142600.0,
+     "unrealized_pct": 0.33
     },
     {
      "code": "319400",
@@ -1036,8 +1005,8 @@
      "stop": 15670.87,
      "shares": 81,
      "bars_held": 3,
-     "last_close": 19220.0,
-     "unrealized_pct": 14.06
+     "last_close": 19180.0,
+     "unrealized_pct": 13.83
     },
     {
      "code": "125490",
@@ -1049,8 +1018,8 @@
      "stop": 10456.58,
      "shares": 121,
      "bars_held": 3,
-     "last_close": 12430.0,
-     "unrealized_pct": 10.55
+     "last_close": 12450.0,
+     "unrealized_pct": 10.73
     },
     {
      "code": "000100",
@@ -1062,8 +1031,8 @@
      "stop": 76768.62,
      "shares": 16,
      "bars_held": 2,
-     "last_close": 83200.0,
-     "unrealized_pct": 0.79
+     "last_close": 83000.0,
+     "unrealized_pct": 0.55
     }
    ]
   }
