@@ -1,6 +1,6 @@
 {
  "date": "2026-11-27",
- "generated_at_utc": "2026-11-26T17:27:41Z",
+ "generated_at_utc": "2026-11-27T07:14:38Z",
  "mode": "forward",
  "rule_fixed": "2026-10-05",
  "rules": {
@@ -74,43 +74,57 @@
   }
  },
  "forward": {
-  "days": 37,
+  "days": 38,
   "from": "2026-10-05",
-  "to": "2026-11-26",
-  "codes": 363,
+  "to": "2026-11-27",
+  "codes": 366,
   "bar_errors": 0,
   "stale_codes": 1,
   "by_source": {
-   "yahoo": 1,
-   "yahoo+naver_api": 361,
-   "naver_api": 1
+   "yahoo+gapfill": 4,
+   "yahoo": 276,
+   "yahoo+naver_api": 86
   },
   "skipped_days": [
    "2026-10-05"
   ],
-  "gap_filled": 0,
-  "gap_filled_codes": {},
+  "gap_filled": 4,
+  "gap_filled_codes": {
+   "271160": [
+    "2026-11-24",
+    "2026-11-25",
+    "2026-11-26"
+   ],
+   "345290": [
+    "2026-11-18",
+    "2026-11-19",
+    "2026-11-20",
+    "2026-11-23",
+    "2026-11-24",
+    "2026-11-25",
+    "2026-11-26"
+   ],
+   "493410": [
+    "2026-11-16",
+    "2026-11-17",
+    "2026-11-18",
+    "2026-11-19",
+    "2026-11-20",
+    "2026-11-23",
+    "2026-11-24",
+    "2026-11-25",
+    "2026-11-26"
+   ],
+   "498150": [
+    "2026-11-25",
+    "2026-11-26"
+   ]
+  },
   "gap_unfilled": 1,
   "note": null
  },
  "signals_today": {
   "base": [
-   {
-    "code": "310210",
-    "name": "Voronoi, Inc.",
-    "group": "Pharmaceuticals: Major",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 139800.0,
-    "pattern_low": 90000.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 150984 이상이면 포기)",
-    "stop_plan": "max(90000, 진입가×0.93)"
-   }
-  ],
-  "no_sector": [
    {
     "code": "218410",
     "name": "RFHIC Corp.",
@@ -119,77 +133,218 @@
     "patterns": [
      "flag"
     ],
-    "signal_close": 61200.0,
+    "signal_close": 66100.0,
     "pattern_low": 50300.0,
-    "sync_by": null,
-    "entry_plan": "내일 시가 (시가가 66096 이상이면 포기)",
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 71388 이상이면 포기)",
     "stop_plan": "max(50300, 진입가×0.93)"
    },
    {
-    "code": "310210",
-    "name": "Voronoi, Inc.",
+    "code": "232680",
+    "name": "RAON ROBOTICS Inc.",
+    "group": "Industrial Machinery",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 15220.0,
+    "pattern_low": 10990.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 16438 이상이면 포기)",
+    "stop_plan": "max(10990, 진입가×0.93)"
+   }
+  ],
+  "no_sector": [
+   {
+    "code": "084670",
+    "name": "DONGYANG EXPRESS Corporation",
+    "group": "Other Transportation",
+    "pattern": "triangle",
+    "patterns": [
+     "triangle"
+    ],
+    "signal_close": 36550.0,
+    "pattern_low": 26173.07,
+    "sync_by": null,
+    "entry_plan": "내일 시가 (시가가 39474 이상이면 포기)",
+    "stop_plan": "max(26173, 진입가×0.93)"
+   },
+   {
+    "code": "042510",
+    "name": "RaonSecure Co., Ltd.",
+    "group": "Computer Communications",
+    "pattern": "triangle",
+    "patterns": [
+     "triangle"
+    ],
+    "signal_close": 18870.0,
+    "pattern_low": 14993.77,
+    "sync_by": null,
+    "entry_plan": "내일 시가 (시가가 20380 이상이면 포기)",
+    "stop_plan": "max(14994, 진입가×0.93)"
+   },
+   {
+    "code": "218410",
+    "name": "RFHIC Corp.",
+    "group": "Semiconductors",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 66100.0,
+    "pattern_low": 50300.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 71388 이상이면 포기)",
+    "stop_plan": "max(50300, 진입가×0.93)"
+   },
+   {
+    "code": "232680",
+    "name": "RAON ROBOTICS Inc.",
+    "group": "Industrial Machinery",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 15220.0,
+    "pattern_low": 10990.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 16438 이상이면 포기)",
+    "stop_plan": "max(10990, 진입가×0.93)"
+   },
+   {
+    "code": "326030",
+    "name": "SK Biopharmaceuticals Co., Ltd.",
     "group": "Pharmaceuticals: Major",
     "pattern": "box",
     "patterns": [
      "box"
     ],
-    "signal_close": 139800.0,
-    "pattern_low": 90000.0,
+    "signal_close": 97500.0,
+    "pattern_low": 72400.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 150984 이상이면 포기)",
-    "stop_plan": "max(90000, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 105300 이상이면 포기)",
+    "stop_plan": "max(72400, 진입가×0.93)"
+   },
+   {
+    "code": "006800",
+    "name": "MIRAE ASSET SECURITIES CO., LTD.",
+    "group": "Investment Banks/Brokers",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 23150.0,
+    "pattern_low": 17850.0,
+    "sync_by": null,
+    "entry_plan": "내일 시가 (시가가 25002 이상이면 포기)",
+    "stop_plan": "max(17850, 진입가×0.93)"
+   },
+   {
+    "code": "039490",
+    "name": "Kiwoom Securities Co., Ltd",
+    "group": "Investment Banks/Brokers",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 233000.0,
+    "pattern_low": 178400.0,
+    "sync_by": null,
+    "entry_plan": "내일 시가 (시가가 251640 이상이면 포기)",
+    "stop_plan": "max(178400, 진입가×0.93)"
    }
   ],
   "hold_10": [
    {
-    "code": "310210",
-    "name": "Voronoi, Inc.",
-    "group": "Pharmaceuticals: Major",
-    "pattern": "box",
+    "code": "218410",
+    "name": "RFHIC Corp.",
+    "group": "Semiconductors",
+    "pattern": "flag",
     "patterns": [
-     "box"
+     "flag"
     ],
-    "signal_close": 139800.0,
-    "pattern_low": 90000.0,
+    "signal_close": 66100.0,
+    "pattern_low": 50300.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 150984 이상이면 포기)",
-    "stop_plan": "max(90000, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 71388 이상이면 포기)",
+    "stop_plan": "max(50300, 진입가×0.93)"
+   },
+   {
+    "code": "232680",
+    "name": "RAON ROBOTICS Inc.",
+    "group": "Industrial Machinery",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 15220.0,
+    "pattern_low": 10990.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 16438 이상이면 포기)",
+    "stop_plan": "max(10990, 진입가×0.93)"
    }
   ],
   "risk_2": [
    {
-    "code": "310210",
-    "name": "Voronoi, Inc.",
+    "code": "218410",
+    "name": "RFHIC Corp.",
+    "group": "Semiconductors",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 66100.0,
+    "pattern_low": 50300.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 71388 이상이면 포기)",
+    "stop_plan": "max(50300, 진입가×0.93)"
+   },
+   {
+    "code": "232680",
+    "name": "RAON ROBOTICS Inc.",
+    "group": "Industrial Machinery",
+    "pattern": "flag",
+    "patterns": [
+     "flag"
+    ],
+    "signal_close": 15220.0,
+    "pattern_low": 10990.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 16438 이상이면 포기)",
+    "stop_plan": "max(10990, 진입가×0.93)"
+   },
+   {
+    "code": "319400",
+    "name": "HUYNDAI MOVEX Co. Ltd.",
+    "group": "Industrial Machinery",
+    "pattern": "box",
+    "patterns": [
+     "box"
+    ],
+    "signal_close": 19220.0,
+    "pattern_low": 14350.0,
+    "sync_by": "day",
+    "entry_plan": "내일 시가 (시가가 20758 이상이면 포기)",
+    "stop_plan": "max(14350, 진입가×0.93)"
+   },
+   {
+    "code": "326030",
+    "name": "SK Biopharmaceuticals Co., Ltd.",
     "group": "Pharmaceuticals: Major",
     "pattern": "box",
     "patterns": [
      "box"
     ],
-    "signal_close": 139800.0,
-    "pattern_low": 90000.0,
+    "signal_close": 97500.0,
+    "pattern_low": 72400.0,
     "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 150984 이상이면 포기)",
-    "stop_plan": "max(90000, 진입가×0.93)"
+    "entry_plan": "내일 시가 (시가가 105300 이상이면 포기)",
+    "stop_plan": "max(72400, 진입가×0.93)"
    }
   ],
-  "no_flag": [
-   {
-    "code": "310210",
-    "name": "Voronoi, Inc.",
-    "group": "Pharmaceuticals: Major",
-    "pattern": "box",
-    "patterns": [
-     "box"
-    ],
-    "signal_close": 139800.0,
-    "pattern_low": 90000.0,
-    "sync_by": "day",
-    "entry_plan": "내일 시가 (시가가 150984 이상이면 포기)",
-    "stop_plan": "max(90000, 진입가×0.93)"
-   }
-  ]
+  "no_flag": []
  },
- "signal_date": "2026-11-26",
+ "signal_date": "2026-11-27",
  "signals_frozen": false,
  "frozen_dates": [
   "2026-10-06",
@@ -230,7 +385,7 @@
  "variants": {
   "base": {
    "label": "동조 업종 + 패턴 돌파 (기본)",
-   "signals": 40,
+   "signals": 42,
    "trades": 16,
    "wins": 1,
    "win_rate": 6.25,
@@ -238,14 +393,14 @@
    "avg_loss_pct": -7.34,
    "payoff": 1.32,
    "profit_factor": 0.09,
-   "total_return_pct": -7.33,
-   "equity_final": 9267090,
+   "total_return_pct": -4.87,
+   "equity_final": 9512570,
    "max_drawdown_pct": 10.79,
    "avg_hold_days": 5.88,
    "skipped": {
     "gap": 0,
-    "limit": 17,
-    "cooldown": 3,
+    "limit": 18,
+    "cooldown": 5,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -299,7 +454,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -7.33
+    "2026": -4.87
    },
    "open_positions": [
     {
@@ -311,9 +466,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 132,
-     "bars_held": 17,
-     "last_close": 13050.0,
-     "unrealized_pct": 35.39
+     "bars_held": 18,
+     "last_close": 13040.0,
+     "unrealized_pct": 35.29
     },
     {
      "code": "090430",
@@ -324,22 +479,22 @@
      "entry": 142125.1,
      "stop": 132176.34,
      "shares": 9,
-     "bars_held": 5,
-     "last_close": 146700.0,
-     "unrealized_pct": 3.22
+     "bars_held": 6,
+     "last_close": 142500.0,
+     "unrealized_pct": 0.26
     },
     {
      "code": "319400",
-     "name": null,
+     "name": "HUYNDAI MOVEX Co. Ltd.",
      "group": "Industrial Machinery",
      "pattern": "box",
      "entry_date": "2026-11-25",
      "entry": 16850.4,
      "stop": 15670.87,
      "shares": 78,
-     "bars_held": 2,
-     "last_close": 17000.0,
-     "unrealized_pct": 0.89
+     "bars_held": 3,
+     "last_close": 19220.0,
+     "unrealized_pct": 14.06
     },
     {
      "code": "125490",
@@ -350,9 +505,9 @@
      "entry": 11243.63,
      "stop": 10456.58,
      "shares": 116,
-     "bars_held": 2,
-     "last_close": 11690.0,
-     "unrealized_pct": 3.97
+     "bars_held": 3,
+     "last_close": 12430.0,
+     "unrealized_pct": 10.55
     },
     {
      "code": "263860",
@@ -363,15 +518,15 @@
      "entry": 40420.9,
      "stop": 37591.44,
      "shares": 32,
-     "bars_held": 1,
-     "last_close": 40100.0,
-     "unrealized_pct": -0.79
+     "bars_held": 2,
+     "last_close": 40900.0,
+     "unrealized_pct": 1.19
     }
    ]
   },
   "no_sector": {
    "label": "패턴 돌파만 (업종 동조 없음, 대조군)",
-   "signals": 112,
+   "signals": 118,
    "trades": 31,
    "wins": 1,
    "win_rate": 3.23,
@@ -379,14 +534,14 @@
    "avg_loss_pct": -7.25,
    "payoff": 0.92,
    "profit_factor": 0.03,
-   "total_return_pct": -18.7,
-   "equity_final": 8129556,
+   "total_return_pct": -17.09,
+   "equity_final": 8291366,
    "max_drawdown_pct": 20.82,
    "avg_hold_days": 4.03,
    "skipped": {
     "gap": 0,
-    "limit": 73,
-    "cooldown": 15,
+    "limit": 74,
+    "cooldown": 18,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -445,7 +600,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -18.7
+    "2026": -17.09
    },
    "open_positions": [
     {
@@ -457,9 +612,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 125,
-     "bars_held": 17,
-     "last_close": 13050.0,
-     "unrealized_pct": 35.39
+     "bars_held": 18,
+     "last_close": 13040.0,
+     "unrealized_pct": 35.29
     },
     {
      "code": "035900",
@@ -470,9 +625,9 @@
      "entry": 44332.6,
      "stop": 41229.32,
      "shares": 26,
-     "bars_held": 10,
-     "last_close": 49650.0,
-     "unrealized_pct": 11.99
+     "bars_held": 11,
+     "last_close": 50100.0,
+     "unrealized_pct": 13.01
     },
     {
      "code": "437730",
@@ -483,22 +638,22 @@
      "entry": 52858.1,
      "stop": 49158.03,
      "shares": 22,
-     "bars_held": 6,
-     "last_close": 61500.0,
-     "unrealized_pct": 16.35
+     "bars_held": 7,
+     "last_close": 60500.0,
+     "unrealized_pct": 14.46
     },
     {
      "code": "319400",
-     "name": null,
+     "name": "HUYNDAI MOVEX Co. Ltd.",
      "group": "Industrial Machinery",
      "pattern": "box",
      "entry_date": "2026-11-25",
      "entry": 16850.4,
      "stop": 15670.87,
      "shares": 68,
-     "bars_held": 2,
-     "last_close": 17000.0,
-     "unrealized_pct": 0.89
+     "bars_held": 3,
+     "last_close": 19220.0,
+     "unrealized_pct": 14.06
     },
     {
      "code": "263860",
@@ -509,15 +664,15 @@
      "entry": 40420.9,
      "stop": 37591.44,
      "shares": 28,
-     "bars_held": 1,
-     "last_close": 40100.0,
-     "unrealized_pct": -0.79
+     "bars_held": 2,
+     "last_close": 40900.0,
+     "unrealized_pct": 1.19
     }
    ]
   },
   "hold_10": {
    "label": "동조 + 패턴, 보유 10일",
-   "signals": 40,
+   "signals": 42,
    "trades": 18,
    "wins": 2,
    "win_rate": 11.11,
@@ -525,14 +680,14 @@
    "avg_loss_pct": -6.73,
    "payoff": 1.83,
    "profit_factor": 0.23,
-   "total_return_pct": -9.32,
-   "equity_final": 9067538,
+   "total_return_pct": -7.78,
+   "equity_final": 9222118,
    "max_drawdown_pct": 12.95,
    "avg_hold_days": 5.06,
    "skipped": {
     "gap": 0,
-    "limit": 15,
-    "cooldown": 6,
+    "limit": 16,
+    "cooldown": 8,
     "size": 1,
     "no_bar": 0,
     "pattern": 0
@@ -586,7 +741,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -9.32
+    "2026": -7.78
    },
    "open_positions": [
     {
@@ -598,22 +753,22 @@
      "entry": 142125.1,
      "stop": 132176.34,
      "shares": 9,
-     "bars_held": 5,
-     "last_close": 146700.0,
-     "unrealized_pct": 3.22
+     "bars_held": 6,
+     "last_close": 142500.0,
+     "unrealized_pct": 0.26
     },
     {
      "code": "319400",
-     "name": null,
+     "name": "HUYNDAI MOVEX Co. Ltd.",
      "group": "Industrial Machinery",
      "pattern": "box",
      "entry_date": "2026-11-25",
      "entry": 16850.4,
      "stop": 15670.87,
      "shares": 76,
-     "bars_held": 2,
-     "last_close": 17000.0,
-     "unrealized_pct": 0.89
+     "bars_held": 3,
+     "last_close": 19220.0,
+     "unrealized_pct": 14.06
     },
     {
      "code": "125490",
@@ -624,9 +779,9 @@
      "entry": 11243.63,
      "stop": 10456.58,
      "shares": 114,
-     "bars_held": 2,
-     "last_close": 11690.0,
-     "unrealized_pct": 3.97
+     "bars_held": 3,
+     "last_close": 12430.0,
+     "unrealized_pct": 10.55
     },
     {
      "code": "263860",
@@ -637,9 +792,9 @@
      "entry": 40420.9,
      "stop": 37591.44,
      "shares": 31,
-     "bars_held": 1,
-     "last_close": 40100.0,
-     "unrealized_pct": -0.79
+     "bars_held": 2,
+     "last_close": 40900.0,
+     "unrealized_pct": 1.19
     },
     {
      "code": "192820",
@@ -650,15 +805,15 @@
      "entry": 327981.0,
      "stop": 305022.33,
      "shares": 3,
-     "bars_held": 1,
-     "last_close": 343500.0,
-     "unrealized_pct": 4.73
+     "bars_held": 2,
+     "last_close": 315000.0,
+     "unrealized_pct": -3.96
     }
    ]
   },
   "risk_2": {
    "label": "동조 + 패턴, 위험 2% (명목 상한 30%)",
-   "signals": 41,
+   "signals": 45,
    "trades": 12,
    "wins": 1,
    "win_rate": 8.33,
@@ -666,15 +821,15 @@
    "avg_loss_pct": -7.26,
    "payoff": 1.5,
    "profit_factor": 0.14,
-   "total_return_pct": -7.87,
-   "equity_final": 9212984,
+   "total_return_pct": -8.13,
+   "equity_final": 9186914,
    "max_drawdown_pct": 16.49,
    "avg_hold_days": 4.42,
    "skipped": {
     "gap": 0,
     "limit": 0,
     "cooldown": 1,
-    "size": 25,
+    "size": 26,
     "no_bar": 0,
     "pattern": 0
    },
@@ -732,7 +887,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -7.87
+    "2026": -8.13
    },
    "open_positions": [
     {
@@ -744,9 +899,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 247,
-     "bars_held": 17,
-     "last_close": 13050.0,
-     "unrealized_pct": 35.39
+     "bars_held": 18,
+     "last_close": 13040.0,
+     "unrealized_pct": 35.29
     },
     {
      "code": "090430",
@@ -757,9 +912,9 @@
      "entry": 142125.1,
      "stop": 132176.34,
      "shares": 18,
-     "bars_held": 5,
-     "last_close": 146700.0,
-     "unrealized_pct": 3.22
+     "bars_held": 6,
+     "last_close": 142500.0,
+     "unrealized_pct": 0.26
     },
     {
      "code": "263860",
@@ -770,9 +925,9 @@
      "entry": 40420.9,
      "stop": 37591.44,
      "shares": 65,
-     "bars_held": 1,
-     "last_close": 40100.0,
-     "unrealized_pct": -0.79
+     "bars_held": 2,
+     "last_close": 40900.0,
+     "unrealized_pct": 1.19
     }
    ]
   },
@@ -786,17 +941,17 @@
    "avg_loss_pct": -7.29,
    "payoff": 1.52,
    "profit_factor": 0.15,
-   "total_return_pct": -2.33,
-   "equity_final": 9767378,
+   "total_return_pct": 0.12,
+   "equity_final": 10011968,
    "max_drawdown_pct": 9.14,
    "avg_hold_days": 7.64,
    "skipped": {
     "gap": 0,
-    "limit": 5,
-    "cooldown": 2,
+    "limit": 6,
+    "cooldown": 3,
     "size": 0,
     "no_bar": 0,
-    "pattern": 4
+    "pattern": 6
    },
    "by_pattern": {
     "cup_handle": {
@@ -842,7 +997,7 @@
     }
    },
    "yearly_return_pct": {
-    "2026": -2.33
+    "2026": 0.12
    },
    "open_positions": [
     {
@@ -854,9 +1009,9 @@
      "entry": 9638.83,
      "stop": 8964.11,
      "shares": 137,
-     "bars_held": 17,
-     "last_close": 13050.0,
-     "unrealized_pct": 35.39
+     "bars_held": 18,
+     "last_close": 13040.0,
+     "unrealized_pct": 35.29
     },
     {
      "code": "090430",
@@ -867,22 +1022,22 @@
      "entry": 142125.1,
      "stop": 132176.34,
      "shares": 9,
-     "bars_held": 5,
-     "last_close": 146700.0,
-     "unrealized_pct": 3.22
+     "bars_held": 6,
+     "last_close": 142500.0,
+     "unrealized_pct": 0.26
     },
     {
      "code": "319400",
-     "name": null,
+     "name": "HUYNDAI MOVEX Co. Ltd.",
      "group": "Industrial Machinery",
      "pattern": "box",
      "entry_date": "2026-11-25",
      "entry": 16850.4,
      "stop": 15670.87,
      "shares": 81,
-     "bars_held": 2,
-     "last_close": 17000.0,
-     "unrealized_pct": 0.89
+     "bars_held": 3,
+     "last_close": 19220.0,
+     "unrealized_pct": 14.06
     },
     {
      "code": "125490",
@@ -893,9 +1048,9 @@
      "entry": 11243.63,
      "stop": 10456.58,
      "shares": 121,
-     "bars_held": 2,
-     "last_close": 11690.0,
-     "unrealized_pct": 3.97
+     "bars_held": 3,
+     "last_close": 12430.0,
+     "unrealized_pct": 10.55
     },
     {
      "code": "000100",
@@ -906,9 +1061,9 @@
      "entry": 82546.9,
      "stop": 76768.62,
      "shares": 16,
-     "bars_held": 1,
-     "last_close": 82300.0,
-     "unrealized_pct": -0.3
+     "bars_held": 2,
+     "last_close": 83200.0,
+     "unrealized_pct": 0.79
     }
    ]
   }
