@@ -19,6 +19,7 @@
 | P37 | [p37_index_deletion.svg](p37_index_deletion.svg) | 지수 편출 이벤트 기록 `index_event.py` (MSCI 의 MSTR 편출, MSTR − IBIT) | `data/nasdaq_mstr_1d.csv`·`data/nasdaq_ibit_1d.csv` (나스닥 일봉 2026-05-01~11-12, TradingView 수집) | 2026-11-13 | A 2026-11-30 · B 약 2026-12-29 |
 | P42 | [p42_trendline.svg](p42_trendline.svg) | 추세선 채널 하단 매수 `trendline.py` (저점①-② 하단, ③고점 평행 상단, 중단) · 순방향 기록 `trendline_track.py` | `data/krx_069500_1d.csv` (KODEX 200 일봉 2025-06-27~2026-11-03, `data/bb_reentry/KRX_069500.csv` 마지막 330봉 — `python scripts/trendline_card.py` 로 재생성) | 2026-11-17 | 시장군별 순방향 20건 (진입 2026-11-19~) |
 | P33 | [p33_forecast.svg](p33_forecast.svg) | 예측 v2 `forecast.py` (크기 예측 + 방향 채점) | `data/okx_btc_2h.csv` (OKX BTC 무기한선물 2시간봉 — TradingView 1h 실데이터를 2h 로 합침, 2026-10-02~11-04 UTC) | 2026-11-08 | 2027-01-05 전후 (채점 60일) |
+| P43 | [p43_exec_demo.svg](p43_exec_demo.svg) | P35 를 OKX 모의계좌로 2주(별도 저장소 `carrygate-exec`, 실제 주문 방식) — 설계서 `docs/EXEC_DEMO_PLAN.md` | `data/okx_btc_60m_1119.csv` (OKX BTC 무기한선물 60분봉 2026-11-19~11-27 UTC, TradingView 실데이터) | 2026-11-27 | 설치 다음날부터 14일 |
 
 ## 만드는 법
 
