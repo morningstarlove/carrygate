@@ -82,6 +82,7 @@ details{margin-top:8px} summary{cursor:pointer;font-size:13px;color:var(--accent
     <div class="tile"><div class="k">추세 전환 4H</div><div class="v" id="t-rev">…</div><div class="d" id="t-rev-d"></div></div>
     <div class="tile"><div class="k">급상승 패턴 1H</div><div class="v" id="t-retest">…</div><div class="d" id="t-retest-d"></div></div>
     <div class="tile"><div class="k">BTC 사이클 낙폭</div><div class="v" id="t-cycle">…</div><div class="d" id="t-cycle-d"></div></div>
+    <div class="tile"><div class="k">추세선 채널</div><div class="v" id="t-tl">…</div><div class="d" id="t-tl-d"></div></div>
     <div class="tile"><div class="k">예측 v2 (12h 폭)</div><div class="v" id="t-forecast">…</div><div class="d" id="t-forecast-d"></div></div>
     <div class="tile"><div class="k">한국 주식 돌파</div><div class="v" id="t-kr">…</div><div class="d" id="t-kr-d"></div></div>
     <div class="tile"><div class="k">초단타 기록</div><div class="v" id="t-scalp">…</div><div class="d" id="t-scalp-d"></div></div>
@@ -104,6 +105,7 @@ details{margin-top:8px} summary{cursor:pointer;font-size:13px;color:var(--accent
       <section class="card wide" id="s-krb"><h2>한국 주식 ② 패턴 돌파 종이매매 (순방향) <span class="when"></span></h2><div class="body"><div class="skeleton"></div><div class="skeleton"></div></div></section>
       <section class="card wide" id="s-krbt"><h2>한국 주식 ③ 3년 백테스트 <span class="when"></span></h2><div class="body"><div class="skeleton"></div></div></section>
       <section class="card wide" id="s-cycle"><h2>BTC 사이클 낙폭 분할매수 (일봉 · −50·−60·−70% 계단 + 200일선 위로 건넘 · 각 25% · 주 1회 정액 매수와 비교, 장기) <span class="when"></span></h2><div class="body"><div class="skeleton"></div><div class="skeleton"></div></div></section>
+      <section class="card wide" id="s-tl"><h2>추세선 채널 하단 매수 (일봉 · 저점①-② 하단 · ③고점 평행 상단 · 하단 터치 다음 날 시가 매수 → 상단 익절 / 하단 이탈 손절) <span class="when"></span></h2><div class="body"><div class="skeleton"></div><div class="skeleton"></div></div></section>
       <section class="card wide" id="s-grid"><h2>그리드 · 종사종팔 v4/v5 (SOXL, 종가 분할 매매) <span class="when"></span></h2><div class="body"><div class="skeleton"></div><div class="skeleton"></div></div></section>
     </div>
   </div>
@@ -140,7 +142,7 @@ details{margin-top:8px} summary{cursor:pointer;font-size:13px;color:var(--accent
   var FILES={status:"status.json",funding:"funding.json",basis:"basis.json",turtle:"turtle.json",reversal:"reversal.json",retest:"retest.json",live:"live.json",scalp:"scalp.json",
              research:"research.json",orderbook:"orderbook.json",fsig:"funding_signal.json",kimchi:"kimchi.json",
              macro:"macro.json",listing:"listing.json",momentum:"momentum.json",grid:"grid.json",
-             kr:"kr_sector.json",krb:"kr_breakout.json",krbt:"kr_backtest.json",verdict:"verdict.json",forecast:"forecast.json",cycle:"cycle.json",idx:"index_event.json"};
+             kr:"kr_sector.json",krb:"kr_breakout.json",krbt:"kr_backtest.json",verdict:"verdict.json",forecast:"forecast.json",cycle:"cycle.json",idx:"index_event.json",tl:"trendline.json"};
   var $=function(id){return document.getElementById(id);};
   function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
   function num(x,d){ if(x==null||isNaN(x)) return "-"; return Number(x).toFixed(d==null?2:d); }
@@ -544,6 +546,40 @@ details{margin-top:8px} summary{cursor:pointer;font-size:13px;color:var(--accent
     section("s-idx").body.innerHTML='<div class="err">아직 결과 파일이 없다 (index_event.json). 제안함 P37 병합(11/13) 뒤 CARRYGATE daily 가 처음 돌면 생긴다. 11/13 시험 실행 값: 발표 전날(11/10) → 11/12 MSTR −5.5%, IBIT −3.2%, 초과 −2.3% (규칙 고정 전, 참고). A 는 11/30, B 는 약 12/29 에 끝난다.</div>';
   }
 
+  // ---------------- 추세선 채널 하단 매수 (제안함 P42, docs/TRENDLINE_PLAN.md) ----------------
+  var TLWHY={target:"상단 익절",stop:"하단 이탈",expire:"만료"};
+  function rTl(d){
+    var s=section("s-tl"); s.when.textContent=d.date||"";
+    var ven=d.venues||{}, r=d.rules||{}; var vk=Object.keys(ven);
+    var nsig=0, nopen=0, nfwd=0; var vrow=[], srow=[], orow=[], trow=[], xrow=[];
+    vk.forEach(function(v){ var vd=ven[v]||{}; var pf=vd.portfolio||{}; var st=pf.stats||{}; var f=st.forward||{}; var lab=vd.label||v;
+      var sigs=vd.signals_today||[], op=pf.open||[];
+      nsig+=sigs.length; nopen+=op.length; nfwd+=(f.trades||0);
+      vrow.push([esc(lab), Object.keys(vd.markets||{}).length, (f.trades||0)+"건 / "+(f.wins||0)+"승", sgn(f.net_pct,2,"%"), f.profit_factor!=null?num(f.profit_factor,2):"-", op.length,
+        (st.trades||0)+"건 · 건당 "+sgn(st.avg_pct,2,"%")+" · 손익비 "+(st.profit_factor!=null?num(st.profit_factor,2):"-")]);
+      sigs.forEach(function(x){ srow.push([esc(lab+" "+x.market), esc(x.bar_date||""), px(x.close), px(x.lower), px(x.mid), px(x.upper)]); });
+      op.forEach(function(o){ orow.push([esc(lab+" "+o.market), esc(o.entry_date||""), px(o.entry), sgn(o.pnl_now,2,"%"), px(o.lower), px(o.upper), (o.bars_left!=null?o.bars_left:"-")+"봉", o.forward?pill("순방향","good"):pill("시작 전 진입","neutral")]); });
+      (pf.forward_trades||[]).forEach(function(t){ trow.push({k:(t.exit_date||"")+" "+t.market, c:[esc(lab+" "+t.market), esc(t.entry_date||"")+" "+px(t.entry), esc(t.exit_date||"")+" "+px(t.exit), esc(TLWHY[t.why]||t.why||""), sgn(t.pnl,2,"%")]}); });
+      var vs=vd.variants||{}; Object.keys(vs).forEach(function(k){ var q=((vs[k].portfolio||{}).stats)||{}; var qf=q.forward||{};
+        xrow.push([esc(lab+" · "+k), (qf.trades||0)+"건 "+sgn(qf.net_pct,2,"%"), (q.trades||0)+"건 · 손익비 "+(q.profit_factor!=null?num(q.profit_factor,2):"-")]); });
+    });
+    trow.sort(function(a,b){return a.k<b.k?1:(a.k>b.k?-1:0);}); trow=trow.slice(0,10).map(function(x){return x.c;});
+    $("t-tl").innerHTML=pill("신호 "+nsig, nsig?"warn":"neutral")+" "+pill("보유 "+nopen, nopen?"good":"neutral");
+    $("t-tl-d").textContent="순방향 닫힌 매매 "+nfwd+"건 (진입 "+(r.forward_from||"")+"~)";
+    var errs=Object.keys(d.errors||{}).map(function(k){return esc(k+": "+d.errors[k]);});
+    s.body.innerHTML='<div class="verdict">강의 자료 "추세선 작도"를 고정 규칙으로 옮긴 것. 최근 120일봉(주 규칙)의 최저 저가 ①과 그 뒤 확정 저점 ②를 이어 하단, ①~② 사이 ③고점에 평행 이동해 상단, 가운데가 중단. 저가가 하단에 닿고 종가가 하단 위에서 끝나면 다음 봉 시가 매수 → 상단 익절 / 종가가 하단 아래로 폭의 10% 넘게 빠지면 손절 / 유효 기간 끝이면 정리. 주문 없음(종이 기록), 진입 '+esc(r.forward_from||"")+' 이후 매매만 순방향.</div>'+
+      tbl([{t:"시장군"},{t:"시장",n:1},{t:"순방향",n:1},{t:"순방향 순수익",n:1},{t:"순방향 손익비",n:1},{t:"보유",n:1},{t:"사후 (참고)",n:1}],vrow)+
+      (srow.length?'<details open><summary>오늘 신호 → 다음 봉 시가 매수 예정 ('+srow.length+')</summary>'+tbl([{t:"시장"},{t:"봉"},{t:"종가",n:1},{t:"하단",n:1},{t:"중단",n:1},{t:"상단",n:1}],srow)+'</details>':'<div class="note">오늘 신호 없음.</div>')+
+      (orow.length?'<details open><summary>보유 중 ('+orow.length+')</summary>'+tbl([{t:"시장"},{t:"진입일"},{t:"진입가",n:1},{t:"지금 손익",n:1},{t:"하단",n:1},{t:"상단",n:1},{t:"남은 유효",n:1},{t:"구분"}],orow)+'</details>':'')+
+      (trow.length?'<details><summary>최근 닫힌 순방향 매매</summary>'+tbl([{t:"시장"},{t:"진입"},{t:"청산"},{t:"사유"},{t:"손익",n:1}],trow)+'</details>':'')+
+      (xrow.length?'<details><summary>변형 (기록만 — 소 60봉·대 250봉·중단 익절·중단 매수)</summary>'+tbl([{t:"시장군 · 변형"},{t:"순방향",n:1},{t:"사후",n:1}],xrow)+'</details>':'')+
+      '<div class="note">합격선(봉인 2026-11-18): 시장군별 닫힌 순방향 20건 — 손익비 ≥ 1.3 합격, < 1.0 불합격. 사후 숫자는 최근 600봉을 같은 규칙으로 돌린 참고값(약한 근거). 한 장 카드 docs/cards/p42_trendline.svg, 설계 docs/TRENDLINE_PLAN.md.'+(errs.length?'<br>오류: '+errs.join(" · "):"")+'</div>';
+  }
+  function rTlMissing(){
+    $("t-tl").innerHTML=pill("첫 실행 전","neutral"); $("t-tl-d").textContent="매일 09:18 KST 실행 뒤 표시";
+    section("s-tl").body.innerHTML='<div class="err">아직 결과 파일이 없다 (trendline.json). 제안함 P42 병합(11/27) 뒤 CARRYGATE daily 가 처음 돌면(매일 09:18 KST) 생기고, 17:37 KST 자동 작업이 여기 옮겨 싣는다. 11/27 시험 실행 값: 업비트 6·OKX 6·한국 40 시장 수신, 순방향 닫힌 매매 0건, 보유 OKX LINK(11/20 진입).</div>';
+  }
+
   // ---------------- 판정 규율 (마일스톤 14, Phil 방식) ----------------
   var VST={NOT_YET:["판단 전","neutral"],PASS:["합격","good"],FAIL:["불합격","bad"]};
   function vpill(st){ var x=VST[st]||[st||"-","neutral"]; return pill(x[0],x[1]); }
@@ -551,8 +587,8 @@ details{margin-top:8px} summary{cursor:pointer;font-size:13px;color:var(--accent
   function rVerdict(d){
     var s=section("s-verdict"); s.when.textContent=(d.date||"")+" · 기준 봉인 "+(d.criteria_sealed||"");
     var t=d.tracks||{}; var sm=d.summary||{}; var rl=d.rules_lock||{};
-    var order=["kr_breakout","turtle","reversal","retest","scalp","forecast","cycle"]; var NM={kr_breakout:"한국 주식 돌파",turtle:"터틀",reversal:"추세 전환",retest:"급상승 패턴 1H",scalp:"초단타",forecast:"예측 v2 (크기)",cycle:"BTC 사이클 분할매수"};
-    var MIN={kr_breakout:"15건",turtle:"20건/거래소",reversal:"20건/거래소",retest:"20건/거래소",scalp:"7일",forecast:"60일",cycle:"180일"};
+    var order=["kr_breakout","turtle","reversal","retest","scalp","forecast","cycle","trendline"]; var NM={kr_breakout:"한국 주식 돌파",turtle:"터틀",reversal:"추세 전환",retest:"급상승 패턴 1H",scalp:"초단타",forecast:"예측 v2 (크기)",cycle:"BTC 사이클 분할매수",trendline:"추세선 채널"};
+    var MIN={kr_breakout:"15건",turtle:"20건/거래소",reversal:"20건/거래소",retest:"20건/거래소",scalp:"7일",forecast:"60일",cycle:"180일",trendline:"20건/시장군"};
     var pass=order.filter(function(k){return sm[k]==="PASS";}).length, fail=order.filter(function(k){return sm[k]==="FAIL";}).length, wait=order.filter(function(k){return sm[k]==="NOT_YET";}).length;
     $("t-verdict").innerHTML=(pass?pill("합격 "+pass,"good")+" ":"")+(fail?pill("불합격 "+fail,"bad")+" ":"")+pill("판단 전 "+wait,"neutral");
     $("t-verdict-d").textContent="규칙 잠금 "+(rl.ok?"일치":"불일치")+" · 기준 봉인 "+(d.criteria_sealed||"");
@@ -561,7 +597,7 @@ details{margin-top:8px} summary{cursor:pointer;font-size:13px;color:var(--accent
       rows.push([esc(NM.kr_breakout+" (base)"), vpill(k.status), (k.trades||0)+"건 / "+(k.wins||0)+"승", k.win_rate_pct!=null?num(k.win_rate_pct,0)+"% (백테스트 "+num(k.backtest_win_rate_pct,0)+"%)":"-", sgn(k.total_return_pct,1,"%"), zcell(k.luck), MIN.kr_breakout, esc(k.reason||"")]);
       if(k.control) rows.push([esc("  대조군 "+k.control.variant), pill("기록만","neutral"), (k.control.trades||0)+"건", k.control.win_rate_pct!=null?num(k.control.win_rate_pct,0)+"%":"-", sgn(k.control.total_return_pct,1,"%")+" (차이 "+sgn(k.control.return_delta_pct,1,"%p")+")", "-", "-", "업종 동조가 실제로 보태는지"]);
     }
-    ["turtle","reversal","retest"].forEach(function(name){ var tr=t[name]; if(!tr) return;
+    ["turtle","reversal","retest","trendline"].forEach(function(name){ var tr=t[name]; if(!tr) return;
       rows.push([esc(NM[name]), vpill(tr.status), (tr.forward_trades_total||0)+"건", "-", "-", "-", MIN[name], esc(tr.reason||"")]);
       Object.keys(tr.venues||{}).forEach(function(v){ var f=tr.venues[v];
         rows.push([esc("  "+v), vpill(f.status), (f.trades||0)+"건 / "+(f.wins||0)+"승", f.win_rate_pct!=null?num(f.win_rate_pct,0)+"% (백테스트 "+num(f.backtest_win_rate_pct,0)+"%)":"백테스트 "+num(f.backtest_win_rate_pct,0)+"%", (f.profit_factor!=null?"손익비 "+num(f.profit_factor,2):"손익비 -")+(f.net_pct!=null?" · "+sgn(f.net_pct,1,"%"):""), zcell(f.luck), "-", esc(f.reason||"")]); }); });
@@ -584,14 +620,14 @@ details{margin-top:8px} summary{cursor:pointer;font-size:13px;color:var(--accent
     section("s-verdict").body.innerHTML='<div class="err">아직 결과 파일이 없다 (verdict.json). CARRYGATE daily(매일 09:18 KST) 또는 KR sector breakout(평일 15:50 KST) 이 처음 돌면 생긴다.</div>';
   }
 
-  var RENDER={status:rStatus,funding:rFunding,basis:rBasis,turtle:rTurtle,reversal:rReversal,retest:rRetest,live:rLive,scalp:rScalp,research:rResearch,orderbook:rOrderbook,fsig:rFsig,kimchi:rKimchi,macro:rMacro,listing:rListing,momentum:rMomentum,grid:rGrid,kr:rKr,krb:rKrb,krbt:rKrbt,verdict:rVerdict,forecast:rForecast,cycle:rCycle,idx:rIdx};
-  var SECTION={status:"s-status",funding:"s-funding",basis:"s-basis",turtle:"s-turtle",reversal:"s-reversal",retest:"s-retest",live:"s-live",scalp:"s-scalp",research:"s-research",orderbook:"s-orderbook",fsig:"s-fsig",kimchi:"s-kimchi",macro:"s-macro",listing:"s-listing",momentum:"s-momentum",grid:"s-grid",kr:"s-kr",krb:"s-krb",krbt:"s-krbt",verdict:"s-verdict",forecast:"s-forecast",cycle:"s-cycle",idx:"s-idx"};
+  var RENDER={status:rStatus,funding:rFunding,basis:rBasis,turtle:rTurtle,reversal:rReversal,retest:rRetest,live:rLive,scalp:rScalp,research:rResearch,orderbook:rOrderbook,fsig:rFsig,kimchi:rKimchi,macro:rMacro,listing:rListing,momentum:rMomentum,grid:rGrid,kr:rKr,krb:rKrb,krbt:rKrbt,verdict:rVerdict,forecast:rForecast,cycle:rCycle,idx:rIdx,tl:rTl};
+  var SECTION={status:"s-status",funding:"s-funding",basis:"s-basis",turtle:"s-turtle",reversal:"s-reversal",retest:"s-retest",live:"s-live",scalp:"s-scalp",research:"s-research",orderbook:"s-orderbook",fsig:"s-fsig",kimchi:"s-kimchi",macro:"s-macro",listing:"s-listing",momentum:"s-momentum",grid:"s-grid",kr:"s-kr",krb:"s-krb",krbt:"s-krbt",verdict:"s-verdict",forecast:"s-forecast",cycle:"s-cycle",idx:"s-idx",tl:"s-tl"};
 
   function safeRender(key,data){
     try{ RENDER[key](data); }catch(e){ setErr(SECTION[key],"render",String(e&&e.message||e)); }
   }
   function markTileFail(key){
-    var map={status:"t-gate",funding:"t-carry",basis:"t-basis",turtle:"t-turtle",reversal:"t-rev",retest:"t-retest",scalp:"t-scalp",live:"t-live",kr:"t-kr",verdict:"t-verdict",forecast:"t-forecast",cycle:"t-cycle"};
+    var map={status:"t-gate",funding:"t-carry",basis:"t-basis",turtle:"t-turtle",reversal:"t-rev",retest:"t-retest",scalp:"t-scalp",live:"t-live",kr:"t-kr",verdict:"t-verdict",forecast:"t-forecast",cycle:"t-cycle",tl:"t-tl"};
     if(map[key]){ $(map[key]).textContent="-"; }
   }
   // ---------------- 불러오기 ----------------
@@ -609,6 +645,7 @@ details{margin-top:8px} summary{cursor:pointer;font-size:13px;color:var(--accent
     if(k==="forecast"){ rForecastMissing(); return true; }
     if(k==="cycle"){ rCycleMissing(); return true; }
     if(k==="idx"){ rIdxMissing(); return true; }
+    if(k==="tl"){ rTlMissing(); return true; }
     if(k==="kr"||k==="krb"||k==="krbt"){ rKrMissing(k); return true; }
     return false;
   }
