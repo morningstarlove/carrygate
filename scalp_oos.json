@@ -1,35 +1,35 @@
 {
  "schema": "carrygate-scalp-oos/1",
- "date": "2026-11-27",
- "auto_freeze": "후보 9개 ≤ 잡음 95% 선 33개 — 자동 얼림 안 함",
+ "date": "2026-11-28",
+ "auto_freeze": "후보 9개 ≤ 잡음 95% 선 28개 — 자동 얼림 안 함",
  "freezes": [
   {
    "name": "2026-10-21",
    "date": "2026-10-21",
-   "oos_days": 37,
-   "plus": 11,
+   "oos_days": 38,
+   "plus": 15,
    "total": 47,
-   "share": 0.234,
+   "share": 0.319,
    "primary_ok": false,
    "verdict": "NO",
    "auto": false,
    "min_oos_days": 10,
    "primary": "okx:XRP:30m:vwap_fade_lim",
-   "primary_oos_nt": -7.5337
+   "primary_oos_nt": -4.0754
   },
   {
    "name": "2026-10-21-binance",
    "date": "2026-10-21",
-   "oos_days": 37,
-   "plus": 4,
+   "oos_days": 38,
+   "plus": 9,
    "total": 19,
-   "share": 0.211,
+   "share": 0.474,
    "primary_ok": false,
    "verdict": "NO",
    "auto": false,
    "min_oos_days": 10,
    "primary": "binance:XRP:30m:vwap_fade_lim",
-   "primary_oos_nt": -15.1908
+   "primary_oos_nt": -11.7647
   }
  ]
 }

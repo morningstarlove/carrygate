@@ -1,0 +1,1613 @@
+{
+ "schema": "carrygate-trendline/1",
+ "date": "2026-11-28",
+ "generated_at_kst": "2026-11-28 17:17",
+ "rules": {
+  "forward_from": "2026-11-19",
+  "primary": [
+   "중",
+   "base"
+  ],
+  "variants": [
+   [
+    "소",
+    "base"
+   ],
+   [
+    "대",
+    "base"
+   ],
+   [
+    "중",
+    "mid"
+   ],
+   [
+    "중",
+    "midentry"
+   ]
+  ],
+  "venues": {
+   "upbit": 0.2,
+   "okx": 0.2,
+   "kr": 0.25
+  },
+  "markets": {
+   "upbit": [
+    "BTC",
+    "ETH",
+    "XRP",
+    "TRX",
+    "LINK",
+    "DOGE"
+   ],
+   "okx": [
+    "BTC",
+    "ETH",
+    "XRP",
+    "TRX",
+    "LINK",
+    "DOGE"
+   ],
+   "kr": [
+    "005930",
+    "000660",
+    "373220",
+    "207940",
+    "005380",
+    "000270",
+    "068270",
+    "105560",
+    "055550",
+    "035420",
+    "005490",
+    "012330",
+    "051910",
+    "006400",
+    "035720",
+    "028260",
+    "066570",
+    "003550",
+    "096770",
+    "034730",
+    "086790",
+    "032830",
+    "015760",
+    "033780",
+    "017670",
+    "030200",
+    "009150",
+    "010130",
+    "012450",
+    "329180",
+    "042660",
+    "034020",
+    "011200",
+    "316140",
+    "018260",
+    "259960",
+    "247540",
+    "086520",
+    "196170",
+    "069500"
+   ]
+  },
+  "draw": {
+   "rule_fixed": "2026-11-17",
+   "windows": {
+    "소": 60,
+    "중": 120,
+    "대": 250
+   },
+   "pivot_k": 5,
+   "min_span_div": 4,
+   "valid_mult": 1.0,
+   "tol": 0.1,
+   "min_width_pct": 5.0,
+   "modes": [
+    "base",
+    "mid",
+    "midentry"
+   ]
+  },
+  "rule_fixed": "2026-11-18"
+ },
+ "source": "upbit·okx 일봉(turtle.py 수집 함수) + 한국 일봉(kr_ohlcv: 야후→네이버)",
+ "venues": {
+  "upbit": {
+   "label": "업비트 현물",
+   "cost_pct": 0.2,
+   "portfolio": {
+    "forward_trades": [],
+    "stats": {
+     "trades": 35,
+     "win_rate_pct": 25.71,
+     "profit_factor": 0.52,
+     "net_pct": -81.44,
+     "avg_pct": -2.33,
+     "forward": {
+      "trades": 0,
+      "wins": 0,
+      "net_pct": 0,
+      "avg_pct": null,
+      "profit_factor": null
+     }
+    },
+    "open": []
+   },
+   "variants": {
+    "소_base": {
+     "portfolio": {
+      "forward_trades": [],
+      "stats": {
+       "trades": 48,
+       "win_rate_pct": 41.67,
+       "profit_factor": 1.17,
+       "net_pct": 23.12,
+       "avg_pct": 0.48,
+       "forward": {
+        "trades": 0,
+        "wins": 0,
+        "net_pct": 0,
+        "avg_pct": null,
+        "profit_factor": null
+       }
+      },
+      "open": []
+     }
+    },
+    "대_base": {
+     "portfolio": {
+      "forward_trades": [],
+      "stats": {
+       "trades": 20,
+       "win_rate_pct": 20.0,
+       "profit_factor": 0.94,
+       "net_pct": -6.01,
+       "avg_pct": -0.3,
+       "forward": {
+        "trades": 0,
+        "wins": 0,
+        "net_pct": 0,
+        "avg_pct": null,
+        "profit_factor": null
+       }
+      },
+      "open": []
+     }
+    },
+    "중_mid": {
+     "portfolio": {
+      "forward_trades": [],
+      "stats": {
+       "trades": 36,
+       "win_rate_pct": 30.56,
+       "profit_factor": 0.57,
+       "net_pct": -71.41,
+       "avg_pct": -1.98,
+       "forward": {
+        "trades": 0,
+        "wins": 0,
+        "net_pct": 0,
+        "avg_pct": null,
+        "profit_factor": null
+       }
+      },
+      "open": []
+     }
+    },
+    "중_midentry": {
+     "portfolio": {
+      "forward_trades": [],
+      "stats": {
+       "trades": 19,
+       "win_rate_pct": 21.05,
+       "profit_factor": 0.45,
+       "net_pct": -32.16,
+       "avg_pct": -1.69,
+       "forward": {
+        "trades": 0,
+        "wins": 0,
+        "net_pct": 0,
+        "avg_pct": null,
+        "profit_factor": null
+       }
+      },
+      "open": []
+     }
+    }
+   },
+   "markets": {
+    "BTC": {
+     "bar_date": "2026-11-27",
+     "close": 81240000.0,
+     "signal": false,
+     "up": null,
+     "down": {
+      "p1": "2026-10-02",
+      "p2": "2026-11-04",
+      "roof": 102974000.0,
+      "floor": 95714000.0
+     }
+    },
+    "DOGE": {
+     "bar_date": "2026-11-27",
+     "close": 78.3,
+     "signal": false,
+     "up": null,
+     "down": {
+      "p1": "2026-09-22",
+      "p2": "2026-11-05",
+      "roof": 86.0,
+      "floor": 67.8636
+     }
+    },
+    "ETH": {
+     "bar_date": "2026-11-27",
+     "close": 2257000.0,
+     "signal": false,
+     "up": null,
+     "down": null
+    },
+    "LINK": {
+     "bar_date": "2026-11-27",
+     "close": 12720.0,
+     "signal": false,
+     "up": null,
+     "down": null
+    },
+    "TRX": {
+     "bar_date": "2026-11-27",
+     "close": 408.0,
+     "signal": false,
+     "up": null,
+     "down": null
+    },
+    "XRP": {
+     "bar_date": "2026-11-27",
+     "close": 1286.0,
+     "signal": false,
+     "up": null,
+     "down": {
+      "p1": "2026-08-22",
+      "p2": "2026-09-23",
+      "roof": 1991.5,
+      "floor": 1462.0
+     }
+    }
+   },
+   "signals_today": []
+  },
+  "okx": {
+   "label": "OKX 무기한선물(롱만)",
+   "cost_pct": 0.2,
+   "portfolio": {
+    "forward_trades": [],
+    "stats": {
+     "trades": 39,
+     "win_rate_pct": 23.08,
+     "profit_factor": 0.46,
+     "net_pct": -122.59,
+     "avg_pct": -3.14,
+     "forward": {
+      "trades": 0,
+      "wins": 0,
+      "net_pct": 0,
+      "avg_pct": null,
+      "profit_factor": null
+     }
+    },
+    "open": [
+     {
+      "market": "LINK",
+      "entry_date": "2026-11-20",
+      "exit_date": "2026-11-27",
+      "entry": 9.001,
+      "why": "open",
+      "days": 8,
+      "r_multiple": 0.31,
+      "mark": 9.369,
+      "pnl_now": 3.8884,
+      "forward": true,
+      "lower": 8.6523,
+      "mid": 12.4032,
+      "upper": 16.1542,
+      "bars_left": 92
+     }
+    ]
+   },
+   "variants": {
+    "소_base": {
+     "portfolio": {
+      "forward_trades": [],
+      "stats": {
+       "trades": 63,
+       "win_rate_pct": 30.16,
+       "profit_factor": 0.93,
+       "net_pct": -17.58,
+       "avg_pct": -0.28,
+       "forward": {
+        "trades": 0,
+        "wins": 0,
+        "net_pct": 0,
+        "avg_pct": null,
+        "profit_factor": null
+       }
+      },
+      "open": []
+     }
+    },
+    "대_base": {
+     "portfolio": {
+      "forward_trades": [],
+      "stats": {
+       "trades": 16,
+       "win_rate_pct": 18.75,
+       "profit_factor": 0.19,
+       "net_pct": -89.84,
+       "avg_pct": -5.62,
+       "forward": {
+        "trades": 0,
+        "wins": 0,
+        "net_pct": 0,
+        "avg_pct": null,
+        "profit_factor": null
+       }
+      },
+      "open": [
+       {
+        "market": "TRX",
+        "entry_date": "2026-11-14",
+        "exit_date": "2026-11-27",
+        "entry": 0.3117,
+        "why": "open",
+        "days": 14,
+        "r_multiple": -0.62,
+        "mark": 0.3007,
+        "pnl_now": -3.745,
+        "forward": false,
+        "lower": 0.3026,
+        "mid": 0.3467,
+        "upper": 0.3908,
+        "bars_left": 208
+       }
+      ]
+     }
+    },
+    "중_mid": {
+     "portfolio": {
+      "forward_trades": [],
+      "stats": {
+       "trades": 43,
+       "win_rate_pct": 27.91,
+       "profit_factor": 0.49,
+       "net_pct": -118.64,
+       "avg_pct": -2.76,
+       "forward": {
+        "trades": 0,
+        "wins": 0,
+        "net_pct": 0,
+        "avg_pct": null,
+        "profit_factor": null
+       }
+      },
+      "open": [
+       {
+        "market": "LINK",
+        "entry_date": "2026-11-20",
+        "exit_date": "2026-11-27",
+        "entry": 9.001,
+        "why": "open",
+        "days": 8,
+        "r_multiple": 0.31,
+        "mark": 9.369,
+        "pnl_now": 3.8884,
+        "forward": true,
+        "lower": 8.6523,
+        "mid": 12.4032,
+        "upper": 16.1542,
+        "bars_left": 92
+       }
+      ]
+     }
+    },
+    "중_midentry": {
+     "portfolio": {
+      "forward_trades": [],
+      "stats": {
+       "trades": 25,
+       "win_rate_pct": 32.0,
+       "profit_factor": 0.69,
+       "net_pct": -19.86,
+       "avg_pct": -0.79,
+       "forward": {
+        "trades": 0,
+        "wins": 0,
+        "net_pct": 0,
+        "avg_pct": null,
+        "profit_factor": null
+       }
+      },
+      "open": []
+     }
+    }
+   },
+   "markets": {
+    "BTC": {
+     "bar_date": "2026-11-27",
+     "close": 59893.9,
+     "signal": false,
+     "up": null,
+     "down": null
+    },
+    "DOGE": {
+     "bar_date": "2026-11-27",
+     "close": 0.0577,
+     "signal": false,
+     "up": null,
+     "down": {
+      "p1": "2026-09-22",
+      "p2": "2026-11-04",
+      "roof": 0.0636,
+      "floor": 0.0488
+     }
+    },
+    "ETH": {
+     "bar_date": "2026-11-27",
+     "close": 1661.74,
+     "signal": false,
+     "up": null,
+     "down": null
+    },
+    "LINK": {
+     "bar_date": "2026-11-27",
+     "close": 9.369,
+     "signal": false,
+     "up": {
+      "p1": "2026-08-01",
+      "p2": "2026-11-21",
+      "p3": "2026-09-29",
+      "lower": 7.9697,
+      "mid": 11.8912,
+      "upper": 15.8128,
+      "intact": true,
+      "valid_to_bars_left": 106
+     },
+     "down": {
+      "p1": "2026-09-29",
+      "p2": "2026-10-29",
+      "roof": 8.3841,
+      "floor": 5.8033
+     }
+    },
+    "TRX": {
+     "bar_date": "2026-11-27",
+     "close": 0.30066,
+     "signal": false,
+     "up": null,
+     "down": null
+    },
+    "XRP": {
+     "bar_date": "2026-11-27",
+     "close": 0.9485,
+     "signal": false,
+     "up": null,
+     "down": {
+      "p1": "2026-08-22",
+      "p2": "2026-09-23",
+      "roof": 1.5719,
+      "floor": 1.1502
+     }
+    }
+   },
+   "signals_today": []
+  },
+  "kr": {
+   "label": "한국 대형주",
+   "cost_pct": 0.25,
+   "portfolio": {
+    "forward_trades": [],
+    "stats": {
+     "trades": 235,
+     "win_rate_pct": 27.66,
+     "profit_factor": 1.09,
+     "net_pct": 98.36,
+     "avg_pct": 0.42,
+     "forward": {
+      "trades": 0,
+      "wins": 0,
+      "net_pct": 0,
+      "avg_pct": null,
+      "profit_factor": null
+     }
+    },
+    "open": [
+     {
+      "market": "018260",
+      "entry_date": "2026-10-30",
+      "exit_date": "2026-11-27",
+      "entry": 203000.0,
+      "why": "open",
+      "days": 21,
+      "r_multiple": -0.06,
+      "mark": 201500.0,
+      "pnl_now": -0.9889,
+      "forward": false,
+      "lower": 197075.0,
+      "mid": 309562.5,
+      "upper": 422050.0,
+      "bars_left": 63
+     },
+     {
+      "market": "033780",
+      "entry_date": "2026-09-17",
+      "exit_date": "2026-11-27",
+      "entry": 172700.0,
+      "why": "open",
+      "days": 48,
+      "r_multiple": 0.38,
+      "mark": 176200.0,
+      "pnl_now": 1.7766,
+      "forward": false,
+      "lower": 174409.9099,
+      "mid": 191022.973,
+      "upper": 207636.036,
+      "bars_left": 58
+     },
+     {
+      "market": "034730",
+      "entry_date": "2026-10-23",
+      "exit_date": "2026-11-27",
+      "entry": 455500.0,
+      "why": "open",
+      "days": 26,
+      "r_multiple": 0.25,
+      "mark": 477000.0,
+      "pnl_now": 4.4701,
+      "forward": false,
+      "lower": 425754.386,
+      "mid": 664969.2982,
+      "upper": 904184.2105,
+      "bars_left": 83
+     },
+     {
+      "market": "086790",
+      "entry_date": "2026-11-09",
+      "exit_date": "2026-11-27",
+      "entry": 117500.0,
+      "why": "open",
+      "days": 15,
+      "r_multiple": 0.04,
+      "mark": 118200.0,
+      "pnl_now": 0.3457,
+      "forward": false,
+      "lower": 111965.4321,
+      "mid": 129121.6049,
+      "upper": 146277.7778,
+      "bars_left": 58
+     },
+     {
+      "market": "105560",
+      "entry_date": "2026-11-05",
+      "exit_date": "2026-11-27",
+      "entry": 156700.0,
+      "why": "open",
+      "days": 17,
+      "r_multiple": -0.74,
+      "mark": 145000.0,
+      "pnl_now": -7.7165,
+      "forward": false,
+      "lower": 145385.1852,
+      "mid": 170114.8148,
+      "upper": 194844.4444,
+      "bars_left": 58
+     }
+    ]
+   },
+   "variants": {
+    "소_base": {
+     "portfolio": {
+      "forward_trades": [],
+      "stats": {
+       "trades": 370,
+       "win_rate_pct": 37.3,
+       "profit_factor": 1.49,
+       "net_pct": 556.06,
+       "avg_pct": 1.5,
+       "forward": {
+        "trades": 0,
+        "wins": 0,
+        "net_pct": 0,
+        "avg_pct": null,
+        "profit_factor": null
+       }
+      },
+      "open": [
+       {
+        "market": "034730",
+        "entry_date": "2026-11-24",
+        "exit_date": "2026-11-27",
+        "entry": 470000.0,
+        "why": "open",
+        "days": 4,
+        "r_multiple": 0.12,
+        "mark": 477000.0,
+        "pnl_now": 1.2394,
+        "forward": true,
+        "lower": 434031.25,
+        "mid": 499671.875,
+        "upper": 565312.5,
+        "bars_left": 1
+       },
+       {
+        "market": "068270",
+        "entry_date": "2026-09-22",
+        "exit_date": "2026-11-27",
+        "entry": 181800.0,
+        "why": "open",
+        "days": 45,
+        "r_multiple": 3.87,
+        "mark": 221000.0,
+        "pnl_now": 21.3122,
+        "forward": false,
+        "lower": 187100.0,
+        "mid": 208675.0,
+        "upper": 230250.0,
+        "bars_left": 4
+       }
+      ]
+     }
+    },
+    "대_base": {
+     "portfolio": {
+      "forward_trades": [],
+      "stats": {
+       "trades": 125,
+       "win_rate_pct": 25.6,
+       "profit_factor": 0.98,
+       "net_pct": -18.04,
+       "avg_pct": -0.14,
+       "forward": {
+        "trades": 0,
+        "wins": 0,
+        "net_pct": 0,
+        "avg_pct": null,
+        "profit_factor": null
+       }
+      },
+      "open": [
+       {
+        "market": "005380",
+        "entry_date": "2026-10-23",
+        "exit_date": "2026-11-27",
+        "entry": 294000.0,
+        "why": "open",
+        "days": 26,
+        "r_multiple": -0.47,
+        "mark": 269000.0,
+        "pnl_now": -8.7534,
+        "forward": false,
+        "lower": 297766.3934,
+        "mid": 557633.1967,
+        "upper": 817500.0,
+        "bars_left": 213
+       },
+       {
+        "market": "005930",
+        "entry_date": "2026-11-17",
+        "exit_date": "2026-11-27",
+        "entry": 191400.0,
+        "why": "open",
+        "days": 9,
+        "r_multiple": -0.39,
+        "mark": 179100.0,
+        "pnl_now": -6.6763,
+        "forward": false,
+        "lower": 184652.7897,
+        "mid": 299388.1974,
+        "upper": 414123.6052,
+        "bars_left": 218
+       },
+       {
+        "market": "006400",
+        "entry_date": "2026-11-10",
+        "exit_date": "2026-11-27",
+        "entry": 433000.0,
+        "why": "open",
+        "days": 14,
+        "r_multiple": 0.2,
+        "mark": 452500.0,
+        "pnl_now": 4.2535,
+        "forward": false,
+        "lower": 390169.0647,
+        "mid": 598428.0576,
+        "upper": 806687.0504,
+        "bars_left": 57
+       },
+       {
+        "market": "012330",
+        "entry_date": "2026-11-25",
+        "exit_date": "2026-11-27",
+        "entry": 347500.0,
+        "why": "open",
+        "days": 3,
+        "r_multiple": -0.12,
+        "mark": 339000.0,
+        "pnl_now": -2.696,
+        "forward": true,
+        "lower": 320618.9427,
+        "mid": 579236.7841,
+        "upper": 837854.6256,
+        "bars_left": 203
+       },
+       {
+        "market": "018260",
+        "entry_date": "2026-10-30",
+        "exit_date": "2026-11-27",
+        "entry": 203000.0,
+        "why": "open",
+        "days": 21,
+        "r_multiple": -0.06,
+        "mark": 201500.0,
+        "pnl_now": -0.9889,
+        "forward": false,
+        "lower": 199427.2727,
+        "mid": 315086.7769,
+        "upper": 430746.281,
+        "bars_left": 88
+       },
+       {
+        "market": "028260",
+        "entry_date": "2026-11-25",
+        "exit_date": "2026-11-27",
+        "entry": 254000.0,
+        "why": "open",
+        "days": 3,
+        "r_multiple": 0.18,
+        "mark": 259000.0,
+        "pnl_now": 1.7185,
+        "forward": true,
+        "lower": 263287.234,
+        "mid": 427292.5532,
+        "upper": 591297.8723,
+        "bars_left": 220
+       },
+       {
+        "market": "032830",
+        "entry_date": "2026-10-23",
+        "exit_date": "2026-11-27",
+        "entry": 241500.0,
+        "why": "open",
+        "days": 26,
+        "r_multiple": -0.13,
+        "mark": 235500.0,
+        "pnl_now": -2.7345,
+        "forward": false,
+        "lower": 233142.8571,
+        "mid": 394411.2903,
+        "upper": 555679.7235,
+        "bars_left": 186
+       },
+       {
+        "market": "033780",
+        "entry_date": "2026-11-11",
+        "exit_date": "2026-11-27",
+        "entry": 175900.0,
+        "why": "open",
+        "days": 13,
+        "r_multiple": -0.03,
+        "mark": 176200.0,
+        "pnl_now": -0.0794,
+        "forward": false,
+        "lower": 176143.75,
+        "mid": 194515.625,
+        "upper": 212887.5,
+        "bars_left": 155
+       },
+       {
+        "market": "034730",
+        "entry_date": "2026-11-18",
+        "exit_date": "2026-11-27",
+        "entry": 488000.0,
+        "why": "open",
+        "days": 8,
+        "r_multiple": -0.11,
+        "mark": 477000.0,
+        "pnl_now": -2.5041,
+        "forward": false,
+        "lower": 440269.2308,
+        "mid": 708076.9231,
+        "upper": 975884.6154,
+        "bars_left": 193
+       },
+       {
+        "market": "055550",
+        "entry_date": "2026-11-04",
+        "exit_date": "2026-11-27",
+        "entry": 85700.0,
+        "why": "open",
+        "days": 18,
+        "r_multiple": -0.3,
+        "mark": 83900.0,
+        "pnl_now": -2.3504,
+        "forward": false,
+        "lower": 83133.4728,
+        "mid": 100912.5523,
+        "upper": 118691.6318,
+        "bars_left": 216
+       },
+       {
+        "market": "068270",
+        "entry_date": "2026-06-22",
+        "exit_date": "2026-11-27",
+        "entry": 168400.0,
+        "why": "open",
+        "days": 109,
+        "r_multiple": 2.92,
+        "mark": 221000.0,
+        "pnl_now": 30.9852,
+        "forward": false,
+        "lower": 162387.3164,
+        "mid": 203797.6748,
+        "upper": 245208.0332,
+        "bars_left": 114
+       },
+       {
+        "market": "069500",
+        "entry_date": "2026-11-16",
+        "exit_date": "2026-11-27",
+        "entry": 83350.0,
+        "why": "open",
+        "days": 10,
+        "r_multiple": -0.46,
+        "mark": 76705.0,
+        "pnl_now": -8.2224,
+        "forward": false,
+        "lower": 77910.7511,
+        "mid": 120453.9378,
+        "upper": 162997.1245,
+        "bars_left": 218
+       },
+       {
+        "market": "086790",
+        "entry_date": "2026-11-04",
+        "exit_date": "2026-11-27",
+        "entry": 115500.0,
+        "why": "open",
+        "days": 18,
+        "r_multiple": 0.3,
+        "mark": 118200.0,
+        "pnl_now": 2.0877,
+        "forward": false,
+        "lower": 113560.9244,
+        "mid": 134096.8487,
+        "upper": 154632.7731,
+        "bars_left": 215
+       },
+       {
+        "market": "105560",
+        "entry_date": "2026-11-04",
+        "exit_date": "2026-11-27",
+        "entry": 152500.0,
+        "why": "open",
+        "days": 18,
+        "r_multiple": -0.64,
+        "mark": 145000.0,
+        "pnl_now": -5.168,
+        "forward": false,
+        "lower": 148250.4098,
+        "mid": 177340.1639,
+        "upper": 206429.918,
+        "bars_left": 221
+       },
+       {
+        "market": "316140",
+        "entry_date": "2026-10-29",
+        "exit_date": "2026-11-27",
+        "entry": 29800.0,
+        "why": "open",
+        "days": 22,
+        "r_multiple": 0.47,
+        "mark": 31100.0,
+        "pnl_now": 4.1124,
+        "forward": false,
+        "lower": 29013.9241,
+        "mid": 36647.1519,
+        "upper": 44280.3797,
+        "bars_left": 54
+       }
+      ]
+     }
+    },
+    "중_mid": {
+     "portfolio": {
+      "forward_trades": [],
+      "stats": {
+       "trades": 263,
+       "win_rate_pct": 34.22,
+       "profit_factor": 0.98,
+       "net_pct": -25.2,
+       "avg_pct": -0.1,
+       "forward": {
+        "trades": 0,
+        "wins": 0,
+        "net_pct": 0,
+        "avg_pct": null,
+        "profit_factor": null
+       }
+      },
+      "open": [
+       {
+        "market": "018260",
+        "entry_date": "2026-10-30",
+        "exit_date": "2026-11-27",
+        "entry": 203000.0,
+        "why": "open",
+        "days": 21,
+        "r_multiple": -0.06,
+        "mark": 201500.0,
+        "pnl_now": -0.9889,
+        "forward": false,
+        "lower": 197075.0,
+        "mid": 309562.5,
+        "upper": 422050.0,
+        "bars_left": 63
+       },
+       {
+        "market": "034730",
+        "entry_date": "2026-10-23",
+        "exit_date": "2026-11-27",
+        "entry": 455500.0,
+        "why": "open",
+        "days": 26,
+        "r_multiple": 0.25,
+        "mark": 477000.0,
+        "pnl_now": 4.4701,
+        "forward": false,
+        "lower": 425754.386,
+        "mid": 664969.2982,
+        "upper": 904184.2105,
+        "bars_left": 83
+       },
+       {
+        "market": "086790",
+        "entry_date": "2026-11-09",
+        "exit_date": "2026-11-27",
+        "entry": 117500.0,
+        "why": "open",
+        "days": 15,
+        "r_multiple": 0.04,
+        "mark": 118200.0,
+        "pnl_now": 0.3457,
+        "forward": false,
+        "lower": 111965.4321,
+        "mid": 129121.6049,
+        "upper": 146277.7778,
+        "bars_left": 58
+       },
+       {
+        "market": "105560",
+        "entry_date": "2026-11-05",
+        "exit_date": "2026-11-27",
+        "entry": 156700.0,
+        "why": "open",
+        "days": 17,
+        "r_multiple": -0.74,
+        "mark": 145000.0,
+        "pnl_now": -7.7165,
+        "forward": false,
+        "lower": 145385.1852,
+        "mid": 170114.8148,
+        "upper": 194844.4444,
+        "bars_left": 58
+       }
+      ]
+     }
+    },
+    "중_midentry": {
+     "portfolio": {
+      "forward_trades": [
+       {
+        "market": "011200",
+        "entry_date": "2026-11-20",
+        "exit_date": "2026-11-24",
+        "entry": 22100.0,
+        "exit": 21400.0,
+        "why": "stop",
+        "days": 3,
+        "pnl": -3.4174,
+        "r_multiple": -3.81
+       },
+       {
+        "market": "033780",
+        "entry_date": "2026-11-25",
+        "exit_date": "2026-11-25",
+        "entry": 183700.0,
+        "exit": 183200.0,
+        "why": "expire",
+        "days": 1,
+        "pnl": -0.5222,
+        "r_multiple": -0.34
+       }
+      ],
+      "stats": {
+       "trades": 217,
+       "win_rate_pct": 44.7,
+       "profit_factor": 1.33,
+       "net_pct": 191.25,
+       "avg_pct": 0.88,
+       "forward": {
+        "trades": 2,
+        "wins": 0,
+        "net_pct": -3.94,
+        "avg_pct": -1.97,
+        "profit_factor": 0.0
+       }
+      },
+      "open": [
+       {
+        "market": "068270",
+        "entry_date": "2026-11-05",
+        "exit_date": "2026-11-27",
+        "entry": 207500.0,
+        "why": "open",
+        "days": 17,
+        "r_multiple": 1.03,
+        "mark": 221000.0,
+        "pnl_now": 6.256,
+        "forward": false,
+        "lower": 179601.1765,
+        "mid": 202327.6471,
+        "upper": 225054.1176,
+        "bars_left": 52
+       }
+      ]
+     }
+    }
+   },
+   "markets": {
+    "000270": {
+     "bar_date": "2026-11-27",
+     "close": 94700.0,
+     "signal": false,
+     "up": null,
+     "down": {
+      "p1": "2026-06-15",
+      "p2": "2026-10-20",
+      "roof": 97788.2353,
+      "floor": 60194.1176
+     }
+    },
+    "000660": {
+     "bar_date": "2026-11-27",
+     "close": 1110000.0,
+     "signal": false,
+     "up": null,
+     "down": {
+      "p1": "2026-06-25",
+      "p2": "2026-10-29",
+      "roof": 1237000.0,
+      "floor": -120666.6667
+     }
+    },
+    "003550": {
+     "bar_date": "2026-11-27",
+     "close": 93300.0,
+     "signal": false,
+     "up": null,
+     "down": null
+    },
+    "005380": {
+     "bar_date": "2026-11-27",
+     "close": 269000.0,
+     "signal": false,
+     "up": null,
+     "down": {
+      "p1": "2026-06-05",
+      "p2": "2026-10-29",
+      "roof": 222607.1429,
+      "floor": -795.9184
+     }
+    },
+    "005490": {
+     "bar_date": "2026-11-27",
+     "close": 258500.0,
+     "signal": false,
+     "up": null,
+     "down": {
+      "p1": "2026-06-05",
+      "p2": "2026-09-01",
+      "roof": 297900.0,
+      "floor": 201200.0
+     }
+    },
+    "005930": {
+     "bar_date": "2026-11-27",
+     "close": 179100.0,
+     "signal": false,
+     "up": null,
+     "down": {
+      "p1": "2026-06-19",
+      "p2": "2026-10-07",
+      "roof": 232650.6849,
+      "floor": 82487.6712
+     }
+    },
+    "006400": {
+     "bar_date": "2026-11-27",
+     "close": 452500.0,
+     "signal": false,
+     "up": {
+      "p1": "2026-07-29",
+      "p2": "2026-11-09",
+      "p3": "2026-09-01",
+      "lower": 428926.4706,
+      "mid": 545915.4412,
+      "upper": 662904.4118,
+      "intact": false,
+      "valid_to_bars_left": 54
+     },
+     "down": {
+      "p1": "2026-06-05",
+      "p2": "2026-10-14",
+      "roof": 599632.1839,
+      "floor": 340557.4713
+     }
+    },
+    "009150": {
+     "bar_date": "2026-11-27",
+     "close": 821000.0,
+     "signal": false,
+     "up": null,
+     "down": {
+      "p1": "2026-06-19",
+      "p2": "2026-10-07",
+      "roof": 1344917.8082,
+      "floor": 68315.0685
+     }
+    },
+    "010130": {
+     "bar_date": "2026-11-27",
+     "close": 811000.0,
+     "signal": false,
+     "up": null,
+     "down": {
+      "p1": "2026-08-25",
+      "p2": "2026-11-05",
+      "roof": 874000.0,
+      "floor": 621812.5
+     }
+    },
+    "011200": {
+     "bar_date": "2026-11-27",
+     "close": 22400.0,
+     "signal": false,
+     "up": {
+      "p1": "2026-06-26",
+      "p2": "2026-11-11",
+      "p3": "2026-10-16",
+      "lower": 20091.7391,
+      "mid": 22485.5435,
+      "upper": 24879.3478,
+      "intact": true,
+      "valid_to_bars_left": 80
+     },
+     "down": null
+    },
+    "012330": {
+     "bar_date": "2026-11-27",
+     "close": 339000.0,
+     "signal": false,
+     "up": null,
+     "down": {
+      "p1": "2026-06-05",
+      "p2": "2026-11-13",
+      "roof": 337614.6789,
+      "floor": 126192.6606
+     }
+    },
+    "012450": {
+     "bar_date": "2026-11-27",
+     "close": 663000.0,
+     "signal": false,
+     "up": null,
+     "down": {
+      "p1": "2026-06-17",
+      "p2": "2026-08-19",
+      "roof": 1240767.4419,
+      "floor": 765837.2093
+     }
+    },
+    "015760": {
+     "bar_date": "2026-11-27",
+     "close": 26150.0,
+     "signal": false,
+     "up": null,
+     "down": {
+      "p1": "2026-06-17",
+      "p2": "2026-11-05",
+      "roof": 30481.0526,
+      "floor": 21995.7895
+     }
+    },
+    "017670": {
+     "bar_date": "2026-11-27",
+     "close": 65200.0,
+     "signal": false,
+     "up": null,
+     "down": {
+      "p1": "2026-06-08",
+      "p2": "2026-08-24",
+      "roof": 95216.9811,
+      "floor": 61766.0377
+     }
+    },
+    "018260": {
+     "bar_date": "2026-11-27",
+     "close": 201500.0,
+     "signal": false,
+     "up": null,
+     "down": {
+      "p1": "2026-06-05",
+      "p2": "2026-11-16",
+      "roof": 240863.6364,
+      "floor": 163090.9091
+     }
+    },
+    "028260": {
+     "bar_date": "2026-11-27",
+     "close": 259000.0,
+     "signal": false,
+     "up": null,
+     "down": {
+      "p1": "2026-06-25",
+      "p2": "2026-10-29",
+      "roof": 277375.0,
+      "floor": 38940.4762
+     }
+    },
+    "030200": {
+     "bar_date": "2026-11-27",
+     "close": 44650.0,
+     "signal": false,
+     "up": null,
+     "down": {
+      "p1": "2026-06-11",
+      "p2": "2026-11-06",
+      "roof": 52985.0,
+      "floor": 43197.0
+     }
+    },
+    "032830": {
+     "bar_date": "2026-11-27",
+     "close": 235500.0,
+     "signal": false,
+     "up": null,
+     "down": {
+      "p1": "2026-06-19",
+      "p2": "2026-11-13",
+      "roof": 239045.4545,
+      "floor": 37272.7273
+     }
+    },
+    "033780": {
+     "bar_date": "2026-11-27",
+     "close": 176200.0,
+     "signal": false,
+     "up": {
+      "p1": "2026-06-26",
+      "p2": "2026-09-09",
+      "p3": "2026-07-29",
+      "lower": 170525.4902,
+      "mid": 183585.2941,
+      "upper": 196645.098,
+      "intact": false,
+      "valid_to_bars_left": -2
+     },
+     "down": null
+    },
+    "034020": {
+     "bar_date": "2026-11-27",
+     "close": 43900.0,
+     "signal": false,
+     "up": null,
+     "down": {
+      "p1": "2026-06-18",
+      "p2": "2026-09-09",
+      "roof": 80545.614,
+      "floor": 35564.9123
+     }
+    },
+    "034730": {
+     "bar_date": "2026-11-27",
+     "close": 477000.0,
+     "signal": false,
+     "up": null,
+     "down": {
+      "p1": "2026-06-25",
+      "p2": "2026-11-13",
+      "roof": 490631.5789,
+      "floor": 143578.9474
+     }
+    },
+    "035420": {
+     "bar_date": "2026-11-27",
+     "close": 163400.0,
+     "signal": false,
+     "up": null,
+     "down": {
+      "p1": "2026-06-08",
+      "p2": "2026-11-11",
+      "roof": 187020.7547,
+      "floor": 96013.2075
+     }
+    },
+    "035720": {
+     "bar_date": "2026-11-27",
+     "close": 31050.0,
+     "signal": false,
+     "up": null,
+     "down": {
+      "p1": "2026-06-12",
+      "p2": "2026-08-12",
+      "roof": 38792.8571,
+      "floor": 28411.9048
+     }
+    },
+    "042660": {
+     "bar_date": "2026-11-27",
+     "close": 44650.0,
+     "signal": false,
+     "up": null,
+     "down": {
+      "p1": "2026-06-17",
+      "p2": "2026-09-09",
+      "roof": 44296.5517,
+      "floor": -6896.5517
+     }
+    },
+    "051910": {
+     "bar_date": "2026-11-27",
+     "close": 220500.0,
+     "signal": false,
+     "up": null,
+     "down": {
+      "p1": "2026-06-17",
+      "p2": "2026-10-08",
+      "roof": 252736.8421,
+      "floor": 135526.3158
+     }
+    },
+    "055550": {
+     "bar_date": "2026-11-27",
+     "close": 83900.0,
+     "signal": false,
+     "up": null,
+     "down": null
+    },
+    "066570": {
+     "bar_date": "2026-11-27",
+     "close": 144800.0,
+     "signal": false,
+     "up": null,
+     "down": {
+      "p1": "2026-06-05",
+      "p2": "2026-10-07",
+      "roof": 195493.9759,
+      "floor": 45080.7229
+     }
+    },
+    "068270": {
+     "bar_date": "2026-11-27",
+     "close": 221000.0,
+     "signal": false,
+     "up": {
+      "p1": "2026-06-08",
+      "p2": "2026-10-13",
+      "p3": "2026-08-11",
+      "lower": 179601.1765,
+      "mid": 202327.6471,
+      "upper": 225054.1176,
+      "intact": true,
+      "valid_to_bars_left": 52
+     },
+     "down": null
+    },
+    "069500": {
+     "bar_date": "2026-11-27",
+     "close": 76705.0,
+     "signal": false,
+     "up": null,
+     "down": {
+      "p1": "2026-06-19",
+      "p2": "2026-09-22",
+      "roof": 89033.7692,
+      "floor": 34998.6154
+     }
+    },
+    "086520": {
+     "bar_date": "2026-11-27",
+     "close": 72900.0,
+     "signal": false,
+     "up": null,
+     "down": {
+      "p1": "2026-06-05",
+      "p2": "2026-10-06",
+      "roof": 82080.4878,
+      "floor": 31000.0
+     }
+    },
+    "086790": {
+     "bar_date": "2026-11-27",
+     "close": 118200.0,
+     "signal": false,
+     "up": {
+      "p1": "2026-06-26",
+      "p2": "2026-10-27",
+      "p3": "2026-07-16",
+      "lower": 111965.4321,
+      "mid": 129121.6049,
+      "upper": 146277.7778,
+      "intact": true,
+      "valid_to_bars_left": 58
+     },
+     "down": {
+      "p1": "2026-07-16",
+      "p2": "2026-09-08",
+      "roof": 141250.0,
+      "floor": 116461.1111
+     }
+    },
+    "096770": {
+     "bar_date": "2026-11-27",
+     "close": 96000.0,
+     "signal": false,
+     "up": {
+      "p1": "2026-06-26",
+      "p2": "2026-08-26",
+      "p3": "2026-07-24",
+      "lower": 128285.3659,
+      "mid": 148628.0488,
+      "upper": 168970.7317,
+      "intact": false,
+      "valid_to_bars_left": -22
+     },
+     "down": null
+    },
+    "105560": {
+     "bar_date": "2026-11-27",
+     "close": 145000.0,
+     "signal": false,
+     "up": null,
+     "down": {
+      "p1": "2026-07-13",
+      "p2": "2026-09-14",
+      "roof": 166816.2791,
+      "floor": 131590.6977
+     }
+    },
+    "196170": {
+     "bar_date": "2026-11-27",
+     "close": 186300.0,
+     "signal": false,
+     "up": null,
+     "down": null
+    },
+    "207940": {
+     "bar_date": "2026-11-27",
+     "close": 1351000.0,
+     "signal": false,
+     "up": null,
+     "down": {
+      "p1": "2026-08-20",
+      "p2": "2026-11-06",
+      "roof": 1558673.0769,
+      "floor": 1110057.6923
+     }
+    },
+    "247540": {
+     "bar_date": "2026-11-27",
+     "close": 92000.0,
+     "signal": false,
+     "up": null,
+     "down": {
+      "p1": "2026-06-05",
+      "p2": "2026-10-08",
+      "roof": 102658.3333,
+      "floor": 22602.381
+     }
+    },
+    "259960": {
+     "bar_date": "2026-11-27",
+     "close": 210500.0,
+     "signal": false,
+     "up": null,
+     "down": {
+      "p1": "2026-07-30",
+      "p2": "2026-11-09",
+      "roof": 218455.2239,
+      "floor": 161637.3134
+     }
+    },
+    "316140": {
+     "bar_date": "2026-11-27",
+     "close": 31100.0,
+     "signal": false,
+     "up": {
+      "p1": "2026-06-26",
+      "p2": "2026-10-27",
+      "p3": "2026-09-18",
+      "lower": 28912.3457,
+      "mid": 33293.5185,
+      "upper": 37674.6914,
+      "intact": true,
+      "valid_to_bars_left": 58
+     },
+     "down": {
+      "p1": "2026-09-18",
+      "p2": "2026-11-16",
+      "roof": 32139.1892,
+      "floor": 26144.5946
+     }
+    },
+    "329180": {
+     "bar_date": "2026-11-27",
+     "close": 250500.0,
+     "signal": false,
+     "up": null,
+     "down": {
+      "p1": "2026-06-17",
+      "p2": "2026-09-11",
+      "roof": 281050.0,
+      "floor": 73933.3333
+     }
+    },
+    "373220": {
+     "bar_date": "2026-11-27",
+     "close": 316500.0,
+     "signal": false,
+     "up": null,
+     "down": null
+    }
+   },
+   "signals_today": []
+  }
+ },
+ "errors": {},
+ "summary": {
+  "ok": true,
+  "markets": 52,
+  "upbit": {
+   "markets": 6,
+   "forward_trades": 0,
+   "forward_net_pct": 0,
+   "forward_profit_factor": null,
+   "open": 0,
+   "signals_today": [],
+   "backtest_trades": 35,
+   "backtest_avg_pct": -2.33,
+   "backtest_profit_factor": 0.52
+  },
+  "okx": {
+   "markets": 6,
+   "forward_trades": 0,
+   "forward_net_pct": 0,
+   "forward_profit_factor": null,
+   "open": 1,
+   "signals_today": [],
+   "backtest_trades": 39,
+   "backtest_avg_pct": -3.14,
+   "backtest_profit_factor": 0.46
+  },
+  "kr": {
+   "markets": 40,
+   "forward_trades": 0,
+   "forward_net_pct": 0,
+   "forward_profit_factor": null,
+   "open": 5,
+   "signals_today": [],
+   "backtest_trades": 235,
+   "backtest_avg_pct": 0.42,
+   "backtest_profit_factor": 1.09
+  }
+ }
+}
